@@ -1,0 +1,85 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "assets"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "6.0"
+    },
+    "assets": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "origin",
+          "file",
+          "sha256",
+          "review"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "origin": {
+            "enum": [
+              "generated",
+              "approved_logo",
+              "evidence_original"
+            ]
+          },
+          "file": {
+            "type": "string"
+          },
+          "sha256": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+          },
+          "tool_receipt": {
+            "type": "string"
+          },
+          "review": {
+            "type": "object",
+            "required": [
+              "bare",
+              "composite",
+              "reviewer",
+              "evidence"
+            ],
+            "properties": {
+              "bare": {
+                "enum": [
+                  "pass",
+                  "fail",
+                  "pending"
+                ]
+              },
+              "composite": {
+                "enum": [
+                  "pass",
+                  "fail",
+                  "pending"
+                ]
+              },
+              "reviewer": {
+                "type": "string"
+              },
+              "evidence": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}

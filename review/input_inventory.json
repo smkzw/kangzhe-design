@@ -1,0 +1,2011 @@
+[
+  {
+    "archive": "kangzhe-design.zip",
+    "path": "kangzhe-design/INSTALL.txt",
+    "size": 3486,
+    "sha256": "552557767a4db21c8ac045a9a8745d92a25caad6eed14ae905c7a889fbbbb03e",
+    "noise": false
+  },
+  {
+    "archive": "kangzhe-design.zip",
+    "path": "kangzhe-design/SKILL.md",
+    "size": 19376,
+    "sha256": "d8883f39731fdf0563bfb57813a6ebea1bb2aaca14321532d37a1cbe5748e02b",
+    "noise": false
+  },
+  {
+    "archive": "kangzhe-design.zip",
+    "path": "__MACOSX/kangzhe-design/._SKILL.md",
+    "size": 163,
+    "sha256": "644bbe2f3811c645dcb6b2f9987c8da6e2bd460196c8e9178231daf74120cf0f",
+    "noise": true
+  },
+  {
+    "archive": "kangzhe-design.zip",
+    "path": "kangzhe-design/design_specs/htmlppt_motion.md",
+    "size": 24390,
+    "sha256": "54d56227c072bc29bbfc3ce7056e77c48c5e01e680aadf07a30b13909ad016d6",
+    "noise": false
+  },
+  {
+    "archive": "kangzhe-design.zip",
+    "path": "__MACOSX/kangzhe-design/design_specs/._htmlppt_motion.md",
+    "size": 163,
+    "sha256": "644bbe2f3811c645dcb6b2f9987c8da6e2bd460196c8e9178231daf74120cf0f",
+    "noise": true
+  },
+  {
+    "archive": "kangzhe-design.zip",
+    "path": "kangzhe-design/design_specs/track_stream.md",
+    "size": 29242,
+    "sha256": "b72ade82129cdca67c3f97bfeb324468df798251ea604ecae41b90a4e1530b4b",
+    "noise": false
+  },
+  {
+    "archive": "kangzhe-design.zip",
+    "path": "__MACOSX/kangzhe-design/design_specs/._track_stream.md",
+    "size": 163,
+    "sha256": "644bbe2f3811c645dcb6b2f9987c8da6e2bd460196c8e9178231daf74120cf0f",
+    "noise": true
+  },
+  {
+    "archive": "kangzhe-design.zip",
+    "path": "kangzhe-design/design_specs/htmlppt_components.md",
+    "size": 54306,
+    "sha256": "8bedc67ae25bd96b51cdcb2132ac7e38f010c33fe5e7fe77669f1822e4477116",
+    "noise": false
+  },
+  {
+    "archive": "kangzhe-design.zip",
+    "path": "__MACOSX/kangzhe-design/design_specs/._htmlppt_components.md",
+    "size": 163,
+    "sha256": "644bbe2f3811c645dcb6b2f9987c8da6e2bd460196c8e9178231daf74120cf0f",
+    "noise": true
+  },
+  {
+    "archive": "kangzhe-design.zip",
+    "path": "kangzhe-design/design_specs/ARCHITECTURE.md",
+    "size": 3830,
+    "sha256": "9b2d4f6b9fdc2cbfdca772982aed02e2fbccdfa8b7b6bf7737d22a6d41a3685b",
+    "noise": false
+  },
+  {
+    "archive": "kangzhe-design.zip",
+    "path": "__MACOSX/kangzhe-design/design_specs/._ARCHITECTURE.md",
+    "size": 163,
+    "sha256": "644bbe2f3811c645dcb6b2f9987c8da6e2bd460196c8e9178231daf74120cf0f",
+    "noise": true
+  },
+  {
+    "archive": "kangzhe-design.zip",
+    "path": "kangzhe-design/design_specs/html_interact.md",
+    "size": 12707,
+    "sha256": "9ae3bc40d9877d6da57b6e27b60242319eb335398b6958a801ba391ad8a9700c",
+    "noise": false
+  },
+  {
+    "archive": "kangzhe-design.zip",
+    "path": "kangzhe-design/design_specs/assets_media.md",
+    "size": 15724,
+    "sha256": "6a320339619b465072a7d2126066c6f9392fdd7a0f9dd734dfefecee80285cf7",
+    "noise": false
+  },
+  {
+    "archive": "kangzhe-design.zip",
+    "path": "kangzhe-design/design_specs/local_map.md",
+    "size": 806,
+    "sha256": "9cbd8df96943c29ac69d54db6cb3a39e4cd7cf9dad4d37b4db36216928a87e6f",
+    "noise": false
+  },
+  {
+    "archive": "kangzhe-design.zip",
+    "path": "__MACOSX/kangzhe-design/design_specs/._local_map.md",
+    "size": 163,
+    "sha256": "644bbe2f3811c645dcb6b2f9987c8da6e2bd460196c8e9178231daf74120cf0f",
+    "noise": true
+  },
+  {
+    "archive": "kangzhe-design.zip",
+    "path": "kangzhe-design/design_specs/html_charts.md",
+    "size": 8894,
+    "sha256": "982adf4c0e92d8db03b74b19ae864d753e002f791faa6b5e8899724fd7d28cc6",
+    "noise": false
+  },
+  {
+    "archive": "kangzhe-design.zip",
+    "path": "kangzhe-design/design_specs/htmlppt_errors.md",
+    "size": 11849,
+    "sha256": "e2044c8c6c173fe7ed19fd75b2f56e6dc6626cba265ce614ea5be164e1a716cd",
+    "noise": false
+  },
+  {
+    "archive": "kangzhe-design.zip",
+    "path": "__MACOSX/kangzhe-design/design_specs/._htmlppt_errors.md",
+    "size": 163,
+    "sha256": "644bbe2f3811c645dcb6b2f9987c8da6e2bd460196c8e9178231daf74120cf0f",
+    "noise": true
+  },
+  {
+    "archive": "kangzhe-design.zip",
+    "path": "kangzhe-design/design_specs/htmlppt_chrome.md",
+    "size": 26201,
+    "sha256": "54db730234198cabbad86dc41b14ec51e5437b0a71d201ee1c6af9468ac5e142",
+    "noise": false
+  },
+  {
+    "archive": "kangzhe-design.zip",
+    "path": "__MACOSX/kangzhe-design/design_specs/._htmlppt_chrome.md",
+    "size": 163,
+    "sha256": "644bbe2f3811c645dcb6b2f9987c8da6e2bd460196c8e9178231daf74120cf0f",
+    "noise": true
+  },
+  {
+    "archive": "kangzhe-design.zip",
+    "path": "kangzhe-design/design_specs/pptx_qc.md",
+    "size": 27809,
+    "sha256": "961a8e429a3e049fa407cd782cd2fc69a07e1aeaa4fc0d751b23fbc85146f9d0",
+    "noise": false
+  },
+  {
+    "archive": "kangzhe-design.zip",
+    "path": "__MACOSX/kangzhe-design/design_specs/._pptx_qc.md",
+    "size": 163,
+    "sha256": "644bbe2f3811c645dcb6b2f9987c8da6e2bd460196c8e9178231daf74120cf0f",
+    "noise": true
+  },
+  {
+    "archive": "kangzhe-design.zip",
+    "path": "kangzhe-design/design_specs/tests/TESTLOG.md",
+    "size": 1481,
+    "sha256": "28888badce9e2e1398dae317fbaed2459571aff131e18b06d9f895cbce3c415f",
+    "noise": false
+  },
+  {
+    "archive": "kangzhe-design.zip",
+    "path": "kangzhe-design/design_specs/tests/test_package_load.py",
+    "size": 9363,
+    "sha256": "13f07dfdaf0bc943c3801a2fe0241f3ff23beb96cdd7ac880ed95b94b3c780d4",
+    "noise": false
+  },
+  {
+    "archive": "kangzhe-design.zip",
+    "path": "__MACOSX/kangzhe-design/design_specs/._tests",
+    "size": 163,
+    "sha256": "644bbe2f3811c645dcb6b2f9987c8da6e2bd460196c8e9178231daf74120cf0f",
+    "noise": true
+  },
+  {
+    "archive": "kangzhe-design.zip",
+    "path": "kangzhe-design/design_specs/ROUTER.md",
+    "size": 2816,
+    "sha256": "18d058de2b61839d8dcb27001447f8e1d8189258863d2201f3fffdfef0af35fc",
+    "noise": false
+  },
+  {
+    "archive": "kangzhe-design.zip",
+    "path": "__MACOSX/kangzhe-design/design_specs/._ROUTER.md",
+    "size": 163,
+    "sha256": "644bbe2f3811c645dcb6b2f9987c8da6e2bd460196c8e9178231daf74120cf0f",
+    "noise": true
+  },
+  {
+    "archive": "kangzhe-design.zip",
+    "path": "kangzhe-design/design_specs/pptx_layouts.md",
+    "size": 43705,
+    "sha256": "5dbd18ba077213128f9425a60c6a290d2b3ad4b4d7d0d0d14a47a2bd1d341a49",
+    "noise": false
+  },
+  {
+    "archive": "kangzhe-design.zip",
+    "path": "__MACOSX/kangzhe-design/design_specs/._pptx_layouts.md",
+    "size": 163,
+    "sha256": "644bbe2f3811c645dcb6b2f9987c8da6e2bd460196c8e9178231daf74120cf0f",
+    "noise": true
+  },
+  {
+    "archive": "kangzhe-design.zip",
+    "path": "kangzhe-design/design_specs/README.md",
+    "size": 3485,
+    "sha256": "3c988febefd1c59412c8e7b457da41e84118c5ab1d82cef77d68c5422345b047",
+    "noise": false
+  },
+  {
+    "archive": "kangzhe-design.zip",
+    "path": "__MACOSX/kangzhe-design/design_specs/._README.md",
+    "size": 163,
+    "sha256": "644bbe2f3811c645dcb6b2f9987c8da6e2bd460196c8e9178231daf74120cf0f",
+    "noise": true
+  },
+  {
+    "archive": "kangzhe-design.zip",
+    "path": "kangzhe-design/design_specs/pptx_aesthetics.md",
+    "size": 14896,
+    "sha256": "e0a0b1d8ca35d2a70d61292d43bf834fd39faee334116686edc98999d8973425",
+    "noise": false
+  },
+  {
+    "archive": "kangzhe-design.zip",
+    "path": "__MACOSX/kangzhe-design/design_specs/._pptx_aesthetics.md",
+    "size": 163,
+    "sha256": "644bbe2f3811c645dcb6b2f9987c8da6e2bd460196c8e9178231daf74120cf0f",
+    "noise": true
+  },
+  {
+    "archive": "kangzhe-design.zip",
+    "path": "kangzhe-design/design_specs/track_pptx.md",
+    "size": 16534,
+    "sha256": "955d962e6388face554489ec82575ccc63215f3cd946a43709cf5ea12e98d15e",
+    "noise": false
+  },
+  {
+    "archive": "kangzhe-design.zip",
+    "path": "__MACOSX/kangzhe-design/design_specs/._track_pptx.md",
+    "size": 163,
+    "sha256": "644bbe2f3811c645dcb6b2f9987c8da6e2bd460196c8e9178231daf74120cf0f",
+    "noise": true
+  },
+  {
+    "archive": "kangzhe-design.zip",
+    "path": "kangzhe-design/design_specs/VERSION",
+    "size": 6,
+    "sha256": "5186e88612feecac695acd0f27bd3b758213febb46a6fa4a105164a68d07c3c8",
+    "noise": false
+  },
+  {
+    "archive": "kangzhe-design.zip",
+    "path": "kangzhe-design/design_specs/htmlppt_runtime.md",
+    "size": 20476,
+    "sha256": "b5e6d87f8d395d81839fefdfcc47c7fd0fe443942c057b41b536cd17b08628b0",
+    "noise": false
+  },
+  {
+    "archive": "kangzhe-design.zip",
+    "path": "__MACOSX/kangzhe-design/design_specs/._htmlppt_runtime.md",
+    "size": 163,
+    "sha256": "644bbe2f3811c645dcb6b2f9987c8da6e2bd460196c8e9178231daf74120cf0f",
+    "noise": true
+  },
+  {
+    "archive": "kangzhe-design.zip",
+    "path": "kangzhe-design/design_specs/pptx_playbook.md",
+    "size": 11648,
+    "sha256": "91599f41631d5c8f77fdadd1bddc85af413148276ec00676cad20d18d45ed1b9",
+    "noise": false
+  },
+  {
+    "archive": "kangzhe-design.zip",
+    "path": "__MACOSX/kangzhe-design/design_specs/._pptx_playbook.md",
+    "size": 163,
+    "sha256": "644bbe2f3811c645dcb6b2f9987c8da6e2bd460196c8e9178231daf74120cf0f",
+    "noise": true
+  },
+  {
+    "archive": "kangzhe-design.zip",
+    "path": "kangzhe-design/design_specs/core.md",
+    "size": 115863,
+    "sha256": "29e06db8216b0df59f40b4f2877286d6348d30a9c489810868a93932e3092386",
+    "noise": false
+  },
+  {
+    "archive": "kangzhe-design.zip",
+    "path": "__MACOSX/kangzhe-design/design_specs/._core.md",
+    "size": 163,
+    "sha256": "644bbe2f3811c645dcb6b2f9987c8da6e2bd460196c8e9178231daf74120cf0f",
+    "noise": true
+  },
+  {
+    "archive": "kangzhe-design.zip",
+    "path": "kangzhe-design/design_specs/assets/kz-interact.css",
+    "size": 6490,
+    "sha256": "ea50a82646e7fb3aa503d4c9456ba51534f61bc7287dadb2017bd309282f6e4a",
+    "noise": false
+  },
+  {
+    "archive": "kangzhe-design.zip",
+    "path": "kangzhe-design/design_specs/assets/kangzhe-brand.js",
+    "size": 6212,
+    "sha256": "73249a93049b4999dfd30efdce69963863456218a2dcb857f0caf60eced36690",
+    "noise": false
+  },
+  {
+    "archive": "kangzhe-design.zip",
+    "path": "__MACOSX/kangzhe-design/design_specs/assets/._kangzhe-brand.js",
+    "size": 163,
+    "sha256": "644bbe2f3811c645dcb6b2f9987c8da6e2bd460196c8e9178231daf74120cf0f",
+    "noise": true
+  },
+  {
+    "archive": "kangzhe-design.zip",
+    "path": "kangzhe-design/design_specs/assets/kz-interact.js",
+    "size": 33496,
+    "sha256": "2ebbe2cf12e525d8b689bad6275877b6ffeda84dcb017a384036f0b1d2f86d73",
+    "noise": false
+  },
+  {
+    "archive": "kangzhe-design.zip",
+    "path": "__MACOSX/kangzhe-design/design_specs/assets/._kz-interact.js",
+    "size": 163,
+    "sha256": "644bbe2f3811c645dcb6b2f9987c8da6e2bd460196c8e9178231daf74120cf0f",
+    "noise": true
+  },
+  {
+    "archive": "kangzhe-design.zip",
+    "path": "kangzhe-design/design_specs/assets/kz-htmlppt-patch.js",
+    "size": 3975,
+    "sha256": "07aebcafed5eb89f7c211691bc54ca78c4d073600ae02260d5322302e8a8be89",
+    "noise": false
+  },
+  {
+    "archive": "kangzhe-design.zip",
+    "path": "kangzhe-design/design_specs/assets/logo_bot.svg",
+    "size": 9542,
+    "sha256": "8d16d3ae8353dd31f46a50d401e66f9e62af40be6cc42cdf5050866a4e6e1cae",
+    "noise": false
+  },
+  {
+    "archive": "kangzhe-design.zip",
+    "path": "__MACOSX/kangzhe-design/design_specs/assets/._logo_bot.svg",
+    "size": 163,
+    "sha256": "644bbe2f3811c645dcb6b2f9987c8da6e2bd460196c8e9178231daf74120cf0f",
+    "noise": true
+  },
+  {
+    "archive": "kangzhe-design.zip",
+    "path": "kangzhe-design/design_specs/assets/__pycache__/pptx_chrome.cpython-314.pyc",
+    "size": 4328,
+    "sha256": "b522057966d7b848fc0506940909e5296c45acb6faac6f9e054651ecca687d3d",
+    "noise": true
+  },
+  {
+    "archive": "kangzhe-design.zip",
+    "path": "__MACOSX/kangzhe-design/design_specs/assets/.___pycache__",
+    "size": 163,
+    "sha256": "644bbe2f3811c645dcb6b2f9987c8da6e2bd460196c8e9178231daf74120cf0f",
+    "noise": true
+  },
+  {
+    "archive": "kangzhe-design.zip",
+    "path": "kangzhe-design/design_specs/assets/vendor_3d/echarts-gl.min.js",
+    "size": 639846,
+    "sha256": "d6d60f2165ce3eb1ea360ef62e8490835e0ae2c1e0c1788a772fff918e350842",
+    "noise": false
+  },
+  {
+    "archive": "kangzhe-design.zip",
+    "path": "kangzhe-design/design_specs/assets/kz-charts.js",
+    "size": 26163,
+    "sha256": "c0bda6ccb58bbbcebbb14c14abced46edc6aa55befde7e6d610b6a8e5d4e201b",
+    "noise": false
+  },
+  {
+    "archive": "kangzhe-design.zip",
+    "path": "__MACOSX/kangzhe-design/design_specs/assets/._kz-charts.js",
+    "size": 163,
+    "sha256": "644bbe2f3811c645dcb6b2f9987c8da6e2bd460196c8e9178231daf74120cf0f",
+    "noise": true
+  },
+  {
+    "archive": "kangzhe-design.zip",
+    "path": "kangzhe-design/design_specs/assets/kz-fluid.js",
+    "size": 5717,
+    "sha256": "7c0192dbe42f1266bcd63e1ebc4211930c1f4d48cffc0c24014ffbb830622608",
+    "noise": false
+  },
+  {
+    "archive": "kangzhe-design.zip",
+    "path": "kangzhe-design/design_specs/assets/kangzhe-brand.css",
+    "size": 21585,
+    "sha256": "30b84607c60763617644f21c7ad5ceff28196f16fac085645f6340887160f9c3",
+    "noise": false
+  },
+  {
+    "archive": "kangzhe-design.zip",
+    "path": "__MACOSX/kangzhe-design/design_specs/assets/._kangzhe-brand.css",
+    "size": 163,
+    "sha256": "644bbe2f3811c645dcb6b2f9987c8da6e2bd460196c8e9178231daf74120cf0f",
+    "noise": true
+  },
+  {
+    "archive": "kangzhe-design.zip",
+    "path": "kangzhe-design/design_specs/assets/pptx_chrome.py",
+    "size": 2914,
+    "sha256": "8fc5740eba13fe14403aa4904a0065c4297bf01fc6d33d292e02429ff4965577",
+    "noise": false
+  },
+  {
+    "archive": "kangzhe-design.zip",
+    "path": "__MACOSX/kangzhe-design/design_specs/assets/._pptx_chrome.py",
+    "size": 163,
+    "sha256": "644bbe2f3811c645dcb6b2f9987c8da6e2bd460196c8e9178231daf74120cf0f",
+    "noise": true
+  },
+  {
+    "archive": "kangzhe-design.zip",
+    "path": "kangzhe-design/design_specs/assets/kz-stream.js",
+    "size": 4195,
+    "sha256": "d17e66b67e38e963dde789be6d3f3d69f76bb3a4b534985b596d8cd5baa196dd",
+    "noise": false
+  },
+  {
+    "archive": "kangzhe-design.zip",
+    "path": "kangzhe-design/design_specs/assets/htmlppt/gx_hero.css",
+    "size": 1351,
+    "sha256": "e898dd9706aa974fa453157bb2a3f854725cef614162ec9938f57d7d44dc3ef3",
+    "noise": false
+  },
+  {
+    "archive": "kangzhe-design.zip",
+    "path": "kangzhe-design/design_specs/assets/htmlppt/gx_fx.css",
+    "size": 20225,
+    "sha256": "7a417c4dd30f9c3f396e02abd6fb00dd976ec06a6b4039ce62d83c15200ef1b4",
+    "noise": false
+  },
+  {
+    "archive": "kangzhe-design.zip",
+    "path": "__MACOSX/kangzhe-design/design_specs/assets/htmlppt/._gx_fx.css",
+    "size": 163,
+    "sha256": "644bbe2f3811c645dcb6b2f9987c8da6e2bd460196c8e9178231daf74120cf0f",
+    "noise": true
+  },
+  {
+    "archive": "kangzhe-design.zip",
+    "path": "kangzhe-design/design_specs/assets/htmlppt/gx_hero.js",
+    "size": 8276,
+    "sha256": "102d2b5d3163496e548fe1f2d6783b4fc1391d63eb2542096a1e28f6191b4542",
+    "noise": false
+  },
+  {
+    "archive": "kangzhe-design.zip",
+    "path": "kangzhe-design/design_specs/assets/htmlppt/gx_fx.js",
+    "size": 12979,
+    "sha256": "248860c8b69c728bbc9cd3191de9cf3c7d05880e87b38d9522359f5fae249cc3",
+    "noise": false
+  },
+  {
+    "archive": "kangzhe-design.zip",
+    "path": "__MACOSX/kangzhe-design/design_specs/assets/htmlppt/._gx_fx.js",
+    "size": 163,
+    "sha256": "644bbe2f3811c645dcb6b2f9987c8da6e2bd460196c8e9178231daf74120cf0f",
+    "noise": true
+  },
+  {
+    "archive": "kangzhe-design.zip",
+    "path": "__MACOSX/kangzhe-design/design_specs/assets/._htmlppt",
+    "size": 163,
+    "sha256": "644bbe2f3811c645dcb6b2f9987c8da6e2bd460196c8e9178231daf74120cf0f",
+    "noise": true
+  },
+  {
+    "archive": "kangzhe-design.zip",
+    "path": "kangzhe-design/design_specs/assets/vendor/gsap.min.js",
+    "size": 72927,
+    "sha256": "92bb9a96476f983d212a2bc4f54c889039c1696dd4461d40a736860938570fbb",
+    "noise": false
+  },
+  {
+    "archive": "kangzhe-design.zip",
+    "path": "kangzhe-design/design_specs/assets/vendor/model-viewer.min.js",
+    "size": 1068903,
+    "sha256": "283b0672384614b4847636c306fc93fe4b1fcadc76d668b4e47f0ca76bcf033b",
+    "noise": false
+  },
+  {
+    "archive": "kangzhe-design.zip",
+    "path": "kangzhe-design/design_specs/assets/vendor/lenis.min.js",
+    "size": 18722,
+    "sha256": "53195c9797e7ce7bf9d7fa9242b08209e57f46de4c9dac126a6494fa780e3346",
+    "noise": false
+  },
+  {
+    "archive": "kangzhe-design.zip",
+    "path": "kangzhe-design/design_specs/assets/vendor/ScrollTrigger.min.js",
+    "size": 44575,
+    "sha256": "b0b14d67b55b0c43c756ac0b106cfcb09d0879945f6ead64451065b0672916a2",
+    "noise": false
+  },
+  {
+    "archive": "kangzhe-design.zip",
+    "path": "kangzhe-design/design_specs/assets/vendor/echarts.min.js",
+    "size": 1121883,
+    "sha256": "b66b25aeb4df84e33199dc21694014d336d222cbd9deb0e5a7c14bd6aa0d0fd0",
+    "noise": false
+  },
+  {
+    "archive": "kangzhe-design.zip",
+    "path": "__MACOSX/kangzhe-design/design_specs/._assets",
+    "size": 163,
+    "sha256": "644bbe2f3811c645dcb6b2f9987c8da6e2bd460196c8e9178231daf74120cf0f",
+    "noise": true
+  },
+  {
+    "archive": "kangzhe-design.zip",
+    "path": "kangzhe-design/design_specs/htmlppt_writing.md",
+    "size": 10365,
+    "sha256": "47cb15d4721fbb6fa32f5208594f83a7203dab302dd3e6b0f731687ebed947f4",
+    "noise": false
+  },
+  {
+    "archive": "kangzhe-design.zip",
+    "path": "__MACOSX/kangzhe-design/design_specs/._htmlppt_writing.md",
+    "size": 163,
+    "sha256": "644bbe2f3811c645dcb6b2f9987c8da6e2bd460196c8e9178231daf74120cf0f",
+    "noise": true
+  },
+  {
+    "archive": "kangzhe-design.zip",
+    "path": "kangzhe-design/design_specs/track_htmlppt.md",
+    "size": 14371,
+    "sha256": "3c050a285e357cc35568cf99f63db52dc54c4d450eb1c100f09c7db6f518666c",
+    "noise": false
+  },
+  {
+    "archive": "kangzhe-design.zip",
+    "path": "__MACOSX/kangzhe-design/design_specs/._track_htmlppt.md",
+    "size": 163,
+    "sha256": "644bbe2f3811c645dcb6b2f9987c8da6e2bd460196c8e9178231daf74120cf0f",
+    "noise": true
+  },
+  {
+    "archive": "kangzhe-design.zip",
+    "path": "kangzhe-design/design_specs/htmlppt_playbook.md",
+    "size": 7155,
+    "sha256": "8f5f0d8b5a8df325f981e10903a41d508bec70d7f97c538c1b8752d517cc29e4",
+    "noise": false
+  },
+  {
+    "archive": "kangzhe-design.zip",
+    "path": "__MACOSX/kangzhe-design/design_specs/._htmlppt_playbook.md",
+    "size": 163,
+    "sha256": "644bbe2f3811c645dcb6b2f9987c8da6e2bd460196c8e9178231daf74120cf0f",
+    "noise": true
+  },
+  {
+    "archive": "kangzhe-design.zip",
+    "path": "kangzhe-design/design_specs/track_site.md",
+    "size": 38300,
+    "sha256": "48ea3a187eb989d3a05536ab926700982b13be675bbb375b46073922b682df0f",
+    "noise": false
+  },
+  {
+    "archive": "kangzhe-design.zip",
+    "path": "__MACOSX/kangzhe-design/design_specs/._track_site.md",
+    "size": 163,
+    "sha256": "644bbe2f3811c645dcb6b2f9987c8da6e2bd460196c8e9178231daf74120cf0f",
+    "noise": true
+  },
+  {
+    "archive": "kangzhe-design.zip",
+    "path": "kangzhe-design/design_specs/track_interactive.md",
+    "size": 26210,
+    "sha256": "388d82e70a0fc4b3fff36d3ff1b768076c815bcc76f97fa8ccc27e643fb58eda",
+    "noise": false
+  },
+  {
+    "archive": "kangzhe-design.zip",
+    "path": "__MACOSX/kangzhe-design/design_specs/._track_interactive.md",
+    "size": 163,
+    "sha256": "644bbe2f3811c645dcb6b2f9987c8da6e2bd460196c8e9178231daf74120cf0f",
+    "noise": true
+  },
+  {
+    "archive": "kangzhe-design.zip",
+    "path": "__MACOSX/kangzhe-design/._design_specs",
+    "size": 163,
+    "sha256": "644bbe2f3811c645dcb6b2f9987c8da6e2bd460196c8e9178231daf74120cf0f",
+    "noise": true
+  },
+  {
+    "archive": "kangzhe-design-3d.zip",
+    "path": "kangzhe-design-3d/INSTALL.txt",
+    "size": 2428,
+    "sha256": "ada1188d252ed53f158be82a1fe11023a4d87cb2ec2f4b7bd2d1922e9b6e5c30",
+    "noise": false
+  },
+  {
+    "archive": "kangzhe-design-3d.zip",
+    "path": "kangzhe-design-3d/SKILL.md",
+    "size": 22613,
+    "sha256": "919cc7ccd6f93ba69d4c1c3d66fea4a0c6f2528980d333dd0e3c1c3aa2fb1493",
+    "noise": false
+  },
+  {
+    "archive": "kangzhe-design-3d.zip",
+    "path": "kangzhe-design-3d/design_specs/htmlppt_motion.md",
+    "size": 23848,
+    "sha256": "7df5d73d7a9e04ce3c8f6f0b308cd5302373473770dc176437302f979e4252e0",
+    "noise": false
+  },
+  {
+    "archive": "kangzhe-design-3d.zip",
+    "path": "__MACOSX/kangzhe-design-3d/design_specs/._htmlppt_motion.md",
+    "size": 163,
+    "sha256": "644bbe2f3811c645dcb6b2f9987c8da6e2bd460196c8e9178231daf74120cf0f",
+    "noise": true
+  },
+  {
+    "archive": "kangzhe-design-3d.zip",
+    "path": "kangzhe-design-3d/design_specs/track_stream.md",
+    "size": 28885,
+    "sha256": "48422fa46a68d78f7cef8d87c0094b0d0a1be949a90d3f25924921aa80b062ac",
+    "noise": false
+  },
+  {
+    "archive": "kangzhe-design-3d.zip",
+    "path": "__MACOSX/kangzhe-design-3d/design_specs/._track_stream.md",
+    "size": 163,
+    "sha256": "644bbe2f3811c645dcb6b2f9987c8da6e2bd460196c8e9178231daf74120cf0f",
+    "noise": true
+  },
+  {
+    "archive": "kangzhe-design-3d.zip",
+    "path": "kangzhe-design-3d/design_specs/htmlppt_components.md",
+    "size": 53624,
+    "sha256": "096310fe374a6eec0688e54e72e003c1a703e69fc36be5517bf0d4dc8e04a71a",
+    "noise": false
+  },
+  {
+    "archive": "kangzhe-design-3d.zip",
+    "path": "__MACOSX/kangzhe-design-3d/design_specs/._htmlppt_components.md",
+    "size": 163,
+    "sha256": "644bbe2f3811c645dcb6b2f9987c8da6e2bd460196c8e9178231daf74120cf0f",
+    "noise": true
+  },
+  {
+    "archive": "kangzhe-design-3d.zip",
+    "path": "kangzhe-design-3d/design_specs/ARCHITECTURE.md",
+    "size": 3830,
+    "sha256": "9b2d4f6b9fdc2cbfdca772982aed02e2fbccdfa8b7b6bf7737d22a6d41a3685b",
+    "noise": false
+  },
+  {
+    "archive": "kangzhe-design-3d.zip",
+    "path": "__MACOSX/kangzhe-design-3d/design_specs/._ARCHITECTURE.md",
+    "size": 163,
+    "sha256": "644bbe2f3811c645dcb6b2f9987c8da6e2bd460196c8e9178231daf74120cf0f",
+    "noise": true
+  },
+  {
+    "archive": "kangzhe-design-3d.zip",
+    "path": "kangzhe-design-3d/design_specs/html_interact.md",
+    "size": 12685,
+    "sha256": "17579268766c0d0308f0acb02e33e068e585dddae9fcb60217c8b4582f52b06c",
+    "noise": false
+  },
+  {
+    "archive": "kangzhe-design-3d.zip",
+    "path": "__MACOSX/kangzhe-design-3d/design_specs/._html_interact.md",
+    "size": 163,
+    "sha256": "644bbe2f3811c645dcb6b2f9987c8da6e2bd460196c8e9178231daf74120cf0f",
+    "noise": true
+  },
+  {
+    "archive": "kangzhe-design-3d.zip",
+    "path": "kangzhe-design-3d/design_specs/assets_media.md",
+    "size": 15701,
+    "sha256": "7cf08fe96ff93f2c716d41178439ba6fd9f0b9f2b48005c7214dd581743e1f99",
+    "noise": false
+  },
+  {
+    "archive": "kangzhe-design-3d.zip",
+    "path": "kangzhe-design-3d/design_specs/local_map.md",
+    "size": 806,
+    "sha256": "9cbd8df96943c29ac69d54db6cb3a39e4cd7cf9dad4d37b4db36216928a87e6f",
+    "noise": false
+  },
+  {
+    "archive": "kangzhe-design-3d.zip",
+    "path": "__MACOSX/kangzhe-design-3d/design_specs/._local_map.md",
+    "size": 163,
+    "sha256": "644bbe2f3811c645dcb6b2f9987c8da6e2bd460196c8e9178231daf74120cf0f",
+    "noise": true
+  },
+  {
+    "archive": "kangzhe-design-3d.zip",
+    "path": "kangzhe-design-3d/design_specs/html_charts.md",
+    "size": 8683,
+    "sha256": "1571d8ae3d14a1c27c430e7013fd6ae52c1f84adaa1132333f4a0ecf2e845f2a",
+    "noise": false
+  },
+  {
+    "archive": "kangzhe-design-3d.zip",
+    "path": "__MACOSX/kangzhe-design-3d/design_specs/._html_charts.md",
+    "size": 163,
+    "sha256": "644bbe2f3811c645dcb6b2f9987c8da6e2bd460196c8e9178231daf74120cf0f",
+    "noise": true
+  },
+  {
+    "archive": "kangzhe-design-3d.zip",
+    "path": "kangzhe-design-3d/design_specs/htmlppt_errors.md",
+    "size": 11669,
+    "sha256": "2a26862f72f32017953020c6e24bd47c588dc8287eed4318931d321a456c52a9",
+    "noise": false
+  },
+  {
+    "archive": "kangzhe-design-3d.zip",
+    "path": "__MACOSX/kangzhe-design-3d/design_specs/._htmlppt_errors.md",
+    "size": 163,
+    "sha256": "644bbe2f3811c645dcb6b2f9987c8da6e2bd460196c8e9178231daf74120cf0f",
+    "noise": true
+  },
+  {
+    "archive": "kangzhe-design-3d.zip",
+    "path": "kangzhe-design-3d/design_specs/htmlppt_chrome.md",
+    "size": 26199,
+    "sha256": "1250f64e42799ed8fed0adaf7354fe5a0448c63333e07ab65d751b3386798b58",
+    "noise": false
+  },
+  {
+    "archive": "kangzhe-design-3d.zip",
+    "path": "__MACOSX/kangzhe-design-3d/design_specs/._htmlppt_chrome.md",
+    "size": 163,
+    "sha256": "644bbe2f3811c645dcb6b2f9987c8da6e2bd460196c8e9178231daf74120cf0f",
+    "noise": true
+  },
+  {
+    "archive": "kangzhe-design-3d.zip",
+    "path": "kangzhe-design-3d/design_specs/pptx_qc.md",
+    "size": 27665,
+    "sha256": "de4048a6a831608a9a0080dbfce00b41d2863109c3df28d6061a3cc6df81ac82",
+    "noise": false
+  },
+  {
+    "archive": "kangzhe-design-3d.zip",
+    "path": "__MACOSX/kangzhe-design-3d/design_specs/._pptx_qc.md",
+    "size": 163,
+    "sha256": "644bbe2f3811c645dcb6b2f9987c8da6e2bd460196c8e9178231daf74120cf0f",
+    "noise": true
+  },
+  {
+    "archive": "kangzhe-design-3d.zip",
+    "path": "kangzhe-design-3d/design_specs/tests/TESTLOG.md",
+    "size": 5891,
+    "sha256": "d472b75371199a50665286650e54c9e966f17e19e6997d611e9cc71fe6573a37",
+    "noise": false
+  },
+  {
+    "archive": "kangzhe-design-3d.zip",
+    "path": "kangzhe-design-3d/design_specs/tests/test_package_load.py",
+    "size": 9086,
+    "sha256": "6da2e34762741d0babcc4ba3e0333a27b027001a061560af8a24e3d067ea83e0",
+    "noise": false
+  },
+  {
+    "archive": "kangzhe-design-3d.zip",
+    "path": "__MACOSX/kangzhe-design-3d/design_specs/._tests",
+    "size": 163,
+    "sha256": "644bbe2f3811c645dcb6b2f9987c8da6e2bd460196c8e9178231daf74120cf0f",
+    "noise": true
+  },
+  {
+    "archive": "kangzhe-design-3d.zip",
+    "path": "kangzhe-design-3d/design_specs/ROUTER.md",
+    "size": 2816,
+    "sha256": "44245f03c782308c09819936bfcea2a807dc55cf5f4ad64e4b3afe58cf2fe671",
+    "noise": false
+  },
+  {
+    "archive": "kangzhe-design-3d.zip",
+    "path": "__MACOSX/kangzhe-design-3d/design_specs/._ROUTER.md",
+    "size": 163,
+    "sha256": "644bbe2f3811c645dcb6b2f9987c8da6e2bd460196c8e9178231daf74120cf0f",
+    "noise": true
+  },
+  {
+    "archive": "kangzhe-design-3d.zip",
+    "path": "kangzhe-design-3d/design_specs/pptx_layouts.md",
+    "size": 43561,
+    "sha256": "55b69d3867109b6c449229d2297e725b200f75acc25733271eeb39746abe42f4",
+    "noise": false
+  },
+  {
+    "archive": "kangzhe-design-3d.zip",
+    "path": "__MACOSX/kangzhe-design-3d/design_specs/._pptx_layouts.md",
+    "size": 163,
+    "sha256": "644bbe2f3811c645dcb6b2f9987c8da6e2bd460196c8e9178231daf74120cf0f",
+    "noise": true
+  },
+  {
+    "archive": "kangzhe-design-3d.zip",
+    "path": "kangzhe-design-3d/design_specs/README.md",
+    "size": 2411,
+    "sha256": "5773ce1bf7bec7c7874f24812abb5962467f92bb88413c9c624ca3ab3707ed42",
+    "noise": false
+  },
+  {
+    "archive": "kangzhe-design-3d.zip",
+    "path": "__MACOSX/kangzhe-design-3d/design_specs/._README.md",
+    "size": 163,
+    "sha256": "644bbe2f3811c645dcb6b2f9987c8da6e2bd460196c8e9178231daf74120cf0f",
+    "noise": true
+  },
+  {
+    "archive": "kangzhe-design-3d.zip",
+    "path": "kangzhe-design-3d/design_specs/pptx_aesthetics.md",
+    "size": 14896,
+    "sha256": "0476d5b386a0c575f54e729674342ffdff3fed452da890a3d8610006bf9a61ed",
+    "noise": false
+  },
+  {
+    "archive": "kangzhe-design-3d.zip",
+    "path": "__MACOSX/kangzhe-design-3d/design_specs/._pptx_aesthetics.md",
+    "size": 163,
+    "sha256": "644bbe2f3811c645dcb6b2f9987c8da6e2bd460196c8e9178231daf74120cf0f",
+    "noise": true
+  },
+  {
+    "archive": "kangzhe-design-3d.zip",
+    "path": "kangzhe-design-3d/design_specs/track_pptx.md",
+    "size": 16534,
+    "sha256": "27b8e1d6a012b77e6c11538e5e008f623ab70efeb52609460738b35826e6715c",
+    "noise": false
+  },
+  {
+    "archive": "kangzhe-design-3d.zip",
+    "path": "__MACOSX/kangzhe-design-3d/design_specs/._track_pptx.md",
+    "size": 163,
+    "sha256": "644bbe2f3811c645dcb6b2f9987c8da6e2bd460196c8e9178231daf74120cf0f",
+    "noise": true
+  },
+  {
+    "archive": "kangzhe-design-3d.zip",
+    "path": "kangzhe-design-3d/design_specs/VERSION",
+    "size": 6,
+    "sha256": "6cafeca6c8b6b13b84b4c4e3bf67122360008b6f0209619fe756f68cb9bdc7e6",
+    "noise": false
+  },
+  {
+    "archive": "kangzhe-design-3d.zip",
+    "path": "kangzhe-design-3d/design_specs/htmlppt_runtime.md",
+    "size": 20204,
+    "sha256": "9c9ad91d726159554185a9c853291cc8e7b285a477205f2df013b6782a7ecc8b",
+    "noise": false
+  },
+  {
+    "archive": "kangzhe-design-3d.zip",
+    "path": "__MACOSX/kangzhe-design-3d/design_specs/._htmlppt_runtime.md",
+    "size": 163,
+    "sha256": "644bbe2f3811c645dcb6b2f9987c8da6e2bd460196c8e9178231daf74120cf0f",
+    "noise": true
+  },
+  {
+    "archive": "kangzhe-design-3d.zip",
+    "path": "kangzhe-design-3d/design_specs/pptx_playbook.md",
+    "size": 11646,
+    "sha256": "400d53f9c64f14e871b898aced99aa8016f5a1495cc898a5a4b905a2b2d496da",
+    "noise": false
+  },
+  {
+    "archive": "kangzhe-design-3d.zip",
+    "path": "__MACOSX/kangzhe-design-3d/design_specs/._pptx_playbook.md",
+    "size": 163,
+    "sha256": "644bbe2f3811c645dcb6b2f9987c8da6e2bd460196c8e9178231daf74120cf0f",
+    "noise": true
+  },
+  {
+    "archive": "kangzhe-design-3d.zip",
+    "path": "kangzhe-design-3d/design_specs/core.md",
+    "size": 115682,
+    "sha256": "356f9c86ab08ad9d67c19cb15ba14fc54ccef623f11b61489d724c6a0cb9ff09",
+    "noise": false
+  },
+  {
+    "archive": "kangzhe-design-3d.zip",
+    "path": "__MACOSX/kangzhe-design-3d/design_specs/._core.md",
+    "size": 163,
+    "sha256": "644bbe2f3811c645dcb6b2f9987c8da6e2bd460196c8e9178231daf74120cf0f",
+    "noise": true
+  },
+  {
+    "archive": "kangzhe-design-3d.zip",
+    "path": "kangzhe-design-3d/design_specs/assets/kz-interact.css",
+    "size": 6490,
+    "sha256": "ea50a82646e7fb3aa503d4c9456ba51534f61bc7287dadb2017bd309282f6e4a",
+    "noise": false
+  },
+  {
+    "archive": "kangzhe-design-3d.zip",
+    "path": "kangzhe-design-3d/design_specs/assets/kangzhe-brand.js",
+    "size": 6212,
+    "sha256": "73249a93049b4999dfd30efdce69963863456218a2dcb857f0caf60eced36690",
+    "noise": false
+  },
+  {
+    "archive": "kangzhe-design-3d.zip",
+    "path": "__MACOSX/kangzhe-design-3d/design_specs/assets/._kangzhe-brand.js",
+    "size": 163,
+    "sha256": "644bbe2f3811c645dcb6b2f9987c8da6e2bd460196c8e9178231daf74120cf0f",
+    "noise": true
+  },
+  {
+    "archive": "kangzhe-design-3d.zip",
+    "path": "kangzhe-design-3d/design_specs/assets/kz-interact.js",
+    "size": 33496,
+    "sha256": "2ebbe2cf12e525d8b689bad6275877b6ffeda84dcb017a384036f0b1d2f86d73",
+    "noise": false
+  },
+  {
+    "archive": "kangzhe-design-3d.zip",
+    "path": "__MACOSX/kangzhe-design-3d/design_specs/assets/._kz-interact.js",
+    "size": 163,
+    "sha256": "644bbe2f3811c645dcb6b2f9987c8da6e2bd460196c8e9178231daf74120cf0f",
+    "noise": true
+  },
+  {
+    "archive": "kangzhe-design-3d.zip",
+    "path": "kangzhe-design-3d/design_specs/assets/kz-htmlppt-patch.js",
+    "size": 3973,
+    "sha256": "a6af60563141d68ee79948377f50929ad2d20fe9f77f385ae4ba8c2fdd20f467",
+    "noise": false
+  },
+  {
+    "archive": "kangzhe-design-3d.zip",
+    "path": "kangzhe-design-3d/design_specs/assets/logo_bot.svg",
+    "size": 9542,
+    "sha256": "8d16d3ae8353dd31f46a50d401e66f9e62af40be6cc42cdf5050866a4e6e1cae",
+    "noise": false
+  },
+  {
+    "archive": "kangzhe-design-3d.zip",
+    "path": "__MACOSX/kangzhe-design-3d/design_specs/assets/._logo_bot.svg",
+    "size": 163,
+    "sha256": "644bbe2f3811c645dcb6b2f9987c8da6e2bd460196c8e9178231daf74120cf0f",
+    "noise": true
+  },
+  {
+    "archive": "kangzhe-design-3d.zip",
+    "path": "kangzhe-design-3d/design_specs/assets/__pycache__/pptx_chrome.cpython-312.pyc",
+    "size": 4242,
+    "sha256": "5a4329ee64060b1149046f5fdc87a8c79ca47b73e76f7478ec6295efa20fe354",
+    "noise": true
+  },
+  {
+    "archive": "kangzhe-design-3d.zip",
+    "path": "kangzhe-design-3d/design_specs/assets/__pycache__/pptx_chrome.cpython-314.pyc",
+    "size": 4331,
+    "sha256": "727607de01fd4c77e48bf14a744742f647612a6a0a3e16416ad7137e153c7afb",
+    "noise": true
+  },
+  {
+    "archive": "kangzhe-design-3d.zip",
+    "path": "kangzhe-design-3d/design_specs/assets/vendor_3d/echarts-gl.min.js",
+    "size": 639846,
+    "sha256": "d6d60f2165ce3eb1ea360ef62e8490835e0ae2c1e0c1788a772fff918e350842",
+    "noise": false
+  },
+  {
+    "archive": "kangzhe-design-3d.zip",
+    "path": "__MACOSX/kangzhe-design-3d/design_specs/assets/vendor_3d/._echarts-gl.min.js",
+    "size": 163,
+    "sha256": "644bbe2f3811c645dcb6b2f9987c8da6e2bd460196c8e9178231daf74120cf0f",
+    "noise": true
+  },
+  {
+    "archive": "kangzhe-design-3d.zip",
+    "path": "__MACOSX/kangzhe-design-3d/design_specs/assets/._vendor_3d",
+    "size": 163,
+    "sha256": "644bbe2f3811c645dcb6b2f9987c8da6e2bd460196c8e9178231daf74120cf0f",
+    "noise": true
+  },
+  {
+    "archive": "kangzhe-design-3d.zip",
+    "path": "kangzhe-design-3d/design_specs/assets/kz-charts.js",
+    "size": 26163,
+    "sha256": "c0bda6ccb58bbbcebbb14c14abced46edc6aa55befde7e6d610b6a8e5d4e201b",
+    "noise": false
+  },
+  {
+    "archive": "kangzhe-design-3d.zip",
+    "path": "__MACOSX/kangzhe-design-3d/design_specs/assets/._kz-charts.js",
+    "size": 163,
+    "sha256": "644bbe2f3811c645dcb6b2f9987c8da6e2bd460196c8e9178231daf74120cf0f",
+    "noise": true
+  },
+  {
+    "archive": "kangzhe-design-3d.zip",
+    "path": "kangzhe-design-3d/design_specs/assets/kz-fluid.js",
+    "size": 5717,
+    "sha256": "7c0192dbe42f1266bcd63e1ebc4211930c1f4d48cffc0c24014ffbb830622608",
+    "noise": false
+  },
+  {
+    "archive": "kangzhe-design-3d.zip",
+    "path": "__MACOSX/kangzhe-design-3d/design_specs/assets/._kz-fluid.js",
+    "size": 163,
+    "sha256": "644bbe2f3811c645dcb6b2f9987c8da6e2bd460196c8e9178231daf74120cf0f",
+    "noise": true
+  },
+  {
+    "archive": "kangzhe-design-3d.zip",
+    "path": "kangzhe-design-3d/design_specs/assets/kangzhe-brand.css",
+    "size": 21585,
+    "sha256": "30b84607c60763617644f21c7ad5ceff28196f16fac085645f6340887160f9c3",
+    "noise": false
+  },
+  {
+    "archive": "kangzhe-design-3d.zip",
+    "path": "__MACOSX/kangzhe-design-3d/design_specs/assets/._kangzhe-brand.css",
+    "size": 163,
+    "sha256": "644bbe2f3811c645dcb6b2f9987c8da6e2bd460196c8e9178231daf74120cf0f",
+    "noise": true
+  },
+  {
+    "archive": "kangzhe-design-3d.zip",
+    "path": "kangzhe-design-3d/design_specs/assets/pptx_chrome.py",
+    "size": 2914,
+    "sha256": "8fc5740eba13fe14403aa4904a0065c4297bf01fc6d33d292e02429ff4965577",
+    "noise": false
+  },
+  {
+    "archive": "kangzhe-design-3d.zip",
+    "path": "__MACOSX/kangzhe-design-3d/design_specs/assets/._pptx_chrome.py",
+    "size": 163,
+    "sha256": "644bbe2f3811c645dcb6b2f9987c8da6e2bd460196c8e9178231daf74120cf0f",
+    "noise": true
+  },
+  {
+    "archive": "kangzhe-design-3d.zip",
+    "path": "kangzhe-design-3d/design_specs/assets/kz-stream.js",
+    "size": 4195,
+    "sha256": "d17e66b67e38e963dde789be6d3f3d69f76bb3a4b534985b596d8cd5baa196dd",
+    "noise": false
+  },
+  {
+    "archive": "kangzhe-design-3d.zip",
+    "path": "__MACOSX/kangzhe-design-3d/design_specs/assets/._kz-stream.js",
+    "size": 163,
+    "sha256": "644bbe2f3811c645dcb6b2f9987c8da6e2bd460196c8e9178231daf74120cf0f",
+    "noise": true
+  },
+  {
+    "archive": "kangzhe-design-3d.zip",
+    "path": "kangzhe-design-3d/design_specs/assets/htmlppt/gx_hero.css",
+    "size": 1351,
+    "sha256": "e898dd9706aa974fa453157bb2a3f854725cef614162ec9938f57d7d44dc3ef3",
+    "noise": false
+  },
+  {
+    "archive": "kangzhe-design-3d.zip",
+    "path": "__MACOSX/kangzhe-design-3d/design_specs/assets/htmlppt/._gx_hero.css",
+    "size": 163,
+    "sha256": "644bbe2f3811c645dcb6b2f9987c8da6e2bd460196c8e9178231daf74120cf0f",
+    "noise": true
+  },
+  {
+    "archive": "kangzhe-design-3d.zip",
+    "path": "kangzhe-design-3d/design_specs/assets/htmlppt/gx_fx.css",
+    "size": 20225,
+    "sha256": "7a417c4dd30f9c3f396e02abd6fb00dd976ec06a6b4039ce62d83c15200ef1b4",
+    "noise": false
+  },
+  {
+    "archive": "kangzhe-design-3d.zip",
+    "path": "__MACOSX/kangzhe-design-3d/design_specs/assets/htmlppt/._gx_fx.css",
+    "size": 163,
+    "sha256": "644bbe2f3811c645dcb6b2f9987c8da6e2bd460196c8e9178231daf74120cf0f",
+    "noise": true
+  },
+  {
+    "archive": "kangzhe-design-3d.zip",
+    "path": "kangzhe-design-3d/design_specs/assets/htmlppt/gx_hero.js",
+    "size": 8117,
+    "sha256": "8ca953ca6f2311595cbf712cb04333c33a46af392604896a26be2fcfaaec6647",
+    "noise": false
+  },
+  {
+    "archive": "kangzhe-design-3d.zip",
+    "path": "__MACOSX/kangzhe-design-3d/design_specs/assets/htmlppt/._gx_hero.js",
+    "size": 163,
+    "sha256": "644bbe2f3811c645dcb6b2f9987c8da6e2bd460196c8e9178231daf74120cf0f",
+    "noise": true
+  },
+  {
+    "archive": "kangzhe-design-3d.zip",
+    "path": "kangzhe-design-3d/design_specs/assets/htmlppt/gx_fx.js",
+    "size": 12979,
+    "sha256": "248860c8b69c728bbc9cd3191de9cf3c7d05880e87b38d9522359f5fae249cc3",
+    "noise": false
+  },
+  {
+    "archive": "kangzhe-design-3d.zip",
+    "path": "__MACOSX/kangzhe-design-3d/design_specs/assets/htmlppt/._gx_fx.js",
+    "size": 163,
+    "sha256": "644bbe2f3811c645dcb6b2f9987c8da6e2bd460196c8e9178231daf74120cf0f",
+    "noise": true
+  },
+  {
+    "archive": "kangzhe-design-3d.zip",
+    "path": "__MACOSX/kangzhe-design-3d/design_specs/assets/._htmlppt",
+    "size": 163,
+    "sha256": "644bbe2f3811c645dcb6b2f9987c8da6e2bd460196c8e9178231daf74120cf0f",
+    "noise": true
+  },
+  {
+    "archive": "kangzhe-design-3d.zip",
+    "path": "kangzhe-design-3d/design_specs/assets/vendor/gsap.min.js",
+    "size": 72927,
+    "sha256": "92bb9a96476f983d212a2bc4f54c889039c1696dd4461d40a736860938570fbb",
+    "noise": false
+  },
+  {
+    "archive": "kangzhe-design-3d.zip",
+    "path": "__MACOSX/kangzhe-design-3d/design_specs/assets/vendor/._gsap.min.js",
+    "size": 163,
+    "sha256": "644bbe2f3811c645dcb6b2f9987c8da6e2bd460196c8e9178231daf74120cf0f",
+    "noise": true
+  },
+  {
+    "archive": "kangzhe-design-3d.zip",
+    "path": "kangzhe-design-3d/design_specs/assets/vendor/model-viewer.min.js",
+    "size": 1068903,
+    "sha256": "283b0672384614b4847636c306fc93fe4b1fcadc76d668b4e47f0ca76bcf033b",
+    "noise": false
+  },
+  {
+    "archive": "kangzhe-design-3d.zip",
+    "path": "__MACOSX/kangzhe-design-3d/design_specs/assets/vendor/._model-viewer.min.js",
+    "size": 163,
+    "sha256": "644bbe2f3811c645dcb6b2f9987c8da6e2bd460196c8e9178231daf74120cf0f",
+    "noise": true
+  },
+  {
+    "archive": "kangzhe-design-3d.zip",
+    "path": "kangzhe-design-3d/design_specs/assets/vendor/lenis.min.js",
+    "size": 18722,
+    "sha256": "53195c9797e7ce7bf9d7fa9242b08209e57f46de4c9dac126a6494fa780e3346",
+    "noise": false
+  },
+  {
+    "archive": "kangzhe-design-3d.zip",
+    "path": "__MACOSX/kangzhe-design-3d/design_specs/assets/vendor/._lenis.min.js",
+    "size": 163,
+    "sha256": "644bbe2f3811c645dcb6b2f9987c8da6e2bd460196c8e9178231daf74120cf0f",
+    "noise": true
+  },
+  {
+    "archive": "kangzhe-design-3d.zip",
+    "path": "kangzhe-design-3d/design_specs/assets/vendor/ScrollTrigger.min.js",
+    "size": 44575,
+    "sha256": "b0b14d67b55b0c43c756ac0b106cfcb09d0879945f6ead64451065b0672916a2",
+    "noise": false
+  },
+  {
+    "archive": "kangzhe-design-3d.zip",
+    "path": "__MACOSX/kangzhe-design-3d/design_specs/assets/vendor/._ScrollTrigger.min.js",
+    "size": 163,
+    "sha256": "644bbe2f3811c645dcb6b2f9987c8da6e2bd460196c8e9178231daf74120cf0f",
+    "noise": true
+  },
+  {
+    "archive": "kangzhe-design-3d.zip",
+    "path": "kangzhe-design-3d/design_specs/assets/vendor/echarts.min.js",
+    "size": 1121883,
+    "sha256": "b66b25aeb4df84e33199dc21694014d336d222cbd9deb0e5a7c14bd6aa0d0fd0",
+    "noise": false
+  },
+  {
+    "archive": "kangzhe-design-3d.zip",
+    "path": "__MACOSX/kangzhe-design-3d/design_specs/assets/vendor/._echarts.min.js",
+    "size": 163,
+    "sha256": "644bbe2f3811c645dcb6b2f9987c8da6e2bd460196c8e9178231daf74120cf0f",
+    "noise": true
+  },
+  {
+    "archive": "kangzhe-design-3d.zip",
+    "path": "__MACOSX/kangzhe-design-3d/design_specs/assets/._vendor",
+    "size": 163,
+    "sha256": "644bbe2f3811c645dcb6b2f9987c8da6e2bd460196c8e9178231daf74120cf0f",
+    "noise": true
+  },
+  {
+    "archive": "kangzhe-design-3d.zip",
+    "path": "__MACOSX/kangzhe-design-3d/design_specs/._assets",
+    "size": 163,
+    "sha256": "644bbe2f3811c645dcb6b2f9987c8da6e2bd460196c8e9178231daf74120cf0f",
+    "noise": true
+  },
+  {
+    "archive": "kangzhe-design-3d.zip",
+    "path": "kangzhe-design-3d/design_specs/htmlppt_writing.md",
+    "size": 10363,
+    "sha256": "55cea395fceb876fd907778804f6648cf91533f2c7d2c407584fc4f6b7337b83",
+    "noise": false
+  },
+  {
+    "archive": "kangzhe-design-3d.zip",
+    "path": "__MACOSX/kangzhe-design-3d/design_specs/._htmlppt_writing.md",
+    "size": 163,
+    "sha256": "644bbe2f3811c645dcb6b2f9987c8da6e2bd460196c8e9178231daf74120cf0f",
+    "noise": true
+  },
+  {
+    "archive": "kangzhe-design-3d.zip",
+    "path": "kangzhe-design-3d/design_specs/track_htmlppt.md",
+    "size": 13610,
+    "sha256": "b9dbc0a0fdf5113b082ae6fe7f9914edcc26b51c3d6dd562242604572a764f3f",
+    "noise": false
+  },
+  {
+    "archive": "kangzhe-design-3d.zip",
+    "path": "__MACOSX/kangzhe-design-3d/design_specs/._track_htmlppt.md",
+    "size": 163,
+    "sha256": "644bbe2f3811c645dcb6b2f9987c8da6e2bd460196c8e9178231daf74120cf0f",
+    "noise": true
+  },
+  {
+    "archive": "kangzhe-design-3d.zip",
+    "path": "kangzhe-design-3d/design_specs/htmlppt_playbook.md",
+    "size": 7153,
+    "sha256": "77b880d567c14edb385f95799cfb7c0e1c419788d5dd217023f42a432df5b730",
+    "noise": false
+  },
+  {
+    "archive": "kangzhe-design-3d.zip",
+    "path": "__MACOSX/kangzhe-design-3d/design_specs/._htmlppt_playbook.md",
+    "size": 163,
+    "sha256": "644bbe2f3811c645dcb6b2f9987c8da6e2bd460196c8e9178231daf74120cf0f",
+    "noise": true
+  },
+  {
+    "archive": "kangzhe-design-3d.zip",
+    "path": "kangzhe-design-3d/design_specs/track_site.md",
+    "size": 37792,
+    "sha256": "cc47f5b67f372a88f0d667be52dfba21aa9434258c5465556db403e86f7f87e1",
+    "noise": false
+  },
+  {
+    "archive": "kangzhe-design-3d.zip",
+    "path": "__MACOSX/kangzhe-design-3d/design_specs/._track_site.md",
+    "size": 163,
+    "sha256": "644bbe2f3811c645dcb6b2f9987c8da6e2bd460196c8e9178231daf74120cf0f",
+    "noise": true
+  },
+  {
+    "archive": "kangzhe-design-3d.zip",
+    "path": "kangzhe-design-3d/design_specs/track_interactive.md",
+    "size": 26061,
+    "sha256": "d6edc278f0ad1a593e149d05947a15ddaf161cc9213b63a7afd01a2380934461",
+    "noise": false
+  },
+  {
+    "archive": "kangzhe-design-3d.zip",
+    "path": "__MACOSX/kangzhe-design-3d/design_specs/._track_interactive.md",
+    "size": 163,
+    "sha256": "644bbe2f3811c645dcb6b2f9987c8da6e2bd460196c8e9178231daf74120cf0f",
+    "noise": true
+  },
+  {
+    "archive": "kangzhe-design-3d.zip",
+    "path": "__MACOSX/kangzhe-design-3d/._design_specs",
+    "size": 163,
+    "sha256": "644bbe2f3811c645dcb6b2f9987c8da6e2bd460196c8e9178231daf74120cf0f",
+    "noise": true
+  },
+  {
+    "archive": "site.zip",
+    "path": "agents.html",
+    "size": 2777,
+    "sha256": "f9c08ce214dfd298da2210e9ce8a87bfdaf0b58546c239f0a014377eded79d33",
+    "noise": false
+  },
+  {
+    "archive": "site.zip",
+    "path": "assets/cms-logo-bot.svg",
+    "size": 9542,
+    "sha256": "8d16d3ae8353dd31f46a50d401e66f9e62af40be6cc42cdf5050866a4e6e1cae",
+    "noise": false
+  },
+  {
+    "archive": "site.zip",
+    "path": "assets/cms-logo.svg",
+    "size": 9542,
+    "sha256": "8d16d3ae8353dd31f46a50d401e66f9e62af40be6cc42cdf5050866a4e6e1cae",
+    "noise": false
+  },
+  {
+    "archive": "site.zip",
+    "path": "assets/logo/arco-lockup.svg",
+    "size": 236,
+    "sha256": "5987d0a501506a4e1cd14811cbd69406a39135972f21c530e29eebfc627cdba4",
+    "noise": false
+  },
+  {
+    "archive": "site.zip",
+    "path": "assets/logo/arco-mark.svg",
+    "size": 473,
+    "sha256": "8d1c37d3c385107ced38efcbe92bc39004d30c365e76a6948e54747fa9a06a85",
+    "noise": false
+  },
+  {
+    "archive": "site.zip",
+    "path": "assets/logo/gen/arco-lockup-raw.png",
+    "size": 824595,
+    "sha256": "5f18fe29393db365d98450a8f7cc9610e1fa4a42dcaf802da20b1c30dbd5436c",
+    "noise": false
+  },
+  {
+    "archive": "site.zip",
+    "path": "assets/logo/gen/arco-lockup.png",
+    "size": 1081070,
+    "sha256": "9229433946be6658414f5d1600d1c03f816275e1e39ce7f20329f0270ac88661",
+    "noise": false
+  },
+  {
+    "archive": "site.zip",
+    "path": "assets/logo/gen/arco-mark-raw.png",
+    "size": 967201,
+    "sha256": "98df952106fc794f76d110f2893d715f2774ad403c5c86da08293662188e1e3c",
+    "noise": false
+  },
+  {
+    "archive": "site.zip",
+    "path": "assets/logo/gen/arco-mark.png",
+    "size": 619654,
+    "sha256": "ad1e77c4fb7e62a9fd24d70d789da15d76d73ce3cfe0b4a5e37959a105d018ce",
+    "noise": false
+  },
+  {
+    "archive": "site.zip",
+    "path": "assets/logo/gen/options/arco-glass-word.png",
+    "size": 1142339,
+    "sha256": "e5f6add66dfce39ac506dfa1fc35af5c9f055dfa787a6aa3b515ebc46f24c2bc",
+    "noise": false
+  },
+  {
+    "archive": "site.zip",
+    "path": "assets/logo/gen/options/sq-a.png",
+    "size": 1144021,
+    "sha256": "c10af193ca5afaa3fd3a0becef4c2818590e1336d813a4008b799aeb0c0d7e41",
+    "noise": false
+  },
+  {
+    "archive": "site.zip",
+    "path": "assets/logo/gen/options/sq-b-glass.png",
+    "size": 615841,
+    "sha256": "f834481eae4bdbac1a3d3fe3d41b88a8179fbd8ff2208f13cab43a1ecb9d69be",
+    "noise": false
+  },
+  {
+    "archive": "site.zip",
+    "path": "assets/logo/gen/options/sq-b.png",
+    "size": 924832,
+    "sha256": "a523f1d1b584c82a11108282c798530df1dd73f9b404297cfdab66247e995801",
+    "noise": false
+  },
+  {
+    "archive": "site.zip",
+    "path": "assets/logo/gen/options/sq-c.png",
+    "size": 1035634,
+    "sha256": "f8ef66b2c66ff52e51efb2a3eef14a8961cf06bd11858380312b9927684835ca",
+    "noise": false
+  },
+  {
+    "archive": "site.zip",
+    "path": "assets/logo/gen/options/wide-a.png",
+    "size": 1081567,
+    "sha256": "87d41f38af22cf29dcd434bc247bb367b69711705273c8e5a9f5bfaad4104c86",
+    "noise": false
+  },
+  {
+    "archive": "site.zip",
+    "path": "assets/logo/gen/options/wide-b.png",
+    "size": 1536193,
+    "sha256": "997aaedbbe213f5f2cfc69fe9930005a7db48602e1daee754a858f89bd8c8235",
+    "noise": false
+  },
+  {
+    "archive": "site.zip",
+    "path": "assets/logo/gen/options/wide-c.png",
+    "size": 934441,
+    "sha256": "08381b4f24a99d0d9a00491c7667de3c12f365f04b3f9fb321e44154886ff1e3",
+    "noise": false
+  },
+  {
+    "archive": "site.zip",
+    "path": "assets/logo/gen/options/wide-from-b-charcoal-cms.png",
+    "size": 363526,
+    "sha256": "8369da78bbeadb8a916eff404e57abc2172907439698c87e0ab6ffdb9e45c428",
+    "noise": false
+  },
+  {
+    "archive": "site.zip",
+    "path": "assets/logo/gen/options/wide-from-b-orange-cms.png",
+    "size": 256291,
+    "sha256": "a51eabc3e64d4d70c81fb503eec6e6105823a870b97c6b327bb2ff9160986845",
+    "noise": false
+  },
+  {
+    "archive": "site.zip",
+    "path": "assets/logo/gen/options/wide-from-b-orange-full.png",
+    "size": 256755,
+    "sha256": "613f8b4fff68e7130b24f9df3b2bdd5891544d02469dced9fefaf55bf910d412",
+    "noise": false
+  },
+  {
+    "archive": "site.zip",
+    "path": "assets/logo/gen/options/wide-glass-cms.png",
+    "size": 953738,
+    "sha256": "d9b281f37557bc2d10be423c0ad2dd850785d2c77134b2c7009d95d170377295",
+    "noise": false
+  },
+  {
+    "archive": "site.zip",
+    "path": "assets/logo/sys-aegis.svg",
+    "size": 1775,
+    "sha256": "16649fc8e2e7bb65e49782fe53e0461ab2f4b5c43063bba6f1066ad6132f2f86",
+    "noise": false
+  },
+  {
+    "archive": "site.zip",
+    "path": "assets/logo/sys-atlas.svg",
+    "size": 1692,
+    "sha256": "d5684536c08f0d56e188856c52711b787a0910fd007c05464329b65381c24524",
+    "noise": false
+  },
+  {
+    "archive": "site.zip",
+    "path": "assets/logo/sys-enroll.svg",
+    "size": 1817,
+    "sha256": "393a71c470ac056015d9c7469f694618ada8071052cf2c1d383092f4252c277c",
+    "noise": false
+  },
+  {
+    "archive": "site.zip",
+    "path": "assets/logo/sys-lens.svg",
+    "size": 1603,
+    "sha256": "95c4512bb5ae440ee2589ec1b159ab9e1d63e6c67ec6698650e6612e9300c6dd",
+    "noise": false
+  },
+  {
+    "archive": "site.zip",
+    "path": "assets/logo/sys-matrix.svg",
+    "size": 1760,
+    "sha256": "d96cb6ec9b54c3b46a7493800ae52e83946a0b0dffe5a96f8124cf6dd4ddc225",
+    "noise": false
+  },
+  {
+    "archive": "site.zip",
+    "path": "assets/logo/sys-nexus.svg",
+    "size": 2064,
+    "sha256": "efdf5cb8338c7acb62129a863e9bc078d9e4e2cab48e7f6315b5589b6584adf2",
+    "noise": false
+  },
+  {
+    "archive": "site.zip",
+    "path": "assets/logo/sys-orbit.svg",
+    "size": 1802,
+    "sha256": "63a0236abb32d805f8702f9aa2238def9d5d8118c4ae4370b9711b296c6baa8a",
+    "noise": false
+  },
+  {
+    "archive": "site.zip",
+    "path": "assets/logo/sys-proto.svg",
+    "size": 1807,
+    "sha256": "b9f94129a4f477fc755a74a5bdeace2104902e8713ac0017347ffc9ca938d629",
+    "noise": false
+  },
+  {
+    "archive": "site.zip",
+    "path": "assets/logo/sys-scribe.svg",
+    "size": 1647,
+    "sha256": "b6d4e93a2381199c7e5f9083e210993a36c6a8bbe17c349e864436f0d2e6a334",
+    "noise": false
+  },
+  {
+    "archive": "site.zip",
+    "path": "assets/logo/sys-submit.svg",
+    "size": 1872,
+    "sha256": "5a5ef116b1842893ad87fc130e5bb0641fe98994324a41aa3c02f57c31418cf7",
+    "noise": false
+  },
+  {
+    "archive": "site.zip",
+    "path": "assets/logo/sys-unmask.svg",
+    "size": 1710,
+    "sha256": "1a39b5287dacc886f2fdad650b8c7421021311f0e00a108c59d47e6fa8cfa6af",
+    "noise": false
+  },
+  {
+    "archive": "site.zip",
+    "path": "assets/logo/sys-vigil.svg",
+    "size": 1636,
+    "sha256": "b90e286ba1fc1adc579515454057a898059166e870f2d888548b8111e6536cfd",
+    "noise": false
+  },
+  {
+    "archive": "site.zip",
+    "path": "core/README.md",
+    "size": 11840,
+    "sha256": "9e3ddc16e4965fc880b529d6e9e252a3474b56712dc70191e6ffa1247747c6c4",
+    "noise": false
+  },
+  {
+    "archive": "site.zip",
+    "path": "core/agent-modal.js",
+    "size": 12355,
+    "sha256": "a6fabec941067306adc1d4566c981e220d4ecf7f433976398eaf87b5cbf01ef7",
+    "noise": false
+  },
+  {
+    "archive": "site.zip",
+    "path": "core/ambient.js",
+    "size": 4163,
+    "sha256": "57075bc251a4e07bcbed3e6da676b9d5428709b5ae105ba4cc06ff8bbac64b79",
+    "noise": false
+  },
+  {
+    "archive": "site.zip",
+    "path": "core/capsule.js",
+    "size": 2675,
+    "sha256": "1bbe504a23c52e42bd9aa817bd812ebcb937ff5ae926661237027d130cda7d1c",
+    "noise": false
+  },
+  {
+    "archive": "site.zip",
+    "path": "core/data/agents-a.json",
+    "size": 70208,
+    "sha256": "610e2a79ae4c5c22a12ba72a5d4d591e6d9c2573e0de1416565001f139afd055",
+    "noise": false
+  },
+  {
+    "archive": "site.zip",
+    "path": "core/data/agents-b.json",
+    "size": 79598,
+    "sha256": "441e38ca610f96a9bf2a803ae833de321ee9d94d88ca6f28011f8bf9a597dce1",
+    "noise": false
+  },
+  {
+    "archive": "site.zip",
+    "path": "core/data/flows.json",
+    "size": 33027,
+    "sha256": "fde208d8e2800295320ccf72eecda9d5477c45ccd596ca0cece9254176c847f3",
+    "noise": false
+  },
+  {
+    "archive": "site.zip",
+    "path": "core/data/systems-a.json",
+    "size": 32255,
+    "sha256": "000efde8852e174825abf86a7511babafc644b61163a87d2325dbcc96f8c7319",
+    "noise": false
+  },
+  {
+    "archive": "site.zip",
+    "path": "core/data/systems-b.json",
+    "size": 32109,
+    "sha256": "fcec437fbd8aadaad51e3c88332aa810990eedd80efde171c5bbba6ede8dd22f",
+    "noise": false
+  },
+  {
+    "archive": "site.zip",
+    "path": "core/data/workitems-1.json",
+    "size": 153993,
+    "sha256": "ef60bb4f0db38c30f85ce276098a526bcba080288dec8fa9cae20d2004445059",
+    "noise": false
+  },
+  {
+    "archive": "site.zip",
+    "path": "core/data/workitems-2.json",
+    "size": 138329,
+    "sha256": "07d3d3ec741c8a4fe0f19ce83aa592fe0b8ba3bd89ab558a63812d086f0cfb71",
+    "noise": false
+  },
+  {
+    "archive": "site.zip",
+    "path": "core/data/workitems-3.json",
+    "size": 132997,
+    "sha256": "1e84e2612e5cb3019d54da25ae299b8b57bc805f6fa6239d8b96332ddb6b42fa",
+    "noise": false
+  },
+  {
+    "archive": "site.zip",
+    "path": "core/dualtrack.js",
+    "size": 32905,
+    "sha256": "7a4247d9b53e37b8eeac65a5a8a419f78de1be94bd9ddad4154cbb6174294743",
+    "noise": false
+  },
+  {
+    "archive": "site.zip",
+    "path": "core/film.css",
+    "size": 8648,
+    "sha256": "0605bfba44d6baad9f932f629c2d82039392e9528e8be01db7b7f3b38910329f",
+    "noise": false
+  },
+  {
+    "archive": "site.zip",
+    "path": "core/film.js",
+    "size": 16078,
+    "sha256": "e22e77ac2d2c9858d4ecd07339ede5778cb4e2332bbd4ce40222cf71f4c86c6a",
+    "noise": false
+  },
+  {
+    "archive": "site.zip",
+    "path": "core/glass.css",
+    "size": 9861,
+    "sha256": "65afd6259985eeb1f49a208f8d38bb583a721bc302f5dc18a073e6d603ec1986",
+    "noise": false
+  },
+  {
+    "archive": "site.zip",
+    "path": "core/metro.js",
+    "size": 7107,
+    "sha256": "770d3bbe9b5a4df9b01deb4196fe18886db9c1f382764d3a3761738ac289fe8c",
+    "noise": false
+  },
+  {
+    "archive": "site.zip",
+    "path": "core/model.js",
+    "size": 528951,
+    "sha256": "97d2a9c968a1fefce1192b719bb7994197b8291a45db79099d6a45625c598f2f",
+    "noise": false
+  },
+  {
+    "archive": "site.zip",
+    "path": "core/morph.js",
+    "size": 16454,
+    "sha256": "29e52440e1db1eefbce3aa9b9db148376bf1d62418a7bff75f0293201f9fd64b",
+    "noise": false
+  },
+  {
+    "archive": "site.zip",
+    "path": "core/nav.js",
+    "size": 5614,
+    "sha256": "7f28f317becc3abb2be44564f335998e896925c89446363864f24b750982cf2c",
+    "noise": false
+  },
+  {
+    "archive": "site.zip",
+    "path": "core/tokens.css",
+    "size": 4085,
+    "sha256": "bcf8261836c6bf61ac6737993ebf5e93f5aedc9787566553609444a96f181735",
+    "noise": false
+  },
+  {
+    "archive": "site.zip",
+    "path": "core/ui.js",
+    "size": 11492,
+    "sha256": "a1fe0b1254536da2b02777ee2f33f1c4917140eeec063ba2042003883d1b591f",
+    "noise": false
+  },
+  {
+    "archive": "site.zip",
+    "path": "core/views.js",
+    "size": 15056,
+    "sha256": "d7c1f5fd8ba930530e901e9ad907811c1b2cd8e60d6a3ce7cecdeaf60aae4c88",
+    "noise": false
+  },
+  {
+    "archive": "site.zip",
+    "path": "demo.html",
+    "size": 3076,
+    "sha256": "5195a953e27f9bcd7ed4291cf63dc9df795513d9f098eb80945efdde06f002c8",
+    "noise": false
+  },
+  {
+    "archive": "site.zip",
+    "path": "flows.html",
+    "size": 2232,
+    "sha256": "5f8a91684e3019daeb81afa7689dcbe1ecab6b4a4251e8c0ade2daa44ef01231",
+    "noise": false
+  },
+  {
+    "archive": "site.zip",
+    "path": "governance.html",
+    "size": 3903,
+    "sha256": "5604083c96d2d8da7b9db99e7d31d87eba538e3a46744c6e235d5d902cdeeea3",
+    "noise": false
+  },
+  {
+    "archive": "site.zip",
+    "path": "index.html",
+    "size": 7036,
+    "sha256": "8856f65df1e612527743136066564b9d2f2c97b72f6a90c4e396e65a95f9617a",
+    "noise": false
+  },
+  {
+    "archive": "site.zip",
+    "path": "nexus.html",
+    "size": 5358,
+    "sha256": "195bbee4535eaa87cb5d3ef3afca0f2ee389e44a6f38d3601337e6981341c777",
+    "noise": false
+  },
+  {
+    "archive": "site.zip",
+    "path": "pages/agents.css",
+    "size": 5555,
+    "sha256": "4ce7d94e4309269529c79ec40cf1384e39953ddbff97385717168506568048d5",
+    "noise": false
+  },
+  {
+    "archive": "site.zip",
+    "path": "pages/agents.js",
+    "size": 15463,
+    "sha256": "8021cba29e8032580d592c4f47f05bb9f593d248ed80f0a910e90d69271c2d9e",
+    "noise": false
+  },
+  {
+    "archive": "site.zip",
+    "path": "pages/demo-data.js",
+    "size": 25381,
+    "sha256": "11c60322e5aec94865e073818dc295f5e5b0fc98f5072b9bb7f91eb35571baec",
+    "noise": false
+  },
+  {
+    "archive": "site.zip",
+    "path": "pages/demo.css",
+    "size": 12988,
+    "sha256": "5a67a1ad3dabb68c497dbd307cb915d6b82383a731b0317e7a2b744658fc3301",
+    "noise": false
+  },
+  {
+    "archive": "site.zip",
+    "path": "pages/demo.js",
+    "size": 23941,
+    "sha256": "b71b78e2dd44f8cde58498c8d8fc0e3ad9be5023d506977cfa1ed3900ccecae3",
+    "noise": false
+  },
+  {
+    "archive": "site.zip",
+    "path": "pages/flows.css",
+    "size": 4114,
+    "sha256": "b465df28e51312c39bc46a8f2ff18ea386981b634fac8c8e003484b8ac1916f7",
+    "noise": false
+  },
+  {
+    "archive": "site.zip",
+    "path": "pages/flows.js",
+    "size": 15800,
+    "sha256": "59ac9bae7a537d628012214cc4caec82f628da73f8ca70c189a117f0bb6d52f1",
+    "noise": false
+  },
+  {
+    "archive": "site.zip",
+    "path": "pages/governance.css",
+    "size": 10503,
+    "sha256": "beaedb0768c5a71fec11e942bdc3134ec40a9484ca647b074c4c6e96aa75d12e",
+    "noise": false
+  },
+  {
+    "archive": "site.zip",
+    "path": "pages/governance.js",
+    "size": 37307,
+    "sha256": "4e484875964fbdcebda927cb28b83c6a93195568b2ad3584518a46b4baf02912",
+    "noise": false
+  },
+  {
+    "archive": "site.zip",
+    "path": "pages/index.css",
+    "size": 14408,
+    "sha256": "0fc0c86a2edd3712ff8952074dcb1f90ed8cc4f6234f7a14aaa1bc8332ca873e",
+    "noise": false
+  },
+  {
+    "archive": "site.zip",
+    "path": "pages/index.js",
+    "size": 70973,
+    "sha256": "5d1de047c65c5b753e1dc84ddaa243658fb6087e8da362a32f63ea15b517d6db",
+    "noise": false
+  },
+  {
+    "archive": "site.zip",
+    "path": "pages/nexus.css",
+    "size": 13048,
+    "sha256": "2fd21d510f1e1a73d0e44def2d8ba3e98081dcdd753488291adef80d23968967",
+    "noise": false
+  },
+  {
+    "archive": "site.zip",
+    "path": "pages/nexus.js",
+    "size": 37100,
+    "sha256": "828d27ae6af1881d93b953e5c3e8ca2f012ebe28c9ee5de86e5d2991052d12e7",
+    "noise": false
+  },
+  {
+    "archive": "site.zip",
+    "path": "pages/platform.css",
+    "size": 8704,
+    "sha256": "4a0cf7055388ddd5ce805823a9b7d6ff3fe7b1902d16d14fac657ff1b116f47b",
+    "noise": false
+  },
+  {
+    "archive": "site.zip",
+    "path": "pages/platform.js",
+    "size": 50086,
+    "sha256": "97672a9c16a2a35049e136d6f4afc9044def63ae8da7e301054ab342028e4ec6",
+    "noise": false
+  },
+  {
+    "archive": "site.zip",
+    "path": "pages/roadmap.css",
+    "size": 5245,
+    "sha256": "0797d2fd95f584304f2d049af48ee4776c2631fdede34ff26d71202000f6a9c1",
+    "noise": false
+  },
+  {
+    "archive": "site.zip",
+    "path": "pages/roadmap.js",
+    "size": 25279,
+    "sha256": "fc379aaaace67b2ad61459b1861373d8f5d905097882562dfbcce54777ccef37",
+    "noise": false
+  },
+  {
+    "archive": "site.zip",
+    "path": "pages/system.css",
+    "size": 10536,
+    "sha256": "8726b7639b01dd0887d59fbf272503c90f83d7658325d4c1f6446df4e505cb0b",
+    "noise": false
+  },
+  {
+    "archive": "site.zip",
+    "path": "pages/system.js",
+    "size": 37028,
+    "sha256": "5db3a2205d06107935ba0187f10bda4693685667ee50084cf07f72ea5dd6726f",
+    "noise": false
+  },
+  {
+    "archive": "site.zip",
+    "path": "pages/systems.css",
+    "size": 6539,
+    "sha256": "d5b2beeea83bd0aebd3984dc5ba565ae20c6485d28c0bd79aa4ccb83c1cbcb33",
+    "noise": false
+  },
+  {
+    "archive": "site.zip",
+    "path": "pages/systems.js",
+    "size": 22834,
+    "sha256": "e3c7e7f5ae00200803d3b22d70f14c18113c3541f64fa9e73dfa0a667fbf338e",
+    "noise": false
+  },
+  {
+    "archive": "site.zip",
+    "path": "pages/workflows.css",
+    "size": 9927,
+    "sha256": "ae58bc9a4befcae7b8380fd29e90409a29b80044d3d4419c4196ab2084786007",
+    "noise": false
+  },
+  {
+    "archive": "site.zip",
+    "path": "pages/workflows.js",
+    "size": 27334,
+    "sha256": "c25709aeda2bcac135527562d2cdd2fcaf1f6e23772d775fe7df9029e5b5b37f",
+    "noise": false
+  },
+  {
+    "archive": "site.zip",
+    "path": "platform.html",
+    "size": 4293,
+    "sha256": "2af6b9bba1fbf6c9ed2c1bafafbb41b5ea5f8a681a163fc8b7dc08b21470c5b5",
+    "noise": false
+  },
+  {
+    "archive": "site.zip",
+    "path": "roadmap.html",
+    "size": 3779,
+    "sha256": "164633e85654fa4761f32be60ceef51913b4a2bf641dc3f1777c5398dfc8919b",
+    "noise": false
+  },
+  {
+    "archive": "site.zip",
+    "path": "system.html",
+    "size": 4120,
+    "sha256": "1366f6ef06af4777e66f0a36b563fa37c05b790642a1ae7560ebee98ba330871",
+    "noise": false
+  },
+  {
+    "archive": "site.zip",
+    "path": "systems.html",
+    "size": 3385,
+    "sha256": "d77edf99f8239bca89f5d85dfff4c1e2ebbc8d23c80d288375050a761af3368b",
+    "noise": false
+  },
+  {
+    "archive": "site.zip",
+    "path": "tools/build-data.mjs",
+    "size": 12662,
+    "sha256": "4e5ae18cd74541d1ce258fb2a0cb252f4a67c3ff8495e6997f0a238726b6f728",
+    "noise": false
+  },
+  {
+    "archive": "site.zip",
+    "path": "tools/make-logos.mjs",
+    "size": 7160,
+    "sha256": "d1ece99f952133421d2d9b76eaefa7be2608e2cfacc2e19b9e1fc6e24c97e530",
+    "noise": false
+  },
+  {
+    "archive": "site.zip",
+    "path": "vendor/CustomEase.min.js",
+    "size": 7143,
+    "sha256": "466e426a5c60c21c94b15a30a3dffacac9bb39ce8f4e07d071d7d4bb1be43390",
+    "noise": false
+  },
+  {
+    "archive": "site.zip",
+    "path": "vendor/DrawSVGPlugin.min.js",
+    "size": 4351,
+    "sha256": "beb19529f54c1212f1f5117d027be01afda2f363a4926d32aa979bc11140edc1",
+    "noise": false
+  },
+  {
+    "archive": "site.zip",
+    "path": "vendor/Flip.min.js",
+    "size": 25534,
+    "sha256": "cbe3ca726350f8d230da38a14ce2384e7772e05a45cee6144dd7fe6dde868c2f",
+    "noise": false
+  },
+  {
+    "archive": "site.zip",
+    "path": "vendor/MorphSVGPlugin.min.js",
+    "size": 21195,
+    "sha256": "19c891a412240d8521b13330813d9b551ea5b0f707907c365ffecaf1dfa0f5cf",
+    "noise": false
+  },
+  {
+    "archive": "site.zip",
+    "path": "vendor/MotionPathPlugin.min.js",
+    "size": 22002,
+    "sha256": "ace44a07c6c179f5347d9b46a152d468e4c9f272ee0d68bf0354e00d60000693",
+    "noise": false
+  },
+  {
+    "archive": "site.zip",
+    "path": "vendor/ScrollToPlugin.min.js",
+    "size": 4059,
+    "sha256": "07cfd328e41012ae60b5614c2e58399fc13af8b1aec765febe770d4eb3e62fcd",
+    "noise": false
+  },
+  {
+    "archive": "site.zip",
+    "path": "vendor/ScrollTrigger.min.js",
+    "size": 44575,
+    "sha256": "b0b14d67b55b0c43c756ac0b106cfcb09d0879945f6ead64451065b0672916a2",
+    "noise": false
+  },
+  {
+    "archive": "site.zip",
+    "path": "vendor/SplitText.min.js",
+    "size": 7732,
+    "sha256": "419f7027a5f086a12cb7988736d8fdd3a6ed2200229661de25b6628ca7ced344",
+    "noise": false
+  },
+  {
+    "archive": "site.zip",
+    "path": "vendor/echarts.min.js",
+    "size": 1121883,
+    "sha256": "b66b25aeb4df84e33199dc21694014d336d222cbd9deb0e5a7c14bd6aa0d0fd0",
+    "noise": false
+  },
+  {
+    "archive": "site.zip",
+    "path": "vendor/gsap.min.js",
+    "size": 72927,
+    "sha256": "92bb9a96476f983d212a2bc4f54c889039c1696dd4461d40a736860938570fbb",
+    "noise": false
+  },
+  {
+    "archive": "site.zip",
+    "path": "vendor/lenis.css",
+    "size": 513,
+    "sha256": "2f668ae84a668327f246faf8a770383a2bf69196d214290fbc4d5548910606c5",
+    "noise": false
+  },
+  {
+    "archive": "site.zip",
+    "path": "vendor/lenis.min.js",
+    "size": 18722,
+    "sha256": "53195c9797e7ce7bf9d7fa9242b08209e57f46de4c9dac126a6494fa780e3346",
+    "noise": false
+  },
+  {
+    "archive": "site.zip",
+    "path": "workflows.html",
+    "size": 2610,
+    "sha256": "6e381f2f95a61dd91f669949fc0a8f1d8b6de4656ee6d82f788f1ded80bbb53e",
+    "noise": false
+  },
+  {
+    "archive": "site.zip",
+    "path": "ARCO-动画电影设计书.md",
+    "size": 58992,
+    "sha256": "248d10f8c93c9742f64a62e75689ce42b8fdd9498860ae0b95d791358f90e72a",
+    "noise": false
+  }
+]

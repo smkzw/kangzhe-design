@@ -1,0 +1,39 @@
+# PPT Master 适配合同
+
+## 事实基线与边界
+
+已核对上游提交 `680de11f1bef4628b68d5daad9dffec569fbd51f`（2026-09-27）。本包没有复制或修改上游，也没有在本环境执行上游的导出流程。以下为经源码核对的适配设计，不是集成通过证书。
+
+唯一 PPTX 制作引擎：`hugohe3/ppt-master`。先读其 `AGENTS.md`、`skills/ppt-master/SKILL.md` 和该版本路由文件。路径、CLI 参数、工作区结构由它负责；本包不另造 PPTX 导出器。
+
+## 插入点
+
+| 上游步骤 | 本包提供 | 不得干预 |
+|---|---|---|
+| 路由与资料接收 | 四轨意图、品牌限定、引用展示策略 | 不把所有任务强制为同一路由 |
+| Strategist / 显式 Quick 的设计决策 | tokens、页面计划、短标题、可选强调句、排版保护区、图片需求 | Quick 不强塞独立确认、spec_lock |
+| 图片准备 | `04-image-pipeline.md` 的图像计划、保护区、主题和 QC 记录 | 使用其图片 manifest 格式和 `image_gen.py`，不臆造 provider 参数 |
+| Executor SVG | 原生文字/数据、透明填充、合法高光/阴影、已批准图片 | 不写 CSS backdrop-filter、任意 SVG 滤镜或整页截图 |
+| native-ready 图表 | `05-charts.md` 的同一数据；逐对象选择 native 标记及元数据 | 不把 ECharts option 当成上游 native JSON |
+| 上游 final checker / export | 补做康哲质量门，保留两份报告 | 不绕过其 checker、原生字段校验、快照同步要求 |
+| 成品视觉复核 | 全页截图、文本/卡片/图片冲突、真正编辑后回读 | SVG 预览不代替 PowerPoint 检查 |
+
+## 原生玻璃
+
+采用背景图 + 可编辑低饱和半透明卡片 + 局部高光 + 合法外阴影。`tools/glass_svg.py` 仅生成**供上游 Executor 参考的 SVG 原语**，不是另一条 PPTX 制作路线。对象组内文字独立、颜色在通道 alpha 上，不给整体文字降透明度。
+
+上游已核实的边界：`fill-opacity` / `stroke-opacity` / `stop-opacity`；对象直接引用的 `feDropShadow` 会近似为 DrawingML 效果；普通组上的任意滤镜、真实 backdrop blur 不在此合同内。最终原生表现必须实测。
+
+## 原生数据与 ECharts 一致
+
+对支持的图表，同时编写可见 fallback 与 `data-pptx-replace-with="chart"` 下的 JSON metadata；SVG-first 基线由上游脚本同步后再检查。原生激活使用该版本支持的 `--native-charts-and-tables`。面积与折线组合必须包含 area + line 两个 plot，共享源数据；不把可见面积删掉后声称一致。
+
+元数据的 `axes.minimum/maximum/major_unit` 不等同于 ECharts `min/max/interval`，不得直接透传。Gantt 不在该版本的原生 chart 类型中：输出可编辑任务形状/文本和日期表，不伪造 `type:gantt`。PPTX 放映环境不承诺 HTML 的拖动和编辑框；编辑模式可调整任务形状，数据驱动重新计算由作者工具执行。
+
+## 参考 PPTX 的使用
+
+上传参考仅作为风格和内容组织参考。若需提炼 Brand/Style/Layout/Deck 工作区，走上游 Create Template；原 PPTX 加新资料的保留式编辑，走 Edit Native PPTX。不要把裸 PPTX 假装成可直接使用的 Generate 模板，不要直接覆盖用户原件。
+
+## 升级探针
+
+记录上游 SHA；读取当次真实 route/接口；检查 image manifest、effect grammar、native-data、模板和导出命令；先跑两页小样再批量。任何接口变化先修适配层并记录，不反过来放宽康哲字体、禁色条、可编辑要求。详见 Agent P1。

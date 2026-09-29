@@ -1,0 +1,96 @@
+"""Actual Chromium component tests, no mocks. Install playwright separately.
+Uses set_content by design; not an upstream integration or native file test.
+"""
+from pathlib import Path
+import json,sys,time,traceback,argparse
+sys.path.insert(0,str(Path(__file__).resolve().parents[1]/'tools'))
+from inline_preview import inline_html
+from playwright.sync_api import sync_playwright
+ROOT=Path(__file__).resolve().parents[1]
+
+def run(out,exe):
+ out.mkdir(parents=True,exist_ok=True);checks=[];errors=[]
+ def check(name,value,detail=None):checks.append(dict(name=name,passed=bool(value),detail=detail));print(('PASS ' if value else 'FAIL ')+name,flush=True)
+ with sync_playwright() as pw:
+  browser=pw.chromium.launch(executable_path=exe,args=['--no-sandbox'])
+  context=browser.new_context(viewport={'width':1440,'height':1000},device_scale_factor=1)
+  page=context.new_page();page.on('pageerror',lambda e:errors.append(str(e)))
+  page.set_content(inline_html(ROOT/'examples/component-lab.html'),wait_until='load');page.wait_for_function("document.documentElement.dataset.kzLabReady==='true'")
+  check('component initialization',not errors,errors.copy());check('ECharts actual version',page.evaluate('echarts.version')=='6.1.0')
+  page.wait_for_timeout(250);p1=page.evaluate('KZ_LAB.film.p');page.wait_for_timeout(400);p2=page.evaluate('KZ_LAB.film.p');check('autoplay without scroll',p2>p1)
+  page.evaluate("KZ_LAB.film.pause('user'); KZ_LAB.film.pause('hidden');KZ_LAB.film.resume('hidden')")
+  check('user pause survives other reason removal',page.evaluate("KZ_LAB.film.snapshot().reasons.includes('user')&&!KZ_LAB.film.snapshot().running"))
+  eq=page.evaluate("""()=>{const f=KZ_LAB.film;f.seek(0);let a=f.snapshot();f.seek(1);let b=f.snapshot();return {a,b,equal:JSON.stringify(a.style)===JSON.stringify(b.style),same:a.carrierId===b.carrierId&&b.sameNode};}""")
+  check('film endpoint geometry/material equality',eq['equal']);check('persistent carrier identity',eq['same'])
+  check('intermediate film states within stage',page.evaluate("""()=>{const f=KZ_LAB.film;for(let i=0;i<=100;i++){f.seek(i/100);const a=f.carrier.getBoundingClientRect(),b=f.stage.getBoundingClientRect();if(a.left<b.left-.1||a.right>b.right+.1||a.top<b.top-.1||a.bottom>b.bottom+.1)return false;}return true;}"""))
+  page.evaluate('KZ_LAB.film.seek(.62)');page.screenshot(path=str(out/'hero-1440.png'))
+  check('fixed numeric axis during animated chart',page.evaluate("""()=>{let c=KZ_LAB.line;c.renderProgress(.25);let a=c.chart.getOption().yAxis[0].max;c.renderProgress(1);return a===c.chart.getOption().yAxis[0].max;}"""))
+  check('chart numeric display linked to progress',page.evaluate("""()=>{KZ_LAB.line.renderProgress(.5);return document.querySelector('#chart-value').textContent==='16';}"""))
+  check('line includes subtle area and preserves gaps',page.evaluate("""()=>{let d=structuredClone(KZ_LAB.lineData);d.series[0].values[1]=null;let o=KZCharts.option(d);return !!o.series[0].areaStyle&&o.series[0].connectNulls===false&&o.series[0].smooth===false&&o.series[0].data[1]===null;}"""))
+  check('legend survives chart render updates',page.evaluate("""()=>{let c=KZ_LAB.line;c.chart.dispatchAction({type:'legendUnSelect',name:'资料归档'});c.renderProgress(.7);c.finish();return c.chart.getOption().legend[0].selected['资料归档']===false;}"""))
+  page.evaluate('KZ_LAB.line.finish()')
+  check('peer card typography uniform',page.evaluate("""()=>{const cards=[...document.querySelectorAll('#components .kz-card')];const sizes=cards.map(c=>getComputedStyle(c.querySelector('p')).fontSize);return new Set(sizes).size===1&&sizes[0]==='20px';}"""))
+  card=page.locator('#components [data-kz-tilt]').first;card.scroll_into_view_if_needed();box=card.bounding_box();page.mouse.move(box['x']+box['width']-2,box['y']+box['height']/2);page.wait_for_timeout(50)
+  check('pointer tilt uses bounded angles',page.evaluate("""()=>{let s=document.querySelector('#components [data-kz-tilt]').style.transform;let nums=[...s.matchAll(/rotate[XY]\\((-?[\\d.]+)deg\\)/g)].map(m=>Number(m[1]));return nums.length===2&&nums.every(v=>Math.abs(v)<=10)&&nums.some(v=>Math.abs(v)>1);}"""))
+  page.mouse.move(1,1);page.wait_for_timeout(50)
+  check('pointer leave restores resting card',page.evaluate("document.querySelector('#components [data-kz-tilt]').style.transform===' '".replace("' '","''")))
+  page.locator('#open-details').click();page.wait_for_timeout(150)
+  snap=page.evaluate('KZ_LAB.drill.snapshot()');check('wide L1 dialog',snap['depth']==1 and snap['width']/snap['viewport']>.78,snap)
+  check('parent film paused for drilldown',page.evaluate("KZ_LAB.film.snapshot().reasons.includes('dialog')"))
+  page.screenshot(path=str(out/'drill-L1-1440.png'))
+  page.locator('#open-method').click();page.wait_for_timeout(150)
+  check('rich nested L2 + chart/film lifecycle',page.evaluate("KZ_LAB.drill.snapshot().depth===2&&!!KZ_LAB.nested&&!KZ_LAB.nested.disposed"))
+  page.screenshot(path=str(out/'drill-L2-1440.png'))
+  page.keyboard.press('Escape');page.wait_for_timeout(100)
+  check('escape back restores L1 focus',page.evaluate("KZ_LAB.drill.snapshot().depth===1&&document.activeElement.id==='open-method'&&KZ_LAB.nested.disposed"))
+  page.keyboard.press('Escape');check('close restores opener focus',page.evaluate("!KZ_LAB.drill.snapshot().open&&document.activeElement.id==='open-details'"))
+  check('closing dialog does not clear user pause',page.evaluate("KZ_LAB.film.snapshot().reasons.includes('user')&&!KZ_LAB.film.snapshot().running"))
+  page.locator('#gantt').scroll_into_view_if_needed();page.wait_for_timeout(150)
+  def d():return page.evaluate('KZ_LAB.gantt.getData().tasks[0]')
+  def geometry(id='design'):
+   return page.evaluate("""id=>{const g=KZ_LAB.gantt,geo=g.geometry(id),r=g.plot.getBoundingClientRect(),scale=r.width/g.plot.clientWidth;return {x:r.left+geo.x*scale,y:r.top+geo.y*(r.height/g.plot.clientHeight),w:geo.w*scale,quarter:(geo.w/(g.getData().tasks.find(t=>t.id===id).end-g.getData().tasks.find(t=>t.id===id).start))*scale};}""",id)
+  def drag(mode,quarters):
+   geo=geometry();x=geo['x']+ (geo['w']/2 if mode=='move' else 3 if mode=='start' else geo['w']-3)
+   page.mouse.move(x,geo['y']);page.mouse.down();page.mouse.move(x+geo['quarter']*quarters,geo['y'],steps=8);page.mouse.up();page.wait_for_timeout(70)
+  old=d();drag('move',1);new=d();check('Gantt mouse drag moves by one quarter',new['start']==old['start']+1 and new['end']==old['end']+1,dict(old=old,new=new))
+  page.evaluate('KZ_LAB.gantt.undo()');check('one gesture equals one undo',d()==old)
+  drag('end',1);new=d();check('Gantt right resize',new['start']==old['start'] and new['end']==old['end']+1,new)
+  page.evaluate('KZ_LAB.gantt.reset()');drag('start',1);new=d();check('Gantt left resize',new['start']==old['start']+1 and new['end']==old['end'],new)
+  page.evaluate('KZ_LAB.gantt.reset()')
+  page.locator('[data-kz-field=sy]').select_option('2026');page.locator('[data-kz-field=sq]').select_option('2');page.locator('[data-kz-field=ey]').select_option('2027');page.locator('[data-kz-field=eq]').select_option('3');page.get_by_role('button',name='应用时间',exact=True).click()
+  check('year/quarter form uses inclusive displayed end',d()['start']==8105 and d()['end']==8111,d())
+  page.locator('[data-kz-field=sy]').select_option('2028');page.locator('[data-kz-field=sq]').select_option('4');page.locator('[data-kz-field=ey]').select_option('2026');page.locator('[data-kz-field=eq]').select_option('1');before=d();page.get_by_role('button',name='应用时间',exact=True).click()
+  check('invalid interval rejected without data mutation',d()==before and '时间无效' in page.locator('.kz-gantt-status').inner_text())
+  page.evaluate('KZ_LAB.gantt.reset()');page.locator('.kz-gantt-plot').focus();page.keyboard.press('ArrowRight');check('keyboard moves task',d()['start']==8105)
+  page.keyboard.press('Shift+ArrowRight');check('keyboard extends end',d()['end']==8109,d())
+  page.keyboard.press('Control+z');check('keyboard undo',d()['end']==8108)
+  page.evaluate('KZ_LAB.gantt.reset()');drag('move',-5);check('drag clamps at minimum axis',d()['start']==8104 and d()['end']==8107)
+  check('serialize/import preserves values',page.evaluate("""()=>{let g=KZ_LAB.gantt;g.commit(8105,8108);let s=g.serialize();g.reset();g.importJSON(s);return g.serialize()===s;}"""))
+  page.evaluate('KZ_LAB.gantt.reset()')
+  geo=geometry();page.mouse.move(geo['x']+geo['w']/2,geo['y']);page.mouse.down();page.mouse.move(geo['x']+geo['w']/2+geo['quarter'],geo['y'],steps=5);page.keyboard.press('Escape');page.mouse.up();check('escape cancels in-flight drag',d()==old)
+  page.evaluate("document.querySelector('#schedule').style.transform='scale(.8)';document.querySelector('#schedule').style.transformOrigin='left top'")
+  check('scaled parent actually transforms chart',page.evaluate("Math.abs(KZ_LAB.gantt.plot.getBoundingClientRect().width/KZ_LAB.gantt.plot.clientWidth-.8)<.002"))
+  drag('move',1);check('pointer mapping under scaled canvas',d()['start']==8105,d())
+  page.evaluate("document.querySelector('#schedule').style.transform='';KZ_LAB.gantt.reset()")
+  page.screenshot(path=str(out/'gantt-1440.png'))
+  page.evaluate('KZ_LAB.gantt.play(150)');page.wait_for_timeout(250);check('Gantt animation ends at canonical data',page.evaluate('KZ_LAB.gantt.getProgress()===1') and d()==old)
+  for width,height in [(1280,900),(1920,1080),(2560,1440),(390,844)]:
+   page.set_viewport_size({'width':width,'height':height});page.evaluate('scrollTo(0,0)');page.wait_for_timeout(160)
+   overflow=page.evaluate('document.documentElement.scrollWidth>innerWidth+1');check(f'no horizontal overflow at {width}',not overflow)
+   check(f'film text inside carrier at {width}',page.evaluate("""()=>{let f=KZ_LAB.film;for(let p of [0,.3,.62,.88,1]){f.seek(p);let a=f.label.getBoundingClientRect(),b=f.carrier.getBoundingClientRect();if(a.left<b.left||a.right>b.right||a.top<b.top||a.bottom>b.bottom)return false;}f.seek(.62);return true;}"""))
+   page.screenshot(path=str(out/f'hero-{width}.png'))
+  page.emulate_media(reduced_motion='reduce');page.wait_for_timeout(100)
+  check('reduced motion stops autoplay',page.evaluate("KZ_LAB.film.snapshot().reasons.includes('reduced-motion')&&!KZ_LAB.film.snapshot().running"))
+  page.set_viewport_size({'width':1440,'height':1000});page.evaluate('scrollTo(0,0)');page.wait_for_timeout(100)
+  page.emulate_media(reduced_motion='no-preference');page.evaluate('KZ_LAB.film.seek(.3)');page.evaluate("dispatchEvent(new Event('beforeprint'))")
+  check('capture freezes overview',page.evaluate("KZ_LAB.film.p===.74&&KZ_LAB.film.snapshot().reasons.includes('capture')"))
+  page.evaluate("dispatchEvent(new Event('afterprint'))");check('capture restores prior progress/pause',page.evaluate("Math.abs(KZ_LAB.film.p-.3)<.000001&&KZ_LAB.film.snapshot().reasons.includes('user')"))
+  check('no uncaught JavaScript errors',not errors,errors)
+  browser.close()
+ report={'harness':'Chromium set_content with trusted local assets inlined; no mocks','browser_executable':exe,'upstream_e2e':False,'native_file_test':False,'checks':checks,'passed':sum(c['passed'] for c in checks),'failed':sum(not c['passed'] for c in checks),'errors':errors}
+ (out/'browser-report.json').write_text(json.dumps(report,ensure_ascii=False,indent=2))
+ return report
+if __name__=='__main__':
+ ap=argparse.ArgumentParser();ap.add_argument('--out',type=Path,default=ROOT/'review/browser');ap.add_argument('--chromium',default='/usr/bin/chromium');a=ap.parse_args()
+ try:r=run(a.out,a.chromium);sys.exit(bool(r['failed']))
+ except Exception:traceback.print_exc();sys.exit(2)

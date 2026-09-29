@@ -1,0 +1,330 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:kangzhe:page-plan:6.0",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "track",
+    "canvas",
+    "pages"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "6.0"
+    },
+    "track": {
+      "enum": [
+        "pptx",
+        "htmlppt",
+        "site",
+        "stream"
+      ]
+    },
+    "canvas": {
+      "type": "array",
+      "items": {
+        "type": "number",
+        "exclusiveMinimum": 0
+      },
+      "minItems": 2,
+      "maxItems": 2
+    },
+    "pages": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "kind",
+          "title",
+          "body_profile",
+          "elements",
+          "protected_regions",
+          "image",
+          "sources",
+          "cards"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "kind": {
+            "enum": [
+              "cover",
+              "toc",
+              "section",
+              "body",
+              "ending",
+              "hero",
+              "flow_section"
+            ]
+          },
+          "title": {
+            "type": "string",
+            "minLength": 1
+          },
+          "body_profile": {
+            "enum": [
+              "standard",
+              "compact"
+            ]
+          },
+          "elements": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "id",
+                "role",
+                "font_px",
+                "line_height"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "role": {
+                  "enum": [
+                    "page_title",
+                    "card_title",
+                    "body",
+                    "chart_label",
+                    "takeaway",
+                    "footer",
+                    "reference"
+                  ]
+                },
+                "font_px": {
+                  "type": "number",
+                  "exclusiveMinimum": 0
+                },
+                "line_height": {
+                  "type": "number",
+                  "exclusiveMinimum": 0
+                },
+                "text": {
+                  "type": "string"
+                },
+                "rect": {
+                  "type": "array",
+                  "prefixItems": [
+                    {
+                      "type": "number"
+                    },
+                    {
+                      "type": "number"
+                    },
+                    {
+                      "type": "number"
+                    },
+                    {
+                      "type": "number"
+                    }
+                  ],
+                  "items": false,
+                  "minItems": 4,
+                  "maxItems": 4
+                }
+              },
+              "additionalProperties": false
+            }
+          },
+          "protected_regions": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "id",
+                "rect",
+                "role"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "rect": {
+                  "type": "array",
+                  "prefixItems": [
+                    {
+                      "type": "number"
+                    },
+                    {
+                      "type": "number"
+                    },
+                    {
+                      "type": "number"
+                    },
+                    {
+                      "type": "number"
+                    }
+                  ],
+                  "items": false,
+                  "minItems": 4,
+                  "maxItems": 4
+                },
+                "role": {
+                  "enum": [
+                    "title",
+                    "logo",
+                    "header",
+                    "footer",
+                    "body",
+                    "takeaway",
+                    "control",
+                    "data",
+                    "other"
+                  ]
+                },
+                "motion_margin": {
+                  "type": "number",
+                  "minimum": 0
+                }
+              },
+              "additionalProperties": false
+            }
+          },
+          "image": {
+            "type": "object",
+            "required": [
+              "mode"
+            ],
+            "properties": {
+              "mode": {
+                "enum": [
+                  "generated",
+                  "global_procedural_optical_field"
+                ]
+              },
+              "asset_id": {
+                "type": "string"
+              },
+              "subject_rects": {
+                "type": "array",
+                "items": {
+                  "type": "array",
+                  "prefixItems": [
+                    {
+                      "type": "number"
+                    },
+                    {
+                      "type": "number"
+                    },
+                    {
+                      "type": "number"
+                    },
+                    {
+                      "type": "number"
+                    }
+                  ],
+                  "items": false,
+                  "minItems": 4,
+                  "maxItems": 4
+                }
+              },
+              "procedural_evidence": {
+                "type": "string"
+              }
+            },
+            "additionalProperties": false
+          },
+          "sources": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "id",
+                "kind",
+                "visible"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "kind": {
+                  "enum": [
+                    "scientific_paper",
+                    "guideline",
+                    "consensus",
+                    "guidance",
+                    "internal",
+                    "news",
+                    "registry",
+                    "other"
+                  ]
+                },
+                "visible": {
+                  "type": "boolean"
+                },
+                "locator": {
+                  "type": "string"
+                }
+              },
+              "additionalProperties": false
+            }
+          },
+          "cards": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "id",
+                "material",
+                "edge_decoration"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "material": {
+                  "enum": [
+                    "liquid_glass",
+                    "accessible_glass"
+                  ]
+                },
+                "edge_decoration": {
+                  "enum": [
+                    "none",
+                    "neutral_hairline",
+                    "localized_highlight"
+                  ]
+                }
+              },
+              "additionalProperties": false
+            }
+          },
+          "takeaway": {
+            "type": [
+              "object",
+              "null"
+            ],
+            "properties": {
+              "text": {
+                "type": "string"
+              },
+              "font_px": {
+                "type": "number"
+              },
+              "align": {
+                "const": "center"
+              },
+              "rationale": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "text",
+              "font_px",
+              "align",
+              "rationale"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}

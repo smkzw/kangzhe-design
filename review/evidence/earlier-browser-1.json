@@ -1,0 +1,252 @@
+{
+  "harness": "Chromium set_content with trusted local assets inlined; no mocks",
+  "browser_executable": "/usr/bin/chromium",
+  "upstream_e2e": false,
+  "native_file_test": false,
+  "checks": [
+    {
+      "name": "component initialization",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "ECharts actual version",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "autoplay without scroll",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "user pause survives other reason removal",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "film endpoint geometry/material equality",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "persistent carrier identity",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "intermediate film states within stage",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "fixed numeric axis during animated chart",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "chart numeric display linked to progress",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "line includes subtle area and preserves gaps",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "legend survives chart render updates",
+      "passed": false,
+      "detail": null
+    },
+    {
+      "name": "wide L1 dialog",
+      "passed": true,
+      "detail": {
+        "open": true,
+        "depth": 1,
+        "path": [
+          "evidence"
+        ],
+        "width": 1180.796875,
+        "viewport": 1440
+      }
+    },
+    {
+      "name": "parent film paused for drilldown",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "rich nested L2 + chart/film lifecycle",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "escape back restores L1 focus",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "close restores opener focus",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "closing dialog does not clear user pause",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Gantt mouse drag moves by one quarter",
+      "passed": true,
+      "detail": {
+        "old": {
+          "id": "design",
+          "label": "设计确认",
+          "start": 8104,
+          "end": 8107
+        },
+        "new": {
+          "id": "design",
+          "label": "设计确认",
+          "start": 8105,
+          "end": 8108
+        }
+      }
+    },
+    {
+      "name": "one gesture equals one undo",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Gantt right resize",
+      "passed": true,
+      "detail": {
+        "id": "design",
+        "label": "设计确认",
+        "start": 8104,
+        "end": 8108
+      }
+    },
+    {
+      "name": "Gantt left resize",
+      "passed": true,
+      "detail": {
+        "id": "design",
+        "label": "设计确认",
+        "start": 8105,
+        "end": 8107
+      }
+    },
+    {
+      "name": "year/quarter form uses inclusive displayed end",
+      "passed": true,
+      "detail": {
+        "id": "design",
+        "label": "设计确认",
+        "start": 8105,
+        "end": 8111
+      }
+    },
+    {
+      "name": "invalid interval rejected without data mutation",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "keyboard moves task",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "keyboard extends end",
+      "passed": true,
+      "detail": {
+        "id": "design",
+        "label": "设计确认",
+        "start": 8105,
+        "end": 8109
+      }
+    },
+    {
+      "name": "keyboard undo",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "drag clamps at minimum axis",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "serialize/import preserves values",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "escape cancels in-flight drag",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "pointer mapping under scaled canvas",
+      "passed": true,
+      "detail": {
+        "id": "design",
+        "label": "设计确认",
+        "start": 8105,
+        "end": 8108
+      }
+    },
+    {
+      "name": "Gantt animation ends at canonical data",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "no horizontal overflow at 1280",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "no horizontal overflow at 1920",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "no horizontal overflow at 2560",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "no horizontal overflow at 390",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "reduced motion stops autoplay",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "capture freezes overview",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "capture restores prior progress/pause",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "no uncaught JavaScript errors",
+      "passed": true,
+      "detail": []
+    }
+  ],
+  "passed": 38,
+  "failed": 1,
+  "errors": []
+}

@@ -1,0 +1,70 @@
+{
+  "version": "6.0.0",
+  "date": "2026-09-29",
+  "scope": "normative redesign plus locally tested reference components; not all tracks production-certified",
+  "input_review": {
+    "zip_entries": 287,
+    "non_noise_files": 202,
+    "noise_files": 85,
+    "pptx_pages_rendered": 19,
+    "pptx_native_chart_parts": 0,
+    "pptx_embedded_xlsx": 0,
+    "site_html_pages_inline_initialized": 11,
+    "site_frames_viewed": 17
+  },
+  "environment": {
+    "python": "3.13.5",
+    "node": "22.16.0",
+    "browser": "Chromium 144.0.7559.96 on Debian 13",
+    "browser_loading": "set_content with trusted local dependencies inlined",
+    "url_navigation": "blocked by managed browser policy",
+    "fonts": "system fallback, no font files redistributed"
+  },
+  "tests": {
+    "python_contracts": {
+      "passed": 18,
+      "failed": 0,
+      "evidence": "evidence/unit-tests.log"
+    },
+    "browser_component_checks": {
+      "passed": 47,
+      "failed": 0,
+      "evidence": "evidence/browser-report.json"
+    },
+    "normal_cycle": {
+      "duration_ms": 36000,
+      "observed_ms": 38004.1,
+      "loops": 1,
+      "same_carrier": true,
+      "evidence": "evidence/normal-cycle.json",
+      "perceptual_video_review": false
+    }
+  },
+  "upstream": {
+    "ppt_master": {
+      "sha": "680de11f1bef4628b68d5daad9dffec569fbd51f",
+      "source_read": true,
+      "executed": false
+    },
+    "html_ppt_skill": {
+      "sha": "fd1629067909ff55b36b905476de4e5f26062a1f",
+      "source_read": true,
+      "executed": false
+    }
+  },
+  "not_performed": [
+    "actual image-generation tool calls",
+    "independent heterogeneous LLM/VLM harness evaluation",
+    "ppt-master output and native Office edit/save/readback",
+    "html-ppt-skill presenter/hash/print end-to-end",
+    "native file:// and HTTP deployment testing",
+    "Safari and Mac/Windows Office compatibility",
+    "full accessibility or performance certification",
+    "complex medical statistical chart implementation and parity"
+  ],
+  "release_levels": {
+    "design_spec": "reconstructed_with_local_contract_checks",
+    "reference_components": "tested_local_with_listed_scope",
+    "production_tracks": "pending_target_validation"
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "min": 8104,
+  "max": 8116,
+  "tasks": [
+    {
+      "id": "design",
+      "label": "设计确认",
+      "start": 8104,
+      "end": 8107
+    },
+    {
+      "id": "prepare",
+      "label": "资料准备",
+      "start": 8105,
+      "end": 8109
+    },
+    {
+      "id": "review",
+      "label": "集中审阅",
+      "start": 8107,
+      "end": 8111
+    },
+    {
+      "id": "follow",
+      "label": "后续复核",
+      "start": 8110,
+      "end": 8115
+    }
+  ]
+}

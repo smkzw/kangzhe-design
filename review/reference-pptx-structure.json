@@ -1,0 +1,323 @@
+{
+  "slide_count": 19,
+  "slides": [
+    {
+      "slide": "ppt/slides/slide1.xml",
+      "native_shapes": 8,
+      "pictures": 2,
+      "graphic_frames": 0,
+      "explicit_sizes_hundredth_pt": {
+        "3220": 1,
+        "3750": 1,
+        "3200": 1,
+        "1350": 1,
+        "1240": 3
+      },
+      "alpha_nodes": 2
+    },
+    {
+      "slide": "ppt/slides/slide2.xml",
+      "native_shapes": 49,
+      "pictures": 2,
+      "graphic_frames": 0,
+      "explicit_sizes_hundredth_pt": {
+        "3600": 1,
+        "2020": 3,
+        "2180": 3,
+        "1200": 3,
+        "1880": 3
+      },
+      "alpha_nodes": 42
+    },
+    {
+      "slide": "ppt/slides/slide3.xml",
+      "native_shapes": 5,
+      "pictures": 2,
+      "graphic_frames": 0,
+      "explicit_sizes_hundredth_pt": {
+        "8780": 1,
+        "4420": 1
+      },
+      "alpha_nodes": 3
+    },
+    {
+      "slide": "ppt/slides/slide4.xml",
+      "native_shapes": 58,
+      "pictures": 3,
+      "graphic_frames": 0,
+      "explicit_sizes_hundredth_pt": {
+        "2400": 1,
+        "1350": 5,
+        "940": 4,
+        "1500": 4,
+        "1010": 8
+      },
+      "alpha_nodes": 54
+    },
+    {
+      "slide": "ppt/slides/slide5.xml",
+      "native_shapes": 94,
+      "pictures": 2,
+      "graphic_frames": 0,
+      "explicit_sizes_hundredth_pt": {
+        "2400": 1,
+        "1350": 10,
+        "1650": 1,
+        "1280": 3,
+        "2620": 2,
+        "1420": 10,
+        "1800": 3,
+        "1120": 1,
+        "1500": 4,
+        "1200": 6
+      },
+      "alpha_nodes": 37
+    },
+    {
+      "slide": "ppt/slides/slide6.xml",
+      "native_shapes": 83,
+      "pictures": 2,
+      "graphic_frames": 0,
+      "explicit_sizes_hundredth_pt": {
+        "2400": 1,
+        "1350": 11,
+        "1650": 4,
+        "1200": 4,
+        "1500": 4,
+        "1420": 3,
+        "1280": 8,
+        "2100": 1,
+        "2020": 3,
+        "1120": 6
+      },
+      "alpha_nodes": 26
+    },
+    {
+      "slide": "ppt/slides/slide7.xml",
+      "native_shapes": 74,
+      "pictures": 2,
+      "graphic_frames": 0,
+      "explicit_sizes_hundredth_pt": {
+        "2400": 1,
+        "1350": 10,
+        "1650": 2,
+        "1200": 4,
+        "1580": 2,
+        "1420": 14,
+        "1280": 2,
+        "1500": 1
+      },
+      "alpha_nodes": 25
+    },
+    {
+      "slide": "ppt/slides/slide8.xml",
+      "native_shapes": 81,
+      "pictures": 2,
+      "graphic_frames": 0,
+      "explicit_sizes_hundredth_pt": {
+        "2400": 1,
+        "1350": 4,
+        "1200": 1,
+        "1120": 9,
+        "1160": 6,
+        "900": 11,
+        "1010": 1,
+        "960": 1,
+        "940": 4,
+        "1300": 1
+      },
+      "alpha_nodes": 30
+    },
+    {
+      "slide": "ppt/slides/slide9.xml",
+      "native_shapes": 99,
+      "pictures": 2,
+      "graphic_frames": 0,
+      "explicit_sizes_hundredth_pt": {
+        "2400": 4,
+        "1350": 6,
+        "1580": 3,
+        "1010": 8,
+        "1050": 9,
+        "1200": 6,
+        "1160": 2,
+        "1120": 1,
+        "1280": 5,
+        "1090": 1,
+        "990": 2,
+        "1140": 2,
+        "1060": 1,
+        "1000": 1
+      },
+      "alpha_nodes": 55
+    },
+    {
+      "slide": "ppt/slides/slide10.xml",
+      "native_shapes": 5,
+      "pictures": 2,
+      "graphic_frames": 0,
+      "explicit_sizes_hundredth_pt": {
+        "8780": 1,
+        "4420": 1
+      },
+      "alpha_nodes": 3
+    },
+    {
+      "slide": "ppt/slides/slide11.xml",
+      "native_shapes": 54,
+      "pictures": 2,
+      "graphic_frames": 0,
+      "explicit_sizes_hundredth_pt": {
+        "2400": 1,
+        "1350": 4,
+        "1280": 10,
+        "1260": 11
+      },
+      "alpha_nodes": 33
+    },
+    {
+      "slide": "ppt/slides/slide12.xml",
+      "native_shapes": 103,
+      "pictures": 2,
+      "graphic_frames": 0,
+      "explicit_sizes_hundredth_pt": {
+        "2400": 1,
+        "1350": 4,
+        "1500": 6,
+        "1280": 6,
+        "1200": 6,
+        "1040": 1,
+        "1000": 2,
+        "2550": 5,
+        "1120": 5
+      },
+      "alpha_nodes": 94
+    },
+    {
+      "slide": "ppt/slides/slide13.xml",
+      "native_shapes": 5,
+      "pictures": 2,
+      "graphic_frames": 0,
+      "explicit_sizes_hundredth_pt": {
+        "8780": 1,
+        "4420": 1
+      },
+      "alpha_nodes": 3
+    },
+    {
+      "slide": "ppt/slides/slide14.xml",
+      "native_shapes": 65,
+      "pictures": 2,
+      "graphic_frames": 0,
+      "explicit_sizes_hundredth_pt": {
+        "2400": 1,
+        "1350": 7,
+        "1800": 1,
+        "1010": 1,
+        "1200": 6,
+        "1390": 6,
+        "1220": 16,
+        "1650": 1,
+        "1170": 3,
+        "1420": 1,
+        "1120": 4,
+        "1020": 2
+      },
+      "alpha_nodes": 30
+    },
+    {
+      "slide": "ppt/slides/slide15.xml",
+      "native_shapes": 77,
+      "pictures": 2,
+      "graphic_frames": 0,
+      "explicit_sizes_hundredth_pt": {
+        "2400": 1,
+        "1350": 9,
+        "1720": 2,
+        "1020": 1,
+        "1120": 2,
+        "950": 6,
+        "1300": 6,
+        "1150": 6,
+        "1010": 5,
+        "1160": 9,
+        "1080": 2,
+        "1050": 3,
+        "1000": 1,
+        "1090": 1
+      },
+      "alpha_nodes": 22
+    },
+    {
+      "slide": "ppt/slides/slide16.xml",
+      "native_shapes": 83,
+      "pictures": 2,
+      "graphic_frames": 0,
+      "explicit_sizes_hundredth_pt": {
+        "2400": 1,
+        "1350": 4,
+        "1800": 2,
+        "1120": 4,
+        "940": 2,
+        "1500": 3,
+        "1220": 6,
+        "1200": 4,
+        "1420": 4,
+        "1100": 8,
+        "2000": 4
+      },
+      "alpha_nodes": 80
+    },
+    {
+      "slide": "ppt/slides/slide17.xml",
+      "native_shapes": 69,
+      "pictures": 2,
+      "graphic_frames": 0,
+      "explicit_sizes_hundredth_pt": {
+        "2400": 1,
+        "1350": 5,
+        "1200": 1,
+        "1720": 3,
+        "1280": 20,
+        "1500": 1,
+        "1220": 4,
+        "1090": 1
+      },
+      "alpha_nodes": 58
+    },
+    {
+      "slide": "ppt/slides/slide18.xml",
+      "native_shapes": 159,
+      "pictures": 2,
+      "graphic_frames": 0,
+      "explicit_sizes_hundredth_pt": {
+        "2400": 1,
+        "1350": 4,
+        "920": 4,
+        "1050": 22,
+        "1010": 26,
+        "1100": 2,
+        "1120": 2,
+        "990": 1,
+        "1090": 3,
+        "940": 2
+      },
+      "alpha_nodes": 40
+    },
+    {
+      "slide": "ppt/slides/slide19.xml",
+      "native_shapes": 8,
+      "pictures": 2,
+      "graphic_frames": 0,
+      "explicit_sizes_hundredth_pt": {
+        "7800": 1,
+        "2180": 1,
+        "1420": 1
+      },
+      "alpha_nodes": 2
+    }
+  ],
+  "chart_parts": 0,
+  "embedded_workbooks": 0,
+  "scope": "structure only; does not prove visual quality, native edit readback, or effective theme fonts"
+}

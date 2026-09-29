@@ -1,0 +1,38 @@
+{
+  "status": "UNCONFIGURED_NOT_EXECUTED",
+  "budget": {
+    "max_pilot_runs": 12,
+    "max_revision_loops": 3,
+    "max_repair_per_run": 2,
+    "cost_limit_user_defined": null
+  },
+  "generators": [
+    {
+      "id": "LOCAL_OR_PROVIDER_EXACT_ID",
+      "tier": "L",
+      "family": "REPLACE",
+      "argv": [
+        "/absolute/path/to/your-model-adapter",
+        "--input",
+        "{input}",
+        "--output",
+        "{output}"
+      ],
+      "capabilities_verified": false
+    }
+  ],
+  "judges": [
+    {
+      "id": "EXACT_VLM_ID",
+      "tier": "H",
+      "family": "DIFFERENT_WHEN_POSSIBLE",
+      "capabilities_verified": false
+    }
+  ],
+  "harnesses": [
+    "H0",
+    "H1",
+    "H2"
+  ],
+  "notes": "Provide real command adapters or actual host tool calls. No API key is stored in this template."
+}

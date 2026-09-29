@@ -1,0 +1,85 @@
+{
+  "schema_version": "6.0",
+  "track": "pptx",
+  "canvas": [
+    1280,
+    720
+  ],
+  "pages": [
+    {
+      "id": "p01",
+      "kind": "body",
+      "title": "入排标准",
+      "body_profile": "standard",
+      "elements": [
+        {
+          "id": "body-a",
+          "role": "body",
+          "font_px": 20,
+          "line_height": 1.4,
+          "text": "符合既定诊断标准。"
+        },
+        {
+          "id": "body-b",
+          "role": "body",
+          "font_px": 20,
+          "line_height": 1.4,
+          "text": "随机前复核所需资料。"
+        }
+      ],
+      "protected_regions": [
+        {
+          "id": "header",
+          "rect": [
+            0,
+            0,
+            1280,
+            88
+          ],
+          "role": "header"
+        },
+        {
+          "id": "main",
+          "rect": [
+            56,
+            96,
+            1168,
+            564
+          ],
+          "role": "body"
+        },
+        {
+          "id": "footer",
+          "rect": [
+            0,
+            668,
+            1280,
+            52
+          ],
+          "role": "footer"
+        }
+      ],
+      "image": {
+        "mode": "generated",
+        "asset_id": "body-field-01",
+        "subject_rects": []
+      },
+      "sources": [
+        {
+          "id": "internal-1",
+          "kind": "internal",
+          "visible": false,
+          "locator": "私有记录，不在正文显示"
+        }
+      ],
+      "cards": [
+        {
+          "id": "a",
+          "material": "liquid_glass",
+          "edge_decoration": "neutral_hairline"
+        }
+      ],
+      "takeaway": null
+    }
+  ]
+}

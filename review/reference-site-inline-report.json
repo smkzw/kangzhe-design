@@ -1,0 +1,68 @@
+[
+  {
+    "file": "agents.html",
+    "film_api": true,
+    "errors": [],
+    "harness": "trusted source inlined; relative SVG assets data-URI resolved; not native URL navigation"
+  },
+  {
+    "file": "demo.html",
+    "film_api": true,
+    "errors": [],
+    "harness": "trusted source inlined; relative SVG assets data-URI resolved; not native URL navigation"
+  },
+  {
+    "file": "flows.html",
+    "film_api": true,
+    "errors": [],
+    "harness": "trusted source inlined; relative SVG assets data-URI resolved; not native URL navigation"
+  },
+  {
+    "file": "governance.html",
+    "film_api": true,
+    "errors": [],
+    "harness": "trusted source inlined; relative SVG assets data-URI resolved; not native URL navigation"
+  },
+  {
+    "file": "index.html",
+    "film_api": true,
+    "errors": [],
+    "harness": "trusted source inlined; relative SVG assets data-URI resolved; not native URL navigation"
+  },
+  {
+    "file": "nexus.html",
+    "film_api": true,
+    "errors": [],
+    "harness": "trusted source inlined; relative SVG assets data-URI resolved; not native URL navigation"
+  },
+  {
+    "file": "platform.html",
+    "film_api": true,
+    "errors": [],
+    "harness": "trusted source inlined; relative SVG assets data-URI resolved; not native URL navigation"
+  },
+  {
+    "file": "roadmap.html",
+    "film_api": true,
+    "errors": [],
+    "harness": "trusted source inlined; relative SVG assets data-URI resolved; not native URL navigation"
+  },
+  {
+    "file": "system.html",
+    "film_api": true,
+    "errors": [],
+    "harness": "trusted source inlined; relative SVG assets data-URI resolved; not native URL navigation"
+  },
+  {
+    "file": "systems.html",
+    "film_api": true,
+    "errors": [],
+    "harness": "trusted source inlined; relative SVG assets data-URI resolved; not native URL navigation"
+  },
+  {
+    "file": "workflows.html",
+    "film_api": true,
+    "errors": [],
+    "harness": "trusted source inlined; relative SVG assets data-URI resolved; not native URL navigation"
+  }
+]

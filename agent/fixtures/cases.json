@@ -1,0 +1,76 @@
+{
+  "schema_version": "6.0",
+  "all_data": "synthetic; no real patient or trial data",
+  "cases": [
+    {
+      "id": "D01",
+      "split": "pilot",
+      "track": "pptx",
+      "title": "七页研究方案汇报",
+      "brief": "包含封面/目录/章节/入排/数据图/季度计划/尾页；虚构数据；内部资料文件名temp_final_2，不做可见来源脚注。"
+    },
+    {
+      "id": "D02",
+      "split": "pilot",
+      "track": "htmlppt",
+      "title": "同页密度与真实图表",
+      "brief": "三个正文卡内容长度不同，另有折线数据[2,null,5,7]；不得逐卡缩字、连补缺失点；须生图。"
+    },
+    {
+      "id": "D03",
+      "split": "pilot",
+      "track": "site",
+      "title": "证据组织与多层明细",
+      "brief": "首页和一级章节均有自动连续电影；一主载体；L1图表+方法，L2限制+独立过程电影；宽屏利用。"
+    },
+    {
+      "id": "D04",
+      "split": "development",
+      "track": "stream",
+      "title": "长篇流程说明",
+      "brief": "五个一级章节，三类部门，目录与下钻；章节首屏电影；自然滚动，不把全部内容塞进1100px。"
+    },
+    {
+      "id": "D05",
+      "split": "development",
+      "track": "htmlppt",
+      "title": "甘特编辑",
+      "brief": "2026Q1–2028Q4，六任务，可平移/两端拖伸/年份季度编辑/取消/撤销；图表框缩放0.8后结果不漂。"
+    },
+    {
+      "id": "D06",
+      "split": "development",
+      "track": "pptx",
+      "title": "引用分类",
+      "brief": "四类已提供资料：内部会议摘要、科学论文、权威指南、新闻；正文引用仅论文和指南；不要临时上网补医疗事实。"
+    },
+    {
+      "id": "H01",
+      "split": "holdout",
+      "track": "pptx",
+      "title": "高密度排除时间窗",
+      "brief": "长中文、拉丁缩写、百分比、半衰期条件和不同日期锚点；不得丢条件或换成12pt以下小字。"
+    },
+    {
+      "id": "H02",
+      "split": "holdout",
+      "track": "htmlppt",
+      "title": "复杂统计与双窗口",
+      "brief": "提供明确CI/分组定义；普通折线不能代替森林图；演讲者preview冻结态；用户输入不触发翻页。"
+    },
+    {
+      "id": "H03",
+      "split": "holdout",
+      "track": "site",
+      "title": "动画回接与可读性",
+      "brief": "含较长说明、4阶段关系变化；持续主载体；需正常速度回接和RM静态详情；中间文字不能被压进小圆。"
+    },
+    {
+      "id": "H04",
+      "split": "holdout",
+      "track": "stream",
+      "title": "超宽与移动阅读",
+      "brief": "2560宽保留多列信息，390宽不溢出、字号不降；L1/L2详情状态返回保持。"
+    }
+  ]
+}

@@ -1,0 +1,240 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "id",
+    "page_id",
+    "question",
+    "audience_message",
+    "source_claim_ids",
+    "carrier_id",
+    "protected_regions",
+    "states",
+    "relations",
+    "timing",
+    "loop_contract",
+    "static_summary",
+    "controls",
+    "reduced_motion",
+    "cleanup"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "6.0"
+    },
+    "id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "page_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "question": {
+      "type": "string",
+      "minLength": 1
+    },
+    "audience_message": {
+      "type": "string",
+      "minLength": 1
+    },
+    "carrier_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "loop_contract": {
+      "type": "string",
+      "minLength": 1
+    },
+    "static_summary": {
+      "type": "string",
+      "minLength": 1
+    },
+    "reduced_motion": {
+      "type": "string",
+      "minLength": 1
+    },
+    "cleanup": {
+      "type": "string",
+      "minLength": 1
+    },
+    "source_claim_ids": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string"
+      }
+    },
+    "protected_regions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "rect",
+          "role"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "rect": {
+            "type": "array",
+            "prefixItems": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "number"
+              },
+              {
+                "type": "number"
+              },
+              {
+                "type": "number"
+              }
+            ],
+            "items": false,
+            "minItems": 4,
+            "maxItems": 4
+          },
+          "role": {
+            "enum": [
+              "title",
+              "logo",
+              "header",
+              "footer",
+              "body",
+              "takeaway",
+              "control",
+              "data",
+              "other"
+            ]
+          },
+          "motion_margin": {
+            "type": "number",
+            "minimum": 0
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "states": {
+      "type": "array",
+      "minItems": 4,
+      "items": {
+        "type": "object",
+        "required": [
+          "t",
+          "x",
+          "y",
+          "w",
+          "h",
+          "r",
+          "tint",
+          "label",
+          "caption"
+        ],
+        "properties": {
+          "t": {
+            "type": "number"
+          },
+          "x": {
+            "type": "number"
+          },
+          "y": {
+            "type": "number"
+          },
+          "w": {
+            "type": "number"
+          },
+          "h": {
+            "type": "number"
+          },
+          "r": {
+            "type": "number"
+          },
+          "tint": {
+            "type": "array",
+            "items": {
+              "type": "number"
+            },
+            "minItems": 4,
+            "maxItems": 4
+          },
+          "label": {
+            "type": "string"
+          },
+          "caption": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "relations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "from",
+          "to",
+          "meaning",
+          "start",
+          "end"
+        ],
+        "properties": {
+          "from": {
+            "type": "string"
+          },
+          "to": {
+            "type": "string"
+          },
+          "meaning": {
+            "type": "string"
+          },
+          "start": {
+            "type": "number"
+          },
+          "end": {
+            "type": "number"
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "timing": {
+      "type": "object",
+      "required": [
+        "duration_ms",
+        "reading_basis"
+      ],
+      "properties": {
+        "duration_ms": {
+          "type": "integer",
+          "minimum": 1000
+        },
+        "reading_basis": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "controls": {
+      "type": "array",
+      "items": {
+        "enum": [
+          "pause",
+          "resume",
+          "replay",
+          "seek",
+          "static_summary"
+        ]
+      },
+      "minItems": 5,
+      "uniqueItems": true
+    }
+  },
+  "additionalProperties": false
+}
