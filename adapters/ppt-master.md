@@ -2,7 +2,7 @@
 
 ## 事实基线与边界
 
-已核对上游提交 `680de11f1bef4628b68d5daad9dffec569fbd51f`（2026-09-27）。本包没有复制或修改上游，也没有在本环境执行上游的导出流程。以下为经源码核对的适配设计，不是集成通过证书。
+原包核对上游提交 `680de11f1bef4628b68d5daad9dffec569fbd51f`（2026-09-27）。KZ6-0929-A01 已实际执行本机 ppt-master 6.6.0 默认与 Quick 导出；本机安装目录无 Git 元数据，不能将远端提交当作安装 SHA。实际文件树 hash、命令和分项结果见本轮交接。本包没有修改上游；真实导出不等于整套集成验收通过。
 
 唯一 PPTX 制作引擎：`hugohe3/ppt-master`。先读其 `AGENTS.md`、`skills/ppt-master/SKILL.md` 和该版本路由文件。路径、CLI 参数、工作区结构由它负责；本包不另造 PPTX 导出器。
 
@@ -28,7 +28,9 @@
 
 对支持的图表，同时编写可见 fallback 与 `data-pptx-replace-with="chart"` 下的 JSON metadata；SVG-first 基线由上游脚本同步后再检查。原生激活使用该版本支持的 `--native-charts-and-tables`。面积与折线组合必须包含 area + line 两个 plot，共享源数据；不把可见面积删掉后声称一致。
 
-元数据的 `axes.minimum/maximum/major_unit` 不等同于 ECharts `min/max/interval`，不得直接透传。Gantt 不在该版本的原生 chart 类型中：输出可编辑任务形状/文本和日期表，不伪造 `type:gantt`。PPTX 放映环境不承诺 HTML 的拖动和编辑框；编辑模式可调整任务形状，数据驱动重新计算由作者工具执行。
+值轴元数据使用 `axes.value.minimum`、`axes.value.maximum`、`axes.value.major_unit`，例如 `{"axes":{"value":{"minimum":0,"maximum":8,"major_unit":2}}}`。不能使用扁平的 `axes.minimum`：A01 对当前上游 `native_objects/chart_data.py::_chart_axes` 的真实调用会拒绝这些未知轴角色。它们也不等同于 ECharts `min/max/interval`，不得直接透传。
+
+Gantt 不在该版本的原生 chart 类型中：输出可编辑任务形状/文本和日期表，不伪造 `type:gantt`。PPTX 放映环境不承诺 HTML 的拖动和编辑框；编辑模式可调整任务形状，数据驱动重新计算由作者工具执行。
 
 ## 参考 PPTX 的使用
 
