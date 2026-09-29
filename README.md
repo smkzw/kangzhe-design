@@ -2,7 +2,7 @@
 
 康哲药业医学部的单一 Liquid Glass 设计技能。覆盖可编辑 PPTX、HTML-PPT、站点式 HTML、流式 HTML。替代原 `kangzhe-design 4.5.7` 与 `kangzhe-design-3d 5.2.7`，不保留 flat、3d 或 legacy 模式。
 
-**版本说明：**6.0.0是规范版本；当前修订A03，整体PARTIAL。已实际调用两个指定引擎、真实生图，完成原12例审计与8次新制作测试；A03原生Office编辑回读仍BLOCKED。最新分层结果见[当前状态](review/CURRENT_STATUS.md)。
+**版本说明：**6.0.0是规范版本；当前修订A04，四轨多轮验证继续中，尚未完整验收。新版候选包含桌面宽屏站点范围、ARCO机制取舍和指定生图能力边界。已完成的引擎、组件、原生Office与模型检查分别见[当前状态](review/CURRENT_STATUS.md)。
 
 ## 使用
 
@@ -29,7 +29,7 @@ PPTX 始终通过 hugohe3/ppt-master；HTML-PPT 始终通过 lewislulu/html-ppt-
 
 打开 `examples/component-lab.html`。该页不需要构建和外网依赖，采用程序化光场，包含连续主载体、ECharts浅面积折线/柱图、两层宽下钻、可拖改季度甘特。它是参考组件，不是“已完成html-ppt-skill集成”的幻灯片。
 
-组件测试使用Chromium内联harness；A03另有EGO真实HTTP导航/交互与IAB补充截图。两类证据分开；上游演讲者窗口、Safari和A03原生Office仍未完整验证。
+组件测试使用Chromium内联harness；A03另有EGO真实HTTP导航/交互与IAB补充截图。两类证据分开；A04新增了A03副本的Mac PowerPoint编辑回读及测试者HTML-PPT双窗口检查；这不代表Safari、Windows Office及全部最终产物已验证。
 
 ## 本地工具
 

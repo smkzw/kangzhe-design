@@ -8,6 +8,8 @@ IMG-01：PPTX 和 HTML-PPT 逐页记录 `asset_id`。封面、目录、章节、
 ## 能力发现与隐私
 调用当前环境真实可用的生图工具/技能，由上游生图路由执行；不硬编码不存在的个人绝对路径或特定模型。PPT Master 已有生图 manifest/执行阶段时，在其阶段加入保护区和审阅合同，**不另起并行生图流程**。一项资产只有一个 owner。
 
+用户指定仅使用某个技能的生图能力时，只读取其真实接口、认证方式和返回格式，不引入该技能其他风格、配色、文字或审批规则。本轮指定 `gpt-image-2-sci-draw` 的生成能力：在环境中发现其 SKILL.md 和 scripts/gen_image.py 后调用，结果仍遵守本章 Liquid Glass、保护区及真实尺寸要求。将返回资产和原始回执回填既有引擎资产清单，继续原引擎导出，不以另一个生图后端替代 ppt-master 或 html-ppt-skill。若接口没有尺寸参数，记录 null 与提示请求尺寸，不猜参数、不把业务路由编号当成已证实的模型版本。
+
 传给外部图像服务的提示词仅含去识别的视觉概念、公开主题和品牌要求；未经授权不上传内部方案全文、患者资料或未公开研究数值。需要参考图时区分版权/隐私授权。输出里只保留必要回执摘要，不泄露访问密钥。工具不可用：任务为 blocked/pending，允许出布局草案但不能标正式完成；不得让几行 CSS 渐变获得“生图通过”。
 
 ## 先布局，再画保护区 IMG-02
@@ -43,7 +45,7 @@ IMG-01：PPTX 和 HTML-PPT 逐页记录 `asset_id`。封面、目录、章节、
 每条记录含 `asset_id / image_role / generation_required / origin / tool / model_if_returned / receipt / file / sha256 / pages / protected_regions / crop / preflight_status / composite_review_status`。`origin=generated` 必须有真实调用或已验证缓存回执；`origin=procedural` 仅站点/流式豁免；`origin=source_original` 仅原始证据，不代替 hero 生成要求。示例包没有执行过的生成不要写虚假 provider/model。
 
 ## IMG-04 画幅与实际像素
-资产计划先列交付viewport族（16:9、21:9/实际ultrawide、站点移动端），每族给源图目标比例、protected_regions和裁切策略。HTML宽屏必须有真实超宽生成背景，不能只有16:9源图用contain后两侧空白。可复用同一超宽图的受检裁切用于16:9，但每种裁切重新做裸图映射与合成QC；不得把拉伸、CSS补边或放大重采样称为超宽生图成功。
+资产计划先按目标轨道列交付viewport族（16:9、21:9/实际ultrawide；仅合同明确要求移动阅读时加入移动端），每族给源图目标比例、protected_regions和裁切策略。站点式 HTML 不设手机/窄屏资产任务。HTML宽屏必须有真实超宽生成背景，不能只有16:9源图用contain后两侧空白。可复用同一超宽图的受检裁切用于16:9，但每种裁切重新做裸图映射与合成QC；不得把拉伸、CSS补边或放大重采样称为超宽生图成功。
 
 回执区分requested_size、actual_size与有效显示尺寸；宽幅源图比例误差默认不超过tokens.image.aspect_tolerance。工具无尺寸参数时只把提示尺寸当请求，不当成功事实。正文长边与hero长边分别按tokens检查；超宽比例合格不代表分辨率合格。低分辨率可供开发检查，正式清晰度项保持WARN/BLOCKED。保护区域按实际裁切变换，不沿用旧16:9 mask。
 

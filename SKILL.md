@@ -10,6 +10,7 @@ description: 康哲药业医学部正式汇报与医学网页的统一 Liquid Gl
 ## 最短读取路径
 1. 必读 `design_specs/00-authority.md`、`01-core.md`、`03-typography-language.md`、`04-image-pipeline.md`；按需读取其中指向的唯一规则所有者，不要求把全包塞进上下文。
 2. 四选一：PPTX → `tracks-pptx.md`；HTML-PPT → `tracks-htmlppt.md`；站点 → `tracks-site.md`；流式 → `tracks-stream.md`。交互是能力，不是第五轨。
+站点式 HTML 只面向桌面宽屏，不要求手机/窄屏适配；其他轨道的视口范围不因此改变。
 PPTX/HTML-PPT 含封面、目录、章节或尾页时，必须读取 `11-hero-layouts.md`，选固定版式 ID；这些页不能套正文页标题字号。
 3. 所有轨读取 `02-liquid-glass.md`。有数据图读取 `05-charts.md`；所有HTML轨必须读取 `06-motion-film.md`（包括普通卡片微交互，不仅电影）；有下钻读取 `07-drilldown.md`；有甘特读取 `08-gantt.md`；有讲稿读取 `09-speaker-notes.md`。
 4. 制作前锁定 `page-plan.json`（当前 `contract_revision=A04`，卡片布局模式和HTML逐对象动态清单必填），再生图。终审读 `10-quality-gates.md`。可用 `tools/context_pack.py --track <track>` 生成当前轨最小索引；它不会代替读取所选规则。

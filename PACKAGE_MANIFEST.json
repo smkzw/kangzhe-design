@@ -1,8 +1,8 @@
 {
   "version": "6.0.0",
-  "revision": "KZ6-0929-A03",
+  "revision": "KZ6-0929-A04",
   "status": "PARTIAL",
-  "scope": "snapshot; original tags and historical evidence retained",
+  "scope": "working candidate; historical release evidence retained; four-track acceptance ongoing",
   "files": [
     {
       "path": ".gitignore",
@@ -11,8 +11,8 @@
     },
     {
       "path": "CHANGELOG.md",
-      "bytes": 1128,
-      "sha256": "b29e3d74f907150af3e541e4319c14c47ff50f960478ecb3a708a46c594d9483"
+      "bytes": 1703,
+      "sha256": "bf74d6c22ba57a08ca746175cc3b798f06b0360904071ba2c575a9f7d6d0dfda"
     },
     {
       "path": "INSTALL.md",
@@ -21,18 +21,18 @@
     },
     {
       "path": "README.md",
-      "bytes": 4493,
-      "sha256": "68d80f2fb1c052ef70568b00ce4242ff059a2a1b8c596c35d4fc134076ab2191"
+      "bytes": 4615,
+      "sha256": "06549617ded26803f6f16fc8c572ef06f9ac387b16749bb818d253d9496e11e2"
     },
     {
       "path": "REVISION",
       "bytes": 13,
-      "sha256": "ae2373649fd1a07b7476d2dad31db8e4c70240c3174807959cd713efb8fa95a1"
+      "sha256": "828fc070916abcf3c0da08071a3646e9492c6cf36738bf020631b0260f5e8d84"
     },
     {
       "path": "SKILL.md",
-      "bytes": 4460,
-      "sha256": "31d1e6684c8eb2bd4827512922312392f49ba62ea22dc0d070938b3bbc4d8b04"
+      "bytes": 4667,
+      "sha256": "484c56bc46fb8cb9fa4bf79ef8bfb636f8c9c1af3a3b240e418b66be716ce17d"
     },
     {
       "path": "VERSION",
@@ -66,8 +66,8 @@
     },
     {
       "path": "agent/EVALUATION.md",
-      "bytes": 6247,
-      "sha256": "73eac35dc15ae103745bf35809418b350fdaf98c4190bb7a5871837b7a50b16f"
+      "bytes": 7778,
+      "sha256": "4e1ee7d4dc0c43195a157d5d465f0e83ac62520525b95d931d2990b3e2a77925"
     },
     {
       "path": "agent/HANDOFF_TEMPLATE.md",
@@ -76,13 +76,13 @@
     },
     {
       "path": "agent/KNOWN_GAPS.md",
-      "bytes": 1590,
-      "sha256": "bf0946354d0c15241abd7317f37234f24e9c1045316c5685a02d8aff98e12119"
+      "bytes": 1853,
+      "sha256": "3fac196fb9b9340f6723310420aebd36cd33cc9da91a7903a25a52eb2ed84d55"
     },
     {
       "path": "agent/PLAN.md",
-      "bytes": 6353,
-      "sha256": "aa4c4e7b24710d557287e5c5154fac3dcee7d754eaa43e349d7f0d73d8c8c27a"
+      "bytes": 6560,
+      "sha256": "8b5d5676e616bc7fb8365b3d507d84226c83912eee01ff2b5fee3d003a2d6350"
     },
     {
       "path": "agent/START_HERE.md",
@@ -96,8 +96,8 @@
     },
     {
       "path": "agent/fixtures/page-plan.valid.json",
-      "bytes": 1642,
-      "sha256": "a4cf7d40c508d6357401091e65ba8472917b82aad90ddfd1390a41d3e5efc4fc"
+      "bytes": 1706,
+      "sha256": "c9266cac93c65c080c12618b8852dbee35f4cb012e488747dff875753768e054"
     },
     {
       "path": "agent/model-matrix.template.json",
@@ -176,8 +176,8 @@
     },
     {
       "path": "design_specs/04-image-pipeline.md",
-      "bytes": 6913,
-      "sha256": "1cc5dbf469b8ee2a887fe4da0c35a3cde465dfcbd5a9fdbcbf50804db8808afc"
+      "bytes": 8278,
+      "sha256": "b61133ed98301f403750c46b44327664a0d968142bd5f4c0afad0b8164cab693"
     },
     {
       "path": "design_specs/05-charts.md",
@@ -186,13 +186,13 @@
     },
     {
       "path": "design_specs/06-motion-film.md",
-      "bytes": 16802,
-      "sha256": "d0d6ecae277bac614d23821e953a97b73758a43675fae2265386b451a20db5ef"
+      "bytes": 19313,
+      "sha256": "a13393b2039d0e19a765b5b04bd79eb23237edfc46eb2bc8537ebd737b5683d3"
     },
     {
       "path": "design_specs/07-drilldown.md",
-      "bytes": 3598,
-      "sha256": "7f5e6b0107d7a5d0cf4b98cee0a2deb58d3a1c64ba099e1ab7cdf87f4740cfd6"
+      "bytes": 3679,
+      "sha256": "e6ee1cd6ac9a4d8916ef85819fe988c0e26bbac04627af049cbebd513a843518"
     },
     {
       "path": "design_specs/08-gantt.md",
@@ -206,13 +206,18 @@
     },
     {
       "path": "design_specs/10-quality-gates.md",
-      "bytes": 6104,
-      "sha256": "2abd723d2ceb1966baffb4a9dc200b6cad12ed2a572175428d25e58a960b86e0"
+      "bytes": 6324,
+      "sha256": "ebe2181173f9672d4d68650051973fb597cb703a774681fe6a0b29d0cbc14ae3"
     },
     {
       "path": "design_specs/11-hero-layouts.md",
       "bytes": 5306,
       "sha256": "a064a72f8c5e5eb40a1290a8d9abbdb2b04b8991419851251a5feb9510210293"
+    },
+    {
+      "path": "design_specs/12-reference-patterns.md",
+      "bytes": 3365,
+      "sha256": "57c6be67e3489a37181fb0e14ce804b5eba1a375252a0c727d2ec8a013c2de70"
     },
     {
       "path": "design_specs/tracks-htmlppt.md",
@@ -221,13 +226,13 @@
     },
     {
       "path": "design_specs/tracks-pptx.md",
-      "bytes": 1923,
-      "sha256": "917ff3fb8080c2a1c70284e962d15ad8500d1b82956cc3df7255f79ce45ce1e4"
+      "bytes": 2016,
+      "sha256": "0bb75bac536e69fee42915e968977e4a1353b8df6b5964f55632c719b2f2b8a2"
     },
     {
       "path": "design_specs/tracks-site.md",
-      "bytes": 1537,
-      "sha256": "e63d662615fbfdec32cba632abd68996bbbcee4bfcaf28eae5af9a6186945f64"
+      "bytes": 2424,
+      "sha256": "f5ea42f7b0f5233b90c7c7c148ae93f360289bd0ab5042794dce4a5ddd00d734"
     },
     {
       "path": "design_specs/tracks-stream.md",
@@ -256,8 +261,8 @@
     },
     {
       "path": "examples/film-plan.json",
-      "bytes": 3877,
-      "sha256": "e4a062fea5ef7e2a3999e046bab4d9fea4d7506bf944f88ded636952b737eb76"
+      "bytes": 5503,
+      "sha256": "b791c692496b3c364b14074a5e82c091a6b6d99dab064496baf394eb41bb79a8"
     },
     {
       "path": "examples/gantt-data.json",
@@ -881,8 +886,8 @@
     },
     {
       "path": "review/CURRENT_STATUS.md",
-      "bytes": 258,
-      "sha256": "86c8b946120b2623f321ba62f2ae7c27c372a92ecd1c908f73c69f0cb278f18b"
+      "bytes": 343,
+      "sha256": "b8ae2c0c7270333b193964db321d005b4b742c011ae52e1ffab098df549b5af6"
     },
     {
       "path": "review/KZ6-0929-A01/P1-P3_STATUS.md",
@@ -1010,6 +1015,11 @@
       "sha256": "8058435925a1d890f6f72895fe5fd000866b2c66bf44c61f552a4d75fc1d22be"
     },
     {
+      "path": "review/KZ6-0929-A04/STATUS.md",
+      "bytes": 2991,
+      "sha256": "915328d2e5842febe860acd44f15b51430cab93638c72c6ca2644e814656d9e2"
+    },
+    {
       "path": "review/LOCAL_VALIDATION.json",
       "bytes": 2198,
       "sha256": "a612b6aa09678aae8e3fce36a2214839d1c7f87e85d277982d62760567726bdb"
@@ -1116,8 +1126,8 @@
     },
     {
       "path": "runtime/README.md",
-      "bytes": 1893,
-      "sha256": "2492be66b2f30d59ca67463197c2e078526def046ae0f5e60425c6f8acf2c85d"
+      "bytes": 2122,
+      "sha256": "707a9aeea140529214cb7dffaa111187efb4d082488f68c6bf5307cba125abbc"
     },
     {
       "path": "runtime/kz-audience.js",
@@ -1141,18 +1151,18 @@
     },
     {
       "path": "runtime/kz-glass.css",
-      "bytes": 10953,
-      "sha256": "620c660bf0f92641aa133dd6692447499b7c642cc0ece04dd86d6615a614ff73"
+      "bytes": 10621,
+      "sha256": "6ecc75c6295e90e5f729a4d495dd48922bb16c87c65926031f3bc1d3020de4d3"
     },
     {
       "path": "runtime/kz-layout-qc.js",
-      "bytes": 2003,
-      "sha256": "03fdb9e1ce058e95a11d3000e56649549693ca26d76f3f904bd896fc30ed9454"
+      "bytes": 1948,
+      "sha256": "0de5efa25e6e6fb499c2098cf53f2c3dceb0487859048962a5d323c36186343b"
     },
     {
       "path": "runtime/kz-motion.js",
-      "bytes": 10412,
-      "sha256": "fce3494096671c08724f0b735476a0f92eab845ae765e31c3c965f0a6bd1fa57"
+      "bytes": 9426,
+      "sha256": "dc580b9c65c93ed20b8c1bcb9a8a7139f4660e776b8cde95e59daea09cd40f9c"
     },
     {
       "path": "runtime/kz-tokens.css",
@@ -1171,13 +1181,13 @@
     },
     {
       "path": "schemas/asset-manifest.schema.json",
-      "bytes": 1863,
-      "sha256": "60e5fd7bbe7aadcabb59f3e20f07087768df81a0c6934312c097d328b8a76697"
+      "bytes": 5434,
+      "sha256": "38ce722149e90042e56536a8ffd3378567c81e8c450bf737dbc960daab6a690a"
     },
     {
       "path": "schemas/film-plan.schema.json",
-      "bytes": 4851,
-      "sha256": "a81edb8ac13b1aca9c888b003979de03fdda124a26a5e6f359fce42d5ec94ffe"
+      "bytes": 5634,
+      "sha256": "8fbd2f70cb99eeb44345d53b18df867d2d9ed8b9a7c521beb4ccdf20fa353d50"
     },
     {
       "path": "schemas/gantt.schema.json",
@@ -1186,13 +1196,13 @@
     },
     {
       "path": "schemas/page-plan.schema.json",
-      "bytes": 12955,
-      "sha256": "627995983ae2436d80d734018f79c98d7286e291c433b6ec2d92f1c64667af42"
+      "bytes": 13541,
+      "sha256": "58b555d89fdec4055ab8435c6971a36ae86aaf7bccf93152d770dd23e41ae7cd"
     },
     {
       "path": "tests/README.md",
-      "bytes": 742,
-      "sha256": "e8b85fcc45cb5a198da22f8b2a2c244cf5c06d9c130fcade5f5aa34107bb5112"
+      "bytes": 895,
+      "sha256": "78a512cd2eeb4d1d64b11ab40db2232a21eaa3c2094d20b9c91c20259f251f8e"
     },
     {
       "path": "tests/bridge_regression.py",
@@ -1201,8 +1211,8 @@
     },
     {
       "path": "tests/browser_smoke.py",
-      "bytes": 12451,
-      "sha256": "d528f322c941dd981538d177a2074d1875c8ca5cdf6c0ac9a43012bbd0f24218"
+      "bytes": 13565,
+      "sha256": "533f6cd5f5442835c81309df40ef95663296361445a7405aa08f7c5793875bd8"
     },
     {
       "path": "tests/film_cycle.py",
@@ -1210,14 +1220,19 @@
       "sha256": "6e632c815eb17d33f09296052c84ca81b7deb39eeca836db9113cc2a74d94ae5"
     },
     {
+      "path": "tests/test_a04_gates.py",
+      "bytes": 3364,
+      "sha256": "e5ebd618e49178081ab51a7a580d6aa4cca860d7badccd5920cea3d3aba1bd7f"
+    },
+    {
       "path": "tests/test_contracts.py",
-      "bytes": 3792,
-      "sha256": "22327e9c81a3dd73cd799c6269b12f2e1d8b94efa5b4d37ff3ed0c0a774d6c3f"
+      "bytes": 3917,
+      "sha256": "8693f7a13d9128b9c0d3b3a1916939f8a941b32903a86cc99837e6ab7b681745"
     },
     {
       "path": "tests/test_hero.py",
-      "bytes": 1976,
-      "sha256": "accb73d5217903ec4a5ff7aa69627f1e4c40b4ce0bfaf7ba959e36fc0bb1f600"
+      "bytes": 2126,
+      "sha256": "cc5003b2280568154d7139db591028b7e1c7c9df0bd5d7533d040f2dba8390ce"
     },
     {
       "path": "tokens/tokens.json",
@@ -1271,8 +1286,8 @@
     },
     {
       "path": "tools/qc_plan.py",
-      "bytes": 7711,
-      "sha256": "b7065481cb5dd579c5127c51c71f9170485c71c53cb5dba84326427c449ae80e"
+      "bytes": 9264,
+      "sha256": "d3037b0bebbeabde723991e6810ad6967b10de853c6b933f1e5e908df5cde27e"
     }
   ]
 }
