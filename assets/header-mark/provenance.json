@@ -1,0 +1,25 @@
+{
+  "id": "kz-header-mark-reference-20260930",
+  "source": "User-approved reference PPTX, slide 4, four native shapes only; no clinical content included",
+  "source_pptx_sha256": "14d4a9ab4b7da1878d4717a5149388561e061bb47d09fe6469d85c7f559a8b50",
+  "source_part": "ppt/slides/slide4.xml",
+  "source_shape_names": [
+    "kz-facet-o",
+    "kz-facet-y",
+    "kz-facet-o-candy",
+    "kz-facet-y-candy"
+  ],
+  "native_asset_sha256": "906dc32ffe4f374ae6cb7e6500236b4680681e67598b7ef4ab438d553c219578",
+  "canvas_px": [
+    1280,
+    720
+  ],
+  "units_per_px": 9525,
+  "svg_viewbox": [
+    0,
+    0,
+    100,
+    90
+  ],
+  "rule": "Copy native objects exactly. HTML uses derived geometry/material and whole-group vertical float only."
+}

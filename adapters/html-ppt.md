@@ -24,3 +24,6 @@
 
 ## 上游验收
 必须保存真实scaffold命令和版本；实际深链接/箭头/overview/S双窗同步、preview、print和离线资源检查。fluid模式下presenter预览是独立viewport，不保证天然复制观众的超宽比例：要测试，必要时向预览传递演示比例或把其边界列为未通过，不声称完全同画。当前真实覆盖以review/CURRENT_STATUS为准。
+
+## 固定双菱形
+调用 `tools/brand_fragments.py` 的 `facets(prefix=页面唯一前缀)`，插入原页眉 SVG，保留 1280×720 基准坐标。若独立 SVG，使用 viewBox="0 0 100 90"，宽高各为 100u/90u，左上锚定 0/0，禁止随页面宽度横向拉伸。不要把静态 SVG 作为 img 后误以为内层 class 能被宿主 CSS 动画控制：采用 inline SVG，加载 kz-glass.css 并保留 `.kz-float` 整组。标记内部四形状不再单独施加动效。普通播放自动微浮动；冻结/减少动态/打印恢复基准，无播放器 UI。

@@ -49,3 +49,12 @@ python tools/bind_hero_pptx.py upstream.pptx branded.pptx hero-page-plan.json --
 ```
 
 页面 id 前缀必须为真实页码，如 `01_cover`；文字与上游原生对象须唯一精确对应，字号不符或重名直接失败。只绑定四类 hero 文字对象的原生框、内边距、固定行高与禁止自动缩字；图表、工作簿、图片、正文和导航不改动。保留上游原件并对输出重新做原生显示与编辑回读。该步骤不能创建 PPTX，不能绕过上游导出。空辅助文字不创建绑定；长标题精简或拆页，不能自动缩小。
+
+## 固定双菱形原生绑定（A04 用户指定）
+`assets/header-mark/source-native.xml` 是经用户确认的原始品牌形状，不是另一个制片引擎。SVG 预览可调用 `brand_fragments.facets(native=True)`；SVG 转换不能保证原始渐变、softEdge 等字段逐项保真，所以最终必须在 ppt-master 实际导出之后复用原生对象：
+
+```bash
+python tools/bind_header_mark_pptx.py upstream.pptx marked.pptx header-mark-bindings.json --receipt mark-binding.json
+```
+
+绑定 JSON 为 `{"pages":[{"slide":4,"replace_shape_ids":[3,4,5,6,7,8]}]}`；这里只是语法示例，实际 ID 必须从当次导出 XML 检查后填写，不猜测所有页一致。仅列入需要正文 chrome 的页面。工具要求原固定画布、精确对象 ID、对象无正文文字且位于左上标记边界内；不匹配直接失败。保留上游原件，四对象顺序不变，仅为避免碰撞重分配 ID。再次运行上游交付检查，并检查最终截图和 Office 原生编辑。不能把绑定工具当成 PPTX 制作/上游验证的替代品。

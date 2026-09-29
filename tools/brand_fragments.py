@@ -1,18 +1,52 @@
-"""Shared native-safe decorative fragments; ppt-master remains the exporter."""
+"""Approved header mark, mechanically derived from the original native objects.
+
+The native asset is authoritative. PPTX must use bind_header_mark_pptx after
+ppt-master export: SVG conversion alone does not guarantee identical OOXML.
+"""
 from pathlib import Path
-import json
-T=json.loads((Path(__file__).resolve().parents[1]/'tokens/tokens.json').read_text())
+from html import escape
+import hashlib,json,math,xml.etree.ElementTree as E
+R=Path(__file__).resolve().parents[1]
+NS={'a':'http://schemas.openxmlformats.org/drawingml/2006/main','p':'http://schemas.openxmlformats.org/presentationml/2006/main'}
+
 def facets(prefix='kz',native=False):
- out=['<defs>']
- for name in ['orange','yellow']:
-  colors=T['chrome']['facet_material'][name+'_stops'];out.append(f'<linearGradient id="{prefix}-{name}" x1="0" y1="0" x2="1" y2="1">'+''.join(f'<stop offset="{i/2}" stop-color="{c}" stop-opacity="{[.92,.86,.94][i]}"/>' for i,c in enumerate(colors))+'</linearGradient>')
- out.append(f'<filter id="{prefix}-shadow"><feDropShadow dx="1" dy="2" stdDeviation="2" flood-color="#67553D" flood-opacity=".12"/></filter></defs>')
- for i,name in enumerate(['yellow','orange']):
-  pts=T['chrome']['facet_'+name];p=' '.join(f'{x},{y}' for x,y in pts);a,b,c,d=pts;depth=T['chrome']['facet_material']['depth_px']
-  side=[b,c,[c[0]-depth,c[1]-depth],[b[0]-depth,b[1]+depth]]
-  xs=[v[0] for v in pts];ys=[v[1] for v in pts]
-  motion='' if native else f' class="kz-float" style="animation-delay:{-i*2.1}s"'
-  out.append(f'<g id="{prefix}-{name}-group" data-pptx-role="decoration" data-pptx-bounds="{min(xs)} {min(ys)} {max(xs)-min(xs)} {max(ys)-min(ys)}" data-kz-facet="{name}"{motion}><polygon id="{prefix}-{name}-face" data-pptx-role="decoration" points="{p}" fill="url(#{prefix}-{name})" filter="url(#{prefix}-shadow)"/>')
-  out.append(f'<polygon id="{prefix}-{name}-depth" data-pptx-role="decoration" points="'+ ' '.join(f'{x},{y}' for x,y in side)+'" fill="#A56D10" fill-opacity=".20"/>')
-  out.append(f'<path id="{prefix}-{name}-glint" data-pptx-role="decoration" d="M{a[0]+1} {a[1]+1} L{b[0]-3} {b[1]+1} L{b[0]-6} {b[1]+7}" fill="none" stroke="#FFFFFF" stroke-opacity=".78" stroke-width="1"/></g>')
- return '\n'.join(out)
+    t=json.loads((R/'tokens/tokens.json').read_text())
+    asset=R/t['chrome']['header_mark']['native_asset']
+    if hashlib.sha256(asset.read_bytes()).hexdigest()!=t['chrome']['header_mark']['sha256']:
+        raise ValueError('Approved mark asset hash mismatch')
+    root=E.parse(asset).getroot();defs=[];parts=[];prefix=escape(prefix,quote=True)
+    for i,s in enumerate(root.findall('p:sp',NS)):
+        pr=s.find('p:spPr',NS); xf=pr.find('a:xfrm',NS)
+        off=xf.find('a:off',NS); ext=xf.find('a:ext',NS)
+        x,y=[int(off.get(k))/9525 for k in ('x','y')]; w,h=[int(ext.get(k))/9525 for k in ('cx','cy')]
+        path=pr.find('a:custGeom/a:pathLst/a:path',NS);pw,ph=int(path.get('w')),int(path.get('h'));commands=[]
+        for node in path:
+            tag=node.tag.split('}')[-1]
+            if tag=='close':commands.append('Z');continue
+            if tag not in ('moveTo','lnTo'):raise ValueError('Unsupported approved path command')
+            pt=node.find('a:pt',NS)
+            commands.append(f'{"M" if tag=="moveTo" else "L"}{x+int(pt.get("x"))*w/pw:.7f},{y+int(pt.get("y"))*h/ph:.7f}')
+        grad=pr.find('a:gradFill',NS);solid=pr.find('a:solidFill/a:srgbClr',NS);opacity=1
+        if grad is not None:
+            lin=grad.find('a:lin',NS)
+            if lin.attrib!={'ang':'2700000','scaled':'1'}:raise ValueError('Unreviewed gradient direction')
+            stops=[]
+            for gs in grad.findall('a:gsLst/a:gs',NS):
+                col=gs.find('a:srgbClr',NS);stops.append(f'<stop offset="{int(gs.get("pos"))/100000}" stop-color="#{col.get("val")}"/>')
+            defs.append(f'<linearGradient id="{prefix}-gradient-{i}" x1="0" y1="0" x2="1" y2="1">'+''.join(stops)+'</linearGradient>')
+            fill=f'url(#{prefix}-gradient-{i})'
+        else:
+            fill='#'+solid.get('val');alpha=solid.find('a:alpha',NS)
+            if alpha is not None:opacity=int(alpha.get('val'))/100000
+        effect='';shadow=pr.find('a:effectLst/a:outerShdw',NS)
+        if shadow is not None:
+            angle=int(shadow.get('dir'))/60000*math.pi/180;dist=int(shadow.get('dist'))/9525
+            col=shadow.find('a:srgbClr',NS);alpha=int(col.find('a:alpha',NS).get('val'))/100000
+            defs.append(f'<filter id="{prefix}-shadow-{i}" x="-15%" y="-15%" width="130%" height="130%" color-interpolation-filters="sRGB"><feDropShadow dx="{dist*math.cos(angle):.7f}" dy="{dist*math.sin(angle):.7f}" stdDeviation="{int(shadow.get("blurRad"))/9525/2:.7f}" flood-color="#{col.get("val")}" flood-opacity="{alpha}"/></filter>')
+            effect=f' filter="url(#{prefix}-shadow-{i})"'
+        parts.append(f'<path data-kz-source-shape="{s.find("p:nvSpPr/p:cNvPr",NS).get("name")}" data-pptx-role="decoration" d="{" ".join(commands)}" fill="{fill}" fill-opacity="{opacity}"{effect}/>')
+    motion='' if native else ' class="kz-float"'
+    return '<defs>'+''.join(defs)+'</defs>'+f'<g data-kz-header-mark="{t["chrome"]["header_mark"]["id"]}"{motion}>'+''.join(parts)+'</g>'
+
+if __name__=='__main__':
+    (R/'assets/header-mark/header-mark.svg').write_text('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 90" aria-hidden="true">'+facets(native=True)+'</svg>\n')
