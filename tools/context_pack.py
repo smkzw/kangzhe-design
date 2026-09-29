@@ -7,7 +7,8 @@ def files(track,features):
  if track in ['pptx','htmlppt']:base+=['design_specs/11-hero-layouts.md']
  if track=='pptx':base+=['adapters/ppt-master.md']
  if track=='htmlppt':base+=['adapters/html-ppt.md']
- if track in ['site','stream']:features.add('film');features.add('drilldown')
+ if track in ['htmlppt','site','stream']:features.add('film')
+ if track in ['site','stream']:features.add('drilldown')
  table={'charts':'05-charts','film':'06-motion-film','drilldown':'07-drilldown','gantt':'08-gantt','notes':'09-speaker-notes'}
  for f in sorted(features):
   if f not in table:raise ValueError('Unknown feature: '+f)

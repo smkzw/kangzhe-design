@@ -1,5 +1,6 @@
 """Bind native text frames after a real ppt-master export; never creates a deck.
-Fails closed on unmatched/duplicate text. Preserves all non-hero slide parts.
+Fails closed on unmatched/duplicate text. Optional explicit native_frame_bindings
+also bind brand chrome. All parts outside the declared pages remain unchanged.
 """
 from pathlib import Path
 import argparse,json,zipfile,xml.etree.ElementTree as E,hashlib
@@ -11,7 +12,7 @@ def bind(src,dst,plan):
     changed={};receipt=[]
     with zipfile.ZipFile(src) as z:
       for page in plan['pages']:
-        if not page.get('hero_layout_id'):continue
+        if not (page.get('hero_layout_id') or page.get('native_frame_bindings')):continue
         index=int(page['id'].split('_')[0]);name=f'ppt/slides/slide{index}.xml';r=E.fromstring(z.read(name));used=set()
         for el in page['elements']:
           want=norm(el.get('text',''))
@@ -41,6 +42,6 @@ def bind(src,dst,plan):
         changed[name]=E.tostring(r,encoding='utf-8',xml_declaration=True)
       with zipfile.ZipFile(dst,'w',zipfile.ZIP_DEFLATED) as out:
         for info in z.infolist():out.writestr(info,changed.get(info.filename,z.read(info.filename)))
-    return {'scope':'brand hero text-frame binding after upstream export','input_sha256':hashlib.sha256(src.read_bytes()).hexdigest(),'output_sha256':hashlib.sha256(dst.read_bytes()).hexdigest(),'changed_parts':list(changed),'bindings':receipt}
+    return {'scope':'declared brand text-frame binding after upstream export','input_sha256':hashlib.sha256(src.read_bytes()).hexdigest(),'output_sha256':hashlib.sha256(dst.read_bytes()).hexdigest(),'changed_parts':list(changed),'bindings':receipt}
 if __name__=='__main__':
  ap=argparse.ArgumentParser();ap.add_argument('input',type=Path);ap.add_argument('output',type=Path);ap.add_argument('plan',type=Path);ap.add_argument('--receipt',type=Path,required=True);a=ap.parse_args();a.receipt.write_text(json.dumps(bind(a.input,a.output,json.loads(a.plan.read_text())),ensure_ascii=False,indent=2)+'\n')

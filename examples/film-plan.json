@@ -172,13 +172,14 @@
   },
   "loop_contract": "几何、颜色、标签、说明首尾一致；持续存在同一 DOM 主载体",
   "static_summary": "页面中三个阶段节点以及下方明细始终可阅读",
-  "controls": [
+  "reduced_motion": "固定在 .74 的静态总览；保留静态资料",
+  "cleanup": "暂停、移除监听器、断开观察器，保留当前暂停原因",
+  "lifecycle_api": [
     "pause",
     "resume",
     "replay",
     "seek",
     "static_summary"
   ],
-  "reduced_motion": "固定在 .74 的静态总览；保留静态资料",
-  "cleanup": "暂停、移除监听器、断开观察器，保留当前暂停原因"
+  "audience_playback_ui": false
 }

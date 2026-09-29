@@ -1,0 +1,98 @@
+[
+  {
+    "case": "cb-before",
+    "model": "deepseek-v4.1-flash(max)",
+    "harness": "CodeBuddy CLI",
+    "spec_entry_sha256": "48bf0991dc98dc1531488ec9b84e2e0330f5b5663123a4feda1cb365b4424009",
+    "budget_seconds": 600,
+    "actual_seconds": 600.047,
+    "terminal": "OWNER_TOTAL_BUDGET_STOP",
+    "exit": null,
+    "outcome": "PARTIAL：2页HTML；旧宽屏/平菱形/底条失败；无终态交接",
+    "owner_repair_counted_as_success": false
+  },
+  {
+    "case": "pi-before",
+    "model": "openai-codex/gpt-6-luna(max)",
+    "harness": "Pi/OMP",
+    "spec_entry_sha256": "48bf0991dc98dc1531488ec9b84e2e0330f5b5663123a4feda1cb365b4424009",
+    "budget_seconds": 600,
+    "actual_seconds": 600.139,
+    "terminal": "OWNER_TOTAL_BUDGET_STOP",
+    "exit": null,
+    "outcome": "INCOMPLETE：仅引擎模板/素材，无任务终稿",
+    "owner_repair_counted_as_success": false
+  },
+  {
+    "case": "cb-after",
+    "model": "deepseek-v4.1-flash(max)",
+    "harness": "CodeBuddy CLI",
+    "spec_entry_sha256": "da48ee4fd130182eb41cd038370b848f5331e35a3915d5b9914e777d4ae852f4",
+    "budget_seconds": 600,
+    "actual_seconds": 600.025,
+    "terminal": "OWNER_TOTAL_BUDGET_STOP",
+    "exit": null,
+    "outcome": "PARTIAL：2页改善宽屏/菱形/卡片；底条仍失败",
+    "owner_repair_counted_as_success": false
+  },
+  {
+    "case": "pi-after",
+    "model": "openai-codex/gpt-6-luna(max)",
+    "harness": "Pi/OMP",
+    "spec_entry_sha256": "da48ee4fd130182eb41cd038370b848f5331e35a3915d5b9914e777d4ae852f4",
+    "budget_seconds": 600,
+    "actual_seconds": 600.013,
+    "terminal": "OWNER_TOTAL_BUDGET_STOP",
+    "exit": null,
+    "outcome": "PARTIAL：新版已有2页任务HTML；底条/QC未关闭",
+    "owner_repair_counted_as_success": false
+  },
+  {
+    "case": "cb-holdout-pptx",
+    "model": "deepseek-v4.1-flash(max)",
+    "harness": "CodeBuddy CLI",
+    "spec_entry_sha256": "da48ee4fd130182eb41cd038370b848f5331e35a3915d5b9914e777d4ae852f4",
+    "budget_seconds": 600,
+    "actual_seconds": 257.315,
+    "terminal": "TERMINAL",
+    "exit": 0,
+    "outcome": "PARTIAL：Default真实3页原生PPTX，未完成视觉/Office；不是超600秒",
+    "owner_repair_counted_as_success": false
+  },
+  {
+    "case": "cb-site",
+    "model": "deepseek-v4.1-flash(max)",
+    "harness": "CodeBuddy CLI",
+    "spec_entry_sha256": "da48ee4fd130182eb41cd038370b848f5331e35a3915d5b9914e777d4ae852f4",
+    "budget_seconds": 600,
+    "actual_seconds": 334.464,
+    "terminal": "TERMINAL",
+    "exit": 3,
+    "outcome": "FAIL：生成2页；40轮上限；site-common的line/el接口错配",
+    "owner_repair_counted_as_success": false
+  },
+  {
+    "case": "pi-stream",
+    "model": "openai-codex/gpt-6-luna(max)",
+    "harness": "Pi/OMP",
+    "spec_entry_sha256": "da48ee4fd130182eb41cd038370b848f5331e35a3915d5b9914e777d4ae852f4",
+    "budget_seconds": 600,
+    "actual_seconds": 600.029,
+    "terminal": "OWNER_TOTAL_BUDGET_STOP",
+    "exit": null,
+    "outcome": "INCOMPLETE：18 read +5 todo，无目标文件",
+    "owner_repair_counted_as_success": false
+  },
+  {
+    "case": "cb-r2",
+    "model": "deepseek-v4.1-flash(max)",
+    "harness": "CodeBuddy CLI",
+    "spec_entry_sha256": "31d1e6684c8eb2bd4827512922312392f49ba62ea22dc0d070938b3bbc4d8b04",
+    "budget_seconds": 600,
+    "actual_seconds": 251.213,
+    "terminal": "TERMINAL",
+    "exit": 3,
+    "outcome": "PARTIAL：播放面板/底条已移除；40轮上限；站点仍有JS错误",
+    "owner_repair_counted_as_success": false
+  }
+]

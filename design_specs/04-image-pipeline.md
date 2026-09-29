@@ -41,3 +41,8 @@ IMG-01：PPTX 和 HTML-PPT 逐页记录 `asset_id`。封面、目录、章节、
 
 ## 资产回执
 每条记录含 `asset_id / image_role / generation_required / origin / tool / model_if_returned / receipt / file / sha256 / pages / protected_regions / crop / preflight_status / composite_review_status`。`origin=generated` 必须有真实调用或已验证缓存回执；`origin=procedural` 仅站点/流式豁免；`origin=source_original` 仅原始证据，不代替 hero 生成要求。示例包没有执行过的生成不要写虚假 provider/model。
+
+## IMG-04 画幅与实际像素
+资产计划先列交付viewport族（16:9、21:9/实际ultrawide、站点移动端），每族给源图目标比例、protected_regions和裁切策略。HTML宽屏必须有真实超宽生成背景，不能只有16:9源图用contain后两侧空白。可复用同一超宽图的受检裁切用于16:9，但每种裁切重新做裸图映射与合成QC；不得把拉伸、CSS补边或放大重采样称为超宽生图成功。
+
+回执区分requested_size、actual_size与有效显示尺寸；宽幅源图比例误差默认不超过tokens.image.aspect_tolerance。工具无尺寸参数时只把提示尺寸当请求，不当成功事实。正文长边与hero长边分别按tokens检查；超宽比例合格不代表分辨率合格。低分辨率可供开发检查，正式清晰度项保持WARN/BLOCKED。保护区域按实际裁切变换，不沿用旧16:9 mask。

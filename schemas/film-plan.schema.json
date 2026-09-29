@@ -15,9 +15,10 @@
     "timing",
     "loop_contract",
     "static_summary",
-    "controls",
+    "lifecycle_api",
     "reduced_motion",
-    "cleanup"
+    "cleanup",
+    "audience_playback_ui"
   ],
   "properties": {
     "schema_version": {
@@ -221,7 +222,7 @@
       },
       "additionalProperties": false
     },
-    "controls": {
+    "lifecycle_api": {
       "type": "array",
       "items": {
         "enum": [
@@ -233,7 +234,11 @@
         ]
       },
       "minItems": 5,
-      "uniqueItems": true
+      "uniqueItems": true,
+      "description": "Internal lifecycle/QC API only; never audience playback UI"
+    },
+    "audience_playback_ui": {
+      "const": false
     }
   },
   "additionalProperties": false

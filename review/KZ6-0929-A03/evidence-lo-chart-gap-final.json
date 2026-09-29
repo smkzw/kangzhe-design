@@ -1,0 +1,8 @@
+{
+  "artifact_sha256": "cd40076714f62f5e03fecb03cc829cb661297126083e316d974108aff1a543ea",
+  "renderer": "LibreOffice PDF",
+  "observation": "native area fill reaches zero at missing category although annotation states missing; not accepted as semantic rendering",
+  "native_xml_has_gap": true,
+  "native_Office": "BLOCKED",
+  "resolution": "Do not infer PowerPoint behavior from LibreOffice; test exact artifact natively before acceptance"
+}

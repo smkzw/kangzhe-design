@@ -1,0 +1,29 @@
+{
+  "scope": "public sanitized subset; complete raw traces retained locally",
+  "files": [
+    {
+      "path": "evidence-browser-report.json",
+      "sha256": "28eba164bd793bf890bc078366246722b46ed73f5a7afa984ae5411dc8d63b7f"
+    },
+    {
+      "path": "evidence-bridge-final.json",
+      "sha256": "7de703d1d3f48bd0b8be2e214175e37b6bb2969cc8cbc8a89e0e42a65cd8ba47"
+    },
+    {
+      "path": "evidence-normal-film-cycle-r4.json",
+      "sha256": "8058435925a1d890f6f72895fe5fd000866b2c66bf44c61f552a4d75fc1d22be"
+    },
+    {
+      "path": "evidence-ego-7pages-3viewports-final.json",
+      "sha256": "d264ee1acd15b7ddabad66271044fc64ec37009d10fb6c740512167e35e5c6d4"
+    },
+    {
+      "path": "evidence-native-inspection-final.json",
+      "sha256": "94c68fb13baf62c90a3739b40fa15c03e46676644a26b8901c1f9398041c75ec"
+    },
+    {
+      "path": "evidence-lo-chart-gap-final.json",
+      "sha256": "13f6fd58b461c9a3d4e7cc35e6fb9ac6be6421f4a893ac82f4eca002937382b3"
+    }
+  ]
+}

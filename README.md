@@ -2,7 +2,7 @@
 
 康哲药业医学部的单一 Liquid Glass 设计技能。覆盖可编辑 PPTX、HTML-PPT、站点式 HTML、流式 HTML。替代原 `kangzhe-design 4.5.7` 与 `kangzhe-design-3d 5.2.7`，不保留 flat、3d 或 legacy 模式。
 
-**版本说明：**6.0.0 是规范版本。A01/A02 已执行真实生图、两个指定引擎、Mac Office 局部编辑回读和12次真实pilot；结果分层记录，整体仍为 PARTIAL。详见 `review/VALIDATION_STATUS.md`，不能把版本号当成所有能力已认证。
+**版本说明：**6.0.0是规范版本；当前修订A03，整体PARTIAL。已实际调用两个指定引擎、真实生图，完成原12例审计与8次新制作测试；A03原生Office编辑回读仍BLOCKED。最新分层结果见[当前状态](review/CURRENT_STATUS.md)。
 
 ## 使用
 
@@ -29,7 +29,7 @@ PPTX 始终通过 hugohe3/ppt-master；HTML-PPT 始终通过 lewislulu/html-ppt-
 
 打开 `examples/component-lab.html`。该页不需要构建和外网依赖，采用程序化光场，包含连续主载体、ECharts浅面积折线/柱图、两层宽下钻、可拖改季度甘特。它是参考组件，不是“已完成html-ppt-skill集成”的幻灯片。
 
-此环境的本地URL导航受浏览器管理策略限制，实际测试通过把本地依赖内联到 Chromium set_content 完成；本地双击/HTTP、上游演讲者窗口、Safari 和 Office 仍需分别验证。不得在宣传中省略这一边界。
+组件测试使用Chromium内联harness；A03另有EGO真实HTTP导航/交互与IAB补充截图。两类证据分开；上游演讲者窗口、Safari和A03原生Office仍未完整验证。
 
 ## 本地工具
 
@@ -56,3 +56,6 @@ preflight 没有资产 manifest 时返回 pending 的实际生图审阅项；不
 
 ## KZ6-0929-A02 固定首尾、目录与章节
 四类页面共用版式 ID、逻辑坐标和专用字号，详见 [固定形态合同](design_specs/11-hero-layouts.md)。[本轮状态](review/KZ6-0929-A02/STATUS.md)分别报告规则代码、组件、两引擎、原生编辑与跨模型边界。公开示例均为合成内容，不包含用户提供的临床参考原件。
+
+## A03 当前示例
+[无播放器控件的HTML-PPT](examples/validation/KZ6-0929-A03/html-ppt/index.html) · [原生PPTX](examples/validation/KZ6-0929-A03/matched-seven.pptx)。均为owner制作的合成内容，不是测试模型成功样本。动画自动发生；保留正常翻页、详情和编辑，禁止观众播放器面板。

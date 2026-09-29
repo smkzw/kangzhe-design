@@ -299,6 +299,17 @@
                     "neutral_hairline",
                     "localized_highlight"
                   ]
+                },
+                "layout_mode": {
+                  "enum": [
+                    "stack",
+                    "distributed",
+                    "centered",
+                    "compact"
+                  ]
+                },
+                "layout_reason": {
+                  "type": "string"
                 }
               },
               "additionalProperties": false
@@ -338,10 +349,59 @@
               "section-01",
               "ending-01"
             ]
+          },
+          "motion_objects": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "id",
+                "role",
+                "enter",
+                "exit",
+                "hover",
+                "ambient"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "role": {
+                  "type": "string"
+                },
+                "enter": {
+                  "type": "string"
+                },
+                "exit": {
+                  "type": "string"
+                },
+                "hover": {
+                  "type": "string"
+                },
+                "ambient": {
+                  "type": "string"
+                },
+                "data_progress": {
+                  "type": "string"
+                },
+                "film_id": {
+                  "type": "string"
+                },
+                "static_reason": {
+                  "type": "string"
+                }
+              },
+              "additionalProperties": false
+            }
           }
         },
         "additionalProperties": false
       }
+    },
+    "contract_revision": {
+      "enum": [
+        "A03"
+      ]
     }
   },
   "additionalProperties": false,

@@ -8,15 +8,15 @@ const film=new KZMotion.Film(q('#main-film'),{frames,duration:36000,onRender(f,p
 const tilt=KZMotion.mountTilt(document);KZMotion.reveal(q('#components'));
 const line=KZCharts.mount(q('#line-chart'),lineData,{onProgress(p,d){q('#chart-value').textContent=String(Math.round(d.series[0].values.at(-1)*p));}});
 const bar=KZCharts.mount(q('#bar-chart'),{kind:'column',unit:'项',decimals:0,categories:['设计确认','资料准备','集中审阅','后续复核'],series:[{id:'stages',name:'任务数',values:[12,18,25,31]}]});
-q('#replay-chart').addEventListener('click',()=>line.play());
+
 const gantt=KZGantt.mount(q('#gantt'),ganttData);
 const drill=new KZDrilldown.Drilldown({host:document.body,onOpen(){film.pause('dialog');},onClose(){film.resume('dialog');}});
 function table(parent){const t=el('table','lab-table');for(const row of [['审阅维度','示例关注点'],['完整性','资料与关键字段是否齐备'],['一致性','数值、结论与展示口径是否一致'],['限制条件','缺失项与不确定性是否明确']]){const tr=el('tr');row.forEach((v,i)=>tr.append(el(i===0?'th':'td',null,v)));t.append(tr);}parent.append(t);}
 function openL2(container){
- container.append(el('p','lab-section-intro','此层保存完整的示例审阅结构，并演示独立动画的暂停与恢复。返回后，上一级图表与滚动位置保持不变。'));
+ container.append(el('p','lab-section-intro','此层保存完整的示例审阅结构，并呈现独立的审阅过程。返回后，上一级图表与滚动位置保持不变。'));
  const grid=el('div','kz-grid kz-grid-two'),a=el('article','kz-card'),b=el('article','kz-card');a.append(el('h3',null,'审阅维度'));table(a);
  const fr=el('div','kz-film'),stage=el('div','kz-film-stage'),carrier=el('div','kz-film-carrier');carrier.append(el('strong','kz-film-carrier-label','研究问题'));stage.append(carrier);fr.append(stage,el('p','kz-film-caption'));
- const controls=el('div','kz-film-controls'),pause=el('button','kz-button','暂停'),slider=el('input');pause.type='button';pause.dataset.kzPause='';slider.type='range';slider.min=0;slider.max=1000;slider.value=0;slider.dataset.kzProgress='';slider.setAttribute('aria-label','明细动画进度');controls.append(pause,slider);fr.append(controls);b.append(el('h3',null,'审阅过程'),fr);grid.append(a,b);container.append(grid);
+ b.append(el('h3',null,'审阅过程'),fr);grid.append(a,b);container.append(grid);
  const nested=new KZMotion.Film(fr,{frames,duration:36000});window.KZ_LAB.nested=nested;return {pause:()=>nested.pause('parent'),resume:()=>nested.resume('parent'),dispose:()=>nested.dispose()};
 }
 q('#open-details').addEventListener('click',event=>drill.push({id:'evidence',title:'证据明细',render(container,manager){

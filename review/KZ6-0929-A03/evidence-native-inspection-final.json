@@ -1,0 +1,95 @@
+{
+  "slide_count": 7,
+  "slides": [
+    {
+      "slide": "ppt/slides/slide1.xml",
+      "native_shapes": 3,
+      "pictures": 2,
+      "graphic_frames": 0,
+      "explicit_sizes_hundredth_pt": {
+        "4200": 2,
+        "2100": 1,
+        "1500": 1
+      },
+      "alpha_nodes": 0
+    },
+    {
+      "slide": "ppt/slides/slide2.xml",
+      "native_shapes": 16,
+      "pictures": 2,
+      "graphic_frames": 0,
+      "explicit_sizes_hundredth_pt": {
+        "3600": 1,
+        "3000": 3,
+        "2400": 3,
+        "1500": 3
+      },
+      "alpha_nodes": 12
+    },
+    {
+      "slide": "ppt/slides/slide3.xml",
+      "native_shapes": 2,
+      "pictures": 2,
+      "graphic_frames": 0,
+      "explicit_sizes_hundredth_pt": {
+        "8400": 1,
+        "4500": 1
+      },
+      "alpha_nodes": 0
+    },
+    {
+      "slide": "ppt/slides/slide4.xml",
+      "native_shapes": 22,
+      "pictures": 2,
+      "graphic_frames": 0,
+      "explicit_sizes_hundredth_pt": {
+        "2400": 1,
+        "1800": 3,
+        "1500": 7,
+        "1350": 2
+      },
+      "alpha_nodes": 21
+    },
+    {
+      "slide": "ppt/slides/slide5.xml",
+      "native_shapes": 16,
+      "pictures": 2,
+      "graphic_frames": 1,
+      "explicit_sizes_hundredth_pt": {
+        "2400": 1,
+        "1800": 1,
+        "1200": 2,
+        "1350": 3
+      },
+      "alpha_nodes": 16
+    },
+    {
+      "slide": "ppt/slides/slide6.xml",
+      "native_shapes": 50,
+      "pictures": 2,
+      "graphic_frames": 0,
+      "explicit_sizes_hundredth_pt": {
+        "2400": 1,
+        "1350": 3,
+        "1200": 13,
+        "1500": 6
+      },
+      "alpha_nodes": 21
+    },
+    {
+      "slide": "ppt/slides/slide7.xml",
+      "native_shapes": 3,
+      "pictures": 2,
+      "graphic_frames": 0,
+      "explicit_sizes_hundredth_pt": {
+        "7800": 1,
+        "2100": 1,
+        "1500": 1
+      },
+      "alpha_nodes": 0
+    }
+  ],
+  "chart_parts": 1,
+  "embedded_workbooks": 1,
+  "scope": "structure only; does not prove visual quality, native edit readback, or effective theme fonts"
+}

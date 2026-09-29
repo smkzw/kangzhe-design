@@ -1,0 +1,80 @@
+{
+  "scope": "real Chromium component DOM; no upstream engine or model claims",
+  "checks": {
+    "overview_clone_never_created": true,
+    "only_active_real_slide_enters": true,
+    "real_slide_transition": true,
+    "connected_slide_moved_out_disposed": true,
+    "each_real_component_disposed_once": true
+  },
+  "initial": [
+    [
+      "create",
+      "s1"
+    ],
+    [
+      "enter",
+      "s1"
+    ],
+    [
+      "create",
+      "s2"
+    ]
+  ],
+  "moved": [
+    [
+      "create",
+      "s1"
+    ],
+    [
+      "enter",
+      "s1"
+    ],
+    [
+      "create",
+      "s2"
+    ],
+    [
+      "leave",
+      "s1"
+    ],
+    [
+      "enter",
+      "s2"
+    ],
+    [
+      "dispose",
+      "s2"
+    ]
+  ],
+  "final": [
+    [
+      "create",
+      "s1"
+    ],
+    [
+      "enter",
+      "s1"
+    ],
+    [
+      "create",
+      "s2"
+    ],
+    [
+      "leave",
+      "s1"
+    ],
+    [
+      "enter",
+      "s2"
+    ],
+    [
+      "dispose",
+      "s2"
+    ],
+    [
+      "dispose",
+      "s1"
+    ]
+  ]
+}

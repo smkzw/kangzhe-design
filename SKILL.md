@@ -11,7 +11,7 @@ description: 康哲药业医学部正式汇报与医学网页的统一 Liquid Gl
 1. 必读 `design_specs/00-authority.md`、`01-core.md`、`03-typography-language.md`、`04-image-pipeline.md`；按需读取其中指向的唯一规则所有者，不要求把全包塞进上下文。
 2. 四选一：PPTX → `tracks-pptx.md`；HTML-PPT → `tracks-htmlppt.md`；站点 → `tracks-site.md`；流式 → `tracks-stream.md`。交互是能力，不是第五轨。
 PPTX/HTML-PPT 含封面、目录、章节或尾页时，必须读取 `11-hero-layouts.md`，选固定版式 ID；这些页不能套正文页标题字号。
-3. 所有轨读取 `02-liquid-glass.md`。有数据图读取 `05-charts.md`；有自动叙事读取 `06-motion-film.md`；有下钻读取 `07-drilldown.md`；有甘特读取 `08-gantt.md`；有讲稿读取 `09-speaker-notes.md`。
+3. 所有轨读取 `02-liquid-glass.md`。有数据图读取 `05-charts.md`；所有HTML轨必须读取 `06-motion-film.md`（包括普通卡片微交互，不仅电影）；有下钻读取 `07-drilldown.md`；有甘特读取 `08-gantt.md`；有讲稿读取 `09-speaker-notes.md`。
 4. 制作前锁定 `page-plan.json`，再生图。终审读 `10-quality-gates.md`。可用 `tools/context_pack.py --track <track>` 生成当前轨最小索引；它不会代替读取所选规则。
 
 ## 不可绕过的制作顺序
@@ -26,9 +26,12 @@ PPTX/HTML-PPT 含封面、目录、章节或尾页时，必须读取 `11-hero-la
 - 受众页仅对外部科学论文、权威指南/共识/指导原则作参考文献式标注。内部来源保留在私有工作记录，不写上页面。
 
 ## 引擎协作
-PPTX 必须进入安装的 `ppt-master` 路由。HTML-PPT 必须从 `html-ppt-skill` 模板脚手架进入，保留它的唯一缩放/导航/演讲者运行时。康哲只注入品牌、页面计划、图像保护、图表及交互组件和 QC，不另写同类引擎，不擅改上游源码。参考 `adapters/README.md`。
+PPTX 必须进入安装的 `ppt-master` 路由。HTML-PPT 必须从 `html-ppt-skill` 模板脚手架进入，保留它的唯一导航/演讲者运行时，并通过其正式fluid扩展点实现宽屏主题。康哲只注入品牌、页面计划、图像保护、图表及交互组件和 QC，不另写同类引擎，不擅改上游源码。参考 `adapters/README.md`。
 
 ## 能力缺失与交付措辞
 工具不可用、源材料不足、上游不支持的效果：写明具体阻塞、影响页、已完成部分和所需能力，不伪造调用回执或把占位标为通过。静态近似不叫动态折射；组件测试不叫引擎端到端测试；LibreOffice 渲染不叫 Windows PowerPoint 验收。
 
-本包重构与后续验证任务在 `agent/START_HERE.md`；本包已经做过什么，只以 `review/LOCAL_VALIDATION.json` 的实际记录为准。
+本包重构与后续验证任务在 `agent/START_HERE.md`；本包已经做过什么，只以 `review/CURRENT_STATUS.md` 的实际记录为准。
+
+## 观众播放界面（A03用户修订）
+所有轨道的动画自然自动发生。不得呈现播放/暂停/重播/进度滑杆/“开始播放下一页”等播放器UI，包括浮动工具条和hover后出现的控件。保留正常翻页、业务导航、详情、Gantt编辑；后台RM/离屏/编辑暂停与QC seek API继续保留。

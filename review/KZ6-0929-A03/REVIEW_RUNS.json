@@ -1,0 +1,14 @@
+{
+  "invoked": 3,
+  "completed_with_runner_receipt": 2,
+  "third": {
+    "model": "google-antigravity/gemini-3.7-flash(high)",
+    "harness": "Pi/OMP",
+    "status": "OWNER_TOTAL_BUDGET_STOP",
+    "seconds": 480.023,
+    "report_exists": true,
+    "final_exists": true,
+    "runner_receipt_exists": false,
+    "acceptance": "Independent observations retained; required terminal harness receipt incomplete"
+  }
+}

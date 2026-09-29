@@ -1,5 +1,7 @@
 # 当前交接
 
-当前修订KZ6-0929-A02；整体PARTIAL。规则入口仍kangzhe-design。首尾/目录/章节固定形式见design_specs/11-hero-layouts.md；真实分层结果见review/KZ6-0929-A02/STATUS.md，12次pilot终态见同目录PILOT_DISPOSITION.md。A01试验基线与A02新规范不能混为同一spec hash。
+当前6.0.0 / KZ6-0929-A03，整体PARTIAL。读取review/CURRENT_STATUS.md及review/KZ6-0929-A03/{STATUS,DEEP_ANALYSIS,REQUIREMENTS_MATRIX,LOOP_LEDGER,HANDOFF}.md。
 
-下一阶段：先修整项预算/工具上限，再获预算扩展；关闭源图尺寸及Windows/保留集。当前公开样板是owner工程产物，不能记到CodeBuddy/Pi成功率。不要把整个review或所有参考全文加入每次模型调用。
+硬约束新增：观众UI不得有播放、暂停、重播、时间码/滑杆；自动动画与普通翻页分别管理。不要重现原清理器通配[data-kz-progress]误删电影问题，只匹配input控件。
+
+已完成8制作+3审阅预算。先原生Office新文件编辑回读，再做复杂电影/宽下钻和H02–H04；跨模型继续需新预算，不静默追加。所有owner样板/修复必须单列，不能计为CodeBuddy/Pi成功。不要全量读取review或旧包。

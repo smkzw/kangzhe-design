@@ -20,6 +20,10 @@ def validate(plan,manifest=None,asset_root=None):
   if re.search(r'[：:—–]|\s-\s',p['title']):add('TITLE',pid,'页面标题不应有冒号或破折号')
   if len(p['title'])>24:add('TITLE-REVIEW',pid,'长标题需要语言审阅；不是自动截短', 'review')
   byrole={}
+  if plan.get('contract_revision')=='A03':
+   for c in p['cards']:
+    if not c.get('layout_mode'):add('LAYOUT-MODE',pid+'/'+c['id'],'A03卡片必须声明纵向布局模式')
+   if plan['track'] in ['htmlppt','site','stream'] and not p.get('motion_objects'):add('MOTION-MAP',pid,'A03 HTML页面缺少逐对象动态清单')
   if plan['track'] in ['pptx','htmlppt'] and p['kind'] in ['cover','toc','section','ending']:
    expected={'cover':['cover_title'],'toc':['toc_title','toc_label'],'section':['section_number','section_title'],'ending':['ending_title']}[p['kind']]
    actual={e['role'] for e in p['elements']}

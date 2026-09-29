@@ -3,6 +3,7 @@ This does not claim HTTP/file:// or CSP equivalence. Never use untrusted input.
 """
 from pathlib import Path
 import re,base64,mimetypes,argparse
+from html.parser import HTMLParser
 
 def inline_html(path: Path, root: Path|None=None) -> str:
     path=path.resolve();root=(root or path.parent.parent).resolve()
@@ -12,9 +13,15 @@ def inline_html(path: Path, root: Path|None=None) -> str:
         if not p.is_relative_to(root):raise ValueError('Asset escapes package root: '+ref)
         return p
     text=path.read_text(encoding='utf-8')
-    def css(m):return '<style>\n'+local(m.group(1)).read_text(encoding='utf-8')+'\n</style>'
+    def css(m):
+        class Link(HTMLParser):
+            attrs={}
+            def handle_starttag(self,tag,attrs):self.attrs=dict(attrs)
+        tag=Link();tag.feed(m.group(0));attrs=tag.attrs
+        if 'stylesheet' not in (attrs.get('rel') or '').split():return m.group(0)
+        return '<style>\n'+local(attrs['href']).read_text(encoding='utf-8')+'\n</style>'
     def js(m):return '<script>\n'+local(m.group(1)).read_text(encoding='utf-8').replace('</script','<\\/script')+'\n</script>'
-    text=re.sub(r'<link\s+rel="stylesheet"\s+href="([^"]+)"\s*>',css,text)
+    text=re.sub(r'<link\b[^>]*>',css,text,flags=re.I)
     def img(m):
         p=local(m.group(2));mime=mimetypes.guess_type(p.name)[0] or 'application/octet-stream'
         return m.group(1)+'data:'+mime+';base64,'+base64.b64encode(p.read_bytes()).decode()+m.group(3)
