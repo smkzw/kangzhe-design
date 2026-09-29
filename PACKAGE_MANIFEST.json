@@ -11,8 +11,8 @@
     },
     {
       "path": "CHANGELOG.md",
-      "bytes": 1703,
-      "sha256": "bf74d6c22ba57a08ca746175cc3b798f06b0360904071ba2c575a9f7d6d0dfda"
+      "bytes": 2013,
+      "sha256": "9a6500eba600c347e38e9de04a11f93e1d40ede0b31df7a25b044cc425d55b08"
     },
     {
       "path": "INSTALL.md",
@@ -96,8 +96,8 @@
     },
     {
       "path": "agent/fixtures/page-plan.valid.json",
-      "bytes": 1706,
-      "sha256": "c9266cac93c65c080c12618b8852dbee35f4cb012e488747dff875753768e054"
+      "bytes": 1769,
+      "sha256": "e672091764827ee811b94740b045765d914fe404dd7273523386ec9907197444"
     },
     {
       "path": "agent/model-matrix.template.json",
@@ -176,8 +176,8 @@
     },
     {
       "path": "design_specs/04-image-pipeline.md",
-      "bytes": 8278,
-      "sha256": "b61133ed98301f403750c46b44327664a0d968142bd5f4c0afad0b8164cab693"
+      "bytes": 8702,
+      "sha256": "75d3c65cc6c3600d8742e6888b5e2dd63b6c1a7e6b56cfb00524f74fd4c192d1"
     },
     {
       "path": "design_specs/05-charts.md",
@@ -1016,8 +1016,8 @@
     },
     {
       "path": "review/KZ6-0929-A04/STATUS.md",
-      "bytes": 2991,
-      "sha256": "915328d2e5842febe860acd44f15b51430cab93638c72c6ca2644e814656d9e2"
+      "bytes": 3411,
+      "sha256": "797dcfff7668d19b90b5b83123a29fc7c823f76eadd1bde66f5a71c9a0521a73"
     },
     {
       "path": "review/LOCAL_VALIDATION.json",
@@ -1042,7 +1042,7 @@
     {
       "path": "review/VALIDATION_STATUS.md",
       "bytes": 3849,
-      "sha256": "ece0a57e7152dd2b905a67392d932a8c716d1c4e1259d26b9531462de65ade91"
+      "sha256": "50e3bce57676c0a42e894ea3a1a411a53da07af992c531777b0217757697d94b"
     },
     {
       "path": "review/evidence/browser-report.json",
@@ -1171,8 +1171,8 @@
     },
     {
       "path": "runtime/kz-tokens.js",
-      "bytes": 4444,
-      "sha256": "0dbe8085138cb1fe42f59acdd4f29a3eca2d732a260c2ac10f1f881fae75a7de"
+      "bytes": 4509,
+      "sha256": "986a82f1b73343fb01e8b6f278880380bb8e60e298184d3f74bd240c4efc3de0"
     },
     {
       "path": "schemas/README.md",
@@ -1196,8 +1196,8 @@
     },
     {
       "path": "schemas/page-plan.schema.json",
-      "bytes": 13541,
-      "sha256": "58b555d89fdec4055ab8435c6971a36ae86aaf7bccf93152d770dd23e41ae7cd"
+      "bytes": 13846,
+      "sha256": "afaea09806198f33c5c8148b894c21e8f2acc4ce441373e74b297b5bca556540"
     },
     {
       "path": "tests/README.md",
@@ -1221,8 +1221,8 @@
     },
     {
       "path": "tests/test_a04_gates.py",
-      "bytes": 3364,
-      "sha256": "e5ebd618e49178081ab51a7a580d6aa4cca860d7badccd5920cea3d3aba1bd7f"
+      "bytes": 5050,
+      "sha256": "df08064f3df21d2cff9f113ddef9483e7d109f5e1763dea81349b7e500c801ae"
     },
     {
       "path": "tests/test_contracts.py",
@@ -1231,13 +1231,13 @@
     },
     {
       "path": "tests/test_hero.py",
-      "bytes": 2126,
-      "sha256": "cc5003b2280568154d7139db591028b7e1c7c9df0bd5d7533d040f2dba8390ce"
+      "bytes": 2228,
+      "sha256": "6f3e8b6a46b9cc94bb4e013d10e4ab32d2c1e3f4352dba502d77d1ed5eae709d"
     },
     {
       "path": "tokens/tokens.json",
-      "bytes": 7281,
-      "sha256": "9bfc006b9b921e713e987675f08516168502a631afa201c0bf3291547a1cc832"
+      "bytes": 7449,
+      "sha256": "95ad9302c90a8049653f9b89c4abc6095b0e48c392a2991b5195a42da212c50a"
     },
     {
       "path": "tools/bind_hero_pptx.py",
@@ -1286,8 +1286,8 @@
     },
     {
       "path": "tools/qc_plan.py",
-      "bytes": 9264,
-      "sha256": "d3037b0bebbeabde723991e6810ad6967b10de853c6b933f1e5e908df5cde27e"
+      "bytes": 10474,
+      "sha256": "c9717bd466ef0acc984aea3e51f517c8d294623fb1e068e9cc74cad993097626"
     }
   ]
 }

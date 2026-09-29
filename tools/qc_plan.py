@@ -6,6 +6,8 @@ from jsonschema import Draft202012Validator
 ROOT=Path(__file__).resolve().parents[1]
 def intersects(a,b):
  return min(a[0]+a[2],b[0]+b[2])>max(a[0],b[0]) and min(a[1]+a[3],b[1]+b[3])>max(a[1],b[1])
+def in_bounds(rect,w,h):
+ return rect[2]>0 and rect[3]>0 and rect[0]>=0 and rect[1]>=0 and rect[0]+rect[2]<=w and rect[1]+rect[3]<=h
 def validate(plan,manifest=None,asset_root=None):
  findings=[]
  def add(code,where,message,level='error'):findings.append(dict(code=code,where=where,message=message,level=level))
@@ -14,6 +16,9 @@ def validate(plan,manifest=None,asset_root=None):
  for e in errs:add('SCHEMA','/'.join(map(str,e.absolute_path)),e.message)
  if errs:return findings
  seen=set();w,h=plan['canvas']
+ targets={tuple(v) for v in plan['target_viewports']}
+ if plan['track']=='site' and not {tuple(v) for v in tokens['site_viewports']}.issubset(targets):add('VIEWPORT-COVERAGE','project','站点缺少规定的桌面宽屏验收视口')
+ if plan['track'] in ['htmlppt','site','stream'] and not any(vw/vh>2 for vw,vh in targets):add('VIEWPORT-ULTRAWIDE','project','HTML交付计划缺少超宽视口，不能只测16:9')
  for p in plan['pages']:
   pid=p['id']
   if pid in seen:add('ID',pid,'重复页面 id')
@@ -60,13 +65,15 @@ def validate(plan,manifest=None,asset_root=None):
    if role in ['body','card_title','chart_label'] and len(styles)>1:add('TYPE-UNIFORM',pid+'/'+role,'同页同角色字号或行距不一致')
   for source in p['sources']:
    if source['visible'] and source['kind'] not in ['scientific_paper','guideline','consensus','guidance']:add('CITATION',pid+'/'+source['id'],'该资料类型不添加观众可见来源脚注')
+  for region in p['protected_regions']:
+   if not in_bounds(region['rect'],w,h):add('PROTECTION-BOUNDS',pid+'/'+region['id'],'保护区尺寸须为正且位于画布内')
   image=p['image']
   if image['mode']=='global_procedural_optical_field':
    if plan['track'] not in ['site','stream']:add('IMAGE-REQUIRED',pid,'PPTX/HTML-PPT 无程序化光场免生图豁免')
    if not image.get('procedural_evidence'):add('IMAGE-EXEMPTION',pid,'光场豁免缺少实现证据')
   elif not image.get('asset_id'):add('IMAGE-MAP',pid,'缺少生成图资产映射')
   for a in image.get('subject_rects',[]):
-   if a[2]<=0 or a[3]<=0 or a[0]<0 or a[1]<0 or a[0]+a[2]>w or a[1]+a[3]>h:add('IMAGE-BOUNDS',pid,'图像主体区域越界')
+   if not in_bounds(a,w,h):add('IMAGE-BOUNDS',pid,'图像主体区域越界')
    for region in p['protected_regions']:
     b=region['rect'];m=max(tokens['image']['safety_pad_px'],region.get('motion_margin',0));b=[b[0]-m,b[1]-m,b[2]+2*m,b[3]+2*m]
     if intersects(a,b):add('IMAGE-COLLISION',pid+'/'+region['id'],'预期图像主体侵入保护区')
@@ -88,11 +95,17 @@ def validate(plan,manifest=None,asset_root=None):
     size=a['actual_size']; tol=tokens['image']['aspect_tolerance']
     floor=tokens['image']['hero_min_long_edge_px' if p['kind'] in ['cover','toc','section','ending','hero'] else 'body_min_long_edge_px']
     if max(size)<floor:add('IMAGE-RESOLUTION',p['id'],'源图实际长边不足；不得把重采样算真实生成','warning')
+    covered={tuple(r['viewport']) for r in a['renditions']}
+    if not targets.issubset(covered):add('IMAGE-RENDITION-MISSING',p['id'],'资产缺少交付视口的裁切/保护区/合成审阅映射')
+    if len(covered)!=len(a['renditions']):add('IMAGE-RENDITION-DUPLICATE',p['id'],'同一资产视口映射重复')
     for r in a['renditions']:
      vw,vh=r['viewport'];x,y,cw,ch=r['crop']
      if x<0 or y<0 or cw<=0 or ch<=0 or x+cw>size[0] or y+ch>size[1]:add('IMAGE-CROP',p['id'],'裁切超出源图实际像素')
      elif abs(cw/ch/(vw/vh)-1)>tol:add('IMAGE-STRETCH',p['id'],'裁切与显示比例不符，不允许拉伸或补边')
      if vw/vh>2 and abs(size[0]/size[1]/(vw/vh)-1)>tol:add('IMAGE-ULTRAWIDE',p['id'],'超宽显示缺少比例匹配的真实源图')
+     for role in ['protected_regions','subject_rects']:
+      for rect in r[role]:
+       if not in_bounds(rect,vw,vh):add('IMAGE-RENDITION-BOUNDS',p['id']+'/'+role,'显示坐标区域尺寸须为正且位于视口内')
      for subject in r['subject_rects']:
       for protected in r['protected_regions']:
        if intersects(subject,protected):add('IMAGE-RENDITION-COLLISION',p['id'],'实际裁切映射后主体侵入保护区')

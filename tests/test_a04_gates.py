@@ -22,7 +22,7 @@ class A04Gates(unittest.TestCase):
   s=json.loads((R/'schemas/film-plan.schema.json').read_text());p=json.loads((R/'examples/film-plan.json').read_text());p['lifecycle_api']=['pause','resume','seek','replay','static_summary'];self.assertTrue(list(Draft202012Validator(s).iter_errors(p)))
  def asset(self,root):
   f=root/'bg.png';Image.new('RGB',(2560,1088),'white').save(f)
-  return {'schema_version':'6.0','assets':[{'id':'body-field-01','origin':'generated','file':'bg.png','sha256':hashlib.sha256(f.read_bytes()).hexdigest(),'tool_receipt':'synthetic fixture; no production generation claim','requested_size':[2560,1088],'actual_size':[2560,1088],'renditions':[{'viewport':[2560,1080],'crop':[0,4,2560,1080],'fit':'cover','protected_regions':[],'subject_rects':[],'evidence':['synthetic fixture']}],'review':{'bare':'pass','composite':'pass','reviewer':'test fixture','evidence':['synthetic fixture']}}]}
+  return {'schema_version':'6.0','assets':[{'id':'body-field-01','origin':'generated','file':'bg.png','sha256':hashlib.sha256(f.read_bytes()).hexdigest(),'tool_receipt':'synthetic fixture; no production generation claim','requested_size':[2560,1088],'actual_size':[2560,1088],'renditions':[{'viewport':[1280,720],'crop':[312,0,1936,1088],'fit':'cover','protected_regions':[],'subject_rects':[],'evidence':['synthetic fixture']},{'viewport':[2560,1080],'crop':[0,4,2560,1080],'fit':'cover','protected_regions':[],'subject_rects':[],'evidence':['synthetic fixture']}],'review':{'bare':'pass','composite':'pass','reviewer':'test fixture','evidence':['synthetic fixture']}}]}
  def test_actual_file_pixels_not_prompt_size(self):
   with tempfile.TemporaryDirectory() as d:
    root=Path(d);m=self.asset(root);m['assets'][0]['actual_size']=[3840,2160];self.assertIn('ASSET-PIXELS',self.codes(m=m,root=root))
@@ -31,8 +31,26 @@ class A04Gates(unittest.TestCase):
    root=Path(d);m=self.asset(root);m['assets'][0]['actual_size']=[2560,1440];self.assertIn('IMAGE-ULTRAWIDE',self.codes(m=m))
  def test_stretched_rendition_fails(self):
   with tempfile.TemporaryDirectory() as d:
-   root=Path(d);m=self.asset(root);m['assets'][0]['renditions'][0]['crop']=[0,0,1920,1080];self.assertIn('IMAGE-STRETCH',self.codes(m=m,root=root))
+   root=Path(d);m=self.asset(root);m['assets'][0]['renditions'][1]['crop']=[0,0,1920,1080];self.assertIn('IMAGE-STRETCH',self.codes(m=m,root=root))
  def test_valid_geometric_asset_still_not_visual_certificate(self):
   with tempfile.TemporaryDirectory() as d:
    root=Path(d);self.assertEqual(self.codes(m=self.asset(root),root=root),set())
+ def test_missing_viewport_contract_fails(self):
+  self.p.pop('target_viewports');self.assertIn('SCHEMA',self.codes())
+ def test_site_cannot_omit_desktop_matrix(self):
+  self.p['track']='site';self.p['pages'][0]['motion_objects']=[{'id':'a','role':'card','enter':'fade','exit':'fade','hover':'tilt','ambient':'none'}]
+  self.assertIn('VIEWPORT-COVERAGE',self.codes());self.assertIn('VIEWPORT-ULTRAWIDE',self.codes())
+ def test_site_desktop_matrix_needs_no_mobile(self):
+  self.p['track']='site';self.p['target_viewports']=[[1280,720],[1440,900],[1920,1080],[2560,1080]]
+  self.p['pages'][0]['motion_objects']=[{'id':'a','role':'card','enter':'fade','exit':'fade','hover':'tilt','ambient':'none'}]
+  self.assertEqual(self.codes(),set())
+ def test_negative_protection_does_not_bypass_collision(self):
+  self.p['pages'][0]['protected_regions'][0]['rect']=[0,0,-20,88];self.assertIn('PROTECTION-BOUNDS',self.codes())
+ def test_missing_ultrawide_rendition_rejected(self):
+  with tempfile.TemporaryDirectory() as d:
+   self.p['target_viewports']=[[1280,720],[2560,1080]];m=self.asset(Path(d));m['assets'][0]['renditions'].pop();self.assertIn('IMAGE-RENDITION-MISSING',self.codes(m=m))
+ def test_invalid_rendition_geometry_rejected(self):
+  with tempfile.TemporaryDirectory() as d:
+   m=self.asset(Path(d));m['assets'][0]['renditions'][0]['protected_regions']=[[0,0,-1,20]];self.assertIn('IMAGE-RENDITION-BOUNDS',self.codes(m=m))
+   m['assets'][0]['renditions'][0]['subject_rects']=[[1270,0,20,20]];self.assertIn('IMAGE-RENDITION-BOUNDS',self.codes(m=m))
 if __name__=='__main__':unittest.main()

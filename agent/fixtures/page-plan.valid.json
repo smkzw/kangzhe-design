@@ -83,5 +83,11 @@
       "takeaway": null
     }
   ],
-  "contract_revision": "A04"
+  "contract_revision": "A04",
+  "target_viewports": [
+    [
+      1280,
+      720
+    ]
+  ]
 }
