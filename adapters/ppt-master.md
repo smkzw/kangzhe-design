@@ -12,7 +12,7 @@
 |---|---|---|
 | 路由与资料接收 | 四轨意图、品牌限定、引用展示策略 | 不把所有任务强制为同一路由 |
 | Strategist / 显式 Quick 的设计决策 | tokens、页面计划、短标题、可选强调句、排版保护区、图片需求 | Quick 不强塞独立确认、spec_lock |
-| 图片准备 | `04-image-pipeline.md` 的图像计划、保护区、主题和 QC 记录 | 使用其图片 manifest 格式和 `image_gen.py`，不臆造 provider 参数 |
+| 图片准备 | `04-image-pipeline.md` 的图像计划、保护区、主题和 QC 记录 | 沿用图片 manifest 和资产阶段；默认使用其 `image_gen.py`。用户指定外部生图能力时，将真实资产/回执导入该 manifest，不另造导出路线、不臆造 provider 参数 |
 | Executor SVG | 原生文字/数据、透明填充、合法高光/阴影、已批准图片 | 不写 CSS backdrop-filter、任意 SVG 滤镜或整页截图 |
 | native-ready 图表 | `05-charts.md` 的同一数据；逐对象选择 native 标记及元数据 | 不把 ECharts option 当成上游 native JSON |
 | 上游 final checker / export | 补做康哲质量门，保留两份报告 | 不绕过其 checker、原生字段校验、快照同步要求 |

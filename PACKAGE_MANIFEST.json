@@ -11,8 +11,8 @@
     },
     {
       "path": "CHANGELOG.md",
-      "bytes": 2013,
-      "sha256": "9a6500eba600c347e38e9de04a11f93e1d40ede0b31df7a25b044cc425d55b08"
+      "bytes": 2232,
+      "sha256": "cd8c9af295fdd3007b6288601036a8cb0d17f0215ae83e82dce9d792a9e72417"
     },
     {
       "path": "INSTALL.md",
@@ -31,8 +31,8 @@
     },
     {
       "path": "SKILL.md",
-      "bytes": 4667,
-      "sha256": "484c56bc46fb8cb9fa4bf79ef8bfb636f8c9c1af3a3b240e418b66be716ce17d"
+      "bytes": 5428,
+      "sha256": "c15c14d223ea40e93b28272d22a3d99a98b48322194d36372d57194755bb2fbc"
     },
     {
       "path": "VERSION",
@@ -56,8 +56,8 @@
     },
     {
       "path": "adapters/ppt-master.md",
-      "bytes": 4975,
-      "sha256": "adcbbdf95fed9467a37db13af368d1501bb93d45ee94d941fe7708382bfbaf51"
+      "bytes": 5099,
+      "sha256": "dd40a15a5d967b3ed9b5e3cf19a1f2f6dcbdf2d1bec0bb43a21ab05939ce854d"
     },
     {
       "path": "agent/CURRENT_HANDOFF.md",
@@ -186,8 +186,8 @@
     },
     {
       "path": "design_specs/06-motion-film.md",
-      "bytes": 19313,
-      "sha256": "a13393b2039d0e19a765b5b04bd79eb23237edfc46eb2bc8537ebd737b5683d3"
+      "bytes": 20381,
+      "sha256": "a4b051d9643a9a0b6bada7f5ac6a28fd23bda736c7776fc552c2aa926511394a"
     },
     {
       "path": "design_specs/07-drilldown.md",
@@ -206,8 +206,8 @@
     },
     {
       "path": "design_specs/10-quality-gates.md",
-      "bytes": 6324,
-      "sha256": "ebe2181173f9672d4d68650051973fb597cb703a774681fe6a0b29d0cbc14ae3"
+      "bytes": 6799,
+      "sha256": "8df69104818c0e3e5f059d9a3d50519110a8afa9b344ef07d68ceae763c3fb1e"
     },
     {
       "path": "design_specs/11-hero-layouts.md",
@@ -1015,9 +1015,14 @@
       "sha256": "8058435925a1d890f6f72895fe5fd000866b2c66bf44c61f552a4d75fc1d22be"
     },
     {
+      "path": "review/KZ6-0929-A04/ATTRIBUTION_UPDATE.md",
+      "bytes": 1956,
+      "sha256": "440358cbf7ca316cc932fdf4dba91b79690bec07b6b1b80dc1c9e5de4160e01a"
+    },
+    {
       "path": "review/KZ6-0929-A04/STATUS.md",
-      "bytes": 3411,
-      "sha256": "797dcfff7668d19b90b5b83123a29fc7c823f76eadd1bde66f5a71c9a0521a73"
+      "bytes": 3863,
+      "sha256": "02cc6302dba633e2d4b0aa1203773cec4d138694ccbf70bae113523eb0b5d50a"
     },
     {
       "path": "review/LOCAL_VALIDATION.json",
