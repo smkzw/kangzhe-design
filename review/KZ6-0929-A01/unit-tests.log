@@ -1,0 +1,23 @@
+test_card_edge_bars_rejected_by_schema (__main__.Contracts.test_card_edge_bars_rejected_by_schema) ... ok
+test_external_science_allowed (__main__.Contracts.test_external_science_allowed) ... ok
+test_film_schema (__main__.Contracts.test_film_schema) ... ok
+test_gantt_schema (__main__.Contracts.test_gantt_schema) ... ok
+test_image_subject_collision (__main__.Contracts.test_image_subject_collision) ... ok
+test_internal_citation_forbidden (__main__.Contracts.test_internal_citation_forbidden) ... ok
+test_legacy_missing_generation_asset_not_passed (__main__.Contracts.test_legacy_missing_generation_asset_not_passed) ... ok
+test_logo_byte_identity (__main__.Contracts.test_logo_byte_identity) ... ok
+test_mask_geometry (__main__.Contracts.test_mask_geometry) ... ok
+test_minimum (__main__.Contracts.test_minimum) ... ok
+test_mixed_body_sizes (__main__.Contracts.test_mixed_body_sizes) ... ok
+test_pagewide_compact (__main__.Contracts.test_pagewide_compact) ... ok
+test_ppt_no_optical_exemption (__main__.Contracts.test_ppt_no_optical_exemption) ... ok
+test_px_pt_conversion (__main__.Contracts.test_px_pt_conversion) ... ok
+test_site_optical_exemption_requires_evidence (__main__.Contracts.test_site_optical_exemption_requires_evidence) ... ok
+test_svg_primitive_parses_native_alpha (__main__.Contracts.test_svg_primitive_parses_native_alpha) ... ok
+test_title_colon (__main__.Contracts.test_title_colon) ... ok
+test_valid_preflight_is_not_visual_pass (__main__.Contracts.test_valid_preflight_is_not_visual_pass) ... ok
+
+----------------------------------------------------------------------
+Ran 18 tests in 0.017s
+
+OK

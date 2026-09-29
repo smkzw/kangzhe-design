@@ -46,6 +46,10 @@ python tools/qc_plan.py agent/fixtures/page-plan.valid.json
 
 preflight 没有资产 manifest 时返回 pending 的实际生图审阅项；不是生产放行。`tools/glass_svg.py` 只提供上游可参考的原语，未单独创建最终 PPTX。
 
+## 后续本机验证
+
+2026-09-29 的 KZ6-0929-A01 已完成迁移安装与 P0 本机复测；两条上游和跨模型验证继续中。分层结果见 [本机验证状态](review/KZ6-0929-A01/STATUS.md)。
+
 ## 下一阶段
 
 将 `agent/prompts/EXECUTE.md` 交给开发 Agent，主包与 Agent执行包放在同一工作区。优先两条引擎真实集成和真实生图，再用不同能力模型×harness对照反复修改唯一规则所有者。没有工具/凭据时记录阻塞，不伪造通过。
