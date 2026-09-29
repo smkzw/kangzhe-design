@@ -32,7 +32,7 @@ class Contracts(unittest.TestCase):
  def test_ppt_no_optical_exemption(self):
   self.p['pages'][0]['image']={'mode':'global_procedural_optical_field','procedural_evidence':'field.css'};self.assertIn('IMAGE-REQUIRED',self.errors(self.p))
  def test_site_optical_exemption_requires_evidence(self):
-  self.p['track']='site';self.p['pages'][0]['image']={'mode':'global_procedural_optical_field'};self.assertIn('IMAGE-EXEMPTION',self.errors(self.p))
+  self.p['track']='site';self.p['pages'][0]['motion_objects']=[{'id':'a','role':'card','enter':'fade','exit':'fade','hover':'tilt','ambient':'none'}];self.p['pages'][0]['image']={'mode':'global_procedural_optical_field'};self.assertIn('IMAGE-EXEMPTION',self.errors(self.p))
  def test_logo_byte_identity(self):
   t=json.loads((ROOT/'tokens/tokens.json').read_text());self.assertEqual(hashlib.sha256((ROOT/t['logo']['path']).read_bytes()).hexdigest(),t['logo']['sha256'])
  def test_px_pt_conversion(self):

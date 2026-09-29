@@ -55,7 +55,7 @@ H2 结构化执行：在 H1 上加 page/film/image sidecar、前后 QC、可执�
 
 ## 7. 有界循环
 
-一个循环：冻结基线 → 生成 → 机器检查 → 盲审 → 证据聚类 → 最小干预 → 同样例复跑 → 保留集回归。默认最多3轮或先到预算上限即停；每轮有独立 handoff。停下时列出残留问题与下一步，不把停止等于完成。
+一个循环：冻结基线 → 生成 → 机器检查 → 盲审 → 证据聚类 → 最小干预 → 同样例复跑 → 保留集回归。每个执行批次最多3轮或到该批预算上限后重新评估；每轮有独立 handoff。用户已授权持续推进时，批次结束不等于全任务停止：据失败证据调整方法，冻结下一批合同再继续。只有完成标准通过、用户停止、必要权限缺失或安全替代耗尽时停止。
 
 优先顺序：先事实/可编辑/工具真实调用，再重叠字号/原生行为，再光学细节/叙事流畅。不得为提分改掉测试数据、放松下限、把复杂图换简单图、给所有页重复强调句或删除必要信息。
 
@@ -64,3 +64,8 @@ H2 结构化执行：在 H1 上加 page/film/image sidecar、前后 QC、可执�
 每次 `run.json` 至少包含：case_id、model_id/version/provider、harness_id、spec_hash、upstream_sha、input_hash、output_hash、seed、token_budget、tool_caps、tool_receipts、timestamps、cold_start_ms、generation_ms、qc_ms、cost_known/unknown、screenshots/video、deterministic_findings、blind_judge_reports、attribution/confidence/evidence、repairs、final_status。
 
 任何 coordinator 后期改动都另记 repair，不覆盖原始生成物。保留失败的原件及其记录；资料含敏感信息时只存授权位置，对外交付索引与脱敏证据，不把临床原件打包进公共skill。
+
+## 9. 四轨独立多轮验收（A04）
+四行分别是 PPTX、HTML-PPT、站点式 HTML、流式 HTML；每行至少记录生成、盲审、修订和同输入复测两轮，不能用总运行次数代替轨道覆盖。最终冻结包须连续两轮完整回归无新增缺陷，已知硬失败清零，并包含未参与修订的保留集。失败的保留集一旦用于修订，移入开发集并补充未见案例。
+
+每行记录模型和真实 harness、确切输入/规范/产物哈希、预算和工具、上游调用回执、独立审阅、修复归属和终态。PPTX 制作者本人须跑完 ppt-master Default；HTML-PPT 制作者本人须完成 html-ppt-skill 脚手架、唯一导航/演讲者、导出全链。站点与流式分别核对各首屏正常速度电影、宽屏和多层下钻。组件测试、协调者成品、Office编辑检查分别计数，不替代测试者生成通过。缺失/失败节点不算完整一轮。

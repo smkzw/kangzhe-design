@@ -6,7 +6,8 @@
     "schema_version",
     "track",
     "canvas",
-    "pages"
+    "pages",
+    "contract_revision"
   ],
   "properties": {
     "schema_version": {
@@ -281,7 +282,8 @@
               "required": [
                 "id",
                 "material",
-                "edge_decoration"
+                "edge_decoration",
+                "layout_mode"
               ],
               "properties": {
                 "id": {
@@ -399,9 +401,7 @@
       }
     },
     "contract_revision": {
-      "enum": [
-        "A03"
-      ]
+      "const": "A04"
     }
   },
   "additionalProperties": false,
@@ -499,6 +499,35 @@
                   }
                 }
               ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "track": {
+            "enum": [
+              "htmlppt",
+              "site",
+              "stream"
+            ]
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "pages": {
+            "items": {
+              "required": [
+                "motion_objects"
+              ],
+              "properties": {
+                "motion_objects": {
+                  "minItems": 1
+                }
+              }
             }
           }
         }

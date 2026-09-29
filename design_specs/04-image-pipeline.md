@@ -46,3 +46,5 @@ IMG-01：PPTX 和 HTML-PPT 逐页记录 `asset_id`。封面、目录、章节、
 资产计划先列交付viewport族（16:9、21:9/实际ultrawide、站点移动端），每族给源图目标比例、protected_regions和裁切策略。HTML宽屏必须有真实超宽生成背景，不能只有16:9源图用contain后两侧空白。可复用同一超宽图的受检裁切用于16:9，但每种裁切重新做裸图映射与合成QC；不得把拉伸、CSS补边或放大重采样称为超宽生图成功。
 
 回执区分requested_size、actual_size与有效显示尺寸；宽幅源图比例误差默认不超过tokens.image.aspect_tolerance。工具无尺寸参数时只把提示尺寸当请求，不当成功事实。正文长边与hero长边分别按tokens检查；超宽比例合格不代表分辨率合格。低分辨率可供开发检查，正式清晰度项保持WARN/BLOCKED。保护区域按实际裁切变换，不沿用旧16:9 mask。
+
+A04 可机读清单以 schemas/asset-manifest.schema.json 为准。generated 资产必须记录 requested_size（接口未提供尺寸参数时为 null）、actual_size、renditions；每个 rendition 用源图像素 crop=[x,y,w,h]、viewport=[w,h]、fit=cover、裁切后显示像素坐标中的 protected_regions/subject_rects 和审阅证据。实际尺寸由文件解码核验，不能由提示词推断。预检只能确认几何/像素/回执字段存在，回执真实性及亮边与文字冲突仍由实际工具日志和图像审阅判定；无 asset_root 时不能取得图像实证通过。

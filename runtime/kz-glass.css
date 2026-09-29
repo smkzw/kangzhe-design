@@ -45,10 +45,7 @@
 .kz .kz-film-carrier::before {content:"";position:absolute;left:7%;top:5%;width:28%;height:16%;border-radius:50%;background:radial-gradient(ellipse,rgba(255,255,255,.90),transparent 72%);pointer-events:none;}
 .kz .kz-film-carrier-label {font-size:26px;font-weight:700;line-height:1.3;white-space:nowrap;}
 .kz .kz-film-carrier-sub {font-size:16px;line-height:1.5;text-align:center;max-width:28ch;margin:0;color:var(--kz-body);}
-.kz .kz-film-controls {display:flex;flex-wrap:wrap;align-items:center;gap:12px;margin-top:16px;min-height:48px;}
-.kz .kz-film-controls input[type=range] {flex:1;min-width:120px;accent-color:var(--kz-brand);}
 .kz .kz-film-caption {font-size:18px;min-height:54px;margin:12px 0 0;}
-.kz .kz-film-progress {font-size:16px;font-family:Arial,sans-serif;font-variant-numeric:tabular-nums;min-width:42px;}
 .kz .kz-float {animation:kz-float var(--kz-float-period,6400ms) ease-in-out infinite;}
 @keyframes kz-float {0%,100%{translate:0 0}50%{translate:0 calc(-1 * var(--kz-float-amplitude,2px))}}
 .kz .kz-dialog {width:82vw;max-width:92vw;height:88vh;max-height:94vh;padding:0;border-radius:var(--kz-radius-dialog);border:1px solid rgba(178,178,178,.44);background:rgba(251,252,253,.96);box-shadow:0 32px 80px rgba(15,17,21,.15);color:var(--kz-ink);font-family:var(--kz-font);overflow:hidden;}
@@ -84,7 +81,7 @@
 .kz .progress-bar {display:none!important;}
 .kz .kz-card-reading {position:relative;z-index:1;}
 .kz [data-kz-layout="centered"] .kz-card-reading {display:flex;flex-direction:column;justify-content:center;min-height:100%;}
-.kz [data-kz-layout="distributed"] .kz-card-reading {display:flex;flex-direction:column;justify-content:space-evenly;gap:min(3vh,36px);min-height:100%;}
+.kz [data-kz-layout="distributed"] .kz-card-reading {display:flex;flex-direction:column;justify-content:center;gap:min(3vh,36px);min-height:100%;}
 
 /* Audience surface: autoplay without player chrome. Internal lifecycle API remains. */
 .kz .kz-film-controls,.kz [data-kz-pause],.kz [data-kz-replay],.kz input[data-kz-progress],.kz [data-kz-progress-text],.kz [data-kz-motion-toggle],.kz .kz-motion-toggle,.kz #motion-toggle,.kz #kz-motion-toggle {display:none!important;}

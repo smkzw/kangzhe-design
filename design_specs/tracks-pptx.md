@@ -2,7 +2,7 @@
 
 入口：`ppt-master` 当前安装版的 SKILL 与 routing。不能用 python-pptx 或其他生成器偷偷取代用户指定链路。本包的 Python 工具只做计划、token 派生、审计/原生输出验证；它不直接写最终 PPTX。
 
-新建康哲品牌/样式/布局 workspace 时按上游 Create Template 路由；已有已验证 workspace 可复用。需要直接改用户现有 PPTX 时走上游 Edit Native PPTX，不把原文件当普通 Generate 模板强套。选择 Default/Quick 由上游和用户意图决定；本包不强迫重复确认已确定的品牌和样式。
+新建康哲品牌/样式/布局 workspace 时按上游 Create Template 路由；已有已验证 workspace 可复用。需要直接改用户现有 PPTX 时走上游 Edit Native PPTX，不把原文件当普通 Generate 模板强套。本包四轨验证与正式交付使用 Default 完整流程；Quick 只有用户明确选择时可用，且不能计入 Default 全流程验收；本包不强迫重复确认已确定的品牌和样式。
 
 将 01 chrome/tokens 注入品牌与 layout；02 注入 style；03/04/05/09 注入策划、图像 manifest、SVG 和 notes。保留上游质量检查、原生图表元数据一致性、后处理与导出顺序。已发布设计锁不能被临时手改后不重新校验。
 

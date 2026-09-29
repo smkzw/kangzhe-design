@@ -35,7 +35,11 @@
         0.72
       ],
       "label": "研究问题",
-      "caption": "界定研究对象、评价范围和需要解决的问题。"
+      "caption": "界定研究对象、评价范围和需要解决的问题。",
+      "source_claim_ids": [
+        "synthetic-demo"
+      ],
+      "explanation_task": "合成演示：界定研究对象、评价范围和需要解决的问题。"
     },
     {
       "t": 0.12,
@@ -51,7 +55,11 @@
         0.72
       ],
       "label": "研究问题",
-      "caption": "界定研究对象、评价范围和需要解决的问题。"
+      "caption": "界定研究对象、评价范围和需要解决的问题。",
+      "source_claim_ids": [
+        "synthetic-demo"
+      ],
+      "explanation_task": "合成演示：界定研究对象、评价范围和需要解决的问题。"
     },
     {
       "t": 0.3,
@@ -67,7 +75,11 @@
         0.78
       ],
       "label": "证据整理",
-      "caption": "将资料、关键数据与限制条件汇集为可审阅的信息。"
+      "caption": "将资料、关键数据与限制条件汇集为可审阅的信息。",
+      "source_claim_ids": [
+        "synthetic-demo"
+      ],
+      "explanation_task": "合成演示：将资料、关键数据与限制条件汇集为可审阅的信息。"
     },
     {
       "t": 0.42,
@@ -83,7 +95,11 @@
         0.78
       ],
       "label": "证据整理",
-      "caption": "将资料、关键数据与限制条件汇集为可审阅的信息。"
+      "caption": "将资料、关键数据与限制条件汇集为可审阅的信息。",
+      "source_claim_ids": [
+        "synthetic-demo"
+      ],
+      "explanation_task": "合成演示：将资料、关键数据与限制条件汇集为可审阅的信息。"
     },
     {
       "t": 0.62,
@@ -99,7 +115,11 @@
         0.86
       ],
       "label": "决策审阅",
-      "caption": "比较证据和可选方案，形成明确的审阅意见。"
+      "caption": "比较证据和可选方案，形成明确的审阅意见。",
+      "source_claim_ids": [
+        "synthetic-demo"
+      ],
+      "explanation_task": "合成演示：比较证据和可选方案，形成明确的审阅意见。"
     },
     {
       "t": 0.74,
@@ -115,7 +135,11 @@
         0.86
       ],
       "label": "决策审阅",
-      "caption": "比较证据和可选方案，形成明确的审阅意见。"
+      "caption": "比较证据和可选方案，形成明确的审阅意见。",
+      "source_claim_ids": [
+        "synthetic-demo"
+      ],
+      "explanation_task": "合成演示：比较证据和可选方案，形成明确的审阅意见。"
     },
     {
       "t": 0.88,
@@ -131,7 +155,11 @@
         0.72
       ],
       "label": "研究问题",
-      "caption": "界定研究对象、评价范围和需要解决的问题。"
+      "caption": "界定研究对象、评价范围和需要解决的问题。",
+      "source_claim_ids": [
+        "synthetic-demo"
+      ],
+      "explanation_task": "合成演示：界定研究对象、评价范围和需要解决的问题。"
     },
     {
       "t": 1,
@@ -147,7 +175,11 @@
         0.72
       ],
       "label": "研究问题",
-      "caption": "界定研究对象、评价范围和需要解决的问题。"
+      "caption": "界定研究对象、评价范围和需要解决的问题。",
+      "source_claim_ids": [
+        "synthetic-demo"
+      ],
+      "explanation_task": "合成演示：界定研究对象、评价范围和需要解决的问题。"
     }
   ],
   "relations": [
@@ -156,14 +188,22 @@
       "to": "证据整理",
       "meaning": "组织需要的证据，不表示临床因果",
       "start": 0.12,
-      "end": 0.42
+      "end": 0.42,
+      "source_claim_ids": [
+        "synthetic-demo"
+      ],
+      "explanation_task": "合成演示：组织需要的证据，不表示临床因果"
     },
     {
       "from": "证据整理",
       "to": "决策审阅",
       "meaning": "证据用于审阅",
       "start": 0.42,
-      "end": 0.74
+      "end": 0.74,
+      "source_claim_ids": [
+        "synthetic-demo"
+      ],
+      "explanation_task": "合成演示：证据用于审阅"
     }
   ],
   "timing": {
@@ -177,9 +217,9 @@
   "lifecycle_api": [
     "pause",
     "resume",
-    "replay",
     "seek",
-    "static_summary"
+    "snapshot",
+    "dispose"
   ],
   "audience_playback_ui": false
 }

@@ -1,6 +1,7 @@
 """Mechanical preflight for KZ sidecar, NOT visual quality certification."""
 from pathlib import Path
 import argparse,json,re,hashlib
+from PIL import Image
 from jsonschema import Draft202012Validator
 ROOT=Path(__file__).resolve().parents[1]
 def intersects(a,b):
@@ -20,10 +21,12 @@ def validate(plan,manifest=None,asset_root=None):
   if re.search(r'[：:—–]|\s-\s',p['title']):add('TITLE',pid,'页面标题不应有冒号或破折号')
   if len(p['title'])>24:add('TITLE-REVIEW',pid,'长标题需要语言审阅；不是自动截短', 'review')
   byrole={}
-  if plan.get('contract_revision')=='A03':
+  if plan['track'] in ['htmlppt','site','stream']:
+   motion=p['motion_objects']; ids=[m['id'] for m in motion]
+   if len(ids)!=len(set(ids)):add('MOTION-ID',pid,'动态对象 id 重复')
    for c in p['cards']:
-    if not c.get('layout_mode'):add('LAYOUT-MODE',pid+'/'+c['id'],'A03卡片必须声明纵向布局模式')
-   if plan['track'] in ['htmlppt','site','stream'] and not p.get('motion_objects'):add('MOTION-MAP',pid,'A03 HTML页面缺少逐对象动态清单')
+    if c['id'] not in ids:add('MOTION-MAP',pid+'/'+c['id'],'卡片未列入逐对象动态清单')
+   add('MOTION-RUNTIME-PENDING',pid,'计划只验证清单；还须交付DOM对象、挂载和真实轨迹逐项对账','pending')
   if plan['track'] in ['pptx','htmlppt'] and p['kind'] in ['cover','toc','section','ending']:
    expected={'cover':['cover_title'],'toc':['toc_title','toc_label'],'section':['section_number','section_title'],'ending':['ending_title']}[p['kind']]
    actual={e['role'] for e in p['elements']}
@@ -81,10 +84,28 @@ def validate(plan,manifest=None,asset_root=None):
     if not a:add('ASSET-MISSING',p['id'],'资产映射不存在');continue
     if a['origin']!='generated' or not a.get('tool_receipt'):add('GEN-RECEIPT',p['id'],'需要真实生成工具回执；占位声明不算生成')
     if a['review']['bare']!='pass' or a['review']['composite']!='pass' or not a['review']['evidence']:add('IMAGE-QC',p['id'],'裸图和合成图均须有审阅证据')
+    if a['origin']!='generated':continue
+    size=a['actual_size']; tol=tokens['image']['aspect_tolerance']
+    floor=tokens['image']['hero_min_long_edge_px' if p['kind'] in ['cover','toc','section','ending','hero'] else 'body_min_long_edge_px']
+    if max(size)<floor:add('IMAGE-RESOLUTION',p['id'],'源图实际长边不足；不得把重采样算真实生成','warning')
+    for r in a['renditions']:
+     vw,vh=r['viewport'];x,y,cw,ch=r['crop']
+     if x<0 or y<0 or cw<=0 or ch<=0 or x+cw>size[0] or y+ch>size[1]:add('IMAGE-CROP',p['id'],'裁切超出源图实际像素')
+     elif abs(cw/ch/(vw/vh)-1)>tol:add('IMAGE-STRETCH',p['id'],'裁切与显示比例不符，不允许拉伸或补边')
+     if vw/vh>2 and abs(size[0]/size[1]/(vw/vh)-1)>tol:add('IMAGE-ULTRAWIDE',p['id'],'超宽显示缺少比例匹配的真实源图')
+     for subject in r['subject_rects']:
+      for protected in r['protected_regions']:
+       if intersects(subject,protected):add('IMAGE-RENDITION-COLLISION',p['id'],'实际裁切映射后主体侵入保护区')
+    if not asset_root:add('ASSET-PIXELS-PENDING',p['id'],'没有资产根目录，未从图像文件核验真实像素','pending')
     if asset_root:
      root=Path(asset_root).resolve();file=(root/a['file']).resolve()
      if not file.is_relative_to(root) or not file.is_file():add('ASSET-FILE',p['id'],'资产文件不存在或越界')
-     elif hashlib.sha256(file.read_bytes()).hexdigest()!=a['sha256']:add('ASSET-HASH',p['id'],'资产哈希不一致')
+     else:
+      if hashlib.sha256(file.read_bytes()).hexdigest()!=a['sha256']:add('ASSET-HASH',p['id'],'资产哈希不一致')
+      try:
+       with Image.open(file) as im:
+        if list(im.size)!=size:add('ASSET-PIXELS',p['id'],'实际文件尺寸与清单不一致')
+      except (OSError,ValueError):add('ASSET-DECODE',p['id'],'图像不可解码')
  else:add('ASSET-NOT-CHECKED','project','仅完成生成前计划检查；未验证实际生成与合成审阅','pending')
  return findings
 if __name__=='__main__':

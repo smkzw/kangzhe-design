@@ -12,7 +12,7 @@
   const thresholds=g.KZ_TOKENS?.layout||{card_span_warning:.45,vertical_imbalance_warning:.20};
   const flags=[];if(gapTop<-.5||gapBottom<-.5)flags.push('TEXT_OUTSIDE');
   if(gapBottom>gapTop&&balance>thresholds.vertical_imbalance_warning)flags.push('TOP_HEAVY');
-  if(span<thresholds.card_span_warning&&!['centered','compact'].includes(card.dataset.kzLayout))flags.push('SPARSE_STACK');
+  if(span<thresholds.card_span_warning)flags.push('SPARSE_CONTENT');
   return{id:card.id,layout:card.dataset.kzLayout||'UNDECLARED',rect:box.toJSON(),content:{top,bottom},gapTop,gapBottom,span,balance,flags,status:flags.length?'REVIEW':'MEASURED'};
  }
  g.KZLayoutQC={inspectCard,inspect(root=document){return [...root.querySelectorAll('.kz-card')].filter(e=>e.getBoundingClientRect().height>0&&e.checkVisibility({checkOpacity:true})).map(inspectCard);}};

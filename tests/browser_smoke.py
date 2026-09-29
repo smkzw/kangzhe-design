@@ -17,6 +17,12 @@ def run(out,exe):
   page=context.new_page();page.on('pageerror',lambda e:errors.append(str(e)))
   page.set_content(inline_html(ROOT/'examples/component-lab.html'),wait_until='load');page.wait_for_function("document.documentElement.dataset.kzLabReady==='true'")
   check('component initialization',not errors,errors.copy());check('ECharts actual version',page.evaluate('echarts.version')=='6.1.0')
+  page.add_script_tag(content=(ROOT/'runtime/kz-layout-qc.js').read_text())
+  layout=page.evaluate("""()=>{const c=document.createElement('article');c.id='a04-layout-probe';c.className='kz-card';c.dataset.kzLayout='distributed';c.style.cssText='height:480px;width:400px;position:fixed;top:0;left:0;z-index:9999';c.innerHTML='<div class="kz-card-reading"><p style="margin:0">第一组短内容</p><p style="margin:0">第二组短内容</p></div>';document.querySelector('.kz').append(c);const p=c.querySelectorAll('p'),a=p[0].getBoundingClientRect(),b=p[1].getBoundingClientRect(),gap=b.top-a.bottom;c.dataset.kzLayout='centered';const sparse=KZLayoutQC.inspectCard(c);c.remove();return {gap,sparse};}""")
+  check('distributed two-group gap capped at 36 logical px',0<=layout['gap']<=36.01,layout['gap'])
+  check('centered sparse card still requires review','SPARSE_CONTENT' in layout['sparse']['flags'],layout['sparse'])
+  check('film plan declared lifecycle exists',page.evaluate("api=>api.every(k=>typeof KZ_LAB.film[k]==='function')",json.loads((ROOT/'examples/film-plan.json').read_text())['lifecycle_api']))
+
   page.wait_for_timeout(250);p1=page.evaluate('KZ_LAB.film.p');page.wait_for_timeout(400);p2=page.evaluate('KZ_LAB.film.p');check('autoplay without scroll',p2>p1)
   check('no audience playback controls',page.locator('.kz-film-controls,[data-kz-pause],[data-kz-replay],input[data-kz-progress],#replay-chart').count()==0)
   page.evaluate("""()=>{for(const [id,label] of [['business-continue','继续'],['legacy-play','播放动画'],['legacy-motion','动效']]){let b=document.createElement('button');b.id=id;b.textContent=label;document.body.append(b);}}""")

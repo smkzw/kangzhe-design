@@ -76,10 +76,12 @@
         {
           "id": "a",
           "material": "liquid_glass",
-          "edge_decoration": "neutral_hairline"
+          "edge_decoration": "neutral_hairline",
+          "layout_mode": "stack"
         }
       ],
       "takeaway": null
     }
-  ]
+  ],
+  "contract_revision": "A04"
 }

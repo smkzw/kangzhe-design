@@ -45,15 +45,10 @@
       this.reasons=new Set();this.abort=new AbortController();this.signal=this.abort.signal;
       this.onRender=options.onRender||(()=>{});this.staticProgress=options.staticProgress??.74;
       this.label=this.carrier.querySelector('.kz-film-carrier-label');
-      this.caption=root.querySelector('.kz-film-caption');this.slider=root.querySelector('input[data-kz-progress]');
-      this.progressText=root.querySelector('[data-kz-progress-text]');this.toggle=root.querySelector('[data-kz-pause]');
-      const replay=root.querySelector('[data-kz-replay]');this.mq=media();
+      this.caption=root.querySelector('.kz-film-caption');this.mq=media();
       this.mqChange=()=>{if(this.mq.matches){this.pause('reduced-motion');this.seek(this.staticProgress);}else this.resume('reduced-motion');};
       this.mq.addEventListener('change',this.mqChange);
       document.addEventListener('visibilitychange',()=>document.hidden?this.pause('hidden'):this.resume('hidden'),{signal:this.signal});
-      this.toggle?.addEventListener('click',()=>this.reasons.has('user')?this.resume('user'):this.pause('user'),{signal:this.signal});
-      replay?.addEventListener('click',()=>{this.seek(0);this.resume('user');},{signal:this.signal});
-      this.slider?.addEventListener('input',()=>{this.pause('user');this.seek(Number(this.slider.value)/1000);},{signal:this.signal});
       root.addEventListener('keydown',e=>{if(e.target.closest('input,select,button,textarea,[contenteditable=true]'))e.stopPropagation();},{signal:this.signal});
       this.resize=new ResizeObserver(()=>this.render());this.resize.observe(this.stage);
       this.io=new IntersectionObserver(entries=>{for(const e of entries)e.isIntersecting?this.resume('offscreen'):this.pause('offscreen');},{threshold:.05});
@@ -73,8 +68,6 @@
       s.borderRadius=radius+'px';s.backgroundColor=`rgba(${f.tint[0]},${f.tint[1]},${f.tint[2]},${f.tint[3]})`;
       if(this.label&&this.label.textContent!==f.label)this.label.textContent=f.label;
       if(this.caption&&this.caption.textContent!==f.caption)this.caption.textContent=f.caption;
-      if(this.slider)this.slider.value=String(Math.round(this.p*1000));
-      if(this.progressText)this.progressText.textContent=Math.round(this.p*100)+'%';
       this.onRender(f,this.p,this);
       this.root.dataset.kzProgress=this.p.toFixed(5);
     }
@@ -83,9 +76,8 @@
       const dt=this.last?Math.min(now-this.last,100):0;this.last=now;
       this.p=(this.p+dt/this.duration)%1;this.render();this.raf=requestAnimationFrame(t=>this.tick(t));
     }
-    syncButton() {if(this.toggle){const stopped=this.reasons.has('user');this.toggle.textContent=stopped?'继续':'暂停';this.toggle.setAttribute('aria-pressed',String(stopped));}}
-    pause(reason='user') {this.reasons.add(reason);cancelAnimationFrame(this.raf);this.raf=0;this.last=0;this.syncButton();}
-    resume(reason='user') {this.reasons.delete(reason);this.syncButton();if(!this.disposed&&!this.reasons.size&&!this.raf){this.last=0;this.raf=requestAnimationFrame(t=>this.tick(t));}}
+    pause(reason='user') {this.reasons.add(reason);cancelAnimationFrame(this.raf);this.raf=0;this.last=0;}
+    resume(reason='user') {this.reasons.delete(reason);if(!this.disposed&&!this.reasons.size&&!this.raf){this.last=0;this.raf=requestAnimationFrame(t=>this.tick(t));}}
     seek(p) {if(!Number.isFinite(p))throw Error('进度不是有限数');this.p=clamp(p);this.last=0;this.render();}
     snapshot(){return {progress:this.p,carrierId:this.carrier.dataset.kzCarrierId,sameNode:this.carrier===this.identity,connected:this.carrier.isConnected,running:!!this.raf,reasons:[...this.reasons],style:{left:this.carrier.style.left,top:this.carrier.style.top,width:this.carrier.style.width,height:this.carrier.style.height,radius:this.carrier.style.borderRadius,color:this.carrier.style.backgroundColor},rect:this.carrier.getBoundingClientRect().toJSON()};}
     dispose(){if(this.disposed)return;this.pause('disposed');this.disposed=true;this.abort.abort();this.io.disconnect();this.resize.disconnect();this.mq.removeEventListener('change',this.mqChange);delete this.root.dataset.kzReady;}
