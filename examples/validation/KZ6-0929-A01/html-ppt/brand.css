@@ -1,0 +1,174 @@
+/* KZ6-0929-A01 · P1B · 项目级品牌层（主题作用域 CSS）
+ *
+ * 范围：tokens 派生的 chrome 几何、字号角色、每页真实合成图布放、打印 chrome 修复。
+ * 数值唯一来源：kangzhe-design/tokens/tokens.json (6.0.0) → runtime/kz-tokens.css 变量。
+ * 加载顺序（adapters/html-ppt.md:15）：upstream base/theme → kz-tokens.css → kz-glass.css → 本文件。
+ * 作用域：.kz（runtime/README.md 要求 kz 组件作用域为 .kz）。
+ * 不改上游任何文件；不定义导航；缩放仍由 runtime.js initCanvasFit 唯一负责。
+ *
+ * 图片布放记录（“登记裁切”，见 ../logs/07-placement-and-contrast.json）：
+ *   p1/p2/p7  cover-fit（原图 1672×941 → 1280×720.58，横竖近乎 1:1，横向零裁切）
+ *   p3        登记缩放：高度 810px、顶部对齐、水平居中 → 原图主体上缘 y=.393 落到画布
+ *             y=318.3px，相对 cover-fit 基线(283.2) 正好 +35.1px；标题区+16px 安全边下缘
+ *             为 300px，净空 18.3px。宽度 1439.2px，左右各溢出 79.6px，底部裁 90px。
+ *   p4/p5/p6  cover-fit 作底；协调者修正后 subject_rects 为空集合。
+ */
+
+/* ================= 字体与画布 ================= */
+.kz { font-family: "Microsoft YaHei","微软雅黑","PingFang SC","Noto Sans CJK SC",Arial,sans-serif; }
+.kz .deck { background: #FBFCFD; }
+
+/* ================= 字号合同 TYPE-01（tokens.type_px / rhythm） ================= */
+.kz .kz-title    { font-size: 32px;  line-height: 1.25; font-weight: 600; color: #0F1115; margin: 0; }
+.kz .kz-body     { font-size: 20px;  line-height: 1.4;  color: #404040; margin: 0; }
+.kz .kz-card-t   { font-size: 24px;  line-height: 1.25; font-weight: 700; color: #0F1115; margin: 0 0 20px; }
+.kz .kz-label    { font-size: 16px;  line-height: 1.4;  color: #64676B; }
+.kz .kz-footer-left { font-size: 18px; line-height: 1.4; color: #808080; }
+
+/* ================= 正文页固定 chrome（tokens.chrome） ================= */
+/* 正文可用区 tokens.chrome.body = [56,96,1168,564]
+   → slide padding 上 96 / 左右 56 / 下 60（96+564=660；720−660=60）
+   替代上游 base.css:81 的 72px 96px。绝对定位子元素不受 padding 影响。 */
+.kz .kz-body-page { padding: 96px 56px 60px; }
+
+/* 页眉容器：覆盖 base.css 的 top/left/right，改为整画布层，内部元素落 token 坐标 */
+.kz .deck-header { position: absolute; inset: 0; font-size: inherit;
+                   letter-spacing: normal; text-transform: none; }
+/* 双菱形 tokens.chrome.facet_orange / facet_yellow，合并包围盒约 [5,9,89,69] */
+.kz .kz-facets { position: absolute; left: 5px; top: 9px; width: 99px; height: 78px; }
+.kz .kz-facet-orange { fill: #FF9900; }
+.kz .kz-facet-yellow { fill: #FFCC00; }
+/* 橙线 tokens.chrome.rule：x 54→1257，y 80，粗 1.5。属保留品牌 chrome，
+   非 LG-02 禁止的通长装饰彩条（02-liquid-glass.md:25 明确区分数据编码与固定 chrome）。 */
+.kz .kz-rule { position: absolute; left: 54px; top: 80px; width: 1203px; height: 1.5px;
+               background: #FF9900; display: block; }
+
+/* 页脚 tokens.chrome.footer：左 24 / 右 32 / 下 14；恰好两槽 */
+.kz .deck-footer { bottom: 14px; left: 24px; right: 32px; font-size: 18px;
+                   color: #808080; letter-spacing: normal; text-transform: none; }
+.kz .deck-footer .slide-number { font-size: 18px; color: #808080; }
+
+/* 进度条：上游 chrome，取 var(--accent)（base.css 默认非品牌色）。
+   协调者 2026-09-29 17:07 修正：整条品牌橙在 1280px 宽上构成"通长彩色装饰条"，
+   按 LG-02 改为**中性**呈现——保留进度可读性，但不带品牌彩色边。
+   仍不改 --accent 本体，以免影响其它上游组件。 */
+.kz .progress-bar > span { background: #C2C7CC; }
+
+/* hero 页隐藏整条正文 chrome（页眉、橙线、页脚、页码）——01-core.md:16 */
+.kz .deck[data-chrome="hero"] > .deck-header,
+.kz .deck[data-chrome="hero"] > .deck-footer { display: none; }
+
+/* Logo：位置对齐 tokens.chrome.logo = [1031,45,158,33]（1280−1031−158 = 91） */
+.kz .deck { --logo-size: 33px; --logo-inset-x: 91px; --logo-inset-y: 45px; }
+
+/* hero 页各自持有一个官方 Logo（上游 data-no-logo + 页面内自持，不得双重标识） */
+.kz .kz-hero-logo { position: absolute; width: 158px; height: 33px; object-fit: contain;
+                    pointer-events: none; z-index: 11; }
+.kz .kz-hero-logo[data-hero="cover"]   { left: 240px; top: 50px; }
+.kz .kz-hero-logo[data-hero="toc"]     { left: 200px; top: 44px; }
+.kz .kz-hero-logo[data-hero="section"] { left: 200px; top: 44px; }
+.kz .kz-hero-logo[data-hero="ending"]  { left: 240px; top: 50px; }
+
+/* ================= 每页真实合成图（层 1） ================= */
+.kz .kz-bg { position: absolute; inset: 0; z-index: 0; pointer-events: none;
+             background-image: var(--kz-bg, none); background-repeat: no-repeat;
+             background-size: var(--kz-bg-size, cover);
+             background-position: var(--kz-bg-pos, center center); }
+
+.kz .deck > .slide[data-page-id="p1_cover"]   { --kz-bg: url("assets/asset_cover_hero.png"); }
+.kz .deck > .slide[data-page-id="p2_toc"]     { --kz-bg: url("assets/asset_toc_hero.png"); }
+.kz .deck > .slide[data-page-id="p4_criteria"],
+.kz .deck > .slide[data-page-id="p5_data"],
+.kz .deck > .slide[data-page-id="p6_quarter"] { --kz-bg: url("assets/asset_body_bg_quiet.png"); }
+.kz .deck > .slide[data-page-id="p7_ending"]  { --kz-bg: url("assets/asset_ending_hero_v3.png"); }
+
+/* 章节页登记裁切：高度 810px 顶部对齐水平居中 → 主体上缘 y=318.3，避开标题区+16px(=300) */
+.kz .deck > .slide[data-page-id="p3_section"] {
+  --kz-bg: url("assets/asset_section_hero.png");
+  --kz-bg-size: auto 810px;
+  --kz-bg-pos: center top;
+}
+
+/* ================= 玻璃阅读面：正文页用 dense 白散射保证文字可读 ================= */
+/* tokens.glass.face_alpha_dense = 0.93。不替换 kz-glass.css 的材质配方，只调 token。 */
+.kz .kz-body-page { --kz-card-alpha: 0.93; }
+
+/* ================= 页面精确几何（与 page-plan.json 的 rect 一一对应） ================= */
+.kz .slide { z-index: 2; }
+.kz .kz-title-abs { position: absolute; z-index: 3; }
+
+/* 正文页单行主题标题：tokens.chrome.title = [91,24,919,44] */
+.kz .kz-page-title { left: 91px; top: 24px; width: 919px; }
+
+/* ---- p1 封面 ---- */
+.kz .kz-cover-title { left: 140px;  top: 230px; width: 1000px; }
+.kz .kz-cover-sub   { left: 140px;  top: 336px; width: 1000px; }
+.kz .kz-cover-meta  { left: 140px;  top: 378px; width: 1000px; }
+
+/* ---- p2 目录 ---- */
+.kz .kz-toc-title { left: 140px; top: 150px; width: 1000px; }
+.kz .kz-toc-grid  { position: absolute; z-index: 3; left: 140px; top: 300px;
+                    display: grid; grid-template-columns: repeat(4, 235px); gap: 20px; }
+.kz .kz-toc-card  { height: 120px; padding: 20px; }
+.kz .kz-toc-card .kz-card-t { margin-bottom: 12px; }
+
+/* ---- p3 章节 ---- */
+.kz .kz-sec-num   { left: 140px; top: 180px; width: 400px; }
+.kz .kz-sec-title { left: 140px; top: 240px; width: 1000px; }
+
+/* ---- p4 入排标准 2×2 ---- */
+/* 卡高 232：单卡文字约占卡内高 73%（TYPE-02 的 70%–92% 区间）。
+   原 272 高时文字只占 45%，属 TYPE-02 明确点名的“文字只占上半部”。
+   网格在正文区 [96,660] 内垂直居中：上净空 40、下净空 40。 */
+.kz .kz-abs { position: absolute; z-index: 3; }
+.kz .kz-p4-c1 { left: 56px;  top: 136px; width: 574px; height: 232px; }
+.kz .kz-p4-c2 { left: 650px; top: 136px; width: 574px; height: 232px; }
+.kz .kz-p4-c3 { left: 56px;  top: 388px; width: 574px; height: 232px; }
+.kz .kz-p4-c4 { left: 650px; top: 388px; width: 574px; height: 232px; }
+
+/* ---- p5 关键数据：图表卡 + 3 个统计卡 ---- */
+.kz .kz-p5-chart { left: 56px; top: 96px; width: 1168px; height: 400px;
+                   display: flex; flex-direction: column; }
+.kz .kz-p5-chart .kz-chart { flex: 1 1 auto; height: auto; min-height: 240px; }
+.kz .kz-p5-s1 { left: 56px;  top: 516px; width: 376px; height: 144px; }
+.kz .kz-p5-s2 { left: 452px; top: 516px; width: 376px; height: 144px; }
+.kz .kz-p5-s3 { left: 848px; top: 516px; width: 376px; height: 144px; }
+.kz .kz-stat-row { padding: 20px; display: flex; flex-direction: column;
+                   justify-content: center; }
+.kz .kz-stat-row .kz-card-t { margin-bottom: 10px; }
+.kz .kz-stat-val { font-family: Arial, sans-serif; font-variant-numeric: tabular-nums;
+                   font-size: 38px; line-height: 1.2; color: #0F1115; }
+
+/* ---- p6 季度计划：甘特 3/4 + 编辑器 1/4（GANTT-01） ---- */
+.kz .kz-p6-gantt { left: 56px; top: 96px; width: 1168px; height: 564px; }
+.kz .kz-gantt-page .kz-gantt-plot { height: 430px; }
+
+/* ---- p7 结束页 ---- */
+.kz .kz-end-title { left: 140px; top: 250px; width: 1000px; }
+.kz .kz-end-sub   { left: 140px; top: 320px; width: 1000px; }
+
+/* ================= 打印 chrome 修复 ================= */
+/* 上游 base.css:238 在打印时整条隐藏 .deck-header/.deck-footer；而 01-core.md:14
+   要求正文页固定两槽页脚（左身份、右物理页序 N / TOTAL）。上游那套是**唯一一份**
+   全局 chrome，在 .deck 收成 height:auto 后只能锚定一次，无法逐页输出。
+   因此每个正文页持有一份自己的打印 chrome（屏上完全 display:none，打印时才出现），
+   保证每个介质里都恰好只有一套页脚，不是第二套屏上 chrome。
+   页序号为真实物理序号（4/7、5/7、6/7），总数含封面等页。
+   不使用 ::after，避免与 base.css:248 的逐页 Logo 绘制冲突。 */
+.kz .kz-print-chrome { display: none; }
+
+/* 页尺寸固定 16:9，使打印时 .slide 的 100vh/100% 与逻辑画布同比例，绝对坐标不失真 */
+@page { size: 13.333in 7.5in; margin: 0; }
+
+@media print {
+  .kz .kz-print-chrome { display: block; position: absolute; inset: 0; z-index: 9;
+                         pointer-events: none; }
+  .kz .kz-print-chrome .kz-facets { position: absolute; left: 5px; top: 9px; }
+  .kz .kz-print-chrome .kz-rule   { position: absolute; left: 54px; top: 80px;
+                                    width: 1203px; height: 1.5px; background: #FF9900; }
+  .kz .kz-print-foot { position: absolute; left: 24px; right: 32px; bottom: 14px;
+                       display: flex; align-items: center; justify-content: space-between;
+                       font-size: 18px; line-height: 1.4; color: #808080;
+                       font-family: "Microsoft YaHei","微软雅黑",Arial,sans-serif; }
+  .kz .kz-bg { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+}

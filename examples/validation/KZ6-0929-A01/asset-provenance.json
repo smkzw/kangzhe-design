@@ -1,0 +1,55 @@
+{
+  "round": "KZ6-0929-A01",
+  "assets": [
+    {
+      "file": "html-ppt/assets/asset_body_bg_quiet.png",
+      "sha256": "ce19777696202c355b2d13cda6fb5b6b2172edfc58e7e93e3b231cfd9f2aed73",
+      "generator_tool": "image_gen.imagegen",
+      "actual_size": [
+        1672,
+        941
+      ],
+      "provenance": "Coordinator actual native generation/edit calls; immutable local receipts retained. Shared cache, not a generator-harness image call."
+    },
+    {
+      "file": "html-ppt/assets/asset_cover_hero.png",
+      "sha256": "aa4f7119df6ff40267fd8e6ed813c97bb93bd5a1666009f0d2686917a46c2871",
+      "generator_tool": "image_gen.imagegen",
+      "actual_size": [
+        1672,
+        941
+      ],
+      "provenance": "Coordinator actual native generation/edit calls; immutable local receipts retained. Shared cache, not a generator-harness image call."
+    },
+    {
+      "file": "html-ppt/assets/asset_ending_hero_v3.png",
+      "sha256": "33680aee0826cf66e90f895047766f732d8eb3da3af849de4ce41cbbeddf8db0",
+      "generator_tool": "image_gen.imagegen",
+      "actual_size": [
+        1672,
+        941
+      ],
+      "provenance": "Coordinator actual native generation/edit calls; immutable local receipts retained. Shared cache, not a generator-harness image call."
+    },
+    {
+      "file": "html-ppt/assets/asset_section_hero.png",
+      "sha256": "380560cab7c937415e855be13fafe448490cbab1adfcbba95f7999402707574e",
+      "generator_tool": "image_gen.imagegen",
+      "actual_size": [
+        1672,
+        941
+      ],
+      "provenance": "Coordinator actual native generation/edit calls; immutable local receipts retained. Shared cache, not a generator-harness image call."
+    },
+    {
+      "file": "html-ppt/assets/asset_toc_hero.png",
+      "sha256": "566c6ad9ed48562fcc95847cdde63decdcc997f34c8a9c5e49b89b7c1a06c545",
+      "generator_tool": "image_gen.imagegen",
+      "actual_size": [
+        1672,
+        941
+      ],
+      "provenance": "Coordinator actual native generation/edit calls; immutable local receipts retained. Shared cache, not a generator-harness image call."
+    }
+  ]
+}

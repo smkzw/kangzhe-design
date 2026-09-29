@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>资料核对｜证据组织</title>
+<style>:root{--kz-bg-pos:18% 78%;}</style>
+<link rel="stylesheet" href="../deps/kz-tokens.css">
+<link rel="stylesheet" href="../deps/kz-glass.css">
+<link rel="stylesheet" href="../deps/kz-site.css">
+</head>
+<body>
+<div class="kz-bgfield"></div>
+<div class="kz-bgmask"></div>
+<div class="kz-bgtint"></div>
+
+<div class="kz kz-site" data-kz-page="site.chapter">
+  <div class="kz-shell">
+    <header class="kz-top">
+      <span class="kz-brand"><img src="../deps/logo_bot.svg" alt="康哲药业"></span>
+      <nav class="kz-nav" aria-label="站点导航">
+        <a href="index.html">首页</a>
+        <a href="chapter.html" aria-current="page">资料核对</a>
+      </nav>
+    </header>
+
+    <nav class="kz-crumb" aria-label="面包屑">
+      <a href="index.html">首页</a>
+      <span aria-hidden="true">›</span>
+      <span aria-current="page">资料核对</span>
+    </nav>
+
+    <h1 class="kz-pagetitle">资料核对</h1>
+    <p class="kz-lede kz-reading">按资料形成时间逐项核对；缺失记为 null，禁止按其他阶段推算。缺失是待确认事项，不是零值。</p>
+    <p><span class="kz-synth">合成演示数据，不表示任何临床结果。</span></p>
+  </div>
+
+  <div class="kz-scene">
+    <figure class="kz-film" data-kz-film data-film-id="film.site.chapter" data-kz-frozen="false">
+      <div class="kz-film-stage">
+        <svg class="kz-film-links" aria-hidden="true"></svg>
+        <div class="kz-film-carrier" data-kz-carrier-id="carrier-site-chapter">
+          <span class="kz-film-carrier-label">界定范围</span>
+          <p class="kz-film-carrier-sub">先明确需要解决的问题与纳入资料的边界。</p>
+          <div class="kz-film-carrier-meta">已建立关系 0 / 4</div>
+        </div>
+        <ul class="kz-film-nodes">
+          <li class="kz-rel">
+            <h3 class="kz-rel-title"><span class="kz-rel-pred">限定</span><span>界定范围</span></h3>
+            <p class="kz-rel-detail">先明确需要解决的问题与纳入资料的边界。</p>
+          </li>
+          <li class="kz-rel">
+            <h3 class="kz-rel-title"><span class="kz-rel-pred">对应</span><span>整理证据</span></h3>
+            <p class="kz-rel-detail">将资料按主题与形成时间组织，保留缺失信息。</p>
+          </li>
+          <li class="kz-rel">
+            <h3 class="kz-rel-title"><span class="kz-rel-pred">缺失</span><span>审阅差异</span></h3>
+            <p class="kz-rel-detail">第二阶段资料缺失，按缺失读取，不能按零或相邻值解读。</p>
+          </li>
+          <li class="kz-rel">
+            <h3 class="kz-rel-title"><span class="kz-rel-pred">回收</span><span>回到问题</span></h3>
+            <p class="kz-rel-detail">回到原有问题，确认现有资料是否足以支持理解。</p>
+          </li>
+        </ul>
+        <div class="kz-film-chips"></div>
+      </div>
+      <p class="kz-film-caption-line"><strong>当前关系：</strong><span class="kz-film-caption">研究问题限定资料范围</span></p>
+      <div class="kz-film-controls">
+        <button type="button" class="kz-button" data-kz-pause aria-pressed="false">暂停</button>
+        <button type="button" class="kz-button" data-kz-replay>重播</button>
+        <input type="range" min="0" max="1000" value="0" data-kz-progress aria-label="章节电影进度">
+        <span class="kz-film-progress" data-kz-progress-text>0%</span>
+        <button type="button" class="kz-button" data-kz-static aria-pressed="false">静态总览</button>
+      </div>
+    </figure>
+  </div>
+
+  <div class="kz-scene">
+    <p class="kz-static-note" data-kz-static-note tabindex="-1">静态总览：以下为完整关系真值，随电影是否播放都不改变。</p>
+    <div class="kz-static" id="static-film.site.chapter">
+      <div class="kz-card"><span class="kz-rel-verb">关系：限定</span><h3>界定范围</h3><p>先明确需要解决的问题与纳入资料的边界。</p></div>
+      <div class="kz-card"><span class="kz-rel-verb">关系：对应</span><h3>整理证据</h3><p>将资料按主题与形成时间组织，保留缺失信息。</p></div>
+      <div class="kz-card"><span class="kz-rel-verb">关系：缺失</span><h3>审阅差异</h3><p>第二阶段资料缺失，按缺失读取，不能按零或相邻值解读。</p></div>
+      <div class="kz-card"><span class="kz-rel-verb">关系：回收</span><h3>回到问题</h3><p>回到原有问题，确认现有资料是否足以支持理解。</p></div>
+    </div>
+  </div>
+
+  <div class="kz-shell">
+    <section class="kz-section" id="l1">
+      <h2>归档图表与核对方法</h2>
+      <div class="kz-card kz-chart-shell">
+        <div>
+          <div class="kz-chart" id="chart-archive" role="img" aria-label="资料归档数量合成示例：第一阶段 2 份，第二阶段缺失，第三阶段 5 份，第四阶段 7 份。"></div>
+          <p class="kz-chart-status" id="chart-status"></p>
+        </div>
+        <div>
+          <table class="kz-datatable">
+            <thead><tr><th>阶段</th><th>数量（份）</th><th>读取状态</th></tr></thead>
+            <tbody>
+              <tr><td>第一阶段</td><td>2</td><td>已提供</td></tr>
+              <tr><td>第二阶段</td><td class="kz-null">未提供</td><td>缺失（null），非零，不插补</td></tr>
+              <tr><td>第三阶段</td><td>5</td><td>已提供</td></tr>
+              <tr><td>第四阶段</td><td>7</td><td>已提供</td></tr>
+            </tbody>
+          </table>
+          <h3>资料核对方法</h3>
+          <p class="kz-method">按资料形成时间逐项核对；缺失记为 null，禁止按其他阶段推算。</p>
+          <p class="kz-method">图表与表格由同一数据对象派生，不手抄两份数；缺失不转为 0，也不插补。</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="kz-section">
+      <h2>分层明细</h2>
+      <div class="kz-cards kz-cards-two">
+        <article class="kz-card">
+          <h3>L1 归档数据与口径</h3>
+          <p>四阶段明细、缺失状态与读取规则；同一数据对象派生图表与表格。</p>
+          <p><button type="button" class="kz-button kz-button-primary" id="open-l1">打开归档数据与口径</button></p>
+        </article>
+        <article class="kz-card">
+          <h3>L2 解释限制与核对过程</h3>
+          <p>三条解释限制，以及一段独立的过程电影；两者与图表使用同一数据对象。</p>
+          <p><button type="button" class="kz-button" id="open-l2">打开解释限制与核对过程</button></p>
+        </article>
+      </div>
+    </section>
+
+    <footer class="kz-foot">
+      <span>产品中心-医学部｜2026年9月</span>
+      <span>资料核对</span>
+    </footer>
+  </div>
+</div>
+
+<script src="../deps/vendor/echarts.min.js"></script>
+<script src="../deps/kz-tokens.js"></script>
+<script src="../deps/kz-motion.js"></script>
+<script src="../deps/kz-drilldown.js"></script>
+<script src="../deps/kz-charts.js"></script>
+<script src="../deps/kz-data.js"></script>
+<script src="../deps/kz-films.js"></script>
+<script src="../deps/kz-app.js"></script>
+<script>
+  (function () {
+    KZ_FILMS.mountAll();
+    KZ_APP.mountChart(document.getElementById('chart-archive'), document.getElementById('chart-status'));
+    var drill = KZ_APP.mountDrilldown({ parentFilmId: 'film.site.chapter' });
+    document.getElementById('open-l1').addEventListener('click', function () { drill.openL1(this); });
+    document.getElementById('open-l2').addEventListener('click', function () { drill.openL2(this); });
+    window.KZ_DRILL = drill;
+  })();
+</script>
+</body>
+</html>

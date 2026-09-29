@@ -1,0 +1,197 @@
+/* KZ6-0929-A01 P3 — site/stream layout on top of kz-tokens.css + kz-glass.css.
+   Adds: real background mapping, wide scenes, separate reading measure, film stage,
+   relation corridor, stream anchors, print expansion, responsive floors.
+   No full-width colored edge bar is used anywhere (LG-02). */
+
+/* ---------- global real background mapping (per-view crop + mask) ---------- */
+.kz-bgfield{
+  position:fixed; inset:0; z-index:-3; pointer-events:none;
+  background-color:var(--kz-canvas);
+  background-image:url("../assets/asset_body_bg_quiet.png");
+  background-size:cover;
+  background-repeat:no-repeat;
+  background-position:var(--kz-bg-pos,72% 18%);
+}
+.kz-bgmask{
+  position:fixed; inset:0; z-index:-2; pointer-events:none;
+  background:linear-gradient(155deg,rgba(255,255,255,.94) 0%,rgba(255,255,255,.90) 42%,rgba(251,248,242,.84) 100%);
+}
+.kz-bgtint{
+  position:fixed; inset:0; z-index:-2; pointer-events:none;
+  background:
+    radial-gradient(ellipse 34% 26% at 84% 8%,rgba(255,204,0,.10),transparent 72%),
+    radial-gradient(ellipse 38% 28% at 8% 88%,rgba(255,153,0,.07),transparent 74%);
+}
+
+/* ---------- shell / wide scene ---------- */
+.kz-site{min-height:100vh;padding-bottom:56px;}
+.kz-shell{width:94vw;margin-inline:auto;}          /* >= 0.88 viewport (tokens.wide.desktop_scene_min_width_ratio) */
+.kz-scene{width:94vw;margin-inline:auto;}
+.kz-reading{max-width:46ch;}                       /* reading measure limited separately from scene width */
+.kz-reading-wide{max-width:62ch;}
+
+/* ---------- header / breadcrumb ---------- */
+.kz-top{display:flex;align-items:center;gap:20px;flex-wrap:wrap;padding:20px 0 14px;}
+.kz-brand{display:flex;align-items:center;gap:12px;font-weight:700;}
+.kz-brand img{height:33px;width:auto;display:block;}
+.kz-nav{display:flex;gap:8px;flex-wrap:wrap;margin-left:auto;}
+.kz-nav a{min-height:44px;display:inline-flex;align-items:center;padding:8px 16px;border-radius:16px;
+  text-decoration:none;color:var(--kz-body);font-size:16px;border:1px solid transparent;}
+.kz-nav a[aria-current="page"]{background:rgba(255,255,255,.78);border-color:rgba(173,176,180,.42);
+  color:var(--kz-ink);font-weight:700;box-shadow:inset 0 1px 0 rgba(255,255,255,.95);}
+.kz-crumb{display:flex;align-items:center;gap:8px;font-size:16px;color:var(--kz-muted);padding:0 0 18px;flex-wrap:wrap;}
+.kz-crumb a{color:var(--kz-body);text-decoration:none;border-bottom:1px solid rgba(64,64,64,.28);min-height:24px;}
+.kz-crumb [aria-current="page"]{color:var(--kz-ink);font-weight:700;}
+.kz-pagetitle{font-size:var(--kz-type-page-title);line-height:1.25;margin:0 0 10px;font-weight:700;}
+.kz-lede{font-size:var(--kz-type-site-body);line-height:1.6;color:var(--kz-body);margin:0 0 22px;}
+.kz-synth{display:inline-flex;align-items:center;gap:8px;font-size:16px;color:var(--kz-muted);
+  padding:6px 12px;border-radius:12px;background:rgba(255,255,255,.62);border:1px solid rgba(173,176,180,.34);}
+
+/* ---------- film ---------- */
+.kz-film{margin:0 0 40px;}
+.kz-film .kz-film-stage{position:relative;height:clamp(440px,68vh,780px);width:100%;isolation:isolate;
+  border-radius:32px;overflow:hidden;
+  background:linear-gradient(160deg,rgba(255,255,255,.42),rgba(255,255,255,.14) 60%,rgba(247,250,252,.30));
+  border:1px solid rgba(173,176,180,.30);}
+.kz-film-links{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:2;}
+.kz-film .kz-film-carrier{position:absolute;z-index:3;display:flex;flex-direction:column;align-items:center;
+  justify-content:space-between;gap:12px;padding:22px 20px;text-align:center;overflow:hidden;
+  left:30%;top:30%;width:40%;height:34%;border-radius:28px;
+  border:1px solid rgba(255,255,255,.96);
+  background:rgba(255,249,238,.70);
+  box-shadow:inset 0 2px 3px rgba(255,255,255,.95),inset 0 -2px 6px rgba(224,172,77,.15),
+    0 0 0 1px rgba(173,168,158,.28),0 20px 42px rgba(81,72,54,.10);
+  backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);}
+.kz-film .kz-film-carrier-label{font-size:26px;font-weight:700;line-height:1.3;}
+.kz-film .kz-film-carrier-sub{font-size:16px;line-height:1.5;max-width:30ch;color:var(--kz-body);margin:0;}
+.kz-film .kz-film-carrier-meta{font-size:16px;color:var(--kz-muted);font-variant-numeric:tabular-nums;}
+
+/* Node column: a 4-row grid, so rows are equal by construction and can never overlap
+   each other whatever the viewport height is. x 0.66..0.99 vs carrier sweep right <= 0.56
+   leaves a 0.10 normalized connector corridor. */
+.kz-film-nodes{list-style:none;margin:0;padding:0;position:absolute;left:66%;top:2%;width:33%;height:96%;
+  display:grid;grid-template-rows:repeat(4,minmax(0,1fr));gap:10px;}
+.kz-rel{position:relative;min-height:0;padding:14px 16px;border-radius:18px;
+  border:1px solid rgba(150,155,162,.50);
+  background:linear-gradient(145deg,rgba(255,255,255,.94),rgba(255,252,244,.86));
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.95),0 8px 20px rgba(15,17,21,.07);
+  display:flex;flex-direction:column;gap:6px;justify-content:flex-start;
+  transform:translateY(0);}
+.kz-rel-pred{display:inline-flex;align-items:center;min-height:26px;padding:1px 9px;border-radius:9px;
+  font-size:16px;line-height:1.4;background:rgba(255,153,0,.16);color:var(--kz-ink);flex:0 0 auto;}
+.kz-rel-title{display:flex;align-items:center;gap:8px;flex-wrap:wrap;
+  font-size:var(--kz-type-card-title);line-height:1.25;margin:0;font-weight:700;}
+.kz-rel-detail{font-size:16px;line-height:1.5;margin:0;color:var(--kz-body);}
+.kz-film-chips{position:absolute;inset:0;pointer-events:none;z-index:5;}
+.kz-chip{position:absolute;transform:translate(-50%,-50%);white-space:nowrap;font-size:16px;
+  padding:4px 10px;border-radius:12px;background:rgba(255,255,255,.92);color:var(--kz-ink);
+  border:1px solid rgba(173,176,180,.42);box-shadow:0 4px 12px rgba(15,17,21,.06);}
+
+/* dialog (L2) film stage: narrower reading column, node column further right */
+.kz-film .kz-film-stage-dialog{height:clamp(480px,58vh,700px);}
+.kz-film .kz-film-stage-dialog .kz-film-nodes{left:62%;width:36%;}
+
+/* A modal dialog is already a near-opaque reading surface. Per 02 (no nested blur) and
+   06 sec.14 (max one live backdrop blur per region) the inner glass keeps its thin border,
+   inner highlight and soft shadow but drops its own backdrop-filter, raising scatter instead. */
+.kz-dialog .kz-card,.kz-dialog .kz-rel,.kz-dialog .kz-film .kz-film-carrier{
+  -webkit-backdrop-filter:none;backdrop-filter:none;}
+.kz-dialog .kz-film .kz-film-carrier{background:rgba(255,252,246,.94);}
+.kz-dialog .kz-card{background:linear-gradient(145deg,rgba(255,255,255,.99),rgba(255,253,248,.96));}
+.kz-dialog .kz-rel{background:linear-gradient(145deg,rgba(255,255,255,.97),rgba(255,252,245,.94));}
+
+.kz-film .kz-film-caption-line{font-size:18px;min-height:54px;margin:14px 0 0;color:var(--kz-ink);}
+.kz .kz-film-caption{font-size:18px;min-height:0;margin:0;}
+.kz-film .kz-film-controls{display:flex;flex-wrap:wrap;align-items:center;gap:12px;margin-top:10px;min-height:48px;}
+.kz-film-controls input[type=range]{flex:1;min-width:140px;accent-color:var(--kz-brand);min-height:44px;}
+.kz-film .kz-film-progress{font-size:16px;font-family:Arial,sans-serif;font-variant-numeric:tabular-nums;min-width:46px;}
+
+/* ---------- static overview (always in DOM, real truth) ---------- */
+.kz-static{display:grid;gap:16px;grid-template-columns:repeat(4,minmax(0,1fr));margin:0 0 44px;padding:0;}
+.kz-static>.kz-card{padding:20px;}
+.kz-static h3{font-size:var(--kz-type-card-title);margin:0 0 10px;}
+.kz-static p{font-size:16px;line-height:1.55;margin:0;color:var(--kz-body);}
+.kz-static .kz-rel-verb{display:block;font-size:16px;color:var(--kz-muted);margin-bottom:8px;}
+.kz-static-note{font-size:16px;color:var(--kz-muted);margin:0 0 28px;}
+
+/* ---------- content grid ---------- */
+.kz-section{margin:0 0 44px;}
+.kz-section>h2{font-size:28px;line-height:1.3;margin:0 0 18px;font-weight:700;}
+.kz-cards{display:grid;gap:var(--kz-gap);grid-template-columns:repeat(3,minmax(0,1fr));align-items:start;}
+.kz-cards>*{min-width:0;}
+.kz-cards-two{grid-template-columns:repeat(2,minmax(0,1fr));}
+.kz-chart-shell{padding:20px;display:grid;gap:16px;grid-template-columns:minmax(0,2fr) minmax(280px,1fr);align-items:start;}
+.kz .kz-chart{width:100%;height:360px;min-width:0;}
+.kz-method{font-size:var(--kz-type-site-body);line-height:1.6;color:var(--kz-body);}
+.kz-method h3{font-size:var(--kz-type-card-title);margin:0 0 10px;}
+.kz-datatable{width:100%;border-collapse:collapse;font-size:16px;}
+.kz-datatable th,.kz-datatable td{text-align:left;padding:10px 12px;border-bottom:1px solid rgba(142,146,152,.20);}
+.kz-datatable th{color:var(--kz-muted);font-weight:700;}
+.kz-null{color:var(--kz-risk);font-weight:700;}
+
+/* ---------- stream ---------- */
+.kz-anchors{position:sticky;top:0;z-index:6;background:rgba(251,252,253,.86);
+  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  border-bottom:1px solid rgba(142,146,152,.20);}
+.kz-anchors ul{list-style:none;display:flex;gap:8px;flex-wrap:wrap;margin:0;padding:12px 0;}
+.kz-anchors a{display:inline-flex;align-items:center;min-height:44px;padding:8px 14px;border-radius:14px;
+  text-decoration:none;color:var(--kz-body);font-size:16px;border:1px solid transparent;}
+.kz-anchors a:hover{background:rgba(255,255,255,.75);border-color:rgba(173,176,180,.36);}
+.kz-stream-grid{display:grid;gap:32px;grid-template-columns:minmax(0,1fr) minmax(260px,320px);align-items:start;}
+.kz-stream-body{max-width:46ch;}
+.kz-stream-body p{font-size:var(--kz-type-site-body);line-height:1.7;margin:0 0 18px;color:var(--kz-body);}
+.kz-stream-body h3{font-size:24px;line-height:1.3;margin:30px 0 10px;font-weight:700;}
+.kz-aside{display:grid;gap:16px;position:sticky;top:76px;}
+
+/* ---------- footer ---------- */
+.kz-foot{font-size:var(--kz-type-footer);color:var(--kz-footer);padding:26px 0 12px;
+  border-top:1px solid rgba(142,146,152,.20);}
+.kz-foot span+span{margin-left:14px;}
+
+/* ---------- responsive ---------- */
+@media (max-width:1100px){
+  .kz-static{grid-template-columns:repeat(2,minmax(0,1fr));}
+  .kz-chart-shell{grid-template-columns:minmax(0,1fr);}
+  .kz-stream-grid{grid-template-columns:minmax(0,1fr);}
+  .kz-aside{position:static;}
+}
+@media (max-width:800px){
+  .kz-shell,.kz-scene{width:92vw;}
+  .kz-cards{grid-template-columns:minmax(0,1fr);}
+  .kz-static{grid-template-columns:minmax(0,1fr);}
+  .kz-pagetitle{font-size:28px;}
+  .kz-section>h2{font-size:24px;}
+  /* Mobile: same carrier DOM node, stacked low-complexity layout, text floor 16px. */
+  .kz-film .kz-film-stage{height:auto;min-height:0;padding:20px 16px 16px;border-radius:24px;}
+  .kz-film-links,.kz-film-chips{display:none;}
+  .kz-film .kz-film-carrier{position:relative !important;left:auto !important;top:auto !important;
+    width:100% !important;height:auto !important;border-radius:24px !important;min-height:190px;padding:20px 16px;}
+  .kz-film .kz-film-carrier-label{font-size:24px;white-space:normal;}
+  .kz-film .kz-film-nodes{position:static;left:auto;top:auto;width:auto;height:auto;display:grid;
+    grid-template-columns:minmax(0,1fr);grid-template-rows:none;gap:12px;margin-top:16px;}
+  .kz-rel{position:static;}
+  .kz-film .kz-film-stage-dialog .kz-film-nodes{left:auto;width:auto;}
+  .kz .kz-chart{height:320px;}
+  .kz-body-floor{font-size:16px;}
+}
+@media (max-width:430px){
+  .kz-film .kz-film-carrier-label{font-size:22px;}
+  .kz-film .kz-film-carrier-sub,.kz-rel-detail,.kz-static p,.kz-datatable{font-size:16px;}
+}
+
+@media (prefers-reduced-motion:reduce){
+  .kz-bgtint{background:none;}
+}
+@media print{
+  .kz-bgfield,.kz-bgmask,.kz-bgtint{position:static;display:none;}
+  .kz-anchors,.kz-nav,.kz-film-links,.kz-film-chips{display:none !important;}
+  .kz-film .kz-film-controls{display:none !important;}
+  .kz-film .kz-film-stage{height:auto;border:0;background:none;overflow:visible;}
+  .kz-film .kz-film-carrier{position:static !important;left:auto !important;top:auto !important;
+    width:auto !important;height:auto !important;box-shadow:none;backdrop-filter:none;background:none;border:0;}
+  .kz-rel{position:static;width:auto;box-shadow:none;background:none;border:0;padding:6px 0;}
+  .kz-static{grid-template-columns:repeat(2,minmax(0,1fr));}
+  .kz-stream-body{max-width:none;}
+  .kz-card{box-shadow:none;backdrop-filter:none;background:rgba(255,255,255,.96) !important;}
+  .kz-section{break-inside:avoid;}
+}

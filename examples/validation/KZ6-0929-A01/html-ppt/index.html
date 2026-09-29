@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<!--
+  KZ6-0929-A01 · P1B · 真实七页（HTML-PPT 轨）
+  上游脚手架：html-ppt templates/full-decks/presenter-mode-reveal，由 scripts/new-deck.sh 生成。
+  缩放 / 翻页 / 键盘 / hash / presenter / preview / 打印基础能力 = 上游 runtime.js 唯一拥有。
+  康哲侧只注入品牌层、真实合成图、图表与甘特组件、生命周期桥。未改上游任何文件。
+  全部内容为合成示例；见 ../source-ledger.json 与 ../image-request.md。
+-->
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>合成研究流程演示 · 康哲医学部</title>
+
+<!-- 上游 base 链（顺序固定） -->
+<link rel="stylesheet" href="vendor/html-ppt/assets/fonts.css">
+<link rel="stylesheet" href="vendor/html-ppt/assets/base.css">
+<link rel="stylesheet" href="vendor/html-ppt/assets/animations/animations.css">
+
+<!-- 康哲 6.0.0 品牌层，顺序依 adapters/html-ppt.md:15 -->
+<link rel="stylesheet" href="vendor/kangzhe-design/runtime/kz-tokens.css">
+<link rel="stylesheet" href="vendor/kangzhe-design/runtime/kz-glass.css">
+<link rel="stylesheet" id="theme-link" href="brand.css">
+</head>
+
+<body class="kz tpl-presenter-mode-reveal"
+      data-logo-position="top-right" data-logo-size="33px">
+
+<div class="deck" data-w="1280" data-h="720" data-chrome="body">
+
+  <!-- ================= 固定品牌 chrome（屏上唯一一套；hero 页由桥接隐藏） ================= -->
+  <div class="deck-header" aria-hidden="true">
+    <svg class="kz-facets" viewBox="0 0 99 78" width="99" height="78">
+      <polygon class="kz-facet-orange" points="55,9 94,9 64,71 24,71"/>
+      <polygon class="kz-facet-yellow" points="23,42 45,42 28,78 5,78"/>
+    </svg>
+    <span class="kz-rule"></span>
+  </div>
+
+  <div class="deck-footer">
+    <span class="kz-footer-left">产品中心-医学部｜2026年9月</span>
+    <span class="slide-number"></span>
+  </div>
+
+  <!-- 官方 Logo：手写于 .deck 直接子元素（上游 base.css:174 路径一，无需 JS 即显示）；
+       位置对齐 tokens.chrome.logo = [1031,45,158,33] -->
+  <img class="deck-logo" data-pos="top-right" alt="康哲医学部"
+       src="vendor/kangzhe-design/assets/logo_bot.svg">
+
+  <!-- ============ 1 / 7 封面 · cover · asset_cover_hero ============ -->
+  <section class="slide kz-hero" data-page-id="p1_cover" data-chrome="hero" data-no-logo data-title="封面">
+    <div class="kz-bg" data-asset="asset_cover_hero" aria-hidden="true"></div>
+    <img class="kz-hero-logo" data-hero="cover" alt="康哲医学部"
+         src="vendor/kangzhe-design/assets/logo_bot.svg">
+    <h1 class="kz-title kz-title-abs kz-cover-title">合成研究流程演示</h1>
+    <p class="kz-body kz-title-abs kz-cover-sub">康哲医学部 · 研究流程示例 · 合成数据</p>
+    <p class="kz-body kz-title-abs kz-cover-meta">本演示仅用于流程与方法学演练，不含真实患者资料，不构成任何试验结论</p>
+    <aside class="notes">
+      <p>这是康哲医学部的一份流程演练材料，用一条合成的研究流程演示从方案到报告怎么组织。</p>
+      <p>先说要紧的一点：材料里的研究名称、入排条款、数值和时间表<strong>都是占位示例</strong>，不对应任何真实项目，也不含患者资料。所以它可以用来看流程结构和方法学口径，但不能用来支持任何疗效或安全性判断。</p>
+      <p>后面按目录的四块依次展开。</p>
+    </aside>
+  </section>
+
+  <!-- ============ 2 / 7 目录 · toc · asset_toc_hero ============ -->
+  <section class="slide kz-hero" data-page-id="p2_toc" data-chrome="hero" data-no-logo data-title="目录">
+    <div class="kz-bg" data-asset="asset_toc_hero" aria-hidden="true"></div>
+    <img class="kz-hero-logo" data-hero="toc" alt="康哲医学部"
+         src="vendor/kangzhe-design/assets/logo_bot.svg">
+    <h2 class="kz-title kz-title-abs kz-toc-title">目录</h2>
+    <div class="kz-toc-grid">
+      <div class="kz-card kz-toc-card">
+        <h3 class="kz-card-t">01 研究流程</h3>
+        <p class="kz-body">流程示例总览</p>
+      </div>
+      <div class="kz-card kz-toc-card">
+        <h3 class="kz-card-t">02 入排标准</h3>
+        <p class="kz-body">合成入排条件</p>
+      </div>
+      <div class="kz-card kz-toc-card">
+        <h3 class="kz-card-t">03 关键数据</h3>
+        <p class="kz-body">折线示例含缺失点</p>
+      </div>
+      <div class="kz-card kz-toc-card">
+        <h3 class="kz-card-t">04 季度计划</h3>
+        <p class="kz-body">2026Q1 至 2028Q4</p>
+      </div>
+    </div>
+    <aside class="notes">
+      <p>四块内容的顺序按研究推进的时间逻辑排。</p>
+      <p>第一块讲流程本身；第二块把入排条件摊开，因为人群定义决定了后面所有数字怎么解释；第三块是关键数据的呈现口径，重点在<strong>缺失值怎么处理</strong>；第四块是季度排期，时间轴跨 2026Q1 到 2028Q4。</p>
+      <p>如果只想看一处，建议看第三块——缺失值的处理方式最容易在后面核对数字时产生误读。</p>
+    </aside>
+  </section>
+
+  <!-- ============ 3 / 7 章节 · section · asset_section_hero（登记裁切） ============ -->
+  <section class="slide kz-hero" data-page-id="p3_section" data-chrome="hero" data-no-logo data-title="研究流程">
+    <div class="kz-bg" data-asset="asset_section_hero" aria-hidden="true"></div>
+    <img class="kz-hero-logo" data-hero="section" alt="康哲医学部"
+         src="vendor/kangzhe-design/assets/logo_bot.svg">
+    <p class="kz-body kz-title-abs kz-sec-num">第一章</p>
+    <h2 class="kz-title kz-title-abs kz-sec-title">研究流程</h2>
+    <aside class="notes">
+      <p>进入第一块，研究流程。</p>
+      <p>这一块只讲流程的组织方式：方案与伦理、中心启动、入组随访、数据清理锁库、统计与报告。要留意的是这些阶段<strong>并不是串行的</strong>，相邻阶段有重叠，后面排期那页会更清楚。</p>
+    </aside>
+  </section>
+
+  <!-- ============ 4 / 7 密集入排 · body · asset_body_bg_quiet ============ -->
+  <section class="slide kz-body-page" data-page-id="p4_criteria" data-chrome="body" data-title="入排标准">
+    <div class="kz-bg" data-asset="asset_body_bg_quiet" aria-hidden="true"></div>
+    <h2 class="kz-title kz-title-abs kz-page-title">入排标准</h2>
+
+    <div class="kz-card kz-abs kz-p4-c1">
+      <h3 class="kz-card-t">研究人群</h3>
+      <p class="kz-body">合成人群定义：18 岁及以上，签署知情同意，诊断符合示例分类。本节为方法学演练，不对应任何真实试验。</p>
+    </div>
+    <div class="kz-card kz-abs kz-p4-c2">
+      <h3 class="kz-card-t">主要入组条件</h3>
+      <p class="kz-body">示例条件一：基线访视完成且关键字段无缺失。示例条件二：允许合并用药范围在方案规定之内。示例条件三：可完成规定随访周期。</p>
+    </div>
+    <div class="kz-card kz-abs kz-p4-c3">
+      <h3 class="kz-card-t">主要排除条件</h3>
+      <p class="kz-body">示例排除一：存在方案列明的合并疾病。示例排除二：近期使用禁用的伴随治疗。示例排除三：妊娠或哺乳期。</p>
+    </div>
+    <div class="kz-card kz-abs kz-p4-c4">
+      <h3 class="kz-card-t">访视与观察</h3>
+      <p class="kz-body">筛选、基线、随访窗口与观察项为演示用占位安排，时间点与窗口长度均为示例值。</p>
+    </div>
+
+    <div class="kz-print-chrome" data-static-print-page="4 / 7" aria-hidden="true">
+      <svg class="kz-facets" viewBox="0 0 99 78" width="99" height="78">
+        <polygon class="kz-facet-orange" points="55,9 94,9 64,71 24,71"/>
+        <polygon class="kz-facet-yellow" points="23,42 45,42 28,78 5,78"/>
+      </svg>
+      <span class="kz-rule"></span>
+      <div class="kz-print-foot">
+        <span>产品中心-医学部｜2026年9月</span>
+        <span data-kz-print-page>4 / 7</span>
+      </div>
+    </div>
+
+    <aside class="notes">
+      <p>入排条件这一页，容易混的是三件事。</p>
+      <p>一是人群定义里的“示例分类”是<strong>占位</strong>。真实项目必须替换成明确的诊断标准，否则入组人数无法复现。</p>
+      <p>二是入组条件里的“合并用药范围”和排除条件里的“禁用伴随治疗”<strong>是一对</strong>，判断时要同时看，只看一边会漏。</p>
+      <p>三是访视窗口那些时间点都是示例值。窗口长度会直接影响哪些受试者算方案偏离，所以核对时以方案原文为准，不要用这一页的数字。</p>
+      <p>这一页的作用是提醒结构上别漏项，它不是规则全文。</p>
+    </aside>
+  </section>
+
+  <!-- ============ 5 / 7 数据图 · body · asset_body_bg_quiet ============ -->
+  <section class="slide kz-body-page" data-page-id="p5_data" data-chrome="body" data-title="关键数据" data-kz-chart-page>
+    <div class="kz-bg" data-asset="asset_body_bg_quiet" aria-hidden="true"></div>
+    <h2 class="kz-title kz-title-abs kz-page-title">关键数据</h2>
+
+    <div class="kz-card kz-abs kz-p5-chart">
+      <h3 class="kz-card-t">示例折线（含缺失点）</h3>
+      <div class="kz-chart" data-kz-chart="chart_series_main"
+           data-series="2,null,5,7" data-connect-nulls="false" data-smooth="false"></div>
+    </div>
+    <div class="kz-card kz-abs kz-p5-s1 kz-stat-row">
+      <h3 class="kz-card-t">有效数据点</h3>
+      <p class="kz-body">3 个点，第 2 点为缺失</p>
+    </div>
+    <div class="kz-card kz-abs kz-p5-s2 kz-stat-row">
+      <h3 class="kz-card-t">缺失处理</h3>
+      <p class="kz-body">保留缺口，不补零</p>
+    </div>
+    <div class="kz-card kz-abs kz-p5-s3 kz-stat-row">
+      <h3 class="kz-card-t">数值来源</h3>
+      <p class="kz-body">合成演示值，非真实结果</p>
+    </div>
+
+    <div class="kz-print-chrome" data-static-print-page="5 / 7" aria-hidden="true">
+      <svg class="kz-facets" viewBox="0 0 99 78" width="99" height="78">
+        <polygon class="kz-facet-orange" points="55,9 94,9 64,71 24,71"/>
+        <polygon class="kz-facet-yellow" points="23,42 45,42 28,78 5,78"/>
+      </svg>
+      <span class="kz-rule"></span>
+      <div class="kz-print-foot">
+        <span>产品中心-医学部｜2026年9月</span>
+        <span data-kz-print-page>5 / 7</span>
+      </div>
+    </div>
+
+    <aside class="notes">
+      <p>这一页只有一个点需要解释：第 2 个时间点的数据是<strong>缺失</strong>的。图上保留了缺口，既没有连起来，也没有当成 0。</p>
+      <p>之所以强调这个，是因为把缺失当 0 会把整条线的形状改掉，后面所有基于形状的描述都会跟着错。</p>
+      <p>其余三个点是合成演示值，不要拿它们比较高低。</p>
+    </aside>
+  </section>
+
+  <!-- ============ 6 / 7 季度计划 · body · asset_body_bg_quiet ============ -->
+  <section class="slide kz-body-page kz-gantt-page" data-page-id="p6_quarter" data-chrome="body"
+           data-title="季度计划" data-kz-gantt-page>
+    <div class="kz-bg" data-asset="asset_body_bg_quiet" aria-hidden="true"></div>
+    <h2 class="kz-title kz-title-abs kz-page-title">季度计划</h2>
+
+    <div class="kz-abs kz-p6-gantt" data-kz-gantt="1"></div>
+
+    <div class="kz-print-chrome" data-static-print-page="6 / 7" aria-hidden="true">
+      <svg class="kz-facets" viewBox="0 0 99 78" width="99" height="78">
+        <polygon class="kz-facet-orange" points="55,9 94,9 64,71 24,71"/>
+        <polygon class="kz-facet-yellow" points="23,42 45,42 28,78 5,78"/>
+      </svg>
+      <span class="kz-rule"></span>
+      <div class="kz-print-foot">
+        <span>产品中心-医学部｜2026年9月</span>
+        <span data-kz-print-page>6 / 7</span>
+      </div>
+    </div>
+
+    <aside class="notes">
+      <p>排期这里看两点。</p>
+      <p>一是任务之间<strong>有重叠</strong>，比如入组和随访在 2026Q4 附近并行。这是正常形态，不是排期错误。</p>
+      <p>二是最后一条“统计分析与总结报告”一直占到 2028Q4，前面任何一个阶段延后都会挤到这里。</p>
+      <p>季度条可以直接拖动改时间，也能用右侧表单精确改开始和结束季度。改动会记成一步撤销，“还原全部”回到初始排期。</p>
+      <p>口径是半开区间，所以“结束季度”表示<strong>最后一个包含的季度</strong>。</p>
+    </aside>
+  </section>
+
+  <!-- ============ 7 / 7 尾页 · ending · asset_ending_hero ============ -->
+  <section class="slide kz-hero" data-page-id="p7_ending" data-chrome="hero" data-no-logo data-title="尾页">
+    <div class="kz-bg" data-asset="asset_ending_hero" aria-hidden="true"></div>
+    <img class="kz-hero-logo" data-hero="ending" alt="康哲医学部"
+         src="vendor/kangzhe-design/assets/logo_bot.svg">
+    <h2 class="kz-title kz-title-abs kz-end-title">流程演示结束</h2>
+    <p class="kz-body kz-title-abs kz-end-sub">全部内容为合成示例，仅用于流程与方法学演练</p>
+    <aside class="notes">
+      <p>流程演练到这里。</p>
+      <p>再强调一次：全部内容都是合成示例，不对应任何真实项目，也不能当作疗效或安全性依据。</p>
+      <p>如果要把这套结构用到真实项目上，优先替换的是<strong>人群定义和随访窗口</strong>，其余部分可以沿用结构。</p>
+    </aside>
+  </section>
+
+</div>
+
+<!-- 上游唯一运行时：缩放 / 键盘 / hash / presenter / preview / 打印基础能力（未删改） -->
+<script src="vendor/html-ppt/assets/runtime.js"></script>
+
+<!-- 随包 ECharts 6.1.0 与康哲组件（图表唯一实现） -->
+<script src="vendor/kangzhe-design/assets/vendor/echarts.min.js"></script>
+<script src="vendor/kangzhe-design/runtime/kz-tokens.js"></script>
+<script src="vendor/kangzhe-design/runtime/kz-charts.js"></script>
+<script src="vendor/kangzhe-design/runtime/kz-gantt.js"></script>
+
+<!-- 康哲增量桥：仅观察上游 .is-active 驱动 chrome 切换与组件生命周期 -->
+<script src="vendor/kangzhe-design/adapters/html-ppt-bridge.js"></script>
+<script src="deck-data.js"></script>
+<script src="deck-wiring.js"></script>
+</body>
+</html>
