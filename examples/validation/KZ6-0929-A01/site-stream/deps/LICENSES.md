@@ -2,7 +2,7 @@
 
 本目录的运行时依赖从唯一新版技能包原样复制，**未修改**。原包与上游只读。
 
-来源：`/Users/smkzw/.cc-switch/skills/kangzhe-design`（`kangzhe-design 6.0.0`，`VERSION` sha256 `54ef76332b31df830699e9d4138396885ab72bae260a034a81ff02bf32d8e90a`）
+来源：`kangzhe-design/（已安装的 6.0.0 技能根目录）`（`kangzhe-design 6.0.0`，`VERSION` sha256 `54ef76332b31df830699e9d4138396885ab72bae260a034a81ff02bf32d8e90a`）
 
 | 本目录文件 | 取自（相对技能包根，非本目录内路径） | sha256 | 许可 |
 |---|---|---|---|
