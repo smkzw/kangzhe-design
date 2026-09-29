@@ -19,6 +19,7 @@
 | 下钻与状态 | 07-drilldown | 窄 drawer、tooltip 冒充明细 |
 | 甘特编辑与时间模型 | 08-gantt | 纯 CSS 条形和图表各存一套日期 |
 | 演讲者备注 | 09-speaker-notes | 每页机械补齐 150–300 字 |
+| 封面、目录、章节、尾页固定形态 | 11-hero-layouts + tokens | 非正文页随意字号、两轨布局漂移 |
 | 证据和放行 | 10-quality-gates | 文件存在/grep 命中就判整包合格 |
 
 ## 适用场景

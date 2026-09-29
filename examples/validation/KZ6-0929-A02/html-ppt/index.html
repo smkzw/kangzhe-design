@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+
+<!--
+  KZ6-0929-A02 · 固定非正文页 · 七页合成示例（HTML-PPT 轨）
+  上游脚手架：html-ppt templates/full-decks/presenter-mode-reveal，由 scripts/new-deck.sh 生成。
+  缩放 / 翻页 / 键盘 / hash / presenter / preview / 打印基础能力 = 上游 runtime.js 唯一拥有。
+  康哲侧只注入品牌层、真实合成图、图表与甘特组件、生命周期桥。未改上游任何文件。
+  全部内容为合成示例；固定形态及已知限制见 ../README.md。
+-->
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<title>合成研究流程演示 · 康哲医学部</title>
+<!-- 上游 base 链（顺序固定） -->
+<link href="vendor/html-ppt/assets/fonts.css" rel="stylesheet"/>
+<link href="vendor/html-ppt/assets/base.css" rel="stylesheet"/>
+<link href="vendor/html-ppt/assets/animations/animations.css" rel="stylesheet"/>
+<!-- 康哲 6.0.0 品牌层，顺序依 adapters/html-ppt.md:15 -->
+<link href="vendor/kangzhe-design/runtime/kz-tokens.css" rel="stylesheet"/>
+<link href="vendor/kangzhe-design/runtime/kz-glass.css" rel="stylesheet"/>
+<link href="brand.css" id="theme-link" rel="stylesheet"/>
+</head>
+<body class="kz tpl-presenter-mode-reveal" data-logo-position="top-right" data-logo-size="33px">
+<div class="deck" data-chrome="body" data-h="720" data-w="1280">
+<!-- ================= 固定品牌 chrome（屏上唯一一套；hero 页由桥接隐藏） ================= -->
+<div aria-hidden="true" class="deck-header">
+<svg class="kz-facets" height="78" viewbox="0 0 99 78" width="99">
+<polygon class="kz-facet-orange" points="55,9 94,9 64,71 24,71"></polygon>
+<polygon class="kz-facet-yellow" points="23,42 45,42 28,78 5,78"></polygon>
+</svg>
+<span class="kz-rule"></span>
+</div>
+<div class="deck-footer">
+<span class="kz-footer-left">产品中心-医学部｜2026年9月</span>
+<span class="slide-number"></span>
+</div>
+<!-- 官方 Logo：手写于 .deck 直接子元素（上游 base.css:174 路径一，无需 JS 即显示）；
+       位置对齐 tokens.chrome.logo = [1031,45,158,33] -->
+<img alt="康哲医学部" class="deck-logo" data-pos="top-right" src="vendor/kangzhe-design/assets/logo_bot.svg"/>
+<!-- ============ 1 / 7 封面 · cover · asset_cover_hero ============ -->
+<section class="slide kz-hero" data-chrome="hero" data-no-logo="" data-page-id="p1_cover" data-title="封面"><div class="kz-fixed-hero" data-hero-layout="cover-01" style="position:absolute;inset:0;background:#FBFCFD;">
+<img aria-hidden="true" src="assets/asset_cover_hero.png" style="position:absolute;left:0px;top:40px;width:1280px;height:720px;object-fit:contain;"/>
+<img alt="康哲药业" src="vendor/kangzhe-design/assets/logo_bot.svg" style="position:absolute;left:56px;top:44px;width:240px;height:50px;object-fit:contain;filter:none;"/>
+<h1 data-hero-role="cover_title" style="position:absolute;left:92px;top:164px;width:1096px;height:148px;margin:0;padding:0;border:0;font-family:var(--kz-font);font-size:56px;line-height:1.25;font-weight:700;color:#0F1115;text-align:left;text-shadow:none;">合成研究流程<br/>汇报示例</h1>
+<p data-hero-role="hero_subtitle" style="position:absolute;left:92px;top:322px;width:1096px;height:42px;margin:0;padding:0;border:0;font-family:var(--kz-font);font-size:28px;line-height:1.25;font-weight:400;color:#404040;text-align:left;text-shadow:none;">结构、数据与季度安排</p>
+<p data-hero-role="hero_meta" style="position:absolute;left:92px;top:382px;width:1096px;height:28px;margin:0;padding:0;border:0;font-family:var(--kz-font);font-size:20px;line-height:1.25;font-weight:400;color:#64676B;text-align:left;text-shadow:none;">产品中心-医学部｜2026年9月</p>
+</div><aside class="notes">本页为合成版式与流程示例，不对应真实研究或临床结论。</aside></section>
+<!-- ============ 2 / 7 目录 · toc · asset_toc_hero ============ -->
+<section class="slide kz-hero" data-chrome="hero" data-no-logo="" data-page-id="p2_toc" data-title="目录"><div class="kz-fixed-hero" data-hero-layout="toc-01" style="position:absolute;inset:0;background:#FBFCFD;">
+<img aria-hidden="true" src="assets/asset_toc_hero.png" style="position:absolute;left:0px;top:90px;width:1280px;height:720px;object-fit:contain;"/>
+<img alt="康哲药业" src="vendor/kangzhe-design/assets/logo_bot.svg" style="position:absolute;left:1024px;top:44px;width:200px;height:44px;object-fit:contain;filter:none;"/>
+<div class="kz-card" style="position:absolute;left:68px;top:160px;width:365.333px;height:136px;"></div>
+<div class="kz-card" style="position:absolute;left:457.333px;top:160px;width:365.333px;height:136px;"></div>
+<div class="kz-card" style="position:absolute;left:846.667px;top:160px;width:365.333px;height:136px;"></div>
+<h1 data-hero-role="toc_title" style="position:absolute;left:68px;top:28px;width:860px;height:68px;margin:0;padding:0;border:0;font-family:var(--kz-font);font-size:48px;line-height:1.25;font-weight:700;color:#0F1115;text-align:left;text-shadow:none;">汇报章节</h1>
+<p data-hero-role="toc_number" style="position:absolute;left:92px;top:172px;width:60px;height:58px;margin:0;padding:0;border:0;font-family:var(--kz-font);font-size:40px;line-height:1.25;font-weight:700;color:#FF9900;text-align:left;text-shadow:none;">01</p>
+<p data-hero-role="toc_label" style="position:absolute;left:160px;top:178px;width:249.333px;height:40px;margin:0;padding:0;border:0;font-family:var(--kz-font);font-size:32px;line-height:1.25;font-weight:700;color:#0F1115;text-align:left;text-shadow:none;">入排信息</p>
+<p data-hero-role="toc_description" style="position:absolute;left:92px;top:242px;width:317.333px;height:25px;margin:0;padding:0;border:0;font-family:var(--kz-font);font-size:20px;line-height:1.25;font-weight:400;color:#404040;text-align:left;text-shadow:none;">条目与使用边界</p>
+<p data-hero-role="toc_number" style="position:absolute;left:481.333px;top:172px;width:60px;height:58px;margin:0;padding:0;border:0;font-family:var(--kz-font);font-size:40px;line-height:1.25;font-weight:700;color:#FF9900;text-align:left;text-shadow:none;">02</p>
+<p data-hero-role="toc_label" style="position:absolute;left:549.333px;top:178px;width:249.333px;height:40px;margin:0;padding:0;border:0;font-family:var(--kz-font);font-size:32px;line-height:1.25;font-weight:700;color:#0F1115;text-align:left;text-shadow:none;">流程节点</p>
+<p data-hero-role="toc_description" style="position:absolute;left:481.333px;top:242px;width:317.333px;height:25px;margin:0;padding:0;border:0;font-family:var(--kz-font);font-size:20px;line-height:1.25;font-weight:400;color:#404040;text-align:left;text-shadow:none;">保留缺失观察</p>
+<p data-hero-role="toc_number" style="position:absolute;left:870.667px;top:172px;width:60px;height:58px;margin:0;padding:0;border:0;font-family:var(--kz-font);font-size:40px;line-height:1.25;font-weight:700;color:#FF9900;text-align:left;text-shadow:none;">03</p>
+<p data-hero-role="toc_label" style="position:absolute;left:938.667px;top:178px;width:249.333px;height:40px;margin:0;padding:0;border:0;font-family:var(--kz-font);font-size:32px;line-height:1.25;font-weight:700;color:#0F1115;text-align:left;text-shadow:none;">季度计划</p>
+<p data-hero-role="toc_description" style="position:absolute;left:870.667px;top:242px;width:317.333px;height:25px;margin:0;padding:0;border:0;font-family:var(--kz-font);font-size:20px;line-height:1.25;font-weight:400;color:#404040;text-align:left;text-shadow:none;">任务与起止时间</p>
+</div><aside class="notes">本页为合成版式与流程示例，不对应真实研究或临床结论。</aside></section>
+<!-- ============ 3 / 7 章节 · section · asset_section_hero（登记裁切） ============ -->
+<section class="slide kz-hero" data-chrome="hero" data-no-logo="" data-page-id="p3_section" data-title="研究流程"><div class="kz-fixed-hero" data-hero-layout="section-01" style="position:absolute;inset:0;background:#FBFCFD;">
+<img aria-hidden="true" src="assets/asset_section_hero.png" style="position:absolute;left:0px;top:120px;width:1280px;height:720px;object-fit:contain;"/>
+<img alt="康哲药业" src="vendor/kangzhe-design/assets/logo_bot.svg" style="position:absolute;left:1024px;top:44px;width:200px;height:44px;object-fit:contain;filter:none;"/>
+<p data-hero-role="section_number" style="position:absolute;left:92px;top:108px;width:400px;height:148px;margin:0;padding:0;border:0;font-family:var(--kz-font);font-size:112px;line-height:1.25;font-weight:700;color:#FF9900;text-align:left;text-shadow:none;">01</p>
+<h1 data-hero-role="section_title" style="position:absolute;left:92px;top:272px;width:1096px;height:83px;margin:0;padding:0;border:0;font-family:var(--kz-font);font-size:60px;line-height:1.25;font-weight:700;color:#0F1115;text-align:left;text-shadow:none;">研究流程</h1>
+</div><aside class="notes">本页为合成版式与流程示例，不对应真实研究或临床结论。</aside></section>
+<!-- ============ 4 / 7 密集入排 · body · asset_body_bg_quiet ============ -->
+<section class="slide kz-body-page" data-chrome="body" data-page-id="p4_criteria" data-title="入排标准"><img src="assets/p1a_body_background.png" style="position:absolute;inset:0;width:1280px;height:720px"/><h2 class="kz-title kz-title-abs kz-page-title">入排信息版式示例</h2><div class="kz-card" style="position:absolute;left:56px;top:132px;width:368px;height:420px;padding:24px"><h3 style="margin:0;font-size:24px;line-height:30px">纳入示例</h3><p style="margin-top:26px;font-size:20px;line-height:28px">合成条目 A，仅用于版式测试。</p></div><div class="kz-card" style="position:absolute;left:456px;top:132px;width:368px;height:420px;padding:24px"><h3 style="margin:0;font-size:24px;line-height:30px">排除示例</h3><p style="margin-top:26px;font-size:20px;line-height:28px">合成条目 B，用于检验<br/>标准字号下的多行阅读。</p></div><div class="kz-card" style="position:absolute;left:856px;top:132px;width:368px;height:420px;padding:24px"><h3 style="margin:0;font-size:24px;line-height:30px">演示边界</h3><p style="margin-top:26px;font-size:20px;line-height:28px">本页不列真实疾病、<br/>患者特征或实验室阈值；<br/>示例不构成方案标准，<br/>也不代表真实试验或临床结论。</p></div><div aria-hidden="true" class="kz-print-chrome" data-static-print-page="4 / 7">
+<svg class="kz-facets" height="78" viewbox="0 0 99 78" width="99">
+<polygon class="kz-facet-orange" points="55,9 94,9 64,71 24,71"></polygon>
+<polygon class="kz-facet-yellow" points="23,42 45,42 28,78 5,78"></polygon>
+</svg>
+<span class="kz-rule"></span>
+<div class="kz-print-foot">
+<span>产品中心-医学部｜2026年9月</span>
+<span data-kz-print-page="">4 / 7</span>
+</div>
+</div><aside class="notes">三张卡片使用一致的15pt正文，长度差异通过自然换行承载。本页仅为合成版式示例。</aside></section>
+<!-- ============ 5 / 7 数据图 · body · asset_body_bg_quiet ============ -->
+<section class="slide kz-body-page" data-chrome="body" data-kz-chart-page="" data-page-id="p5_data" data-title="关键数据"><img src="assets/p1a_body_background.png" style="position:absolute;inset:0;width:1280px;height:720px"/><h2 class="kz-title kz-title-abs kz-page-title">流程节点合成示例</h2><div class="kz-card" style="position:absolute;left:56px;top:112px;width:1168px;height:516px"><h3 style="position:absolute;left:32px;top:24px;font-size:24px">合成值</h3><span style="position:absolute;right:32px;top:32px;font-size:16px">单位：份</span><div class="kz-chart" data-kz-chart="chart_series_main" style="position:absolute;left:114px;top:78px;width:1000px;height:396px"></div><p style="position:absolute;left:144px;bottom:18px;font-size:16px">注：启动资料缺失，不等于零，不插补。</p></div><div aria-hidden="true" class="kz-print-chrome" data-static-print-page="5 / 7">
+<svg class="kz-facets" height="78" viewbox="0 0 99 78" width="99">
+<polygon class="kz-facet-orange" points="55,9 94,9 64,71 24,71"></polygon>
+<polygon class="kz-facet-yellow" points="23,42 45,42 28,78 5,78"></polygon>
+</svg>
+<span class="kz-rule"></span>
+<div class="kz-print-foot">
+<span>产品中心-医学部｜2026年9月</span>
+<span data-kz-print-page="">5 / 7</span>
+</div>
+</div><aside class="notes">折线与浅面积是同一组数值的两种编码；启动节点缺失，不能按零或相邻值推算。所有值仅为合成演示，单位份。</aside></section>
+<!-- ============ 6 / 7 季度计划 · body · asset_body_bg_quiet ============ -->
+<section class="slide kz-body-page kz-gantt-page" data-chrome="body" data-kz-gantt-page="" data-page-id="p6_quarter" data-title="季度计划">
+<div aria-hidden="true" class="kz-bg" data-asset="asset_body_bg_quiet"></div>
+<h2 class="kz-title kz-title-abs kz-page-title">季度计划</h2>
+<div class="kz-abs kz-p6-gantt" data-kz-gantt="1"></div>
+<div aria-hidden="true" class="kz-print-chrome" data-static-print-page="6 / 7">
+<svg class="kz-facets" height="78" viewbox="0 0 99 78" width="99">
+<polygon class="kz-facet-orange" points="55,9 94,9 64,71 24,71"></polygon>
+<polygon class="kz-facet-yellow" points="23,42 45,42 28,78 5,78"></polygon>
+</svg>
+<span class="kz-rule"></span>
+<div class="kz-print-foot">
+<span>产品中心-医学部｜2026年9月</span>
+<span data-kz-print-page="">6 / 7</span>
+</div>
+</div>
+<aside class="notes">
+<p>排期这里看两点。</p>
+<p>一是任务之间<strong>有重叠</strong>，比如入组和随访在 2026Q4 附近并行。这是正常形态，不是排期错误。</p>
+<p>二是最后一条“统计分析与总结报告”一直占到 2028Q4，前面任何一个阶段延后都会挤到这里。</p>
+<p>季度条可以直接拖动改时间，也能用右侧表单精确改开始和结束季度。改动会记成一步撤销，“还原全部”回到初始排期。</p>
+<p>口径是半开区间，所以“结束季度”表示<strong>最后一个包含的季度</strong>。</p>
+</aside>
+</section>
+<!-- ============ 7 / 7 尾页 · ending · asset_ending_hero ============ -->
+<section class="slide kz-hero" data-chrome="hero" data-no-logo="" data-page-id="p7_ending" data-title="尾页"><div class="kz-fixed-hero" data-hero-layout="ending-01" style="position:absolute;inset:0;background:#FBFCFD;">
+<img aria-hidden="true" src="assets/asset_ending_hero_v3.png" style="position:absolute;left:0px;top:0px;width:1280px;height:720px;object-fit:contain;"/>
+<img alt="康哲药业" src="vendor/kangzhe-design/assets/logo_bot.svg" style="position:absolute;left:56px;top:44px;width:240px;height:50px;object-fit:contain;filter:none;"/>
+<h1 data-hero-role="ending_title" style="position:absolute;left:92px;top:184px;width:1096px;height:138px;margin:0;padding:0;border:0;font-family:var(--kz-font);font-size:104px;line-height:1.25;font-weight:700;color:#0F1115;text-align:left;text-shadow:none;">谢谢</h1>
+<p data-hero-role="hero_subtitle" style="position:absolute;left:92px;top:334px;width:1096px;height:42px;margin:0;padding:0;border:0;font-family:var(--kz-font);font-size:28px;line-height:1.25;font-weight:400;color:#404040;text-align:left;text-shadow:none;">感谢参与交流</p>
+<p data-hero-role="hero_meta" style="position:absolute;left:92px;top:394px;width:1096px;height:28px;margin:0;padding:0;border:0;font-family:var(--kz-font);font-size:20px;line-height:1.25;font-weight:400;color:#64676B;text-align:left;text-shadow:none;">产品中心-医学部｜2026年9月</p>
+</div><aside class="notes">本页为合成版式与流程示例，不对应真实研究或临床结论。</aside></section>
+</div>
+<!-- 上游唯一运行时：缩放 / 键盘 / hash / presenter / preview / 打印基础能力（未删改） -->
+<script src="vendor/html-ppt/assets/runtime.js"></script>
+<!-- 随包 ECharts 6.1.0 与康哲组件（图表唯一实现） -->
+<script src="vendor/kangzhe-design/assets/vendor/echarts.min.js"></script>
+<script src="vendor/kangzhe-design/runtime/kz-tokens.js"></script>
+<script src="vendor/kangzhe-design/runtime/kz-charts.js"></script>
+<script src="vendor/kangzhe-design/runtime/kz-gantt.js"></script>
+<!-- 康哲增量桥：仅观察上游 .is-active 驱动 chrome 切换与组件生命周期 -->
+<script src="vendor/kangzhe-design/adapters/html-ppt-bridge.js"></script>
+<script src="deck-data.js"></script>
+<script src="deck-wiring.js"></script>
+</body>
+</html>

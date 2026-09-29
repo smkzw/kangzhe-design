@@ -20,10 +20,32 @@ def validate(plan,manifest=None,asset_root=None):
   if re.search(r'[：:—–]|\s-\s',p['title']):add('TITLE',pid,'页面标题不应有冒号或破折号')
   if len(p['title'])>24:add('TITLE-REVIEW',pid,'长标题需要语言审阅；不是自动截短', 'review')
   byrole={}
+  if plan['track'] in ['pptx','htmlppt'] and p['kind'] in ['cover','toc','section','ending']:
+   expected={'cover':['cover_title'],'toc':['toc_title','toc_label'],'section':['section_number','section_title'],'ending':['ending_title']}[p['kind']]
+   actual={e['role'] for e in p['elements']}
+   for r in expected:
+    if r not in actual:add('HERO-ROLE',pid,'缺少固定角色 '+r)
+   if p['kind']=='toc':
+    labels=[e for e in p['elements'] if e['role']=='toc_label'];n=len(labels)
+    if not 1<=n<=6:add('HERO-CAPACITY',pid,'目录每页1至6项，超过必须拆页')
+    else:
+     from hero_layout import layout
+     _,blocks,_=layout('toc',{'title':'目录','items':[{'title':'项'}]*n})
+     for role in ['toc_number','toc_label','toc_description']:
+      els=[e for e in p['elements'] if e['role']==role];want=[b for b in blocks if b['role']==role]
+      if len(els)!=len(want):add('HERO-ROLE',pid,'目录角色数量不一致 '+role)
+      elif any(not e.get('rect') or any(abs(a-b)>2 for a,b in zip(e['rect'],b['rect'])) for e,b in zip(els,want)):add('HERO-GEOMETRY',pid,'目录固定网格位置不符 '+role)
   for el in p['elements']:
    role=el['role'];font=el['font_px'];byrole.setdefault(role,set()).add((round(font,3),round(el['line_height'],3)))
    floor=tokens['type_px']['reference'] if role=='reference' else tokens['type_px']['body_floor']
    if font<floor-.01:add('FONT-FLOOR',pid+'/'+el['id'],'字号低于该角色最低值')
+   if role in ['cover_title','hero_subtitle','hero_meta','toc_title','toc_number','toc_label','toc_description','section_number','section_title','ending_title'] and abs(font-tokens['type_px'][role])>.01:add('HERO-TYPE',pid+'/'+el['id'],'非正文页必须使用固定角色字号，不允许缩字')
+   if plan['track'] in ['pptx','htmlppt'] and role in ['cover_title','hero_subtitle','hero_meta','toc_title','toc_number','toc_label','toc_description','section_number','section_title','ending_title'] and abs(el['line_height']-1.25)>.001:add('HERO-LINEHEIGHT',pid+'/'+el['id'],'固定行高必须为1.25')
+   hero=tokens.get('hero_layouts',{}).get(p['kind'])
+   anchor={'cover_title':'title','toc_title':'title','section_number':'number','section_title':'title','ending_title':'title','hero_subtitle':'subtitle','hero_meta':'meta'}.get(role)
+   if plan['track'] in ['pptx','htmlppt'] and hero and anchor:
+    expected_rect=hero.get(anchor)
+    if expected_rect and (not el.get('rect') or any(abs(a-b)>2 for a,b in zip(el['rect'],expected_rect))):add('HERO-GEOMETRY',pid+'/'+el['id'],'固定文字框位置/尺寸与版式 token 不符')
    if role=='body':
     expected=tokens['type_px']['body_compact' if p['body_profile']=='compact' else 'body']
     if abs(font-expected)>.01:add('BODY-PROFILE',pid+'/'+el['id'],'正文未使用整页统一 profile')

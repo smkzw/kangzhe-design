@@ -1,0 +1,12 @@
+{
+  "result": "PASS",
+  "binding_count": 18,
+  "changed_parts": [
+    "ppt/slides/slide3.xml",
+    "ppt/slides/slide2.xml",
+    "ppt/slides/slide1.xml",
+    "ppt/slides/slide7.xml"
+  ],
+  "same_as_native_reviewed_output": true,
+  "other_parts_byte_identical": true
+}

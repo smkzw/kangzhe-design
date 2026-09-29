@@ -1,0 +1,548 @@
+{
+  "schema_version": "6.0",
+  "track": "htmlppt",
+  "canvas": [
+    1280,
+    720
+  ],
+  "pages": [
+    {
+      "id": "01_cover",
+      "kind": "cover",
+      "title": "合成研究流程汇报示例",
+      "hero_layout_id": "cover-01",
+      "body_profile": "standard",
+      "elements": [
+        {
+          "id": "text-0",
+          "role": "cover_title",
+          "font_px": 56,
+          "line_height": 1.25,
+          "text": "合成研究流程\n汇报示例",
+          "rect": [
+            92,
+            164,
+            1096,
+            148
+          ]
+        },
+        {
+          "id": "text-1",
+          "role": "hero_subtitle",
+          "font_px": 28,
+          "line_height": 1.25,
+          "text": "结构、数据与季度安排",
+          "rect": [
+            92,
+            322,
+            1096,
+            42
+          ]
+        },
+        {
+          "id": "text-2",
+          "role": "hero_meta",
+          "font_px": 20,
+          "line_height": 1.25,
+          "text": "产品中心-医学部｜2026年9月",
+          "rect": [
+            92,
+            382,
+            1096,
+            28
+          ]
+        }
+      ],
+      "protected_regions": [
+        {
+          "id": "logo",
+          "role": "logo",
+          "rect": [
+            56,
+            44,
+            240,
+            50
+          ]
+        },
+        {
+          "id": "text-0",
+          "role": "title",
+          "rect": [
+            92,
+            164,
+            1096,
+            148
+          ]
+        },
+        {
+          "id": "text-1",
+          "role": "title",
+          "rect": [
+            92,
+            322,
+            1096,
+            42
+          ]
+        },
+        {
+          "id": "text-2",
+          "role": "title",
+          "rect": [
+            92,
+            382,
+            1096,
+            28
+          ]
+        }
+      ],
+      "image": {
+        "mode": "generated",
+        "asset_id": "asset_cover_hero"
+      },
+      "sources": [],
+      "cards": []
+    },
+    {
+      "id": "02_toc",
+      "kind": "toc",
+      "title": "汇报章节",
+      "hero_layout_id": "toc-01",
+      "body_profile": "standard",
+      "elements": [
+        {
+          "id": "text-0",
+          "role": "toc_title",
+          "font_px": 48,
+          "line_height": 1.25,
+          "text": "汇报章节",
+          "rect": [
+            68,
+            28,
+            860,
+            68
+          ]
+        },
+        {
+          "id": "text-1",
+          "role": "toc_number",
+          "font_px": 40,
+          "line_height": 1.25,
+          "text": "01",
+          "rect": [
+            92.0,
+            172,
+            60,
+            58
+          ]
+        },
+        {
+          "id": "text-2",
+          "role": "toc_label",
+          "font_px": 32,
+          "line_height": 1.25,
+          "text": "入排信息",
+          "rect": [
+            160.0,
+            178,
+            249.33333333333331,
+            40
+          ]
+        },
+        {
+          "id": "text-3",
+          "role": "toc_description",
+          "font_px": 20,
+          "line_height": 1.25,
+          "text": "条目与使用边界",
+          "rect": [
+            92.0,
+            242,
+            317.3333333333333,
+            25
+          ]
+        },
+        {
+          "id": "text-4",
+          "role": "toc_number",
+          "font_px": 40,
+          "line_height": 1.25,
+          "text": "02",
+          "rect": [
+            481.3333333333333,
+            172,
+            60,
+            58
+          ]
+        },
+        {
+          "id": "text-5",
+          "role": "toc_label",
+          "font_px": 32,
+          "line_height": 1.25,
+          "text": "流程节点",
+          "rect": [
+            549.3333333333333,
+            178,
+            249.33333333333331,
+            40
+          ]
+        },
+        {
+          "id": "text-6",
+          "role": "toc_description",
+          "font_px": 20,
+          "line_height": 1.25,
+          "text": "保留缺失观察",
+          "rect": [
+            481.3333333333333,
+            242,
+            317.3333333333333,
+            25
+          ]
+        },
+        {
+          "id": "text-7",
+          "role": "toc_number",
+          "font_px": 40,
+          "line_height": 1.25,
+          "text": "03",
+          "rect": [
+            870.6666666666666,
+            172,
+            60,
+            58
+          ]
+        },
+        {
+          "id": "text-8",
+          "role": "toc_label",
+          "font_px": 32,
+          "line_height": 1.25,
+          "text": "季度计划",
+          "rect": [
+            938.6666666666666,
+            178,
+            249.33333333333331,
+            40
+          ]
+        },
+        {
+          "id": "text-9",
+          "role": "toc_description",
+          "font_px": 20,
+          "line_height": 1.25,
+          "text": "任务与起止时间",
+          "rect": [
+            870.6666666666666,
+            242,
+            317.3333333333333,
+            25
+          ]
+        }
+      ],
+      "protected_regions": [
+        {
+          "id": "logo",
+          "role": "logo",
+          "rect": [
+            1024,
+            44,
+            200,
+            44
+          ]
+        },
+        {
+          "id": "text-0",
+          "role": "title",
+          "rect": [
+            68,
+            28,
+            860,
+            68
+          ]
+        },
+        {
+          "id": "text-1",
+          "role": "title",
+          "rect": [
+            92.0,
+            172,
+            60,
+            58
+          ]
+        },
+        {
+          "id": "text-2",
+          "role": "title",
+          "rect": [
+            160.0,
+            178,
+            249.33333333333331,
+            40
+          ]
+        },
+        {
+          "id": "text-3",
+          "role": "title",
+          "rect": [
+            92.0,
+            242,
+            317.3333333333333,
+            25
+          ]
+        },
+        {
+          "id": "text-4",
+          "role": "title",
+          "rect": [
+            481.3333333333333,
+            172,
+            60,
+            58
+          ]
+        },
+        {
+          "id": "text-5",
+          "role": "title",
+          "rect": [
+            549.3333333333333,
+            178,
+            249.33333333333331,
+            40
+          ]
+        },
+        {
+          "id": "text-6",
+          "role": "title",
+          "rect": [
+            481.3333333333333,
+            242,
+            317.3333333333333,
+            25
+          ]
+        },
+        {
+          "id": "text-7",
+          "role": "title",
+          "rect": [
+            870.6666666666666,
+            172,
+            60,
+            58
+          ]
+        },
+        {
+          "id": "text-8",
+          "role": "title",
+          "rect": [
+            938.6666666666666,
+            178,
+            249.33333333333331,
+            40
+          ]
+        },
+        {
+          "id": "text-9",
+          "role": "title",
+          "rect": [
+            870.6666666666666,
+            242,
+            317.3333333333333,
+            25
+          ]
+        }
+      ],
+      "image": {
+        "mode": "generated",
+        "asset_id": "asset_toc_hero"
+      },
+      "sources": [],
+      "cards": [
+        {
+          "id": "card-0",
+          "material": "liquid_glass",
+          "edge_decoration": "neutral_hairline"
+        },
+        {
+          "id": "card-1",
+          "material": "liquid_glass",
+          "edge_decoration": "neutral_hairline"
+        },
+        {
+          "id": "card-2",
+          "material": "liquid_glass",
+          "edge_decoration": "neutral_hairline"
+        }
+      ]
+    },
+    {
+      "id": "03_section",
+      "kind": "section",
+      "title": "研究流程",
+      "hero_layout_id": "section-01",
+      "body_profile": "standard",
+      "elements": [
+        {
+          "id": "text-0",
+          "role": "section_number",
+          "font_px": 112,
+          "line_height": 1.25,
+          "text": "01",
+          "rect": [
+            92,
+            108,
+            400,
+            148
+          ]
+        },
+        {
+          "id": "text-1",
+          "role": "section_title",
+          "font_px": 60,
+          "line_height": 1.25,
+          "text": "研究流程",
+          "rect": [
+            92,
+            272,
+            1096,
+            83
+          ]
+        }
+      ],
+      "protected_regions": [
+        {
+          "id": "logo",
+          "role": "logo",
+          "rect": [
+            1024,
+            44,
+            200,
+            44
+          ]
+        },
+        {
+          "id": "text-0",
+          "role": "title",
+          "rect": [
+            92,
+            108,
+            400,
+            148
+          ]
+        },
+        {
+          "id": "text-1",
+          "role": "title",
+          "rect": [
+            92,
+            272,
+            1096,
+            83
+          ]
+        }
+      ],
+      "image": {
+        "mode": "generated",
+        "asset_id": "asset_section_hero"
+      },
+      "sources": [],
+      "cards": []
+    },
+    {
+      "id": "07_ending",
+      "kind": "ending",
+      "title": "谢谢",
+      "hero_layout_id": "ending-01",
+      "body_profile": "standard",
+      "elements": [
+        {
+          "id": "text-0",
+          "role": "ending_title",
+          "font_px": 104,
+          "line_height": 1.25,
+          "text": "谢谢",
+          "rect": [
+            92,
+            184,
+            1096,
+            138
+          ]
+        },
+        {
+          "id": "text-1",
+          "role": "hero_subtitle",
+          "font_px": 28,
+          "line_height": 1.25,
+          "text": "感谢参与交流",
+          "rect": [
+            92,
+            334,
+            1096,
+            42
+          ]
+        },
+        {
+          "id": "text-2",
+          "role": "hero_meta",
+          "font_px": 20,
+          "line_height": 1.25,
+          "text": "产品中心-医学部｜2026年9月",
+          "rect": [
+            92,
+            394,
+            1096,
+            28
+          ]
+        }
+      ],
+      "protected_regions": [
+        {
+          "id": "logo",
+          "role": "logo",
+          "rect": [
+            56,
+            44,
+            240,
+            50
+          ]
+        },
+        {
+          "id": "text-0",
+          "role": "title",
+          "rect": [
+            92,
+            184,
+            1096,
+            138
+          ]
+        },
+        {
+          "id": "text-1",
+          "role": "title",
+          "rect": [
+            92,
+            334,
+            1096,
+            42
+          ]
+        },
+        {
+          "id": "text-2",
+          "role": "title",
+          "rect": [
+            92,
+            394,
+            1096,
+            28
+          ]
+        }
+      ],
+      "image": {
+        "mode": "generated",
+        "asset_id": "asset_ending_hero_v3"
+      },
+      "sources": [],
+      "cards": []
+    }
+  ]
+}

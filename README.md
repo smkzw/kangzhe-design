@@ -2,7 +2,7 @@
 
 康哲药业医学部的单一 Liquid Glass 设计技能。覆盖可编辑 PPTX、HTML-PPT、站点式 HTML、流式 HTML。替代原 `kangzhe-design 4.5.7` 与 `kangzhe-design-3d 5.2.7`，不保留 flat、3d 或 legacy 模式。
 
-**版本说明：**6.0.0 是完成重构后的规范版本。已提供可运行参考组件和本地测试；真实生图、两个指定引擎端到端、原生 Office 编辑回读与多模型对照仍需后续验证。详见 `review/VALIDATION_STATUS.md`，不能把版本号当成所有能力已认证。
+**版本说明：**6.0.0 是规范版本。A01/A02 已执行真实生图、两个指定引擎、Mac Office 局部编辑回读和12次真实pilot；结果分层记录，整体仍为 PARTIAL。详见 `review/VALIDATION_STATUS.md`，不能把版本号当成所有能力已认证。
 
 ## 使用
 
@@ -53,3 +53,6 @@ preflight 没有资产 manifest 时返回 pending 的实际生图审阅项；不
 ## 下一阶段
 
 将 `agent/prompts/EXECUTE.md` 交给开发 Agent，主包与 Agent执行包放在同一工作区。优先两条引擎真实集成和真实生图，再用不同能力模型×harness对照反复修改唯一规则所有者。没有工具/凭据时记录阻塞，不伪造通过。
+
+## KZ6-0929-A02 固定首尾、目录与章节
+四类页面共用版式 ID、逻辑坐标和专用字号，详见 [固定形态合同](design_specs/11-hero-layouts.md)。[本轮状态](review/KZ6-0929-A02/STATUS.md)分别报告规则代码、组件、两引擎、原生编辑与跨模型边界。公开示例均为合成内容，不包含用户提供的临床参考原件。

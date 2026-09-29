@@ -39,13 +39,3 @@ Gantt 不在该版本的原生 chart 类型中：输出可编辑任务形状/文
 ## 升级探针
 
 记录上游 SHA；读取当次真实 route/接口；检查 image manifest、effect grammar、native-data、模板和导出命令；先跑两页小样再批量。任何接口变化先修适配层并记录，不反过来放宽康哲字体、禁色条、可编辑要求。详见 Agent P1。
-
-## 固定 hero 文字框适配（A02）
-上游 `scripts/docs/svg-contract.md` 的 `data-pptx-bounds` 是质量检查提示，不执行裁切或文字重排。实际导出会以文字度量收紧框，无法据此保证固定宽度。完成原引擎 checker 与真实导出后，再运行品牌适配：
-
-```bash
-python tools/qc_plan.py hero-page-plan.json
-python tools/bind_hero_pptx.py upstream.pptx branded.pptx hero-page-plan.json --receipt frame-binding.json
-```
-
-页面 id 前缀必须为真实页码，如 `01_cover`；文字与上游原生对象须唯一精确对应，字号不符或重名直接失败。只绑定四类 hero 文字对象的原生框、内边距、固定行高与禁止自动缩字；图表、工作簿、图片、正文和导航不改动。保留上游原件并对输出重新做原生显示与编辑回读。该步骤不能创建 PPTX，不能绕过上游导出。空辅助文字不创建绑定；长标题精简或拆页，不能自动缩小。

@@ -93,7 +93,17 @@
                     "chart_label",
                     "takeaway",
                     "footer",
-                    "reference"
+                    "reference",
+                    "cover_title",
+                    "hero_subtitle",
+                    "hero_meta",
+                    "toc_title",
+                    "toc_number",
+                    "toc_label",
+                    "toc_description",
+                    "section_number",
+                    "section_title",
+                    "ending_title"
                   ]
                 },
                 "font_px": {
@@ -320,11 +330,119 @@
               "rationale"
             ],
             "additionalProperties": false
+          },
+          "hero_layout_id": {
+            "enum": [
+              "cover-01",
+              "toc-01",
+              "section-01",
+              "ending-01"
+            ]
           }
         },
         "additionalProperties": false
       }
     }
   },
-  "additionalProperties": false
+  "additionalProperties": false,
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "track": {
+            "enum": [
+              "pptx",
+              "htmlppt"
+            ]
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "pages": {
+            "items": {
+              "allOf": [
+                {
+                  "if": {
+                    "properties": {
+                      "kind": {
+                        "const": "cover"
+                      }
+                    }
+                  },
+                  "then": {
+                    "required": [
+                      "hero_layout_id"
+                    ],
+                    "properties": {
+                      "hero_layout_id": {
+                        "const": "cover-01"
+                      }
+                    }
+                  }
+                },
+                {
+                  "if": {
+                    "properties": {
+                      "kind": {
+                        "const": "toc"
+                      }
+                    }
+                  },
+                  "then": {
+                    "required": [
+                      "hero_layout_id"
+                    ],
+                    "properties": {
+                      "hero_layout_id": {
+                        "const": "toc-01"
+                      }
+                    }
+                  }
+                },
+                {
+                  "if": {
+                    "properties": {
+                      "kind": {
+                        "const": "section"
+                      }
+                    }
+                  },
+                  "then": {
+                    "required": [
+                      "hero_layout_id"
+                    ],
+                    "properties": {
+                      "hero_layout_id": {
+                        "const": "section-01"
+                      }
+                    }
+                  }
+                },
+                {
+                  "if": {
+                    "properties": {
+                      "kind": {
+                        "const": "ending"
+                      }
+                    }
+                  },
+                  "then": {
+                    "required": [
+                      "hero_layout_id"
+                    ],
+                    "properties": {
+                      "hero_layout_id": {
+                        "const": "ending-01"
+                      }
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
+  ]
 }

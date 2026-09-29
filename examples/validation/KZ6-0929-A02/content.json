@@ -1,0 +1,52 @@
+[
+  [
+    "cover",
+    {
+      "title": [
+        "合成研究流程",
+        "汇报示例"
+      ],
+      "subtitle": "结构、数据与季度安排",
+      "meta": "产品中心-医学部｜2026年9月"
+    },
+    "asset_cover_hero"
+  ],
+  [
+    "toc",
+    {
+      "title": "汇报章节",
+      "items": [
+        {
+          "title": "入排信息",
+          "description": "条目与使用边界"
+        },
+        {
+          "title": "流程节点",
+          "description": "保留缺失观察"
+        },
+        {
+          "title": "季度计划",
+          "description": "任务与起止时间"
+        }
+      ]
+    },
+    "asset_toc_hero"
+  ],
+  [
+    "section",
+    {
+      "number": "01",
+      "title": "研究流程"
+    },
+    "asset_section_hero"
+  ],
+  [
+    "ending",
+    {
+      "title": "谢谢",
+      "subtitle": "感谢参与交流",
+      "meta": "产品中心-医学部｜2026年9月"
+    },
+    "asset_ending_hero_v3"
+  ]
+]

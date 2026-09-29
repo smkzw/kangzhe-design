@@ -4,6 +4,7 @@ from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1]
 def files(track,features):
  base=['SKILL.md','tokens/tokens.json']+[f'design_specs/{x}.md' for x in ['00-authority','01-core','02-liquid-glass','03-typography-language','04-image-pipeline','tracks-'+track,'10-quality-gates']]
+ if track in ['pptx','htmlppt']:base+=['design_specs/11-hero-layouts.md']
  if track=='pptx':base+=['adapters/ppt-master.md']
  if track=='htmlppt':base+=['adapters/html-ppt.md']
  if track in ['site','stream']:features.add('film');features.add('drilldown')
