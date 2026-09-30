@@ -66,7 +66,8 @@ def validate(plan,manifest=None,asset_root=None):
    if plan['track'] in ['pptx','htmlppt'] and hero and anchor:
     expected_rect=hero.get(anchor)
     if expected_rect and (not el.get('rect') or any(abs(a-b)>2 for a,b in zip(el['rect'],expected_rect))):add('HERO-GEOMETRY',pid+'/'+el['id'],'固定文字框位置/尺寸与版式 token 不符')
-   if role=='body':
+   if plan['track'] in ['pptx','htmlppt'] and role in ['page_title','card_title','footer'] and abs(font-tokens['type_px'][role])>.01:add('PPT-ROLE-TYPE',pid+'/'+el['id'],'正文页标题、卡标题和页脚必须使用固定角色字号')
+   if role=='body' and p['body_profile']!='responsive':
     expected=tokens['type_px']['body_compact' if p['body_profile']=='compact' else 'body']
     if abs(font-expected)>.01:add('BODY-PROFILE',pid+'/'+el['id'],'正文未使用整页统一 profile')
   for role,styles in byrole.items():

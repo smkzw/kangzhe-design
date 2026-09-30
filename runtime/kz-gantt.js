@@ -21,8 +21,19 @@
     const baseline=clone(input);let data=clone(input),selected=data.tasks[0].id,undo=[],drag=null,disposed=false;
     const abort=new AbortController(),signal=abort.signal;let progress=1,raf=0;
     const mq=matchMedia('(prefers-reduced-motion: reduce)');
+    const prior={children:[...root.childNodes],editing:root.dataset.kzEditing,classes:['kz-gantt','kz-interactive'].filter(name=>!root.classList.contains(name))};
+    let plot=null,chart=null,resize=null;
+    const releaseAll=()=>{const errors=[];for(const release of [
+      ()=>{if(raf){cancelAnimationFrame(raf);raf=0;}},
+      ()=>abort.abort(),
+      ()=>resize?.disconnect(),
+      ()=>chart?.dispose(),
+      ()=>{root.classList.remove(...prior.classes);if(prior.editing===undefined)delete root.dataset.kzEditing;else root.dataset.kzEditing=prior.editing;},
+      ()=>root.replaceChildren(...prior.children)
+    ]){try{release();}catch(error){errors.push(error);}}return errors;};
+    try{
     root.classList.add('kz-gantt','kz-interactive');root.dataset.kzEditing='true';
-    const plot=document.createElement('div');plot.className='kz-gantt-plot';plot.tabIndex=0;plot.setAttribute('role','application');plot.setAttribute('aria-label','可编辑季度甘特图；左右方向键移动，Shift 加方向键调整结束季度');
+    plot=document.createElement('div');plot.className='kz-gantt-plot';plot.tabIndex=0;plot.setAttribute('role','application');plot.setAttribute('aria-label','可编辑季度甘特图；左右方向键移动，Shift 加方向键调整结束季度');
     const editor=document.createElement('div');editor.className='kz-gantt-editor';
     const lab=(text)=>{const x=document.createElement('label');x.textContent=text;return x;};
     const select=document.createElement('select');select.setAttribute('aria-label','选择项目');
@@ -43,12 +54,13 @@
     for(const [b,text] of [[undoB,'撤销'],[resetB,'还原全部']]){b.type='button';b.className='kz-button';b.textContent=text;}
     dirty.append(dirtyText,undoB,resetB);root.replaceChildren(plot,editor,dirty);
     for(const t of data.tasks){const o=document.createElement('option');o.value=t.id;o.textContent=t.label;select.append(o);}
-    const chart=echarts.init(plot,null,{renderer:'canvas'});
+    chart=echarts.init(plot,null,{renderer:'canvas'});
     function task(){return data.tasks.find(t=>t.id===selected);}
     function countDirty(){return data.tasks.filter(t=>{const b=baseline.tasks.find(x=>x.id===t.id);return t.start!==b.start||t.end!==b.end;}).length;}
     function syncFields(){const t=task(),s=fromIndex(t.start),e=fromIndex(t.end-1);select.value=selected;inputs.sy.value=s.year;inputs.sq.value=s.quarter;inputs.ey.value=e.year;inputs.eq.value=e.quarter;}
     function status(message=''){hint.textContent=message;const n=countDirty();dirty.hidden=!n;dirtyText.textContent=`已修改 ${n} 项`;undoB.disabled=!undo.length;}
     function draw(){
+      if(disposed)return;
       const unit=root.closest('.deck')&&document.body.dataset.fit==='fluid'?Math.max(1,innerHeight/KZ_TOKENS.wide.htmlppt_reference_height):1;
       chart.setOption({animation:false,grid:{left:(chart.getWidth()<480?96:126)*unit,right:24*unit,top:38*unit,bottom:44*unit},textStyle:{fontFamily:KZ_TOKENS.fonts.fallback_css,fontSize:16*unit},
         xAxis:{type:'value',min:data.min,max:data.max,interval:1,axisLabel:{fontSize:16*unit,color:KZ_TOKENS.colors.body,formatter:v=>{if(v>=data.max)return '';const q=fromIndex(v);if(v===data.min&&q.quarter!==1)return `${q.year}Q${q.quarter}`;return q.quarter===1?String(q.year):((chart.getWidth()-150*unit)/(data.max-data.min)>=30*unit?'Q'+q.quarter:'');}},axisTick:{show:false},splitLine:{lineStyle:{color:'#E3E7EC'}},axisLine:{lineStyle:{color:'#CDD3D9'}}},
@@ -61,8 +73,8 @@
           data:data.tasks.map((t,i)=>[i,t.start,t.start+(t.end-t.start)*progress]),encode:{x:[1,2],y:0}}]},{notMerge:true});
       status();options.onProgress?.(progress,clone(data));
     }
-    function finish(){cancelAnimationFrame(raf);raf=0;progress=1;draw();}
-    function play(duration=1000){finish();if(mq.matches)return;let start=null;
+    function finish(){if(disposed)return;cancelAnimationFrame(raf);raf=0;progress=1;draw();}
+    function play(duration=1000){cancelAnimationFrame(raf);raf=0;if(disposed)return;if(mq.matches){finish();return;}progress=0;draw();let start=null;
       const tick=now=>{if(disposed)return;start??=now;const p=Math.min(1,(now-start)/duration);progress=1-Math.pow(1-p,3);draw();if(p<1)raf=requestAnimationFrame(tick);else raf=0;};raf=requestAnimationFrame(tick);
     }
     mq.addEventListener('change',()=>{if(mq.matches)finish();},{signal});
@@ -110,13 +122,19 @@
     function undoOne(){finish();if(undo.length){data=undo.pop();draw();syncFields();status('已撤销');}}
     function reset(){cancelAnimationFrame(raf);progress=1;data=clone(baseline);undo=[];draw();syncFields();status('已还原');}
     undoB.addEventListener('click',undoOne,{signal});resetB.addEventListener('click',reset,{signal});
-    const resize=new ResizeObserver(()=>{if(drag)rollbackDrag();chart.resize();draw();});resize.observe(plot);
+    resize=new ResizeObserver(()=>{if(drag)rollbackDrag();chart.resize();draw();});resize.observe(plot);
     draw();syncFields();
     return {chart,root,plot,select(id){if(!data.tasks.some(t=>t.id===id))throw Error('未知任务');selected=id;syncFields();draw();},
       play,finish,getProgress:()=>progress,getData:()=>clone(data),getSelected:()=>selected,getDirty:countDirty,commit,undo:undoOne,reset,serialize:()=>JSON.stringify(data),
       geometry(id){const t=data.tasks.find(x=>x.id===id);if(!t)throw Error('未知任务');return rowGeometry(t);},
       importJSON(text){const next=JSON.parse(text);validate(next);if(next.min!==baseline.min||next.max!==baseline.max||next.tasks.length!==baseline.tasks.length||next.tasks.some((t,i)=>t.id!==baseline.tasks[i].id))throw Error('导入仅支持相同任务和时间轴');undo.push(clone(data));data=clone(next);draw();syncFields();},
-      pause(){finish();if(drag)rollbackDrag();},resume(){chart.resize();},dispose(){if(disposed)return;disposed=true;cancelAnimationFrame(raf);abort.abort();resize.disconnect();chart.dispose();root.replaceChildren();}};
+      pause(){finish();if(drag)rollbackDrag();},resume(){chart.resize();},dispose(){if(disposed)return;disposed=true;const errors=releaseAll();if(errors.length)throw new AggregateError(errors,'甘特清理未完全释放');}};
+    }catch(error){
+      disposed=true;
+      const errors=releaseAll();
+      if(errors.length)throw new AggregateError([error,...errors],'甘特挂载失败且未完全释放');
+      throw error;
+    }
   }
   global.KZGantt={mount,validate,qindex,fromIndex,qlabel};
 })(window);

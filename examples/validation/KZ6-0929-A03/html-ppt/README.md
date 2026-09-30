@@ -1,4 +1,10 @@
-# presenter-mode-reveal · 演讲者模式模板
+A04 R13b：本历史样例的 kz-charts/kz-gantt/kz-motion JavaScript 已同步当前组件，用于生命周期集成验证；历史页面视觉、菱形与 CSS 仍不作为当前设计模板。所有现行视觉规则只读 design_specs 与 tokens。
+
+# A03 历史验证样本（非当前视觉模板）
+
+本目录保留A03的视觉、生成资产与vendor用于回溯，不是当前批准的康哲主题。新产物的双菱形、字号、引用、首尾页与动态要求以当前design_specs/tokens为准，不沿用本页历史外观。A04只对a03.js宿主初始化回滚和销毁生命周期另作修复。以下保留上游原README供历史接口参考；其中逐字稿口径等不能覆盖康哲当前规范。
+
+## 历史上游 presenter-mode-reveal 说明
 
 一份专为**带逐字稿的技术分享**设计的 full-deck 模板。核心卖点是真正可用的**磁吸卡片式演讲者视图**：当前页 iframe 预览 + 下页 iframe 预览 + 大字号逐字稿 + 计时器，4 个卡片可任意拖拽/缩放，全部集成在 `runtime.js` 里，零依赖。
 

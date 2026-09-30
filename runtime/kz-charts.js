@@ -60,9 +60,9 @@
   function mount(el,data,opts={}){
     if(!global.echarts)throw Error('缺少随包 ECharts；不以 CSS 假图代替');
     validate(data);let current=copy(data),disposed=false,raf=0,lastProgress=1;
-    const chart=echarts.init(el,null,{renderer:'canvas'}),mq=matchMedia('(prefers-reduced-motion: reduce)');
-    let selected={};chart.on('legendselectchanged',e=>{selected={...e.selected};});
-    const ro=new ResizeObserver(()=>{chart.resize();renderProgress(lastProgress);});ro.observe(el);
+    let chart=null,mq=null,ro=null,selected={};
+    let changed=()=>{},beforePrint=()=>{},visibility=()=>{};
+    const releaseAll=()=>{const errors=[];for(const release of [()=>{cancelAnimationFrame(raf);raf=0;},()=>ro?.disconnect(),()=>mq?.removeEventListener('change',changed),()=>document.removeEventListener('visibilitychange',visibility),()=>global.removeEventListener('beforeprint',beforePrint),()=>chart?.dispose()]){try{release();}catch(error){errors.push(error);}}return errors;};
     function renderProgress(p){
       if(disposed)return;p=Math.max(0,Math.min(1,p));lastProgress=p;
       const previous=chart.getOption();selected={...selected,...(previous?.legend?.[0]?.selected||{})};
@@ -71,21 +71,35 @@
       chart.setOption(next,{notMerge:true});
       opts.onProgress?.(p,copy(current));
     }
-    function finish(){cancelAnimationFrame(raf);raf=0;renderProgress(1);}
+    function finish(){if(disposed)return;cancelAnimationFrame(raf);raf=0;renderProgress(1);}
     function play(duration=KZ_TOKENS.motion.chart_ms){
-      finish();if(mq.matches||disposed)return;
+      cancelAnimationFrame(raf);raf=0;
+      if(disposed)return;
+      if(mq.matches){finish();return;}
+      renderProgress(0);
       let start=null;
       function tick(now){if(disposed)return;start??=now;const p=Math.min(1,(now-start)/duration);renderProgress(1-Math.pow(1-p,3));if(p<1)raf=requestAnimationFrame(tick);else raf=0;}
       raf=requestAnimationFrame(tick);
     }
-    const changed=()=>{if(mq.matches)finish();};mq.addEventListener('change',changed);
-    const beforePrint=()=>finish();global.addEventListener('beforeprint',beforePrint);
-    const visibility=()=>{if(document.hidden)finish();};document.addEventListener('visibilitychange',visibility);
-    chart.on('click',params=>opts.onDataClick?.(params,copy(current)));
-    renderProgress(1);
-    return {chart,play,finish,renderProgress,getData:()=>copy(current),getProgress:()=>lastProgress,
-      setData(next){validate(next);current=copy(next);finish();},resize:()=>chart.resize(),pause:finish,resume(){},
-      dispose(){if(disposed)return;cancelAnimationFrame(raf);disposed=true;ro.disconnect();mq.removeEventListener('change',changed);document.removeEventListener('visibilitychange',visibility);global.removeEventListener('beforeprint',beforePrint);chart.dispose();}};
+    try{
+      chart=echarts.init(el,null,{renderer:'canvas'});
+      mq=matchMedia('(prefers-reduced-motion: reduce)');
+      chart.on('legendselectchanged',e=>{selected={...e.selected};});
+      ro=new ResizeObserver(()=>{chart.resize();renderProgress(lastProgress);});ro.observe(el);
+      changed=()=>{if(mq.matches)finish();};mq.addEventListener('change',changed);
+      beforePrint=()=>finish();global.addEventListener('beforeprint',beforePrint);
+      visibility=()=>{if(document.hidden)finish();};document.addEventListener('visibilitychange',visibility);
+      chart.on('click',params=>opts.onDataClick?.(params,copy(current)));
+      renderProgress(1);
+      return {chart,play,finish,renderProgress,getData:()=>copy(current),getProgress:()=>lastProgress,
+        setData(next){validate(next);current=copy(next);finish();},resize:()=>chart.resize(),pause:finish,resume(){},
+        dispose(){if(disposed)return;disposed=true;const errors=releaseAll();if(errors.length)throw new AggregateError(errors,'图表清理未完全释放');}};
+    }catch(error){
+      disposed=true;
+      const errors=releaseAll();
+      if(errors.length)throw new AggregateError([error,...errors],'图表挂载失败且未完全释放');
+      throw error;
+    }
   }
   global.KZCharts={mount,option,validate,rgba};
 })(window);

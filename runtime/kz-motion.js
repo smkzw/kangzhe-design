@@ -136,20 +136,34 @@
     if(activePages.has(root))throw Error('页面根节点已有动态挂载，请先dispose');
     const targets=[...root.querySelectorAll('[data-kz-reveal]')];
     if(targets.some(el=>activePageTargets.has(el)))throw Error('页面动画元素已有动态挂载，请先dispose');
-    const tilt=mountTilt(root),abort=new AbortController(),mq=media();let sequence=null,disposed=false;
-    root.dataset.kzMotionMounted='true';root.dataset.kzMotionActive='false';
-    function complete(){sequence?.cancel();sequence=null;}
-    const settle=()=>{if(document.hidden||mq.matches)complete();};
-    document.addEventListener('visibilitychange',settle,{signal:abort.signal});
-    global.addEventListener('beforeprint',complete,{signal:abort.signal});
-    mq.addEventListener('change',settle);
-    const life={
-      enter(){if(disposed)return;complete();root.dataset.kzMotionActive='true';sequence=animateReveal(root);},
-      leave(){if(disposed)return;complete();root.dataset.kzMotionActive='false';sequence=animateReveal(root,{exit:true});},
-      finish(){complete();},
-      dispose(){if(disposed)return;disposed=true;complete();tilt.dispose();abort.abort();mq.removeEventListener('change',settle);activePages.delete(root);targets.forEach(el=>activePageTargets.delete(el));delete root.dataset.kzMotionMounted;delete root.dataset.kzMotionActive;}
-    };
-    activePages.set(root,life);targets.forEach(el=>activePageTargets.set(el,life));return life;
+    const tilt=mountTilt(root),prior={mounted:root.dataset.kzMotionMounted,active:root.dataset.kzMotionActive};
+    let abort,mq,sequence=null,disposed=false,settle=null;
+    try{
+      abort=new AbortController();mq=media();
+      root.dataset.kzMotionMounted='true';root.dataset.kzMotionActive='false';
+      function complete(){sequence?.cancel();sequence=null;}
+      settle=()=>{if(document.hidden||mq.matches)complete();};
+      document.addEventListener('visibilitychange',settle,{signal:abort.signal});
+      global.addEventListener('beforeprint',complete,{signal:abort.signal});
+      mq.addEventListener('change',settle);
+      const life={
+        enter(){if(disposed)return;complete();root.dataset.kzMotionActive='true';sequence=animateReveal(root);},
+        leave(){if(disposed)return;complete();root.dataset.kzMotionActive='false';sequence=animateReveal(root,{exit:true});},
+        finish(){complete();},
+        dispose(){if(disposed)return;disposed=true;complete();tilt.dispose();abort.abort();mq.removeEventListener('change',settle);activePages.delete(root);targets.forEach(el=>activePageTargets.delete(el));delete root.dataset.kzMotionMounted;delete root.dataset.kzMotionActive;}
+      };
+      activePages.set(root,life);targets.forEach(el=>activePageTargets.set(el,life));return life;
+    }catch(error){
+      const errors=[];
+      for(const release of [()=>{if(settle&&mq)mq.removeEventListener('change',settle);},()=>abort?.abort(),()=>tilt.dispose(),
+        ()=>{if(prior.mounted===undefined)delete root.dataset.kzMotionMounted;else root.dataset.kzMotionMounted=prior.mounted;},
+        ()=>{if(prior.active===undefined)delete root.dataset.kzMotionActive;else root.dataset.kzMotionActive=prior.active;},
+        ()=>activePages.delete(root),()=>targets.forEach(el=>activePageTargets.delete(el))]){
+        try{release();}catch(failure){errors.push(failure);}
+      }
+      if(errors.length)throw new AggregateError([error,...errors],'页面挂载失败且未完全释放');
+      throw error;
+    }
   }
   global.KZMotion={Film,mountTilt,reveal,mountPage,sample,validateFrames};
 })(window);

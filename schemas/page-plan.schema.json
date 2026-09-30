@@ -70,7 +70,8 @@
           "body_profile": {
             "enum": [
               "standard",
-              "compact"
+              "compact",
+              "responsive"
             ]
           },
           "elements": {
@@ -674,6 +675,34 @@
               "properties": {
                 "motion_objects": {
                   "minItems": 1
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "track": {
+            "enum": [
+              "pptx",
+              "htmlppt"
+            ]
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "pages": {
+            "items": {
+              "properties": {
+                "body_profile": {
+                  "enum": [
+                    "standard",
+                    "compact"
+                  ]
                 }
               }
             }

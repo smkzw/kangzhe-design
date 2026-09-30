@@ -2,7 +2,7 @@
   "version": "6.0.0",
   "revision": "KZ6-0929-A04",
   "status": "PARTIAL",
-  "scope": "R12-R14 exact source candidate: validated contracts/runtime plus genuine scope-bound engine/Office/model evidence; four-track final discovery rounds and holdout unresolved",
+  "scope": "R14 exact source: explicit responsive profile, fixed PPT role gates, current host/module init cleanup and zero-to-one animation; component/source evidence only; full four-track acceptance unresolved",
   "files": [
     {
       "path": ".gitignore",
@@ -11,8 +11,8 @@
     },
     {
       "path": "CHANGELOG.md",
-      "bytes": 9274,
-      "sha256": "a359a5d180891171fbfd7a9361634beac3328e6345621f216d640442613c5e05"
+      "bytes": 9761,
+      "sha256": "a401192948103fb87239db14b9a4cab9ce9e601bd174f9c6525e8a57753bf260"
     },
     {
       "path": "INSTALL.md",
@@ -21,8 +21,8 @@
     },
     {
       "path": "README.md",
-      "bytes": 4786,
-      "sha256": "9a316e9650846ef67ea9ca82d102a91f6d8bc436cff81ac1464a587fd3274e80"
+      "bytes": 4997,
+      "sha256": "58fabfbd1758410486164fe3d22224f7bad47b65d855dbf1de65d2d46fc01e79"
     },
     {
       "path": "REVISION",
@@ -186,8 +186,8 @@
     },
     {
       "path": "design_specs/03-typography-language.md",
-      "bytes": 9520,
-      "sha256": "0d566ba7ded4051a726d12e2cb54c25a167383a73fa260e6079131a2d5db0e34"
+      "bytes": 10384,
+      "sha256": "3a9bbfe6e0b40ff9ec58e4f9a005e5109103a0eebbbeef40fc15999f0c9524a9"
     },
     {
       "path": "design_specs/04-image-pipeline.md",
@@ -716,8 +716,8 @@
     },
     {
       "path": "examples/validation/KZ6-0929-A03/html-ppt/README.md",
-      "bytes": 3964,
-      "sha256": "cc92770560dc7b1030e90b078e74c5f0b19cad25cac585b53164682a081c555f"
+      "bytes": 4684,
+      "sha256": "cb7116ede8695caef79c83172bd7cdca6cdadea7cc7064323eb7771f116c8bb2"
     },
     {
       "path": "examples/validation/KZ6-0929-A03/html-ppt/a03.css",
@@ -726,8 +726,8 @@
     },
     {
       "path": "examples/validation/KZ6-0929-A03/html-ppt/a03.js",
-      "bytes": 2117,
-      "sha256": "f0b6e08af90e5f4d4009fca5044bae68f469396ee536aaddc0cee4b88f5ec188"
+      "bytes": 3735,
+      "sha256": "1ca6efd838cda0307c4c03a6e7b2424f8237ee6877214debf751568f699365f7"
     },
     {
       "path": "examples/validation/KZ6-0929-A03/html-ppt/assets/asset_body_bg_quiet.png",
@@ -856,8 +856,8 @@
     },
     {
       "path": "examples/validation/KZ6-0929-A03/html-ppt/vendor/kangzhe-design/runtime/kz-charts.js",
-      "bytes": 6948,
-      "sha256": "ab492558d4269ac1fdd71eaaca72f5ce4162a8e0dcd7a9a45db610d78ca9a1f6"
+      "bytes": 8738,
+      "sha256": "b41501e4caddad61cbfb1362b0a25118e2502d02dd6fb542742fe66e3e14d33d"
     },
     {
       "path": "examples/validation/KZ6-0929-A03/html-ppt/vendor/kangzhe-design/runtime/kz-drilldown.js",
@@ -866,8 +866,8 @@
     },
     {
       "path": "examples/validation/KZ6-0929-A03/html-ppt/vendor/kangzhe-design/runtime/kz-gantt.js",
-      "bytes": 12638,
-      "sha256": "68fc105ed1799095db341fc197f0b2b702029618f224db489135091ac8e241c1"
+      "bytes": 13814,
+      "sha256": "54a21f0d587bb097fb56ec058cfefdd31b9cb32fe843ab51429fc13822c9f3dd"
     },
     {
       "path": "examples/validation/KZ6-0929-A03/html-ppt/vendor/kangzhe-design/runtime/kz-glass.css",
@@ -881,8 +881,8 @@
     },
     {
       "path": "examples/validation/KZ6-0929-A03/html-ppt/vendor/kangzhe-design/runtime/kz-motion.js",
-      "bytes": 10412,
-      "sha256": "fce3494096671c08724f0b735476a0f92eab845ae765e31c3c965f0a6bd1fa57"
+      "bytes": 14110,
+      "sha256": "a7cf487c60c40a3137fa7663894faa98bc76914c0b4efabd41e1f126e8afb2bf"
     },
     {
       "path": "examples/validation/KZ6-0929-A03/html-ppt/vendor/kangzhe-design/runtime/kz-tokens.css",
@@ -901,8 +901,8 @@
     },
     {
       "path": "review/CURRENT_STATUS.md",
-      "bytes": 10664,
-      "sha256": "43133ea09c8b31d7b17223d8c0836ac3c935add89085f999eca9454d6f6ad49d"
+      "bytes": 11092,
+      "sha256": "ccd9aa62f67b995fdf3de9cd56d13712a123a2a338d937c3ab887401a7ce7a87"
     },
     {
       "path": "review/KZ6-0929-A01/P1-P3_STATUS.md",
@@ -1045,6 +1045,11 @@
       "sha256": "046dc8250d1e70d92a9a64d917f8c2a29839b155095123a9bcdabe8c0cae8ad8"
     },
     {
+      "path": "review/KZ6-0929-A04/R14/STATUS.md",
+      "bytes": 2960,
+      "sha256": "fc4ef1b48adb47be1e58313992ec96509e0dafdce8537d0e1ad98f6aa9324102"
+    },
+    {
       "path": "review/KZ6-0929-A04/STATUS.md",
       "bytes": 3863,
       "sha256": "02cc6302dba633e2d4b0aa1203773cec4d138694ccbf70bae113523eb0b5d50a"
@@ -1156,8 +1161,8 @@
     },
     {
       "path": "runtime/API.md",
-      "bytes": 9805,
-      "sha256": "2976aa5073f9a6047b44bebb931c5cc1d537020419c6988690886d0fdc06c44f"
+      "bytes": 11832,
+      "sha256": "c031066ff3041ff047cb9908cc269b83c184362e9f9e168cfa6eeb05d4b12392"
     },
     {
       "path": "runtime/README.md",
@@ -1171,8 +1176,8 @@
     },
     {
       "path": "runtime/kz-charts.js",
-      "bytes": 8057,
-      "sha256": "ea63957077d518a7b9b1c9bcd81273227134778769308dd1a763c11a4980bf41"
+      "bytes": 8738,
+      "sha256": "b41501e4caddad61cbfb1362b0a25118e2502d02dd6fb542742fe66e3e14d33d"
     },
     {
       "path": "runtime/kz-drilldown.js",
@@ -1181,8 +1186,8 @@
     },
     {
       "path": "runtime/kz-gantt.js",
-      "bytes": 12807,
-      "sha256": "af631f64470f6b2d510ad0f9276ee5da4f8d6d88db8628bdd9e002c8b0b20eed"
+      "bytes": 13814,
+      "sha256": "54a21f0d587bb097fb56ec058cfefdd31b9cb32fe843ab51429fc13822c9f3dd"
     },
     {
       "path": "runtime/kz-glass.css",
@@ -1196,8 +1201,8 @@
     },
     {
       "path": "runtime/kz-motion.js",
-      "bytes": 13249,
-      "sha256": "4614d49053ab5465156f5e8d594d65b27d3a1bd4c93ef9e5c7827b7e560a058e"
+      "bytes": 14110,
+      "sha256": "a7cf487c60c40a3137fa7663894faa98bc76914c0b4efabd41e1f126e8afb2bf"
     },
     {
       "path": "runtime/kz-tokens.css",
@@ -1231,13 +1236,18 @@
     },
     {
       "path": "schemas/page-plan.schema.json",
-      "bytes": 18281,
-      "sha256": "5073da474c29e8f545830c5e88439274d00bf2954e4dd2f6c68377f7b96b7bf2"
+      "bytes": 18830,
+      "sha256": "2fe35e3712e4cd6791917a24912d6a04d7a80a5695733ae179af794988190bfb"
     },
     {
       "path": "tests/README.md",
       "bytes": 3186,
       "sha256": "6f751350b0293b8a754856816fb458651891b2828e5ca4b41aaddb51b0389d73"
+    },
+    {
+      "path": "tests/a03_cleanup.cjs",
+      "bytes": 5052,
+      "sha256": "2c324eecb4e10256f6a859e1185d8e765fb55a238bc67a43403da8f5216f264b"
     },
     {
       "path": "tests/bridge_failure_browser.py",
@@ -1258,6 +1268,16 @@
       "path": "tests/chart_axis_browser.py",
       "bytes": 4871,
       "sha256": "612a289ef6e2a8a28fb117b828be5cd63d927d7a07d11ee125c86d6b8d50d9f3"
+    },
+    {
+      "path": "tests/chart_gantt_play_sequence.cjs",
+      "bytes": 9477,
+      "sha256": "bb691b5d440206b6b4e5aa30049d936d3e1e2885a5ed564149d02d90e29153d4"
+    },
+    {
+      "path": "tests/components_init_faults.cjs",
+      "bytes": 11155,
+      "sha256": "6ebf394152393ffaa163b45b2aa2002e043b419c4c3523d818101d1546b55a2e"
     },
     {
       "path": "tests/drill_capacity_browser.py",
@@ -1305,9 +1325,24 @@
       "sha256": "d26c73255ac0772791387e990fc37385550936fc9a85531889e21f3aa132179d"
     },
     {
+      "path": "tests/test_a03_cleanup.py",
+      "bytes": 628,
+      "sha256": "5edf04fd8fe880435e339ff8777ec80cb96c6e29e3777ab42207de827454af4b"
+    },
+    {
       "path": "tests/test_a04_gates.py",
       "bytes": 5050,
       "sha256": "df08064f3df21d2cff9f113ddef9483e7d109f5e1763dea81349b7e500c801ae"
+    },
+    {
+      "path": "tests/test_chart_gantt_play_sequence.py",
+      "bytes": 625,
+      "sha256": "6f99dd3086713831cfd68f2f8383bb401bab85b9e0e32d46f2bae5825accdbfa"
+    },
+    {
+      "path": "tests/test_components_init_faults.py",
+      "bytes": 600,
+      "sha256": "09d5b283d9c8c59a713b1b51a86ae3aefd3729cda14088eec15a5c15abb1a0db"
     },
     {
       "path": "tests/test_context_routing.py",
@@ -1328,6 +1363,16 @@
       "path": "tests/test_hero.py",
       "bytes": 6281,
       "sha256": "48cf80f2d63b29ebc9522693c1419a9e75e6a484ee5e7d1cb17b4e842a568079"
+    },
+    {
+      "path": "tests/test_ppt_role_sizes.py",
+      "bytes": 1856,
+      "sha256": "6e9bbb12079805e8de9303e184570d70a4aca975eba83cfd05c9948a74ec5772"
+    },
+    {
+      "path": "tests/test_responsive_profile.py",
+      "bytes": 1886,
+      "sha256": "5f0b8120e4ecebd5871936d44f9b21a0af775b7c7c7cec66a36c25cfce23156f"
     },
     {
       "path": "tests/test_viewport_assets.py",
@@ -1401,8 +1446,8 @@
     },
     {
       "path": "tools/qc_plan.py",
-      "bytes": 13916,
-      "sha256": "33fae40489df2a755ec75ae7325234277b15180da101b00570d84e44df331957"
+      "bytes": 14192,
+      "sha256": "0c4192988138564efb57c56e4e6675fe93c31604d5dee453d1c432b1c3e2264c"
     }
   ]
 }

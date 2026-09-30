@@ -58,5 +58,5 @@ preflight 没有资产 manifest 时返回 pending 的实际生图审阅项；不
 ## KZ6-0929-A02 固定首尾、目录与章节
 四类页面共用版式 ID、逻辑坐标和专用字号，详见 [固定形态合同](design_specs/11-hero-layouts.md)。[本轮状态](review/KZ6-0929-A02/STATUS.md)分别报告规则代码、组件、两引擎、原生编辑与跨模型边界。公开示例均为合成内容，不包含用户提供的临床参考原件。
 
-## A03 当前示例
-[无播放器控件的HTML-PPT](examples/validation/KZ6-0929-A03/html-ppt/index.html) · [原生PPTX](examples/validation/KZ6-0929-A03/matched-seven.pptx)。均为owner制作的合成内容，不是测试模型成功样本。动画自动发生；保留正常翻页、详情和编辑，禁止观众播放器面板。
+## A03 历史验证样本
+[无播放器控件的HTML-PPT](examples/validation/KZ6-0929-A03/html-ppt/index.html) · [原生PPTX](examples/validation/KZ6-0929-A03/matched-seven.pptx)。均为owner制作的合成内容，不是测试模型成功样本，也不是当前批准的视觉模板。其资产、双菱形、布局和vendor保留当时版本供回溯；新产物遵循当前tokens与design_specs，不照抄历史样式。A04对该HTML样本的宿主生命周期另做修复与组件验证，不能由此宣称历史全部样式已重验。
