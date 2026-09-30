@@ -210,7 +210,8 @@
                 ]
               },
               "asset_id": {
-                "type": "string"
+                "type": "string",
+                "minLength": 1
               },
               "subject_rects": {
                 "type": "array",
@@ -237,9 +238,141 @@
               },
               "procedural_evidence": {
                 "type": "string"
+              },
+              "viewport_assets": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "required": [
+                    "viewport",
+                    "asset_id"
+                  ],
+                  "properties": {
+                    "viewport": {
+                      "type": "array",
+                      "prefixItems": [
+                        {
+                          "type": "integer",
+                          "minimum": 1
+                        },
+                        {
+                          "type": "integer",
+                          "minimum": 1
+                        }
+                      ],
+                      "items": false,
+                      "minItems": 2,
+                      "maxItems": 2
+                    },
+                    "asset_id": {
+                      "type": "string",
+                      "minLength": 1
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              },
+              "viewport_regions": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "required": [
+                    "viewport",
+                    "protected_regions"
+                  ],
+                  "properties": {
+                    "viewport": {
+                      "type": "array",
+                      "prefixItems": [
+                        {
+                          "type": "integer",
+                          "minimum": 1
+                        },
+                        {
+                          "type": "integer",
+                          "minimum": 1
+                        }
+                      ],
+                      "items": false,
+                      "minItems": 2,
+                      "maxItems": 2
+                    },
+                    "protected_regions": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "required": [
+                          "id",
+                          "rect",
+                          "role"
+                        ],
+                        "properties": {
+                          "id": {
+                            "type": "string"
+                          },
+                          "rect": {
+                            "type": "array",
+                            "prefixItems": [
+                              {
+                                "type": "number"
+                              },
+                              {
+                                "type": "number"
+                              },
+                              {
+                                "type": "number"
+                              },
+                              {
+                                "type": "number"
+                              }
+                            ],
+                            "items": false,
+                            "minItems": 4,
+                            "maxItems": 4
+                          },
+                          "role": {
+                            "enum": [
+                              "title",
+                              "logo",
+                              "header",
+                              "footer",
+                              "body",
+                              "takeaway",
+                              "control",
+                              "data",
+                              "other"
+                            ]
+                          },
+                          "motion_margin": {
+                            "type": "number",
+                            "minimum": 0
+                          }
+                        },
+                        "additionalProperties": false
+                      }
+                    }
+                  },
+                  "additionalProperties": false
+                }
               }
             },
-            "additionalProperties": false
+            "additionalProperties": false,
+            "allOf": [
+              {
+                "if": {
+                  "properties": {
+                    "mode": {
+                      "const": "generated"
+                    }
+                  }
+                },
+                "then": {
+                  "required": [
+                    "asset_id"
+                  ]
+                }
+              }
+            ]
           },
           "sources": {
             "type": "array",

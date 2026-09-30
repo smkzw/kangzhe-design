@@ -92,7 +92,7 @@
     resume(reason='user') {if(this.disposed)return;this.reasons.delete(reason);if(!this.reasons.size&&!this.raf){this.last=0;this.raf=requestAnimationFrame(t=>this.tick(t));}}
     seek(p) {if(this.disposed)return;if(!Number.isFinite(p))throw Error('进度不是有限数');this.p=clamp(p);this.last=0;this.render();}
     snapshot(){return {progress:this.p,geometry:this.geometry,carrierId:this.carrier.dataset.kzCarrierId,sameNode:this.carrier===this.identity,connected:this.carrier.isConnected,running:!!this.raf,reasons:[...this.reasons],style:{left:this.carrier.style.left,top:this.carrier.style.top,width:this.carrier.style.width,height:this.carrier.style.height,radius:this.carrier.style.borderRadius,color:this.carrier.style.backgroundColor},rect:this.carrier.getBoundingClientRect().toJSON()};}
-    dispose(){if(this.disposed)return;this.pause('disposed');this.disposed=true;this.abort.abort();this.io.disconnect();this.resize.disconnect();this.mq.removeEventListener('change',this.mqChange);delete this.root.dataset.kzReady;activeFilms.delete(this.root);activeCarriers.delete(this.carrier);}
+    dispose(){if(this.disposed)return;this.pause('disposed');this.disposed=true;this.abort.abort();this.io.disconnect();this.resize.disconnect();this.mq.removeEventListener('change',this.mqChange);delete this.root.dataset.kzReady;delete this.root.dataset.kzProgress;activeFilms.delete(this.root);activeCarriers.delete(this.carrier);}
   }
   function mountTilt(root=document) {
     if(activeTilts.has(root))throw Error('光影根节点已有动态挂载，请先dispose');

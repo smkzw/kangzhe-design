@@ -2,7 +2,7 @@
   "version": "6.0.0",
   "revision": "KZ6-0929-A04",
   "status": "PARTIAL",
-  "scope": "R11 common directory reading and fluid component typography; real component and independent scoped validation; known full-deck collision and four-track gates still unresolved",
+  "scope": "R12-R14 exact source candidate: validated contracts/runtime plus genuine scope-bound engine/Office/model evidence; four-track final discovery rounds and holdout unresolved",
   "files": [
     {
       "path": ".gitignore",
@@ -11,8 +11,8 @@
     },
     {
       "path": "CHANGELOG.md",
-      "bytes": 6536,
-      "sha256": "6c62440de78d1d5e7bb36c2ae557e682794b016f7333298f4ed8abd16a754928"
+      "bytes": 9274,
+      "sha256": "a359a5d180891171fbfd7a9361634beac3328e6345621f216d640442613c5e05"
     },
     {
       "path": "INSTALL.md",
@@ -51,13 +51,13 @@
     },
     {
       "path": "adapters/html-ppt.md",
-      "bytes": 7449,
-      "sha256": "10121ddb3040c2d81ad4093615181e5ef95c49357a484ce2a0d786ca43a5daf0"
+      "bytes": 7976,
+      "sha256": "ceddd086f9ac26b864786f2cd3559b9f5ff919a292be7a105f3ad70457082b07"
     },
     {
       "path": "adapters/ppt-master.md",
-      "bytes": 6178,
-      "sha256": "42cd8301ccf49a0bea89fa22f6d7776e4b2d6e8d241603677b1b8ce631fd7517"
+      "bytes": 7244,
+      "sha256": "68a77cae3422e082a89900b06d2e2b5968fd584f5f30d3072e346a933e7d8a87"
     },
     {
       "path": "agent/CURRENT_HANDOFF.md",
@@ -76,8 +76,8 @@
     },
     {
       "path": "agent/KNOWN_GAPS.md",
-      "bytes": 4011,
-      "sha256": "18040f88f6a37d6bfed4edd3461c1e03265f91a2e51870617f81620fd64a44f6"
+      "bytes": 6291,
+      "sha256": "6b075966d1483e64bc4994fb21cfc5487754bbb169218b4ab91a65f331273d7d"
     },
     {
       "path": "agent/PLAN.md",
@@ -186,23 +186,23 @@
     },
     {
       "path": "design_specs/03-typography-language.md",
-      "bytes": 9055,
-      "sha256": "09e2efaa16cfb6d54e42222c951728dc87029ce19cc858a3f701a37414229927"
+      "bytes": 9520,
+      "sha256": "0d566ba7ded4051a726d12e2cb54c25a167383a73fa260e6079131a2d5db0e34"
     },
     {
       "path": "design_specs/04-image-pipeline.md",
-      "bytes": 11599,
-      "sha256": "205c25cce0b61beb01fb9a1181a9f6573445180cd4ee6f64a6d77296ebc34735"
+      "bytes": 13702,
+      "sha256": "183dae02aadb56b985e13fdcf2714d2356f199853876e983ece9d8b452e9d141"
     },
     {
       "path": "design_specs/05-charts.md",
-      "bytes": 4811,
-      "sha256": "393d3c542552d001bdbc8ba29ae039b24ee15815af01b579553d83415351d8b8"
+      "bytes": 5299,
+      "sha256": "cd4eee80b2770cf49005b9474d2221dc16b3ebe15f6f454ce084948cb9a3f247"
     },
     {
       "path": "design_specs/06-motion-film.md",
-      "bytes": 23361,
-      "sha256": "3aa26dc3b7d422058e5182efd0ccc9f8a557aaae85510f8d5f5ca2935161f2d6"
+      "bytes": 23881,
+      "sha256": "9d856ad91d674c798f7fd097263c6c9474ac1fe6c2c6af7a278373d73ead8a63"
     },
     {
       "path": "design_specs/07-drilldown.md",
@@ -221,8 +221,8 @@
     },
     {
       "path": "design_specs/10-quality-gates.md",
-      "bytes": 10686,
-      "sha256": "fc1dd4a231a2417ec29e86601dac81c6f3152341f981002017120e8c9cec2322"
+      "bytes": 12491,
+      "sha256": "245f91fc9d45f5b6efe9fc13bebf4fcfbd1bca9599fe649fd1714806e94a9bb9"
     },
     {
       "path": "design_specs/11-hero-layouts.md",
@@ -901,8 +901,8 @@
     },
     {
       "path": "review/CURRENT_STATUS.md",
-      "bytes": 6923,
-      "sha256": "793de7361d551296019721938340fbba48e1f2ffcf5f7961d2cf43a250cf2503"
+      "bytes": 10664,
+      "sha256": "43133ea09c8b31d7b17223d8c0836ac3c935add89085f999eca9454d6f6ad49d"
     },
     {
       "path": "review/KZ6-0929-A01/P1-P3_STATUS.md",
@@ -1040,6 +1040,11 @@
       "sha256": "389931ba6ac9db58f4bb4da3ca67c16a242d673f47a66ad8bd20cf155636d58f"
     },
     {
+      "path": "review/KZ6-0929-A04/R12.md",
+      "bytes": 2892,
+      "sha256": "046dc8250d1e70d92a9a64d917f8c2a29839b155095123a9bcdabe8c0cae8ad8"
+    },
+    {
       "path": "review/KZ6-0929-A04/STATUS.md",
       "bytes": 3863,
       "sha256": "02cc6302dba633e2d4b0aa1203773cec4d138694ccbf70bae113523eb0b5d50a"
@@ -1151,8 +1156,8 @@
     },
     {
       "path": "runtime/API.md",
-      "bytes": 7607,
-      "sha256": "164fb33c0cb12ca9f14d009d025210d2b34be84739c705277cee9925bc45b863"
+      "bytes": 9805,
+      "sha256": "2976aa5073f9a6047b44bebb931c5cc1d537020419c6988690886d0fdc06c44f"
     },
     {
       "path": "runtime/README.md",
@@ -1166,8 +1171,8 @@
     },
     {
       "path": "runtime/kz-charts.js",
-      "bytes": 6948,
-      "sha256": "ab492558d4269ac1fdd71eaaca72f5ce4162a8e0dcd7a9a45db610d78ca9a1f6"
+      "bytes": 8057,
+      "sha256": "ea63957077d518a7b9b1c9bcd81273227134778769308dd1a763c11a4980bf41"
     },
     {
       "path": "runtime/kz-drilldown.js",
@@ -1176,8 +1181,8 @@
     },
     {
       "path": "runtime/kz-gantt.js",
-      "bytes": 12638,
-      "sha256": "68fc105ed1799095db341fc197f0b2b702029618f224db489135091ac8e241c1"
+      "bytes": 12807,
+      "sha256": "af631f64470f6b2d510ad0f9276ee5da4f8d6d88db8628bdd9e002c8b0b20eed"
     },
     {
       "path": "runtime/kz-glass.css",
@@ -1191,8 +1196,8 @@
     },
     {
       "path": "runtime/kz-motion.js",
-      "bytes": 13213,
-      "sha256": "565c67262c8ba5245bdaec22e8a718ce074d03d2f254814384ea52ae4a069d27"
+      "bytes": 13249,
+      "sha256": "4614d49053ab5465156f5e8d594d65b27d3a1bd4c93ef9e5c7827b7e560a058e"
     },
     {
       "path": "runtime/kz-tokens.css",
@@ -1226,13 +1231,13 @@
     },
     {
       "path": "schemas/page-plan.schema.json",
-      "bytes": 13846,
-      "sha256": "afaea09806198f33c5c8148b894c21e8f2acc4ce441373e74b297b5bca556540"
+      "bytes": 18281,
+      "sha256": "5073da474c29e8f545830c5e88439274d00bf2954e4dd2f6c68377f7b96b7bf2"
     },
     {
       "path": "tests/README.md",
-      "bytes": 1719,
-      "sha256": "e7a2d647bc65141579346e40dfe957f6f62fbd18c62f5fe843cf531a71992f94"
+      "bytes": 3186,
+      "sha256": "6f751350b0293b8a754856816fb458651891b2828e5ca4b41aaddb51b0389d73"
     },
     {
       "path": "tests/bridge_failure_browser.py",
@@ -1250,6 +1255,11 @@
       "sha256": "533f6cd5f5442835c81309df40ef95663296361445a7405aa08f7c5793875bd8"
     },
     {
+      "path": "tests/chart_axis_browser.py",
+      "bytes": 4871,
+      "sha256": "612a289ef6e2a8a28fb117b828be5cd63d927d7a07d11ee125c86d6b8d50d9f3"
+    },
+    {
       "path": "tests/drill_capacity_browser.py",
       "bytes": 2523,
       "sha256": "d167138ad29c60d8844caac505a44894a8590f230b3df4d590fb1ffc1b25dd82"
@@ -1260,14 +1270,19 @@
       "sha256": "6e632c815eb17d33f09296052c84ca81b7deb39eeca836db9113cc2a74d94ae5"
     },
     {
+      "path": "tests/gantt_keyboard_browser.py",
+      "bytes": 2709,
+      "sha256": "00a967c3d5516e813816bd0c684bcec3848cdc8f4c194673081b3f6036efe256"
+    },
+    {
       "path": "tests/layout_data_browser.py",
       "bytes": 3381,
       "sha256": "00aa3f78d21522bc18a590245235d9cd5f746119247e79b6f19f610cddd007a4"
     },
     {
       "path": "tests/motion_ownership_browser.py",
-      "bytes": 2643,
-      "sha256": "b1a997baabb6a435a0b88dd208f4451a3fa2f1f3304bc73a471e9ba83fd2cab8"
+      "bytes": 2759,
+      "sha256": "d4ac7ef0a5b8dc7fff5b9f8efcc3e2ebf276cf4f1b7d7379d1b33c3a9009dfcd"
     },
     {
       "path": "tests/motion_text_browser.py",
@@ -1311,8 +1326,13 @@
     },
     {
       "path": "tests/test_hero.py",
-      "bytes": 5143,
-      "sha256": "c61fa9445372bf6097fac6bccec5a2e46494e49875b40aefb04bf2b386f0bc20"
+      "bytes": 6281,
+      "sha256": "48cf80f2d63b29ebc9522693c1419a9e75e6a484ee5e7d1cb17b4e842a568079"
+    },
+    {
+      "path": "tests/test_viewport_assets.py",
+      "bytes": 5418,
+      "sha256": "7132291bf5f2fb0e02434bd1faf77950c283326d7eb02bfe36cfbc674b7fdf20"
     },
     {
       "path": "tests/text_bounds_browser.py",
@@ -1381,8 +1401,8 @@
     },
     {
       "path": "tools/qc_plan.py",
-      "bytes": 10474,
-      "sha256": "c9717bd466ef0acc984aea3e51f517c8d294623fb1e068e9cc74cad993097626"
+      "bytes": 13916,
+      "sha256": "33fae40489df2a755ec75ae7325234277b15180da101b00570d84e44df331957"
     }
   ]
 }

@@ -67,3 +67,12 @@ IMG-01：PPTX 和 HTML-PPT 逐页记录 `asset_id`。封面、目录、章节、
 A04 可机读清单以 schemas/asset-manifest.schema.json 为准。generated 资产必须记录 requested_size（接口未提供尺寸参数时为 null）、actual_size、renditions；每个 rendition 用源图像素 crop=[x,y,w,h]、viewport=[w,h]、fit=cover、裁切后显示像素坐标中的 protected_regions/subject_rects 和审阅证据。实际尺寸由文件解码核验，不能由提示词推断。预检只能确认几何/像素/回执字段存在，回执真实性及亮边与文字冲突仍由实际工具日志和图像审阅判定；无 asset_root 时不能取得图像实证通过。
 
 页面计划的 target_viewports 必填，列出本次交付的实际视口；站点矩阵以 tokens.site_viewports 为准，HTML轨必须包含超宽视口。每页映射的生成资产必须覆盖这些视口的 rendition，不能只提交一张16:9合成图却宣称宽屏通过。计划画布和实际裁切后视口的保护区、主体框均须为正尺寸且不越界；透明背景空框不作为保护区证据。
+
+### 按视口选择真实源图
+同一页面使用不同画幅的真实资产时，`image.asset_id` 是默认源；可添加 `image.viewport_assets=[{"viewport":[2560,1080],"asset_id":"hero-ultrawide"}]` 对已列入 `target_viewports` 的精确视口覆盖。默认源与覆盖源分别在资产清单登记其真实文件/尺寸/调用回执及实际使用的renditions，不把两张图拼成一个假哈希，不将16:9源的crop冒称21:9生成。每个交付视口只有一个有效源；重复/合同外视口、缺失覆盖源、未审原图和错误像素仍失败。
+
+这只是登记和预检接口，不接管HTML的responsive图片选择。项目可用同一主题的`picture/source`按画幅切换；在每个目标视口核对真实`currentSrc`、解码尺寸、对应asset SHA与crop，再看完整合成保护区。不能因默认图通过就放行替换图，静态导出与普通观众源都须绑定实际选择。一个生成源覆盖全部视口仍可只用asset_id，旧有效计划不必迁移。
+
+默认回退源即使在列出的视口中未被选中，也须真实登记并通过裸图/合成、尺寸/哈希检查；它仍随产品交付，不得作为坏图后门。generated模式必须有非空asset_id。
+
+有可辨认主体的非基准画幅须补 `image.viewport_regions=[{"viewport":[2560,1080],"protected_regions":[{"id":"page-title","role":"title","rect":[84,36,1378.5,66],"motion_margin":16}]}]`，其中rect为该视口实际显示像素，示例必须替换为本页真实DOM几何；列表覆盖基准保护区全部对象id，不猜fluid横坐标伸缩。基准视口直接核页面protected_regions，清单里删空保护区不能绕过。预检另核资产rendition声明的保护区并加安全外扩；PPT安全量按同一高度单位换算，站点/流式保持屏幕px，运动margin按规则登记。viewport_regions来自真实渲染，JSON本身无法证明作者登记值是真实DOM，仍须实际合成/轨迹复核。近白无可辨认主体的正文源无需人为制造subject框，但可见亮边/纹理冲突仍由IMG-05实物审阅拒绝。

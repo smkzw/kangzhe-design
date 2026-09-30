@@ -51,7 +51,7 @@
     function draw(){
       const unit=root.closest('.deck')&&document.body.dataset.fit==='fluid'?Math.max(1,innerHeight/KZ_TOKENS.wide.htmlppt_reference_height):1;
       chart.setOption({animation:false,grid:{left:(chart.getWidth()<480?96:126)*unit,right:24*unit,top:38*unit,bottom:44*unit},textStyle:{fontFamily:KZ_TOKENS.fonts.fallback_css,fontSize:16*unit},
-        xAxis:{type:'value',min:data.min,max:data.max,interval:1,axisLabel:{fontSize:16*unit,color:KZ_TOKENS.colors.body,formatter:v=>{const q=fromIndex(v);return q.quarter===1?String(q.year):((chart.getWidth()-150*unit)/(data.max-data.min)>=30*unit?'Q'+q.quarter:'');}},axisTick:{show:false},splitLine:{lineStyle:{color:'#E3E7EC'}},axisLine:{lineStyle:{color:'#CDD3D9'}}},
+        xAxis:{type:'value',min:data.min,max:data.max,interval:1,axisLabel:{fontSize:16*unit,color:KZ_TOKENS.colors.body,formatter:v=>{if(v>=data.max)return '';const q=fromIndex(v);if(v===data.min&&q.quarter!==1)return `${q.year}Q${q.quarter}`;return q.quarter===1?String(q.year):((chart.getWidth()-150*unit)/(data.max-data.min)>=30*unit?'Q'+q.quarter:'');}},axisTick:{show:false},splitLine:{lineStyle:{color:'#E3E7EC'}},axisLine:{lineStyle:{color:'#CDD3D9'}}},
         yAxis:{type:'category',inverse:true,data:data.tasks.map(t=>t.label),axisLabel:{fontSize:16*unit,color:KZ_TOKENS.colors.body,width:(chart.getWidth()<480?86:116)*unit,overflow:'break'},axisTick:{show:false},axisLine:{show:false}},
         tooltip:{show:false},series:[{type:'custom',coordinateSystem:'cartesian2d',id:'kz-gantt-tasks',silent:true,
           renderItem(params,api){const row=api.value(0),start=api.coord([api.value(1),row]),end=api.coord([api.value(2),row]),height=Math.min(36*unit,api.size([0,1])[1]*.56),t=data.tasks[row];
@@ -104,7 +104,7 @@
       if(!['ArrowLeft','ArrowRight'].includes(e.key))return;e.preventDefault();e.stopPropagation();const d=e.key==='ArrowRight'?1:-1,t=task();
       commit(t.start+(e.shiftKey?0:d),t.end+d);
     },{signal});
-    root.addEventListener('keydown',e=>{if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='z'&&!e.target.closest('input,select,textarea')){e.preventDefault();e.stopPropagation();undoOne();return;}if(['ArrowLeft','ArrowRight','ArrowUp','ArrowDown','PageUp','PageDown','Home','End',' ','Escape'].includes(e.key))e.stopPropagation();},{signal});
+    root.addEventListener('keydown',e=>{if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='z'&&!e.target.closest('input,select,textarea')){e.preventDefault();e.stopPropagation();undoOne();return;}if(e.target.closest('input,select,textarea,button,[contenteditable=true]')||['ArrowLeft','ArrowRight','ArrowUp','ArrowDown','PageUp','PageDown','Home','End',' ','Enter','Escape'].includes(e.key))e.stopPropagation();},{signal});
     select.addEventListener('change',()=>{selected=select.value;syncFields();draw();},{signal});
     apply.addEventListener('click',()=>commit(qindex(inputs.sy.value,inputs.sq.value),qindex(inputs.ey.value,inputs.eq.value)+1),{signal});
     function undoOne(){finish();if(undo.length){data=undo.pop();draw();syncFields();status('已撤销');}}

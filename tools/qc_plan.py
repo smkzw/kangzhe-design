@@ -42,10 +42,18 @@ def validate(plan,manifest=None,asset_root=None):
     if not 1<=n<=6:add('HERO-CAPACITY',pid,'目录每页1至6项，超过必须拆页')
     else:
      from hero_layout import layout
-     _,blocks,_=layout('toc',{'title':'目录','items':[{'title':'项'}]*n})
+     _,blocks,_=layout('toc',{'title':'目录','items':[{'title':'项','description':'说明'}]*n})
      for role in ['toc_number','toc_label','toc_description']:
       els=[e for e in p['elements'] if e['role']==role];want=[b for b in blocks if b['role']==role]
-      if len(els)!=len(want):add('HERO-ROLE',pid,'目录角色数量不一致 '+role)
+      if role=='toc_description':
+       # Descriptions are optional per card; actual slots must still be unique.
+       occupied=set()
+       for e in els:
+        matches=[i for i,b in enumerate(want) if e.get('rect') and all(abs(a-c)<=2 for a,c in zip(e['rect'],b['rect']))]
+        if not matches:add('HERO-GEOMETRY',pid,'目录固定网格位置不符 '+role)
+        elif matches[0] in occupied:add('HERO-ROLE',pid,'目录说明槽重复')
+        else:occupied.add(matches[0])
+      elif len(els)!=len(want):add('HERO-ROLE',pid,'目录角色数量不一致 '+role)
       elif any(not e.get('rect') or any(abs(a-b)>2 for a,b in zip(e['rect'],b['rect'])) for e,b in zip(els,want)):add('HERO-GEOMETRY',pid,'目录固定网格位置不符 '+role)
   for el in p['elements']:
    role=el['role'];font=el['font_px'];byrole.setdefault(role,set()).add((round(font,3),round(el['line_height'],3)))
@@ -68,6 +76,24 @@ def validate(plan,manifest=None,asset_root=None):
   for region in p['protected_regions']:
    if not in_bounds(region['rect'],w,h):add('PROTECTION-BOUNDS',pid+'/'+region['id'],'保护区尺寸须为正且位于画布内')
   image=p['image']
+  bindings=set()
+  if image.get('viewport_assets') and image['mode']!='generated':add('IMAGE-VIEWPORT-MODE',pid,'按视口资产选择只用于真实生成图，不用于光场豁免')
+  for binding in image.get('viewport_assets',[]):
+   viewport=tuple(binding['viewport'])
+   if viewport not in targets:add('IMAGE-VIEWPORT-UNKNOWN',pid,'资产选择视口未列入交付合同')
+   if viewport in bindings:add('IMAGE-VIEWPORT-DUPLICATE',pid,'同一视口不得选择多个资产')
+   bindings.add(viewport)
+  region_viewports=set()
+  for mapping in image.get('viewport_regions',[]):
+   viewport=tuple(mapping['viewport'])
+   if viewport not in targets:add('IMAGE-VIEWPORT-UNKNOWN',pid,'保护区映射视口未列入交付合同')
+   if viewport in region_viewports:add('IMAGE-PROTECTION-DUPLICATE',pid,'视口保护区映射重复')
+   region_viewports.add(viewport)
+   ids=[region['id'] for region in mapping['protected_regions']]
+   if len(ids)!=len(set(ids)):add('IMAGE-PROTECTION-DUPLICATE',pid,'实际保护区id重复')
+   if not {region['id'] for region in p['protected_regions']}.issubset(ids):add('IMAGE-PROTECTION-COVERAGE',pid,'实际视口保护区漏掉页面对象')
+   for region in mapping['protected_regions']:
+    if not in_bounds(region['rect'],*viewport):add('IMAGE-RENDITION-BOUNDS',pid+'/'+region['id'],'实际视口保护区越界或尺寸非正')
   if image['mode']=='global_procedural_optical_field':
    if plan['track'] not in ['site','stream']:add('IMAGE-REQUIRED',pid,'PPTX/HTML-PPT 无程序化光场免生图豁免')
    if not image.get('procedural_evidence'):add('IMAGE-EXEMPTION',pid,'光场豁免缺少实现证据')
@@ -87,11 +113,20 @@ def validate(plan,manifest=None,asset_root=None):
    if len(assets)!=len(manifest['assets']):add('ASSET-ID','assets','资产 id 重复')
    for p in plan['pages']:
     if p['image']['mode']!='generated':continue
-    a=assets.get(p['image'].get('asset_id'))
-    if not a:add('ASSET-MISSING',p['id'],'资产映射不存在');continue
+    choices={tuple(b['viewport']):b['asset_id'] for b in p['image'].get('viewport_assets',[])}
+    # The fallback image is shipped even when all target viewports have overrides.
+    required={p['image'].get('asset_id'):set()}
+    for viewport in targets:required.setdefault(choices.get(viewport,p['image'].get('asset_id')),set()).add(viewport)
+    for asset_id,asset_targets in required.items():
+     _validate_asset(p,assets.get(asset_id),asset_targets,asset_root,tokens,add,plan['canvas'],plan['track'])
+ else:add('ASSET-NOT-CHECKED','project','仅完成生成前计划检查；未验证实际生成与合成审阅','pending')
+ return findings
+
+def _validate_asset(p,a,targets,asset_root,tokens,add,canvas,track):
+    if not a:add('ASSET-MISSING',p['id'],'资产映射不存在');return
     if a['origin']!='generated' or not a.get('tool_receipt'):add('GEN-RECEIPT',p['id'],'需要真实生成工具回执；占位声明不算生成')
     if a['review']['bare']!='pass' or a['review']['composite']!='pass' or not a['review']['evidence']:add('IMAGE-QC',p['id'],'裸图和合成图均须有审阅证据')
-    if a['origin']!='generated':continue
+    if a['origin']!='generated':return
     size=a['actual_size']; tol=tokens['image']['aspect_tolerance']
     floor=tokens['image']['hero_min_long_edge_px' if p['kind'] in ['cover','toc','section','ending','hero'] else 'body_min_long_edge_px']
     if max(size)<floor:add('IMAGE-RESOLUTION',p['id'],'源图实际长边不足；不得把重采样算真实生成','warning')
@@ -100,6 +135,7 @@ def validate(plan,manifest=None,asset_root=None):
     if len(covered)!=len(a['renditions']):add('IMAGE-RENDITION-DUPLICATE',p['id'],'同一资产视口映射重复')
     for r in a['renditions']:
      vw,vh=r['viewport'];x,y,cw,ch=r['crop']
+     unit=vh/canvas[1] if track in ['pptx','htmlppt'] else 1
      if x<0 or y<0 or cw<=0 or ch<=0 or x+cw>size[0] or y+ch>size[1]:add('IMAGE-CROP',p['id'],'裁切超出源图实际像素')
      elif abs(cw/ch/(vw/vh)-1)>tol:add('IMAGE-STRETCH',p['id'],'裁切与显示比例不符，不允许拉伸或补边')
      if vw/vh>2 and abs(size[0]/size[1]/(vw/vh)-1)>tol:add('IMAGE-ULTRAWIDE',p['id'],'超宽显示缺少比例匹配的真实源图')
@@ -108,7 +144,18 @@ def validate(plan,manifest=None,asset_root=None):
        if not in_bounds(rect,vw,vh):add('IMAGE-RENDITION-BOUNDS',p['id']+'/'+role,'显示坐标区域尺寸须为正且位于视口内')
      for subject in r['subject_rects']:
       for protected in r['protected_regions']:
-       if intersects(subject,protected):add('IMAGE-RENDITION-COLLISION',p['id'],'实际裁切映射后主体侵入保护区')
+       pad=tokens['image']['safety_pad_px']*unit
+       expanded=[protected[0]-pad,protected[1]-pad,protected[2]+2*pad,protected[3]+2*pad]
+       if intersects(subject,expanded):add('IMAGE-RENDITION-COLLISION',p['id'],'实际裁切映射后主体侵入保护区含安全外扩')
+     if r['subject_rects'] and tuple(r['viewport']) in targets:
+      mapped=next((m['protected_regions'] for m in p['image'].get('viewport_regions',[]) if m['viewport']==r['viewport']),None)
+      regions=p['protected_regions'] if r['viewport']==canvas else mapped
+      if regions is None:add('IMAGE-PROTECTION-MAP',p['id'],'非基准视口有主体时必须登记实际保护区，不猜测fluid坐标')
+      else:
+       for region in regions:
+        rect=region['rect'];pad=max(tokens['image']['safety_pad_px'],region.get('motion_margin',0))*unit
+        expanded=[rect[0]-pad,rect[1]-pad,rect[2]+2*pad,rect[3]+2*pad]
+        if any(intersects(subject,expanded) for subject in r['subject_rects']):add('IMAGE-RENDITION-COLLISION',p['id']+'/'+region['id'],'主体侵入页面实际保护区含运动安全外扩')
     if not asset_root:add('ASSET-PIXELS-PENDING',p['id'],'没有资产根目录，未从图像文件核验真实像素','pending')
     if asset_root:
      root=Path(asset_root).resolve();file=(root/a['file']).resolve()
@@ -119,8 +166,6 @@ def validate(plan,manifest=None,asset_root=None):
        with Image.open(file) as im:
         if list(im.size)!=size:add('ASSET-PIXELS',p['id'],'实际文件尺寸与清单不一致')
       except (OSError,ValueError):add('ASSET-DECODE',p['id'],'图像不可解码')
- else:add('ASSET-NOT-CHECKED','project','仅完成生成前计划检查；未验证实际生成与合成审阅','pending')
- return findings
 if __name__=='__main__':
  ap=argparse.ArgumentParser();ap.add_argument('plan',type=Path);ap.add_argument('--manifest',type=Path);ap.add_argument('--asset-root',type=Path);ap.add_argument('--out',type=Path);a=ap.parse_args()
  try:

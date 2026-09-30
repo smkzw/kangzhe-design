@@ -4,6 +4,7 @@
   const copy=x=>JSON.parse(JSON.stringify(x));
   const palettes=()=>[KZ_TOKENS.colors.brand,KZ_TOKENS.departments.operations.color,KZ_TOKENS.departments.statistics.color,KZ_TOKENS.departments.pv.color];
   const finiteOrNull=x=>x===null||Number.isFinite(x);
+  function extent(data){let lo=0,hi=0;for(const series of data.series)for(const v of series.values)if(Number.isFinite(v)){lo=Math.min(lo,v);hi=Math.max(hi,v);}return [lo,hi];}
   function validate(data){
     if(!data||!['line','bar','column'].includes(data.kind))throw Error('基础图表只支持 line/bar/column');
     if(!Array.isArray(data.categories)||!data.categories.length)throw Error('缺少类别');
@@ -18,17 +19,31 @@
       for(const k of ['min','max','interval'])if(data.axis[k]!==undefined&&!Number.isFinite(data.axis[k]))throw Error('坐标范围必须为有限数');
       if(data.axis.min!==undefined&&data.axis.max!==undefined&&data.axis.min>=data.axis.max)throw Error('坐标上限必须大于下限');
       if(data.axis.interval!==undefined&&data.axis.interval<=0)throw Error('坐标间隔必须为正数');
+      if(data.axis.min!==undefined||data.axis.max!==undefined){
+        const automatic=readableAxis(...extent(data));
+        if((data.axis.min??automatic.min)>=(data.axis.max??automatic.max))throw Error('显式坐标端点与自动范围冲突；请提供有效的 min/max');
+      }
     }
     return true;
   }
   function rgba(hex,alpha){const h=hex.replace('#','');return `rgba(${parseInt(h.slice(0,2),16)},${parseInt(h.slice(2,4),16)},${parseInt(h.slice(4,6),16)},${alpha})`;}
+  function readableAxis(lo,hi){
+    const span=hi-lo||1,lower=lo<0?lo-span*.08:0,upper=hi>0?hi+span*.12:(lo===0?1:0);
+    const raw=(upper-lower)/5,magnitude=10**Math.floor(Math.log10(raw)),fraction=raw/magnitude;
+    const step=(fraction<=1?1:fraction<=2?2:fraction<=5?5:10)*magnitude;
+    // IEEE-754 endpoints can leave no representable room for rounded padding.
+    if(!Number.isFinite(raw)||!Number.isFinite(step)||step<=0)return {min:lo,max:hi||1,interval:undefined};
+    const tidy=n=>Number(n.toPrecision(12));
+    return {min:tidy(Math.floor(lower/step)*step),max:tidy(Math.ceil(upper/step)*step),interval:tidy(step)};
+  }
   function option(data,{progress=1,reduced=false,width=1280,unit=1}={}){
     validate(data);const line=data.kind==='line',horizontal=data.kind==='bar';
     const numberFormat=v=>v===null?'未提供':Number(v).toLocaleString('zh-CN',{maximumFractionDigits:data.decimals??2,minimumFractionDigits:data.decimals??0});
     const category={type:'category',data:data.categories,boundaryGap:!line,axisTick:{show:false},axisLine:{lineStyle:{color:'#CED3D8'}},axisLabel:{color:KZ_TOKENS.colors.body,fontSize:16*unit,interval:0,width:width<480?32:undefined,overflow:'break',lineHeight:20*unit}};
-    const all=data.series.flatMap(s=>s.values).filter(Number.isFinite);
-    const lo=Math.min(0,...all),hi=Math.max(0,...all),span=hi-lo||1;
-    const value={type:'value',min:data.axis?.min??(lo<0?lo-span*.08:0),max:data.axis?.max??(hi>0?hi+span*.12:(lo===0?1:0)),interval:data.axis?.interval,name:data.unit,nameTextStyle:{color:KZ_TOKENS.colors.body,fontSize:16*unit},axisLabel:{color:KZ_TOKENS.colors.body,fontSize:16*unit},splitLine:{lineStyle:{color:'#E7EBEE'}},axisLine:{show:false}};
+    const [lo,hi]=extent(data);
+    const axis=readableAxis(lo,hi);
+    const explicitExtent=data.axis?.min!==undefined||data.axis?.max!==undefined;
+    const value={type:'value',min:data.axis?.min??axis.min,max:data.axis?.max??axis.max,interval:data.axis?.interval??(explicitExtent?undefined:axis.interval),name:data.unit,nameTextStyle:{color:KZ_TOKENS.colors.body,fontSize:16*unit},axisLabel:{color:KZ_TOKENS.colors.body,fontSize:16*unit},splitLine:{lineStyle:{color:'#E7EBEE'}},axisLine:{show:false}};
     return {backgroundColor:'transparent',animation:false,textStyle:{fontFamily:KZ_TOKENS.fonts.fallback_css,fontSize:16*unit,color:KZ_TOKENS.colors.body},
       aria:{enabled:true,decal:{show:false},label:{description:data.description||('图表；单位：'+data.unit)}},
       color:palettes(),grid:{left:(horizontal?120:60)*unit,right:28*unit,top:56*unit,bottom:(width<480?56:42)*unit,containLabel:false},

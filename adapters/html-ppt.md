@@ -34,9 +34,12 @@
 
 确有该问题时，从当前观众源自动派生同目录的 `capture-only.html`，资源路径和官方 runtime/hash 导航不变；仅此副本链接静态 CSS，取消过渡/浮动，并确保活动页 opacity=1、其他页仍由上游控制。项目装配还必须识别**只属于副本**的冻结标志，将图表/甘特和电影置于已验证完整静态态；单独禁用 CSS 不能让未出现的数据自动完整。
 
-本次真实工程的装配显式支持 `body[data-preview]`，故副本 `data-preview="1"` 可调用其既有 `freezeForPreview()`；这不是上游通用接口，其他项目须先核对或在自己的装配层提供明确捕获标志。不可猜测把 URL query 写进文件名，也不修改官方 renderer/runtime。观众 `index.html` 不引用捕获 CSS 或冻结标志；改源后重新派生捕获副本，不保留过时正文。
+捕获标志由项目装配层识别，不能猜测存在 `freezeForPreview()`。当前实测七页工程以 `body[data-capture-only]` 或 `body[data-preview]` 选择静态分支：page.finish()、chart.finish()、gantt.finish()呈现完整终态；不启动普通Film，另以静态文字展示完整阶段与限制。其他工程可按自己已核实的公开接口装配静态态，不能复制一个没有定义的方法名。不可猜测把 URL query 写进文件名，也不修改官方 renderer/runtime。观众 `index.html` 不引用捕获 CSS 或冻结标志；改源后重新派生捕获副本，不保留过时正文。
 
 最后必须实际调用原 `render.sh capture-only.html all 输出目录`，逐页检查真实 PNG/尺寸、活动页 computed opacity=1、完整文字/数据、字号和品牌 chrome；另验观众源普通自动播放与进出。正式脚本1920截图不代替2560宽屏运行检查。记录观众源与上游源码前后hash、副本diff和真实返回码，明确“官方工具＋静态副本”，不宣称普通源未经适配已正常截帧。
 
 ## 固定双菱形
 调用 `tools/brand_fragments.py` 的 `facets(prefix=页面唯一前缀)`，插入原页眉 SVG，保留 1280×720 基准坐标。若独立 SVG，使用 viewBox="0 0 100 90"，宽高各为 100u/90u，左上锚定 0/0，禁止随页面宽度横向拉伸。不要把静态 SVG 作为 img 后误以为内层 class 能被宿主 CSS 动画控制：采用 inline SVG，加载 kz-glass.css 并保留 `.kz-float` 整组。标记内部四形状不再单独施加动效。普通播放自动微浮动；冻结/减少动态/打印恢复基准，无播放器 UI。
+
+## Responsive图片登记
+使用picture/source切换标准与超宽真实源时，按04的image.viewport_assets记录精确目标视口有效asset_id；媒体条件是项目实现，不是第二个fit引擎。逐视口检查currentSrc及源SHA/裁切，正式capture-only仍从同观众源派生，不默默换回未经登记图片。

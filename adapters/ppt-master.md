@@ -24,6 +24,11 @@
 
 上游已核实的边界：`fill-opacity` / `stroke-opacity` / `stop-opacity`；对象直接引用的 `feDropShadow` 会近似为 DrawingML 效果；普通组上的任意滤镜、真实 backdrop blur 不在此合同内。最终原生表现必须实测。
 
+### 数据对象下的阅读底板（A04 R12 实测）
+原生图表、表格或甘特需要阅读底板时，底板与局部高光应先于数据对象绘制，最终位于数据对象下方，保持为独立、可编辑的静态页面框架原语。当前上游 checker 支持 root 原语的稳定 `id` 与 `data-pptx-role="decoration"`；其 `_carrier_page_frame_role` 与 `_check_animation_group_ids` 明确识别这类页面框架。不要为满足动画分组提示，将底板与原生图表/表格替换标记合并成一个内容组；替换器处理的边界可能包含底板。
+
+只有确属无业务文字、无数据语义的底板/高光可声明为 decoration。正文、图表、表格、任务条和承载内容的卡片仍保持真实内容身份；不得借这个角色隐藏内容重叠。KZ6-0929-A04 R12 在本机 6.6.0 经真实 Default checker、native export 与 PowerPoint 显示验证该组合，仍保留非阻断样式提示。升级时重新读取该版本静态框架与替换标记接口，不复制样页坐标或猜测对象 ID。
+
 ## 原生数据与 ECharts 一致
 
 对支持的图表，同时编写可见 fallback 与 `data-pptx-replace-with="chart"` 下的 JSON metadata；SVG-first 基线由上游脚本同步后再检查。原生激活使用该版本支持的 `--native-charts-and-tables`。面积与折线组合必须包含 area + line 两个 plot，共享源数据；不把可见面积删掉后声称一致。

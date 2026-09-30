@@ -21,6 +21,22 @@ class HeroContracts(unittest.TestCase):
   p=self.page();p['pages'][0]['elements'][0]['line_height']=1.1;self.assertIn('HERO-LINEHEIGHT',self.errors(p))
  def test_toc_seven_requires_split(self):
   with self.assertRaises(ValueError):layout('toc',{'title':'目录','items':[{'title':'章节'}]*7})
+ def toc_plan(self,items):
+  p=self.page();q=p['pages'][0];q.update(kind='toc',title='目录',hero_layout_id='toc-01')
+  _,blocks,_=layout('toc',{'title':'目录','items':items})
+  q['elements']=[dict(id=str(i),role=b['role'],font_px=b['font_px'],line_height=b['line_height'],rect=b['rect']) for i,b in enumerate(blocks)]
+  return p
+ def test_optional_description_slots_validate_for_mixed_and_full_toc(self):
+  for descriptions in [[],[1],[0,2],[0,1,2]]:
+   items=[dict(title='章节',**({'description':'真实说明'} if i in descriptions else {})) for i in range(3)]
+   with self.subTest(descriptions=descriptions):self.assertEqual(self.errors(self.toc_plan(items)),set())
+ def test_description_drift_and_duplicate_rejected(self):
+  p=self.toc_plan([{'title':'章节','description':'说明'},{'title':'结果'}])
+  e=next(e for e in p['pages'][0]['elements'] if e['role']=='toc_description')
+  duplicate=copy.deepcopy(e);duplicate['id']='duplicate';p['pages'][0]['elements'].append(duplicate)
+  self.assertIn('HERO-ROLE',self.errors(p))
+  p['pages'][0]['elements'].pop();e['rect'][1]+=20
+  self.assertIn('HERO-GEOMETRY',self.errors(p))
  def test_empty_description_reading_is_balanced_inside_fixed_card(self):
   _,blocks,cards=layout('toc',{'title':'目录','items':[{'title':'核对','description':None},{'title':'结果','description':'  '}]})
   reading=[b for b in blocks if b['role'] in ['toc_number','toc_label','toc_description']]

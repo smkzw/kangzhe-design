@@ -34,11 +34,15 @@ const bridge = KZHTMLPPT.bind(document.querySelector('.deck'), slide => {
 
 options 可提供 `onProgress(progress,currentData)` 和 `onDataClick(echartsParams,currentData)`。返回 chart、play(durationMs)、finish()、renderProgress(p)、getData()、getProgress()、setData(next)、resize()、pause()、resume()、dispose()。pause() 实际完成到真值；resume() 无重播行为，重新进入时显式调用 play()。使用 onProgress 将数字与图形绑定；项目负责离页完成、静态完整和最终 dispose。KZCharts.option(data,options) 是低级 option 工厂，通常不需使用。
 
+显式axis可只给一端，另一端由完整数据的自动范围决定；合并后必须min<max，否则validate在初始化ECharts之前拒绝。显式科学端点未给interval时，由ECharts按该范围决定步长，不强制改成自动1/2/5范围。自动范围在增长动画中固定。onProgress收到当前数据的独立拷贝；20万点工厂探针只验证不触发参数展开栈溢出，不表示20万点动画性能或可读性已通过。
+
 ## 可编辑季度甘特
 
 `KZGantt.mount(root,data,options)`；数据为 `{min,max,tasks:[{id,label,start,end,...}]}`，整数季度来自 KZGantt.qindex(year,quarter)。区间是 **[start,end)**；展示“含结束季度”须把结束季度 index 加 1，不能再额外加一整年。root 由组件创建 plot/editor，项目提供尺寸。支持 onProgress(progress,currentData)，单一数据对象驱动图形与读数。
 
 返回 chart、root、plot、select(id)、play(durationMs)、finish()、getProgress()、getData()、getSelected()、getDirty()、commit(start,end)、undo()、reset()、serialize()、geometry(id)、importJSON(text)、pause()、resume()、dispose()。commit 修改当前选中任务；importJSON 只支持相同轴和同序任务 ID。编辑自动结束入场，避免动画覆盖修改；表单/拖移/两端延展/键盘仍须真实测试。没有 exportExcel 或原生 Excel 接口。
+
+绘图区的max是半开区间边界，末端刻度不标成下一年的业务时期；当前工厂省略该边界标签，范围标题和编辑器继续显示真实含结束季度。不移动条形、不减一季度、不把max改为含端点。
 
 ## 宽幅多层下钻
 
@@ -50,7 +54,13 @@ options 可提供 `onProgress(progress,currentData)` 和 `onDataClick(echartsPar
 
 `new KZMotion.Film(root,options)` 要求 root 内已有 `.kz-film-stage` 与同一 `.kz-film-carrier`，并提供 options.frames、duration。帧结构为 `{t,x,y,w,h,r,tint:[r,g,b,a],label,caption}`，首尾回接按 06。可选 managedText:false 由项目业务时钟写文本；onRender(frame,progress,film) 的 frame.index 来自同一几何采样，供同步业务状态。另有 staticProgress、minCarrierWidth 参数；数值从实际计划/token 取，不在此页复制设计默认值。
 
+这些几何值是相对于实际舞台的归一化值，不能把 x/y 当作载体中心坐标。当前 `validateFrames` 要求至少四帧，t 严格递增且端点为0和1；每帧 x/y 非负、w/h 为正、x+w 与 y+h 均不超过1（当前实现仅容许1e-5浮点误差），r 在0–0.5之间。tint为四项RGBA数组，RGB为0–255、alpha为0–1；首尾几何、材质和文字满足同一合同。譬如 w=.70 时，x=.48会被构造器拒绝，而不是自动裁切为合法运动。最小宽度在后续render中的调整不能救非法输入帧。
+
+构造成功后当前实现设置 root.dataset.kzReady='true'，render更新 root.dataset.kzProgress；返回实例的snapshot也提供进度、同节点及暂停原因。dispose清除这两项root状态属性，carrierId保持节点身份。这些是当前组件的实际接口，不要求其他项目时钟冒用同名属性。普通态须实际确认初始化成功、有限进度、自动变化和完整回接。异常、未挂载、缺失/NaN进度或EMPTY不算动画通过；静态副本可能不创建Film，须另测普通观众源。电影初始化错误还可能阻断同一enter中的图表play，图表真值与联动须另作断言。
+
 舞台尺寸来自真实 `.kz-film-stage` 的clientWidth/clientHeight。当前共享CSS同时设 `height:440px; min-height:320px`；嵌入较矮的PPT正文卡时，项目只覆盖height不会取消min-height，实际舞台仍可能撑破卡片。项目须在自己的作用域一并设定合理height/min-height，并实测正文卡、标题、说明、图表、页脚的联合容量；不能裁字或缩字遮溢出。内层叙事载体置于玻璃阅读卡时保持同族，但不得再叠加第二层backdrop采样；02负责材质硬门。
+
+隐藏容器可先挂载，初始stage可能为零尺寸；ready只证明初始化，不证明可见布局。实际活动页必须等待舞台宽高为正及ResizeObserver重新render，再测effective几何/字形/保护区；零尺寸snapshot不算可见状态通过。
 
 离页若项目调用 `film.pause('engine-inactive')`，复入必须调用 `film.resume('engine-inactive')`；IO或resume其他原因不会清除它。保留其他hidden/modal/RM原因，并实际测离开后返回，不用初次自动播放推定复入正确。
 
