@@ -6,6 +6,10 @@
 ## A03默认：全视口主题
 从new-deck.sh创建。body设置data-fit="fluid"；deck保持上游class和导航；CSS覆盖其默认padding，用一套品牌主题单位 `--kz-u = viewport_height / 720`，在16:9桌面与1280×720基准相同。主题使用正常CSS长度/网格，不再给deck或文字transform:scale。桌面正文区域left=56u、right=56u、top=96u、bottom=60u，卡群真实跨该宽度；左页眉锚定，右Logo/页码右锚定，固定分隔线向右延伸。文字/Logo/菱形不横向拉伸。对短内容限制文本行长，不限制整个网格/主视觉的宽度。
 
+共享组件在 `body.kz[data-fit="fluid"]` 下通过 `--kz-component-u=--kz-u` 换算其按钮、甘特编辑标签/字段/状态、面包屑和图表状态等文字；其他HTML轨保持屏幕单位，不继承PPT换算。项目CSS后加载时仍须检查最终computed字号/u，控件和下钻中的必要文字同样不得低于16逻辑px，不准只检查卡片正文。不要把已换算的component变量再乘一次u；此补充不替代项目网格、行高、内边距与字号角色的完整主题适配。
+
+`tokens.chrome.rule` 是端点数组 `[x1,y1,x2,y2,stroke_width]`，不是矩形 `[x,y,width,height]`。当前右端点1257对应1280基准右距23；HTML用 `left:x1*u; right:(1280-x2)*u; top:y1*u; height:stroke_width*u`，不要把x2当长度相加或得到负右距。PPTX/SVG用原端点和描边宽度，不改固定页眉。
+
 主交付覆盖16:9、2:1、21:9及更宽桌面；狭窄竖屏使用明确的阅读布局或提示横屏，不能把正常中文降到低于16屏幕px来假装适配。若任务要求固定16:9文件，以显式fixed-export配置使用上游fit；它不代表宽屏观看验收。打印恢复1280×720与完整终态，退出打印恢复观众模式。
 
 四类hero的基准坐标来自tokens：左文字/Logo锚保留；右Logo锚随宽度；目录三等列展开；背景用实际宽幅生成资产按经审阅crop铺满。页眉页脚位置以同一u换算，只有x的右锚随宽度变化。PPTX保持固定画布，无须模拟浏览器resize。

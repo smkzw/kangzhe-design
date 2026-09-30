@@ -1,3 +1,11 @@
+# R11当前缺口（优先于保留历史）
+1. HTML-PPT新七页第5页stage min-height继承导致真实撑出卡与页脚撞字；需制作者修复、离页复入/完整电影/正式七页导出/双窗/甘特真操作，不由owner修后代计成功。
+2. 站点129检查0失败仅已有覆盖；B/C子电影完整周期、真实hidden及逐表单元Range待；四轨最终两轮与holdout未计。EGO原空间不存在、替代授权pending，不假称Chrome是EGO。
+3. 生图接口实际像素不足仍WARN/BLOCKED，不插值或猜size字段。CodeBuddyreset已过但新路由尚待实际验证。
+4. 本轮目录/控件组件复审通过不替代真实ppt-master/html-ppt-skill接入；原生Office仅既有确切hash，Excel不在范围。
+
+以下保留历史。
+
 # 当前待补足项 · A04
 
 项目 | 当前事实 | 关闭条件

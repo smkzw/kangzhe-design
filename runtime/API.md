@@ -50,6 +50,10 @@ options 可提供 `onProgress(progress,currentData)` 和 `onDataClick(echartsPar
 
 `new KZMotion.Film(root,options)` 要求 root 内已有 `.kz-film-stage` 与同一 `.kz-film-carrier`，并提供 options.frames、duration。帧结构为 `{t,x,y,w,h,r,tint:[r,g,b,a],label,caption}`，首尾回接按 06。可选 managedText:false 由项目业务时钟写文本；onRender(frame,progress,film) 的 frame.index 来自同一几何采样，供同步业务状态。另有 staticProgress、minCarrierWidth 参数；数值从实际计划/token 取，不在此页复制设计默认值。
 
+舞台尺寸来自真实 `.kz-film-stage` 的clientWidth/clientHeight。当前共享CSS同时设 `height:440px; min-height:320px`；嵌入较矮的PPT正文卡时，项目只覆盖height不会取消min-height，实际舞台仍可能撑破卡片。项目须在自己的作用域一并设定合理height/min-height，并实测正文卡、标题、说明、图表、页脚的联合容量；不能裁字或缩字遮溢出。内层叙事载体置于玻璃阅读卡时保持同族，但不得再叠加第二层backdrop采样；02负责材质硬门。
+
+离页若项目调用 `film.pause('engine-inactive')`，复入必须调用 `film.resume('engine-inactive')`；IO或resume其他原因不会清除它。保留其他hidden/modal/RM原因，并实际测离开后返回，不用初次自动播放推定复入正确。
+
 Film 自动开始，返回 pause(reason)、resume(reason)、seek(progress)、snapshot()、dispose()；没有 play/reset/static_summary 方法。pause/resume 按原因集合管理；seek 仅后台 QC/捕获，不呈现播放器。Film 已管理 RM/可见性/打印/自身 resize；项目自己的 observer/listener/timer 仍须释放。静态总览是项目内容合同，不是某个 Film 方法。能力边界与语义电影验收见 06 与 runtime/README。
 
 ## 计划和证据
