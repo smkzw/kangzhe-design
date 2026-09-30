@@ -1,0 +1,17 @@
+"""Actual browser probes of independently reported shared-element ownership defects."""
+from pathlib import Path
+import argparse,json
+from playwright.sync_api import sync_playwright
+ap=argparse.ArgumentParser();ap.add_argument('--chrome',required=True);ap.add_argument('--output',required=True);a=ap.parse_args();root=Path(__file__).resolve().parents[1];out={}
+with sync_playwright() as pw:
+ b=pw.chromium.launch(executable_path=a.chrome);p=b.new_page();errors=[];p.on('pageerror',lambda e:errors.append(str(e)))
+ p.set_content('<div id=outer><div id=inner><div class=kz-film-stage style="width:800px;height:400px;position:relative"><div class=kz-film-carrier style="position:absolute"></div></div></div></div>');p.add_script_tag(path=str(root/'runtime/kz-motion.js'))
+ out['carrier']=p.evaluate('''()=>{const outer=document.querySelector('#outer'),inner=document.querySelector('#inner'),f=t=>({t,x:.1,y:.1,w:.6,h:.6,r:.1,tint:[255,249,240,.7],label:'起始',caption:'说明'}),options={frames:[f(0),f(.3),f(.7),f(1)]};let one=new KZMotion.Film(inner,options);one.pause('qc');let rejected=false;try{new KZMotion.Film(outer,options)}catch(e){rejected=/载体已由另一时钟/.test(e.message)}const identity=one.carrier;one.dispose();const two=new KZMotion.Film(outer,options),same=two.carrier===identity;two.dispose();let failed=false;try{new KZMotion.Film(inner,{...options,onRender(){throw Error('intentional init failure')}})}catch(e){failed=true}const three=new KZMotion.Film(outer,options);three.dispose();return{rejected,same,failed,remountAfterFailure:true};}''')
+ assert all(out['carrier'].values()),out
+ p.set_content('<div id=outer><div id=inner><div id=target data-kz-tilt data-kz-reveal style="width:200px;height:100px">正文</div></div></div>');p.add_script_tag(path=str(root/'runtime/kz-motion.js'))
+ out['tilt']=p.evaluate('''()=>{const outer=document.querySelector('#outer'),inner=document.querySelector('#inner'),target=document.querySelector('#target'),one=KZMotion.mountTilt(inner);let sameRejected=false,nestedRejected=false;try{KZMotion.mountTilt(inner)}catch(e){sameRejected=true}try{KZMotion.mountTilt(outer)}catch(e){nestedRejected=true}target.dispatchEvent(new PointerEvent('pointermove',{pointerType:'mouse',clientX:150,clientY:70}));const live=!!target.style.transform;one.dispose();target.dispatchEvent(new PointerEvent('pointermove',{pointerType:'mouse',clientX:150,clientY:70}));const removed=!target.style.transform;one.dispose();const two=KZMotion.mountTilt(outer);two.dispose();return{sameRejected,nestedRejected,live,removed,remount:true};}''')
+ assert all(out['tilt'].values()),out
+ out['page']=p.evaluate('''()=>{const inner=document.querySelector('#inner'),outer=document.querySelector('#outer'),one=KZMotion.mountPage(inner);let nestedRejected=false;try{KZMotion.mountPage(outer)}catch(e){nestedRejected=true}one.dispose();const two=KZMotion.mountPage(outer);two.dispose();return{nestedRejected,remount:true};}''');assert all(out['page'].values()),out
+ out['emptyTokens']=p.evaluate('''async()=>{window.KZ_TOKENS={};const seq=KZMotion.reveal(document.querySelector('#inner'));await seq.finished;return getComputedStyle(document.querySelector('#target')).opacity;}''');assert out['emptyTokens']=='1',out
+ out['errors']=errors;assert not errors,errors;b.close()
+Path(a.output).write_text(json.dumps(out,ensure_ascii=False,indent=2));print('Actual shared carrier, nested target, disposal, initialization failure and token fallback checks passed')

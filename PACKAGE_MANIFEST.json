@@ -2,7 +2,7 @@
   "version": "6.0.0",
   "revision": "KZ6-0929-A04",
   "status": "PARTIAL",
-  "scope": "working candidate; historical release evidence retained; four-track acceptance ongoing",
+  "scope": "A04 shared-runtime candidate validated at component level; four-track production acceptance ongoing",
   "files": [
     {
       "path": ".gitignore",
@@ -11,8 +11,8 @@
     },
     {
       "path": "CHANGELOG.md",
-      "bytes": 3051,
-      "sha256": "1e54f2e024c9f5ab2460530f24b0a89fc9d63c0d985b2df63d3fd6db51d782df"
+      "bytes": 3476,
+      "sha256": "2069bdb90d7ede03cba6321f9b23e433fcb539f57d5f8f93e765bb0f11f9aa1f"
     },
     {
       "path": "INSTALL.md",
@@ -31,8 +31,8 @@
     },
     {
       "path": "SKILL.md",
-      "bytes": 5839,
-      "sha256": "aee2cf1bcb1c6bedc3870276745d156a612abc34ee41f5b3242b1168b17b053a"
+      "bytes": 6213,
+      "sha256": "5fc81acffc6430bebf0bb40227e67ef9f2f6c32bca1e3b1e26700a3db875b508"
     },
     {
       "path": "VERSION",
@@ -51,8 +51,8 @@
     },
     {
       "path": "adapters/html-ppt.md",
-      "bytes": 4773,
-      "sha256": "fbe93826f93a1150c3bcb756ccbac1c7a154807880a68616cfeb8f36327b5cc3"
+      "bytes": 6597,
+      "sha256": "ea547f4d5c4683aeea063e558d0fb68140b178c49141480a75334a6739ebde56"
     },
     {
       "path": "adapters/ppt-master.md",
@@ -76,13 +76,13 @@
     },
     {
       "path": "agent/KNOWN_GAPS.md",
-      "bytes": 1853,
-      "sha256": "3fac196fb9b9340f6723310420aebd36cd33cc9da91a7903a25a52eb2ed84d55"
+      "bytes": 2226,
+      "sha256": "d27ac93d01bf48e2af0f665100657d510d1847818f047f433825a9e7a826c3d1"
     },
     {
       "path": "agent/PLAN.md",
-      "bytes": 6560,
-      "sha256": "8b5d5676e616bc7fb8365b3d507d84226c83912eee01ff2b5fee3d003a2d6350"
+      "bytes": 6756,
+      "sha256": "35bacd990b730da8ca1b599e5ff8b7f7813db44b920c768ffe3095ef532bf0c8"
     },
     {
       "path": "agent/START_HERE.md",
@@ -196,13 +196,13 @@
     },
     {
       "path": "design_specs/05-charts.md",
-      "bytes": 3937,
-      "sha256": "ef4d871ee8d53c01f8fa03d5b14aa6b3f2f5ad9f5bbcd7c7aec5da8ac6cc314a"
+      "bytes": 4811,
+      "sha256": "393d3c542552d001bdbc8ba29ae039b24ee15815af01b579553d83415351d8b8"
     },
     {
       "path": "design_specs/06-motion-film.md",
-      "bytes": 20602,
-      "sha256": "2100faf788a7c7fb665811e8c267e698899df33390d938e473bed2e78fc8cf5f"
+      "bytes": 22769,
+      "sha256": "ee77e03668ffd14d660c1a07601a3eb27a5bf9739b9469d762a3f6de017b644f"
     },
     {
       "path": "design_specs/07-drilldown.md",
@@ -221,8 +221,8 @@
     },
     {
       "path": "design_specs/10-quality-gates.md",
-      "bytes": 7726,
-      "sha256": "425c5ecd8bd8400dab8ccd8b87512fc896034602ee90325917556e0cf12f9a0e"
+      "bytes": 10401,
+      "sha256": "386c39a0e6503edf98913b34191deaf56706433af9325dd1d9d4b5e230549e37"
     },
     {
       "path": "design_specs/11-hero-layouts.md",
@@ -901,8 +901,8 @@
     },
     {
       "path": "review/CURRENT_STATUS.md",
-      "bytes": 1419,
-      "sha256": "6d4b5d32679dca697c600f3a1f2b412df4c412ce9b658a485d59cb64767c60a2"
+      "bytes": 2664,
+      "sha256": "dec8b274ec7334286d8fb0fd67c4007f0645e659e82e4b6d18e9e81af371e1c4"
     },
     {
       "path": "review/KZ6-0929-A01/P1-P3_STATUS.md",
@@ -1181,13 +1181,13 @@
     },
     {
       "path": "runtime/kz-layout-qc.js",
-      "bytes": 1948,
-      "sha256": "0de5efa25e6e6fb499c2098cf53f2c3dceb0487859048962a5d323c36186343b"
+      "bytes": 6210,
+      "sha256": "efa6cfc7ae15b0bd81e67b8f80698d62dbbb6a17f578e5b8ba8cf005acb70b1e"
     },
     {
       "path": "runtime/kz-motion.js",
-      "bytes": 9426,
-      "sha256": "dc580b9c65c93ed20b8c1bcb9a8a7139f4660e776b8cde95e59daea09cd40f9c"
+      "bytes": 13213,
+      "sha256": "565c67262c8ba5245bdaec22e8a718ce074d03d2f254814384ea52ae4a069d27"
     },
     {
       "path": "runtime/kz-tokens.css",
@@ -1245,6 +1245,36 @@
       "sha256": "6e632c815eb17d33f09296052c84ca81b7deb39eeca836db9113cc2a74d94ae5"
     },
     {
+      "path": "tests/layout_data_browser.py",
+      "bytes": 3381,
+      "sha256": "00aa3f78d21522bc18a590245235d9cd5f746119247e79b6f19f610cddd007a4"
+    },
+    {
+      "path": "tests/motion_ownership_browser.py",
+      "bytes": 2643,
+      "sha256": "b1a997baabb6a435a0b88dd208f4451a3fa2f1f3304bc73a471e9ba83fd2cab8"
+    },
+    {
+      "path": "tests/motion_text_browser.py",
+      "bytes": 3047,
+      "sha256": "8ba01384aff2c0325b77c5409e5e4b91e01144daa139f71f226e21e385e947bb"
+    },
+    {
+      "path": "tests/ownership_boundary_browser.py",
+      "bytes": 3484,
+      "sha256": "8963c940252979e79aba3830fca5d7ae19cd060865ba1685b64cb7591007f0e5"
+    },
+    {
+      "path": "tests/page_lifecycle_browser.py",
+      "bytes": 2633,
+      "sha256": "f8bd56f46dc7a00449b8aa57a6ba23b259e59ad0d9a6b4485aebbfc60bc43960"
+    },
+    {
+      "path": "tests/review_r7_browser.py",
+      "bytes": 4527,
+      "sha256": "d26c73255ac0772791387e990fc37385550936fc9a85531889e21f3aa132179d"
+    },
+    {
       "path": "tests/test_a04_gates.py",
       "bytes": 5050,
       "sha256": "df08064f3df21d2cff9f113ddef9483e7d109f5e1763dea81349b7e500c801ae"
@@ -1263,6 +1293,11 @@
       "path": "tests/test_hero.py",
       "bytes": 2228,
       "sha256": "6f3e8b6a46b9cc94bb4e013d10e4ab32d2c1e3f4352dba502d77d1ed5eae709d"
+    },
+    {
+      "path": "tests/text_bounds_browser.py",
+      "bytes": 5878,
+      "sha256": "f791442f742e395a9da076532ee4813f6d2083c599d9df388c12d3f97585c124"
     },
     {
       "path": "tokens/tokens.json",
