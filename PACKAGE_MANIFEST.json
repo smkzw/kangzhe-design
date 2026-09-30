@@ -11,8 +11,8 @@
     },
     {
       "path": "CHANGELOG.md",
-      "bytes": 2439,
-      "sha256": "3c64e2eb6b0fcbac8d7a7f0947d064a6e9774abe8fd9926b5f3f06815d661ad6"
+      "bytes": 2703,
+      "sha256": "710a710eb90233eea78b84ac23945aa51c5c37683f4d44e846058179295e1602"
     },
     {
       "path": "INSTALL.md",
@@ -21,8 +21,8 @@
     },
     {
       "path": "README.md",
-      "bytes": 4615,
-      "sha256": "06549617ded26803f6f16fc8c572ef06f9ac387b16749bb818d253d9496e11e2"
+      "bytes": 4690,
+      "sha256": "63a49466f2022505e3f079e68f52c116d72a7e376c8a939b7dd7cc8cadbd7bba"
     },
     {
       "path": "REVISION",
@@ -31,8 +31,8 @@
     },
     {
       "path": "SKILL.md",
-      "bytes": 5673,
-      "sha256": "bda2c53d855fa212a234d50cf5c8abdd25c5d0af84e32395a43dc10c49853814"
+      "bytes": 5839,
+      "sha256": "aee2cf1bcb1c6bedc3870276745d156a612abc34ee41f5b3242b1168b17b053a"
     },
     {
       "path": "VERSION",
@@ -171,18 +171,18 @@
     },
     {
       "path": "design_specs/00-authority.md",
-      "bytes": 3533,
-      "sha256": "2970cca95cd0ef004ab34b6e0f11f31f9f5142788cb457d1c3425a22e68cd1c8"
+      "bytes": 3554,
+      "sha256": "d6d340bdffd033a1674ca8d45fbc7ff9fba81592897658621364a583e5fb2654"
     },
     {
       "path": "design_specs/01-core.md",
-      "bytes": 3578,
-      "sha256": "e0909c9e550d7754f9106704d05630c56f95a9d4412b7b725a9c2b2bf26956be"
+      "bytes": 3592,
+      "sha256": "b013c2f4b189c53577b9f0ee6e430816c6adaac462ae25f079abdae7e794df53"
     },
     {
       "path": "design_specs/02-liquid-glass.md",
-      "bytes": 6077,
-      "sha256": "193bf774771f5dc32381d3ec89af2f63f96d239312a1141d66fde536ee372c15"
+      "bytes": 6303,
+      "sha256": "4403dc0906f920bec0ee655287bba1e215e59ac9e6b433c6028a5ee56f580337"
     },
     {
       "path": "design_specs/03-typography-language.md",
@@ -201,8 +201,8 @@
     },
     {
       "path": "design_specs/06-motion-film.md",
-      "bytes": 20396,
-      "sha256": "a4450cc873732015d1502b01bdb2d89665ff84d5f9f0b15a0d734a1757847afc"
+      "bytes": 20602,
+      "sha256": "2100faf788a7c7fb665811e8c267e698899df33390d938e473bed2e78fc8cf5f"
     },
     {
       "path": "design_specs/07-drilldown.md",
@@ -221,8 +221,8 @@
     },
     {
       "path": "design_specs/10-quality-gates.md",
-      "bytes": 6971,
-      "sha256": "889acbc0c0828f8ed1a60479fdbab85bb63ee6635bf2c8b00ff2ac4f576ab1d5"
+      "bytes": 7245,
+      "sha256": "526f4de6599703ef1c9cb8ae3d044728dc36a31eb98fc3a0831d0e8cea6328a1"
     },
     {
       "path": "design_specs/11-hero-layouts.md",
@@ -246,13 +246,13 @@
     },
     {
       "path": "design_specs/tracks-site.md",
-      "bytes": 2424,
-      "sha256": "f5ea42f7b0f5233b90c7c7c148ae93f360289bd0ab5042794dce4a5ddd00d734"
+      "bytes": 2528,
+      "sha256": "54f9715cc0276e81f6b72dc2e19a7e0e89475cd9885e062cbcaeb71c8ef79782"
     },
     {
       "path": "design_specs/tracks-stream.md",
-      "bytes": 1103,
-      "sha256": "5ed261b9b88f159c6442860259b7e2bfc8ed125069d6c32792970f83468e3502"
+      "bytes": 1204,
+      "sha256": "f86ed9b16486264dac05a815182a3fa0d8d2e2b2f0ee46fbf1bb09a5af05a63d"
     },
     {
       "path": "examples/chart-data.json",
@@ -901,8 +901,8 @@
     },
     {
       "path": "review/CURRENT_STATUS.md",
-      "bytes": 343,
-      "sha256": "b8ae2c0c7270333b193964db321d005b4b742c011ae52e1ffab098df549b5af6"
+      "bytes": 698,
+      "sha256": "72d934601ebfac24654a0d99d3d063618cec4b52453627edb678f6612fa7eccb"
     },
     {
       "path": "review/KZ6-0929-A01/P1-P3_STATUS.md",
@@ -1196,8 +1196,8 @@
     },
     {
       "path": "runtime/kz-tokens.js",
-      "bytes": 4522,
-      "sha256": "8546fc55abc0d7149b8f827da43036504ed86dac4be6a1226c0bcfa08473c973"
+      "bytes": 4550,
+      "sha256": "bad7755479b07fa57ce0dd2236b5a1203e013947aa15e510560b4fab59571b9f"
     },
     {
       "path": "schemas/README.md",
@@ -1266,8 +1266,8 @@
     },
     {
       "path": "tokens/tokens.json",
-      "bytes": 7167,
-      "sha256": "edeb53ee729ab36158a4dd7976dd31a6be249ae48acf2486d178549d07bf8fc0"
+      "bytes": 7228,
+      "sha256": "c676fe163c027a89b07a4144b573811e57ceb69fb07c10832101d68ef1cfbc0f"
     },
     {
       "path": "tools/bind_header_mark_pptx.py",

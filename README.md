@@ -6,7 +6,7 @@
 
 ## 使用
 
-安装只保留本目录的一个 SKILL.md。读取顺序见 `SKILL.md`；四轨共用 tokens 和主题所有者，条件读取图表、电影、下钻、甘特、讲稿规则。不把整个维护包无差别塞进模型上下文。
+安装只保留本目录的一个 SKILL.md。读取顺序见 `SKILL.md`；双菱形只用于 PPTX 与 HTML-PPT，站点式和流式 HTML 不使用。四轨共用 tokens 和主题所有者，条件读取图表、电影、下钻、甘特、讲稿规则。不把整个维护包无差别塞进模型上下文。
 
 PPTX 始终通过 hugohe3/ppt-master；HTML-PPT 始终通过 lewislulu/html-ppt-skill。本包负责品牌与内容表达、图片保护、样式/组件和验收，不替代它们的 scaffold、路由、缩放、导航和导出。
 
