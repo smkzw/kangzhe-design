@@ -11,8 +11,8 @@
     },
     {
       "path": "CHANGELOG.md",
-      "bytes": 2703,
-      "sha256": "710a710eb90233eea78b84ac23945aa51c5c37683f4d44e846058179295e1602"
+      "bytes": 3051,
+      "sha256": "1e54f2e024c9f5ab2460530f24b0a89fc9d63c0d985b2df63d3fd6db51d782df"
     },
     {
       "path": "INSTALL.md",
@@ -181,8 +181,8 @@
     },
     {
       "path": "design_specs/02-liquid-glass.md",
-      "bytes": 6303,
-      "sha256": "4403dc0906f920bec0ee655287bba1e215e59ac9e6b433c6028a5ee56f580337"
+      "bytes": 6830,
+      "sha256": "c4b9e640b9d6a85fc156bd2a410544636e4b4f29437e12a6ec4f25826a66308b"
     },
     {
       "path": "design_specs/03-typography-language.md",
@@ -191,8 +191,8 @@
     },
     {
       "path": "design_specs/04-image-pipeline.md",
-      "bytes": 8702,
-      "sha256": "75d3c65cc6c3600d8742e6888b5e2dd63b6c1a7e6b56cfb00524f74fd4c192d1"
+      "bytes": 11599,
+      "sha256": "205c25cce0b61beb01fb9a1181a9f6573445180cd4ee6f64a6d77296ebc34735"
     },
     {
       "path": "design_specs/05-charts.md",
@@ -221,8 +221,8 @@
     },
     {
       "path": "design_specs/10-quality-gates.md",
-      "bytes": 7245,
-      "sha256": "526f4de6599703ef1c9cb8ae3d044728dc36a31eb98fc3a0831d0e8cea6328a1"
+      "bytes": 7726,
+      "sha256": "425c5ecd8bd8400dab8ccd8b87512fc896034602ee90325917556e0cf12f9a0e"
     },
     {
       "path": "design_specs/11-hero-layouts.md",
@@ -236,13 +236,13 @@
     },
     {
       "path": "design_specs/tracks-htmlppt.md",
-      "bytes": 1413,
-      "sha256": "634ce7689c17f80a823fa838225badcba4f8abc76207213026b07a91b667e9f6"
+      "bytes": 1732,
+      "sha256": "5e698d7e4cec648b20402fdbb0a2f374958b126cab9a87c6f1c0624d31f4bb0f"
     },
     {
       "path": "design_specs/tracks-pptx.md",
-      "bytes": 2016,
-      "sha256": "0bb75bac536e69fee42915e968977e4a1353b8df6b5964f55632c719b2f2b8a2"
+      "bytes": 2312,
+      "sha256": "4375b8182be8f4c4e3031b7d006de8f5b0a60f0a3d4f203b4cef0dbcc7be8770"
     },
     {
       "path": "design_specs/tracks-site.md",
@@ -901,8 +901,8 @@
     },
     {
       "path": "review/CURRENT_STATUS.md",
-      "bytes": 698,
-      "sha256": "72d934601ebfac24654a0d99d3d063618cec4b52453627edb678f6612fa7eccb"
+      "bytes": 1419,
+      "sha256": "6d4b5d32679dca697c600f3a1f2b412df4c412ce9b658a485d59cb64767c60a2"
     },
     {
       "path": "review/KZ6-0929-A01/P1-P3_STATUS.md",

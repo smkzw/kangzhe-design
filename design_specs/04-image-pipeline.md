@@ -23,6 +23,19 @@ IMG-01：PPTX 和 HTML-PPT 逐页记录 `asset_id`。封面、目录、章节、
 保护区是 **构图和遮罩合同**，不是要求整张背景在几何上与卡片零相交。允许低频背景在卡后透出；不允许复杂结构或亮斑穿过文字笔画。图像换比例、裁切、移动后必须重新验证映射，不能复用旧 pass。
 
 ## 提示词模板
+### 正文页专用构图 IMG-05（PPTX / HTML-PPT）
+正文背景与封面、目录、章节、结束页主视觉必须分开策划和登记。不得把 hero 的玻璃块、玻璃环、丝带或光束降透明度后当正文背景。正文默认采用 **近白阅读区＋极少量边缘光影**，Liquid Glass 的可感知材质主要由前景原生卡片和数据外壳提供。
+
+先依据实际 protected_regions 确定可用边缘空槽；可见暖色光影只落在这些空槽，不横穿正文。边缘位置不自动豁免页眉、Logo 或页脚保护。没有空槽时，允许生成近白的极低频光学底图，不为证明“生过图”强塞物象。
+
+- 中央正文、全部文字和图表坐标面保持近白、低频；不得出现可辨认的玻璃轮廓、斜向光带、折射亮线、大片橙黄色雾、硬阴影、环或丝带。玻璃轮廓即使很浅，仍须核对它是否穿过字形、曲线或刻度；不能只靠低透明度放行。
+- 仅在可用边缘空槽放一处或两处很淡的局部光影。不得沿一整条边铺色、形成通长色带或用连续装饰框包围正文。业务主题通过整套主视觉和前景信息表达，正文背景不再重复画流程、数据或结构。
+- 在中间阅读区优先减去背景结构，不靠增加玻璃层数补救。背景无冲突是前景卡片透明度选择的前提；仍有冲突则退回重新生成/构图，不提高模糊强度掩盖。
+
+正文提示词从下面的专用模板出发；后面的通用 subject 模板主要用于 hero，不得无差别用于正文：
+
+“Generate a quiet near-white optical background for a formal pharmaceutical medical presentation, [actual aspect ratio]. This is a CONTENT SLIDE, not a cover or hero illustration. The foreground will contain editable text, tables and charts. Keep every [actual protected rectangle] uniformly near-white and visually empty. No recognizable objects anywhere in the reading area: no glass panels, rings, ribbons, folds, diagonal rays, caustic lines or large orange/yellow clouds. Only one or two extremely faint warm refraction hints may sit in [actual unused edge slots], with no outline or hard edge. Keep header, logo and footer slots clean even at the edges. Liquid Glass depth is expressed by foreground cards, not by detailed background geometry. No text, logo, chart, border or letterboxing.”
+
 提示词应包含：本页业务主题的非敏感概括；康哲浅色橙黄光学材料；主物象及它为何服务本页；精确 subject / quiet / clear 区位置；预期画幅和裁切；光向一致；不可出现的内容。示例（只作模板，不是已生成资产）：
 
 “Create a refined light Liquid Glass environment for a formal medical research presentation. Main accent #FF9900, secondary #FFCC00, predominantly white. Theme: [specific non-confidential concept]. Place [subject] only inside [normalized rectangles]. Keep [protected rectangles] clear and low-frequency; no bright edges crossing those zones. One coherent soft light direction, translucent rounded forms, restrained optical depth. No rendered text, numbers, labels, charts, watermarks or imitation corporate logos. The image is decoration, not scientific evidence.”
@@ -33,6 +46,8 @@ IMG-01：PPTX 和 HTML-PPT 逐页记录 `asset_id`。封面、目录、章节、
 第一遍看 **裸图**：主题匹配、光向、品牌色、无乱码/假 Logo/不实机制；保护区内是否有亮边、轮廓和高频纹理。第二遍看 **实际合成页**：实际字体、图片裁切、卡片透明度、页眉页脚、hover/电影关键帧全部参与。只看裸图不算通过。
 
 机器检查：尺寸/MIME/哈希/本地可读取；布局区域坐标；遮罩和裁切是否登记；对比度的代表性最差样本；protected-region 内边缘密度和局部亮度波动可作筛查，不能当成语义审阅替代。VLM 先看完整页，再看问题局部；不要只给图像或只给很小 contact sheet。拒绝项标注 asset id、页号、区域、截图和修改建议。
+
+正文合成审阅另须覆盖：文字最多的卡片页、无卡/有玻璃壳的图表页、表格或甘特页。检查背景与前景的主次、实际最小字号、浅灰刻度与网格线、强调红字、正文卡在未 hover 与 hover 时的可读性。复用一张正文图不代表三个阅读用途自动通过；任一用途出现背景轮廓与字形/数据混读，即该用途失败。先审原始图，再审每种实际裁切后的合成；截图须保留真实前景，不能仅给空白模板。
 
 修复优先：重新安排 subject 区/重新生成 → 调整裁切 → 与设计一致的局部浅色遮罩。不得靠整页盖 94% 白色把所有生图都擦掉，也不得把文字移到固定页眉之外迁就图。达到重试预算后写阻塞，不偷换成假图通过。
 
