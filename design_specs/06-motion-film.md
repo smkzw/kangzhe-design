@@ -134,6 +134,8 @@ PPTX/HTML-PPT 的品牌装饰范围保持固定；其中 HTML-PPT 的双菱形�
 
 挂载必须发生在实际交付页：`mountTilt`、`reveal`及float类/控制器各有对应对象；库存在、函数名grep或组件实验室通过不等于交付通过。结构使用layout外壳→reveal层→tilt玻璃层→reading内容；float用独立translate或再一层，任何transform只有一个owner。文字必须在卡内随卡运动，不能卡在飘字不动。
 
+卡片的 layout/reveal 祖先默认使用平面合成，不为“立体感”随意加 `transform-style:preserve-3d`；透视由 tilt 玻璃层自身承担。真实 HTML-PPT 中该祖先属性曾使卡片变换后触发 pointerleave，立即清空光源和倾斜。只有在当前工程实际鼠标移动并驻留、完整入场与复入均通过时才可使用其他合成结构；不把本条应用到需要独立空间关系的电影舞台。QC 必须保存真实指针进入后驻留的样本与离开复位，不能只 dispatchEvent 一次读取瞬时 transform 就称 hover 通过。
+
 上游`.is-active`观察桥只管理生命周期；enter取消旧exit并按进入序列运行，leave在上游500ms转场可见区间内执行240ms退出，再停帧；快进快退不得留下opacity=0。不得延迟或重写上游导航。对数据面保留移动高光的外壳，内部数据保持稳定。
 
 禁止提供观众播放控制。后台暂停同时冻结环境浮动、电影和正在进行的入场到完整阅读态；系统RM、编辑、后台、非活动页原因分别管理，解除某原因不清除其他原因。preview/overview克隆/print静态完整；普通模式不能因为QC参数遗留而失去动态。

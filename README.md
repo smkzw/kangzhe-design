@@ -36,7 +36,8 @@ PPTX 始终通过 hugohe3/ppt-master；HTML-PPT 始终通过 lewislulu/html-ppt-
 使用当前已有 Python 3.10+、Node 与浏览器即可检查；Python检查依赖 `jsonschema`、`Pillow`，浏览器检查另需 `playwright` 和实际 Chromium。不要把安装依赖或启动模型作为每次修订的重复步骤。
 
 ```bash
-python tools/context_pack.py --track htmlppt --features charts,film,gantt,drilldown,notes
+python tools/context_pack.py --track htmlppt --stage bootstrap --features charts,film,gantt,drilldown,notes
+# 后续逐阶段 plan/assets/author/verify；verify 保留全部适用硬门
 python tools/build_tokens.py
 python tests/test_contracts.py
 python tests/browser_smoke.py --chromium /path/to/chromium --out /path/to/evidence
