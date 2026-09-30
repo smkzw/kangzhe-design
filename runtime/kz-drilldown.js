@@ -34,7 +34,7 @@
     }
     sync(){
       const top=this.stack.at(-1);if(!top)return;
-      this.title.textContent=top.title;this.back.hidden=this.stack.length<2;this.crumb.replaceChildren();
+      this.title.textContent=top.title;this.back.hidden=this.stack.length<2;this.crumb.hidden=this.stack.length<2;this.crumb.replaceChildren();
       this.stack.forEach((rec,i)=>{
         if(i)this.crumb.append(element('span',null,'›'));
         const b=element('button',null,rec.title);b.type='button';if(i===this.stack.length-1)b.setAttribute('aria-current','page');

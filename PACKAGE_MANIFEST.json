@@ -2,7 +2,7 @@
   "version": "6.0.0",
   "revision": "KZ6-0929-A04",
   "status": "PARTIAL",
-  "scope": "A04 shared-runtime candidate validated at component level; four-track production acceptance ongoing",
+  "scope": "A04 R9 drilldown capacity component-validated; four-track acceptance ongoing",
   "files": [
     {
       "path": ".gitignore",
@@ -11,8 +11,8 @@
     },
     {
       "path": "CHANGELOG.md",
-      "bytes": 3476,
-      "sha256": "2069bdb90d7ede03cba6321f9b23e433fcb539f57d5f8f93e765bb0f11f9aa1f"
+      "bytes": 4095,
+      "sha256": "a21b9d8e07a59c605666aea00906293e8c701e4ef9dba5f2041daff4cadb377e"
     },
     {
       "path": "INSTALL.md",
@@ -76,8 +76,8 @@
     },
     {
       "path": "agent/KNOWN_GAPS.md",
-      "bytes": 2226,
-      "sha256": "d27ac93d01bf48e2af0f665100657d510d1847818f047f433825a9e7a826c3d1"
+      "bytes": 2478,
+      "sha256": "8ad01ba7ad5f86ed92c3902698a958001f03f60aaa6d36b5e8af968c3ef303a2"
     },
     {
       "path": "agent/PLAN.md",
@@ -206,8 +206,8 @@
     },
     {
       "path": "design_specs/07-drilldown.md",
-      "bytes": 3679,
-      "sha256": "e6ee1cd6ac9a4d8916ef85819fe988c0e26bbac04627af049cbebd513a843518"
+      "bytes": 4651,
+      "sha256": "2219f119e27c8503eef07a28aaced107f3eddd0b3d2d7494ae024ee682a6dc9b"
     },
     {
       "path": "design_specs/08-gantt.md",
@@ -221,8 +221,8 @@
     },
     {
       "path": "design_specs/10-quality-gates.md",
-      "bytes": 10401,
-      "sha256": "386c39a0e6503edf98913b34191deaf56706433af9325dd1d9d4b5e230549e37"
+      "bytes": 10686,
+      "sha256": "fc1dd4a231a2417ec29e86601dac81c6f3152341f981002017120e8c9cec2322"
     },
     {
       "path": "design_specs/11-hero-layouts.md",
@@ -901,8 +901,8 @@
     },
     {
       "path": "review/CURRENT_STATUS.md",
-      "bytes": 2664,
-      "sha256": "dec8b274ec7334286d8fb0fd67c4007f0645e659e82e4b6d18e9e81af371e1c4"
+      "bytes": 3484,
+      "sha256": "edaae24515205bb6fe064b2961c42726295af035f7c6ed891d8462b8d5c5ed38"
     },
     {
       "path": "review/KZ6-0929-A01/P1-P3_STATUS.md",
@@ -1166,8 +1166,8 @@
     },
     {
       "path": "runtime/kz-drilldown.js",
-      "bytes": 4781,
-      "sha256": "ffa0abb071dc23a7280037b46bf2b57aa47dbd405af4bbb6d492ba64b96897be"
+      "bytes": 4819,
+      "sha256": "899bd53399bad6c09edb7d0d718474db895cefda6a719ed33102f98a098101f1"
     },
     {
       "path": "runtime/kz-gantt.js",
@@ -1176,8 +1176,8 @@
     },
     {
       "path": "runtime/kz-glass.css",
-      "bytes": 10621,
-      "sha256": "6ecc75c6295e90e5f729a4d495dd48922bb16c87c65926031f3bc1d3020de4d3"
+      "bytes": 10699,
+      "sha256": "320e50591fd3b4109fc6804e124e061acd503e93bbb6974d23be9ecc08bb2de5"
     },
     {
       "path": "runtime/kz-layout-qc.js",
@@ -1238,6 +1238,11 @@
       "path": "tests/browser_smoke.py",
       "bytes": 13565,
       "sha256": "533f6cd5f5442835c81309df40ef95663296361445a7405aa08f7c5793875bd8"
+    },
+    {
+      "path": "tests/drill_capacity_browser.py",
+      "bytes": 2523,
+      "sha256": "d167138ad29c60d8844caac505a44894a8590f230b3df4d590fb1ffc1b25dd82"
     },
     {
       "path": "tests/film_cycle.py",
