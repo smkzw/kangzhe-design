@@ -2,7 +2,7 @@
   "version": "6.0.0",
   "revision": "KZ6-0929-A04",
   "status": "PARTIAL",
-  "scope": "R18/R43 card content hierarchy candidate: COPY-06 and review gates; actual engine repairs in progress; overall PARTIAL",
+  "scope": "R21 status: R18 COPY-06 plus R20 own typography runtime; actual named HTML engine integration and bounded card/native evidence; unseen full chain and final four-track rounds incomplete; overall PARTIAL",
   "files": [
     {
       "path": ".gitignore",
@@ -51,8 +51,8 @@
     },
     {
       "path": "adapters/html-ppt.md",
-      "bytes": 10702,
-      "sha256": "e3c0cf20faae929329871c72eea4ec82d3e9a1413003723c79587b3342f29986"
+      "bytes": 12148,
+      "sha256": "42a95f8f89bf8ff40a753a8145e6005ea0efdb2dc7af019c13d28fd32c24f685"
     },
     {
       "path": "adapters/ppt-master.md",
@@ -901,8 +901,8 @@
     },
     {
       "path": "review/CURRENT_STATUS.md",
-      "bytes": 12064,
-      "sha256": "17588ff83a2f7b995ebcbb92efb408e80b052d0041e461b737d2c669480a8310"
+      "bytes": 19308,
+      "sha256": "dac5d2412fa67ec5222eaeb62e277617c037d31f2b178c2eecee9860420cac1a"
     },
     {
       "path": "review/KZ6-0929-A01/P1-P3_STATUS.md",
@@ -1221,8 +1221,8 @@
     },
     {
       "path": "runtime/kz-glass.css",
-      "bytes": 11432,
-      "sha256": "71c2ff0c0fb17c90c7b4c458b8c5a8aaa986be9b426f22a858db4784aa649591"
+      "bytes": 11528,
+      "sha256": "cb0f5f6e6399c378b33ba091ed675f5e17acdbc5ef728bb6ecc02cedfe28e0d7"
     },
     {
       "path": "runtime/kz-layout-qc.js",
