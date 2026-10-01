@@ -1,0 +1,132 @@
+{
+  "audit_version": "KZ6-0929-A04-r17-runtime-qc",
+  "audit_date": "2026-10-01",
+  "summary": {
+    "total_findings": 10,
+    "verdict": "ACCEPT",
+    "conflict_detected": false,
+    "font_size_reduction": false,
+    "editability_impacted": false,
+    "image_gen_impacted": false,
+    "motion_gate_loosened": false,
+    "numeric_second_owner_added": false,
+    "unexecutable_requirements_added": false,
+    "aesthetic_suggestions_separated": true
+  },
+  "findings": [
+    {
+      "id": "FINDING-R17-01",
+      "topic": "固定hero宽公式与右留距约束",
+      "target_file": "adapters/html-ppt.md",
+      "candidate_quote": "非16:9桌面（例如1440×900）仍按同一u保留角色字号与左锚，但文字框不能机械套用整套基准宽度。对固定文字角色，从tokens读取基准x、w，基准右留距为 `reference_width - x - w`；实际宽度取 `min(w*u, viewport_width - x*u - right_margin*u)`。这只约束文字阅读框，背景与正文网格仍铺满全视口；右锚Logo另按现有右锚规则。16:9基准框不变，宽屏不借加宽重拼标题；若实际字形仍放不下，按11精简展示名称或按既有行数自然断句，不缩角色字号、不隐藏裁切。分别检查文字框和每行实际字形，不能以“字暂时没出屏”豁免越界框。",
+      "base_reference": "base/adapters/html-ppt.md:13-16; reference/design_specs/11-hero-layouts.md:HERO-01,HERO-05; reference/tokens/tokens.json:hero_layouts",
+      "rule_verdict": "COMPLIANT",
+      "conflict_check": "无冲突。tokens 基准画幅为 1280×720 (reference_width=1280)。在 16:9 桌面下 viewport_width - x*u - right_margin*u 等于 w*u；在 1440×900 (16:10) 等窄/高比例桌面下，u=1.25，原 w*u 会超出视口可用宽度，公式通过引入基准右留距保护视口边缘，避免文字框溢出。",
+      "font_size_check": "明确要求“不缩角色字号、不隐藏裁切”，字形放不下时依 11 精简或自然断句，禁止降低字号。",
+      "numeric_owner_check": "坐标和留距完全源自 tokens.hero_layouts 单一基准，无第二 owner。",
+      "executability": "公式为纯代数几何 min 运算，可完全由 CSS/JS 确定性执行与断言。"
+    },
+    {
+      "id": "FINDING-R17-02",
+      "topic": "静态分支总览帧几何绑定与通用CSS回退防护",
+      "target_file": "adapters/html-ppt.md",
+      "candidate_quote": "静态分支不创建 Film 时，不能依赖它平时写入的 inline 几何来覆盖通用组件 CSS。项目静态样式必须显式采用已审阅总览帧的有效几何、内容宽度和内边距；核对最终 computed 值与完整文字 Range，而非只检查 opacity。共享 carrier 的默认位置、尺寸或 align-items 不得使静态副本退回小载体、窄内容列或顶端拥挤。静态分支可选择合法完整总览，不要求复制动态帧，但字号、事实、完整数据及品牌锚不得改变。preview、RM、capture、print 分别在其真实宿主环境验证，不把一种模式通过推广到其他模式。",
+      "base_reference": "base/adapters/html-ppt.md:38-44; base/design_specs/06-motion-film.md:105-109,148-150",
+      "rule_verdict": "COMPLIANT",
+      "conflict_check": "无冲突。解决了无 Film 实例时 carrier 缺少 inline style 导致退回 CSS 默认收缩态的工程隐患。",
+      "font_size_check": "明文规定“字号、事实、完整数据及品牌锚不得改变”，严格保护 03 字号合同。",
+      "numeric_owner_check": "静态展示继承已审阅总览帧真值，不存在第二数据 owner。",
+      "executability": "要求核对 computed 属性与文字 Range，并在真实宿主环境隔离验证，完全可执行。"
+    },
+    {
+      "id": "FINDING-R17-03",
+      "topic": "业务阅读停留期的真实可见性 (Read Visibility) 与空Range否决",
+      "target_file": "design_specs/06-motion-film.md",
+      "candidate_quote": "文字 Range 全部在载体内只是空间检查。每个原速周期的业务阅读停留还须确认该状态的必要信息实际显露并可读；全部文字 opacity=0 时得到的空 Range 集不构成通过。",
+      "base_reference": "base/design_specs/06-motion-film.md:121,141; reference/design_specs/03-typography-language.md:13",
+      "rule_verdict": "COMPLIANT",
+      "conflict_check": "无冲突。堵塞了“全透明空 Range 冒充无空间越界”的作弊/假阳性漏洞，强化了阅读停留质量。",
+      "motion_gate_check": "真实动效门显著收紧，要求阅读驻留期间 opacity>0 且文字真实可读，非降级放行。",
+      "numeric_owner_check": "不引入额外数值，依业务状态核对文本节点渲染态。",
+      "executability": "DOM getComputedStyle(node).opacity 与 Range.getBoundingClientRect() 均为主流无头浏览器原生能力。"
+    },
+    {
+      "id": "FINDING-R17-04",
+      "topic": "最大态收回与末态回接时序：Exit先于Shrink",
+      "target_file": "design_specs/06-motion-film.md",
+      "candidate_quote": "针对最大态收回和末态回接，记录阅读结束、退出完成、几何开始收小三个实际时刻及子信息透明度；按本章顺序，子信息仍可见时不得先收小。",
+      "base_reference": "base/design_specs/06-motion-film.md:86; reference/design_specs/06-motion-film.md:MOTION-01",
+      "rule_verdict": "COMPLIANT",
+      "conflict_check": "无冲突。完全继承并具体化 base 第 86 行“先在仍有足够容量的载体中完成阅读停留，子信息有序退出至不可见，再收小载体”的既有规则。",
+      "motion_gate_check": "确立 t(reading_end) <= t(exit_complete) <= t(shrink_start) 的三时刻单调约束，杜绝载体提前缩小压迫可见文字的版面破损。",
+      "numeric_owner_check": "不涉及数值业务所有权，仅约束渲染层动效状态机转场次序。",
+      "executability": "时间戳与透明度记录完全可通过 requestAnimationFrame 或 Web Animations API 采样追踪。"
+    },
+    {
+      "id": "FINDING-R17-05",
+      "topic": "正常播放与QC Seek/CSS时钟差异边界",
+      "target_file": "design_specs/06-motion-film.md",
+      "candidate_quote": "QC seek 可帮助定位边界，不能用快速 seek 下的 CSS 时钟差异代替普通播放判定。",
+      "base_reference": "base/design_specs/06-motion-film.md:121,148-150",
+      "rule_verdict": "COMPLIANT",
+      "conflict_check": "无冲突。严格维护 base“录制一次完整正常速度循环，不用高速拖动假装看过”的基线原则。",
+      "motion_gate_check": "防止因 seek 瞬间 jump 产生的插值不一致被误判为动效缺陷，明确 seek 仅为调试定位工具，原速普通播放为终审金标准。",
+      "numeric_owner_check": "不涉及数据 owner。",
+      "executability": "规范化测试手段，杜绝以非标测试脚本的假失败阻碍发布。"
+    },
+    {
+      "id": "FINDING-R17-06",
+      "topic": "第二圈连续电影共用时钟图数同步与后台恢复协调",
+      "target_file": "design_specs/06-motion-film.md",
+      "candidate_quote": "连续电影的数据驱动不得用首圈完成标志永久停止更新。同一业务时钟在第二圈仍须驱动图表和数字；检查图表的公开当前进度与同时刻数字、目标真值，包含第二圈增长中段和后台恢复后的首次活动更新。暂停或静态结束可能使图表达到终态，恢复应以真实组件进度协调当前业务状态，不能只比较项目缓存值。零和缺失值继续分别保留；这些检查不允许增加观众播放器控件或缩短原阅读停留。",
+      "base_reference": "base/design_specs/06-motion-film.md:134,143,152",
+      "rule_verdict": "COMPLIANT",
+      "conflict_check": "无冲突。深度落实 base 第 152 行“同一时刻的标题、阶段编号、解释句、节点、关系和数值必须来自同一个业务状态选择结果”的要求。",
+      "motion_gate_check": "防止一次性 flag 导致第二圈图表停滞而数字空转，强化了循环动画的图数一致性门禁。",
+      "numeric_owner_check": "明确严禁独立项目缓存私自拥有数值，强制统一于单一业务时钟与组件当前公开进度，杜绝数值第二 owner。",
+      "executability": "通过读取图表实例 progress 与 DOM 文本数值比对，可执行性良好。"
+    },
+    {
+      "id": "FINDING-R17-07",
+      "topic": "Harness 自动记忆隔离与执行中断边界",
+      "target_file": "agent/EVALUATION.md",
+      "candidate_quote": "每次独立生成/盲审前核对harness自动记忆与项目历史注入。原案例的反馈、旧产物或其他模型私有推理不得自动进入未见案例和盲审；应使用该harness当前官方文档支持的隔离方式，并记录文档/配置来源、进程环境和实际工具轨迹。提示里的“禁止读记忆”不等于自动注入已关闭；关闭一个功能也不证明全OS未读。发现历史读取/写入时，保留实际痕迹，标为执行边界或对照污染，不能把它算成清洁的独立结果。源文件、允许的原材料和已冻结公共规范仍可读取；隔离不削掉任务必需工具。\n\n配额429、provider连接或总时限终止单列为环境/执行未完成，不据此宣称MODEL_LIMIT。指定模型不可用时保持其BLOCKED；经授权的新模型任务记录为不同路由与作者，只基于冻结源和公开接口接续，不转移原模型私有推理，不代计原模型成功。",
+      "base_reference": "base/agent/EVALUATION.md:10-15,71-74",
+      "rule_verdict": "COMPLIANT",
+      "conflict_check": "无冲突。补齐了 harness 隐式记忆注入（autoMemory、跨会话污染）对盲审独立性的威胁判定规则，同时明确了 429/timeout 与模型本质能力的边界。",
+      "executability": "要求使用官方隔离参数并记录工具轨迹，操作规程明确，具备强执行性。"
+    },
+    {
+      "id": "FINDING-R17-08",
+      "topic": "动态检查独立失败条件与有界补观察机制",
+      "target_file": "agent/EVALUATION.md",
+      "candidate_quote": "全周期记录应覆盖同一 DOM、有效扫掠范围、业务阅读态真实可见、退出顺序和业务同步，分别报告；“无越界”不能替代其他项。原速循环按实际累积进度与至少一次回接确认，不能只等待名义墙钟时长后推定完成。若绘制间隔使完整周期未观察到，保留该次不完整结果，另用有界更长窗口补观察，不降低原阅读时长或完整周期门。数据电影增加第二圈增长中段与隐藏恢复后的图数同步检查，不要求所有无数据电影额外跑第二圈。源码变更后仅对受影响门重跑，最终两轮四轨验收仍须绑定同一冻结包。",
+      "base_reference": "base/agent/EVALUATION.md:71-74; design_specs/06-motion-film.md:154-156",
+      "rule_verdict": "COMPLIANT",
+      "conflict_check": "无冲突。明确了各项动态检查维度的正交性，避免以名义墙钟充当真实循环进度，合理规范了有界补测机制与受影响门回归范围。",
+      "executability": "边界清晰，限制仅对数据电影跑第二圈图数同步，防止无数据电影发生测试膨胀。"
+    },
+    {
+      "id": "FINDING-R17-09",
+      "topic": "盲审手工换行与自动换行辨识边界及keep-all误用禁令",
+      "target_file": "agent/prompts/BLIND_VLM_REVIEW.md",
+      "candidate_quote": "规则裁决先区分原文的“必须/禁止”、有条件要求、诊断目标与审美建议。每项硬缺陷引用实际适用的完整规则，核对所需前提；不能把正常自动中文换行直接认作“手工换行”违规，也不能把中文词语“日期”一律视作数值日期与锚点。末行单汉字、手工语义断句、日期数值/单位组合等分别按03的实际条件核对。静态图看不出DOM手工断句时写UNCERTAIN并提出最小源码/字形检查，不自行建议全段keep-all。半角/全角标点凭截图不确定时要求真实文字码点。",
+      "base_reference": "base/agent/prompts/BLIND_VLM_REVIEW.md:1-3; reference/design_specs/03-typography-language.md:20,50",
+      "rule_verdict": "COMPLIANT",
+      "conflict_check": "无冲突。严格对齐 03 第 50 行“手工换行必须按完整语义单元安排”与第 20 行“不用keep-all造成长中文溢出”的原意，纠正了盲审模型凭单帧截图把浏览器正常断行误断为违规、盲目建议 keep-all 的系统性偏差。",
+      "font_size_check": "保护 03 字号与排版合同，杜绝因错误建议引发溢出与缩字变相违规。",
+      "executability": "以 UNCERTAIN + 最小源码/码点核对替代主观猜想，判定逻辑严密可执行。"
+    },
+    {
+      "id": "FINDING-R17-10",
+      "topic": "电影Caption阅读区、TYPE-02跨度诊断界限与审美建议单列",
+      "target_file": "agent/prompts/BLIND_VLM_REVIEW.md",
+      "candidate_quote": "电影caption既可在载体内，也可依06采用稳定独立reading zone；不能增加“只能放在载体内”的规则。卡内净空阈值和整页跨度诊断按TYPE-02分开；短内容合法居中/紧凑不以填字补面积。具体改进可以建议，但不得把未写入规范的偏好列为硬失败。保留原审阅，后续源码反证另作裁决记录。",
+      "base_reference": "base/agent/prompts/BLIND_VLM_REVIEW.md:1-3; reference/design_specs/03-typography-language.md:63-71; base/design_specs/06-motion-film.md:82",
+      "rule_verdict": "COMPLIANT",
+      "conflict_check": "无冲突。准确呼应 06 第 82 行“主文字在稳定的 reading zone，电影在清晰的 stage”以及 03 TYPE-02 中“跨度目标70–92%是诊断，不要求以编造事实达标”的原意，遏制盲审评审随意发明规则或把审美偏好升级为硬缺陷。",
+      "aesthetic_separation": "明确要求将具体改进建议与硬缺陷裁决严格隔离，严禁将未入规的主观审美偏好列为硬阻断项。",
+      "executability": "条款权责明确，便于评审仲裁与自动化归档。"
+    }
+  ]
+}

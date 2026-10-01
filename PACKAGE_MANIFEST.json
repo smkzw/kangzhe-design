@@ -2,7 +2,7 @@
   "version": "6.0.0",
   "revision": "KZ6-0929-A04",
   "status": "PARTIAL",
-  "scope": "R15 nonbody chrome preflight; portable upstream boot; exact Film root interface and Chinese break rules; 90 components plus independent scoped source review only; full four-track acceptance unresolved",
+  "scope": "R17 source-reviewed hero-width, memory isolation, blind adjudication, static geometry, visibility/exit and repeat data-clock QC; 90 deterministic contracts; overall four-track acceptance unresolved",
   "files": [
     {
       "path": ".gitignore",
@@ -11,8 +11,8 @@
     },
     {
       "path": "CHANGELOG.md",
-      "bytes": 10157,
-      "sha256": "669c49df77a2973f2f120f8aa32bc0965e8c590a6d28cc2cb2fa8b8b46e1a20c"
+      "bytes": 10951,
+      "sha256": "51a39e32304989638f671d1bf13514f4b952528cd8702aa5f69fd1a39cce7ad7"
     },
     {
       "path": "INSTALL.md",
@@ -51,8 +51,8 @@
     },
     {
       "path": "adapters/html-ppt.md",
-      "bytes": 9329,
-      "sha256": "9e85227f3ecfd9a334f32d788772205f7708bd425f2b44744edf2ef9e3e193fa"
+      "bytes": 10702,
+      "sha256": "e3c0cf20faae929329871c72eea4ec82d3e9a1413003723c79587b3342f29986"
     },
     {
       "path": "adapters/ppt-master.md",
@@ -66,8 +66,8 @@
     },
     {
       "path": "agent/EVALUATION.md",
-      "bytes": 7778,
-      "sha256": "4e1ee7d4dc0c43195a157d5d465f0e83ac62520525b95d931d2990b3e2a77925"
+      "bytes": 9453,
+      "sha256": "1e117302254d17a0f13e972034224ad407172dc36738a096e2b4a40518723229"
     },
     {
       "path": "agent/HANDOFF_TEMPLATE.md",
@@ -111,8 +111,8 @@
     },
     {
       "path": "agent/prompts/BLIND_VLM_REVIEW.md",
-      "bytes": 905,
-      "sha256": "f805e41cb88a070960e3193a3526aa31ddcc359350bd2ee1f55629b080c6706e"
+      "bytes": 1888,
+      "sha256": "2caa35beebfd60650dacc260ce7bbb896676431c50b656f16a4e5ad596b99148"
     },
     {
       "path": "agent/prompts/EXECUTE.md",
@@ -201,8 +201,8 @@
     },
     {
       "path": "design_specs/06-motion-film.md",
-      "bytes": 23881,
-      "sha256": "9d856ad91d674c798f7fd097263c6c9474ac1fe6c2c6af7a278373d73ead8a63"
+      "bytes": 24972,
+      "sha256": "75fee84621508c3e30a34d087ec8d2dd5ba757d8ebecfe2a61fd9518c2f6a79e"
     },
     {
       "path": "design_specs/07-drilldown.md",
@@ -901,8 +901,8 @@
     },
     {
       "path": "review/CURRENT_STATUS.md",
-      "bytes": 11382,
-      "sha256": "1f5d313c96e6dab761baafe2916eb9f76db42098311e67336f0b5d3499aefcb5"
+      "bytes": 11695,
+      "sha256": "afeff54f97c7f87cdeedafa0ff323a69ab05ac988f3fc31972b613c120e2a942"
     },
     {
       "path": "review/KZ6-0929-A01/P1-P3_STATUS.md",
@@ -1063,6 +1063,21 @@
       "path": "review/KZ6-0929-A04/R15/component-90.log",
       "bytes": 189,
       "sha256": "c2f0f769204779d8b20eaebeb8de54b65c894eca1d335de6f1540d849edc18ce"
+    },
+    {
+      "path": "review/KZ6-0929-A04/R17/STATUS.md",
+      "bytes": 2868,
+      "sha256": "9ca667272ccbe6a3afb24694684ee6d79c78ffef9597b251ff0557a6ff9b6d22"
+    },
+    {
+      "path": "review/KZ6-0929-A04/R17/spec-REVIEW.md",
+      "bytes": 29307,
+      "sha256": "e8adbaca7100b85d02979901869fc914c05a0ff2ba62ff6827fad9448b6bb506"
+    },
+    {
+      "path": "review/KZ6-0929-A04/R17/spec-findings.json",
+      "bytes": 14227,
+      "sha256": "9e1cc9dba1e6dc07fd78e0535c008d8a3d4779ee6386962ba24b71051fbe42d6"
     },
     {
       "path": "review/KZ6-0929-A04/STATUS.md",
