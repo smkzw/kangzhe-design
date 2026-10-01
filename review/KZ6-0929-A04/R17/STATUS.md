@@ -6,8 +6,8 @@
 |---|---|---|
 |规范|四个owner文档补固定hero右留距、自动记忆隔离、硬规则盲审裁决、静态布局绑定、真实read显露、先退出后收缩、第二圈图数同步|fresh Gemini-3.8-flash/high 独立差异审正常154.867秒，0确认冲突；只规范scope|
 |组件|当前文档修订下90确定性合同通过；本轮未改公共runtime代码|不替代生图、上游、模型制作、Office或观众视觉|
-|HTML-PPT上游|最新合成开发产物经官方render静态副本7PNG；5desktop×7page×普通/静态70布局PASS；8实际Gantt编辑序列、11判据PASS；overview/S同步、完整自然24秒回接/同载体/整组菱形浮动通过|原Luna静态修复280/450秒STOP保留；owner修复stage优先级独立计数；fresh静态视觉审仍未正常终态，不能计制作节点成功|
-|站点式HTML|最新合成开发源7自然电影全部fullcycle PASS，图表2圈340真实样本无图数错配；4desktop136状态实际业务文字可见/Range PASS、4原速收缩边界PASS；真实native Chrome后台17项PASS|owner stage容量与文案修复独立计数；原Luna退出620/图数220秒STOP保留；当前指定DS clean终态及新鲜视觉审未关闭|
+|HTML-PPT上游|R36合成开发产物经官方render静态副本7PNG；5desktop×7page×普通/静态70布局PASS；8实际Gantt编辑序列、11判据PASS；overview/S同步、完整自然24秒回接/同载体/整组菱形浮动通过|原Luna静态修复280/450秒STOP保留；owner修复stage优先级独立计数；fresh静态视觉审原330秒STOP后同会话36.359秒正常恢复，确认灰线/页脚2硬缺陷；R38品牌修复与新源复验另计，不把R36静态审改绿|
+|站点式HTML|最新合成开发源7自然电影全部fullcycle PASS，图表2圈340真实样本无图数错配；4desktop136状态实际业务文字可见/Range PASS、4原速收缩边界PASS；真实native Chrome后台17项PASS|owner stage容量与文案修复独立计数；原Luna退出620/图数220秒STOP保留；fresh独立8图静态审正常322.394秒，提出空末态/空间/标题/弹窗4组问题；R40内容和布局修复与源码裁决在途，不能把此前Range/hidden通过当整体通过|
 |流式HTML|开发源4原速完整周期及真实后台14项已通过；审阅两条普通自动日期名词断行硬判由DOM另行撤回|原审与源码仲裁分列；不能冒称原弱模型干净终态已补齐|
 |PPTX|指定maker本人此前真实Default九页；最新Mac PowerPoint8编辑存关开/回读PASS，fresh9图静态0确认硬问题|图像原生像素门未关闭；不Excel；本轮未新做Windows Office或新未见整套制作|
 |跨模型|真实CodeBuddy/deepseek-v4.1-flash/max与Pi/openai-codex/gpt-6-luna/max制作；独立Gemini-3.8-flash/high审|真实配额/STOP/作者归属保留，0证实MODEL_LIMIT；不把局部修复转记为原模型成功|
