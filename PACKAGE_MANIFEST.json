@@ -76,13 +76,13 @@
     },
     {
       "path": "agent/KNOWN_GAPS.md",
-      "bytes": 6291,
-      "sha256": "6b075966d1483e64bc4994fb21cfc5487754bbb169218b4ab91a65f331273d7d"
+      "bytes": 7473,
+      "sha256": "f3328c47cb942d9421365487185b1787fdd4bd6988d958b91ae4a7971e958e78"
     },
     {
       "path": "agent/PLAN.md",
-      "bytes": 6756,
-      "sha256": "35bacd990b730da8ca1b599e5ff8b7f7813db44b920c768ffe3095ef532bf0c8"
+      "bytes": 7046,
+      "sha256": "ccbbd05c27309346f17e0d09d8d1321d69df7c484c911db8c3df40a97a12ceca"
     },
     {
       "path": "agent/START_HERE.md",
@@ -1106,8 +1106,8 @@
     },
     {
       "path": "review/VALIDATION_STATUS.md",
-      "bytes": 4139,
-      "sha256": "9148a774931a1af69bd023db9f36be0db2c15d8ce7ca4009f4d5382394df3409"
+      "bytes": 4354,
+      "sha256": "63b87d9b65e5c92e19ccd643c2fdaad67985309fecc788d3b705d35bc7ed7bc9"
     },
     {
       "path": "review/evidence/browser-report.json",

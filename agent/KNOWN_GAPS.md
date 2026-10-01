@@ -1,3 +1,15 @@
+# R17 当前缺口 · 2026-10-01（唯一当前表）
+
+完成层次和实际修订只读 [当前状态](../review/CURRENT_STATUS.md) 与 [R17分层事实](../review/KZ6-0929-A04/R17/STATUS.md)。90组件、真实Chrome、两上游制作、原生Office、独立模型终态分别记账。
+
+1. 两连续同冻结完整四轨与未见保留集仍为0；失败开发集不回填为持出成功，owner修复不转换成原测试者成功。
+2. CodeBuddy实际429，重置提示2026-10-01 22:43:14 UTC+8；缺正常clean-memory节点，不重试到配额恢复、不静默替代。
+3. 指定SciDraw接口实际无size参数，原生真实像素门未关闭；不插值、不假生图。
+4. EGO原任务空间已失效，替代空间授权与可调用入口未齐；当前native Chrome后台证据不冒称EGO。
+5. 最新开发产物仍须保持确切源绑定并修复独立视觉意见；正常、capture、preview、print/RM、原生编辑的证据不互相替代。Windows Office/Safari等未测平台保持未测。
+
+以下所有R15及更早条目均为保存的历史，里面的“当前/优先”只描述当时，不覆盖本节；不把历史未执行读成最新未调用。
+
 # R14补充 · 2026-10-01
 - 全72合同通过；新增viewport_assets真实源切换、generated默认fallback仍核、viewport_regions实际保护对象与安全外扩；fresh Gemini实际13测试/10hash零确认源码缺陷，380.009秒STOP保留，同会话仅报告恢复44.469秒正常，只计一次scope审阅。回执自引用SHA错误由owner拒用，真实hash另算。
 - Luna真实超宽图片接入与官方七页PNG正常264.628秒；后续四hero Logo锚点/额外标记已由Luna实际修复，官方再次七PNG rc0，但420.012秒STOP，未完成新四宽/交接。不把旧PNG/旧QC绑定新source。七页计划/资产登记仍待。
