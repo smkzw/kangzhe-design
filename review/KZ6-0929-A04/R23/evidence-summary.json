@@ -1,0 +1,93 @@
+{
+  "version": "6.0.0",
+  "contract": "A04/R23",
+  "delivery": "quick-close release; exact manifest/install/remote receipt required",
+  "validation_status": "PARTIAL",
+  "final_clean_four_track_rounds": 0,
+  "new_model_dispatches": 0,
+  "unit_tests": 90,
+  "generated_hero": {
+    "actual_size": [
+      2560,
+      1088
+    ],
+    "sha256": "0016ff9b026949b4744dd8837edee33eb832f8b249bec6127f70af8a58daec92",
+    "backend_snapshot_verified": false
+  },
+  "reports": [
+    {
+      "case": "stage-r69-quick-close/unit.log",
+      "sha256": "5a2a87eb53c075b4e389bfb7326125243c6472544e55b010ff60329aea5c6e35"
+    },
+    {
+      "case": "stage-r69-quick-close/component.json",
+      "sha256": "061e03fd8ac293fdc3d30445a12db48072613363f9abc18f8cad819c2eb5d85a"
+    },
+    {
+      "case": "stage-r69-quick-close/component.log",
+      "sha256": "418f3c2d99e46e16a1e39e1ea68a9f93ebdff44baab192ed91229cee8b7cd71e"
+    },
+    {
+      "case": "stage-r67-modal-and-toc/scroll-RED.log",
+      "sha256": "56a6b94ad3e910f9d3d5215ecf79c6d8a7c19930a53abada8dfeead2f8a9bbd6"
+    },
+    {
+      "case": "stage-r67-modal-and-toc/scroll-GREEN.json",
+      "sha256": "cee3fd158c782f172339bde90386bf804e4d4539f00e1ad9577e8cff3e11242f"
+    },
+    {
+      "case": "stage-r67-modal-and-toc/component-r68.json",
+      "sha256": "061e03fd8ac293fdc3d30445a12db48072613363f9abc18f8cad819c2eb5d85a"
+    },
+    {
+      "case": "stage-r67-modal-and-toc/version-background-pause-diagnostic.json",
+      "sha256": "a6fd81ea91c061ef91813b033ee66d299f36cf8c94d49d40b152cc61044235be"
+    },
+    {
+      "case": "blind-r67-isolation-toc/findings.json",
+      "sha256": "0355e197da2443b252a63ac826eb260638520dd971537d6dde666f1da62ae437"
+    },
+    {
+      "case": "receipts/blind-r67-isolation-toc-budget.json",
+      "sha256": "f6c026f79b816f47eb408df2379f4100b51b4caf9523df498e043844e7b03044"
+    },
+    {
+      "case": "receipts/blind-H08-r65-editorial-recovery-budget.json",
+      "sha256": "ec5b84e3c45e2a820d049c6a101d940c09006edf8dd33eb4b927b3a124a807cf"
+    },
+    {
+      "case": "receipts/pi-H08-r67-readable-wrap-budget.json",
+      "sha256": "adac94e06231b388be6bfff08443ef0849105304f2c32b7578d3f278342d57c2"
+    },
+    {
+      "case": "receipts/pi-H08-r67-wrap-recovery-budget.json",
+      "sha256": "ad402bf671acbc8290ddf82c249cf14e951e7ad5f26dd76ee8428b910002640c"
+    },
+    {
+      "case": "development/H08-cards-holdout-r49/result-r67.json",
+      "sha256": "958f2972760f4f2f12873f50cb8ea564312328c2e5d0b722099eb2249cef185a"
+    },
+    {
+      "case": "development/H08-cards-holdout-r49/qc/r69-owner-hierarchy/report.json",
+      "sha256": "59f4d56bae3d799cafd566703bedd8da76a743a96e4a9701d0ef26f971200104"
+    },
+    {
+      "case": "development/H02-native-size-r66/qc/r67-toc-protection/report.json",
+      "sha256": "259ba8617e019a24451b831cbfa5ccae8bd6de3dbf4403ca8e5beaf0a701ae52"
+    },
+    {
+      "case": "development/H02-native-size-r66/qc/r67-hero-composite/report.json",
+      "sha256": "b2913ba912df393c13c6a0d6e84140c29958607570ee50265877043f909140b8"
+    },
+    {
+      "case": "native-office-H07-r59/EDIT_READBACK.json",
+      "sha256": "87f651bdc0d12114d0f1b4552ecdf1700638a190389551feaa031a0bcd1ccb8e"
+    },
+    {
+      "case": "stage-r64-final-runtime/web-natural/report.json",
+      "sha256": "668d692ef8e9e261d4d498c52d1d4785618622970ce569ab8a1cc6f55dd7e58b"
+    }
+  ],
+  "private_raw_outputs_preserved": true,
+  "owner_final_repairs_not_counted_as_model_success": true
+}

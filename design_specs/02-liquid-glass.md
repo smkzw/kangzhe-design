@@ -28,6 +28,9 @@ PPTX 使用 **原生可编辑透明填充、渐变、圆角与阴影**，必要�
 
 背景原图、使用的真实像素/裁切、完整合成页与卡片材质须一起审。若资产真实存在但实际看不见，先核HTTP/currentSrc或PPTX媒体关系、z层/遮盖、额外opacity/saturation和项目CSS覆盖，再改相应owner；不一律重新生图，更不能为显眼引入穿字的玻璃轮廓。审阅单分别记录background_presence、reading_quietness、glass_perceptibility、text_data_readability；以明确页号/状态/完整截图给判断。单张最漂亮帧或裸图不足以放行。
 
+## 下钻阅读隔离 LG-05（A04 R23）
+打开宽幅下钻时，后方页面的可辨认文字不得穿透到弹窗、卡片或表格阅读面。`CSS.supports`、computed `backdrop-filter` 和声明中的 alpha 不能代替实际画面验证；当前 Camofox 实测声明了 `::backdrop blur(5px)` 仍透出清晰文字。`kz-drilldown.js` 在弹窗之外的互不嵌套背景根节点临时挂载隔离 class；弹窗和其内容不加 filter，不叠加内部 blur，不改变玻璃卡材料。后方 CSS 光场/装饰动画临时暂停，避免整个长页面逐帧重绘拖慢前景电影；JS 时钟由各项目 onOpen/onClose 用自己的 pause reason 管理，不能修改时长或人为 seek 冒充完整周期。二级电影继续正常自动播放。返回上一层保持隔离，关闭或 dispose 后释放本组件的 class 与滚动锁，保留原有 class/style/value/priority；并行实例以引用计数避免提前解除。此隔离只用于原生 modal 的后方页面，不用于掩盖复杂生图、正文卡缺陷或常态全页强 blur。实审须包含打开、二级下钻、返回、关闭后的完整截图及焦点/滚动/电影恢复。
+
 ## 色条绝对禁令 LG-02
 无论旧组件、新组件、主题、轨道、密度、风险卡、引用卡，均不得使用沿一条边覆盖卡宽/高大部分长度的彩色条作为装饰。包含：border-left/top、独立 rect、伪元素、box-shadow inset、linear-gradient 伪装、带颜色的通长底边。不允许“身份色必须保留”“存量可保留”豁免。
 

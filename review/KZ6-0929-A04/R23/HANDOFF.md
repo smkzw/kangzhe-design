@@ -11,7 +11,7 @@
 |真实宽幅背景|指定SciDraw customConfig真实请求、原图2560×1088|assets/sci-hero-r66-native-size/receipt.json及background.png；26.996秒|本次像素门关闭，后端版本未知|
 |发布安装|原子同步共享canonical、20技能入口（19个技能symlink及1个共享目录symlink）同manifest、公开main|最终安装/发布回执，ZIP及manifest hash|按交付回执核验；临床原件/原始模型私密输出不入公开包|
 
-私有stage-r69-quick-close/evidence-index.json记录每个实际存在路径与SHA；公开evidence-summary.json只载脱敏概要。
+私有evidence-index.json记录每个实际存在路径与SHA；公开evidence-summary.json只载脱敏概要。
 
 ## 3. 模型运行
 |case|确切模型/harness|预算与终态|范围与原件|

@@ -1,5 +1,7 @@
 # Agent 执行入口 · KZ6-0929
 
+**当前R23策略：**用户要求快速收尾，不再派发新测试；先读CURRENT_HANDOFF.md、KNOWN_GAPS.md首表与review/CURRENT_STATUS.md。以下长期验证目标不触发当前自动续跑。
+
 目标：在单一 `kangzhe-design` 6.0 上完成真实制作集成与异质模型验证，不再叠加旧包。不把本次已有参考组件重写一遍；先复测、定位差距，再最小范围完善。
 
 ## 先读

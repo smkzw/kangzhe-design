@@ -2,7 +2,7 @@
   "version": "6.0.0",
   "revision": "KZ6-0929-A04",
   "status": "PARTIAL",
-  "scope": "A04 R22 warm translucent material/background correction; real images, native engine artifacts and bounded source/VLM/browser evidence; overall PARTIAL, final full four-track clean rounds 0",
+  "scope": "A04 R23 user-directed quick closure: confirmed fixes, direct checks, public GitHub and all local harness symlinks; no new model dispatch; full four-track validation remains PARTIAL",
   "files": [
     {
       "path": ".gitignore",
@@ -11,8 +11,8 @@
     },
     {
       "path": "CHANGELOG.md",
-      "bytes": 10951,
-      "sha256": "51a39e32304989638f671d1bf13514f4b952528cd8702aa5f69fd1a39cce7ad7"
+      "bytes": 11654,
+      "sha256": "261e5071ceb57af9f0cf9ce414dfc8b7acbcac1f5c48a9afda9f200ae2573fce"
     },
     {
       "path": "INSTALL.md",
@@ -21,8 +21,8 @@
     },
     {
       "path": "README.md",
-      "bytes": 5040,
-      "sha256": "302dd181928d9f8e94639d87535acf9386e7dfe70db30f863cf1240ea5e0d527"
+      "bytes": 4996,
+      "sha256": "edd932d20bfa2a387607cbec95158fdbb8b4389ff9b6b9ac658e1baf397ba865"
     },
     {
       "path": "REVISION",
@@ -61,8 +61,8 @@
     },
     {
       "path": "agent/CURRENT_HANDOFF.md",
-      "bytes": 3515,
-      "sha256": "158beb7493eba969e9edfcb272d1abc82a33e53216e64d7433d8d48035f295c2"
+      "bytes": 5135,
+      "sha256": "8087068765309a7f591ce8224eaa8d72137facc4b97dc9d5f3cf6f960d72a11b"
     },
     {
       "path": "agent/EVALUATION.md",
@@ -76,18 +76,18 @@
     },
     {
       "path": "agent/KNOWN_GAPS.md",
-      "bytes": 8627,
-      "sha256": "2988ff10f09ccfdd8022fd0f41e516db7eeac1ba43bfb74679c02a98fa0b430d"
+      "bytes": 9805,
+      "sha256": "f06ba36e42c5caa3f0fb7cd0e0bd7fd37564d2da934ecc850c4eea642fe66789"
     },
     {
       "path": "agent/PLAN.md",
-      "bytes": 7046,
-      "sha256": "275c3863e31689d08a618c1fc00c1be46cf53ee875faca170ccd526930a83618"
+      "bytes": 7637,
+      "sha256": "9c339b3c095c20bc6756cb919ea27d56eb8242f15b830bceb31b90a9aed15169"
     },
     {
       "path": "agent/START_HERE.md",
-      "bytes": 1137,
-      "sha256": "1434015e201c32bf510520d7bfa9fa6445de32424c5914971a9af87290f78832"
+      "bytes": 1342,
+      "sha256": "019b466db748f44228f6df08be6f64c0178881e3fa1128706156ffe6ee251be1"
     },
     {
       "path": "agent/fixtures/cases.json",
@@ -181,18 +181,18 @@
     },
     {
       "path": "design_specs/02-liquid-glass.md",
-      "bytes": 8726,
-      "sha256": "a55bb65e8f263009af67aad27da912c57a8882076ab170e1a8e394594acec468"
+      "bytes": 9894,
+      "sha256": "0df649548e464713adcc3788ff2b09c0eb6b39df92155b1970d6053b010d8cf6"
     },
     {
       "path": "design_specs/03-typography-language.md",
-      "bytes": 14616,
-      "sha256": "9f4a33c457a6e778a1bae81b1014c02ea450883cbd690c786ab9e851c1a9cf5f"
+      "bytes": 15202,
+      "sha256": "4f9fc9472c03b43f0c2bc010aaa8a5168e8f7bf7fa0abf8577f41c6e12b8d4e8"
     },
     {
       "path": "design_specs/04-image-pipeline.md",
-      "bytes": 14341,
-      "sha256": "cd6bb7fe3b4fa4a8e47c7eec73a83b58c9791317ff53086f0eabd0e7d4d90c0b"
+      "bytes": 15075,
+      "sha256": "99632c9e3cabe96cf653184b2238cb9c81894d76551062b26f5181831d13c701"
     },
     {
       "path": "design_specs/05-charts.md",
@@ -901,8 +901,8 @@
     },
     {
       "path": "review/CURRENT_STATUS.md",
-      "bytes": 23066,
-      "sha256": "279beb78d922f40381447b5b29903bfa5b461b6c05eb3d06f8f9cfd64a1d905b"
+      "bytes": 26917,
+      "sha256": "99be4328753df79a658cdba097dd9a8b84ea6cb9f1a380d46deaf35a4bdcd71a"
     },
     {
       "path": "review/KZ6-0929-A01/P1-P3_STATUS.md",
@@ -1095,6 +1095,21 @@
       "sha256": "cf76f3902dbefe1d7a0639798250f15340afd743d1eae5c31df468f5334368b9"
     },
     {
+      "path": "review/KZ6-0929-A04/R23/HANDOFF.md",
+      "bytes": 5113,
+      "sha256": "67340b427afc7dd5fe360c836e96c7400e47b2b7ed99b97fde3d26280bab120d"
+    },
+    {
+      "path": "review/KZ6-0929-A04/R23/STATUS.md",
+      "bytes": 3786,
+      "sha256": "0cbacc28f9521c2ae9ec6c08e29cf56f5e1c7145a6028b8bd2f8a62f453c6e45"
+    },
+    {
+      "path": "review/KZ6-0929-A04/R23/evidence-summary.json",
+      "bytes": 3471,
+      "sha256": "247b3340026be96288b773e5adfeac9fa5d73b7fc2acc91f7ac5276badc9ab55"
+    },
+    {
       "path": "review/KZ6-0929-A04/STATUS.md",
       "bytes": 3863,
       "sha256": "02cc6302dba633e2d4b0aa1203773cec4d138694ccbf70bae113523eb0b5d50a"
@@ -1121,8 +1136,8 @@
     },
     {
       "path": "review/VALIDATION_STATUS.md",
-      "bytes": 418,
-      "sha256": "4e06ee368b9c6fb27a7da1583cc79e8d2de9cbfdf801e5cb81ea72e95be90bf3"
+      "bytes": 592,
+      "sha256": "8e7bfa1c3206de1795610a2341de87f37082c0f5dcf0c8c3220c471e527a7c42"
     },
     {
       "path": "review/evidence/browser-report.json",
@@ -1206,8 +1221,8 @@
     },
     {
       "path": "runtime/API.md",
-      "bytes": 11832,
-      "sha256": "c031066ff3041ff047cb9908cc269b83c184362e9f9e168cfa6eeb05d4b12392"
+      "bytes": 12318,
+      "sha256": "cdcc265f0b2c1681866f329c41869b0f36a7d567f65522b1210009b117343fc2"
     },
     {
       "path": "runtime/README.md",
@@ -1226,8 +1241,8 @@
     },
     {
       "path": "runtime/kz-drilldown.js",
-      "bytes": 4819,
-      "sha256": "899bd53399bad6c09edb7d0d718474db895cefda6a719ed33102f98a098101f1"
+      "bytes": 6539,
+      "sha256": "98a0c8e6354529ffd270692397998d0621318c6e5f6d428e10d5d077b220ce66"
     },
     {
       "path": "runtime/kz-gantt.js",
@@ -1236,8 +1251,8 @@
     },
     {
       "path": "runtime/kz-glass.css",
-      "bytes": 12087,
-      "sha256": "bb7cdcbd3a07f66dc0cc209089afa2ef0ea6fff1962fd05215c8d7699996f358"
+      "bytes": 12427,
+      "sha256": "e92d70bf23b32d4aff27900c338b1fa8b0f6759294668d202162bc9d8f34c3dd"
     },
     {
       "path": "runtime/kz-layout-qc.js",
@@ -1323,6 +1338,11 @@
       "path": "tests/components_init_faults.cjs",
       "bytes": 11155,
       "sha256": "6ebf394152393ffaa163b45b2aa2002e043b419c4c3523d818101d1546b55a2e"
+    },
+    {
+      "path": "tests/drill_background_browser.py",
+      "bytes": 4561,
+      "sha256": "b0a64e639514911bbf0e0db1d2f8c9cf5c3b8b45315354c622ec6c55d9d03fac"
     },
     {
       "path": "tests/drill_capacity_browser.py",

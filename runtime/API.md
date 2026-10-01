@@ -52,6 +52,8 @@ options 可提供 `onProgress(progress,currentData)` 和 `onDataClick(echartsPar
 
 多层数据/电影仍由项目装配，父层返回时恢复焦点/滚动。onOpen/onClose 可暂停/恢复原页面的相应后台原因；不要清除其他暂停原因。组件捕获 renderer 抛错会显示“明细未能加载”，项目 QC 必须把这个错误视为未通过，不能因为弹窗打开就判成功。
 
+首次打开时组件给弹窗祖先路径以外的互斥背景根挂载内部类`.kz-drill-background`：只模糊后方页面并暂停其CSS动画，不模糊弹窗或改写背景内联filter。close/dispose引用计数释放该类与body滚动锁，保留外部已有class、overflow值和priority；返回上层仍保持隔离。背景JS电影仍由onOpen/onClose管理相应暂停原因，弹窗内当前层电影继续正常自动播放；此内部类不是全站背景主题。
+
 ## 连续电影
 
 `new KZMotion.Film(root,options)` 要求 root 内已有 `.kz-film-stage` 与同一 `.kz-film-carrier`，并提供 options.frames、duration。帧结构为 `{t,x,y,w,h,r,tint:[r,g,b,a],label,caption}`，首尾回接按 06。可选 managedText:false 由项目业务时钟写文本；onRender(frame,progress,film) 的 frame.index 来自同一几何采样，供同步业务状态。另有 staticProgress、minCarrierWidth 参数；数值从实际计划/token 取，不在此页复制设计默认值。

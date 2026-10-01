@@ -1,6 +1,30 @@
 /* Rich drilldown: one modal, persistent layer stack, no untrusted innerHTML. */
 (function(global){
   'use strict';let serial=0;
+  const backgroundOwners=new WeakMap();
+  const scrollOwners=new WeakMap();
+  function lockScroll(){
+    const body=document.body;let rec=scrollOwners.get(body);
+    if(!rec){rec={count:0,value:body.style.getPropertyValue('overflow'),priority:body.style.getPropertyPriority('overflow')};scrollOwners.set(body,rec);body.style.setProperty('overflow','hidden',rec.priority);}
+    rec.count++;
+    return ()=>{if(--rec.count)return;scrollOwners.delete(body);if(body.style.getPropertyValue('overflow')==='hidden'&&body.style.getPropertyPriority('overflow')===rec.priority){if(rec.value)body.style.setProperty('overflow',rec.value,rec.priority);else body.style.removeProperty('overflow');}};
+  }
+  function isolateBackground(dialog){
+    const roots=[];let path=dialog;
+    // Disjoint siblings along the ancestor path: never blur the reading panel
+    // or nest filters. Native ::backdrop blur can be advertised but not painted.
+    while(path.parentElement){
+      const parent=path.parentElement;
+      for(const node of parent.children){
+        if(node===path||['DIALOG','SCRIPT','STYLE','LINK','TEMPLATE','NOSCRIPT'].includes(node.tagName))continue;
+        let rec=backgroundOwners.get(node);
+        if(!rec){rec={count:0,added:!node.classList.contains('kz-drill-background')};backgroundOwners.set(node,rec);}
+        rec.count++;node.classList.add('kz-drill-background');roots.push(node);
+      }
+      if(parent===document.body)break;path=parent;
+    }
+    return ()=>{for(const node of roots){const rec=backgroundOwners.get(node);if(!rec)continue;if(--rec.count===0){if(rec.added)node.classList.remove('kz-drill-background');backgroundOwners.delete(node);}}};
+  }
   function element(tag,cls,text){const el=document.createElement(tag);if(cls)el.className=cls;if(text!=null)el.textContent=text;return el;}
   class Drilldown {
     constructor({host=document.body,onOpen=()=>{},onClose=()=>{}}={}){
@@ -26,7 +50,7 @@
       if(old){old.scroll=this.body.scrollTop;old.focus=trigger?.isConnected?trigger:document.activeElement;old.life.pause?.();old.section.hidden=true;}
       const section=element('section');section.dataset.kzLevel=id;section.setAttribute('aria-label',title);
       this.body.append(section);const rec={id,title,section,scroll:0,focus:null,life:{}};this.stack.push(rec);
-      if(this.stack.length===1){this.opener=trigger;this.savedOverflow=document.body.style.overflow;document.body.style.overflow='hidden';this.dialog.showModal();this.onOpen();}
+      if(this.stack.length===1){this.opener=trigger;this.dialog.showModal();this.restoreScroll=lockScroll();this.restoreBackground=isolateBackground(this.dialog);this.onOpen();}
       // A renderer only receives its own container. Strings must be rendered with textContent.
       try{rec.life=render(section,this)||{};}catch(err){section.replaceChildren(element('p','kz-error','明细未能加载：'+err.message));rec.life={};}
       this.sync();this.body.scrollTop=0;this.title.focus();
@@ -50,7 +74,7 @@
     close(){
       if(!this.stack.length)return;
       while(this.stack.length){const rec=this.stack.pop();rec.life.dispose?.();rec.section.remove();}
-      this.dialog.close();document.body.style.overflow=this.savedOverflow||'';this.onClose();
+      this.dialog.close();this.restoreBackground?.();this.restoreBackground=null;this.restoreScroll?.();this.restoreScroll=null;this.onClose();
       if(this.opener?.isConnected)this.opener.focus();
     }
     snapshot(){return {open:this.dialog.open,depth:this.stack.length,path:this.stack.map(x=>x.id),width:this.dialog.open?this.dialog.getBoundingClientRect().width:0,viewport:innerWidth};}
