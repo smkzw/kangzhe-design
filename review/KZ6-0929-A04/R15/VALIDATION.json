@@ -1,0 +1,46 @@
+{
+  "version": "6.0.0",
+  "round": "KZ6-0929-A04",
+  "revision": "R15",
+  "attribution": "owner spec/preflight repair; independent reviewer actual checks; not tester original output",
+  "runtime_changed": false,
+  "components": {
+    "count": 90,
+    "status": "PASS",
+    "evidence": "component-90.log"
+  },
+  "independent_runs": [
+    {
+      "node": "blind-r15-hero-portability-contract",
+      "agent": "pi",
+      "provider": "google-antigravity",
+      "model": "gemini-3.8-flash",
+      "effort": "high",
+      "elapsed_seconds": 151.592,
+      "normal_terminal": true,
+      "scope": "four changed files + 90 component tests"
+    },
+    {
+      "node": "blind-r15-interface-v2",
+      "agent": "pi",
+      "provider": "google-antigravity",
+      "model": "gemini-3.8-flash",
+      "effort": "high",
+      "elapsed_seconds": 27.631,
+      "normal_terminal": true,
+      "scope": "Film interface paragraph only"
+    }
+  ],
+  "adjudication": {
+    "first_interface_ambiguity": "confirmed; root/stage/carrier text repaired; fresh second review PASS",
+    "defensive_schema_coupling": "suggestion: unlisted roles already rejected by authoritative schema, no acceptance bypass"
+  },
+  "source_files": {
+    "tools/qc_plan.py": "860bae124e62e0f0c68905f4d6f900632831c3ebe1fa6cf2df13ef4560586599",
+    "tests/test_hero.py": "9942e82b187d9bf476d5213ecb692fed9ebcdb4b54edc15d4270690a89172626",
+    "adapters/html-ppt.md": "9e85227f3ecfd9a334f32d788772205f7708bd425f2b44744edf2ef9e3e193fa",
+    "design_specs/03-typography-language.md": "62abf19069b1b21f079210fc2ffd5ab0f26850a451558860ddbfbedb44efdcdc"
+  },
+  "full_four_track_clear_rounds": 0,
+  "overall_acceptance": false
+}

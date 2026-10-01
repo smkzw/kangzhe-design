@@ -35,6 +35,7 @@ def validate(plan,manifest=None,asset_root=None):
   if plan['track'] in ['pptx','htmlppt'] and p['kind'] in ['cover','toc','section','ending']:
    expected={'cover':['cover_title'],'toc':['toc_title','toc_label'],'section':['section_number','section_title'],'ending':['ending_title']}[p['kind']]
    actual={e['role'] for e in p['elements']}
+   if 'footer' in actual or any(r['role'] in ['header','footer'] for r in p['protected_regions']):add('HERO-CHROME',pid,'封面、目录、章节和结束页不得显示正文页眉页脚或页码')
    for r in expected:
     if r not in actual:add('HERO-ROLE',pid,'缺少固定角色 '+r)
    if p['kind']=='toc':

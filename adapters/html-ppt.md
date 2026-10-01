@@ -15,7 +15,12 @@
 四类hero的基准坐标来自tokens：左文字/Logo锚保留；右Logo锚随宽度；目录三等列展开；背景用实际宽幅生成资产按经审阅crop铺满。页眉页脚位置以同一u换算，只有x的右锚随宽度变化。PPTX保持固定画布，无须模拟浏览器resize。
 
 ## 禁止上游默认页底进度条
-上游runtime自动在body下注入`.progress-bar > span`，它不一定出现在作者HTML中，也不在`.deck`内。必须加载`runtime/kz-glass.css`的`.kz .progress-bar{display:none!important}`；保留原生页码，不改上游runtime。不准只删除源HTML标签或只在hero页关闭。到最后一页检查computed display、全视口底部截图和实际span边界；蓝/橙全宽线均失败，页眉固定橙线仍保留。
+上游runtime自动在body下注入`.progress-bar > span`，它不一定出现在作者HTML中，也不在`.deck`内。必须加载`runtime/kz-glass.css`的`.kz .progress-bar{display:none!important}`；仅正文页保留规定物理页码；封面、目录、章节、尾页不显示页码。不改上游runtime。不准只删除源HTML标签或只在hero页关闭。到最后一页检查computed display、全视口底部截图和实际span边界；蓝/橙全宽线均失败，页眉固定橙线仍保留。
+
+## 可移植资源与普通态启动
+new-deck.sh 创建时生成的路径可能仍指向安装目录。交付前把实际使用的官方 base.css/runtime.js 原件及其需要的资源复制到项目资源目录，记录上游与复制件SHA；相对引用只在交付目录内解析，不改上游内容，也不依赖用户机器的隐藏技能目录。分别通过 file:// 和当前HTTP预览实际打开，核对所有必需资源无404、七页正常导航及G7-INIT。scaffold成功不等于可移植交付；先完成这一步，再投入长周期和视觉审阅。
+
+Film 的签名是 `new KZMotion.Film(root, options)`。root 是包含 `.kz-film-stage` 和该舞台内唯一 `.kz-film-carrier` 的外层容器；构造器在 root 的后代中自行查找两者，不接收 carrier 参数。先取得并断言这三个 DOM 节点的嵌套关系，再调用构造器；不要把 stage 本身作为 root，也不把整张含固定 chrome 的 slide 当作几何舞台。专用外层容器或该页唯一拥有的包含范围可以作为 root。不得使用未声明的 carrier 变量。DOM 根节点与 Film 实例句柄分开持有；四业务阶段和首尾同形接续仍按06处理。代码异常必须修复，不能用删除电影、只留静态图或吞掉异常代替。
 
 ## 生命周期和真实挂载
 顺序：上游base/theme → kz-tokens → kz-glass → 品牌布局；上游runtime → kz-motion/其他所需组件 → html-ppt-bridge →项目装配 → kz-audience。`kz-audience.js`清除兼容旧示例的播放器UI，不接管动画时钟/翻页；新页面从源头不生成这些控件。

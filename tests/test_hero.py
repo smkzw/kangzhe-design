@@ -80,6 +80,18 @@ class HeroContracts(unittest.TestCase):
    self.assertTrue(any('kz-card' in x.get('class','').split() for x in chain))
    self.assertTrue(any('kz-float' in x.get('class','').split() for x in chain))
    self.assertTrue(any('data-kz-reveal' in x for x in chain))
+ def test_nonbody_footer_or_header_chrome_rejected(self):
+  for track in ['pptx','htmlppt']:
+   for kind in ['cover','toc','section','ending']:
+    for role in ['footer','header']:
+     p=self.page();p['track']=track;q=p['pages'][0];q.update(kind=kind,hero_layout_id=kind+'-01')
+     data={'title':'资料汇报','number':'01','items':[{'title':'材料'}]}
+     _,blocks,_=layout(kind,data)
+     q['elements']=[dict(id=str(i),role=b['role'],font_px=b['font_px'],line_height=b['line_height'],rect=b['rect'])for i,b in enumerate(blocks)]
+     if track=='htmlppt':p['target_viewports']=[[1280,720],[2560,1080]];q['motion_objects']=[dict(id='logo',role='brand-logo',enter='static',exit='static',hover='none',ambient='none')]
+     if role=='footer':q['elements'].append(dict(id='page-number',role='footer',font_px=18,line_height=1.25,text='1 / 7'))
+     else:q['protected_regions'].append(dict(id='header',role='header',rect=[0,0,100,90],motion_margin=0))
+     with self.subTest(track=track,kind=kind,role=role):self.assertIn('HERO-CHROME',self.errors(p))
  def test_site_not_forced_to_slide_master(self):
   p=self.page();p['track']='site';p['target_viewports']=[[1280,720],[1440,900],[1920,1080],[2560,1080]];p['pages'][0].pop('hero_layout_id');p['pages'][0]['elements']=[];p['pages'][0]['motion_objects']=[{'id':'scene','role':'film','enter':'fade','exit':'fade','hover':'none','ambient':'film'}];self.assertEqual(self.errors(p),set())
 if __name__=='__main__':unittest.main()

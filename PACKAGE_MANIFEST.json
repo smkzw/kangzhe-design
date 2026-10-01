@@ -2,7 +2,7 @@
   "version": "6.0.0",
   "revision": "KZ6-0929-A04",
   "status": "PARTIAL",
-  "scope": "R14 exact source: explicit responsive profile, fixed PPT role gates, current host/module init cleanup and zero-to-one animation; component/source evidence only; full four-track acceptance unresolved",
+  "scope": "R15 nonbody chrome preflight; portable upstream boot; exact Film root interface and Chinese break rules; 90 components plus independent scoped source review only; full four-track acceptance unresolved",
   "files": [
     {
       "path": ".gitignore",
@@ -11,8 +11,8 @@
     },
     {
       "path": "CHANGELOG.md",
-      "bytes": 9761,
-      "sha256": "a401192948103fb87239db14b9a4cab9ce9e601bd174f9c6525e8a57753bf260"
+      "bytes": 10157,
+      "sha256": "669c49df77a2973f2f120f8aa32bc0965e8c590a6d28cc2cb2fa8b8b46e1a20c"
     },
     {
       "path": "INSTALL.md",
@@ -51,8 +51,8 @@
     },
     {
       "path": "adapters/html-ppt.md",
-      "bytes": 7976,
-      "sha256": "ceddd086f9ac26b864786f2cd3559b9f5ff919a292be7a105f3ad70457082b07"
+      "bytes": 9329,
+      "sha256": "9e85227f3ecfd9a334f32d788772205f7708bd425f2b44744edf2ef9e3e193fa"
     },
     {
       "path": "adapters/ppt-master.md",
@@ -186,8 +186,8 @@
     },
     {
       "path": "design_specs/03-typography-language.md",
-      "bytes": 10384,
-      "sha256": "3a9bbfe6e0b40ff9ec58e4f9a005e5109103a0eebbbeef40fc15999f0c9524a9"
+      "bytes": 10867,
+      "sha256": "62abf19069b1b21f079210fc2ffd5ab0f26850a451558860ddbfbedb44efdcdc"
     },
     {
       "path": "design_specs/04-image-pipeline.md",
@@ -901,8 +901,8 @@
     },
     {
       "path": "review/CURRENT_STATUS.md",
-      "bytes": 11092,
-      "sha256": "ccd9aa62f67b995fdf3de9cd56d13712a123a2a338d937c3ab887401a7ce7a87"
+      "bytes": 11382,
+      "sha256": "1f5d313c96e6dab761baafe2916eb9f76db42098311e67336f0b5d3499aefcb5"
     },
     {
       "path": "review/KZ6-0929-A01/P1-P3_STATUS.md",
@@ -1050,6 +1050,21 @@
       "sha256": "fc4ef1b48adb47be1e58313992ec96509e0dafdce8537d0e1ad98f6aa9324102"
     },
     {
+      "path": "review/KZ6-0929-A04/R15/STATUS.md",
+      "bytes": 2769,
+      "sha256": "56c270ce48d68df286996ba03386732681169ff359fb91755dc7b14124bdc9c1"
+    },
+    {
+      "path": "review/KZ6-0929-A04/R15/VALIDATION.json",
+      "bytes": 1673,
+      "sha256": "959c07d4268b48a7a231173e966561d5cc4648e465a34ee4b88ef60a45e0853c"
+    },
+    {
+      "path": "review/KZ6-0929-A04/R15/component-90.log",
+      "bytes": 189,
+      "sha256": "c2f0f769204779d8b20eaebeb8de54b65c894eca1d335de6f1540d849edc18ce"
+    },
+    {
       "path": "review/KZ6-0929-A04/STATUS.md",
       "bytes": 3863,
       "sha256": "02cc6302dba633e2d4b0aa1203773cec4d138694ccbf70bae113523eb0b5d50a"
@@ -1076,8 +1091,8 @@
     },
     {
       "path": "review/VALIDATION_STATUS.md",
-      "bytes": 3849,
-      "sha256": "50e3bce57676c0a42e894ea3a1a411a53da07af992c531777b0217757697d94b"
+      "bytes": 4139,
+      "sha256": "9148a774931a1af69bd023db9f36be0db2c15d8ce7ca4009f4d5382394df3409"
     },
     {
       "path": "review/evidence/browser-report.json",
@@ -1361,8 +1376,8 @@
     },
     {
       "path": "tests/test_hero.py",
-      "bytes": 6281,
-      "sha256": "48cf80f2d63b29ebc9522693c1419a9e75e6a484ee5e7d1cb17b4e842a568079"
+      "bytes": 7332,
+      "sha256": "9942e82b187d9bf476d5213ecb692fed9ebcdb4b54edc15d4270690a89172626"
     },
     {
       "path": "tests/test_ppt_role_sizes.py",
@@ -1446,8 +1461,8 @@
     },
     {
       "path": "tools/qc_plan.py",
-      "bytes": 14192,
-      "sha256": "0c4192988138564efb57c56e4e6675fe93c31604d5dee453d1c432b1c3e2264c"
+      "bytes": 14391,
+      "sha256": "860bae124e62e0f0c68905f4d6f900632831c3ebe1fa6cf2df13ef4560586599"
     }
   ]
 }
