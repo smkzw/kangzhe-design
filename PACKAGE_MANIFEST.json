@@ -2,7 +2,7 @@
   "version": "6.0.0",
   "revision": "KZ6-0929-A04",
   "status": "PARTIAL",
-  "scope": "R17 source-reviewed hero-width, memory isolation, blind adjudication, static geometry, visibility/exit and repeat data-clock QC; 90 deterministic contracts; overall four-track acceptance unresolved",
+  "scope": "R18/R43 card content hierarchy candidate: COPY-06 and review gates; actual engine repairs in progress; overall PARTIAL",
   "files": [
     {
       "path": ".gitignore",
@@ -31,8 +31,8 @@
     },
     {
       "path": "SKILL.md",
-      "bytes": 7335,
-      "sha256": "16607e6834ad333ae9bf9d52bb58d312cd8742848fa3d21cb4bec3e6f5035d32"
+      "bytes": 7557,
+      "sha256": "f1a4779079e7d1a5709ac90c4851768df1ef92d8c9a455f92f7f1dd4676e96ab"
     },
     {
       "path": "VERSION",
@@ -66,8 +66,8 @@
     },
     {
       "path": "agent/EVALUATION.md",
-      "bytes": 9453,
-      "sha256": "1e117302254d17a0f13e972034224ad407172dc36738a096e2b4a40518723229"
+      "bytes": 9946,
+      "sha256": "9e656e447e0fa6ae98927ede7014e1a97fbbd9854ec851f9e2a045fe23b742c5"
     },
     {
       "path": "agent/HANDOFF_TEMPLATE.md",
@@ -111,8 +111,8 @@
     },
     {
       "path": "agent/prompts/BLIND_VLM_REVIEW.md",
-      "bytes": 1888,
-      "sha256": "2caa35beebfd60650dacc260ce7bbb896676431c50b656f16a4e5ad596b99148"
+      "bytes": 2348,
+      "sha256": "4012de623f142c4a28cbe0aee96f3e193fb2b2ec6742f802610b173d96ec662a"
     },
     {
       "path": "agent/prompts/EXECUTE.md",
@@ -186,8 +186,8 @@
     },
     {
       "path": "design_specs/03-typography-language.md",
-      "bytes": 10867,
-      "sha256": "62abf19069b1b21f079210fc2ffd5ab0f26850a451558860ddbfbedb44efdcdc"
+      "bytes": 14616,
+      "sha256": "9f4a33c457a6e778a1bae81b1014c02ea450883cbd690c786ab9e851c1a9cf5f"
     },
     {
       "path": "design_specs/04-image-pipeline.md",
@@ -901,8 +901,8 @@
     },
     {
       "path": "review/CURRENT_STATUS.md",
-      "bytes": 11695,
-      "sha256": "afeff54f97c7f87cdeedafa0ff323a69ab05ac988f3fc31972b613c120e2a942"
+      "bytes": 12064,
+      "sha256": "17588ff83a2f7b995ebcbb92efb408e80b052d0041e461b737d2c669480a8310"
     },
     {
       "path": "review/KZ6-0929-A01/P1-P3_STATUS.md",
