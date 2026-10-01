@@ -1071,8 +1071,8 @@
     },
     {
       "path": "review/KZ6-0929-A04/R17/spec-REVIEW.md",
-      "bytes": 29307,
-      "sha256": "e8adbaca7100b85d02979901869fc914c05a0ff2ba62ff6827fad9448b6bb506"
+      "bytes": 29303,
+      "sha256": "f11caa7ae0b2a4b2424b3bca4b5b73e701a5495df52b7e37f9ae03bcdf5534c6"
     },
     {
       "path": "review/KZ6-0929-A04/R17/spec-findings.json",
