@@ -42,6 +42,17 @@
   --kz-statistics-tint: #DCE9C8;
   --kz-pv: #A85F34;
   --kz-pv-tint: #FCF5E6;
+  --kz-face-top-rgb: 255,252,245;
+  --kz-face-top-alpha: 0.9;
+  --kz-face-top-offset: 0%;
+  --kz-face-mid-rgb: 255,240,216;
+  --kz-face-mid-alpha: 0.8;
+  --kz-face-mid-offset: 48%;
+  --kz-face-bottom-rgb: 255,228,181;
+  --kz-face-bottom-alpha: 0.7;
+  --kz-face-bottom-offset: 100%;
+  --kz-face-border-rgb: 190,178,161;
+  --kz-face-border-alpha: 0.45;
   --kz-font: "Microsoft YaHei","微软雅黑","PingFang SC","Noto Sans CJK SC",Arial,sans-serif;
   --kz-radius: 24px;
   --kz-radius-compact: 18px;
@@ -49,7 +60,7 @@
   --kz-blur: 18px;
   --kz-gap: 20px;
   --kz-pad: 24px;
-  --kz-card-alpha: 0.86;
+  --kz-card-alpha: 0.8;
   --kz-line-body: 1.4;
   --kz-float-period: 6400ms;
   --kz-float-amplitude: 2px;

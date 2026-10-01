@@ -1,0 +1,150 @@
+{
+  "scope": "R22 affected-scope evidence; not final four-track release",
+  "version": "6.0.0",
+  "status": "PARTIAL",
+  "final_clean_four_track_rounds": 0,
+  "generated_body": {
+    "actual_size": [
+      1942,
+      809
+    ],
+    "sha256": "f4278e1303307a8e90dcd9145ddb1d0fce5875a49a80badda7f500e335aa9c31"
+  },
+  "reports": [
+    {
+      "case": "blind-H07-r59-source-native/findings.json",
+      "sha256": "adbe5190f51212ca983ff377eae5c8cca787856eb31f728e9d4f16ebf04c1216",
+      "pass": null,
+      "review": {
+        "modality": "Fresh independent source + VLM review",
+        "scope": "ONLY four new cards on native PPTX pages 04/05, two header titles, and matching notes 04/05",
+        "model_route": "frozen Gemini high (bound 300 / inner 250 / max 8 turns)",
+        "overall_status": "PASS",
+        "hard_findings_count": 0,
+        "aesthetic_findings_count": 2,
+        "uncertain_count": 2,
+        "not_tested_count": 4
+      },
+      "checks_count": 0
+    },
+    {
+      "case": "blind-H08-r62-source-material/findings.json",
+      "sha256": "dd5e609993d00728a16a74e44a9e22274766aadc3103a1db7f75de09366803a7",
+      "pass": null,
+      "review": {
+        "modality": "Fresh independent HTML source + VLM review",
+        "scope": "ONLY four transferred cards on #items/page4 and all L1/L2 drilldown views plus header title and notes",
+        "model_route": "frozen Gemini high (bound 300 / inner 250 / max 8 turns)",
+        "overall_status": "PASS",
+        "hard_findings_count": 0,
+        "aesthetic_findings_count": 2,
+        "uncertain_count": 2,
+        "not_tested_count": 4,
+        "owner_integration_attribution": "Owner applied material cascade and capture derivation only; raw original failure retained; owner integration is not counted as maker originality"
+      },
+      "checks_count": 0
+    },
+    {
+      "case": "candidate-r22-glass-repaired/findings-repaired.json",
+      "sha256": "9fa8cba097604038bd71d32d5848f739b705f57da5c168bb20c232061bf553f7",
+      "pass": null,
+      "review": {
+        "modality": "Fresh independent static code and contract review",
+        "scope": "Repaired candidate: source/runtime/kz-glass.css, source/tools/glass_svg.py, tokens/tokens.json, build_tokens.py, UPSTREAM_EFFECTS.md contract, and qc smoke artifacts",
+        "target_fixes": [
+          "preserve host background-image by background-color",
+          "independent face-mid-alpha",
+          "correctly scale optional takeaway font/minheight only HTML-PPT logicalu",
+          "connect short curved gradient glint"
+        ],
+        "overall_status": "PASS",
+        "hard_findings_count": 0,
+        "aesthetic_findings_count": 2,
+        "uncertain_count": 2,
+        "not_tested_count": 5
+      },
+      "checks_count": 0
+    },
+    {
+      "case": "candidate-r22-glass-repaired/qc/report.json",
+      "sha256": "50ab241b8f1326a3467e97ecdcc52291fa18c75d60a462ea8c4c57856116fc51",
+      "pass": true,
+      "review": null,
+      "checks_count": 4
+    },
+    {
+      "case": "development/H02-glass-r54/qc/r64-material-pointer/report.json",
+      "sha256": "54f0159fcc450a4e4449f4ad328b5e8a9648888886d8bb5df86e2c61dc15ccc9",
+      "pass": true,
+      "review": null,
+      "checks_count": 8
+    },
+    {
+      "case": "development/H02-glass-r54/qc/r64-owner-engine/report.json",
+      "sha256": "3fa3c6b9a29ead3ace552a5efb239c60818d48187d4df09f668b09f6b05d19f7",
+      "pass": true,
+      "review": null,
+      "checks_count": 9
+    },
+    {
+      "case": "development/H02-glass-r54/qc/r64-owner-layout/report.json",
+      "sha256": "0ed7a79cad46793f8fe7580c8c65f03b3c4579e316e2857dabc0e01572d23154",
+      "pass": true,
+      "review": null,
+      "checks_count": 70
+    },
+    {
+      "case": "development/H08-cards-holdout-r49/qc/r64-material-pointer/report.json",
+      "sha256": "ae200cf9f9b5bb7e753fcde143a98ffdc46d3747e8d52e65cc84c7919755084d",
+      "pass": true,
+      "review": null,
+      "checks_count": 8
+    },
+    {
+      "case": "development/H08-cards-holdout-r49/qc/r64-owner-engine/report.json",
+      "sha256": "7e2fc396e7eaa65a7838bd736157a352212cf893fbfd6e0a0149b8bd13379ba9",
+      "pass": true,
+      "review": null,
+      "checks_count": 9
+    },
+    {
+      "case": "development/H08-cards-holdout-r49/qc/r64-owner-layout/report.json",
+      "sha256": "9445a5adc01d042308506d0112370b0982db5d03f767f060597bcf43de96bac1",
+      "pass": true,
+      "review": null,
+      "checks_count": 70
+    },
+    {
+      "case": "native-office-H07-r59/EDIT_READBACK.json",
+      "sha256": "87f651bdc0d12114d0f1b4552ecdf1700638a190389551feaa031a0bcd1ccb8e",
+      "pass": true,
+      "review": null,
+      "checks_count": 8
+    },
+    {
+      "case": "stage-r64-final-runtime/web-natural/report.json",
+      "sha256": "668d692ef8e9e261d4d498c52d1d4785618622970ce569ab8a1cc6f55dd7e58b",
+      "pass": true,
+      "review": null,
+      "checks_count": 0
+    }
+  ],
+  "independent_model_nodes": [
+    {
+      "status": "TERMINAL",
+      "seconds": 196.345,
+      "sha256": "da6e7e9856aae77447d6256e7f66182daedef242afd6f4575f2e7e44f4c62853"
+    },
+    {
+      "status": "TERMINAL",
+      "seconds": 278.314,
+      "sha256": "cac138dff9d0c6bc7bece79d5e2ab7911cf9614dc76c9106d79d958d87eae91a"
+    },
+    {
+      "status": "TERMINAL",
+      "seconds": 213.221,
+      "sha256": "68757a4026f7fc1effb53569e6b52d56a4d5feaff368b002e336ec8f84abda29"
+    }
+  ],
+  "private_raw_outputs_preserved": true
+}

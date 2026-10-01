@@ -2,7 +2,7 @@
   "version": "6.0.0",
   "revision": "KZ6-0929-A04",
   "status": "PARTIAL",
-  "scope": "R21 status: R18 COPY-06 plus R20 own typography runtime; actual named HTML engine integration and bounded card/native evidence; unseen full chain and final four-track rounds incomplete; overall PARTIAL",
+  "scope": "A04 R22 warm translucent material/background correction; real images, native engine artifacts and bounded source/VLM/browser evidence; overall PARTIAL, final full four-track clean rounds 0",
   "files": [
     {
       "path": ".gitignore",
@@ -21,8 +21,8 @@
     },
     {
       "path": "README.md",
-      "bytes": 4997,
-      "sha256": "58fabfbd1758410486164fe3d22224f7bad47b65d855dbf1de65d2d46fc01e79"
+      "bytes": 5040,
+      "sha256": "302dd181928d9f8e94639d87535acf9386e7dfe70db30f863cf1240ea5e0d527"
     },
     {
       "path": "REVISION",
@@ -51,8 +51,8 @@
     },
     {
       "path": "adapters/html-ppt.md",
-      "bytes": 12148,
-      "sha256": "42a95f8f89bf8ff40a753a8145e6005ea0efdb2dc7af019c13d28fd32c24f685"
+      "bytes": 12708,
+      "sha256": "53dd4ff082d6622d7aeb88a18f08c6a367c1836b7957cc4c02a587393b499105"
     },
     {
       "path": "adapters/ppt-master.md",
@@ -61,8 +61,8 @@
     },
     {
       "path": "agent/CURRENT_HANDOFF.md",
-      "bytes": 673,
-      "sha256": "1533e7ecc858f8c0f06917d94b6503937ac26122b5fda0d408599c62d27b9af4"
+      "bytes": 3515,
+      "sha256": "158beb7493eba969e9edfcb272d1abc82a33e53216e64d7433d8d48035f295c2"
     },
     {
       "path": "agent/EVALUATION.md",
@@ -76,13 +76,13 @@
     },
     {
       "path": "agent/KNOWN_GAPS.md",
-      "bytes": 7473,
-      "sha256": "f3328c47cb942d9421365487185b1787fdd4bd6988d958b91ae4a7971e958e78"
+      "bytes": 8627,
+      "sha256": "2988ff10f09ccfdd8022fd0f41e516db7eeac1ba43bfb74679c02a98fa0b430d"
     },
     {
       "path": "agent/PLAN.md",
       "bytes": 7046,
-      "sha256": "ccbbd05c27309346f17e0d09d8d1321d69df7c484c911db8c3df40a97a12ceca"
+      "sha256": "275c3863e31689d08a618c1fc00c1be46cf53ee875faca170ccd526930a83618"
     },
     {
       "path": "agent/START_HERE.md",
@@ -181,8 +181,8 @@
     },
     {
       "path": "design_specs/02-liquid-glass.md",
-      "bytes": 6830,
-      "sha256": "c4b9e640b9d6a85fc156bd2a410544636e4b4f29437e12a6ec4f25826a66308b"
+      "bytes": 8726,
+      "sha256": "a55bb65e8f263009af67aad27da912c57a8882076ab170e1a8e394594acec468"
     },
     {
       "path": "design_specs/03-typography-language.md",
@@ -191,8 +191,8 @@
     },
     {
       "path": "design_specs/04-image-pipeline.md",
-      "bytes": 13702,
-      "sha256": "183dae02aadb56b985e13fdcf2714d2356f199853876e983ece9d8b452e9d141"
+      "bytes": 14341,
+      "sha256": "cd6bb7fe3b4fa4a8e47c7eec73a83b58c9791317ff53086f0eabd0e7d4d90c0b"
     },
     {
       "path": "design_specs/05-charts.md",
@@ -901,8 +901,8 @@
     },
     {
       "path": "review/CURRENT_STATUS.md",
-      "bytes": 19308,
-      "sha256": "dac5d2412fa67ec5222eaeb62e277617c037d31f2b178c2eecee9860420cac1a"
+      "bytes": 23066,
+      "sha256": "279beb78d922f40381447b5b29903bfa5b461b6c05eb3d06f8f9cfd64a1d905b"
     },
     {
       "path": "review/KZ6-0929-A01/P1-P3_STATUS.md",
@@ -1080,6 +1080,21 @@
       "sha256": "9e1cc9dba1e6dc07fd78e0535c008d8a3d4779ee6386962ba24b71051fbe42d6"
     },
     {
+      "path": "review/KZ6-0929-A04/R22/HANDOFF.md",
+      "bytes": 3440,
+      "sha256": "71020fe0894abfd3f22916a9f85e3a1a53713d9e5dd45ff19ed070142680142b"
+    },
+    {
+      "path": "review/KZ6-0929-A04/R22/STATUS.md",
+      "bytes": 3697,
+      "sha256": "acff2711f3234ce0e2c2fbfbc96f29a821157583eb671e995759b451c7461021"
+    },
+    {
+      "path": "review/KZ6-0929-A04/R22/evidence-summary.json",
+      "bytes": 5439,
+      "sha256": "cf76f3902dbefe1d7a0639798250f15340afd743d1eae5c31df468f5334368b9"
+    },
+    {
       "path": "review/KZ6-0929-A04/STATUS.md",
       "bytes": 3863,
       "sha256": "02cc6302dba633e2d4b0aa1203773cec4d138694ccbf70bae113523eb0b5d50a"
@@ -1106,8 +1121,8 @@
     },
     {
       "path": "review/VALIDATION_STATUS.md",
-      "bytes": 4354,
-      "sha256": "63b87d9b65e5c92e19ccd643c2fdaad67985309fecc788d3b705d35bc7ed7bc9"
+      "bytes": 418,
+      "sha256": "4e06ee368b9c6fb27a7da1583cc79e8d2de9cbfdf801e5cb81ea72e95be90bf3"
     },
     {
       "path": "review/evidence/browser-report.json",
@@ -1221,8 +1236,8 @@
     },
     {
       "path": "runtime/kz-glass.css",
-      "bytes": 11528,
-      "sha256": "cb0f5f6e6399c378b33ba091ed675f5e17acdbc5ef728bb6ecc02cedfe28e0d7"
+      "bytes": 12087,
+      "sha256": "bb7cdcbd3a07f66dc0cc209089afa2ef0ea6fff1962fd05215c8d7699996f358"
     },
     {
       "path": "runtime/kz-layout-qc.js",
@@ -1236,13 +1251,13 @@
     },
     {
       "path": "runtime/kz-tokens.css",
-      "bytes": 1638,
-      "sha256": "695172264c9f2d4269bd5e74e355535e5987330dd1e92dc6808ca058d18e26d2"
+      "bytes": 1988,
+      "sha256": "e9686c593411384c618c07ba25aedb6a285a2bd8d672c611ca57b058fa54d079"
     },
     {
       "path": "runtime/kz-tokens.js",
-      "bytes": 4848,
-      "sha256": "77e663a70ca5c4bc4d86ba340a489b6a0b6c533bcc554f4dc23deef562326758"
+      "bytes": 5041,
+      "sha256": "734992b1decd4afa413f59ec95d20257c4376fa548c4c3ab233e0059751dede3"
     },
     {
       "path": "schemas/README.md",
@@ -1421,8 +1436,8 @@
     },
     {
       "path": "tokens/tokens.json",
-      "bytes": 7667,
-      "sha256": "576557ee68c1b92c375805bd81474d0e28df4438d3e9c365a1a3b3a2c9f87d5c"
+      "bytes": 8015,
+      "sha256": "c82a59a6cd7925553f10fd64ee2342fb434969f79453880ef2b05e2544d0a476"
     },
     {
       "path": "tools/bind_header_mark_pptx.py",
@@ -1441,8 +1456,8 @@
     },
     {
       "path": "tools/build_tokens.py",
-      "bytes": 1744,
-      "sha256": "f4d62bf10a4ab8f3e09992eaf25fbc51efd11a2d8c9ce28533cfee80e8229895"
+      "bytes": 2289,
+      "sha256": "4715868bc7f62c590433eb563f2db83d4db60c5ae51a025a0518a3993709db0a"
     },
     {
       "path": "tools/context_pack.py",
@@ -1451,8 +1466,8 @@
     },
     {
       "path": "tools/glass_svg.py",
-      "bytes": 1747,
-      "sha256": "09cf55bd521eacd0404bb228136c15dbfa5419046516e0cebadf75b178611de0"
+      "bytes": 1722,
+      "sha256": "27395257461c9253adb6ba9e088a019ff0f8d6e04f20b5288e10ec0aa45da2dc"
     },
     {
       "path": "tools/hero_layout.py",

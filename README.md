@@ -2,7 +2,7 @@
 
 康哲药业医学部的单一 Liquid Glass 设计技能。覆盖可编辑 PPTX、HTML-PPT、站点式 HTML、流式 HTML。替代原 `kangzhe-design 4.5.7` 与 `kangzhe-design-3d 5.2.7`，不保留 flat、3d 或 legacy 模式。
 
-**版本说明：**6.0.0是规范版本；当前修订A04，四轨多轮验证继续中，尚未完整验收。新版候选包含桌面宽屏站点范围、ARCO机制取舍和指定生图能力边界。已完成的引擎、组件、原生Office与模型检查分别见[当前状态](review/CURRENT_STATUS.md)。
+**版本说明：**6.0.0是规范版本；当前修订A04/R22（暖色玻璃与真实背景显现），四轨多轮验证继续中，尚未完整验收。新版候选包含桌面宽屏站点范围、ARCO机制取舍和指定生图能力边界。已完成的引擎、组件、原生Office与模型检查分别见[当前状态](review/CURRENT_STATUS.md)。
 
 ## 使用
 

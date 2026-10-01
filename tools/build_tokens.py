@@ -10,6 +10,11 @@ def build():
     for key, value in t['type_px'].items(): css.append(f'  --kz-type-{key.replace("_","-")}: {value}px;')
     for key, value in t['departments'].items():
         css += [f'  --kz-{key}: {value["color"]};', f'  --kz-{key}-tint: {value["tint"]};']
+    for label, stop in zip(['top','mid','bottom'], t['glass']['face_gradient']):
+        color=stop['color'].lstrip('#');rgb=','.join(str(int(color[i:i+2],16)) for i in (0,2,4))
+        css += [f'  --kz-face-{label}-rgb: {rgb};',f'  --kz-face-{label}-alpha: {stop["alpha"]};',f'  --kz-face-{label}-offset: {stop["offset"]*100:g}%;']
+    color=t['glass']['border_color'].lstrip('#');rgb=','.join(str(int(color[i:i+2],16)) for i in (0,2,4))
+    css += [f'  --kz-face-border-rgb: {rgb};',f'  --kz-face-border-alpha: {t["glass"]["border_alpha"]};']
     css += [f'  --kz-font: {t["fonts"]["fallback_css"]};',
             f'  --kz-radius: {t["glass"]["radius"]}px;',
             f'  --kz-radius-compact: {t["glass"]["radius_compact"]}px;',
