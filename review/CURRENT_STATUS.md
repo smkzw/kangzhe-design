@@ -1,6 +1,6 @@
-# A04 R23 收尾状态 · 2026-10-01
+# 当前状态 · 2026-10-07（6.1.3 / A08）
 
-版本保持单一6.0.0，skill名kangzhe-design。按用户最新要求：修正已确认问题，停止新增测试派发，发布GitHub并同步本机harness。源码收尾完成；发布与安装绑定最终manifest及私有PUBLIC_INSTALL.json。**发布安装与整体验收分开：完整四轨连续两轮验收未完成，不宣称无缺陷。**
+版本保持单一6.1.3（A08 为规范条款增补与运行时修正：tokens.glass 近白高透光、`.kz-card::after` 局部短高光、`.kz-dirty` 浮层化、`.kz-dialog-body` 字号规则；FILM-01 复合判据、动态保护区包络、性能白名单、DRILL-04 不适用口径、GANTT-04 工具条合同、HERO-05 机检、COPY-08 语义层与豁免、门表法定化、09 计时口径、tracks-site 单页变体、04 主视觉自验，逐条见 CHANGELOG。此前 A06 为规范条款增补与运行时修正：`--kz-un` 字号换算类型修正、DRILL-03/04 键隔离与滚轮路由参考实现、header_mark/footer 几何收编 tokens 并钉死页脚日期格式、FILM-01 状态增量量化、G5-PROJ 级联标注、page-plan cards 逐卡 detail 登记，逐条见 CHANGELOG），skill名kangzhe-design。以下为 A04 R23（6.0.0）收尾事实，继续有效：修正已确认问题，停止新增测试派发，发布GitHub并同步本机harness。源码收尾完成；发布与安装绑定最终manifest及私有PUBLIC_INSTALL.json。**发布安装与整体验收分开：完整四轨连续两轮验收未完成，不宣称无缺陷。**
 
 |证据层|完成事实|边界|
 |---|---|---|

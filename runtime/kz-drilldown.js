@@ -41,7 +41,52 @@
       const signal=this.abort.signal;
       this.back.addEventListener('click',()=>this.pop(),{signal});this.closeButton.addEventListener('click',()=>this.close(),{signal});
       this.dialog.addEventListener('cancel',e=>{e.preventDefault();this.pop();},{signal});
-      this.dialog.addEventListener('keydown',e=>{if(['ArrowLeft','ArrowRight','ArrowUp','ArrowDown','PageUp','PageDown','Home','End',' ','Escape'].includes(e.key))e.stopPropagation();},{signal});
+      // DRILL-03/04 隔离：阻止冒泡不影响按钮原生 Enter/Space 激活（默认动作在目标自身，不依赖冒泡路径）。
+      this.dialog.addEventListener('keydown',e=>{
+        if(['ArrowLeft','ArrowRight','ArrowUp','ArrowDown','PageUp','PageDown','Home','End',' ','Escape','Enter','Backspace'].includes(e.key))e.stopPropagation();
+        if(e.key==='Tab'){
+          // 候选集须是实际可聚焦节点：:disabled 覆盖禁用 fieldset 后代，排除 inert 子树与不可见节点
+          const items=[...this.dialog.querySelectorAll('button,a[href],input,select,textarea,[tabindex]')].filter(el=>{
+            if(el.matches(':disabled')||el.closest('[inert]')||el.tabIndex<0)return false;
+            const s=getComputedStyle(el);
+            return s.visibility!=='hidden'&&s.display!=='none'&&el.getClientRects().length>0;
+          });
+          if(!items.length)return;
+          const first=items[0],last=items[items.length-1],active=document.activeElement;
+          if(!this.dialog.contains(active)){e.preventDefault();first.focus();}
+          else if(!items.includes(active)){e.preventDefault();(e.shiftKey?last:first).focus();}
+          else if(e.shiftKey&&active===first){e.preventDefault();last.focus();}
+          else if(!e.shiftKey&&active===last){e.preventDefault();first.focus();}
+        }
+      },{signal});
+      // DRILL-04 冒泡阶段滚轮路由：Y 与 X 各自找指针之下、沿该方向仍可滚动的最近滚动体；
+      // 横向命中不吞纵向增量（触控板单事件常带两个分量）；两端或滚动体外一律消费，
+      // 不链滚背景、不触发翻页。触控走原生滚动，横向滚动壳的 overscroll-behavior 陷阱见 07 DRILL-04。
+      this.dialog.addEventListener('wheel',e=>{
+        // 子控件已取消默认动作时不再路由滚动，但事件仍不得出弹层（隔离不依赖宿主另查 defaultPrevented）。
+        if(e.defaultPrevented){e.stopPropagation();return;}
+        const origin=e.target instanceof Element?e.target:e.target&&e.target.parentElement;
+        // 页模式按轴取分母：Y 用视口高、X 用视口宽。
+        const modeY=e.deltaMode===1?16:e.deltaMode===2?global.innerHeight:1;
+        const modeX=e.deltaMode===1?16:e.deltaMode===2?global.innerWidth:1;
+        // 手动赋值须即时生效：CSS scroll-behavior:smooth 会让连续 += 读到动画中间值，增量丢失。
+        const instant=(node,axis,delta)=>{const prev=node.style.scrollBehavior;node.style.scrollBehavior='auto';if(axis==='Y')node.scrollTop+=delta;else node.scrollLeft+=delta;node.style.scrollBehavior=prev;};
+        for(const [axis,delta] of [['Y',e.deltaY*modeY],['X',e.deltaX*modeX]]){
+          if(!delta)continue;
+          let node=origin;
+          while(node&&node!==this.dialog){
+            const style=getComputedStyle(node);
+            if(axis==='Y'&&/(auto|scroll)/.test(style.overflowY)&&((delta>0&&node.scrollTop+node.clientHeight<node.scrollHeight-1)||(delta<0&&node.scrollTop>0))){instant(node,'Y',delta);break;}
+            if(axis==='X'&&/(auto|scroll)/.test(style.overflowX)&&((delta>0&&node.scrollLeft+node.clientWidth<node.scrollWidth-1)||(delta<0&&node.scrollLeft>0))){instant(node,'X',delta);break;}
+            node=node.parentElement;
+          }
+        }
+        e.preventDefault();e.stopPropagation();
+      },{signal,passive:false});
+      // DRILL-04 触控隔离：全程阻止冒泡使宿主翻页滑动手势不触发；不 preventDefault，弹层内原生滚动保留。
+      // data-no-swipe 供上游引擎 interactive() 识别；stopPropagation 兜底其他宿主。
+      this.dialog.setAttribute('data-no-swipe','');
+      for(const type of ['touchstart','touchmove','touchend','touchcancel'])this.dialog.addEventListener(type,e=>{e.stopPropagation();},{signal,passive:true});
     }
     push({id,title,render},trigger=document.activeElement){
       if(this.disposed)throw Error('下钻组件已释放');if(!id||!title||typeof render!=='function')throw Error('下钻层缺少 id/title/render');

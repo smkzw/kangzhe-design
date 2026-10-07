@@ -1,9 +1,20 @@
 {
-  "schema_version": "6.0",
+  "schema_version": "6.1",
   "track": "htmlppt",
   "canvas": [
     1280,
     720
+  ],
+  "contract_revision": "A06",
+  "target_viewports": [
+    [
+      1280,
+      720
+    ],
+    [
+      2560,
+      1080
+    ]
   ],
   "pages": [
     {
@@ -100,7 +111,18 @@
         "asset_id": "asset_cover_hero"
       },
       "sources": [],
-      "cards": []
+      "cards": [],
+      "motion_objects": [
+        {
+          "id": "page-static",
+          "role": "page",
+          "enter": "none",
+          "exit": "none",
+          "hover": "none",
+          "ambient": "none",
+          "static_reason": "封面页无动态对象"
+        }
+      ]
     },
     {
       "id": "02_toc",
@@ -130,7 +152,7 @@
           "text": "01",
           "rect": [
             92.0,
-            172,
+            192,
             60,
             58
           ]
@@ -143,7 +165,7 @@
           "text": "入排信息",
           "rect": [
             160.0,
-            178,
+            201,
             249.33333333333331,
             40
           ]
@@ -156,7 +178,7 @@
           "text": "条目与使用边界",
           "rect": [
             92.0,
-            242,
+            259,
             317.3333333333333,
             25
           ]
@@ -169,7 +191,7 @@
           "text": "02",
           "rect": [
             481.3333333333333,
-            172,
+            192,
             60,
             58
           ]
@@ -182,7 +204,7 @@
           "text": "流程节点",
           "rect": [
             549.3333333333333,
-            178,
+            201,
             249.33333333333331,
             40
           ]
@@ -195,7 +217,7 @@
           "text": "保留缺失观察",
           "rect": [
             481.3333333333333,
-            242,
+            259,
             317.3333333333333,
             25
           ]
@@ -208,7 +230,7 @@
           "text": "03",
           "rect": [
             870.6666666666666,
-            172,
+            192,
             60,
             58
           ]
@@ -221,7 +243,7 @@
           "text": "季度计划",
           "rect": [
             938.6666666666666,
-            178,
+            201,
             249.33333333333331,
             40
           ]
@@ -234,7 +256,7 @@
           "text": "任务与起止时间",
           "rect": [
             870.6666666666666,
-            242,
+            259,
             317.3333333333333,
             25
           ]
@@ -361,17 +383,52 @@
         {
           "id": "card-0",
           "material": "liquid_glass",
-          "edge_decoration": "neutral_hairline"
+          "edge_decoration": "neutral_hairline",
+          "layout_mode": "distributed",
+          "detail": "not_available",
+          "detail_reason": "示例页未提供逐卡明细内容，不配置下钻"
         },
         {
           "id": "card-1",
           "material": "liquid_glass",
-          "edge_decoration": "neutral_hairline"
+          "edge_decoration": "neutral_hairline",
+          "layout_mode": "distributed",
+          "detail": "not_available",
+          "detail_reason": "示例页未提供逐卡明细内容，不配置下钻"
         },
         {
           "id": "card-2",
           "material": "liquid_glass",
-          "edge_decoration": "neutral_hairline"
+          "edge_decoration": "neutral_hairline",
+          "layout_mode": "distributed",
+          "detail": "not_available",
+          "detail_reason": "示例页未提供逐卡明细内容，不配置下钻"
+        }
+      ],
+      "motion_objects": [
+        {
+          "id": "card-0",
+          "role": "card",
+          "enter": "fade",
+          "exit": "fade",
+          "hover": "tilt",
+          "ambient": "float"
+        },
+        {
+          "id": "card-1",
+          "role": "card",
+          "enter": "fade",
+          "exit": "fade",
+          "hover": "tilt",
+          "ambient": "float"
+        },
+        {
+          "id": "card-2",
+          "role": "card",
+          "enter": "fade",
+          "exit": "fade",
+          "hover": "tilt",
+          "ambient": "float"
         }
       ]
     },
@@ -446,7 +503,18 @@
         "asset_id": "asset_section_hero"
       },
       "sources": [],
-      "cards": []
+      "cards": [],
+      "motion_objects": [
+        {
+          "id": "page-static",
+          "role": "page",
+          "enter": "none",
+          "exit": "none",
+          "hover": "none",
+          "ambient": "none",
+          "static_reason": "章节页无动态对象"
+        }
+      ]
     },
     {
       "id": "07_ending",
@@ -542,7 +610,18 @@
         "asset_id": "asset_ending_hero_v3"
       },
       "sources": [],
-      "cards": []
+      "cards": [],
+      "motion_objects": [
+        {
+          "id": "page-static",
+          "role": "page",
+          "enter": "none",
+          "exit": "none",
+          "hover": "none",
+          "ambient": "none",
+          "static_reason": "结束页无动态对象"
+        }
+      ]
     }
   ]
 }

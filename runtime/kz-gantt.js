@@ -2,6 +2,14 @@
 (function(global){
   'use strict';
   const clone=x=>JSON.parse(JSON.stringify(x));
+  // 字号比率与 bridge 同一生命周期：fluid 下读 :root 的 --kz-un（含钳制与打印锁定），无 bridge 时退回自算。
+  function fluidUnit(el){
+    if(!document.body||document.body.dataset.fit!=='fluid')return 1;
+    if(!(el.closest('.deck')||el.closest('.kz-dialog')))return 1; // 下钻弹层挂在 body 上，同属 fluid 页面
+    const v=parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--kz-un'));
+    if(Number.isFinite(v)&&v>0)return v;
+    return Math.max(1,innerHeight/KZ_TOKENS.wide.htmlppt_reference_height);
+  }
   const qindex=(year,q)=>{const y=Number(year),v=Number(q);if(!Number.isInteger(y)||y<1||!Number.isInteger(v)||v<1||v>4)throw Error('年份/季度无效');return y*4+v-1;};
   const fromIndex=i=>({year:Math.floor(i/4),quarter:(i%4+4)%4+1});
   const qlabel=i=>{const v=fromIndex(Math.round(i));return `${v.year} Q${v.quarter}`;};
@@ -61,7 +69,7 @@
     function status(message=''){hint.textContent=message;const n=countDirty();dirty.hidden=!n;dirtyText.textContent=`已修改 ${n} 项`;undoB.disabled=!undo.length;}
     function draw(){
       if(disposed)return;
-      const unit=root.closest('.deck')&&document.body.dataset.fit==='fluid'?Math.max(1,innerHeight/KZ_TOKENS.wide.htmlppt_reference_height):1;
+      const unit=fluidUnit(root);
       chart.setOption({animation:false,grid:{left:(chart.getWidth()<480?96:126)*unit,right:24*unit,top:38*unit,bottom:44*unit},textStyle:{fontFamily:KZ_TOKENS.fonts.fallback_css,fontSize:16*unit},
         xAxis:{type:'value',min:data.min,max:data.max,interval:1,axisLabel:{fontSize:16*unit,color:KZ_TOKENS.colors.body,formatter:v=>{if(v>=data.max)return '';const q=fromIndex(v);if(v===data.min&&q.quarter!==1)return `${q.year}Q${q.quarter}`;return q.quarter===1?String(q.year):((chart.getWidth()-150*unit)/(data.max-data.min)>=30*unit?'Q'+q.quarter:'');}},axisTick:{show:false},splitLine:{lineStyle:{color:'#E3E7EC'}},axisLine:{lineStyle:{color:'#CDD3D9'}}},
         yAxis:{type:'category',inverse:true,data:data.tasks.map(t=>t.label),axisLabel:{fontSize:16*unit,color:KZ_TOKENS.colors.body,width:(chart.getWidth()<480?86:116)*unit,overflow:'break'},axisTick:{show:false},axisLine:{show:false}},
@@ -80,6 +88,7 @@
     mq.addEventListener('change',()=>{if(mq.matches)finish();},{signal});
     document.addEventListener('visibilitychange',()=>{if(document.hidden)finish();},{signal});
     global.addEventListener('beforeprint',finish,{signal});
+    global.addEventListener('kz:fluidratio',()=>{if(!disposed)draw();},{signal});
     function local(event){const r=plot.getBoundingClientRect();return [(event.clientX-r.left)*(plot.clientWidth/r.width),(event.clientY-r.top)*(plot.clientHeight/r.height)];}
     function axisAt(event){return chart.convertFromPixel({xAxisIndex:0},local(event)[0]);}
     function rowGeometry(t){const i=data.tasks.findIndex(x=>x.id===t.id),a=chart.convertToPixel({xAxisIndex:0,yAxisIndex:0},[t.start,i]),b=chart.convertToPixel({xAxisIndex:0,yAxisIndex:0},[t.end,i]);return {x:a[0],y:a[1],w:b[0]-a[0],i};}

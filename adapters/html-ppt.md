@@ -4,9 +4,9 @@
 本机runtime.js的initCanvasFit在初始化时把data-w/data-h读为常量，后续resize只更新scale；运行时改data-w不能可靠改变逻辑宽度。它与base.css均明确支持body[data-fit="fluid"]退出固定fit，由主题负责全视口排版。这是宽屏最小适配点，不改上游源码、不增加新引擎。远端基线fd1629067909ff55b36b905476de4e5f26062a1f与本机tree hash分别记录，不冒充相同。
 
 ## A03默认：全视口主题
-从new-deck.sh创建。body设置data-fit="fluid"；deck保持上游class和导航；CSS覆盖其默认padding，用一套品牌主题单位 `--kz-u = viewport_height / 720`，在16:9桌面与1280×720基准相同。主题使用正常CSS长度/网格，不再给deck或文字transform:scale。桌面正文区域left=56u、right=56u、top=96u、bottom=60u，卡群真实跨该宽度；左页眉锚定，右Logo/页码右锚定，固定分隔线向右延伸。文字/Logo/菱形不横向拉伸。对短内容限制文本行长，不限制整个网格/主视觉的宽度。
+从new-deck.sh创建。body设置data-fit="fluid"；deck保持上游class和导航；CSS覆盖其默认padding，用一套品牌主题单位 `--kz-u = calc(100vh / 720)`（**长度**），在16:9桌面与1280×720基准相同。主题使用正常CSS长度/网格，不再给deck或文字transform:scale。桌面正文区域left=56u、right=56u、top=96u、bottom=60u，卡群真实跨该宽度；左页眉锚定，右Logo/页码右锚定，固定分隔线向右延伸。文字/Logo/菱形不横向拉伸。对短内容限制文本行长，不限制整个网格/主视觉的宽度。
 
-共享组件在 `body.kz[data-fit="fluid"]` 下通过 `--kz-component-u=--kz-u` 换算其按钮、甘特编辑标签/字段/状态、面包屑和图表状态等文字；其他HTML轨保持屏幕单位，不继承PPT换算。项目CSS后加载时仍须检查最终computed字号/u，控件和下钻中的必要文字同样不得低于16逻辑px，不准只检查卡片正文。不要把已换算的component变量再乘一次u；此补充不替代项目网格、行高、内边距与字号角色的完整主题适配。
+主题单位有两个、CSS 类型不同，不得混用：`--kz-u` 是**长度**（`calc(100vh/720)`），只用于几何换算，写法为 `calc(99 * var(--kz-u))`（数字×长度）；`--kz-un` 是**无单位比率**（可见视口高/720，由 html-ppt-bridge.js 在 `:root` 维护：随 resize 与 visualViewport 更新、下限钳 1、打印期间锁定为 1），只用于 px 字号 token 的换算。共享组件在 `body.kz[data-fit="fluid"]` 下以 `--kz-component-u:var(--kz-un,1)` 换算其按钮、甘特编辑标签/字段/状态、面包屑和图表状态等文字，即 `calc(var(--kz-type-body) * var(--kz-component-u))` 为 px×数字，合法；`calc(24px * var(--kz-u))` 是长度×长度，整条声明无效并回落默认字号，属硬失败。其他HTML轨保持屏幕单位，不继承PPT换算。**字号只许一条路径**：一律基准 px 乘 `--kz-un`（写法 `calc(24px * var(--kz-un))`；`calc(24 * var(--kz-un))` 是无单位数、非法字号，整条丢弃）；`--kz-u` 禁用于 font-size——长度换算在矮视口（如 600px 高）与钳制后的 `--kz-un` 分叉（0.83 对 1），两条路都"有据"会产生不同字号，不可判定。验收分母一律取 `--kz-un` 的使用值（含钳制与打印锁定）。项目CSS后加载时仍须检查最终computed字号/u（1280 与 2560 各抽 h3/li/button/select/label/状态/下钻文字的实际节点，记录 `--kz-un` 使用值），控件和下钻中的必要文字同样不得低于16逻辑px，不准只检查卡片正文或只读声明值。canvas 组件（图表/甘特）的字号比率与 CSS 同源（读 `--kz-un` 使用值、听 `kz:fluidratio` 重渲染）；打印态图表轴标签与 CSS 文字同回基准。不要把已换算的component变量再乘一次u；此补充不替代项目网格、行高、内边距与字号角色的完整主题适配。
 
 ### 材料资源须一起接入（A04 R22）
 新版材质的共享kz-glass.css、kz-tokens.css和kz-tokens.js须来自同一冻结包。新增face stop/border tokens不是另一套主题；不能只复制新glass CSS却留旧tokens而让background声明失效。项目覆盖只调整实际布局，不用纯白rgba替换完整材料配方或消去高光/阴影。body图默认保留真实颜色/opacity1；若需要局部遮罩或降色，按04记录范围与合成QC。实际检查未hover/自然电影/冻结和数据面，不能只给鼠标光影样例。
@@ -28,6 +28,8 @@ HTML必须用真实标题及ul/ol/li、按完整意义分条；已有模板的p�
 
 ## 禁止上游默认页底进度条
 上游runtime自动在body下注入`.progress-bar > span`，它不一定出现在作者HTML中，也不在`.deck`内。必须加载`runtime/kz-glass.css`的`.kz .progress-bar{display:none!important}`；仅正文页保留规定物理页码；封面、目录、章节、尾页不显示页码。不改上游runtime。不准只删除源HTML标签或只在hero页关闭。到最后一页检查computed display、全视口底部截图和实际span边界；蓝/橙全宽线均失败，页眉固定橙线仍保留。
+
+页码耦合点：上游 runtime 写入 `.slide-number` 的 `data-current` 并由 `.slide-number::before{content:attr(data-current)}` 渲染物理页码；产物页码槽必须使用该类名与属性机制，自建类名须自带等价伪元素。页码槽几何存在但文字为空按硬失败计。
 
 ## 可移植资源与普通态启动
 new-deck.sh 创建时生成的路径可能仍指向安装目录。交付前把实际使用的官方 base.css/runtime.js 原件及其需要的资源复制到项目资源目录，记录上游与复制件SHA；相对引用只在交付目录内解析，不改上游内容，也不依赖用户机器的隐藏技能目录。分别通过 file:// 和当前HTTP预览实际打开，核对所有必需资源无404、七页正常导航及G7-INIT。scaffold成功不等于可移植交付；先完成这一步，再投入长周期和视觉审阅。
@@ -56,7 +58,7 @@ Film 的签名是 `new KZMotion.Film(root, options)`。root 是包含 `.kz-film-
 最后必须实际调用原 `render.sh capture-only.html all 输出目录`，逐页检查真实 PNG/尺寸、活动页 computed opacity=1、完整文字/数据、字号和品牌 chrome；另验观众源普通自动播放与进出。正式脚本1920截图不代替2560宽屏运行检查。记录观众源与上游源码前后hash、副本diff和真实返回码，明确“官方工具＋静态副本”，不宣称普通源未经适配已正常截帧。
 
 ## 固定双菱形
-调用 `tools/brand_fragments.py` 的 `facets(prefix=页面唯一前缀)`，插入原页眉 SVG，保留 1280×720 基准坐标。若独立 SVG，使用 viewBox="0 0 100 90"，宽高各为 100u/90u，左上锚定 0/0，禁止随页面宽度横向拉伸。不要把静态 SVG 作为 img 后误以为内层 class 能被宿主 CSS 动画控制：采用 inline SVG，加载 kz-glass.css 并保留 `.kz-float` 整组。标记内部四形状不再单独施加动效。普通播放自动微浮动；冻结/减少动态/打印恢复基准，无播放器 UI。
+调用 `tools/brand_fragments.py` 的 `facets(prefix=页面唯一前缀)`，插入原页眉 SVG，保留 1280×720 基准坐标。放置矩形已登记于 `tokens.chrome.header_mark.placement_htmlppt_u`（当前 [0,0,100,90]，即宽 100u、高 90u、左上锚定 0/0），以 tokens 为唯一几何权威；不得另行缩小、移动或改锚点。若独立 SVG，使用 viewBox="0 0 100 90"，宽高按 tokens 登记矩形接入，禁止随页面宽度横向拉伸。不要把静态 SVG 作为 img 后误以为内层 class 能被宿主 CSS 动画控制：采用 inline SVG，加载 kz-glass.css 并保留 `.kz-float` 整组。标记内部四形状不再单独施加动效。普通播放自动微浮动；冻结/减少动态/打印恢复基准，无播放器 UI。
 
 ## Responsive图片登记
 使用picture/source切换标准与超宽真实源时，按04的image.viewport_assets记录精确目标视口有效asset_id；媒体条件是项目实现，不是第二个fit引擎。逐视口检查currentSrc及源SHA/裁切，正式capture-only仍从同观众源派生，不默默换回未经登记图片。

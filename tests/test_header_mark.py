@@ -1,7 +1,7 @@
 """Guard exact native copying and refusal to change unrelated slide content."""
 from pathlib import Path
 from xml.dom import minidom as D
-import json,sys,tempfile,unittest,zipfile
+import json,re,sys,tempfile,unittest,zipfile
 R=Path(__file__).resolve().parents[1];sys.path.insert(0,str(R/'tools'))
 from bind_header_mark_pptx import bind,signature,nodes,P,A
 from brand_fragments import facets
@@ -40,4 +40,15 @@ class HeaderMarkTest(unittest.TestCase):
  def test_svg_uses_same_four_shapes_one_float_group(self):
   s=facets();self.assertEqual(s.count('data-kz-source-shape='),4);self.assertEqual(s.count('class="kz-float"'),1)
   self.assertLess(s.index('kz-facet-o-candy'),s.index('kz-facet-y-candy'));self.assertNotIn('glint',s);self.assertNotIn('class="kz-float"',facets(native=True))
+ def test_placement_fields_registered_in_tokens(self):
+  t=json.loads((R/'tokens/tokens.json').read_text())['chrome']['header_mark']
+  self.assertEqual(t['placement_htmlppt_u'],t['viewbox']);self.assertEqual(t['placement_htmlppt_u'],[0,0,100,90])
+  self.assertEqual(t['placement_pptx'],'native_xml');self.assertIn('x,y,w,h',t['placement_htmlppt_u_format'])
+ def test_svg_asset_viewbox_matches_placement(self):
+  # The shipped SVG asset is the product-side anchor: its viewBox must equal the placement rect.
+  svg=(R/'assets/header-mark/header-mark.svg').read_text()
+  m=re.search(r'viewBox="([\d.\s]+)"',svg);self.assertTrue(m,'svg viewBox missing')
+  vb=[float(x) for x in m.group(1).split()]
+  t=json.loads((R/'tokens/tokens.json').read_text())['chrome']['header_mark']
+  self.assertEqual(vb,[float(x) for x in t['placement_htmlppt_u']])
 if __name__=='__main__':unittest.main()

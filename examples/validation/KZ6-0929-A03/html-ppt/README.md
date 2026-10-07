@@ -2,6 +2,8 @@ A04 R13b：本历史样例的 kz-charts/kz-gantt/kz-motion JavaScript 已同步�
 
 # A03 历史验证样本（非当前视觉模板）
 
+A06 补充：本样本 a03.css 以 length 型 `--kz-u` 预乘字号 token，属 6.1.1 之前的旧方案；与当前 `--kz-component-u=var(--kz-un)` 机制叠加会二次放大，新产物不得照抄该写法（合法写法见 adapters/html-ppt.md 双变量合同）。
+
 本目录保留A03的视觉、生成资产与vendor用于回溯，不是当前批准的康哲主题。新产物的双菱形、字号、引用、首尾页与动态要求以当前design_specs/tokens为准，不沿用本页历史外观。A04只对a03.js宿主初始化回滚和销毁生命周期另作修复。以下保留上游原README供历史接口参考；其中逐字稿口径等不能覆盖康哲当前规范。
 
 ## 历史上游 presenter-mode-reveal 说明

@@ -1,3 +1,94 @@
+# 6.1.3 · 2026-10-07
+
+## A08 · R2 三方审阅回写（玻璃近白高透光、FILM-01 复合判据、门表法定化、计时口径）
+- 来源：R2 构建产物（glm-5.3-flash 医学写作 HTML-PPT、gpt-6-luna 入组审核站点）经 codex/bunny/grok 三方独立审阅与我方源码裁决的发现汇总；证据存项目私有工作区 retro_r2 与各审阅文件。
+- 新增：09「计时口径」——总耗时必备/单页可选/「双时钟」任务书必须定义对象与语义（闭合 R2-N01）。
+- 修复：runtime/kz-glass.css 补 `.kz-dialog-body` 正文字号规则（R2-F11 参考实现缺口）。
+- 修复：tokens.glass 卡面三停改近白高透光（alpha ≤0.62）+ `.kz-card::after` 局部短高光，消除 LG-04 与「不得米黄实色」的张力（R2-bunny#16 规范缺陷）。
+- 修复：`.kz-dirty` 改 absolute 浮层合同 + GANTT-04 真实指针验收条款（R2-F05/bunny#2 规范缺陷）。
+- 新增：06 FILM-01 复合判据（几何+新信息对象+退出三条件，纯载体膨胀不计独立状态）与主载体文字落矩形条款（R2-bunny FILM 专项规范缺陷）。
+- 新增：11 HERO-05 宽屏展开机检判据（≤2px）、HERO-02 目录说明换行行宽。
+- 新增：07 DRILL-04「无可溢出内容记不适用/未验证」口径。
+- 新增：adapters/html-ppt 页码 `.slide-number` 耦合点（R2-F06）。
+- 新增：03 COPY-08 语义层示例（「不代表/不构造/规格未定义」类）与业务规则句豁免（R2-codex F10）；范围扩弹层/抽屉层、字面禁语降为示例、两问式主判定与机械化代理指标（R2-bunny B2）。
+- 新增：tracks-site 单页章节锚变体合同（R2-codex F12）与三条变体约束（主层信息任务/交互单一所有者/背景盒随段高，R2-bunny B5/C1/C5）；版本语义说明（包 VERSION/REVISION 为唯一权威，tokens/schema 版本独立，R2-codex F13）。
+- 新增：06 动态 protected_region 按运动包络登记；SKILL.md 过程合同补 runtime 快照版本锁定记录（VERSION+REVISION+已用模块 sha256）。
+- 新增：10 门表法定化（SELF_REPORT 必含 G0–G9 门表小节，逐门 PASS+证据/FAIL/PENDING/N/A+原因；G7-NOTES/G5-PROJ 必填行）；favicon 噪音口径。
+- 新增：G5 空洞量化下限（卡/载体/弹层最大内部垂直空隙与尾空隙 >30% 即缺陷，07 落地、10 引用）；06 载体高度由内容导出；04 主视觉可见度自验数字与裁切锚点规则（R2-bunny A8/C2/C7/A11/B6/C4）。
+- 新增：06 性能白名单（backdrop-filter 表面禁逐帧动画 width/height）；02 载体嵌套面板材质档位（.kz-thin）。
+- 测试夹具：patch_smoke 横向表演 premise 修订——`.kz-dialog-body` 字号规则生效后表演内容换行使表格变为纵可滚，双轴增量被正确路由到表（最近可滚体），夹具补 `white-space:nowrap` 恢复「表仅横向可滚」前提；非 runtime 缺陷。
+- 版本同步：VERSION 6.1.3、REVISION KZ6-1007-A08；tests/test_a04_gates.py 哨兵新增 A08 锚。
+
+# 6.1.2 · 2026-10-07
+
+## A07 · R2 构建实机回写（边界宣示禁令、hero 衬底合同、页缘溢出实测）
+- 来源：R2 构建产物（glm-5.3-flash 医学写作 HTML-PPT）用户实机审阅四条问题 + 我方 DOM 级复测；证据存项目私有工作区 retro_r2。
+- 03 新增 COPY-08 边界宣示禁令：受众为熟悉人机协同分工与证据边界的内部资深人员时，受众可见层禁止呈现「AI 不替代/不等于医学判断」「最终判断由人确认」「仅供参考」「必须人工确认」类边界声明（页标题/卡标题/强调行/bullet/注脚/讲稿一律删除）；源材料边界条款登记 fact-map 即可；判断标准为「删掉后业务信息无损即属宣示」。业务规则本身（知识库优先级、可回溯、不一致处置流向）不受限。事故：R2 产物整页以「使用边界」为标题，三卡底部分别缀「不直接替代医学撰写经理的最终判断」等宣示句。
+- 11 HERO-03 新增文字区衬底与主视觉铺满合同：hero 页主视觉承载文字的区域必须 ①生成时策划为低频低对比构图 或 ②合成态加同层级虚化/渐变遮罩/暗化衬底；不允许清晰高对比主体直接置于标题笔画之下；验收以合成态文字笔画区取样对比为准，裸图通过不代替合成态可读性。主视觉未铺满产生的未覆盖带（顶部白条、侧缘缺口）须在 page-plan 登记几何与理由并过审，未登记空白带按缺陷处理。事故：R2 封面/目录/章节页文字直接压清晰亮图，封面顶部出现未登记白带。
+- 10 「几何与文字」新增页缘溢出实测条款：每个交付视口逐页逐卡 getBoundingClientRect 底/右对页面边界求差，>2px 即失败；卡内叶级文字 Range 矩形不得越过卡片左右内边界 >1px；CSS 裁切使滚动不可见不等于无溢出；卡内容分布沿用 03 TYPE-02 T/B/H/R 阈值，无测量记录不得自述通过。事故：R2 产物 s5 卡超页面下缘 68px（1280 视口 118px）、甘特卡内 20 处文字横向溢出、边界页卡下空白 52%——03 TYPE-02 阈值与 03:15 容量处置原有条款已覆盖但未被构建者执行，本条把测量方法与「scroll 裁切不可见≠通过」显性化。
+- 版本同步：VERSION 6.1.2、REVISION KZ6-1007-A07，README/INSTALL/00/10/CURRENT_STATUS/VALIDATION_STATUS/CURRENT_HANDOFF 同步；tests/test_a04_gates.py 哨兵锚定 COPY-08/边界宣示、文字区衬底/主视觉铺满合同、页缘溢出实测/getBoundingClientRect。pytest 93 绿。
+
+# 6.1.1 · 2026-10-06
+
+## A06 · R1 双轨盲审回写（字号换算类型缺陷、模态键/滚轮路由、品牌几何收编、状态增量量化）
+- 来源：glm-5.3-flash（HTML-PPT 轨）与 gpt-6-luna（站点轨）R1 构建的四路独立审阅（space-bunny、gpt-6.1-sol×2、grok-4.7 简版）加我方实测复核；完整证据与归因存项目私有工作区。
+- 修复包缺陷（P0）：`runtime/kz-glass.css` 的 `--kz-component-u:var(--kz-u,1)` 把长度赋给字号换算系数，`calc(px token × 长度)` 整条声明无效，fluid 下组件字号全部回落浏览器默认（实测 1920×1080 卡标题逻辑 10.67px，低于 TYPE-01 地板）。改为 `--kz-component-u:var(--kz-un,1)`；`adapters/html-ppt-bridge.js` 新增 `--kz-un` 无单位比率（视口高/tokens.wide.htmlppt_reference_height，resize 同步）维护。adapter 合同改为双变量显式类型：`--kz-u` 长度仅用于几何（`calc(99 * var(--kz-u))`），`--kz-un` 数字仅用于 px 换算，附非法写法示例；字号验收改为逐实际节点 computed÷u（1280 与 2560，含控件与下钻文字），不只查声明值或卡片正文。
+- `runtime/kz-drilldown.js` 补齐 DRILL-03/04 参考机制：翻页键隔离扩至 Enter/Backspace（stopPropagation 不阻碍按钮原生激活）、Tab 焦点圈禁、冒泡阶段滚轮路由（增量交指针之下沿方向仍可滚动的最近滚动体；两端与滚动体外消费，恒 preventDefault+stopPropagation；子控件已 preventDefault 时尊重其取消、不再重复路由，但仍 stopPropagation 使事件不出弹层）。07 DRILL-04 补横向滚动壳 CSS 陷阱（`overflow-x:auto` 使 `overflow-y` 计算为 auto，配 `overscroll-behavior:contain` 形成整块滚轮/触控死区；应 `overscroll-behavior-x:contain` / `-y:auto`），验收须含指针落在溢出子区域的采样。
+- 品牌几何收编：`tokens.chrome.header_mark` 新增 `placement_htmlppt_u=[0,0,100,90]`（适配合同原文数值）与 `placement_pptx=native_xml`；adapter 固定双菱形节改以 tokens 为唯一几何权威。事故：R1 构建方自行缩至 37×33.3u 并移至 54/22u。
+- 06 FILM-01 量化状态增量：相邻主要状态几何逐项差 >1e-3 或可见节点/连接增减，纯文案替换不构成独立状态；relations 必须有可见 DOM 对应物；验收逐对相邻状态采样，计划声明不作为关系已发展的证据。
+- 10 G5-PROJ 补级联：无实机记“投屏可读性未验证”时 G2/G5 门与 SELF_REPORT 结论段同步标注，不得写无条件 PASS。
+- tracks-site 补 G7-NOTES 的 N/A 显式声明惯例（站点轨无讲稿容器时须写明原因，不得留空）。
+- schemas/page-plan：cards 项新增必填 `detail`（available/not_available/not_needed）与 `detail_reason`，对齐 07 DRILL-01 逐卡规划义务（A05  schema 未开放该字段，计划无法如实登记）。
+- 版本同步：VERSION 6.1.1、PACKAGE_MANIFEST（revision KZ6-0929-A06，302 条 sha256 全量重算）。
+- chrome 对照合格参照件实测量产（用户提供 MG-K10 方案讨论会 HTML 与研究者会 PPTX）：双菱形四原生形状（橙[24,9,70,62] 黄[5,42,40,36]+candy 层）、标题区、橙色横线 [54,80,1257,1.5px]、Logo [1031,45,158,33]、页脚两槽与页码格式，与 tokens 登记逐项吻合，无需改数；唯页脚日期格式按参照件钉死为 `YYYY年M月`（01-core 与 tokens.chrome.footer.date_format）。
+
+## A06 · 补丁复审回写（space-bunny / grok-4.7 复审，gpt-6.1-sol 复审中断后以合并清单为准）
+- `kz-drilldown.js` 真缺陷修复：`deltaMode===2` 分支误用不存在的变量 `g`（IIFE 形参为 `global`），DOM_DELTA_PAGE 滚轮事件抛 ReferenceError 且 preventDefault 不执行；已改 `global.innerHeight`。滚轮路由改双轴独立行走：Y 与 X 各找指针之下沿该方向仍可滚动的最近滚动体，横向命中不再吞掉同一事件的纵向增量（触控板单事件常带两个分量）。触控隔离补 touchstart/touchmove/touchend 阻止冒泡（不 preventDefault，弹层内原生滚动保留）并加 `data-no-swipe` 供上游引擎 interactive() 识别。焦点圈禁补标题位：h2[tabIndex=-1] 不在 Tab 环内，焦点落于环外节点时按方向收拢到首/末可聚焦件。 wheel 处理器开头尊重 `e.defaultPrevented`。
+- `html-ppt-bridge.js`：`--kz-un` 下限钳 1（窄高视口不缩字，容量处置走 03；与 kz-charts/kz-gantt 的 Math.max(1,…) 一致），beforeprint 收回 1、afterprint 恢复（内联样式压过作者样式表，打印态必须显式重置），并补 visualViewport resize 监听（Safari 工具栏/捏合缩放时 innerHeight 与 100vh 分叉）。
+- `kz-glass.css` 组件内部间距随字号走：卡标题下距、列表项间距、按钮 min-height/padding/gap 乘 `--kz-component-u`（720 基准下不变；按钮 min-height 保留 44px 地板）。
+- adapter 双变量合同消除歧义：`--kz-u = calc(100vh/720)` 明写为长度；自定义字号合法写法只有 `calc(24px * var(--kz-un))` 或几何量 `calc(24 * var(--kz-u))`；预缩放与 `--kz-un` 二选一，不得把已乘 `--kz-u` 的值再交给 `--kz-component-u`。A03 历史样本的预乘写法在 README 显式标注不得照抄（vendor 为冻结快照，不改写历史证据）。
+- 权威链闭合：00-authority 明确双菱形 HTML-PPT 放置矩形以 `tokens.chrome.header_mark.placement_htmlppt_u` 为唯一权威（视图框坐标 [x,y,w,h]，tokens 增加 format 注记），PPTX 走 native_xml；tests/test_header_mark.py 新增 placement 字段断言。
+- page-plan schema 破坏性变更正式升版：schema_version const 6.0→6.1、$id→urn:kangzhe:page-plan:6.1、contract_revision const A04→A06；两份夹具同步升版：A02 hero 示例（HTML-PPT 轨）补齐 detail/detail_reason/motion_objects/target_viewports/contract_revision；agent/fixtures 夹具为 PPTX 轨计划、无 motion_objects（可选字段），仅补 detail/detail_reason/target_viewports/contract_revision，A02 目录页网格 rect 按现行 hero_layout token 修正（此前被 SCHEMA 早退掩盖）；SKILL.md、test_hero.py 引用同步。pytest 91 项通过，qc_plan 对两份夹具零 error。
+- 闸门措辞收敛：G5-PROJ 级联范围限定为 G2/G5/SELF_REPORT 结论段（SELF_REPORT 定义为交付随附验收自述的结论段），其余门按各自证据独立判定；G7-NOTES 在 10 章本体增加 N/A 分支，tracks-stream 同步（此前只在 tracks-site）。
+- 06 FILM-01 补：归一化坐标分母写明（相对电影舞台宽高的 0–1 比例）；环回状态对归 FILM-04 接续比较（1e-4），不计入相邻状态增量采样。examples/film-plan.json 四对几何全等的相邻状态合并为 4 状态（环回保持）。
+- 措辞勘误：DRILL-04 路由实际在冒泡阶段（无 capture:true），drilldown.js 注释、07、CHANGELOG 原「捕获阶段」表述统一改「冒泡阶段」；07 DRILL-04 补三类必验形态（双轴增量、触控滑动、实现取舍知情——手动 scrollTop 换确定性、丢平滑/惯性）。
+- 版本串补齐：REVISION→KZ6-0929-A06；README、INSTALL、00-authority、10-quality-gates、CURRENT_STATUS、VALIDATION_STATUS、agent/CURRENT_HANDOFF 全部同步 6.1.1/A06（ECharts 6.1.0 为库版本号，不动）。
+- 运行时冒烟扩展重跑（playwright-core + Chromium，1920×1080）：原 9 项基础上新增双轴滚轮（dx=120 且 dy=150 同时生效）、deltaMode=2 不抛错、触控三事件零冒泡+data-no-swipe、标题位 Tab/Shift+Tab 收拢，共 14 项全过。
+- 已知边界（记录在案，不展开修复）：page 级背景图的逐图 detail 登记未开放（DRILL-01 目前只覆盖 cards）；数字输入与部分 select 的滚轮默认动作在弹层内被取消（路由确定性取舍，07 已注明）。
+## A06 · 终审回写（gpt-6.1-sol / space-bunny 终审，修复已落地并实测）
+- `kz-drilldown.js` 滚轮早退泄漏修复：子控件已 preventDefault 时原实现直接 return、不 stopPropagation，事件穿出弹层触发宿主翻页；改为 `defaultPrevented → stopPropagation 后 return`（事件不出弹层的隔离不变量对所有路径成立）。
+- `kz-drilldown.js` 平滑滚动吞增量：宿主或 UA 样式 `scroll-behavior:smooth` 时手动 `scrollTop` 赋值被动画化、连续增量相互覆盖，路由丢失确定性；改为赋值前临时内联 `scrollBehavior='auto'`、赋值后恢复（instant 辅助函数）。deltaMode=2（整页滚动）时 X 轴分母改用 innerWidth（原为 innerHeight，宽屏横向页滚动距离失真）。
+- `kz-drilldown.js` 焦点候选过滤补强：`:disabled` 用 `el.matches` 判定（字段集禁用继承）、排除 `[inert]` 子树、查 computed visibility/display（仅 offsetParent 会漏 `visibility:hidden`）。触控隔离补 `touchcancel`。
+- `html-ppt-bridge.js` 打印不变量：新增 `printing` 标志——beforeprint 锁定 `--kz-un=1`、打印期间 resize 不改写、afterprint 恢复原值；抽出 `writeRatio()` 统一写入并广播 `kz:fluidratio` 事件供运行时组件重渲染。视口高取 `visualViewport.height||innerHeight`。
+- `kz-charts.js` / `kz-gantt.js` 流体适配闭环：各自新增 `fluidUnit(el)`（fluid 模式读 :root `--kz-un`，弹层内经 `el.closest('.kz-dialog')` 正确解析，`document.body` 空防御）；监听 `kz:fluidratio` 重渲染（charts 纳入 releaseAll 释放清单，gantt 复用既有 AbortSignal）。修复前弹层内图表字号按视口而非弹层缩放。
+- adapter html-ppt 字号合同收敛为单一规则：自定义字号只许 `calc(24px * var(--kz-un))`，`--kz-u`（长度变量）禁用于 font-size——矮视口下两种写法分叉且验收不可判定；验收分母统一为 `--kz-un` 使用值。
+- 06 FILM-01 口径补全：归一化坐标分母（载体短边系数直接比）与 tint 比较口径（RGB 分量 ÷255、alpha 直接比）写明，消除「几何差>1e-3」在实现侧的解读空间。
+- A02 目录三卡 ambient `none→float`：目录卡片为主要内容载体，HERO-05 要求 hero 页元素有环境动效登记，none 与示例其余页不一致。
+- `kz-glass.css` 组件间距补乘 `--kz-component-u`（第二轮）：.kz-thin/.kz-marker/.kz-chart（高 350px）/.kz-chart-status/.kz-film-stage（440px）/按钮 radius 16px/dialog head/body padding；卡 padding 与 grid gap 保持项目域不动（版心尺度属项目决策，规范不预乘）。
+- tokens 对齐实测：`dialog_height_vh` 88→94（对齐 kz-glass.css 实测值）；build_tokens.py 新增派生 `--kz-dialog-width`/`--kz-dialog-max-height`，kz-glass.css 改消费变量、不再硬编码。
+- 闸门措辞唯一口径：tracks-site 与 tracks-stream 的 G7-NOTES 描述统一为「以 10-quality-gates 该门条文为唯一口径」，消除轨道文件与闸门本体的措辞漂移。
+- tests/test_a04_gates.py 新增 `test_gate_wording_anchors`：哨兵串断言（投屏可读性未验证/SELF_REPORT/唯一口径/禁用于 font-size/kz:fluidratio/除以 255/FILM-04），防终审条款在后续编辑中静默丢失。
+- tests/test_header_mark.py 新增 `test_placement_fields_registered_in_tokens` 与 `test_svg_asset_viewbox_matches_placement`：正则解析 SVG viewBox 与 tokens placement 对拍，品牌几何漂移由测试拦截。
+- 冒烟扩至 17 项：新增 defaultPrevented 包容（子控件取消后事件不出弹层）、scroll-behavior:smooth 下 200ms 内增量不丢失、打印三段（beforeprint 锁 1 / 期间 resize 不改写 / afterprint 恢复）断言，全过。
+- .gitignore 补 `.pytest_cache/`。
+- 终审后措辞勘误（冻结后非阻断项，由 bunny R3 §3 提出）：10 章 G5-PROJ 与 03 章「除以主题 u」统一为「除以 `--kz-un` 使用值（含钳制与打印锁定）」，消除 `--kz-u`/`--kz-un` 双变量下的解读歧义；哨兵测试同步锚定两章 `--kz-un` 且禁「主题u」回退。终审结论（codex+bunny 双「可冻结」）：16 项修复核验全对、93 pytest 绿、manifest 302 条 0 不符、无新 P0；非阻断建议另两条留档（A02 实建件早于计划属冻结证据；bridge beforeprint 先于图表注册致打印重绘两次，终态正确仅冗余）。
+
+
+
+## A05 · 阶段性汇报实战回写（电影中断安全、模态滚动、状态可辨、讲稿时钟）
+- 来源：医学部阶段性汇报（HTML-PPT 与站点融合、逐页动画电影、多层级下钻、S 键讲者窗）十余轮返工中已定位的真实失败模式；条款只收不变量与验收法，事故细节留在本条目。三方会商（gpt-6.1-sol / grok-4.7 / space-bunny）记录存项目私有工作区。
+- 06 FILM-05 补中断安全：暂停/seek/再次进入/编辑打断只终止自有补间且限其正在写入的属性；禁止不区分属性的 kill/clear/overwrite 连带终止同时间轴未开始的补间；重开以整条时间轴为单位；锚点可见性须符合进度。事故：GSAP killTweensOf 未限定属性，误杀未开始的 autoAlpha tween，主令牌永久 opacity 0；静态截图与录屏均不可见，由播放中段 computed 断言发现。
+- 06 新增第 16 节状态可辨识性：状态差不得只由细描边或低于 TYPE-01 地板的标注承载；流程需要区分三态时，已过态须保留不依赖动画的完成标记；手段不规定数量，示例移 12；减少动态与静态总览下区分仍成立。§15 审阅样本补中断-恢复帧与“主要叙事状态须有新增解释价值”的观看判定。
+- FILM-03 补：并行车道/并列分支同时建立（优先于 70ms 间隔默认值）；关键解释第一圈即完整可读；连续多页不追求统一片长、避免同一开场结构。
+- 07 新增 DRILL-04 模态期间内部滚动优先：模态打开期间页面翻页暂停；滚动增量交给指针下仍可滚动的最近滚动体；到边缘或滚动体外消费事件，不链式滚背景、不翻页。事故：全局 wheel 捕获无条件拦截，弹窗 267px 溢出内容完全不可达。
+- 10：G7 最小证据补登记锚元素中断-恢复后可见性断言（G7-ANCHOR，锚清单登记于 QC 旁注，不改 film-plan schema，个数不设上限）；G8 补可滚动层真实滚轮双向放行与边缘吞没；G5 方法补投屏可读性（最大交付视口 100% 渲染加实际观看条件判定；截图缩小不是等价代理；无实机记“投屏可读性未验证”）。
+- 09 新增校准锚（只提问、不设字数区间、不以句数触发诊断）与“讲稿与电影共用同一业务时钟”（讲稿不得指向尚未出现或已消失的状态；静态摘要持续保有，不要求逐帧完整）。
+- 03 新增 COPY-07 卡内嵌装饰图构图：图固定一侧、向文字侧渐隐至近白、文字落近白侧；证据图/图表/影像除外；不催生新图；PPTX 文字不栅格进图。
+- 00 补：融合形态不是第五轨，须声明导航/缩放/讲者窗口/chrome 的轨道归属。
+- 会商否决未入条款：投屏截图 50% 缩放代理（只是降采样，不构成观看距离等价）、状态变化“至少两项属性”计数（不可定位失败）、讲稿 100–150 字通用区间（数字即成硬门）。
+- 第二轮复审（同三家）后修订：FILM-05 锚点登记位置与 G7-ANCHOR 对齐（schema 未开放时登记于 QC 旁注）；09 双时钟节消除 static_summary 逐帧误读、删去与 FILM-03 重复的第二圈句；校准锚删句数触发；第 16 节术语对齐（当前对象/状态进入前中后/target_viewports）；新增 G7-NOTES 验收段；G5-PROJ 补 PPTX 画幅口径。
+- 版本同步：PACKAGE_MANIFEST（version 6.1.0 / revision KZ6-0929-A05，全部 302 条 sha256 重算）、README、INSTALL、CURRENT_STATUS 头、VALIDATION_STATUS 头、CURRENT_HANDOFF 头。review/LOCAL_VALIDATION.json 保留 6.0.0 历史验证快照不改写；各历史轮次记录（R12–R23）保留原文。
+
 # A04 R23 · 用户指定快速收尾
 - 修下钻背景文字重影、背景CSS动画争用与多实例滚动恢复；弹窗正文与电影不模糊、不降低动画速度。
 - 补有界词组、统一否定重点、真实浏览器换行与目录整卡运动保护；修实际H08行首标点，源事实保留。

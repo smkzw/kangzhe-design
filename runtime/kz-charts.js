@@ -2,6 +2,14 @@
 (function(global){
   'use strict';
   const copy=x=>JSON.parse(JSON.stringify(x));
+  // 字号比率与 bridge 同一生命周期：fluid 下读 :root 的 --kz-un（含钳制与打印锁定），无 bridge 时退回自算。
+  function fluidUnit(el){
+    if(!document.body||document.body.dataset.fit!=='fluid')return 1;
+    if(!(el.closest('.deck')||el.closest('.kz-dialog')))return 1; // 下钻弹层挂在 body 上，同属 fluid 页面
+    const v=parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--kz-un'));
+    if(Number.isFinite(v)&&v>0)return v;
+    return Math.max(1,innerHeight/KZ_TOKENS.wide.htmlppt_reference_height);
+  }
   const palettes=()=>[KZ_TOKENS.colors.brand,KZ_TOKENS.departments.operations.color,KZ_TOKENS.departments.statistics.color,KZ_TOKENS.departments.pv.color];
   const finiteOrNull=x=>x===null||Number.isFinite(x);
   function extent(data){let lo=0,hi=0;for(const series of data.series)for(const v of series.values)if(Number.isFinite(v)){lo=Math.min(lo,v);hi=Math.max(hi,v);}return [lo,hi];}
@@ -61,13 +69,12 @@
     if(!global.echarts)throw Error('缺少随包 ECharts；不以 CSS 假图代替');
     validate(data);let current=copy(data),disposed=false,raf=0,lastProgress=1;
     let chart=null,mq=null,ro=null,selected={};
-    let changed=()=>{},beforePrint=()=>{},visibility=()=>{};
-    const releaseAll=()=>{const errors=[];for(const release of [()=>{cancelAnimationFrame(raf);raf=0;},()=>ro?.disconnect(),()=>mq?.removeEventListener('change',changed),()=>document.removeEventListener('visibilitychange',visibility),()=>global.removeEventListener('beforeprint',beforePrint),()=>chart?.dispose()]){try{release();}catch(error){errors.push(error);}}return errors;};
+    let changed=()=>{},beforePrint=()=>{},visibility=()=>{},ratioChanged=()=>{};
+    const releaseAll=()=>{const errors=[];for(const release of [()=>{cancelAnimationFrame(raf);raf=0;},()=>ro?.disconnect(),()=>mq?.removeEventListener('change',changed),()=>document.removeEventListener('visibilitychange',visibility),()=>global.removeEventListener('beforeprint',beforePrint),()=>global.removeEventListener('kz:fluidratio',ratioChanged),()=>chart?.dispose()]){try{release();}catch(error){errors.push(error);}}return errors;};
     function renderProgress(p){
       if(disposed)return;p=Math.max(0,Math.min(1,p));lastProgress=p;
       const previous=chart.getOption();selected={...selected,...(previous?.legend?.[0]?.selected||{})};
-      const unit=el.closest('.deck')&&document.body.dataset.fit==='fluid'?Math.max(1,innerHeight/KZ_TOKENS.wide.htmlppt_reference_height):1;
-      const next=option(current,{progress:p,width:chart.getWidth(),unit});next.legend.selected={...selected};
+      const unit=fluidUnit(el);const next=option(current,{progress:p,width:chart.getWidth(),unit});next.legend.selected={...selected};
       chart.setOption(next,{notMerge:true});
       opts.onProgress?.(p,copy(current));
     }
@@ -88,6 +95,7 @@
       ro=new ResizeObserver(()=>{chart.resize();renderProgress(lastProgress);});ro.observe(el);
       changed=()=>{if(mq.matches)finish();};mq.addEventListener('change',changed);
       beforePrint=()=>finish();global.addEventListener('beforeprint',beforePrint);
+      ratioChanged=()=>renderProgress(lastProgress);global.addEventListener('kz:fluidratio',ratioChanged);
       visibility=()=>{if(document.hidden)finish();};document.addEventListener('visibilitychange',visibility);
       chart.on('click',params=>opts.onDataClick?.(params,copy(current)));
       renderProgress(1);

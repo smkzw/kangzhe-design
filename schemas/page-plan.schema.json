@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "urn:kangzhe:page-plan:6.0",
+  "$id": "urn:kangzhe:page-plan:6.1",
   "type": "object",
   "required": [
     "schema_version",
@@ -12,7 +12,7 @@
   ],
   "properties": {
     "schema_version": {
-      "const": "6.0"
+      "const": "6.1"
     },
     "track": {
       "enum": [
@@ -418,7 +418,9 @@
                 "id",
                 "material",
                 "edge_decoration",
-                "layout_mode"
+                "layout_mode",
+                "detail",
+                "detail_reason"
               ],
               "properties": {
                 "id": {
@@ -447,6 +449,17 @@
                 },
                 "layout_reason": {
                   "type": "string"
+                },
+                "detail": {
+                  "enum": [
+                    "available",
+                    "not_available",
+                    "not_needed"
+                  ]
+                },
+                "detail_reason": {
+                  "type": "string",
+                  "minLength": 1
                 }
               },
               "additionalProperties": false
@@ -536,7 +549,7 @@
       }
     },
     "contract_revision": {
-      "const": "A04"
+      "const": "A06"
     },
     "target_viewports": {
       "type": "array",

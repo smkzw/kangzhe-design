@@ -2,7 +2,7 @@
 name: kangzhe-design
 description: 康哲药业医学部正式汇报与医学网页的统一 Liquid Glass 设计系统。用于康哲 design、康哲 design 3D、康哲风格、可编辑 PPTX、HTML PPT、站点式 HTML、流式 HTML。PPTX 配合 ppt-master；HTML-PPT 配合 html-ppt-skill。只安装本技能，不再安装旧扁平版或 3D 版。
 ---
-# Kangzhe Design 6.0
+# Kangzhe Design 6.1
 
 ## 先确定责任边界
 这是品牌、内容表达、视觉与验收层，不是另一套 PPT 制作引擎。四轨只有一个设计语言，没有 flat 开关、legacy 卡片或第二套配色。布局数值常量只读 `tokens/tokens.json`；Logo 使用登记的固定原生资产；双菱形仅用于 PPTX 与 HTML-PPT，站点式与流式 HTML 不使用这组装饰；规则归属见 `design_specs/00-authority.md`。禁止加载旧包补缺。
@@ -13,7 +13,7 @@ description: 康哲药业医学部正式汇报与医学网页的统一 Liquid Gl
 站点式 HTML 只面向桌面宽屏，不要求手机/窄屏适配；其他轨道的视口范围不因此改变。
 PPTX/HTML-PPT 含封面、目录、章节或尾页时，必须读取 `11-hero-layouts.md`，选固定版式 ID；这些页不能套正文页标题字号。
 3. 所有轨读取 `02-liquid-glass.md`。有数据图读取 `05-charts.md`；所有HTML轨必须读取 `06-motion-film.md`（包括普通卡片微交互，不仅电影）；有下钻读取 `07-drilldown.md`；有甘特读取 `08-gantt.md`；有讲稿读取 `09-speaker-notes.md`。
-4. 制作前锁定 `page-plan.json`（当前 `contract_revision=A04`，卡片布局模式和HTML逐对象动态清单必填），再生图。终审读 `10-quality-gates.md`。可用 `tools/context_pack.py --track <track>` 生成当前轨最小索引；它不会代替读取所选规则。
+4. 制作前锁定 `page-plan.json`（当前 `contract_revision=A08`，卡片布局模式和HTML逐对象动态清单必填），再生图。终审读 `10-quality-gates.md`。可用 `tools/context_pack.py --track <track>` 生成当前轨最小索引；它不会代替读取所选规则。产物携带 runtime 快照时，asset-manifest 或 SELF_REPORT 须记录包 VERSION+REVISION 及实际使用模块清单（含各模块 sha256）；验收只核对已用模块与当前包一致，不要求携带未用模块。版本语义：包版本以 VERSION/REVISION 为唯一权威；tokens 的 version 字段与 schemas 的 schema_version 独立演进，分别约束 tokens 结构与计划文件结构，不构成规范包版本证据；构建者在 fact-map 或 SELF_REPORT 记录「构建时包 VERSION+REVISION」即完成版本锁定。
 
 读取按当前工序逐步进行，不以“最短索引”为由一次展开所有源码。PPTX 不读 HTML 的 motion/gantt/drilldown/bridge 实现；同一份规范或接口已读取且版本未变，不重复全文加载。制作阶段先取得当前步骤的完整接口，落盘计划和一页可导出的完整样页，确认原引擎链路后扩展其余页；样页不代替全套验收。每个阶段记录已读文件 hash、已完成实物、下一接口，恢复会话从该记录继续。连续两次只增加阅读/计划却没有产物进展时，缩小当前制作单元并检查具体缺口，不继续通读全库。工具暂缺只阻塞依赖它的检查，不安装已工作的工具，也不让浏览器配置探索吞掉制作阶段。
 

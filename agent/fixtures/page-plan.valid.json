@@ -1,5 +1,5 @@
 {
-  "schema_version": "6.0",
+  "schema_version": "6.1",
   "track": "pptx",
   "canvas": [
     1280,
@@ -77,13 +77,15 @@
           "id": "a",
           "material": "liquid_glass",
           "edge_decoration": "neutral_hairline",
-          "layout_mode": "stack"
+          "layout_mode": "stack",
+          "detail": "not_needed",
+          "detail_reason": "PPTX 轨为静态交付，卡片无下钻交互"
         }
       ],
       "takeaway": null
     }
   ],
-  "contract_revision": "A04",
+  "contract_revision": "A06",
   "target_viewports": [
     [
       1280,

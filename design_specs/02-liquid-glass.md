@@ -24,9 +24,13 @@ PPTX 使用 **原生可编辑透明填充、渐变、圆角与阴影**，必要�
 ## 可感知材料 LG-04（A04 R22）
 “生过图”“fill有alpha”或“CSS有blur”分别只能证明接口/结构，不能证明受众实际看见了Liquid Glass。完整合成页在未hover、正常电影中段和冻结态都必须能分辨微暖透光渐变、连续中性薄边、短局部高光与柔和空间影；材质不能只在鼠标经过的一瞬间出现。正文中间继续安静，但不能把所有背景光影和卡面差异一起抹成纯白。
 
+卡面默认三停自 A08 起为近白高透光（tokens.glass face_gradient alpha ≤0.62），配长度 ≤边长 1/3 的局部短高光（参考实现 `.kz-card::after`）；产物卡面呈近不透明米黄/奶油实色块、或未 hover 时无任何可辨局部高光，按本条不通过计。
+
 当前默认卡面三渐变stop、alpha和中性边界只取tokens.glass；tools/glass_svg.py与runtime由同一tokens取得。允许同族玻璃卡有浅暖中性面和低强度色散，不限于在白面上画一条橙线；不能扩成四部门四块高饱和实色卡。不要仅用rgba(255,255,255,a)覆盖完整材料配方，也不要凭原生白色alpha填充就把PPTX玻璃门标PASS。PPTX保留可编辑的原生渐变stop/alpha与阴影，不能整卡栅格化。
 
 背景原图、使用的真实像素/裁切、完整合成页与卡片材质须一起审。若资产真实存在但实际看不见，先核HTTP/currentSrc或PPTX媒体关系、z层/遮盖、额外opacity/saturation和项目CSS覆盖，再改相应owner；不一律重新生图，更不能为显眼引入穿字的玻璃轮廓。审阅单分别记录background_presence、reading_quietness、glass_perceptibility、text_data_readability；以明确页号/状态/完整截图给判断。单张最漂亮帧或裸图不足以放行。
+
+电影/章节载体内部的嵌套信息面板使用 `.kz-thin` 同族薄覆层，不得用无渐变无阴影的纯白填充造成材质离群。
 
 ## 下钻阅读隔离 LG-05（A04 R23）
 打开宽幅下钻时，后方页面的可辨认文字不得穿透到弹窗、卡片或表格阅读面。`CSS.supports`、computed `backdrop-filter` 和声明中的 alpha 不能代替实际画面验证；当前 Camofox 实测声明了 `::backdrop blur(5px)` 仍透出清晰文字。`kz-drilldown.js` 在弹窗之外的互不嵌套背景根节点临时挂载隔离 class；弹窗和其内容不加 filter，不叠加内部 blur，不改变玻璃卡材料。后方 CSS 光场/装饰动画临时暂停，避免整个长页面逐帧重绘拖慢前景电影；JS 时钟由各项目 onOpen/onClose 用自己的 pause reason 管理，不能修改时长或人为 seek 冒充完整周期。二级电影继续正常自动播放。返回上一层保持隔离，关闭或 dispose 后释放本组件的 class 与滚动锁，保留原有 class/style/value/priority；并行实例以引用计数避免提前解除。此隔离只用于原生 modal 的后方页面，不用于掩盖复杂生图、正文卡缺陷或常态全页强 blur。实审须包含打开、二级下钻、返回、关闭后的完整截图及焦点/滚动/电影恢复。

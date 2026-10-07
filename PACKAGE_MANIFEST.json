@@ -1,1518 +1,1518 @@
 {
-  "version": "6.0.0",
-  "revision": "KZ6-0929-A04",
-  "status": "PARTIAL",
-  "scope": "A04 R23 user-directed quick closure: confirmed fixes, direct checks, public GitHub and all local harness symlinks; no new model dispatch; full four-track validation remains PARTIAL",
-  "files": [
-    {
-      "path": ".gitignore",
-      "bytes": 33,
-      "sha256": "fa5b2d4433b835933b22140e01833a4972a0ee8532d76951286e3dd071994af0"
-    },
-    {
-      "path": "CHANGELOG.md",
-      "bytes": 11654,
-      "sha256": "261e5071ceb57af9f0cf9ce414dfc8b7acbcac1f5c48a9afda9f200ae2573fce"
-    },
-    {
-      "path": "INSTALL.md",
-      "bytes": 1214,
-      "sha256": "6329ec9d1c117fc00133b5aedc928c7db3244988c1f34e7d892084705ff5fa38"
-    },
-    {
-      "path": "README.md",
-      "bytes": 4996,
-      "sha256": "edd932d20bfa2a387607cbec95158fdbb8b4389ff9b6b9ac658e1baf397ba865"
-    },
-    {
-      "path": "REVISION",
-      "bytes": 13,
-      "sha256": "828fc070916abcf3c0da08071a3646e9492c6cf36738bf020631b0260f5e8d84"
-    },
-    {
-      "path": "SKILL.md",
-      "bytes": 7557,
-      "sha256": "f1a4779079e7d1a5709ac90c4851768df1ef92d8c9a455f92f7f1dd4676e96ab"
-    },
-    {
-      "path": "VERSION",
-      "bytes": 6,
-      "sha256": "54ef76332b31df830699e9d4138396885ab72bae260a034a81ff02bf32d8e90a"
-    },
-    {
-      "path": "adapters/README.md",
-      "bytes": 641,
-      "sha256": "cf59bedd712649321dd2b9a8e72b3dfbad365189b53c152a6ef4a1ce4ac9dc4b"
-    },
-    {
-      "path": "adapters/html-ppt-bridge.js",
-      "bytes": 1649,
-      "sha256": "ead6715ea63903ce75b19dcb12a57b919bad75a18d7caae0bb81680c150c9c6e"
-    },
-    {
-      "path": "adapters/html-ppt.md",
-      "bytes": 12708,
-      "sha256": "53dd4ff082d6622d7aeb88a18f08c6a367c1836b7957cc4c02a587393b499105"
-    },
-    {
-      "path": "adapters/ppt-master.md",
-      "bytes": 7244,
-      "sha256": "68a77cae3422e082a89900b06d2e2b5968fd584f5f30d3072e346a933e7d8a87"
-    },
-    {
-      "path": "agent/CURRENT_HANDOFF.md",
-      "bytes": 5135,
-      "sha256": "8087068765309a7f591ce8224eaa8d72137facc4b97dc9d5f3cf6f960d72a11b"
-    },
-    {
-      "path": "agent/EVALUATION.md",
-      "bytes": 9946,
-      "sha256": "9e656e447e0fa6ae98927ede7014e1a97fbbd9854ec851f9e2a045fe23b742c5"
-    },
-    {
-      "path": "agent/HANDOFF_TEMPLATE.md",
-      "bytes": 2030,
-      "sha256": "b5fcb568d48342f5a8aec9ee945fa4cb92c2c983f23322f989bbe47df9ce666f"
-    },
-    {
-      "path": "agent/KNOWN_GAPS.md",
-      "bytes": 9805,
-      "sha256": "f06ba36e42c5caa3f0fb7cd0e0bd7fd37564d2da934ecc850c4eea642fe66789"
-    },
-    {
-      "path": "agent/PLAN.md",
-      "bytes": 7637,
-      "sha256": "9c339b3c095c20bc6756cb919ea27d56eb8242f15b830bceb31b90a9aed15169"
-    },
-    {
-      "path": "agent/START_HERE.md",
-      "bytes": 1342,
-      "sha256": "019b466db748f44228f6df08be6f64c0178881e3fa1128706156ffe6ee251be1"
-    },
-    {
-      "path": "agent/fixtures/cases.json",
-      "bytes": 2780,
-      "sha256": "bda7fa178c7e17c60626cc016f5e653b6784183c698fa1d2314fb5ca9e4bbee7"
-    },
-    {
-      "path": "agent/fixtures/page-plan.valid.json",
-      "bytes": 1769,
-      "sha256": "e672091764827ee811b94740b045765d914fe404dd7273523386ec9907197444"
-    },
-    {
-      "path": "agent/model-matrix.template.json",
-      "bytes": 812,
-      "sha256": "cd30c05cd339c711b2ac6e420a31eef6cd483f7ddda230e9ddaeb049557a475e"
-    },
-    {
-      "path": "agent/prompts/ATTRIBUTION.md",
-      "bytes": 687,
-      "sha256": "a0e1fb29829710ae3036c613b53448177cf44368e0096051956d4defee63452e"
-    },
-    {
-      "path": "agent/prompts/BLIND_VLM_REVIEW.md",
-      "bytes": 2348,
-      "sha256": "4012de623f142c4a28cbe0aee96f3e193fb2b2ec6742f802610b173d96ec662a"
-    },
-    {
-      "path": "agent/prompts/EXECUTE.md",
-      "bytes": 1568,
-      "sha256": "a4008153f2f601739f9a57f626a3014850b11f1720aa785fa651a758401feb1f"
-    },
-    {
-      "path": "agent/prompts/GENERATOR.md",
-      "bytes": 646,
-      "sha256": "54d4c3d45c2d0eb590f8d8ad02c9375ba83efb59d150510dc250f4a87269e974"
-    },
-    {
-      "path": "agent/run_adapter.py",
-      "bytes": 2192,
-      "sha256": "168891620d2193a56d1498ab71f9d975ea9d2f91bf3f5cf46f956ac2731be4d3"
-    },
-    {
-      "path": "assets/README.md",
-      "bytes": 932,
-      "sha256": "48ba7431462c50cb982d0d8df68ea9387e67d9b5f7438b7394ef802475d91d78"
-    },
-    {
-      "path": "assets/header-mark/header-mark.svg",
-      "bytes": 2094,
-      "sha256": "58b3c5dc76b8ef9ddaef818d5901649c9dfb4d392009711ee3c5b4f2c44c3248"
-    },
-    {
-      "path": "assets/header-mark/provenance.json",
-      "bytes": 730,
-      "sha256": "9b0c7f4be3e15db1944d360351d217223c47c3f18fdb1e990602432eb58f752d"
-    },
-    {
-      "path": "assets/header-mark/source-native.xml",
-      "bytes": 5801,
-      "sha256": "906dc32ffe4f374ae6cb7e6500236b4680681e67598b7ef4ab438d553c219578"
-    },
-    {
-      "path": "assets/logo_bot.svg",
-      "bytes": 9542,
-      "sha256": "8d16d3ae8353dd31f46a50d401e66f9e62af40be6cc42cdf5050866a4e6e1cae"
-    },
-    {
-      "path": "assets/vendor/ECHARTS-LICENSE.txt",
-      "bytes": 11358,
-      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
-    },
-    {
-      "path": "assets/vendor/ECHARTS-NOTICE.txt",
-      "bytes": 169,
-      "sha256": "88c2418a8ab4dba3486b263600ab39e0c78c36142ddfa4167ed3d9c3a2d2ab38"
-    },
-    {
-      "path": "assets/vendor/echarts.min.js",
-      "bytes": 1121883,
-      "sha256": "b66b25aeb4df84e33199dc21694014d336d222cbd9deb0e5a7c14bd6aa0d0fd0"
-    },
-    {
-      "path": "design_specs/00-authority.md",
-      "bytes": 3554,
-      "sha256": "d6d340bdffd033a1674ca8d45fbc7ff9fba81592897658621364a583e5fb2654"
-    },
-    {
-      "path": "design_specs/01-core.md",
-      "bytes": 3592,
-      "sha256": "b013c2f4b189c53577b9f0ee6e430816c6adaac462ae25f079abdae7e794df53"
-    },
-    {
-      "path": "design_specs/02-liquid-glass.md",
-      "bytes": 9894,
-      "sha256": "0df649548e464713adcc3788ff2b09c0eb6b39df92155b1970d6053b010d8cf6"
-    },
-    {
-      "path": "design_specs/03-typography-language.md",
-      "bytes": 15202,
-      "sha256": "4f9fc9472c03b43f0c2bc010aaa8a5168e8f7bf7fa0abf8577f41c6e12b8d4e8"
-    },
-    {
-      "path": "design_specs/04-image-pipeline.md",
-      "bytes": 15075,
-      "sha256": "99632c9e3cabe96cf653184b2238cb9c81894d76551062b26f5181831d13c701"
-    },
-    {
-      "path": "design_specs/05-charts.md",
-      "bytes": 5299,
-      "sha256": "cd4eee80b2770cf49005b9474d2221dc16b3ebe15f6f454ce084948cb9a3f247"
-    },
-    {
-      "path": "design_specs/06-motion-film.md",
-      "bytes": 24972,
-      "sha256": "75fee84621508c3e30a34d087ec8d2dd5ba757d8ebecfe2a61fd9518c2f6a79e"
-    },
-    {
-      "path": "design_specs/07-drilldown.md",
-      "bytes": 4651,
-      "sha256": "2219f119e27c8503eef07a28aaced107f3eddd0b3d2d7494ae024ee682a6dc9b"
-    },
-    {
-      "path": "design_specs/08-gantt.md",
-      "bytes": 4396,
-      "sha256": "716ce5804e89526ee1b55862654b8a3854422a4d49f76101c8dc69e4a0d81134"
-    },
-    {
-      "path": "design_specs/09-speaker-notes.md",
-      "bytes": 2318,
-      "sha256": "b1aa6053a9de18a8570e8b070d42f95d3ab66598d548333ff1a455dac93fc89b"
-    },
-    {
-      "path": "design_specs/10-quality-gates.md",
-      "bytes": 12491,
-      "sha256": "245f91fc9d45f5b6efe9fc13bebf4fcfbd1bca9599fe649fd1714806e94a9bb9"
-    },
-    {
-      "path": "design_specs/11-hero-layouts.md",
-      "bytes": 7023,
-      "sha256": "a35aa4ca58a3f77f6f0285f19b302aba0454ee7ba7b6112249bab8afe0ee57b9"
-    },
-    {
-      "path": "design_specs/12-reference-patterns.md",
-      "bytes": 4490,
-      "sha256": "cd50837f737529623438fca81b3a71d5be860d5892af26392ca0560dac49001f"
-    },
-    {
-      "path": "design_specs/tracks-htmlppt.md",
-      "bytes": 1732,
-      "sha256": "5e698d7e4cec648b20402fdbb0a2f374958b126cab9a87c6f1c0624d31f4bb0f"
-    },
-    {
-      "path": "design_specs/tracks-pptx.md",
-      "bytes": 2312,
-      "sha256": "4375b8182be8f4c4e3031b7d006de8f5b0a60f0a3d4f203b4cef0dbcc7be8770"
-    },
-    {
-      "path": "design_specs/tracks-site.md",
-      "bytes": 2528,
-      "sha256": "54f9715cc0276e81f6b72dc2e19a7e0e89475cd9885e062cbcaeb71c8ef79782"
-    },
-    {
-      "path": "design_specs/tracks-stream.md",
-      "bytes": 1204,
-      "sha256": "f86ed9b16486264dac05a815182a3fa0d8d2e2b2f0ee46fbf1bb09a5af05a63d"
-    },
-    {
-      "path": "examples/chart-data.json",
-      "bytes": 543,
-      "sha256": "3db8c8295e2d2cc9a908f9a26f635e266c73b649d31610ed6d4d3b3c2b775075"
-    },
-    {
-      "path": "examples/component-lab.html",
-      "bytes": 8277,
-      "sha256": "deea93774f9bc80f32a0f59090a5fcc5e1103d609bb73af425fb106b9d299f94"
-    },
-    {
-      "path": "examples/component-lab.js",
-      "bytes": 6076,
-      "sha256": "02fc5a188f0e76f1a3ccc78116f0593d0145abb9505731df4df4815bda5c0d87"
-    },
-    {
-      "path": "examples/film-frames.json",
-      "bytes": 2173,
-      "sha256": "b1a15a480a78eb5913aedc22f7e0c2c5f7251bbad94c3e5d0117ce4acb1a6d85"
-    },
-    {
-      "path": "examples/film-plan.json",
-      "bytes": 5503,
-      "sha256": "b791c692496b3c364b14074a5e82c091a6b6d99dab064496baf394eb41bb79a8"
-    },
-    {
-      "path": "examples/gantt-data.json",
-      "bytes": 470,
-      "sha256": "2e5e6e12498e20e3de2d0d6b1a7027f59c5f0da367b21d0c9b37ea3d9f82dc73"
-    },
-    {
-      "path": "examples/validation/KZ6-0929-A01/README.md",
-      "bytes": 1972,
-      "sha256": "e3592d430f4884118ce2f6eef676097ff6814e33f70e73e70d66c08d93695ce2"
-    },
-    {
-      "path": "examples/validation/KZ6-0929-A01/asset-provenance.json",
-      "bytes": 2109,
-      "sha256": "67c6813a7b3c508d04b758679391d3ac9c4e07b4279ae137dfa967a3aae4187e"
-    },
-    {
-      "path": "examples/validation/KZ6-0929-A01/html-ppt/README.md",
-      "bytes": 3964,
-      "sha256": "cc92770560dc7b1030e90b078e74c5f0b19cad25cac585b53164682a081c555f"
-    },
-    {
-      "path": "examples/validation/KZ6-0929-A01/html-ppt/assets/asset_body_bg_quiet.png",
-      "bytes": 1066611,
-      "sha256": "ce19777696202c355b2d13cda6fb5b6b2172edfc58e7e93e3b231cfd9f2aed73"
-    },
-    {
-      "path": "examples/validation/KZ6-0929-A01/html-ppt/assets/asset_cover_hero.png",
-      "bytes": 1052069,
-      "sha256": "aa4f7119df6ff40267fd8e6ed813c97bb93bd5a1666009f0d2686917a46c2871"
-    },
-    {
-      "path": "examples/validation/KZ6-0929-A01/html-ppt/assets/asset_ending_hero_v3.png",
-      "bytes": 1073326,
-      "sha256": "33680aee0826cf66e90f895047766f732d8eb3da3af849de4ce41cbbeddf8db0"
-    },
-    {
-      "path": "examples/validation/KZ6-0929-A01/html-ppt/assets/asset_section_hero.png",
-      "bytes": 1189843,
-      "sha256": "380560cab7c937415e855be13fafe448490cbab1adfcbba95f7999402707574e"
-    },
-    {
-      "path": "examples/validation/KZ6-0929-A01/html-ppt/assets/asset_toc_hero.png",
-      "bytes": 1169150,
-      "sha256": "566c6ad9ed48562fcc95847cdde63decdcc997f34c8a9c5e49b89b7c1a06c545"
-    },
-    {
-      "path": "examples/validation/KZ6-0929-A01/html-ppt/brand.css",
-      "bytes": 10729,
-      "sha256": "8b4a7380f16af33a0913af18d1ba7ed3abcd7532a3aab575e8ceef5eb699cfa1"
-    },
-    {
-      "path": "examples/validation/KZ6-0929-A01/html-ppt/deck-data.js",
-      "bytes": 2199,
-      "sha256": "2dc95c25e983720d242c789f8302bada462896c6b42b625895c3157a36778272"
-    },
-    {
-      "path": "examples/validation/KZ6-0929-A01/html-ppt/deck-wiring.js",
-      "bytes": 6149,
-      "sha256": "3176fac6ac75f2d38d197b6707fb163fa6f5b4b123703f4089430a55e0dbe1ea"
-    },
-    {
-      "path": "examples/validation/KZ6-0929-A01/html-ppt/index.html",
-      "bytes": 16037,
-      "sha256": "e301ffb26fb298f7c290e632a92915cd4122af44da2c05816fc06bb55aaf80b5"
-    },
-    {
-      "path": "examples/validation/KZ6-0929-A01/html-ppt/style.css",
-      "bytes": 5596,
-      "sha256": "f5e6cfe5f8c20a46184c6d44b6fc7eed20bc23a7ee6d2faf34a7957e7d7ffe8a"
-    },
-    {
-      "path": "examples/validation/KZ6-0929-A01/html-ppt/vendor/LICENSES/ECHARTS-LICENSE.txt",
-      "bytes": 11358,
-      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
-    },
-    {
-      "path": "examples/validation/KZ6-0929-A01/html-ppt/vendor/LICENSES/ECHARTS-NOTICE.txt",
-      "bytes": 169,
-      "sha256": "88c2418a8ab4dba3486b263600ab39e0c78c36142ddfa4167ed3d9c3a2d2ab38"
-    },
-    {
-      "path": "examples/validation/KZ6-0929-A01/html-ppt/vendor/LICENSES/html-ppt-LICENSE.txt",
-      "bytes": 1084,
-      "sha256": "a5ed4059e25a3ec35e439abd2623753d1f42d4aa4989ffb5c6b7a97b61f6a949"
-    },
-    {
-      "path": "examples/validation/KZ6-0929-A01/html-ppt/vendor/html-ppt/assets/animations/animations.css",
-      "bytes": 8065,
-      "sha256": "3bc36127d7e491b0a723fe5788682824c9b9e8849cf2a5ceb72dc3ebb951e3e8"
-    },
-    {
-      "path": "examples/validation/KZ6-0929-A01/html-ppt/vendor/html-ppt/assets/base.css",
-      "bytes": 15340,
-      "sha256": "786791775484fbec5e4e74b3c3280ad8955a848251520008fb9c9d0d5669a9a4"
-    },
-    {
-      "path": "examples/validation/KZ6-0929-A01/html-ppt/vendor/html-ppt/assets/fonts.css",
-      "bytes": 889,
-      "sha256": "1e93c54e2a4c5f27a2404cc2c8f682d50f5d41a95ebecd11ed41f925e3a79572"
-    },
-    {
-      "path": "examples/validation/KZ6-0929-A01/html-ppt/vendor/html-ppt/assets/runtime.js",
-      "bytes": 46930,
-      "sha256": "d4a0136ba177f2ede2940bcbf0846f65d1c9f80a8d11c6eee4f503d81c200903"
-    },
-    {
-      "path": "examples/validation/KZ6-0929-A01/html-ppt/vendor/kangzhe-design/adapters/html-ppt-bridge.js",
-      "bytes": 1003,
-      "sha256": "a82cefa61951718727ba1867f1aa3c9b6016bce25041d15ff5478bf2c4e34465"
-    },
-    {
-      "path": "examples/validation/KZ6-0929-A01/html-ppt/vendor/kangzhe-design/assets/logo_bot.svg",
-      "bytes": 9542,
-      "sha256": "8d16d3ae8353dd31f46a50d401e66f9e62af40be6cc42cdf5050866a4e6e1cae"
-    },
-    {
-      "path": "examples/validation/KZ6-0929-A01/html-ppt/vendor/kangzhe-design/assets/vendor/echarts.min.js",
-      "bytes": 1121883,
-      "sha256": "b66b25aeb4df84e33199dc21694014d336d222cbd9deb0e5a7c14bd6aa0d0fd0"
-    },
-    {
-      "path": "examples/validation/KZ6-0929-A01/html-ppt/vendor/kangzhe-design/runtime/kz-charts.js",
-      "bytes": 6242,
-      "sha256": "aa8d22a1bebf66de7c755bd2f713843e9eef9e0932ae8e1e9da9c01075ccacf1"
-    },
-    {
-      "path": "examples/validation/KZ6-0929-A01/html-ppt/vendor/kangzhe-design/runtime/kz-gantt.js",
-      "bytes": 12510,
-      "sha256": "89ddd1761bd367bc9c0ae3d31a405af955a1a2cdb4e62c013d526e6580d3d264"
-    },
-    {
-      "path": "examples/validation/KZ6-0929-A01/html-ppt/vendor/kangzhe-design/runtime/kz-glass.css",
-      "bytes": 9972,
-      "sha256": "5a3b127220307e16252bac4ed952322c73ee11d00b9a6f2c5a1872370b6c85e8"
-    },
-    {
-      "path": "examples/validation/KZ6-0929-A01/html-ppt/vendor/kangzhe-design/runtime/kz-tokens.css",
-      "bytes": 1233,
-      "sha256": "1e33eabb5699e7d169031ba403b46d0bbfef4fad401be9722fbf2391519aacda"
-    },
-    {
-      "path": "examples/validation/KZ6-0929-A01/html-ppt/vendor/kangzhe-design/runtime/kz-tokens.js",
-      "bytes": 2957,
-      "sha256": "4ed20635089707761ac9e9be092b86a1041ee4a8dacc0f0ec26a557601105184"
-    },
-    {
-      "path": "examples/validation/KZ6-0929-A01/site-stream/assets/asset_body_bg_quiet.png",
-      "bytes": 1066611,
-      "sha256": "ce19777696202c355b2d13cda6fb5b6b2172edfc58e7e93e3b231cfd9f2aed73"
-    },
-    {
-      "path": "examples/validation/KZ6-0929-A01/site-stream/deps/LICENSES.md",
-      "bytes": 2369,
-      "sha256": "b58283c578556f6e56f6a23910e443c693916fd993a394fc08046ccae500482f"
-    },
-    {
-      "path": "examples/validation/KZ6-0929-A01/site-stream/deps/kz-app.js",
-      "bytes": 11328,
-      "sha256": "cb138780b720b2acdb034b9895fc59f38612218c896c8f34c0fff78d47af1369"
-    },
-    {
-      "path": "examples/validation/KZ6-0929-A01/site-stream/deps/kz-charts.js",
-      "bytes": 6242,
-      "sha256": "aa8d22a1bebf66de7c755bd2f713843e9eef9e0932ae8e1e9da9c01075ccacf1"
-    },
-    {
-      "path": "examples/validation/KZ6-0929-A01/site-stream/deps/kz-data.js",
-      "bytes": 5547,
-      "sha256": "b14902e67969be2a2b670121b10f68aeb0ccfacd966af5c864a5457cb434618d"
-    },
-    {
-      "path": "examples/validation/KZ6-0929-A01/site-stream/deps/kz-drilldown.js",
-      "bytes": 4781,
-      "sha256": "ffa0abb071dc23a7280037b46bf2b57aa47dbd405af4bbb6d492ba64b96897be"
-    },
-    {
-      "path": "examples/validation/KZ6-0929-A01/site-stream/deps/kz-films.js",
-      "bytes": 14745,
-      "sha256": "a2e5ef4367f3e0ab6cbe89d753bff2e8e678665738306a9eb9c3f06b5abe442a"
-    },
-    {
-      "path": "examples/validation/KZ6-0929-A01/site-stream/deps/kz-glass.css",
-      "bytes": 9972,
-      "sha256": "5a3b127220307e16252bac4ed952322c73ee11d00b9a6f2c5a1872370b6c85e8"
-    },
-    {
-      "path": "examples/validation/KZ6-0929-A01/site-stream/deps/kz-motion.js",
-      "bytes": 9473,
-      "sha256": "759c515d1712b99a90a2851696184fe470588986e61e846ccae65c0ffcfb8355"
-    },
-    {
-      "path": "examples/validation/KZ6-0929-A01/site-stream/deps/kz-site.css",
-      "bytes": 12338,
-      "sha256": "2d1add0606e1ab7d1009d8e71e59cf20d6c746f795398ee0474cd1c3f52aa85a"
-    },
-    {
-      "path": "examples/validation/KZ6-0929-A01/site-stream/deps/kz-tokens.css",
-      "bytes": 1233,
-      "sha256": "1e33eabb5699e7d169031ba403b46d0bbfef4fad401be9722fbf2391519aacda"
-    },
-    {
-      "path": "examples/validation/KZ6-0929-A01/site-stream/deps/kz-tokens.js",
-      "bytes": 2957,
-      "sha256": "4ed20635089707761ac9e9be092b86a1041ee4a8dacc0f0ec26a557601105184"
-    },
-    {
-      "path": "examples/validation/KZ6-0929-A01/site-stream/deps/logo_bot.svg",
-      "bytes": 9542,
-      "sha256": "8d16d3ae8353dd31f46a50d401e66f9e62af40be6cc42cdf5050866a4e6e1cae"
-    },
-    {
-      "path": "examples/validation/KZ6-0929-A01/site-stream/deps/vendor/ECHARTS-LICENSE.txt",
-      "bytes": 11358,
-      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
-    },
-    {
-      "path": "examples/validation/KZ6-0929-A01/site-stream/deps/vendor/ECHARTS-NOTICE.txt",
-      "bytes": 169,
-      "sha256": "88c2418a8ab4dba3486b263600ab39e0c78c36142ddfa4167ed3d9c3a2d2ab38"
-    },
-    {
-      "path": "examples/validation/KZ6-0929-A01/site-stream/deps/vendor/echarts.min.js",
-      "bytes": 1121883,
-      "sha256": "b66b25aeb4df84e33199dc21694014d336d222cbd9deb0e5a7c14bd6aa0d0fd0"
-    },
-    {
-      "path": "examples/validation/KZ6-0929-A01/site-stream/site/chapter.html",
-      "bytes": 9504,
-      "sha256": "e479ebaeeac15ffe6c2846c60d58c91f9b3a2a11fd0e50bc717a5d353e20dcfe"
-    },
-    {
-      "path": "examples/validation/KZ6-0929-A01/site-stream/site/index.html",
-      "bytes": 8455,
-      "sha256": "9dab911fd31ab4781032ac5b4637c9a4a49bf99a081263488499ec0b06e41ae2"
-    },
-    {
-      "path": "examples/validation/KZ6-0929-A01/site-stream/stream/index.html",
-      "bytes": 14871,
-      "sha256": "b85adc8d1baa87f290102e60f9133e5843f2e0d3c0eacd73798d53d1bec90fd7"
-    },
-    {
-      "path": "examples/validation/KZ6-0929-A02/README.md",
-      "bytes": 1016,
-      "sha256": "0de47f664b1cb81d03bd162de6151a738036fca56bc8b30e482e958e1c3e8fb5"
-    },
-    {
-      "path": "examples/validation/KZ6-0929-A02/binding-regression.json",
-      "bytes": 266,
-      "sha256": "d5ebf3039cc36c891b898d186bf6676723fc35325550b214e91e43e97a28e279"
-    },
-    {
-      "path": "examples/validation/KZ6-0929-A02/content.json",
-      "bytes": 960,
-      "sha256": "dddc6ab646d80faaac99d7fa426cd2826cc53684e563fc058fb0d4c4473e4c9d"
-    },
-    {
-      "path": "examples/validation/KZ6-0929-A02/frame-binding.json",
-      "bytes": 6240,
-      "sha256": "775b47f85c011199dd9fef931c4af70ff401bed58814514834b8cd7ff3d6cc35"
-    },
-    {
-      "path": "examples/validation/KZ6-0929-A02/hero-page-plan.json",
-      "bytes": 10980,
-      "sha256": "f54a984dff0ddc41f9b9ce74df6429a57c0b3d47cce022066d04e25d119758ea"
-    },
-    {
-      "path": "examples/validation/KZ6-0929-A02/html-ppt/README.md",
-      "bytes": 462,
-      "sha256": "9805d44fb2cfdcaed5caba09626d396232bd936206e07d940716b88f5b2aaf54"
-    },
-    {
-      "path": "examples/validation/KZ6-0929-A02/html-ppt/assets/asset_body_bg_quiet.png",
-      "bytes": 1066611,
-      "sha256": "ce19777696202c355b2d13cda6fb5b6b2172edfc58e7e93e3b231cfd9f2aed73"
-    },
-    {
-      "path": "examples/validation/KZ6-0929-A02/html-ppt/assets/asset_cover_hero.png",
-      "bytes": 1052069,
-      "sha256": "aa4f7119df6ff40267fd8e6ed813c97bb93bd5a1666009f0d2686917a46c2871"
-    },
-    {
-      "path": "examples/validation/KZ6-0929-A02/html-ppt/assets/asset_ending_hero_v3.png",
-      "bytes": 1073326,
-      "sha256": "33680aee0826cf66e90f895047766f732d8eb3da3af849de4ce41cbbeddf8db0"
-    },
-    {
-      "path": "examples/validation/KZ6-0929-A02/html-ppt/assets/asset_section_hero.png",
-      "bytes": 1189843,
-      "sha256": "380560cab7c937415e855be13fafe448490cbab1adfcbba95f7999402707574e"
-    },
-    {
-      "path": "examples/validation/KZ6-0929-A02/html-ppt/assets/asset_toc_hero.png",
-      "bytes": 1169150,
-      "sha256": "566c6ad9ed48562fcc95847cdde63decdcc997f34c8a9c5e49b89b7c1a06c545"
-    },
-    {
-      "path": "examples/validation/KZ6-0929-A02/html-ppt/assets/p1a_body_background.png",
-      "bytes": 1066611,
-      "sha256": "ce19777696202c355b2d13cda6fb5b6b2172edfc58e7e93e3b231cfd9f2aed73"
-    },
-    {
-      "path": "examples/validation/KZ6-0929-A02/html-ppt/brand.css",
-      "bytes": 11005,
-      "sha256": "7c6458919bb0d90bccacca0a4d91c2e6bf63adcd3c772f0437a1a0faa5b26f10"
-    },
-    {
-      "path": "examples/validation/KZ6-0929-A02/html-ppt/deck-data.js",
-      "bytes": 2200,
-      "sha256": "4a503deb1479d5e28f28fa3e7254c1d5659294a55ca2bece96872a29edd55bad"
-    },
-    {
-      "path": "examples/validation/KZ6-0929-A02/html-ppt/deck-wiring.js",
-      "bytes": 6149,
-      "sha256": "3176fac6ac75f2d38d197b6707fb163fa6f5b4b123703f4089430a55e0dbe1ea"
-    },
-    {
-      "path": "examples/validation/KZ6-0929-A02/html-ppt/index.html",
-      "bytes": 18107,
-      "sha256": "68ee936da52f245261dc50f7667d829fbd7f66456b7edad6e0eed2ddfee4344c"
-    },
-    {
-      "path": "examples/validation/KZ6-0929-A02/html-ppt/style.css",
-      "bytes": 5596,
-      "sha256": "f5e6cfe5f8c20a46184c6d44b6fc7eed20bc23a7ee6d2faf34a7957e7d7ffe8a"
-    },
-    {
-      "path": "examples/validation/KZ6-0929-A02/html-ppt/vendor/LICENSES/ECHARTS-LICENSE.txt",
-      "bytes": 11358,
-      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
-    },
-    {
-      "path": "examples/validation/KZ6-0929-A02/html-ppt/vendor/LICENSES/ECHARTS-NOTICE.txt",
-      "bytes": 169,
-      "sha256": "88c2418a8ab4dba3486b263600ab39e0c78c36142ddfa4167ed3d9c3a2d2ab38"
-    },
-    {
-      "path": "examples/validation/KZ6-0929-A02/html-ppt/vendor/LICENSES/html-ppt-LICENSE.txt",
-      "bytes": 1084,
-      "sha256": "a5ed4059e25a3ec35e439abd2623753d1f42d4aa4989ffb5c6b7a97b61f6a949"
-    },
-    {
-      "path": "examples/validation/KZ6-0929-A02/html-ppt/vendor/html-ppt/assets/animations/animations.css",
-      "bytes": 8065,
-      "sha256": "3bc36127d7e491b0a723fe5788682824c9b9e8849cf2a5ceb72dc3ebb951e3e8"
-    },
-    {
-      "path": "examples/validation/KZ6-0929-A02/html-ppt/vendor/html-ppt/assets/base.css",
-      "bytes": 15340,
-      "sha256": "786791775484fbec5e4e74b3c3280ad8955a848251520008fb9c9d0d5669a9a4"
-    },
-    {
-      "path": "examples/validation/KZ6-0929-A02/html-ppt/vendor/html-ppt/assets/fonts.css",
-      "bytes": 889,
-      "sha256": "1e93c54e2a4c5f27a2404cc2c8f682d50f5d41a95ebecd11ed41f925e3a79572"
-    },
-    {
-      "path": "examples/validation/KZ6-0929-A02/html-ppt/vendor/html-ppt/assets/runtime.js",
-      "bytes": 46930,
-      "sha256": "d4a0136ba177f2ede2940bcbf0846f65d1c9f80a8d11c6eee4f503d81c200903"
-    },
-    {
-      "path": "examples/validation/KZ6-0929-A02/html-ppt/vendor/kangzhe-design/adapters/README.md",
-      "bytes": 641,
-      "sha256": "cf59bedd712649321dd2b9a8e72b3dfbad365189b53c152a6ef4a1ce4ac9dc4b"
-    },
-    {
-      "path": "examples/validation/KZ6-0929-A02/html-ppt/vendor/kangzhe-design/adapters/html-ppt-bridge.js",
-      "bytes": 1174,
-      "sha256": "ef6c4778548b8bd39c14ea81c562c80d2601094e9f7db942723c281a2a262247"
-    },
-    {
-      "path": "examples/validation/KZ6-0929-A02/html-ppt/vendor/kangzhe-design/adapters/html-ppt.md",
-      "bytes": 2660,
-      "sha256": "68ba57645773c423c432bd0740d4d5a6fc880896640c2d955e6d26ccbdbb1375"
-    },
-    {
-      "path": "examples/validation/KZ6-0929-A02/html-ppt/vendor/kangzhe-design/adapters/ppt-master.md",
-      "bytes": 4002,
-      "sha256": "db4597868f26062611aca991028f0aed4dc2d2cb1e9980d1bb92d59293558041"
-    },
-    {
-      "path": "examples/validation/KZ6-0929-A02/html-ppt/vendor/kangzhe-design/assets/logo_bot.svg",
-      "bytes": 9542,
-      "sha256": "8d16d3ae8353dd31f46a50d401e66f9e62af40be6cc42cdf5050866a4e6e1cae"
-    },
-    {
-      "path": "examples/validation/KZ6-0929-A02/html-ppt/vendor/kangzhe-design/assets/vendor/echarts.min.js",
-      "bytes": 1121883,
-      "sha256": "b66b25aeb4df84e33199dc21694014d336d222cbd9deb0e5a7c14bd6aa0d0fd0"
-    },
-    {
-      "path": "examples/validation/KZ6-0929-A02/html-ppt/vendor/kangzhe-design/runtime/README.md",
-      "bytes": 1893,
-      "sha256": "2492be66b2f30d59ca67463197c2e078526def046ae0f5e60425c6f8acf2c85d"
-    },
-    {
-      "path": "examples/validation/KZ6-0929-A02/html-ppt/vendor/kangzhe-design/runtime/kz-charts.js",
-      "bytes": 6242,
-      "sha256": "aa8d22a1bebf66de7c755bd2f713843e9eef9e0932ae8e1e9da9c01075ccacf1"
-    },
-    {
-      "path": "examples/validation/KZ6-0929-A02/html-ppt/vendor/kangzhe-design/runtime/kz-drilldown.js",
-      "bytes": 4781,
-      "sha256": "ffa0abb071dc23a7280037b46bf2b57aa47dbd405af4bbb6d492ba64b96897be"
-    },
-    {
-      "path": "examples/validation/KZ6-0929-A02/html-ppt/vendor/kangzhe-design/runtime/kz-gantt.js",
-      "bytes": 12510,
-      "sha256": "89ddd1761bd367bc9c0ae3d31a405af955a1a2cdb4e62c013d526e6580d3d264"
-    },
-    {
-      "path": "examples/validation/KZ6-0929-A02/html-ppt/vendor/kangzhe-design/runtime/kz-glass.css",
-      "bytes": 9972,
-      "sha256": "5a3b127220307e16252bac4ed952322c73ee11d00b9a6f2c5a1872370b6c85e8"
-    },
-    {
-      "path": "examples/validation/KZ6-0929-A02/html-ppt/vendor/kangzhe-design/runtime/kz-motion.js",
-      "bytes": 9473,
-      "sha256": "759c515d1712b99a90a2851696184fe470588986e61e846ccae65c0ffcfb8355"
-    },
-    {
-      "path": "examples/validation/KZ6-0929-A02/html-ppt/vendor/kangzhe-design/runtime/kz-tokens.css",
-      "bytes": 1550,
-      "sha256": "97309d3cdd39e679bb56d73d97292ea5a5135270aed6191fa8118d03074eb031"
-    },
-    {
-      "path": "examples/validation/KZ6-0929-A02/html-ppt/vendor/kangzhe-design/runtime/kz-tokens.js",
-      "bytes": 4053,
-      "sha256": "c3f1136e9dd4e664e32c6c65e57e9d133c3d23ac699d3cc8bb811696290d4b47"
-    },
-    {
-      "path": "examples/validation/KZ6-0929-A02/matched-seven.pptx",
-      "bytes": 5535808,
-      "sha256": "467b444bdee029038f883de7b24dc3281c0d48a4f69d026d3653dc27023289bb"
-    },
-    {
-      "path": "examples/validation/KZ6-0929-A03/html-ppt/README.md",
-      "bytes": 4684,
-      "sha256": "cb7116ede8695caef79c83172bd7cdca6cdadea7cc7064323eb7771f116c8bb2"
-    },
-    {
-      "path": "examples/validation/KZ6-0929-A03/html-ppt/a03.css",
-      "bytes": 5503,
-      "sha256": "e38c5a74ba86507d8aecb7cb5005ea0862750b8ef67bd77d5e4adaba007bf2f7"
-    },
-    {
-      "path": "examples/validation/KZ6-0929-A03/html-ppt/a03.js",
-      "bytes": 3735,
-      "sha256": "1ca6efd838cda0307c4c03a6e7b2424f8237ee6877214debf751568f699365f7"
-    },
-    {
-      "path": "examples/validation/KZ6-0929-A03/html-ppt/assets/asset_body_bg_quiet.png",
-      "bytes": 1066611,
-      "sha256": "ce19777696202c355b2d13cda6fb5b6b2172edfc58e7e93e3b231cfd9f2aed73"
-    },
-    {
-      "path": "examples/validation/KZ6-0929-A03/html-ppt/assets/asset_cover_hero.png",
-      "bytes": 1052069,
-      "sha256": "aa4f7119df6ff40267fd8e6ed813c97bb93bd5a1666009f0d2686917a46c2871"
-    },
-    {
-      "path": "examples/validation/KZ6-0929-A03/html-ppt/assets/asset_ending_hero_v3.png",
-      "bytes": 1073326,
-      "sha256": "33680aee0826cf66e90f895047766f732d8eb3da3af849de4ce41cbbeddf8db0"
-    },
-    {
-      "path": "examples/validation/KZ6-0929-A03/html-ppt/assets/asset_section_hero.png",
-      "bytes": 1189843,
-      "sha256": "380560cab7c937415e855be13fafe448490cbab1adfcbba95f7999402707574e"
-    },
-    {
-      "path": "examples/validation/KZ6-0929-A03/html-ppt/assets/asset_toc_hero.png",
-      "bytes": 1169150,
-      "sha256": "566c6ad9ed48562fcc95847cdde63decdcc997f34c8a9c5e49b89b7c1a06c545"
-    },
-    {
-      "path": "examples/validation/KZ6-0929-A03/html-ppt/assets/body-wide-generated.png",
-      "bytes": 1148754,
-      "sha256": "4fbf1155d89da95c46364d2097961030c4044d84e9fa7daef066c39a2677528f"
-    },
-    {
-      "path": "examples/validation/KZ6-0929-A03/html-ppt/assets/p1a_body_background.png",
-      "bytes": 1066611,
-      "sha256": "ce19777696202c355b2d13cda6fb5b6b2172edfc58e7e93e3b231cfd9f2aed73"
-    },
-    {
-      "path": "examples/validation/KZ6-0929-A03/html-ppt/deck-data.js",
-      "bytes": 2217,
-      "sha256": "0bddf24eac98181bfd27ecc2a003fe7b11f429236229a25807af017a746b6bf8"
-    },
-    {
-      "path": "examples/validation/KZ6-0929-A03/html-ppt/index.html",
-      "bytes": 22855,
-      "sha256": "ef72505a0ad6ce7334ec85bdfa2c192d68cf6d65b9e4ff58aea520d7cf0ffab9"
-    },
-    {
-      "path": "examples/validation/KZ6-0929-A03/html-ppt/style.css",
-      "bytes": 5596,
-      "sha256": "f5e6cfe5f8c20a46184c6d44b6fc7eed20bc23a7ee6d2faf34a7957e7d7ffe8a"
-    },
-    {
-      "path": "examples/validation/KZ6-0929-A03/html-ppt/vendor/LICENSES/ECHARTS-LICENSE.txt",
-      "bytes": 11358,
-      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
-    },
-    {
-      "path": "examples/validation/KZ6-0929-A03/html-ppt/vendor/LICENSES/ECHARTS-NOTICE.txt",
-      "bytes": 169,
-      "sha256": "88c2418a8ab4dba3486b263600ab39e0c78c36142ddfa4167ed3d9c3a2d2ab38"
-    },
-    {
-      "path": "examples/validation/KZ6-0929-A03/html-ppt/vendor/LICENSES/html-ppt-LICENSE.txt",
-      "bytes": 1084,
-      "sha256": "a5ed4059e25a3ec35e439abd2623753d1f42d4aa4989ffb5c6b7a97b61f6a949"
-    },
-    {
-      "path": "examples/validation/KZ6-0929-A03/html-ppt/vendor/html-ppt/assets/animations/animations.css",
-      "bytes": 8065,
-      "sha256": "3bc36127d7e491b0a723fe5788682824c9b9e8849cf2a5ceb72dc3ebb951e3e8"
-    },
-    {
-      "path": "examples/validation/KZ6-0929-A03/html-ppt/vendor/html-ppt/assets/base.css",
-      "bytes": 15340,
-      "sha256": "786791775484fbec5e4e74b3c3280ad8955a848251520008fb9c9d0d5669a9a4"
-    },
-    {
-      "path": "examples/validation/KZ6-0929-A03/html-ppt/vendor/html-ppt/assets/fonts.css",
-      "bytes": 889,
-      "sha256": "1e93c54e2a4c5f27a2404cc2c8f682d50f5d41a95ebecd11ed41f925e3a79572"
-    },
-    {
-      "path": "examples/validation/KZ6-0929-A03/html-ppt/vendor/html-ppt/assets/runtime.js",
-      "bytes": 46930,
-      "sha256": "d4a0136ba177f2ede2940bcbf0846f65d1c9f80a8d11c6eee4f503d81c200903"
-    },
-    {
-      "path": "examples/validation/KZ6-0929-A03/html-ppt/vendor/kangzhe-design/adapters/README.md",
-      "bytes": 641,
-      "sha256": "cf59bedd712649321dd2b9a8e72b3dfbad365189b53c152a6ef4a1ce4ac9dc4b"
-    },
-    {
-      "path": "examples/validation/KZ6-0929-A03/html-ppt/vendor/kangzhe-design/adapters/html-ppt-bridge.js",
-      "bytes": 1174,
-      "sha256": "ef6c4778548b8bd39c14ea81c562c80d2601094e9f7db942723c281a2a262247"
-    },
-    {
-      "path": "examples/validation/KZ6-0929-A03/html-ppt/vendor/kangzhe-design/adapters/html-ppt.md",
-      "bytes": 4201,
-      "sha256": "ef652cfebca99b231cff22b72019c7824aacee4b640f356fb5fce6c2b128d5d2"
-    },
-    {
-      "path": "examples/validation/KZ6-0929-A03/html-ppt/vendor/kangzhe-design/adapters/ppt-master.md",
-      "bytes": 4975,
-      "sha256": "adcbbdf95fed9467a37db13af368d1501bb93d45ee94d941fe7708382bfbaf51"
-    },
-    {
-      "path": "examples/validation/KZ6-0929-A03/html-ppt/vendor/kangzhe-design/assets/logo_bot.svg",
-      "bytes": 9542,
-      "sha256": "8d16d3ae8353dd31f46a50d401e66f9e62af40be6cc42cdf5050866a4e6e1cae"
-    },
-    {
-      "path": "examples/validation/KZ6-0929-A03/html-ppt/vendor/kangzhe-design/assets/vendor/echarts.min.js",
-      "bytes": 1121883,
-      "sha256": "b66b25aeb4df84e33199dc21694014d336d222cbd9deb0e5a7c14bd6aa0d0fd0"
-    },
-    {
-      "path": "examples/validation/KZ6-0929-A03/html-ppt/vendor/kangzhe-design/runtime/README.md",
-      "bytes": 1893,
-      "sha256": "2492be66b2f30d59ca67463197c2e078526def046ae0f5e60425c6f8acf2c85d"
-    },
-    {
-      "path": "examples/validation/KZ6-0929-A03/html-ppt/vendor/kangzhe-design/runtime/kz-audience.js",
-      "bytes": 1439,
-      "sha256": "8dac0e8a8fa655117a7e9814c9c3f94996e4530be380b6ef0b4b4c673a61186c"
-    },
-    {
-      "path": "examples/validation/KZ6-0929-A03/html-ppt/vendor/kangzhe-design/runtime/kz-charts.js",
-      "bytes": 8738,
-      "sha256": "b41501e4caddad61cbfb1362b0a25118e2502d02dd6fb542742fe66e3e14d33d"
-    },
-    {
-      "path": "examples/validation/KZ6-0929-A03/html-ppt/vendor/kangzhe-design/runtime/kz-drilldown.js",
-      "bytes": 4781,
-      "sha256": "ffa0abb071dc23a7280037b46bf2b57aa47dbd405af4bbb6d492ba64b96897be"
-    },
-    {
-      "path": "examples/validation/KZ6-0929-A03/html-ppt/vendor/kangzhe-design/runtime/kz-gantt.js",
-      "bytes": 13814,
-      "sha256": "54a21f0d587bb097fb56ec058cfefdd31b9cb32fe843ab51429fc13822c9f3dd"
-    },
-    {
-      "path": "examples/validation/KZ6-0929-A03/html-ppt/vendor/kangzhe-design/runtime/kz-glass.css",
-      "bytes": 10953,
-      "sha256": "620c660bf0f92641aa133dd6692447499b7c642cc0ece04dd86d6615a614ff73"
-    },
-    {
-      "path": "examples/validation/KZ6-0929-A03/html-ppt/vendor/kangzhe-design/runtime/kz-layout-qc.js",
-      "bytes": 2003,
-      "sha256": "03fdb9e1ce058e95a11d3000e56649549693ca26d76f3f904bd896fc30ed9454"
-    },
-    {
-      "path": "examples/validation/KZ6-0929-A03/html-ppt/vendor/kangzhe-design/runtime/kz-motion.js",
-      "bytes": 14110,
-      "sha256": "a7cf487c60c40a3137fa7663894faa98bc76914c0b4efabd41e1f126e8afb2bf"
-    },
-    {
-      "path": "examples/validation/KZ6-0929-A03/html-ppt/vendor/kangzhe-design/runtime/kz-tokens.css",
-      "bytes": 1638,
-      "sha256": "695172264c9f2d4269bd5e74e355535e5987330dd1e92dc6808ca058d18e26d2"
-    },
-    {
-      "path": "examples/validation/KZ6-0929-A03/html-ppt/vendor/kangzhe-design/runtime/kz-tokens.js",
-      "bytes": 4444,
-      "sha256": "0dbe8085138cb1fe42f59acdd4f29a3eca2d732a260c2ac10f1f881fae75a7de"
-    },
-    {
-      "path": "examples/validation/KZ6-0929-A03/matched-seven.pptx",
-      "bytes": 5618714,
-      "sha256": "cd40076714f62f5e03fecb03cc829cb661297126083e316d974108aff1a543ea"
-    },
-    {
-      "path": "review/CURRENT_STATUS.md",
-      "bytes": 26917,
-      "sha256": "99be4328753df79a658cdba097dd9a8b84ea6cb9f1a380d46deaf35a4bdcd71a"
-    },
-    {
-      "path": "review/KZ6-0929-A01/P1-P3_STATUS.md",
-      "bytes": 1545,
-      "sha256": "3161b2a0b9a5d5c421044133599565d5331ae504d1dc5185fd6323e665e471a0"
-    },
-    {
-      "path": "review/KZ6-0929-A01/STATUS.md",
-      "bytes": 1076,
-      "sha256": "38aa77c3a9015764c199d40c33cf147adb983625e610c56e17b13d47023a9a16"
-    },
-    {
-      "path": "review/KZ6-0929-A01/browser-report.json",
-      "bytes": 6149,
-      "sha256": "dfdf32719f738734177bf939813cee49b0f9267d42c9c3d269baa40e7494578f"
-    },
-    {
-      "path": "review/KZ6-0929-A01/normal-cycle.json",
-      "bytes": 876,
-      "sha256": "6cf7215ecbeddee4ee35f80d3202edc6242137b49a20150b5ae693eaf266720c"
-    },
-    {
-      "path": "review/KZ6-0929-A01/unit-tests.log",
-      "bytes": 1619,
-      "sha256": "02649e36c5b521d0411025a9e7a0f3d9364cf422e261289986e48331e4264dd3"
-    },
-    {
-      "path": "review/KZ6-0929-A02/PILOT_DISPOSITION.md",
-      "bytes": 1941,
-      "sha256": "17fef01a1e308e4081cc7c1b01c9ebac216fb30274c658dab29a9a0f94c658bc"
-    },
-    {
-      "path": "review/KZ6-0929-A02/REVIEW_ARBITRATION.md",
-      "bytes": 1626,
-      "sha256": "be1554f30bc22cc37df38db53b193e393ae440ca3bbb0df1743c01c8fc051c12"
-    },
-    {
-      "path": "review/KZ6-0929-A02/STATUS.md",
-      "bytes": 2793,
-      "sha256": "b564bc7afae1a53c522b1d4fe66e34d8d33d815b1222d1fd9c68b01ed08c6d58"
-    },
-    {
-      "path": "review/KZ6-0929-A03/BLIND_R2_ARBITRATION.md",
-      "bytes": 914,
-      "sha256": "474622f8cffa2661e017e3a53458dccfd5c756e92b455d4abf2834a91d880aaa"
-    },
-    {
-      "path": "review/KZ6-0929-A03/BLIND_R2_OBSERVATIONS.md",
-      "bytes": 7140,
-      "sha256": "f1a4005f266cd520e9eb7ae935ef8c7a20780e9ca414fc3284139d779727b121"
-    },
-    {
-      "path": "review/KZ6-0929-A03/DEEP_ANALYSIS.md",
-      "bytes": 12096,
-      "sha256": "62ef53074d8381069ed5a4a3b8f9935208a689fe5f24935b5993e877ad01738b"
-    },
-    {
-      "path": "review/KZ6-0929-A03/HANDOFF.md",
-      "bytes": 6975,
-      "sha256": "cf0bba6363ca1ee4bd9f7219ea84a9dde9727c20dba623f2abdc27c6f8d10923"
-    },
-    {
-      "path": "review/KZ6-0929-A03/LOOP_LEDGER.md",
-      "bytes": 1917,
-      "sha256": "7ba3b2d4c0b51af08ab7cef310102b9048ee4a4cd3454cad79638650e4c5c56f"
-    },
-    {
-      "path": "review/KZ6-0929-A03/MODEL_RUNS.json",
-      "bytes": 3508,
-      "sha256": "1e648a7e62be3c3eac96b6650e9649541dd5005a43e723234ddca681f232b0e2"
-    },
-    {
-      "path": "review/KZ6-0929-A03/PRECHANGE_REVIEW.md",
-      "bytes": 3182,
-      "sha256": "2cce4204f2d7dd2686ce51966c3e71303f9f65e651ae0a19788b9531f1bddc49"
-    },
-    {
-      "path": "review/KZ6-0929-A03/REQUIREMENTS_MATRIX.md",
-      "bytes": 7628,
-      "sha256": "87a0ceb6da223e0c42215e816b575f9da1cfa1a2c4781ff22a695a0e832b0ffd"
-    },
-    {
-      "path": "review/KZ6-0929-A03/REVIEW_RUNS.json",
-      "bytes": 411,
-      "sha256": "fb13f0a43ebd735b7caad6643379c1db27bf007ec21f04e5c4411de19d1f3579"
-    },
-    {
-      "path": "review/KZ6-0929-A03/STATUS.md",
-      "bytes": 2176,
-      "sha256": "7662af7c55170b7131c728db16028d04cbec0be2024595dd0dd38c5f5bb6cd5f"
-    },
-    {
-      "path": "review/KZ6-0929-A03/evidence-bridge-final.json",
-      "bytes": 1002,
-      "sha256": "7de703d1d3f48bd0b8be2e214175e37b6bb2969cc8cbc8a89e0e42a65cd8ba47"
-    },
-    {
-      "path": "review/KZ6-0929-A03/evidence-browser-report.json",
-      "bytes": 6535,
-      "sha256": "28eba164bd793bf890bc078366246722b46ed73f5a7afa984ae5411dc8d63b7f"
-    },
-    {
-      "path": "review/KZ6-0929-A03/evidence-ego-7pages-3viewports-final.json",
-      "bytes": 8080,
-      "sha256": "d264ee1acd15b7ddabad66271044fc64ec37009d10fb6c740512167e35e5c6d4"
-    },
-    {
-      "path": "review/KZ6-0929-A03/evidence-index.json",
-      "bytes": 977,
-      "sha256": "b40e2d45bd2e6425e620953b9bcea295cebcfed2a5f27b2c8ef4cb86bcc971ce"
-    },
-    {
-      "path": "review/KZ6-0929-A03/evidence-lo-chart-gap-final.json",
-      "bytes": 442,
-      "sha256": "13f6fd58b461c9a3d4e7cc35e6fb9ac6be6421f4a893ac82f4eca002937382b3"
-    },
-    {
-      "path": "review/KZ6-0929-A03/evidence-native-inspection-final.json",
-      "bytes": 2039,
-      "sha256": "94c68fb13baf62c90a3739b40fa15c03e46676644a26b8901c1f9398041c75ec"
-    },
-    {
-      "path": "review/KZ6-0929-A03/evidence-normal-film-cycle-r4.json",
-      "bytes": 875,
-      "sha256": "8058435925a1d890f6f72895fe5fd000866b2c66bf44c61f552a4d75fc1d22be"
-    },
-    {
-      "path": "review/KZ6-0929-A04/ATTRIBUTION_UPDATE.md",
-      "bytes": 3030,
-      "sha256": "5b0ac563f054d43ca825b2c4ab87850f2cf0e0106e6b5b293ad8e3bac5c31eb8"
-    },
-    {
-      "path": "review/KZ6-0929-A04/HEADER_MARK.md",
-      "bytes": 1310,
-      "sha256": "389931ba6ac9db58f4bb4da3ca67c16a242d673f47a66ad8bd20cf155636d58f"
-    },
-    {
-      "path": "review/KZ6-0929-A04/R12.md",
-      "bytes": 2892,
-      "sha256": "046dc8250d1e70d92a9a64d917f8c2a29839b155095123a9bcdabe8c0cae8ad8"
-    },
-    {
-      "path": "review/KZ6-0929-A04/R14/STATUS.md",
-      "bytes": 2960,
-      "sha256": "fc4ef1b48adb47be1e58313992ec96509e0dafdce8537d0e1ad98f6aa9324102"
-    },
-    {
-      "path": "review/KZ6-0929-A04/R15/STATUS.md",
-      "bytes": 2769,
-      "sha256": "56c270ce48d68df286996ba03386732681169ff359fb91755dc7b14124bdc9c1"
-    },
-    {
-      "path": "review/KZ6-0929-A04/R15/VALIDATION.json",
-      "bytes": 1673,
-      "sha256": "959c07d4268b48a7a231173e966561d5cc4648e465a34ee4b88ef60a45e0853c"
-    },
-    {
-      "path": "review/KZ6-0929-A04/R15/component-90.log",
-      "bytes": 189,
-      "sha256": "c2f0f769204779d8b20eaebeb8de54b65c894eca1d335de6f1540d849edc18ce"
-    },
-    {
-      "path": "review/KZ6-0929-A04/R17/STATUS.md",
-      "bytes": 3349,
-      "sha256": "6bd0b11cc149097b9993aa5e9d90059af6fc4e403b2e5a14c885d7f6d01e7af8"
-    },
-    {
-      "path": "review/KZ6-0929-A04/R17/spec-REVIEW.md",
-      "bytes": 29303,
-      "sha256": "f11caa7ae0b2a4b2424b3bca4b5b73e701a5495df52b7e37f9ae03bcdf5534c6"
-    },
-    {
-      "path": "review/KZ6-0929-A04/R17/spec-findings.json",
-      "bytes": 14227,
-      "sha256": "9e1cc9dba1e6dc07fd78e0535c008d8a3d4779ee6386962ba24b71051fbe42d6"
-    },
-    {
-      "path": "review/KZ6-0929-A04/R22/HANDOFF.md",
-      "bytes": 3440,
-      "sha256": "71020fe0894abfd3f22916a9f85e3a1a53713d9e5dd45ff19ed070142680142b"
-    },
-    {
-      "path": "review/KZ6-0929-A04/R22/STATUS.md",
-      "bytes": 3697,
-      "sha256": "acff2711f3234ce0e2c2fbfbc96f29a821157583eb671e995759b451c7461021"
-    },
-    {
-      "path": "review/KZ6-0929-A04/R22/evidence-summary.json",
-      "bytes": 5439,
-      "sha256": "cf76f3902dbefe1d7a0639798250f15340afd743d1eae5c31df468f5334368b9"
-    },
-    {
-      "path": "review/KZ6-0929-A04/R23/HANDOFF.md",
-      "bytes": 5113,
-      "sha256": "67340b427afc7dd5fe360c836e96c7400e47b2b7ed99b97fde3d26280bab120d"
-    },
-    {
-      "path": "review/KZ6-0929-A04/R23/STATUS.md",
-      "bytes": 3786,
-      "sha256": "0cbacc28f9521c2ae9ec6c08e29cf56f5e1c7145a6028b8bd2f8a62f453c6e45"
-    },
-    {
-      "path": "review/KZ6-0929-A04/R23/evidence-summary.json",
-      "bytes": 3471,
-      "sha256": "247b3340026be96288b773e5adfeac9fa5d73b7fc2acc91f7ac5276badc9ab55"
-    },
-    {
-      "path": "review/KZ6-0929-A04/STATUS.md",
-      "bytes": 3863,
-      "sha256": "02cc6302dba633e2d4b0aa1203773cec4d138694ccbf70bae113523eb0b5d50a"
-    },
-    {
-      "path": "review/LOCAL_VALIDATION.json",
-      "bytes": 2198,
-      "sha256": "a612b6aa09678aae8e3fce36a2214839d1c7f87e85d277982d62760567726bdb"
-    },
-    {
-      "path": "review/RECONSTRUCTION_REVIEW.md",
-      "bytes": 10246,
-      "sha256": "861d5588c4d87ee97eac6f03a9d6da609c8ce14de7ff6c4d9b298375264edc33"
-    },
-    {
-      "path": "review/REQUIREMENT_MATRIX.md",
-      "bytes": 3283,
-      "sha256": "ebe55b2bdbed46aaddcaea1dc60fd4989b0296c680e7dbf576f2eb635692da56"
-    },
-    {
-      "path": "review/RESEARCH.md",
-      "bytes": 3367,
-      "sha256": "32d67b8642df86129676cdf7d1bfde7ae095772eb96adb2a9e504882208540a6"
-    },
-    {
-      "path": "review/VALIDATION_STATUS.md",
-      "bytes": 592,
-      "sha256": "8e7bfa1c3206de1795610a2341de87f37082c0f5dcf0c8c3220c471e527a7c42"
-    },
-    {
-      "path": "review/evidence/browser-report.json",
-      "bytes": 6131,
-      "sha256": "63c973f99a882883886b8f1b93e6de36a87e3997790f83e46477d0372d442ccf"
-    },
-    {
-      "path": "review/evidence/drill-L1-1440.png",
-      "bytes": 386107,
-      "sha256": "7c6eca1fe5dff3b0deb4b75b756ee9e0723786c0b2d455ebfe4bf86da1902d05"
-    },
-    {
-      "path": "review/evidence/drill-L2-1440.png",
-      "bytes": 408293,
-      "sha256": "0aa5b977d6fd373a108a1f41cf752e15a962370e173e0fe13b6ceec99c8cb8c7"
-    },
-    {
-      "path": "review/evidence/earlier-browser-1.json",
-      "bytes": 5279,
-      "sha256": "ab627abdc2a1999eaed0a3e7f49f42dc06c979bbbfa264a85e42600b1dff263d"
-    },
-    {
-      "path": "review/evidence/earlier-browser-2.json",
-      "bytes": 5279,
-      "sha256": "a7902b156aa7eb735de3f2d692a76c58d57c57c4ea51157944a8c56b06cd90b4"
-    },
-    {
-      "path": "review/evidence/gantt-1440.png",
-      "bytes": 397822,
-      "sha256": "469ae401ccd831349dac5be1d1b77bb359d0c067c79a61ea98c7387e691ae567"
-    },
-    {
-      "path": "review/evidence/hero-1280.png",
-      "bytes": 276546,
-      "sha256": "50066022fb9bd62070bbd9a076b83925b5f769cd0549e38e2c6e1cd93f76ae9a"
-    },
-    {
-      "path": "review/evidence/hero-1440.png",
-      "bytes": 317657,
-      "sha256": "df0f6e4248e80d43d855bc47af7ddfafb692455b3cfda86e2ac14d07ec4456fd"
-    },
-    {
-      "path": "review/evidence/hero-1920.png",
-      "bytes": 424072,
-      "sha256": "e3a36b256acb157e99173446d8da20b88855260dc7549c9513be9e11da2f7a6b"
-    },
-    {
-      "path": "review/evidence/hero-2560.png",
-      "bytes": 639772,
-      "sha256": "96ac0a7953275ca43e6d97079f035bacfa500ee51c63170febce3422da79e3f6"
-    },
-    {
-      "path": "review/evidence/hero-390.png",
-      "bytes": 139024,
-      "sha256": "cb29c0032fb72ce37d0a6501be9c35c941e277213b32679030d1560b9a0deb45"
-    },
-    {
-      "path": "review/evidence/normal-cycle.json",
-      "bytes": 873,
-      "sha256": "5d7eea510798e3e560d2f073cab2ad09ceed4479738eb019174e361af1155cf9"
-    },
-    {
-      "path": "review/evidence/unit-tests.log",
-      "bytes": 1619,
-      "sha256": "b081f61a8c5854cbb132f1723e2f9a8f51fe4686dc1f2d182d5172f3b09f1529"
-    },
-    {
-      "path": "review/input_inventory.json",
-      "bytes": 63036,
-      "sha256": "c4ce0a7beba869d7e3befbd2b1fb8dcc362c257d935b0d2da24f37a208a04877"
-    },
-    {
-      "path": "review/reference-pptx-structure.json",
-      "bytes": 6717,
-      "sha256": "c68d1e4e6a1e4df0221784fe1d2c1d006550e9e1a96d6dad42fada97808d7bbe"
-    },
-    {
-      "path": "review/reference-site-inline-report.json",
-      "bytes": 2010,
-      "sha256": "ac2a0b306865080942c24b67427945654139c234071bfa43b831147506451f19"
-    },
-    {
-      "path": "runtime/API.md",
-      "bytes": 12318,
-      "sha256": "cdcc265f0b2c1681866f329c41869b0f36a7d567f65522b1210009b117343fc2"
-    },
-    {
-      "path": "runtime/README.md",
-      "bytes": 2278,
-      "sha256": "2c8b115dde45f54f0a19edd5a659f5c17c1bf795f4ad6a2b3bc15801267d2784"
-    },
-    {
-      "path": "runtime/kz-audience.js",
-      "bytes": 1439,
-      "sha256": "8dac0e8a8fa655117a7e9814c9c3f94996e4530be380b6ef0b4b4c673a61186c"
-    },
-    {
-      "path": "runtime/kz-charts.js",
-      "bytes": 8738,
-      "sha256": "b41501e4caddad61cbfb1362b0a25118e2502d02dd6fb542742fe66e3e14d33d"
-    },
-    {
-      "path": "runtime/kz-drilldown.js",
-      "bytes": 6539,
-      "sha256": "98a0c8e6354529ffd270692397998d0621318c6e5f6d428e10d5d077b220ce66"
-    },
-    {
-      "path": "runtime/kz-gantt.js",
-      "bytes": 13814,
-      "sha256": "54a21f0d587bb097fb56ec058cfefdd31b9cb32fe843ab51429fc13822c9f3dd"
-    },
-    {
-      "path": "runtime/kz-glass.css",
-      "bytes": 12427,
-      "sha256": "e92d70bf23b32d4aff27900c338b1fa8b0f6759294668d202162bc9d8f34c3dd"
-    },
-    {
-      "path": "runtime/kz-layout-qc.js",
-      "bytes": 6210,
-      "sha256": "efa6cfc7ae15b0bd81e67b8f80698d62dbbb6a17f578e5b8ba8cf005acb70b1e"
-    },
-    {
-      "path": "runtime/kz-motion.js",
-      "bytes": 14110,
-      "sha256": "a7cf487c60c40a3137fa7663894faa98bc76914c0b4efabd41e1f126e8afb2bf"
-    },
-    {
-      "path": "runtime/kz-tokens.css",
-      "bytes": 1988,
-      "sha256": "e9686c593411384c618c07ba25aedb6a285a2bd8d672c611ca57b058fa54d079"
-    },
-    {
-      "path": "runtime/kz-tokens.js",
-      "bytes": 5041,
-      "sha256": "734992b1decd4afa413f59ec95d20257c4376fa548c4c3ab233e0059751dede3"
-    },
-    {
-      "path": "schemas/README.md",
-      "bytes": 790,
-      "sha256": "e21a8b3731160987f24abcf241fedf9e341f0b9c1d131875c0c28a1e00ccbcd9"
-    },
-    {
-      "path": "schemas/asset-manifest.schema.json",
-      "bytes": 5434,
-      "sha256": "38ce722149e90042e56536a8ffd3378567c81e8c450bf737dbc960daab6a690a"
-    },
-    {
-      "path": "schemas/film-plan.schema.json",
-      "bytes": 5634,
-      "sha256": "8fbd2f70cb99eeb44345d53b18df867d2d9ed8b9a7c521beb4ccdf20fa353d50"
-    },
-    {
-      "path": "schemas/gantt.schema.json",
-      "bytes": 986,
-      "sha256": "38cd533f56672188d92fe89c29b18b83339da38d2e9c008e16d5080f61d1c9e7"
-    },
-    {
-      "path": "schemas/page-plan.schema.json",
-      "bytes": 18830,
-      "sha256": "2fe35e3712e4cd6791917a24912d6a04d7a80a5695733ae179af794988190bfb"
-    },
-    {
-      "path": "tests/README.md",
-      "bytes": 3186,
-      "sha256": "6f751350b0293b8a754856816fb458651891b2828e5ca4b41aaddb51b0389d73"
-    },
-    {
-      "path": "tests/a03_cleanup.cjs",
-      "bytes": 5052,
-      "sha256": "2c324eecb4e10256f6a859e1185d8e765fb55a238bc67a43403da8f5216f264b"
-    },
-    {
-      "path": "tests/bridge_failure_browser.py",
-      "bytes": 3604,
-      "sha256": "d58ce2d601dc6b7a870d039d961ea35e4da8b9ba8e69a9d909ab2c23f30e4b76"
-    },
-    {
-      "path": "tests/bridge_regression.py",
-      "bytes": 2649,
-      "sha256": "f0fe25565741789774de8c767a43c15db34f308bb8e8d3e5d1c757dbd839ea78"
-    },
-    {
-      "path": "tests/browser_smoke.py",
-      "bytes": 13565,
-      "sha256": "533f6cd5f5442835c81309df40ef95663296361445a7405aa08f7c5793875bd8"
-    },
-    {
-      "path": "tests/chart_axis_browser.py",
-      "bytes": 4871,
-      "sha256": "612a289ef6e2a8a28fb117b828be5cd63d927d7a07d11ee125c86d6b8d50d9f3"
-    },
-    {
-      "path": "tests/chart_gantt_play_sequence.cjs",
-      "bytes": 9477,
-      "sha256": "bb691b5d440206b6b4e5aa30049d936d3e1e2885a5ed564149d02d90e29153d4"
-    },
-    {
-      "path": "tests/components_init_faults.cjs",
-      "bytes": 11155,
-      "sha256": "6ebf394152393ffaa163b45b2aa2002e043b419c4c3523d818101d1546b55a2e"
-    },
-    {
-      "path": "tests/drill_background_browser.py",
-      "bytes": 4561,
-      "sha256": "b0a64e639514911bbf0e0db1d2f8c9cf5c3b8b45315354c622ec6c55d9d03fac"
-    },
-    {
-      "path": "tests/drill_capacity_browser.py",
-      "bytes": 2523,
-      "sha256": "d167138ad29c60d8844caac505a44894a8590f230b3df4d590fb1ffc1b25dd82"
-    },
-    {
-      "path": "tests/film_cycle.py",
-      "bytes": 1791,
-      "sha256": "6e632c815eb17d33f09296052c84ca81b7deb39eeca836db9113cc2a74d94ae5"
-    },
-    {
-      "path": "tests/gantt_keyboard_browser.py",
-      "bytes": 2709,
-      "sha256": "00a967c3d5516e813816bd0c684bcec3848cdc8f4c194673081b3f6036efe256"
-    },
-    {
-      "path": "tests/layout_data_browser.py",
-      "bytes": 3381,
-      "sha256": "00aa3f78d21522bc18a590245235d9cd5f746119247e79b6f19f610cddd007a4"
-    },
-    {
-      "path": "tests/motion_ownership_browser.py",
-      "bytes": 2759,
-      "sha256": "d4ac7ef0a5b8dc7fff5b9f8efcc3e2ebf276cf4f1b7d7379d1b33c3a9009dfcd"
-    },
-    {
-      "path": "tests/motion_text_browser.py",
-      "bytes": 3047,
-      "sha256": "8ba01384aff2c0325b77c5409e5e4b91e01144daa139f71f226e21e385e947bb"
-    },
-    {
-      "path": "tests/ownership_boundary_browser.py",
-      "bytes": 3484,
-      "sha256": "8963c940252979e79aba3830fca5d7ae19cd060865ba1685b64cb7591007f0e5"
-    },
-    {
-      "path": "tests/page_lifecycle_browser.py",
-      "bytes": 2633,
-      "sha256": "f8bd56f46dc7a00449b8aa57a6ba23b259e59ad0d9a6b4485aebbfc60bc43960"
-    },
-    {
-      "path": "tests/review_r7_browser.py",
-      "bytes": 4527,
-      "sha256": "d26c73255ac0772791387e990fc37385550936fc9a85531889e21f3aa132179d"
-    },
-    {
-      "path": "tests/test_a03_cleanup.py",
-      "bytes": 628,
-      "sha256": "5edf04fd8fe880435e339ff8777ec80cb96c6e29e3777ab42207de827454af4b"
-    },
-    {
-      "path": "tests/test_a04_gates.py",
-      "bytes": 5050,
-      "sha256": "df08064f3df21d2cff9f113ddef9483e7d109f5e1763dea81349b7e500c801ae"
-    },
-    {
-      "path": "tests/test_chart_gantt_play_sequence.py",
-      "bytes": 625,
-      "sha256": "6f99dd3086713831cfd68f2f8383bb401bab85b9e0e32d46f2bae5825accdbfa"
-    },
-    {
-      "path": "tests/test_components_init_faults.py",
-      "bytes": 600,
-      "sha256": "09d5b283d9c8c59a713b1b51a86ae3aefd3729cda14088eec15a5c15abb1a0db"
-    },
-    {
-      "path": "tests/test_context_routing.py",
-      "bytes": 2169,
-      "sha256": "d5821ee4db2ccbbed509db32b6d125e51985753aeeae961a7178707f562404da"
-    },
-    {
-      "path": "tests/test_contracts.py",
-      "bytes": 3917,
-      "sha256": "8693f7a13d9128b9c0d3b3a1916939f8a941b32903a86cc99837e6ab7b681745"
-    },
-    {
-      "path": "tests/test_header_mark.py",
-      "bytes": 3264,
-      "sha256": "05cd4a462df2515874a8351f4ecdda4ed25491f927f896680e3a7d3a2f36995a"
-    },
-    {
-      "path": "tests/test_hero.py",
-      "bytes": 7332,
-      "sha256": "9942e82b187d9bf476d5213ecb692fed9ebcdb4b54edc15d4270690a89172626"
-    },
-    {
-      "path": "tests/test_ppt_role_sizes.py",
-      "bytes": 1856,
-      "sha256": "6e9bbb12079805e8de9303e184570d70a4aca975eba83cfd05c9948a74ec5772"
-    },
-    {
-      "path": "tests/test_responsive_profile.py",
-      "bytes": 1886,
-      "sha256": "5f0b8120e4ecebd5871936d44f9b21a0af775b7c7c7cec66a36c25cfce23156f"
-    },
-    {
-      "path": "tests/test_viewport_assets.py",
-      "bytes": 5418,
-      "sha256": "7132291bf5f2fb0e02434bd1faf77950c283326d7eb02bfe36cfbc674b7fdf20"
-    },
-    {
-      "path": "tests/text_bounds_browser.py",
-      "bytes": 5878,
-      "sha256": "f791442f742e395a9da076532ee4813f6d2083c599d9df388c12d3f97585c124"
-    },
-    {
-      "path": "tests/tilt_pointer_browser.py",
-      "bytes": 2385,
-      "sha256": "13e9edc91730be46aed2a2af0e515d54085f8976689899e442a075459d938658"
-    },
-    {
-      "path": "tokens/tokens.json",
-      "bytes": 8015,
-      "sha256": "c82a59a6cd7925553f10fd64ee2342fb434969f79453880ef2b05e2544d0a476"
-    },
-    {
-      "path": "tools/bind_header_mark_pptx.py",
-      "bytes": 6161,
-      "sha256": "f0cc9306992d93ec77675644614218104dacaa003139c9e0de1c6eb8355b6616"
-    },
-    {
-      "path": "tools/bind_hero_pptx.py",
-      "bytes": 3921,
-      "sha256": "7370ec3572c0b2d6a62e342b556a44b46b824cf644008ae88e70b4d4a8db18d4"
-    },
-    {
-      "path": "tools/brand_fragments.py",
-      "bytes": 3734,
-      "sha256": "aeb8db8c250d80a71a8d260ab302cd0e2eb3ea17882feb195d1fa956274c0789"
-    },
-    {
-      "path": "tools/build_tokens.py",
-      "bytes": 2289,
-      "sha256": "4715868bc7f62c590433eb563f2db83d4db60c5ae51a025a0518a3993709db0a"
-    },
-    {
-      "path": "tools/context_pack.py",
-      "bytes": 4106,
-      "sha256": "fea59f36c1cda8f9f11bd047e7df935f3f53c9600ebd2e239a6ab0f12f1aae23"
-    },
-    {
-      "path": "tools/glass_svg.py",
-      "bytes": 1722,
-      "sha256": "27395257461c9253adb6ba9e088a019ff0f8d6e04f20b5288e10ec0aa45da2dc"
-    },
-    {
-      "path": "tools/hero_layout.py",
-      "bytes": 7172,
-      "sha256": "6d3003c18e7e3f2564b91e5ea3d07d07738d8a74ab25ba94721d1b0adc62d33e"
-    },
-    {
-      "path": "tools/inline_preview.py",
-      "bytes": 1830,
-      "sha256": "5eb64c17b83d344255284b2e80a2329ea51bd5fcb8e8dfaee9d5dc13d2e6d18c"
-    },
-    {
-      "path": "tools/inspect_pptx.py",
-      "bytes": 1559,
-      "sha256": "68157bf9d49a42d42d52dbe2e18615c19db93649373ca0e9572a1ec27ca8d62e"
-    },
-    {
-      "path": "tools/make_safe_mask.py",
-      "bytes": 727,
-      "sha256": "9b738b5aec846eb1b170c0bd11269ab011349251a289af58f6278f84905a7222"
-    },
-    {
-      "path": "tools/qc_plan.py",
-      "bytes": 14391,
-      "sha256": "860bae124e62e0f0c68905f4d6f900632831c3ebe1fa6cf2df13ef4560586599"
-    }
-  ]
+ "version": "6.1.3",
+ "revision": "KZ6-1007-A08",
+ "status": "PARTIAL",
+ "scope": "A06 R1 dual-track blind-review writeback: fix --kz-component-u length*length defect (--kz-un ratio via bridge), kz-drilldown.js DRILL-03/04 key isolation/focus trap/wheel routing, header_mark placement into tokens, FILM-01 quantified state delta, G5-PROJ cascade, tracks-site G7-NOTES N/A, page-plan cards detail fields; full four-track validation remains PARTIAL",
+ "files": [
+  {
+   "path": ".gitignore",
+   "bytes": "48",
+   "sha256": "sha256:33d6b396ea484467ca87acdb4168f71e045e5198dc6a7ad7ee4259c095263872"
+  },
+  {
+   "path": "CHANGELOG.md",
+   "bytes": "33324",
+   "sha256": "sha256:387727ed652cb23f7149b7a0a823791648037884e1de09073249a7816f741702"
+  },
+  {
+   "path": "INSTALL.md",
+   "bytes": "1214",
+   "sha256": "sha256:7a0b1557655616b51802bc48014fc0e837117fb243670bf89e88d55189f297e0"
+  },
+  {
+   "path": "README.md",
+   "bytes": "5275",
+   "sha256": "sha256:d556edafa13dd6b388f1b3638a0a4439d1caf5b8f2b37e52e37c6bb090cbaa97"
+  },
+  {
+   "path": "REVISION",
+   "bytes": "13",
+   "sha256": "sha256:445d0e33f9838ccbdd4dce269d9931cd147f3f4cc49d7ab8d61aba3d1c5c96a2"
+  },
+  {
+   "path": "SKILL.md",
+   "bytes": "8104",
+   "sha256": "sha256:e60f7612294bd992be456fc3c0caa598aa741b2113317745004011d2ac837f7b"
+  },
+  {
+   "path": "VERSION",
+   "bytes": "6",
+   "sha256": "sha256:212c23b1f7154cbf0df9cb171c9ba00f16e16e78331f34eb133a8e1a1629300c"
+  },
+  {
+   "path": "adapters/README.md",
+   "bytes": "641",
+   "sha256": "sha256:cf59bedd712649321dd2b9a8e72b3dfbad365189b53c152a6ef4a1ce4ac9dc4b"
+  },
+  {
+   "path": "adapters/html-ppt-bridge.js",
+   "bytes": "3215",
+   "sha256": "sha256:6d4e757bf54a0fb4778c271af71495941345086ebe1439710fc20368f469234a"
+  },
+  {
+   "path": "adapters/html-ppt.md",
+   "bytes": "14591",
+   "sha256": "sha256:b5549f7686d91eb28f259d6ea1720b4b1e68de44751ae1ee9c6cd88d25acabb9"
+  },
+  {
+   "path": "adapters/ppt-master.md",
+   "bytes": "7244",
+   "sha256": "sha256:68a77cae3422e082a89900b06d2e2b5968fd584f5f30d3072e346a933e7d8a87"
+  },
+  {
+   "path": "agent/CURRENT_HANDOFF.md",
+   "bytes": "5294",
+   "sha256": "sha256:691981ac02a4f5b5ec50cf51f6c62abcf4265a8f8b81b2f8367a5042f1c75282"
+  },
+  {
+   "path": "agent/EVALUATION.md",
+   "bytes": "9946",
+   "sha256": "sha256:9e656e447e0fa6ae98927ede7014e1a97fbbd9854ec851f9e2a045fe23b742c5"
+  },
+  {
+   "path": "agent/HANDOFF_TEMPLATE.md",
+   "bytes": "2030",
+   "sha256": "sha256:b5fcb568d48342f5a8aec9ee945fa4cb92c2c983f23322f989bbe47df9ce666f"
+  },
+  {
+   "path": "agent/KNOWN_GAPS.md",
+   "bytes": "9805",
+   "sha256": "sha256:f06ba36e42c5caa3f0fb7cd0e0bd7fd37564d2da934ecc850c4eea642fe66789"
+  },
+  {
+   "path": "agent/PLAN.md",
+   "bytes": "7637",
+   "sha256": "sha256:9c339b3c095c20bc6756cb919ea27d56eb8242f15b830bceb31b90a9aed15169"
+  },
+  {
+   "path": "agent/START_HERE.md",
+   "bytes": "1342",
+   "sha256": "sha256:019b466db748f44228f6df08be6f64c0178881e3fa1128706156ffe6ee251be1"
+  },
+  {
+   "path": "agent/fixtures/cases.json",
+   "bytes": "2780",
+   "sha256": "sha256:bda7fa178c7e17c60626cc016f5e653b6784183c698fa1d2314fb5ca9e4bbee7"
+  },
+  {
+   "path": "agent/fixtures/page-plan.valid.json",
+   "bytes": "1880",
+   "sha256": "sha256:a06b942d596e4a6be6d56906901c7268a7e2f52897b414bba6c6e8f44a304f45"
+  },
+  {
+   "path": "agent/model-matrix.template.json",
+   "bytes": "812",
+   "sha256": "sha256:cd30c05cd339c711b2ac6e420a31eef6cd483f7ddda230e9ddaeb049557a475e"
+  },
+  {
+   "path": "agent/prompts/ATTRIBUTION.md",
+   "bytes": "687",
+   "sha256": "sha256:a0e1fb29829710ae3036c613b53448177cf44368e0096051956d4defee63452e"
+  },
+  {
+   "path": "agent/prompts/BLIND_VLM_REVIEW.md",
+   "bytes": "2348",
+   "sha256": "sha256:4012de623f142c4a28cbe0aee96f3e193fb2b2ec6742f802610b173d96ec662a"
+  },
+  {
+   "path": "agent/prompts/EXECUTE.md",
+   "bytes": "1568",
+   "sha256": "sha256:a4008153f2f601739f9a57f626a3014850b11f1720aa785fa651a758401feb1f"
+  },
+  {
+   "path": "agent/prompts/GENERATOR.md",
+   "bytes": "646",
+   "sha256": "sha256:54d4c3d45c2d0eb590f8d8ad02c9375ba83efb59d150510dc250f4a87269e974"
+  },
+  {
+   "path": "agent/run_adapter.py",
+   "bytes": "2192",
+   "sha256": "sha256:168891620d2193a56d1498ab71f9d975ea9d2f91bf3f5cf46f956ac2731be4d3"
+  },
+  {
+   "path": "assets/README.md",
+   "bytes": "932",
+   "sha256": "sha256:48ba7431462c50cb982d0d8df68ea9387e67d9b5f7438b7394ef802475d91d78"
+  },
+  {
+   "path": "assets/header-mark/header-mark.svg",
+   "bytes": "2094",
+   "sha256": "sha256:58b3c5dc76b8ef9ddaef818d5901649c9dfb4d392009711ee3c5b4f2c44c3248"
+  },
+  {
+   "path": "assets/header-mark/provenance.json",
+   "bytes": "730",
+   "sha256": "sha256:9b0c7f4be3e15db1944d360351d217223c47c3f18fdb1e990602432eb58f752d"
+  },
+  {
+   "path": "assets/header-mark/source-native.xml",
+   "bytes": "5801",
+   "sha256": "sha256:906dc32ffe4f374ae6cb7e6500236b4680681e67598b7ef4ab438d553c219578"
+  },
+  {
+   "path": "assets/logo_bot.svg",
+   "bytes": "9542",
+   "sha256": "sha256:8d16d3ae8353dd31f46a50d401e66f9e62af40be6cc42cdf5050866a4e6e1cae"
+  },
+  {
+   "path": "assets/vendor/ECHARTS-LICENSE.txt",
+   "bytes": "11358",
+   "sha256": "sha256:cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+  },
+  {
+   "path": "assets/vendor/ECHARTS-NOTICE.txt",
+   "bytes": "169",
+   "sha256": "sha256:88c2418a8ab4dba3486b263600ab39e0c78c36142ddfa4167ed3d9c3a2d2ab38"
+  },
+  {
+   "path": "assets/vendor/echarts.min.js",
+   "bytes": "1121883",
+   "sha256": "sha256:b66b25aeb4df84e33199dc21694014d336d222cbd9deb0e5a7c14bd6aa0d0fd0"
+  },
+  {
+   "path": "design_specs/00-authority.md",
+   "bytes": "4108",
+   "sha256": "sha256:6d7957207c4d54c61b645f58d82ed7ff3279a61472b2a61290c0c3d21c983200"
+  },
+  {
+   "path": "design_specs/01-core.md",
+   "bytes": "3682",
+   "sha256": "sha256:ceea313e4594cab08d7b80937db098ba366a3f5aff709f61f2ba9a5fa7c5407e"
+  },
+  {
+   "path": "design_specs/02-liquid-glass.md",
+   "bytes": "10342",
+   "sha256": "sha256:f90cdb80d8b3bac66b7c44f1253d74f0210f5a9fc724707f8df0fb5b25a81f0d"
+  },
+  {
+   "path": "design_specs/03-typography-language.md",
+   "bytes": "17678",
+   "sha256": "sha256:e79e92ae8b575296a090f51c87141453eadb4e9786e8475804d98871e04505a3"
+  },
+  {
+   "path": "design_specs/04-image-pipeline.md",
+   "bytes": "15458",
+   "sha256": "sha256:926a21c57785ceacef0e28f37eaf7628a7ac5709395a57527abeb27f36925579"
+  },
+  {
+   "path": "design_specs/05-charts.md",
+   "bytes": "5299",
+   "sha256": "sha256:cd4eee80b2770cf49005b9474d2221dc16b3ebe15f6f454ce084948cb9a3f247"
+  },
+  {
+   "path": "design_specs/06-motion-film.md",
+   "bytes": "29595",
+   "sha256": "sha256:aa3be34ec4d8f00a48f10e4561fdaaa6bfe057bd85ca7030a1e99e6bcaee677d"
+  },
+  {
+   "path": "design_specs/07-drilldown.md",
+   "bytes": "8080",
+   "sha256": "sha256:e43501be4c9a29ec3b1503687b74eb067cfc395f76c0b35bd622eb90ab5f3b0a"
+  },
+  {
+   "path": "design_specs/08-gantt.md",
+   "bytes": "4809",
+   "sha256": "sha256:fb60966d61bef808d0c52a8424cdd8050642bf1c595c67ec22a3c4d244a2dc67"
+  },
+  {
+   "path": "design_specs/09-speaker-notes.md",
+   "bytes": "4156",
+   "sha256": "sha256:9865d2ea4de52ee45d11ce26184761361ddfdb6ff9e1adaa029a40b5ee892b3f"
+  },
+  {
+   "path": "design_specs/10-quality-gates.md",
+   "bytes": "16525",
+   "sha256": "sha256:2da5caf3de6a0df2b84374ec4ab4cdc557cb3d96a1e1dd27931d1753464c5870"
+  },
+  {
+   "path": "design_specs/11-hero-layouts.md",
+   "bytes": "8005",
+   "sha256": "sha256:fe59c6be2ac02e0445c0fdc4d2c87ded36885d5620f0821f6de75e9cf1e8966c"
+  },
+  {
+   "path": "design_specs/12-reference-patterns.md",
+   "bytes": "5017",
+   "sha256": "sha256:909962c36d491925c38f488f7688f93793eabc571e038f51ce2f36fd0377249f"
+  },
+  {
+   "path": "design_specs/tracks-htmlppt.md",
+   "bytes": "1732",
+   "sha256": "sha256:5e698d7e4cec648b20402fdbb0a2f374958b126cab9a87c6f1c0624d31f4bb0f"
+  },
+  {
+   "path": "design_specs/tracks-pptx.md",
+   "bytes": "2312",
+   "sha256": "sha256:4375b8182be8f4c4e3031b7d006de8f5b0a60f0a3d4f203b4cef0dbcc7be8770"
+  },
+  {
+   "path": "design_specs/tracks-site.md",
+   "bytes": "3483",
+   "sha256": "sha256:97161ceb0ab1c390d3918b54dd500ea355f93ac850b46dd86fd562bdeb96860b"
+  },
+  {
+   "path": "design_specs/tracks-stream.md",
+   "bytes": "1412",
+   "sha256": "sha256:ab92b5df8862e38f086e5fa652c6a07010a12e0cd04fc0ae247ee6da491ba16a"
+  },
+  {
+   "path": "examples/chart-data.json",
+   "bytes": "543",
+   "sha256": "sha256:3db8c8295e2d2cc9a908f9a26f635e266c73b649d31610ed6d4d3b3c2b775075"
+  },
+  {
+   "path": "examples/component-lab.html",
+   "bytes": "8277",
+   "sha256": "sha256:deea93774f9bc80f32a0f59090a5fcc5e1103d609bb73af425fb106b9d299f94"
+  },
+  {
+   "path": "examples/component-lab.js",
+   "bytes": "6076",
+   "sha256": "sha256:02fc5a188f0e76f1a3ccc78116f0593d0145abb9505731df4df4815bda5c0d87"
+  },
+  {
+   "path": "examples/film-frames.json",
+   "bytes": "2173",
+   "sha256": "sha256:b1a15a480a78eb5913aedc22f7e0c2c5f7251bbad94c3e5d0117ce4acb1a6d85"
+  },
+  {
+   "path": "examples/film-plan.json",
+   "bytes": "3611",
+   "sha256": "sha256:31274ef17e74b6623a6a49f7db711c0456772c60318d66e8d2fc2735c355ee21"
+  },
+  {
+   "path": "examples/gantt-data.json",
+   "bytes": "470",
+   "sha256": "sha256:2e5e6e12498e20e3de2d0d6b1a7027f59c5f0da367b21d0c9b37ea3d9f82dc73"
+  },
+  {
+   "path": "examples/validation/KZ6-0929-A01/README.md",
+   "bytes": "1972",
+   "sha256": "sha256:e3592d430f4884118ce2f6eef676097ff6814e33f70e73e70d66c08d93695ce2"
+  },
+  {
+   "path": "examples/validation/KZ6-0929-A01/asset-provenance.json",
+   "bytes": "2109",
+   "sha256": "sha256:67c6813a7b3c508d04b758679391d3ac9c4e07b4279ae137dfa967a3aae4187e"
+  },
+  {
+   "path": "examples/validation/KZ6-0929-A01/html-ppt/README.md",
+   "bytes": "3964",
+   "sha256": "sha256:cc92770560dc7b1030e90b078e74c5f0b19cad25cac585b53164682a081c555f"
+  },
+  {
+   "path": "examples/validation/KZ6-0929-A01/html-ppt/assets/asset_body_bg_quiet.png",
+   "bytes": "1066611",
+   "sha256": "sha256:ce19777696202c355b2d13cda6fb5b6b2172edfc58e7e93e3b231cfd9f2aed73"
+  },
+  {
+   "path": "examples/validation/KZ6-0929-A01/html-ppt/assets/asset_cover_hero.png",
+   "bytes": "1052069",
+   "sha256": "sha256:aa4f7119df6ff40267fd8e6ed813c97bb93bd5a1666009f0d2686917a46c2871"
+  },
+  {
+   "path": "examples/validation/KZ6-0929-A01/html-ppt/assets/asset_ending_hero_v3.png",
+   "bytes": "1073326",
+   "sha256": "sha256:33680aee0826cf66e90f895047766f732d8eb3da3af849de4ce41cbbeddf8db0"
+  },
+  {
+   "path": "examples/validation/KZ6-0929-A01/html-ppt/assets/asset_section_hero.png",
+   "bytes": "1189843",
+   "sha256": "sha256:380560cab7c937415e855be13fafe448490cbab1adfcbba95f7999402707574e"
+  },
+  {
+   "path": "examples/validation/KZ6-0929-A01/html-ppt/assets/asset_toc_hero.png",
+   "bytes": "1169150",
+   "sha256": "sha256:566c6ad9ed48562fcc95847cdde63decdcc997f34c8a9c5e49b89b7c1a06c545"
+  },
+  {
+   "path": "examples/validation/KZ6-0929-A01/html-ppt/brand.css",
+   "bytes": "10729",
+   "sha256": "sha256:8b4a7380f16af33a0913af18d1ba7ed3abcd7532a3aab575e8ceef5eb699cfa1"
+  },
+  {
+   "path": "examples/validation/KZ6-0929-A01/html-ppt/deck-data.js",
+   "bytes": "2199",
+   "sha256": "sha256:2dc95c25e983720d242c789f8302bada462896c6b42b625895c3157a36778272"
+  },
+  {
+   "path": "examples/validation/KZ6-0929-A01/html-ppt/deck-wiring.js",
+   "bytes": "6149",
+   "sha256": "sha256:3176fac6ac75f2d38d197b6707fb163fa6f5b4b123703f4089430a55e0dbe1ea"
+  },
+  {
+   "path": "examples/validation/KZ6-0929-A01/html-ppt/index.html",
+   "bytes": "16037",
+   "sha256": "sha256:e301ffb26fb298f7c290e632a92915cd4122af44da2c05816fc06bb55aaf80b5"
+  },
+  {
+   "path": "examples/validation/KZ6-0929-A01/html-ppt/style.css",
+   "bytes": "5596",
+   "sha256": "sha256:f5e6cfe5f8c20a46184c6d44b6fc7eed20bc23a7ee6d2faf34a7957e7d7ffe8a"
+  },
+  {
+   "path": "examples/validation/KZ6-0929-A01/html-ppt/vendor/LICENSES/ECHARTS-LICENSE.txt",
+   "bytes": "11358",
+   "sha256": "sha256:cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+  },
+  {
+   "path": "examples/validation/KZ6-0929-A01/html-ppt/vendor/LICENSES/ECHARTS-NOTICE.txt",
+   "bytes": "169",
+   "sha256": "sha256:88c2418a8ab4dba3486b263600ab39e0c78c36142ddfa4167ed3d9c3a2d2ab38"
+  },
+  {
+   "path": "examples/validation/KZ6-0929-A01/html-ppt/vendor/LICENSES/html-ppt-LICENSE.txt",
+   "bytes": "1084",
+   "sha256": "sha256:a5ed4059e25a3ec35e439abd2623753d1f42d4aa4989ffb5c6b7a97b61f6a949"
+  },
+  {
+   "path": "examples/validation/KZ6-0929-A01/html-ppt/vendor/html-ppt/assets/animations/animations.css",
+   "bytes": "8065",
+   "sha256": "sha256:3bc36127d7e491b0a723fe5788682824c9b9e8849cf2a5ceb72dc3ebb951e3e8"
+  },
+  {
+   "path": "examples/validation/KZ6-0929-A01/html-ppt/vendor/html-ppt/assets/base.css",
+   "bytes": "15340",
+   "sha256": "sha256:786791775484fbec5e4e74b3c3280ad8955a848251520008fb9c9d0d5669a9a4"
+  },
+  {
+   "path": "examples/validation/KZ6-0929-A01/html-ppt/vendor/html-ppt/assets/fonts.css",
+   "bytes": "889",
+   "sha256": "sha256:1e93c54e2a4c5f27a2404cc2c8f682d50f5d41a95ebecd11ed41f925e3a79572"
+  },
+  {
+   "path": "examples/validation/KZ6-0929-A01/html-ppt/vendor/html-ppt/assets/runtime.js",
+   "bytes": "46930",
+   "sha256": "sha256:d4a0136ba177f2ede2940bcbf0846f65d1c9f80a8d11c6eee4f503d81c200903"
+  },
+  {
+   "path": "examples/validation/KZ6-0929-A01/html-ppt/vendor/kangzhe-design/adapters/html-ppt-bridge.js",
+   "bytes": "1003",
+   "sha256": "sha256:a82cefa61951718727ba1867f1aa3c9b6016bce25041d15ff5478bf2c4e34465"
+  },
+  {
+   "path": "examples/validation/KZ6-0929-A01/html-ppt/vendor/kangzhe-design/assets/logo_bot.svg",
+   "bytes": "9542",
+   "sha256": "sha256:8d16d3ae8353dd31f46a50d401e66f9e62af40be6cc42cdf5050866a4e6e1cae"
+  },
+  {
+   "path": "examples/validation/KZ6-0929-A01/html-ppt/vendor/kangzhe-design/assets/vendor/echarts.min.js",
+   "bytes": "1121883",
+   "sha256": "sha256:b66b25aeb4df84e33199dc21694014d336d222cbd9deb0e5a7c14bd6aa0d0fd0"
+  },
+  {
+   "path": "examples/validation/KZ6-0929-A01/html-ppt/vendor/kangzhe-design/runtime/kz-charts.js",
+   "bytes": "6242",
+   "sha256": "sha256:aa8d22a1bebf66de7c755bd2f713843e9eef9e0932ae8e1e9da9c01075ccacf1"
+  },
+  {
+   "path": "examples/validation/KZ6-0929-A01/html-ppt/vendor/kangzhe-design/runtime/kz-gantt.js",
+   "bytes": "12510",
+   "sha256": "sha256:89ddd1761bd367bc9c0ae3d31a405af955a1a2cdb4e62c013d526e6580d3d264"
+  },
+  {
+   "path": "examples/validation/KZ6-0929-A01/html-ppt/vendor/kangzhe-design/runtime/kz-glass.css",
+   "bytes": "9972",
+   "sha256": "sha256:5a3b127220307e16252bac4ed952322c73ee11d00b9a6f2c5a1872370b6c85e8"
+  },
+  {
+   "path": "examples/validation/KZ6-0929-A01/html-ppt/vendor/kangzhe-design/runtime/kz-tokens.css",
+   "bytes": "1233",
+   "sha256": "sha256:1e33eabb5699e7d169031ba403b46d0bbfef4fad401be9722fbf2391519aacda"
+  },
+  {
+   "path": "examples/validation/KZ6-0929-A01/html-ppt/vendor/kangzhe-design/runtime/kz-tokens.js",
+   "bytes": "2957",
+   "sha256": "sha256:4ed20635089707761ac9e9be092b86a1041ee4a8dacc0f0ec26a557601105184"
+  },
+  {
+   "path": "examples/validation/KZ6-0929-A01/site-stream/assets/asset_body_bg_quiet.png",
+   "bytes": "1066611",
+   "sha256": "sha256:ce19777696202c355b2d13cda6fb5b6b2172edfc58e7e93e3b231cfd9f2aed73"
+  },
+  {
+   "path": "examples/validation/KZ6-0929-A01/site-stream/deps/LICENSES.md",
+   "bytes": "2369",
+   "sha256": "sha256:b58283c578556f6e56f6a23910e443c693916fd993a394fc08046ccae500482f"
+  },
+  {
+   "path": "examples/validation/KZ6-0929-A01/site-stream/deps/kz-app.js",
+   "bytes": "11328",
+   "sha256": "sha256:cb138780b720b2acdb034b9895fc59f38612218c896c8f34c0fff78d47af1369"
+  },
+  {
+   "path": "examples/validation/KZ6-0929-A01/site-stream/deps/kz-charts.js",
+   "bytes": "6242",
+   "sha256": "sha256:aa8d22a1bebf66de7c755bd2f713843e9eef9e0932ae8e1e9da9c01075ccacf1"
+  },
+  {
+   "path": "examples/validation/KZ6-0929-A01/site-stream/deps/kz-data.js",
+   "bytes": "5547",
+   "sha256": "sha256:b14902e67969be2a2b670121b10f68aeb0ccfacd966af5c864a5457cb434618d"
+  },
+  {
+   "path": "examples/validation/KZ6-0929-A01/site-stream/deps/kz-drilldown.js",
+   "bytes": "4781",
+   "sha256": "sha256:ffa0abb071dc23a7280037b46bf2b57aa47dbd405af4bbb6d492ba64b96897be"
+  },
+  {
+   "path": "examples/validation/KZ6-0929-A01/site-stream/deps/kz-films.js",
+   "bytes": "14745",
+   "sha256": "sha256:a2e5ef4367f3e0ab6cbe89d753bff2e8e678665738306a9eb9c3f06b5abe442a"
+  },
+  {
+   "path": "examples/validation/KZ6-0929-A01/site-stream/deps/kz-glass.css",
+   "bytes": "9972",
+   "sha256": "sha256:5a3b127220307e16252bac4ed952322c73ee11d00b9a6f2c5a1872370b6c85e8"
+  },
+  {
+   "path": "examples/validation/KZ6-0929-A01/site-stream/deps/kz-motion.js",
+   "bytes": "9473",
+   "sha256": "sha256:759c515d1712b99a90a2851696184fe470588986e61e846ccae65c0ffcfb8355"
+  },
+  {
+   "path": "examples/validation/KZ6-0929-A01/site-stream/deps/kz-site.css",
+   "bytes": "12338",
+   "sha256": "sha256:2d1add0606e1ab7d1009d8e71e59cf20d6c746f795398ee0474cd1c3f52aa85a"
+  },
+  {
+   "path": "examples/validation/KZ6-0929-A01/site-stream/deps/kz-tokens.css",
+   "bytes": "1233",
+   "sha256": "sha256:1e33eabb5699e7d169031ba403b46d0bbfef4fad401be9722fbf2391519aacda"
+  },
+  {
+   "path": "examples/validation/KZ6-0929-A01/site-stream/deps/kz-tokens.js",
+   "bytes": "2957",
+   "sha256": "sha256:4ed20635089707761ac9e9be092b86a1041ee4a8dacc0f0ec26a557601105184"
+  },
+  {
+   "path": "examples/validation/KZ6-0929-A01/site-stream/deps/logo_bot.svg",
+   "bytes": "9542",
+   "sha256": "sha256:8d16d3ae8353dd31f46a50d401e66f9e62af40be6cc42cdf5050866a4e6e1cae"
+  },
+  {
+   "path": "examples/validation/KZ6-0929-A01/site-stream/deps/vendor/ECHARTS-LICENSE.txt",
+   "bytes": "11358",
+   "sha256": "sha256:cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+  },
+  {
+   "path": "examples/validation/KZ6-0929-A01/site-stream/deps/vendor/ECHARTS-NOTICE.txt",
+   "bytes": "169",
+   "sha256": "sha256:88c2418a8ab4dba3486b263600ab39e0c78c36142ddfa4167ed3d9c3a2d2ab38"
+  },
+  {
+   "path": "examples/validation/KZ6-0929-A01/site-stream/deps/vendor/echarts.min.js",
+   "bytes": "1121883",
+   "sha256": "sha256:b66b25aeb4df84e33199dc21694014d336d222cbd9deb0e5a7c14bd6aa0d0fd0"
+  },
+  {
+   "path": "examples/validation/KZ6-0929-A01/site-stream/site/chapter.html",
+   "bytes": "9504",
+   "sha256": "sha256:e479ebaeeac15ffe6c2846c60d58c91f9b3a2a11fd0e50bc717a5d353e20dcfe"
+  },
+  {
+   "path": "examples/validation/KZ6-0929-A01/site-stream/site/index.html",
+   "bytes": "8455",
+   "sha256": "sha256:9dab911fd31ab4781032ac5b4637c9a4a49bf99a081263488499ec0b06e41ae2"
+  },
+  {
+   "path": "examples/validation/KZ6-0929-A01/site-stream/stream/index.html",
+   "bytes": "14871",
+   "sha256": "sha256:b85adc8d1baa87f290102e60f9133e5843f2e0d3c0eacd73798d53d1bec90fd7"
+  },
+  {
+   "path": "examples/validation/KZ6-0929-A02/README.md",
+   "bytes": "1237",
+   "sha256": "sha256:1eb5aef1db10fe531c64a0ef6f3a388871287ed458ebf213dceb78d7b0672920"
+  },
+  {
+   "path": "examples/validation/KZ6-0929-A02/binding-regression.json",
+   "bytes": "266",
+   "sha256": "sha256:d5ebf3039cc36c891b898d186bf6676723fc35325550b214e91e43e97a28e279"
+  },
+  {
+   "path": "examples/validation/KZ6-0929-A02/content.json",
+   "bytes": "960",
+   "sha256": "sha256:dddc6ab646d80faaac99d7fa426cd2826cc53684e563fc058fb0d4c4473e4c9d"
+  },
+  {
+   "path": "examples/validation/KZ6-0929-A02/frame-binding.json",
+   "bytes": "6240",
+   "sha256": "sha256:775b47f85c011199dd9fef931c4af70ff401bed58814514834b8cd7ff3d6cc35"
+  },
+  {
+   "path": "examples/validation/KZ6-0929-A02/hero-page-plan.json",
+   "bytes": "13000",
+   "sha256": "sha256:96846f5cae5366afd64ff3f6add53c44ed0da1f584884b563035c5d944c86998"
+  },
+  {
+   "path": "examples/validation/KZ6-0929-A02/html-ppt/README.md",
+   "bytes": "462",
+   "sha256": "sha256:9805d44fb2cfdcaed5caba09626d396232bd936206e07d940716b88f5b2aaf54"
+  },
+  {
+   "path": "examples/validation/KZ6-0929-A02/html-ppt/assets/asset_body_bg_quiet.png",
+   "bytes": "1066611",
+   "sha256": "sha256:ce19777696202c355b2d13cda6fb5b6b2172edfc58e7e93e3b231cfd9f2aed73"
+  },
+  {
+   "path": "examples/validation/KZ6-0929-A02/html-ppt/assets/asset_cover_hero.png",
+   "bytes": "1052069",
+   "sha256": "sha256:aa4f7119df6ff40267fd8e6ed813c97bb93bd5a1666009f0d2686917a46c2871"
+  },
+  {
+   "path": "examples/validation/KZ6-0929-A02/html-ppt/assets/asset_ending_hero_v3.png",
+   "bytes": "1073326",
+   "sha256": "sha256:33680aee0826cf66e90f895047766f732d8eb3da3af849de4ce41cbbeddf8db0"
+  },
+  {
+   "path": "examples/validation/KZ6-0929-A02/html-ppt/assets/asset_section_hero.png",
+   "bytes": "1189843",
+   "sha256": "sha256:380560cab7c937415e855be13fafe448490cbab1adfcbba95f7999402707574e"
+  },
+  {
+   "path": "examples/validation/KZ6-0929-A02/html-ppt/assets/asset_toc_hero.png",
+   "bytes": "1169150",
+   "sha256": "sha256:566c6ad9ed48562fcc95847cdde63decdcc997f34c8a9c5e49b89b7c1a06c545"
+  },
+  {
+   "path": "examples/validation/KZ6-0929-A02/html-ppt/assets/p1a_body_background.png",
+   "bytes": "1066611",
+   "sha256": "sha256:ce19777696202c355b2d13cda6fb5b6b2172edfc58e7e93e3b231cfd9f2aed73"
+  },
+  {
+   "path": "examples/validation/KZ6-0929-A02/html-ppt/brand.css",
+   "bytes": "11005",
+   "sha256": "sha256:7c6458919bb0d90bccacca0a4d91c2e6bf63adcd3c772f0437a1a0faa5b26f10"
+  },
+  {
+   "path": "examples/validation/KZ6-0929-A02/html-ppt/deck-data.js",
+   "bytes": "2200",
+   "sha256": "sha256:4a503deb1479d5e28f28fa3e7254c1d5659294a55ca2bece96872a29edd55bad"
+  },
+  {
+   "path": "examples/validation/KZ6-0929-A02/html-ppt/deck-wiring.js",
+   "bytes": "6149",
+   "sha256": "sha256:3176fac6ac75f2d38d197b6707fb163fa6f5b4b123703f4089430a55e0dbe1ea"
+  },
+  {
+   "path": "examples/validation/KZ6-0929-A02/html-ppt/index.html",
+   "bytes": "18107",
+   "sha256": "sha256:68ee936da52f245261dc50f7667d829fbd7f66456b7edad6e0eed2ddfee4344c"
+  },
+  {
+   "path": "examples/validation/KZ6-0929-A02/html-ppt/style.css",
+   "bytes": "5596",
+   "sha256": "sha256:f5e6cfe5f8c20a46184c6d44b6fc7eed20bc23a7ee6d2faf34a7957e7d7ffe8a"
+  },
+  {
+   "path": "examples/validation/KZ6-0929-A02/html-ppt/vendor/LICENSES/ECHARTS-LICENSE.txt",
+   "bytes": "11358",
+   "sha256": "sha256:cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+  },
+  {
+   "path": "examples/validation/KZ6-0929-A02/html-ppt/vendor/LICENSES/ECHARTS-NOTICE.txt",
+   "bytes": "169",
+   "sha256": "sha256:88c2418a8ab4dba3486b263600ab39e0c78c36142ddfa4167ed3d9c3a2d2ab38"
+  },
+  {
+   "path": "examples/validation/KZ6-0929-A02/html-ppt/vendor/LICENSES/html-ppt-LICENSE.txt",
+   "bytes": "1084",
+   "sha256": "sha256:a5ed4059e25a3ec35e439abd2623753d1f42d4aa4989ffb5c6b7a97b61f6a949"
+  },
+  {
+   "path": "examples/validation/KZ6-0929-A02/html-ppt/vendor/html-ppt/assets/animations/animations.css",
+   "bytes": "8065",
+   "sha256": "sha256:3bc36127d7e491b0a723fe5788682824c9b9e8849cf2a5ceb72dc3ebb951e3e8"
+  },
+  {
+   "path": "examples/validation/KZ6-0929-A02/html-ppt/vendor/html-ppt/assets/base.css",
+   "bytes": "15340",
+   "sha256": "sha256:786791775484fbec5e4e74b3c3280ad8955a848251520008fb9c9d0d5669a9a4"
+  },
+  {
+   "path": "examples/validation/KZ6-0929-A02/html-ppt/vendor/html-ppt/assets/fonts.css",
+   "bytes": "889",
+   "sha256": "sha256:1e93c54e2a4c5f27a2404cc2c8f682d50f5d41a95ebecd11ed41f925e3a79572"
+  },
+  {
+   "path": "examples/validation/KZ6-0929-A02/html-ppt/vendor/html-ppt/assets/runtime.js",
+   "bytes": "46930",
+   "sha256": "sha256:d4a0136ba177f2ede2940bcbf0846f65d1c9f80a8d11c6eee4f503d81c200903"
+  },
+  {
+   "path": "examples/validation/KZ6-0929-A02/html-ppt/vendor/kangzhe-design/adapters/README.md",
+   "bytes": "641",
+   "sha256": "sha256:cf59bedd712649321dd2b9a8e72b3dfbad365189b53c152a6ef4a1ce4ac9dc4b"
+  },
+  {
+   "path": "examples/validation/KZ6-0929-A02/html-ppt/vendor/kangzhe-design/adapters/html-ppt-bridge.js",
+   "bytes": "1174",
+   "sha256": "sha256:ef6c4778548b8bd39c14ea81c562c80d2601094e9f7db942723c281a2a262247"
+  },
+  {
+   "path": "examples/validation/KZ6-0929-A02/html-ppt/vendor/kangzhe-design/adapters/html-ppt.md",
+   "bytes": "2660",
+   "sha256": "sha256:68ba57645773c423c432bd0740d4d5a6fc880896640c2d955e6d26ccbdbb1375"
+  },
+  {
+   "path": "examples/validation/KZ6-0929-A02/html-ppt/vendor/kangzhe-design/adapters/ppt-master.md",
+   "bytes": "4002",
+   "sha256": "sha256:db4597868f26062611aca991028f0aed4dc2d2cb1e9980d1bb92d59293558041"
+  },
+  {
+   "path": "examples/validation/KZ6-0929-A02/html-ppt/vendor/kangzhe-design/assets/logo_bot.svg",
+   "bytes": "9542",
+   "sha256": "sha256:8d16d3ae8353dd31f46a50d401e66f9e62af40be6cc42cdf5050866a4e6e1cae"
+  },
+  {
+   "path": "examples/validation/KZ6-0929-A02/html-ppt/vendor/kangzhe-design/assets/vendor/echarts.min.js",
+   "bytes": "1121883",
+   "sha256": "sha256:b66b25aeb4df84e33199dc21694014d336d222cbd9deb0e5a7c14bd6aa0d0fd0"
+  },
+  {
+   "path": "examples/validation/KZ6-0929-A02/html-ppt/vendor/kangzhe-design/runtime/README.md",
+   "bytes": "1893",
+   "sha256": "sha256:2492be66b2f30d59ca67463197c2e078526def046ae0f5e60425c6f8acf2c85d"
+  },
+  {
+   "path": "examples/validation/KZ6-0929-A02/html-ppt/vendor/kangzhe-design/runtime/kz-charts.js",
+   "bytes": "6242",
+   "sha256": "sha256:aa8d22a1bebf66de7c755bd2f713843e9eef9e0932ae8e1e9da9c01075ccacf1"
+  },
+  {
+   "path": "examples/validation/KZ6-0929-A02/html-ppt/vendor/kangzhe-design/runtime/kz-drilldown.js",
+   "bytes": "4781",
+   "sha256": "sha256:ffa0abb071dc23a7280037b46bf2b57aa47dbd405af4bbb6d492ba64b96897be"
+  },
+  {
+   "path": "examples/validation/KZ6-0929-A02/html-ppt/vendor/kangzhe-design/runtime/kz-gantt.js",
+   "bytes": "12510",
+   "sha256": "sha256:89ddd1761bd367bc9c0ae3d31a405af955a1a2cdb4e62c013d526e6580d3d264"
+  },
+  {
+   "path": "examples/validation/KZ6-0929-A02/html-ppt/vendor/kangzhe-design/runtime/kz-glass.css",
+   "bytes": "9972",
+   "sha256": "sha256:5a3b127220307e16252bac4ed952322c73ee11d00b9a6f2c5a1872370b6c85e8"
+  },
+  {
+   "path": "examples/validation/KZ6-0929-A02/html-ppt/vendor/kangzhe-design/runtime/kz-motion.js",
+   "bytes": "9473",
+   "sha256": "sha256:759c515d1712b99a90a2851696184fe470588986e61e846ccae65c0ffcfb8355"
+  },
+  {
+   "path": "examples/validation/KZ6-0929-A02/html-ppt/vendor/kangzhe-design/runtime/kz-tokens.css",
+   "bytes": "1550",
+   "sha256": "sha256:97309d3cdd39e679bb56d73d97292ea5a5135270aed6191fa8118d03074eb031"
+  },
+  {
+   "path": "examples/validation/KZ6-0929-A02/html-ppt/vendor/kangzhe-design/runtime/kz-tokens.js",
+   "bytes": "4053",
+   "sha256": "sha256:c3f1136e9dd4e664e32c6c65e57e9d133c3d23ac699d3cc8bb811696290d4b47"
+  },
+  {
+   "path": "examples/validation/KZ6-0929-A02/matched-seven.pptx",
+   "bytes": "5535808",
+   "sha256": "sha256:467b444bdee029038f883de7b24dc3281c0d48a4f69d026d3653dc27023289bb"
+  },
+  {
+   "path": "examples/validation/KZ6-0929-A03/html-ppt/README.md",
+   "bytes": "4956",
+   "sha256": "sha256:5ff7fd9d375032460273376306d271c954cb8b922299a74199930cad8132c436"
+  },
+  {
+   "path": "examples/validation/KZ6-0929-A03/html-ppt/a03.css",
+   "bytes": "5503",
+   "sha256": "sha256:e38c5a74ba86507d8aecb7cb5005ea0862750b8ef67bd77d5e4adaba007bf2f7"
+  },
+  {
+   "path": "examples/validation/KZ6-0929-A03/html-ppt/a03.js",
+   "bytes": "3735",
+   "sha256": "sha256:1ca6efd838cda0307c4c03a6e7b2424f8237ee6877214debf751568f699365f7"
+  },
+  {
+   "path": "examples/validation/KZ6-0929-A03/html-ppt/assets/asset_body_bg_quiet.png",
+   "bytes": "1066611",
+   "sha256": "sha256:ce19777696202c355b2d13cda6fb5b6b2172edfc58e7e93e3b231cfd9f2aed73"
+  },
+  {
+   "path": "examples/validation/KZ6-0929-A03/html-ppt/assets/asset_cover_hero.png",
+   "bytes": "1052069",
+   "sha256": "sha256:aa4f7119df6ff40267fd8e6ed813c97bb93bd5a1666009f0d2686917a46c2871"
+  },
+  {
+   "path": "examples/validation/KZ6-0929-A03/html-ppt/assets/asset_ending_hero_v3.png",
+   "bytes": "1073326",
+   "sha256": "sha256:33680aee0826cf66e90f895047766f732d8eb3da3af849de4ce41cbbeddf8db0"
+  },
+  {
+   "path": "examples/validation/KZ6-0929-A03/html-ppt/assets/asset_section_hero.png",
+   "bytes": "1189843",
+   "sha256": "sha256:380560cab7c937415e855be13fafe448490cbab1adfcbba95f7999402707574e"
+  },
+  {
+   "path": "examples/validation/KZ6-0929-A03/html-ppt/assets/asset_toc_hero.png",
+   "bytes": "1169150",
+   "sha256": "sha256:566c6ad9ed48562fcc95847cdde63decdcc997f34c8a9c5e49b89b7c1a06c545"
+  },
+  {
+   "path": "examples/validation/KZ6-0929-A03/html-ppt/assets/body-wide-generated.png",
+   "bytes": "1148754",
+   "sha256": "sha256:4fbf1155d89da95c46364d2097961030c4044d84e9fa7daef066c39a2677528f"
+  },
+  {
+   "path": "examples/validation/KZ6-0929-A03/html-ppt/assets/p1a_body_background.png",
+   "bytes": "1066611",
+   "sha256": "sha256:ce19777696202c355b2d13cda6fb5b6b2172edfc58e7e93e3b231cfd9f2aed73"
+  },
+  {
+   "path": "examples/validation/KZ6-0929-A03/html-ppt/deck-data.js",
+   "bytes": "2217",
+   "sha256": "sha256:0bddf24eac98181bfd27ecc2a003fe7b11f429236229a25807af017a746b6bf8"
+  },
+  {
+   "path": "examples/validation/KZ6-0929-A03/html-ppt/index.html",
+   "bytes": "22855",
+   "sha256": "sha256:ef72505a0ad6ce7334ec85bdfa2c192d68cf6d65b9e4ff58aea520d7cf0ffab9"
+  },
+  {
+   "path": "examples/validation/KZ6-0929-A03/html-ppt/style.css",
+   "bytes": "5596",
+   "sha256": "sha256:f5e6cfe5f8c20a46184c6d44b6fc7eed20bc23a7ee6d2faf34a7957e7d7ffe8a"
+  },
+  {
+   "path": "examples/validation/KZ6-0929-A03/html-ppt/vendor/LICENSES/ECHARTS-LICENSE.txt",
+   "bytes": "11358",
+   "sha256": "sha256:cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+  },
+  {
+   "path": "examples/validation/KZ6-0929-A03/html-ppt/vendor/LICENSES/ECHARTS-NOTICE.txt",
+   "bytes": "169",
+   "sha256": "sha256:88c2418a8ab4dba3486b263600ab39e0c78c36142ddfa4167ed3d9c3a2d2ab38"
+  },
+  {
+   "path": "examples/validation/KZ6-0929-A03/html-ppt/vendor/LICENSES/html-ppt-LICENSE.txt",
+   "bytes": "1084",
+   "sha256": "sha256:a5ed4059e25a3ec35e439abd2623753d1f42d4aa4989ffb5c6b7a97b61f6a949"
+  },
+  {
+   "path": "examples/validation/KZ6-0929-A03/html-ppt/vendor/html-ppt/assets/animations/animations.css",
+   "bytes": "8065",
+   "sha256": "sha256:3bc36127d7e491b0a723fe5788682824c9b9e8849cf2a5ceb72dc3ebb951e3e8"
+  },
+  {
+   "path": "examples/validation/KZ6-0929-A03/html-ppt/vendor/html-ppt/assets/base.css",
+   "bytes": "15340",
+   "sha256": "sha256:786791775484fbec5e4e74b3c3280ad8955a848251520008fb9c9d0d5669a9a4"
+  },
+  {
+   "path": "examples/validation/KZ6-0929-A03/html-ppt/vendor/html-ppt/assets/fonts.css",
+   "bytes": "889",
+   "sha256": "sha256:1e93c54e2a4c5f27a2404cc2c8f682d50f5d41a95ebecd11ed41f925e3a79572"
+  },
+  {
+   "path": "examples/validation/KZ6-0929-A03/html-ppt/vendor/html-ppt/assets/runtime.js",
+   "bytes": "46930",
+   "sha256": "sha256:d4a0136ba177f2ede2940bcbf0846f65d1c9f80a8d11c6eee4f503d81c200903"
+  },
+  {
+   "path": "examples/validation/KZ6-0929-A03/html-ppt/vendor/kangzhe-design/adapters/README.md",
+   "bytes": "641",
+   "sha256": "sha256:cf59bedd712649321dd2b9a8e72b3dfbad365189b53c152a6ef4a1ce4ac9dc4b"
+  },
+  {
+   "path": "examples/validation/KZ6-0929-A03/html-ppt/vendor/kangzhe-design/adapters/html-ppt-bridge.js",
+   "bytes": "1174",
+   "sha256": "sha256:ef6c4778548b8bd39c14ea81c562c80d2601094e9f7db942723c281a2a262247"
+  },
+  {
+   "path": "examples/validation/KZ6-0929-A03/html-ppt/vendor/kangzhe-design/adapters/html-ppt.md",
+   "bytes": "4201",
+   "sha256": "sha256:ef652cfebca99b231cff22b72019c7824aacee4b640f356fb5fce6c2b128d5d2"
+  },
+  {
+   "path": "examples/validation/KZ6-0929-A03/html-ppt/vendor/kangzhe-design/adapters/ppt-master.md",
+   "bytes": "4975",
+   "sha256": "sha256:adcbbdf95fed9467a37db13af368d1501bb93d45ee94d941fe7708382bfbaf51"
+  },
+  {
+   "path": "examples/validation/KZ6-0929-A03/html-ppt/vendor/kangzhe-design/assets/logo_bot.svg",
+   "bytes": "9542",
+   "sha256": "sha256:8d16d3ae8353dd31f46a50d401e66f9e62af40be6cc42cdf5050866a4e6e1cae"
+  },
+  {
+   "path": "examples/validation/KZ6-0929-A03/html-ppt/vendor/kangzhe-design/assets/vendor/echarts.min.js",
+   "bytes": "1121883",
+   "sha256": "sha256:b66b25aeb4df84e33199dc21694014d336d222cbd9deb0e5a7c14bd6aa0d0fd0"
+  },
+  {
+   "path": "examples/validation/KZ6-0929-A03/html-ppt/vendor/kangzhe-design/runtime/README.md",
+   "bytes": "1893",
+   "sha256": "sha256:2492be66b2f30d59ca67463197c2e078526def046ae0f5e60425c6f8acf2c85d"
+  },
+  {
+   "path": "examples/validation/KZ6-0929-A03/html-ppt/vendor/kangzhe-design/runtime/kz-audience.js",
+   "bytes": "1439",
+   "sha256": "sha256:8dac0e8a8fa655117a7e9814c9c3f94996e4530be380b6ef0b4b4c673a61186c"
+  },
+  {
+   "path": "examples/validation/KZ6-0929-A03/html-ppt/vendor/kangzhe-design/runtime/kz-charts.js",
+   "bytes": "8738",
+   "sha256": "sha256:b41501e4caddad61cbfb1362b0a25118e2502d02dd6fb542742fe66e3e14d33d"
+  },
+  {
+   "path": "examples/validation/KZ6-0929-A03/html-ppt/vendor/kangzhe-design/runtime/kz-drilldown.js",
+   "bytes": "4781",
+   "sha256": "sha256:ffa0abb071dc23a7280037b46bf2b57aa47dbd405af4bbb6d492ba64b96897be"
+  },
+  {
+   "path": "examples/validation/KZ6-0929-A03/html-ppt/vendor/kangzhe-design/runtime/kz-gantt.js",
+   "bytes": "13814",
+   "sha256": "sha256:54a21f0d587bb097fb56ec058cfefdd31b9cb32fe843ab51429fc13822c9f3dd"
+  },
+  {
+   "path": "examples/validation/KZ6-0929-A03/html-ppt/vendor/kangzhe-design/runtime/kz-glass.css",
+   "bytes": "10953",
+   "sha256": "sha256:620c660bf0f92641aa133dd6692447499b7c642cc0ece04dd86d6615a614ff73"
+  },
+  {
+   "path": "examples/validation/KZ6-0929-A03/html-ppt/vendor/kangzhe-design/runtime/kz-layout-qc.js",
+   "bytes": "2003",
+   "sha256": "sha256:03fdb9e1ce058e95a11d3000e56649549693ca26d76f3f904bd896fc30ed9454"
+  },
+  {
+   "path": "examples/validation/KZ6-0929-A03/html-ppt/vendor/kangzhe-design/runtime/kz-motion.js",
+   "bytes": "14110",
+   "sha256": "sha256:a7cf487c60c40a3137fa7663894faa98bc76914c0b4efabd41e1f126e8afb2bf"
+  },
+  {
+   "path": "examples/validation/KZ6-0929-A03/html-ppt/vendor/kangzhe-design/runtime/kz-tokens.css",
+   "bytes": "1638",
+   "sha256": "sha256:695172264c9f2d4269bd5e74e355535e5987330dd1e92dc6808ca058d18e26d2"
+  },
+  {
+   "path": "examples/validation/KZ6-0929-A03/html-ppt/vendor/kangzhe-design/runtime/kz-tokens.js",
+   "bytes": "4444",
+   "sha256": "sha256:0dbe8085138cb1fe42f59acdd4f29a3eca2d732a260c2ac10f1f881fae75a7de"
+  },
+  {
+   "path": "examples/validation/KZ6-0929-A03/matched-seven.pptx",
+   "bytes": "5618714",
+   "sha256": "sha256:cd40076714f62f5e03fecb03cc829cb661297126083e316d974108aff1a543ea"
+  },
+  {
+   "path": "review/CURRENT_STATUS.md",
+   "bytes": "27727",
+   "sha256": "sha256:b8ec81e10fec35f54fba7c64f4d38c819307449d7cdbefd8d4b04c5534ef59b8"
+  },
+  {
+   "path": "review/KZ6-0929-A01/P1-P3_STATUS.md",
+   "bytes": "1545",
+   "sha256": "sha256:3161b2a0b9a5d5c421044133599565d5331ae504d1dc5185fd6323e665e471a0"
+  },
+  {
+   "path": "review/KZ6-0929-A01/STATUS.md",
+   "bytes": "1076",
+   "sha256": "sha256:38aa77c3a9015764c199d40c33cf147adb983625e610c56e17b13d47023a9a16"
+  },
+  {
+   "path": "review/KZ6-0929-A01/browser-report.json",
+   "bytes": "6149",
+   "sha256": "sha256:dfdf32719f738734177bf939813cee49b0f9267d42c9c3d269baa40e7494578f"
+  },
+  {
+   "path": "review/KZ6-0929-A01/normal-cycle.json",
+   "bytes": "876",
+   "sha256": "sha256:6cf7215ecbeddee4ee35f80d3202edc6242137b49a20150b5ae693eaf266720c"
+  },
+  {
+   "path": "review/KZ6-0929-A01/unit-tests.log",
+   "bytes": "1619",
+   "sha256": "sha256:02649e36c5b521d0411025a9e7a0f3d9364cf422e261289986e48331e4264dd3"
+  },
+  {
+   "path": "review/KZ6-0929-A02/PILOT_DISPOSITION.md",
+   "bytes": "1941",
+   "sha256": "sha256:17fef01a1e308e4081cc7c1b01c9ebac216fb30274c658dab29a9a0f94c658bc"
+  },
+  {
+   "path": "review/KZ6-0929-A02/REVIEW_ARBITRATION.md",
+   "bytes": "1626",
+   "sha256": "sha256:be1554f30bc22cc37df38db53b193e393ae440ca3bbb0df1743c01c8fc051c12"
+  },
+  {
+   "path": "review/KZ6-0929-A02/STATUS.md",
+   "bytes": "2793",
+   "sha256": "sha256:b564bc7afae1a53c522b1d4fe66e34d8d33d815b1222d1fd9c68b01ed08c6d58"
+  },
+  {
+   "path": "review/KZ6-0929-A03/BLIND_R2_ARBITRATION.md",
+   "bytes": "914",
+   "sha256": "sha256:474622f8cffa2661e017e3a53458dccfd5c756e92b455d4abf2834a91d880aaa"
+  },
+  {
+   "path": "review/KZ6-0929-A03/BLIND_R2_OBSERVATIONS.md",
+   "bytes": "7140",
+   "sha256": "sha256:f1a4005f266cd520e9eb7ae935ef8c7a20780e9ca414fc3284139d779727b121"
+  },
+  {
+   "path": "review/KZ6-0929-A03/DEEP_ANALYSIS.md",
+   "bytes": "12096",
+   "sha256": "sha256:62ef53074d8381069ed5a4a3b8f9935208a689fe5f24935b5993e877ad01738b"
+  },
+  {
+   "path": "review/KZ6-0929-A03/HANDOFF.md",
+   "bytes": "6975",
+   "sha256": "sha256:cf0bba6363ca1ee4bd9f7219ea84a9dde9727c20dba623f2abdc27c6f8d10923"
+  },
+  {
+   "path": "review/KZ6-0929-A03/LOOP_LEDGER.md",
+   "bytes": "1917",
+   "sha256": "sha256:7ba3b2d4c0b51af08ab7cef310102b9048ee4a4cd3454cad79638650e4c5c56f"
+  },
+  {
+   "path": "review/KZ6-0929-A03/MODEL_RUNS.json",
+   "bytes": "3508",
+   "sha256": "sha256:1e648a7e62be3c3eac96b6650e9649541dd5005a43e723234ddca681f232b0e2"
+  },
+  {
+   "path": "review/KZ6-0929-A03/PRECHANGE_REVIEW.md",
+   "bytes": "3182",
+   "sha256": "sha256:2cce4204f2d7dd2686ce51966c3e71303f9f65e651ae0a19788b9531f1bddc49"
+  },
+  {
+   "path": "review/KZ6-0929-A03/REQUIREMENTS_MATRIX.md",
+   "bytes": "7628",
+   "sha256": "sha256:87a0ceb6da223e0c42215e816b575f9da1cfa1a2c4781ff22a695a0e832b0ffd"
+  },
+  {
+   "path": "review/KZ6-0929-A03/REVIEW_RUNS.json",
+   "bytes": "411",
+   "sha256": "sha256:fb13f0a43ebd735b7caad6643379c1db27bf007ec21f04e5c4411de19d1f3579"
+  },
+  {
+   "path": "review/KZ6-0929-A03/STATUS.md",
+   "bytes": "2176",
+   "sha256": "sha256:7662af7c55170b7131c728db16028d04cbec0be2024595dd0dd38c5f5bb6cd5f"
+  },
+  {
+   "path": "review/KZ6-0929-A03/evidence-bridge-final.json",
+   "bytes": "1002",
+   "sha256": "sha256:7de703d1d3f48bd0b8be2e214175e37b6bb2969cc8cbc8a89e0e42a65cd8ba47"
+  },
+  {
+   "path": "review/KZ6-0929-A03/evidence-browser-report.json",
+   "bytes": "6535",
+   "sha256": "sha256:28eba164bd793bf890bc078366246722b46ed73f5a7afa984ae5411dc8d63b7f"
+  },
+  {
+   "path": "review/KZ6-0929-A03/evidence-ego-7pages-3viewports-final.json",
+   "bytes": "8080",
+   "sha256": "sha256:d264ee1acd15b7ddabad66271044fc64ec37009d10fb6c740512167e35e5c6d4"
+  },
+  {
+   "path": "review/KZ6-0929-A03/evidence-index.json",
+   "bytes": "977",
+   "sha256": "sha256:b40e2d45bd2e6425e620953b9bcea295cebcfed2a5f27b2c8ef4cb86bcc971ce"
+  },
+  {
+   "path": "review/KZ6-0929-A03/evidence-lo-chart-gap-final.json",
+   "bytes": "442",
+   "sha256": "sha256:13f6fd58b461c9a3d4e7cc35e6fb9ac6be6421f4a893ac82f4eca002937382b3"
+  },
+  {
+   "path": "review/KZ6-0929-A03/evidence-native-inspection-final.json",
+   "bytes": "2039",
+   "sha256": "sha256:94c68fb13baf62c90a3739b40fa15c03e46676644a26b8901c1f9398041c75ec"
+  },
+  {
+   "path": "review/KZ6-0929-A03/evidence-normal-film-cycle-r4.json",
+   "bytes": "875",
+   "sha256": "sha256:8058435925a1d890f6f72895fe5fd000866b2c66bf44c61f552a4d75fc1d22be"
+  },
+  {
+   "path": "review/KZ6-0929-A04/ATTRIBUTION_UPDATE.md",
+   "bytes": "3030",
+   "sha256": "sha256:5b0ac563f054d43ca825b2c4ab87850f2cf0e0106e6b5b293ad8e3bac5c31eb8"
+  },
+  {
+   "path": "review/KZ6-0929-A04/HEADER_MARK.md",
+   "bytes": "1310",
+   "sha256": "sha256:389931ba6ac9db58f4bb4da3ca67c16a242d673f47a66ad8bd20cf155636d58f"
+  },
+  {
+   "path": "review/KZ6-0929-A04/R12.md",
+   "bytes": "2892",
+   "sha256": "sha256:046dc8250d1e70d92a9a64d917f8c2a29839b155095123a9bcdabe8c0cae8ad8"
+  },
+  {
+   "path": "review/KZ6-0929-A04/R14/STATUS.md",
+   "bytes": "2960",
+   "sha256": "sha256:fc4ef1b48adb47be1e58313992ec96509e0dafdce8537d0e1ad98f6aa9324102"
+  },
+  {
+   "path": "review/KZ6-0929-A04/R15/STATUS.md",
+   "bytes": "2769",
+   "sha256": "sha256:56c270ce48d68df286996ba03386732681169ff359fb91755dc7b14124bdc9c1"
+  },
+  {
+   "path": "review/KZ6-0929-A04/R15/VALIDATION.json",
+   "bytes": "1673",
+   "sha256": "sha256:959c07d4268b48a7a231173e966561d5cc4648e465a34ee4b88ef60a45e0853c"
+  },
+  {
+   "path": "review/KZ6-0929-A04/R15/component-90.log",
+   "bytes": "189",
+   "sha256": "sha256:c2f0f769204779d8b20eaebeb8de54b65c894eca1d335de6f1540d849edc18ce"
+  },
+  {
+   "path": "review/KZ6-0929-A04/R17/STATUS.md",
+   "bytes": "3349",
+   "sha256": "sha256:6bd0b11cc149097b9993aa5e9d90059af6fc4e403b2e5a14c885d7f6d01e7af8"
+  },
+  {
+   "path": "review/KZ6-0929-A04/R17/spec-REVIEW.md",
+   "bytes": "29303",
+   "sha256": "sha256:f11caa7ae0b2a4b2424b3bca4b5b73e701a5495df52b7e37f9ae03bcdf5534c6"
+  },
+  {
+   "path": "review/KZ6-0929-A04/R17/spec-findings.json",
+   "bytes": "14227",
+   "sha256": "sha256:9e1cc9dba1e6dc07fd78e0535c008d8a3d4779ee6386962ba24b71051fbe42d6"
+  },
+  {
+   "path": "review/KZ6-0929-A04/R22/HANDOFF.md",
+   "bytes": "3440",
+   "sha256": "sha256:71020fe0894abfd3f22916a9f85e3a1a53713d9e5dd45ff19ed070142680142b"
+  },
+  {
+   "path": "review/KZ6-0929-A04/R22/STATUS.md",
+   "bytes": "3697",
+   "sha256": "sha256:acff2711f3234ce0e2c2fbfbc96f29a821157583eb671e995759b451c7461021"
+  },
+  {
+   "path": "review/KZ6-0929-A04/R22/evidence-summary.json",
+   "bytes": "5439",
+   "sha256": "sha256:cf76f3902dbefe1d7a0639798250f15340afd743d1eae5c31df468f5334368b9"
+  },
+  {
+   "path": "review/KZ6-0929-A04/R23/HANDOFF.md",
+   "bytes": "5113",
+   "sha256": "sha256:67340b427afc7dd5fe360c836e96c7400e47b2b7ed99b97fde3d26280bab120d"
+  },
+  {
+   "path": "review/KZ6-0929-A04/R23/STATUS.md",
+   "bytes": "3786",
+   "sha256": "sha256:0cbacc28f9521c2ae9ec6c08e29cf56f5e1c7145a6028b8bd2f8a62f453c6e45"
+  },
+  {
+   "path": "review/KZ6-0929-A04/R23/evidence-summary.json",
+   "bytes": "3471",
+   "sha256": "sha256:247b3340026be96288b773e5adfeac9fa5d73b7fc2acc91f7ac5276badc9ab55"
+  },
+  {
+   "path": "review/KZ6-0929-A04/STATUS.md",
+   "bytes": "3863",
+   "sha256": "sha256:02cc6302dba633e2d4b0aa1203773cec4d138694ccbf70bae113523eb0b5d50a"
+  },
+  {
+   "path": "review/LOCAL_VALIDATION.json",
+   "bytes": "2198",
+   "sha256": "sha256:a612b6aa09678aae8e3fce36a2214839d1c7f87e85d277982d62760567726bdb"
+  },
+  {
+   "path": "review/RECONSTRUCTION_REVIEW.md",
+   "bytes": "10246",
+   "sha256": "sha256:861d5588c4d87ee97eac6f03a9d6da609c8ce14de7ff6c4d9b298375264edc33"
+  },
+  {
+   "path": "review/REQUIREMENT_MATRIX.md",
+   "bytes": "3283",
+   "sha256": "sha256:ebe55b2bdbed46aaddcaea1dc60fd4989b0296c680e7dbf576f2eb635692da56"
+  },
+  {
+   "path": "review/RESEARCH.md",
+   "bytes": "3367",
+   "sha256": "sha256:32d67b8642df86129676cdf7d1bfde7ae095772eb96adb2a9e504882208540a6"
+  },
+  {
+   "path": "review/VALIDATION_STATUS.md",
+   "bytes": "764",
+   "sha256": "sha256:885bd7ef1945dfe787272a88068548b4398937076d70e602301e21b0ae4d9bf5"
+  },
+  {
+   "path": "review/evidence/browser-report.json",
+   "bytes": "6131",
+   "sha256": "sha256:63c973f99a882883886b8f1b93e6de36a87e3997790f83e46477d0372d442ccf"
+  },
+  {
+   "path": "review/evidence/drill-L1-1440.png",
+   "bytes": "386107",
+   "sha256": "sha256:7c6eca1fe5dff3b0deb4b75b756ee9e0723786c0b2d455ebfe4bf86da1902d05"
+  },
+  {
+   "path": "review/evidence/drill-L2-1440.png",
+   "bytes": "408293",
+   "sha256": "sha256:0aa5b977d6fd373a108a1f41cf752e15a962370e173e0fe13b6ceec99c8cb8c7"
+  },
+  {
+   "path": "review/evidence/earlier-browser-1.json",
+   "bytes": "5279",
+   "sha256": "sha256:ab627abdc2a1999eaed0a3e7f49f42dc06c979bbbfa264a85e42600b1dff263d"
+  },
+  {
+   "path": "review/evidence/earlier-browser-2.json",
+   "bytes": "5279",
+   "sha256": "sha256:a7902b156aa7eb735de3f2d692a76c58d57c57c4ea51157944a8c56b06cd90b4"
+  },
+  {
+   "path": "review/evidence/gantt-1440.png",
+   "bytes": "397822",
+   "sha256": "sha256:469ae401ccd831349dac5be1d1b77bb359d0c067c79a61ea98c7387e691ae567"
+  },
+  {
+   "path": "review/evidence/hero-1280.png",
+   "bytes": "276546",
+   "sha256": "sha256:50066022fb9bd62070bbd9a076b83925b5f769cd0549e38e2c6e1cd93f76ae9a"
+  },
+  {
+   "path": "review/evidence/hero-1440.png",
+   "bytes": "317657",
+   "sha256": "sha256:df0f6e4248e80d43d855bc47af7ddfafb692455b3cfda86e2ac14d07ec4456fd"
+  },
+  {
+   "path": "review/evidence/hero-1920.png",
+   "bytes": "424072",
+   "sha256": "sha256:e3a36b256acb157e99173446d8da20b88855260dc7549c9513be9e11da2f7a6b"
+  },
+  {
+   "path": "review/evidence/hero-2560.png",
+   "bytes": "639772",
+   "sha256": "sha256:96ac0a7953275ca43e6d97079f035bacfa500ee51c63170febce3422da79e3f6"
+  },
+  {
+   "path": "review/evidence/hero-390.png",
+   "bytes": "139024",
+   "sha256": "sha256:cb29c0032fb72ce37d0a6501be9c35c941e277213b32679030d1560b9a0deb45"
+  },
+  {
+   "path": "review/evidence/normal-cycle.json",
+   "bytes": "873",
+   "sha256": "sha256:5d7eea510798e3e560d2f073cab2ad09ceed4479738eb019174e361af1155cf9"
+  },
+  {
+   "path": "review/evidence/unit-tests.log",
+   "bytes": "1619",
+   "sha256": "sha256:b081f61a8c5854cbb132f1723e2f9a8f51fe4686dc1f2d182d5172f3b09f1529"
+  },
+  {
+   "path": "review/input_inventory.json",
+   "bytes": "63036",
+   "sha256": "sha256:c4ce0a7beba869d7e3befbd2b1fb8dcc362c257d935b0d2da24f37a208a04877"
+  },
+  {
+   "path": "review/reference-pptx-structure.json",
+   "bytes": "6717",
+   "sha256": "sha256:c68d1e4e6a1e4df0221784fe1d2c1d006550e9e1a96d6dad42fada97808d7bbe"
+  },
+  {
+   "path": "review/reference-site-inline-report.json",
+   "bytes": "2010",
+   "sha256": "sha256:ac2a0b306865080942c24b67427945654139c234071bfa43b831147506451f19"
+  },
+  {
+   "path": "runtime/API.md",
+   "bytes": "12318",
+   "sha256": "sha256:cdcc265f0b2c1681866f329c41869b0f36a7d567f65522b1210009b117343fc2"
+  },
+  {
+   "path": "runtime/README.md",
+   "bytes": "2278",
+   "sha256": "sha256:2c8b115dde45f54f0a19edd5a659f5c17c1bf795f4ad6a2b3bc15801267d2784"
+  },
+  {
+   "path": "runtime/kz-audience.js",
+   "bytes": "1439",
+   "sha256": "sha256:8dac0e8a8fa655117a7e9814c9c3f94996e4530be380b6ef0b4b4c673a61186c"
+  },
+  {
+   "path": "runtime/kz-charts.js",
+   "bytes": "9383",
+   "sha256": "sha256:b0425c0ef21e634370f262679ea65dd7559ed6e24c069b98a47898846e64f811"
+  },
+  {
+   "path": "runtime/kz-drilldown.js",
+   "bytes": "10200",
+   "sha256": "sha256:f9a4d1f605eecc340287836da03f4100c29f8ea23c20d06b42abfd38ca136300"
+  },
+  {
+   "path": "runtime/kz-gantt.js",
+   "bytes": "14360",
+   "sha256": "sha256:2cad14b788b7149b57caaafb736def11d3fd5ec66fdb63657e5f8d653eac2dc9"
+  },
+  {
+   "path": "runtime/kz-glass.css",
+   "bytes": "14348",
+   "sha256": "sha256:176e1c1b1037826a792ec3bb3b26f6a958136b81259ee332aec4e6ef10e8a1fe"
+  },
+  {
+   "path": "runtime/kz-layout-qc.js",
+   "bytes": "6210",
+   "sha256": "sha256:efa6cfc7ae15b0bd81e67b8f80698d62dbbb6a17f578e5b8ba8cf005acb70b1e"
+  },
+  {
+   "path": "runtime/kz-motion.js",
+   "bytes": "14110",
+   "sha256": "sha256:a7cf487c60c40a3137fa7663894faa98bc76914c0b4efabd41e1f126e8afb2bf"
+  },
+  {
+   "path": "runtime/kz-tokens.css",
+   "bytes": "2049",
+   "sha256": "sha256:f1627b24f0a2068837c6f894e5e1b535f654466499ec3b91527eacb3ada80e54"
+  },
+  {
+   "path": "runtime/kz-tokens.js",
+   "bytes": "5235",
+   "sha256": "sha256:1b6a711ab3adcfe559402cff065df7e5593ace181e46e3c0c5b50e8e547b04fd"
+  },
+  {
+   "path": "schemas/README.md",
+   "bytes": "790",
+   "sha256": "sha256:e21a8b3731160987f24abcf241fedf9e341f0b9c1d131875c0c28a1e00ccbcd9"
+  },
+  {
+   "path": "schemas/asset-manifest.schema.json",
+   "bytes": "5434",
+   "sha256": "sha256:38ce722149e90042e56536a8ffd3378567c81e8c450bf737dbc960daab6a690a"
+  },
+  {
+   "path": "schemas/film-plan.schema.json",
+   "bytes": "5634",
+   "sha256": "sha256:8fbd2f70cb99eeb44345d53b18df867d2d9ed8b9a7c521beb4ccdf20fa353d50"
+  },
+  {
+   "path": "schemas/gantt.schema.json",
+   "bytes": "986",
+   "sha256": "sha256:38cd533f56672188d92fe89c29b18b83339da38d2e9c008e16d5080f61d1c9e7"
+  },
+  {
+   "path": "schemas/page-plan.schema.json",
+   "bytes": "19209",
+   "sha256": "sha256:cc0ffeed721be85e307c2f0b89904d4671f266cdd629159118e3dca68fd504d5"
+  },
+  {
+   "path": "tests/README.md",
+   "bytes": "3186",
+   "sha256": "sha256:6f751350b0293b8a754856816fb458651891b2828e5ca4b41aaddb51b0389d73"
+  },
+  {
+   "path": "tests/a03_cleanup.cjs",
+   "bytes": "5052",
+   "sha256": "sha256:2c324eecb4e10256f6a859e1185d8e765fb55a238bc67a43403da8f5216f264b"
+  },
+  {
+   "path": "tests/bridge_failure_browser.py",
+   "bytes": "3604",
+   "sha256": "sha256:d58ce2d601dc6b7a870d039d961ea35e4da8b9ba8e69a9d909ab2c23f30e4b76"
+  },
+  {
+   "path": "tests/bridge_regression.py",
+   "bytes": "2649",
+   "sha256": "sha256:f0fe25565741789774de8c767a43c15db34f308bb8e8d3e5d1c757dbd839ea78"
+  },
+  {
+   "path": "tests/browser_smoke.py",
+   "bytes": "13565",
+   "sha256": "sha256:533f6cd5f5442835c81309df40ef95663296361445a7405aa08f7c5793875bd8"
+  },
+  {
+   "path": "tests/chart_axis_browser.py",
+   "bytes": "4871",
+   "sha256": "sha256:612a289ef6e2a8a28fb117b828be5cd63d927d7a07d11ee125c86d6b8d50d9f3"
+  },
+  {
+   "path": "tests/chart_gantt_play_sequence.cjs",
+   "bytes": "9477",
+   "sha256": "sha256:bb691b5d440206b6b4e5aa30049d936d3e1e2885a5ed564149d02d90e29153d4"
+  },
+  {
+   "path": "tests/components_init_faults.cjs",
+   "bytes": "11155",
+   "sha256": "sha256:6ebf394152393ffaa163b45b2aa2002e043b419c4c3523d818101d1546b55a2e"
+  },
+  {
+   "path": "tests/drill_background_browser.py",
+   "bytes": "4561",
+   "sha256": "sha256:b0a64e639514911bbf0e0db1d2f8c9cf5c3b8b45315354c622ec6c55d9d03fac"
+  },
+  {
+   "path": "tests/drill_capacity_browser.py",
+   "bytes": "2523",
+   "sha256": "sha256:d167138ad29c60d8844caac505a44894a8590f230b3df4d590fb1ffc1b25dd82"
+  },
+  {
+   "path": "tests/film_cycle.py",
+   "bytes": "1791",
+   "sha256": "sha256:6e632c815eb17d33f09296052c84ca81b7deb39eeca836db9113cc2a74d94ae5"
+  },
+  {
+   "path": "tests/gantt_keyboard_browser.py",
+   "bytes": "2709",
+   "sha256": "sha256:00a967c3d5516e813816bd0c684bcec3848cdc8f4c194673081b3f6036efe256"
+  },
+  {
+   "path": "tests/layout_data_browser.py",
+   "bytes": "3381",
+   "sha256": "sha256:00aa3f78d21522bc18a590245235d9cd5f746119247e79b6f19f610cddd007a4"
+  },
+  {
+   "path": "tests/motion_ownership_browser.py",
+   "bytes": "2759",
+   "sha256": "sha256:d4ac7ef0a5b8dc7fff5b9f8efcc3e2ebf276cf4f1b7d7379d1b33c3a9009dfcd"
+  },
+  {
+   "path": "tests/motion_text_browser.py",
+   "bytes": "3047",
+   "sha256": "sha256:8ba01384aff2c0325b77c5409e5e4b91e01144daa139f71f226e21e385e947bb"
+  },
+  {
+   "path": "tests/ownership_boundary_browser.py",
+   "bytes": "3484",
+   "sha256": "sha256:8963c940252979e79aba3830fca5d7ae19cd060865ba1685b64cb7591007f0e5"
+  },
+  {
+   "path": "tests/page_lifecycle_browser.py",
+   "bytes": "2633",
+   "sha256": "sha256:f8bd56f46dc7a00449b8aa57a6ba23b259e59ad0d9a6b4485aebbfc60bc43960"
+  },
+  {
+   "path": "tests/review_r7_browser.py",
+   "bytes": "4527",
+   "sha256": "sha256:d26c73255ac0772791387e990fc37385550936fc9a85531889e21f3aa132179d"
+  },
+  {
+   "path": "tests/test_a03_cleanup.py",
+   "bytes": "628",
+   "sha256": "sha256:5edf04fd8fe880435e339ff8777ec80cb96c6e29e3777ab42207de827454af4b"
+  },
+  {
+   "path": "tests/test_a04_gates.py",
+   "bytes": "7524",
+   "sha256": "sha256:27d3059d20e83ca27f53fe80d69aafcef347689cba67eb2757342c5909ba0fbc"
+  },
+  {
+   "path": "tests/test_chart_gantt_play_sequence.py",
+   "bytes": "625",
+   "sha256": "sha256:6f99dd3086713831cfd68f2f8383bb401bab85b9e0e32d46f2bae5825accdbfa"
+  },
+  {
+   "path": "tests/test_components_init_faults.py",
+   "bytes": "600",
+   "sha256": "sha256:09d5b283d9c8c59a713b1b51a86ae3aefd3729cda14088eec15a5c15abb1a0db"
+  },
+  {
+   "path": "tests/test_context_routing.py",
+   "bytes": "2169",
+   "sha256": "sha256:d5821ee4db2ccbbed509db32b6d125e51985753aeeae961a7178707f562404da"
+  },
+  {
+   "path": "tests/test_contracts.py",
+   "bytes": "3917",
+   "sha256": "sha256:8693f7a13d9128b9c0d3b3a1916939f8a941b32903a86cc99837e6ab7b681745"
+  },
+  {
+   "path": "tests/test_header_mark.py",
+   "bytes": "4107",
+   "sha256": "sha256:d17e5bcf70b8c6e9f42d79ae2dd401232de148b4eb12a6779ad40c441c3f8bee"
+  },
+  {
+   "path": "tests/test_hero.py",
+   "bytes": "7332",
+   "sha256": "sha256:f5f093ad7c473d4729667064cbb8df99877720feedaa380ed9d1f88430856226"
+  },
+  {
+   "path": "tests/test_ppt_role_sizes.py",
+   "bytes": "1856",
+   "sha256": "sha256:6e9bbb12079805e8de9303e184570d70a4aca975eba83cfd05c9948a74ec5772"
+  },
+  {
+   "path": "tests/test_responsive_profile.py",
+   "bytes": "1886",
+   "sha256": "sha256:5f0b8120e4ecebd5871936d44f9b21a0af775b7c7c7cec66a36c25cfce23156f"
+  },
+  {
+   "path": "tests/test_viewport_assets.py",
+   "bytes": "5418",
+   "sha256": "sha256:7132291bf5f2fb0e02434bd1faf77950c283326d7eb02bfe36cfbc674b7fdf20"
+  },
+  {
+   "path": "tests/text_bounds_browser.py",
+   "bytes": "5878",
+   "sha256": "sha256:f791442f742e395a9da076532ee4813f6d2083c599d9df388c12d3f97585c124"
+  },
+  {
+   "path": "tests/tilt_pointer_browser.py",
+   "bytes": "2385",
+   "sha256": "sha256:13e9edc91730be46aed2a2af0e515d54085f8976689899e442a075459d938658"
+  },
+  {
+   "path": "tokens/tokens.json",
+   "bytes": "7064",
+   "sha256": "sha256:6bf5d51863af317ffe994db170b738667c6be13b88c399cf6015954629382950"
+  },
+  {
+   "path": "tools/bind_header_mark_pptx.py",
+   "bytes": "6161",
+   "sha256": "sha256:f0cc9306992d93ec77675644614218104dacaa003139c9e0de1c6eb8355b6616"
+  },
+  {
+   "path": "tools/bind_hero_pptx.py",
+   "bytes": "3921",
+   "sha256": "sha256:7370ec3572c0b2d6a62e342b556a44b46b824cf644008ae88e70b4d4a8db18d4"
+  },
+  {
+   "path": "tools/brand_fragments.py",
+   "bytes": "3734",
+   "sha256": "sha256:aeb8db8c250d80a71a8d260ab302cd0e2eb3ea17882feb195d1fa956274c0789"
+  },
+  {
+   "path": "tools/build_tokens.py",
+   "bytes": "2437",
+   "sha256": "sha256:6fb200fa82f392c56ebd41a1a75b5b2565cfba5218d7721aac3d8c4ffb865456"
+  },
+  {
+   "path": "tools/context_pack.py",
+   "bytes": "4106",
+   "sha256": "sha256:fea59f36c1cda8f9f11bd047e7df935f3f53c9600ebd2e239a6ab0f12f1aae23"
+  },
+  {
+   "path": "tools/glass_svg.py",
+   "bytes": "1722",
+   "sha256": "sha256:27395257461c9253adb6ba9e088a019ff0f8d6e04f20b5288e10ec0aa45da2dc"
+  },
+  {
+   "path": "tools/hero_layout.py",
+   "bytes": "7172",
+   "sha256": "sha256:6d3003c18e7e3f2564b91e5ea3d07d07738d8a74ab25ba94721d1b0adc62d33e"
+  },
+  {
+   "path": "tools/inline_preview.py",
+   "bytes": "1830",
+   "sha256": "sha256:5eb64c17b83d344255284b2e80a2329ea51bd5fcb8e8dfaee9d5dc13d2e6d18c"
+  },
+  {
+   "path": "tools/inspect_pptx.py",
+   "bytes": "1559",
+   "sha256": "sha256:68157bf9d49a42d42d52dbe2e18615c19db93649373ca0e9572a1ec27ca8d62e"
+  },
+  {
+   "path": "tools/make_safe_mask.py",
+   "bytes": "727",
+   "sha256": "sha256:9b738b5aec846eb1b170c0bd11269ab011349251a289af58f6278f84905a7222"
+  },
+  {
+   "path": "tools/qc_plan.py",
+   "bytes": "14391",
+   "sha256": "sha256:860bae124e62e0f0c68905f4d6f900632831c3ebe1fa6cf2df13ef4560586599"
+  }
+ ]
 }

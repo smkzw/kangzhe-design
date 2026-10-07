@@ -1,7 +1,7 @@
-# HANDOFF · KZ6-0929-A04 / R23
+# HANDOFF · KZ6-1007-A08 / 6.1.3
 
 ## 1. 状态
-单一6.0.0，skill名kangzhe-design。已知问题源码收尾完成；GitHub/本机安装绑定PACKAGE_MANIFEST与私有stage-r69-quick-close/PUBLIC_INSTALL.json。整体验收仍PARTIAL。未完成前三项：完整四轨两轮/持出集、指定CodeBuddy正常整轮、全部最终原生/环境覆盖。按用户要求停止新增测试派发，不等待这些门再结束本次发布。
+单一6.1.3（A08 规范条款增补与运行时修正，见 CHANGELOG 6.1.3 条目；含 tokens/runtime/adapter 代码变更；前序 A06/A07 条目同见 CHANGELOG），skill名kangzhe-design。已知问题源码收尾完成；GitHub/本机安装绑定PACKAGE_MANIFEST与私有stage-r69-quick-close/PUBLIC_INSTALL.json。整体验收仍PARTIAL。未完成前三项：完整四轨两轮/持出集、指定CodeBuddy正常整轮、全部最终原生/环境覆盖。按用户要求停止新增测试派发，不等待这些门再结束本次发布。
 
 ## 2. 执行事实
 |目标|修改/产物|真实命令与证据|结果|
