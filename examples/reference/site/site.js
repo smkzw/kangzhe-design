@@ -68,6 +68,7 @@
   }
 
   window.KZRefSite = {
+    mountFoldFilm,
     mount(kind) {
       const R = window.KZ_REF, out = {};
       mountMotion();

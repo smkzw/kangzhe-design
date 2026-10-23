@@ -79,6 +79,42 @@ def _face_gradient():
     stops=''.join(f'<stop offset="{v["offset"]}" stop-color="{v["color"]}" stop-opacity="{v["alpha"]}"/>' for v in T['glass']['face_gradient'])
     return f'<linearGradient id="kz-face" x1="0" y1="0" x2="1" y2="1">{stops}</linearGradient>'
 
+def html_fluid_fragment(kind,content,image,logo):
+    """Same fixed layout for html-ppt fluid decks (adapters/html-ppt.md): geometry in --kz-u, type in --kz-un.
+    Left text anchors keep their 1280-basis offsets; right-side logos follow the right anchor; the TOC row
+    spreads across the content width; hero titles enter in reading order. No second fit or navigation."""
+    k,blocks,cards=layout(kind,content);W=T['hero_layouts']['canvas'][0]
+    u=lambda n:f'calc({n:g} * var(--kz-u))'
+    def place(r,anchor_right=False):
+        x,y,w,h=r
+        if anchor_right:return f'right:{u(W-x-w)};top:{u(y)};width:{u(w)};height:{u(h)};'
+        return f'left:{u(x)};top:{u(y)};width:min({u(w)},calc(100% - {(x+(W-x-w)):g} * var(--kz-u)));height:{u(h)};'
+    order={'cover_title':0,'section_number':0,'ending_title':0,'toc_title':0,'section_title':1,'hero_subtitle':1,'hero_meta':2}
+    def text_html(b,inside_card=False,origin=(0,0)):
+        tag='h1' if b['role'] in ['cover_title','toc_title','section_title','ending_title'] else 'p'
+        x,y,w,h=b['rect'];x-=origin[0];y-=origin[1]
+        geo=f'left:{u(x)};top:{u(y)};right:{u(T["hero_layouts"]["toc"]["reading"]["label_right"])};height:{u(h)};' if inside_card else place([x,y,w,h])
+        reveal='' if inside_card else f' data-kz-reveal data-kz-order="{order.get(b["role"],1)}"'
+        return f'<{tag} data-hero-role="{b["role"]}"{reveal} style="position:absolute;{geo}margin:0;padding:0;border:0;font-family:var(--kz-font);font-size:calc({b["font_px"]}px * var(--kz-un,1));line-height:1.25;font-weight:{700 if b["bold"] else 400};color:{b["color"]};text-align:left;text-shadow:none;white-space:nowrap;">'+'<br>'.join(escape(x) for x in b['lines'])+f'</{tag}>'
+    ix,iy,iw,ih=k['image']
+    out=[f'<div class="kz-fixed-hero kz-hero-fluid" data-hero-layout="{k["id"]}" style="position:absolute;inset:0;overflow:hidden;background:#FBFCFD;">',
+         # Wide fluid view: the image always covers the slide (no top band). A basis rect pushed down (y>0) means the
+         # subject sits low, so the wide crop is anchored to the bottom; review the crop per aspect (04 IMG-03).
+         f'<img class="kz-hero-image" aria-hidden="true" src="{escape(image,quote=True)}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% {"100%" if iy>0 else "50%"};">',
+         f'<img alt="康哲药业" src="{escape(logo,quote=True)}" style="position:absolute;{place(k["logo"],k["logo"][0]>W/2)}object-fit:contain;filter:none;">']
+    if cards:
+        g=k['grid'];gap=k['gap'];hero_tilt=T['motion']['tilt']['hero_max_deg']
+        out.append(f'<div class="kz-hero-toc" style="position:absolute;left:{u(g[0])};right:{u(W-g[0]-g[2])};top:{u(g[1])};display:flex;flex-wrap:wrap;justify-content:center;gap:{u(gap)};">')
+        for index,(x,y,w,h) in enumerate(cards):
+            out.append(f'<div data-kz-reveal data-kz-order="{1+index}" style="position:relative;flex:0 0 calc((100% - {2*gap:g} * var(--kz-u)) / 3);height:{u(h)};"><div class="kz-float" style="width:100%;height:100%;--kz-float-index:{index};"><div class="kz-card" data-kz-tilt="{hero_tilt}" data-kz-light style="position:relative;width:100%;height:100%;padding:0;">')
+            for b in blocks:
+                if b.get('card_index')==index:out.append(text_html(b,True,(x,y)))
+            out.append('</div></div></div>')
+        out.append('</div>')
+    for b in blocks:
+        if 'card_index' not in b:out.append(text_html(b))
+    return '\n'.join(out+['</div>'])
+
 def svg_fragment(kind,content,image,logo):
     k,blocks,cards=layout(kind,content)
     def img(path,r,id):return f'<image id="{id}" data-pptx-role="{ "logo" if id=="logo" else "background"}" href="{escape(path,quote=True)}" x="{r[0]}" y="{r[1]}" width="{r[2]}" height="{r[3]}" preserveAspectRatio="xMidYMid slice"/>'

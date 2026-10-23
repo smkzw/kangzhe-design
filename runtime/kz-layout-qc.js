@@ -19,7 +19,9 @@
   if(h<=0)return{id:card.id,status:'NOT_TESTED',reason:'no usable reading height'};
   const gapTop=top-box.top-pt,gapBottom=box.bottom-pb-bottom,span=(bottom-top)/h,balance=Math.abs(gapTop-gapBottom)/h;
   const thresholds=g.KZ_TOKENS?.layout||{card_span_warning:.45,vertical_imbalance_warning:.20};
-  const flags=[];if(gapTop<-.5||gapBottom<-.5)flags.push('TEXT_OUTSIDE');
+  // Glyph content areas overhang tight line boxes (line-height 1.25) by a few px, so "outside" means past the card
+  // edge itself; the padding box is only the reference for the top/bottom balance below.
+  const flags=[];if(top<box.top-.5||bottom>box.bottom+.5)flags.push('TEXT_OUTSIDE');
   if(gapBottom>gapTop&&balance>thresholds.vertical_imbalance_warning)flags.push('TOP_HEAVY');
   if(span<thresholds.card_span_warning)flags.push('SPARSE_CONTENT');
   return{id:card.id,layout:card.dataset.kzLayout||'UNDECLARED',rect:box.toJSON(),content:{top,bottom},gapTop,gapBottom,span,balance,flags,status:flags.length?'REVIEW':'MEASURED'};
