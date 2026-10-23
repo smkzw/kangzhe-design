@@ -385,8 +385,8 @@
   },
   {
    "path": "runtime/kz-glass.css",
-   "bytes": 25148,
-   "sha256": "sha256:cdfafa1f969821c5fc07795fcd42926e0c380289c79f57b4915112731221845d"
+   "bytes": 25360,
+   "sha256": "sha256:f1b81d4c4b6e307ea22fe30355ede564495f50945579080f8862b33253735bd9"
   },
   {
    "path": "runtime/kz-layout-qc.js",

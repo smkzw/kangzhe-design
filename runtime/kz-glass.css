@@ -176,6 +176,9 @@
 .kz .kz-step[data-state="current"] .kz-step-mark {background:var(--kz-brand);}
 .kz .kz-step[data-state="todo"] b,.kz .kz-step[data-state="todo"] p {color:var(--kz-muted);}
 
+/* Sections below the fold wait for their entrance (set by KZMotion.mountSections only, so no-JS pages stay visible). */
+.kz [data-kz-pending] [data-kz-reveal],.kz [data-kz-pending][data-kz-reveal] {opacity:0;}
+
 /* Cross-document chapter transition for site pages (progressive; header stays put). */
 @media (prefers-reduced-motion:no-preference) {
   @view-transition {navigation:auto;}

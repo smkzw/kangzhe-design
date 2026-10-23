@@ -75,7 +75,8 @@ check("下钻：收回动画期间状态即为关闭，动画后原生关闭", c
 check("下钻：焦点回到触发按钮、父电影恢复", closed.focus === "open-details" && !closed.film.includes("dialog"), closed);
 
 // 6. Sections reveal on natural scroll; data reveals play; ambient field shifts.
-const before = await page.evaluate(() => ({ pending: document.querySelectorAll("[data-kz-pending]").length, shift: getComputedStyle(document.querySelector(".kz-optical-field")).getPropertyValue("--kz-field-shift") }));
+const before = await page.evaluate(() => { const t = document.querySelector("[data-kz-pending] [data-kz-reveal]"); return { pending: document.querySelectorAll("[data-kz-pending]").length, hiddenBeforeEntrance: !!t && getComputedStyle(t).opacity === "0", shift: getComputedStyle(document.querySelector(".kz-optical-field")).getPropertyValue("--kz-field-shift") }; });
+check("段落：入场前保持不可见（不先闪现再淡入）", before.hiddenBeforeEntrance, before);
 await page.mouse.move(960, 600);
 for (let i = 0; i < 6; i++) await page.mouse.wheel(0, 500, { label: "scroll page" });
 await wait(1400);
