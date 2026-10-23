@@ -52,7 +52,7 @@ def layout(kind, content):
 def html_fragment(kind,content,image,logo):
     k,blocks,cards=layout(kind,content)
     def box(r):return f'left:{r[0]:g}px;top:{r[1]:g}px;width:{r[2]:g}px;height:{r[3]:g}px;'
-    out=[f'<div class="kz-fixed-hero" data-hero-layout="{k["id"]}" style="position:absolute;inset:0;overflow:hidden;background:#FBFCFD;">',f'<img aria-hidden="true" src="{escape(image,quote=True)}" style="position:absolute;{box(k["image"])}object-fit:contain;">',f'<img alt="康哲药业" src="{escape(logo,quote=True)}" style="position:absolute;{box(k["logo"])}object-fit:contain;filter:none;">']
+    out=[f'<div class="kz-fixed-hero" data-hero-layout="{k["id"]}" style="position:absolute;inset:0;overflow:hidden;background:#FBFCFD;">',f'<img aria-hidden="true" src="{escape(image,quote=True)}" style="position:absolute;{box(k["image"])}object-fit:cover;">',f'<img alt="康哲药业" src="{escape(logo,quote=True)}" style="position:absolute;{box(k["logo"])}object-fit:contain;filter:none;">']
     def text_html(b, origin=(0,0)):
         r=list(b['rect']);r[0]-=origin[0];r[1]-=origin[1]
         tag='h1' if b['role'] in ['cover_title','toc_title','section_title','ending_title'] else 'p'
@@ -60,7 +60,8 @@ def html_fragment(kind,content,image,logo):
     card_roles={'toc_number','toc_label','toc_description'}
     for index,r in enumerate(cards):
         x,y,w,h=r
-        out.append(f'<div data-kz-reveal style="position:absolute;{box(r)}transform-style:flat;"><div class="kz-float" style="width:100%;height:100%;"><div class="kz-card" data-kz-tilt="10" data-kz-light style="position:relative;width:100%;height:100%;padding:0;">')
+        hero_tilt=T['motion']['tilt']['hero_max_deg']
+        out.append(f'<div data-kz-reveal style="position:absolute;{box(r)}transform-style:flat;"><div class="kz-float" style="width:100%;height:100%;--kz-float-index:{index};"><div class="kz-card" data-kz-tilt="{hero_tilt}" data-kz-light style="position:relative;width:100%;height:100%;padding:0;">')
         for b in blocks:
             if b.get('card_index')==index:
                 out.append(text_html(b,(x,y)))
@@ -69,12 +70,22 @@ def html_fragment(kind,content,image,logo):
         if b['role'] not in card_roles:out.append(text_html(b))
     return '\n'.join(out+['</div>'])
 
+def _shadow_filter():
+    # ppt-master converts one direct feDropShadow per object to a native outerShdw (alpha ×≈0.75 on export).
+    sh=T['elevation']['pptx']['rest'];color=T['elevation']['pptx']['color']
+    return f'<filter id="shadow"><feDropShadow dx="{sh["dx"]}" dy="{sh["dy"]}" stdDeviation="{sh["std_deviation"]}" flood-color="{color}" flood-opacity="{sh["alpha"]}"/></filter>'
+
+def _face_gradient():
+    stops=''.join(f'<stop offset="{v["offset"]}" stop-color="{v["color"]}" stop-opacity="{v["alpha"]}"/>' for v in T['glass']['face_gradient'])
+    return f'<linearGradient id="kz-face" x1="0" y1="0" x2="1" y2="1">{stops}</linearGradient>'
+
 def svg_fragment(kind,content,image,logo):
     k,blocks,cards=layout(kind,content)
-    def img(path,r,id):return f'<image id="{id}" data-pptx-role="{ "logo" if id=="logo" else "background"}" href="{escape(path,quote=True)}" x="{r[0]}" y="{r[1]}" width="{r[2]}" height="{r[3]}" preserveAspectRatio="xMidYMid meet"/>'
+    def img(path,r,id):return f'<image id="{id}" data-pptx-role="{ "logo" if id=="logo" else "background"}" href="{escape(path,quote=True)}" x="{r[0]}" y="{r[1]}" width="{r[2]}" height="{r[3]}" preserveAspectRatio="xMidYMid slice"/>'
     # Decorative image bleed uses the root viewport; text capacity is checked above.
-    out=['<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" font-family="Microsoft YaHei, Arial" data-pptx-page-role="'+('cover' if kind=='cover' else 'section' if kind=='section' else 'ending' if kind=='ending' else 'content')+'">','<defs><filter id="shadow"><feDropShadow dx="0" dy="6" stdDeviation="8" flood-color="#0F1115" flood-opacity="0.10"/></filter></defs>','<rect width="1280" height="720" fill="#FBFCFD"/>',img(image,k['image'],'hero-image'),img(logo,k['logo'],'logo')]
-    for i,(x,y,w,h) in enumerate(cards):out.extend([f'<rect id="card-{i}" x="{x}" y="{y}" width="{w}" height="{h}" rx="24" fill="#FFFFFF" fill-opacity="{T["glass"]["face_alpha"]}" stroke="#B5B4B1" stroke-opacity=".32" stroke-width="1" filter="url(#shadow)"/>',f'<path d="M{x+24} {y+2}h{w*.25}" stroke="#FFFFFF" stroke-opacity=".9" stroke-width="1.5"/>'])
+    out=['<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" font-family="Microsoft YaHei, Arial" data-pptx-page-role="'+('cover' if kind=='cover' else 'section' if kind=='section' else 'ending' if kind=='ending' else 'content')+'">','<defs>'+_shadow_filter()+_face_gradient()+'</defs>','<rect width="1280" height="720" fill="#FBFCFD"/>',img(image,k['image'],'hero-image'),img(logo,k['logo'],'logo')]
+    g=T['glass']
+    for i,(x,y,w,h) in enumerate(cards):out.extend([f'<rect id="card-{i}" x="{x}" y="{y}" width="{w}" height="{h}" rx="{g["radius"]}" fill="url(#kz-face)" stroke="{g["border_color"]}" stroke-opacity="{g["border_alpha"]}" stroke-width="1" filter="url(#shadow)"/>',f'<path d="M{x+24} {y+2}h{w*g["highlight_extent_max"]:.1f}" stroke="#FFFFFF" stroke-opacity=".9" stroke-width="1.5"/>'])
     for i,b in enumerate(blocks):
         x,y,w,h=b['rect'];f=b['font_px'];lines=b['lines']
         out.append(f'<g id="hero-text-{i}" data-pptx-bounds="{x} {y} {w} {h}"><text x="{x}" y="{y+f*.9}" font-size="{f}" font-weight="{700 if b["bold"] else 400}" fill="{b["color"]}">')

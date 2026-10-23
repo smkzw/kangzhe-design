@@ -46,5 +46,35 @@
   }
   return{id:root.id,status:failures.length?'FAIL':suppressedVisible?'REVIEW_OPACITY':textCount?'PASS':'EMPTY',rect:box.toJSON(),textCount,suppressedVisible,failures};
  }
- g.KZLayoutQC={inspectCard,inspectTextBounds,inspect(root=document){return [...root.querySelectorAll('.kz-card')].filter(e=>e.getBoundingClientRect().height>0&&e.checkVisibility({checkOpacity:true,checkVisibilityCSS:true})).map(e=>inspectCard(e));}};
+ // FOLD-01: the first screen fits the actual viewport and spends it on information, not empty stage.
+ // Samples a grid over the viewport; a point is covered by information objects (cards, KPI tiles, steps,
+ // film carrier/nodes, headings, visible text lines). Reports overflow below/right of the viewport,
+ // coverage share and the largest empty axis-aligned rectangle (share of the viewport). A metric, not a verdict.
+ function inspectFold(fold=document.querySelector('.kz-fold')||document.body,{content='.kz-card,.kz-kpi,.kz-step,.kz-film-carrier,[data-kz-node],[data-kz-info],h1,h2,.kz-lede,nav,.kz-chart,img:not([alt=""])',cols=64,rows=36}={}){
+  const T=g.KZ_TOKENS?.layout?.fold||{},minCoverage=T.min_coverage??.55,maxVoid=T.max_void_ratio??.22,W=innerWidth,H=innerHeight;
+  if(!fold||!fold.isConnected)return{status:'NOT_TESTED',reason:'missing fold root'};
+  const visible=el=>el.checkVisibility({checkOpacity:true,checkVisibilityCSS:true});
+  const rects=[],overflow=[];
+  for(const el of fold.querySelectorAll(content)){if(!visible(el))continue;const r=el.getBoundingClientRect();if(r.width&&r.height)rects.push(r);}
+  const walker=document.createTreeWalker(fold,NodeFilter.SHOW_TEXT);let node;
+  while(node=walker.nextNode()){
+   const p=node.parentElement;if(!node.textContent.trim()||!p||p.closest('script,style,.notes,[hidden]')||!visible(p))continue;
+   const range=document.createRange();range.selectNodeContents(node);
+   for(const q of range.getClientRects()){if(!q.width||!q.height)continue;rects.push(q);if(q.bottom>H+1||q.right>W+1)overflow.push({text:node.textContent.trim().slice(0,24),rect:q.toJSON()});}
+  }
+  const foldRect=fold.getBoundingClientRect();
+  if(foldRect.bottom>H+1)overflow.unshift({text:'(fold root)',rect:foldRect.toJSON()});
+  const grid=[];let covered=0;
+  for(let j=0;j<rows;j++){const row=[];for(let i=0;i<cols;i++){const x=(i+.5)*W/cols,y=(j+.5)*H/rows,hit=rects.some(r=>x>=r.left&&x<=r.right&&y>=r.top&&y<=r.bottom);row.push(hit);if(hit)covered++;}grid.push(row);}
+  // Largest all-empty rectangle by the histogram method.
+  const heights=new Array(cols).fill(0);let largest=0;
+  for(let j=0;j<rows;j++){
+   for(let i=0;i<cols;i++)heights[i]=grid[j][i]?0:heights[i]+1;
+   const stack=[];for(let i=0;i<=cols;i++){const h=i<cols?heights[i]:0;while(stack.length&&heights[stack.at(-1)]>=h){const top=stack.pop(),width=stack.length?i-stack.at(-1)-1:i;largest=Math.max(largest,heights[top]*width);}stack.push(i);}
+  }
+  const coverage=covered/(cols*rows),voidRatio=largest/(cols*rows),flags=[];
+  if(overflow.length)flags.push('FOLD_OVERFLOW');if(coverage<minCoverage)flags.push('LOW_COVERAGE');if(voidRatio>maxVoid)flags.push('LARGE_VOID');
+  return{status:flags.length?'FAIL':'PASS',viewport:[W,H],coverage:+coverage.toFixed(3),voidRatio:+voidRatio.toFixed(3),thresholds:{minCoverage,maxVoid},flags,overflow:overflow.slice(0,12)};
+ }
+ g.KZLayoutQC={inspectCard,inspectTextBounds,inspectFold,inspect(root=document){return [...root.querySelectorAll('.kz-card')].filter(e=>e.getBoundingClientRect().height>0&&e.checkVisibility({checkOpacity:true,checkVisibilityCSS:true})).map(e=>inspectCard(e));}};
 })(window);

@@ -45,7 +45,8 @@ def facets(prefix='kz',native=False):
             defs.append(f'<filter id="{prefix}-shadow-{i}" x="-15%" y="-15%" width="130%" height="130%" color-interpolation-filters="sRGB"><feDropShadow dx="{dist*math.cos(angle):.7f}" dy="{dist*math.sin(angle):.7f}" stdDeviation="{int(shadow.get("blurRad"))/9525/2:.7f}" flood-color="#{col.get("val")}" flood-opacity="{alpha}"/></filter>')
             effect=f' filter="url(#{prefix}-shadow-{i})"'
         parts.append(f'<path data-kz-source-shape="{s.find("p:nvSpPr/p:cNvPr",NS).get("name")}" data-pptx-role="decoration" d="{" ".join(commands)}" fill="{fill}" fill-opacity="{opacity}"{effect}/>')
-    motion='' if native else ' class="kz-float"'
+    # HTML-PPT: the whole mark floats 2px/6.4s in phase (tokens.motion.header_mark_float); never the hero-card float.
+    motion='' if native else ' class="kz-mark-float"'
     return '<defs>'+''.join(defs)+'</defs>'+f'<g data-kz-header-mark="{t["chrome"]["header_mark"]["id"]}"{motion}>'+''.join(parts)+'</g>'
 
 if __name__=='__main__':

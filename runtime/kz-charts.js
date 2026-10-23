@@ -8,9 +8,35 @@
     if(!(el.closest('.deck')||el.closest('.kz-dialog')))return 1; // 下钻弹层挂在 body 上，同属 fluid 页面
     const v=parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--kz-un'));
     if(Number.isFinite(v)&&v>0)return v;
-    return Math.max(1,innerHeight/KZ_TOKENS.wide.htmlppt_reference_height);
+    return innerHeight/KZ_TOKENS.wide.htmlppt_reference_height;
   }
-  const palettes=()=>[KZ_TOKENS.colors.brand,KZ_TOKENS.departments.operations.color,KZ_TOKENS.departments.statistics.color,KZ_TOKENS.departments.pv.color];
+  // Fixed categorical order (never cycled through department colours). Department colours apply only when a
+  // series declares the department it represents; `role:'comparator'` takes the reserved neutral.
+  const palettes=()=>KZ_TOKENS.charts?.categorical||[KZ_TOKENS.colors.brand,KZ_TOKENS.departments.operations.color,KZ_TOKENS.departments.statistics.color,KZ_TOKENS.departments.pv.color];
+  const chartTone=(k,f)=>KZ_TOKENS.charts?.[k]||f;
+  function seriesColor(s,i){
+    if(s.color)return s.color;
+    if(s.role==='comparator')return chartTone('comparator','#6E7B8C');
+    if(s.department&&KZ_TOKENS.departments?.[s.department])return KZ_TOKENS.departments[s.department].color;
+    const p=palettes();if(i>=p.length)throw Error('类别系列超过固定色序；请合并为“其他”或拆成小多图');return p[i];
+  }
+  const easeData=()=>{const b=KZ_TOKENS.motion?.easing?.data||[.33,1,.68,1];return x=>{let lo=0,hi=1;for(let i=0;i<20;i++){const t=(lo+hi)/2,bx=3*(1-t)**2*t*b[0]+3*(1-t)*t*t*b[2]+t**3;bx<x?lo=t:hi=t;}const t=(lo+hi)/2;return 3*(1-t)**2*t*b[1]+3*(1-t)*t*t*b[3]+t**3;};};
+  // Line reveal draws left→right: points up to the progress position keep their true values; the last
+  // segment is interpolated to the progress position. Values are never scaled toward zero.
+  function lineData(values,progress){
+    const n=values.length,edge=progress*(n-1),out=[];
+    for(let i=0;i<n;i++){
+      if(i<=edge+1e-9){out.push([i,values[i]]);continue;}
+      const a=values[i-1],b=values[i],f=edge-(i-1);
+      if(f>0&&a!==null&&b!==null)out.push({value:[edge,a+(b-a)*f],symbol:'none'});
+      break;
+    }
+    return out;
+  }
+  // Bars grow from the baseline with a small left→right offset inside the same progress.
+  function barValue(v,i,n,progress){
+    if(v===null)return null;const s=n>1?Math.min(.06,.4/(n-1)):0,local=Math.max(0,Math.min(1,(progress-i*s)/(1-(n-1)*s)));return v*local;
+  }
   const finiteOrNull=x=>x===null||Number.isFinite(x);
   function extent(data){let lo=0,hi=0;for(const series of data.series)for(const v of series.values)if(Number.isFinite(v)){lo=Math.min(lo,v);hi=Math.max(hi,v);}return [lo,hi];}
   function validate(data){
@@ -47,11 +73,14 @@
   function option(data,{progress=1,reduced=false,width=1280,unit=1}={}){
     validate(data);const line=data.kind==='line',horizontal=data.kind==='bar';
     const numberFormat=v=>v===null?'未提供':Number(v).toLocaleString('zh-CN',{maximumFractionDigits:data.decimals??2,minimumFractionDigits:data.decimals??0});
-    const category={type:'category',data:data.categories,boundaryGap:!line,axisTick:{show:false},axisLine:{lineStyle:{color:'#CED3D8'}},axisLabel:{color:KZ_TOKENS.colors.body,fontSize:16*unit,interval:0,width:width<480?32:undefined,overflow:'break',lineHeight:20*unit}};
+    const n=data.categories.length,labelStyle={color:chartTone('label',KZ_TOKENS.colors.body),fontSize:16*unit,width:width<480?32:undefined,overflow:'break',lineHeight:20*unit};
+    const category=line
+      ?{type:'value',min:0,max:Math.max(1,n-1),interval:n<=48?1:undefined,axisTick:{show:false},splitLine:{show:false},axisLine:{show:true,lineStyle:{color:chartTone('axis','#CED3D8')}},axisLabel:{...labelStyle,formatter:v=>Number.isInteger(v)&&v<n?String(data.categories[v]):''},axisPointer:{snap:true,label:{formatter:({value})=>String(data.categories[Math.round(value)]??'')}}}
+      :{type:'category',data:data.categories,boundaryGap:true,axisTick:{show:false},axisLine:{lineStyle:{color:chartTone('axis','#CED3D8')}},axisLabel:{...labelStyle,interval:0}};
     const [lo,hi]=extent(data);
     const axis=readableAxis(lo,hi);
     const explicitExtent=data.axis?.min!==undefined||data.axis?.max!==undefined;
-    const value={type:'value',min:data.axis?.min??axis.min,max:data.axis?.max??axis.max,interval:data.axis?.interval??(explicitExtent?undefined:axis.interval),name:data.unit,nameTextStyle:{color:KZ_TOKENS.colors.body,fontSize:16*unit},axisLabel:{color:KZ_TOKENS.colors.body,fontSize:16*unit},splitLine:{lineStyle:{color:'#E7EBEE'}},axisLine:{show:false}};
+    const value={type:'value',min:data.axis?.min??axis.min,max:data.axis?.max??axis.max,interval:data.axis?.interval??(explicitExtent?undefined:axis.interval),name:data.unit,nameTextStyle:{color:KZ_TOKENS.colors.body,fontSize:16*unit},axisLabel:{color:chartTone('label',KZ_TOKENS.colors.body),fontSize:16*unit},splitLine:{lineStyle:{color:chartTone('grid','#E7EBEE')}},axisLine:{show:false}};
     return {backgroundColor:'transparent',animation:false,textStyle:{fontFamily:KZ_TOKENS.fonts.fallback_css,fontSize:16*unit,color:KZ_TOKENS.colors.body},
       aria:{enabled:true,decal:{show:false},label:{description:data.description||('图表；单位：'+data.unit)}},
       color:palettes(),grid:{left:(horizontal?120:60)*unit,right:28*unit,top:56*unit,bottom:(width<480?56:42)*unit,containLabel:false},
@@ -59,7 +88,7 @@
       tooltip:{show:progress===1,trigger:'axis',confine:true,valueFormatter:numberFormat,textStyle:{fontSize:16*unit},backgroundColor:'rgba(255,255,255,.96)',borderColor:'#D9DEE3'},
       xAxis:horizontal?value:category,yAxis:horizontal?category:value,
       series:data.series.map((s,i)=>{
-        const color=s.color||palettes()[i%4],vals=s.values.map(v=>v===null?null:v*progress);
+        const color=seriesColor(s,i),vals=line?lineData(s.values,progress):s.values.map((v,j)=>barValue(v,j,n,progress));
         const common={id:s.id,name:s.name||s.id,type:line?'line':'bar',data:vals,animation:false,itemStyle:{color},emphasis:{focus:'series'},silent:progress!==1};
         if(line)return {...common,smooth:false,connectNulls:false,symbol:'circle',symbolSize:7,lineStyle:{color,width:3},areaStyle:data.area===false?undefined:{color:new echarts.graphic.LinearGradient(0,0,0,1,[{offset:0,color:rgba(color,.14)},{offset:1,color:rgba(color,.025)}])}};
         return {...common,barMaxWidth:42,itemStyle:{color:new echarts.graphic.LinearGradient(0,0,horizontal?1:0,horizontal?0:1,[{offset:0,color:rgba(color,.68)},{offset:1,color}]),borderRadius:horizontal?[0,6,6,0]:[6,6,0,0]},label:{show:true,position:horizontal?'right':'top',fontSize:16*unit,color:KZ_TOKENS.colors.body,formatter:p=>numberFormat(p.value)}};
@@ -79,13 +108,14 @@
       opts.onProgress?.(p,copy(current));
     }
     function finish(){if(disposed)return;cancelAnimationFrame(raf);raf=0;renderProgress(1);}
-    function play(duration=KZ_TOKENS.motion.chart_ms){
+    function play(duration=KZ_TOKENS.motion?.duration_ms?.data??KZ_TOKENS.motion?.chart_ms??1000){
       cancelAnimationFrame(raf);raf=0;
       if(disposed)return;
       if(mq.matches){finish();return;}
       renderProgress(0);
       let start=null;
-      function tick(now){if(disposed)return;start??=now;const p=Math.min(1,(now-start)/duration);renderProgress(1-Math.pow(1-p,3));if(p<1)raf=requestAnimationFrame(tick);else raf=0;}
+      const curve=easeData();
+      function tick(now){if(disposed)return;start??=now;const p=Math.min(1,(now-start)/duration);renderProgress(curve(p));if(p<1)raf=requestAnimationFrame(tick);else raf=0;}
       raf=requestAnimationFrame(tick);
     }
     try{

@@ -38,8 +38,8 @@ class HeaderMarkTest(unittest.TestCase):
   self.pack(self.xml.replace('<p:spTree>','<p:spTree>'+start).replace('</p:spTree>','</p:grpSp></p:spTree>'))
   with self.assertRaisesRegex(ValueError,'Non-identity'):bind(self.src,self.dst,self.plan)
  def test_svg_uses_same_four_shapes_one_float_group(self):
-  s=facets();self.assertEqual(s.count('data-kz-source-shape='),4);self.assertEqual(s.count('class="kz-float"'),1)
-  self.assertLess(s.index('kz-facet-o-candy'),s.index('kz-facet-y-candy'));self.assertNotIn('glint',s);self.assertNotIn('class="kz-float"',facets(native=True))
+  s=facets();self.assertEqual(s.count('data-kz-source-shape='),4);self.assertEqual(s.count('class="kz-mark-float"'),1)
+  self.assertLess(s.index('kz-facet-o-candy'),s.index('kz-facet-y-candy'));self.assertNotIn('glint',s);self.assertNotIn('class="kz-mark-float"',facets(native=True))
  def test_placement_fields_registered_in_tokens(self):
   t=json.loads((R/'tokens/tokens.json').read_text())['chrome']['header_mark']
   self.assertEqual(t['placement_htmlppt_u'],t['viewbox']);self.assertEqual(t['placement_htmlppt_u'],[0,0,100,90])

@@ -43,7 +43,8 @@
       this.dialog.addEventListener('cancel',e=>{e.preventDefault();this.pop();},{signal});
       // DRILL-03/04 隔离：阻止冒泡不影响按钮原生 Enter/Space 激活（默认动作在目标自身，不依赖冒泡路径）。
       this.dialog.addEventListener('keydown',e=>{
-        if(['ArrowLeft','ArrowRight','ArrowUp','ArrowDown','PageUp','PageDown','Home','End',' ','Escape','Enter','Backspace'].includes(e.key))e.stopPropagation();
+        // 宿主快捷键（翻页、S/O/F/A 等单字母键）一律不出弹层；原生默认动作（Esc→cancel、按钮激活）不受影响。
+        e.stopPropagation();
         if(e.key==='Tab'){
           // 候选集须是实际可聚焦节点：:disabled 覆盖禁用 fieldset 后代，排除 inert 子树与不可见节点
           const items=[...this.dialog.querySelectorAll('button,a[href],input,select,textarea,[tabindex]')].filter(el=>{
@@ -95,10 +96,12 @@
       if(old){old.scroll=this.body.scrollTop;old.focus=trigger?.isConnected?trigger:document.activeElement;old.life.pause?.();old.section.hidden=true;}
       const section=element('section');section.dataset.kzLevel=id;section.setAttribute('aria-label',title);
       this.body.append(section);const rec={id,title,section,scroll:0,focus:null,life:{}};this.stack.push(rec);
-      if(this.stack.length===1){this.opener=trigger;this.dialog.showModal();this.restoreScroll=lockScroll();this.restoreBackground=isolateBackground(this.dialog);this.onOpen();}
+      if(this.stack.length===1){this.finishClosing();this.opener=trigger;this.dialog.showModal();this.restoreScroll=lockScroll();this.restoreBackground=isolateBackground(this.dialog);this.onOpen();}
+      else this.animateLevel(section,1);
       // A renderer only receives its own container. Strings must be rendered with textContent.
       try{rec.life=render(section,this)||{};}catch(err){section.replaceChildren(element('p','kz-error','明细未能加载：'+err.message));rec.life={};}
       this.sync();this.body.scrollTop=0;this.title.focus();
+      if(this.stack.length===1)this.morph(trigger,false);
       requestAnimationFrame(()=>{if(!this.disposed&&this.stack.at(-1)===rec)rec.life.resume?.();});
     }
     sync(){
@@ -113,17 +116,46 @@
     pop(){
       if(this.stack.length<=1){this.close();return;}
       const top=this.stack.pop();top.life.dispose?.();top.section.remove();
-      const prev=this.stack.at(-1);prev.section.hidden=false;this.sync();this.body.scrollTop=prev.scroll;
+      const prev=this.stack.at(-1);prev.section.hidden=false;this.animateLevel(prev.section,-1);this.sync();this.body.scrollTop=prev.scroll;
       prev.life.resume?.();const f=prev.focus;if(f?.isConnected)f.focus({preventScroll:true});else this.title.focus({preventScroll:true});
     }
     close(){
       if(!this.stack.length)return;
-      while(this.stack.length){const rec=this.stack.pop();rec.life.dispose?.();rec.section.remove();}
-      this.dialog.close();this.restoreBackground?.();this.restoreBackground=null;this.restoreScroll?.();this.restoreScroll=null;this.onClose();
-      if(this.opener?.isConnected)this.opener.focus();
+      const opener=this.opener;
+      // Measure while the panel still has its content: it folds back into the card it came from, then closes.
+      const animating=!this.disposed&&this.morph(opener,true),removed=[];
+      while(this.stack.length){const rec=this.stack.pop();rec.life.dispose?.();if(animating)removed.push(rec.section);else rec.section.remove();}
+      this.restoreBackground?.();this.restoreBackground=null;this.restoreScroll?.();this.restoreScroll=null;this.onClose();
+      // Focus can only return once the modal has closed (the page behind a modal dialog is inert).
+      if(animating){Object.assign(this.closing,{sections:removed,opener});this.closing.finished.then(()=>this.finishClosing(),()=>this.finishClosing());}
+      else{this.dialog.close();if(opener?.isConnected)opener.focus({preventScroll:true});}
     }
-    snapshot(){return {open:this.dialog.open,depth:this.stack.length,path:this.stack.map(x=>x.id),width:this.dialog.open?this.dialog.getBoundingClientRect().width:0,viewport:innerWidth};}
-    dispose(){if(this.disposed)return;this.close();this.disposed=true;this.abort.abort();this.dialog.remove();}
+    // Shared-element transition between the source card and the panel (FLIP on the dialog box only).
+    morph(trigger,closing){
+      const T=global.KZ_TOKENS?.motion||{},reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const source=trigger?.closest?.('.kz-card,[data-kz-drill-source]')||trigger;
+      if(reduced||document.hidden||!source?.isConnected||!this.dialog.animate)return false;
+      const from=source.getBoundingClientRect(),to=this.dialog.getBoundingClientRect();
+      if(!from.width||!from.height||!to.width||!to.height)return false;
+      const card=`translate(${from.left-to.left}px,${from.top-to.top}px) scale(${from.width/to.width},${from.height/to.height})`;
+      const ease=a=>'cubic-bezier('+a.join(',')+')',frame=this.dialog.firstElementChild;
+      const opt={duration:closing?(T.duration_ms?.exit??220):(T.duration_ms?.dialog??420),easing:closing?ease(T.easing?.exit??[.3,0,.8,.15]):ease(T.easing?.enter??[.05,.7,.1,1])};
+      this.dialog.style.transformOrigin='0 0';
+      const box=this.dialog.animate(closing?[{transform:'none',opacity:1},{transform:card,opacity:.4}]:[{transform:card,opacity:.4},{transform:'none',opacity:1}],opt);
+      const text=frame.animate(closing?[{opacity:1},{opacity:0,offset:.5},{opacity:0}]:[{opacity:0},{opacity:0,offset:.45},{opacity:1}],opt);
+      if(closing){this.dialog.style.pointerEvents='none';this.closing={finished:box.finished,cancel(){box.cancel();text.cancel();}};}
+      return true;
+    }
+    finishClosing(){
+      if(!this.closing)return;const c=this.closing;this.closing=null;c.cancel();c.sections?.forEach(x=>x.remove());this.dialog.style.pointerEvents='';if(this.dialog.open&&!this.stack.length){this.dialog.close();if(c.opener?.isConnected)c.opener.focus({preventScroll:true});}
+    }
+    animateLevel(section,direction){
+      const T=global.KZ_TOKENS?.motion||{};
+      if(matchMedia('(prefers-reduced-motion: reduce)').matches||!section.animate)return;
+      section.animate([{opacity:0,translate:`${24*direction}px 0`},{opacity:1,translate:'0 0'}],{duration:T.duration_ms?.item??360,easing:'cubic-bezier('+(T.easing?.enter??[.05,.7,.1,1]).join(',')+')'});
+    }
+    snapshot(){return {open:this.dialog.open&&!this.closing,depth:this.stack.length,path:this.stack.map(x=>x.id),width:this.dialog.open&&!this.closing?this.dialog.getBoundingClientRect().width:0,viewport:innerWidth};}
+    dispose(){if(this.disposed)return;this.close();this.finishClosing();this.disposed=true;this.abort.abort();this.dialog.remove();}
   }
   global.KZDrilldown={Drilldown,element};
 })(window);

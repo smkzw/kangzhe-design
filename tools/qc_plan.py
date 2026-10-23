@@ -17,7 +17,8 @@ def validate(plan,manifest=None,asset_root=None):
  if errs:return findings
  seen=set();w,h=plan['canvas']
  targets={tuple(v) for v in plan['target_viewports']}
- if plan['track']=='site' and not {tuple(v) for v in tokens['site_viewports']}.issubset(targets):add('VIEWPORT-COVERAGE','project','站点缺少规定的桌面宽屏验收视口')
+ required=tokens['viewports'].get(plan['track'])
+ if required and not {tuple(v) for v in required}.issubset(targets):add('VIEWPORT-COVERAGE','project','缺少本轨规定的浏览器可视区验收视口：'+', '.join(f'{a}×{b}' for a,b in required))
  if plan['track'] in ['htmlppt','site','stream'] and not any(vw/vh>2 for vw,vh in targets):add('VIEWPORT-ULTRAWIDE','project','HTML交付计划缺少超宽视口，不能只测16:9')
  for p in plan['pages']:
   pid=p['id']

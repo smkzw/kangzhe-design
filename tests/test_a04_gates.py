@@ -41,7 +41,7 @@ class A04Gates(unittest.TestCase):
   self.p['track']='site';self.p['pages'][0]['motion_objects']=[{'id':'a','role':'card','enter':'fade','exit':'fade','hover':'tilt','ambient':'none'}]
   self.assertIn('VIEWPORT-COVERAGE',self.codes());self.assertIn('VIEWPORT-ULTRAWIDE',self.codes())
  def test_site_desktop_matrix_needs_no_mobile(self):
-  self.p['track']='site';self.p['target_viewports']=[[1280,720],[1440,900],[1920,1080],[2560,1080]]
+  self.p['track']='site';self.p['target_viewports']=[[1280,720],[1536,730],[1920,940],[2560,1080]]
   self.p['pages'][0]['motion_objects']=[{'id':'a','role':'card','enter':'fade','exit':'fade','hover':'tilt','ambient':'none'}]
   self.assertEqual(self.codes(),set())
  def test_negative_protection_does_not_bypass_collision(self):

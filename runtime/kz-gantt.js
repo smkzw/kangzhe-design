@@ -8,7 +8,7 @@
     if(!(el.closest('.deck')||el.closest('.kz-dialog')))return 1; // 下钻弹层挂在 body 上，同属 fluid 页面
     const v=parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--kz-un'));
     if(Number.isFinite(v)&&v>0)return v;
-    return Math.max(1,innerHeight/KZ_TOKENS.wide.htmlppt_reference_height);
+    return innerHeight/KZ_TOKENS.wide.htmlppt_reference_height;
   }
   const qindex=(year,q)=>{const y=Number(year),v=Number(q);if(!Number.isInteger(y)||y<1||!Number.isInteger(v)||v<1||v>4)throw Error('年份/季度无效');return y*4+v-1;};
   const fromIndex=i=>({year:Math.floor(i/4),quarter:(i%4+4)%4+1});
@@ -71,19 +71,21 @@
       if(disposed)return;
       const unit=fluidUnit(root);
       chart.setOption({animation:false,grid:{left:(chart.getWidth()<480?96:126)*unit,right:24*unit,top:38*unit,bottom:44*unit},textStyle:{fontFamily:KZ_TOKENS.fonts.fallback_css,fontSize:16*unit},
-        xAxis:{type:'value',min:data.min,max:data.max,interval:1,axisLabel:{fontSize:16*unit,color:KZ_TOKENS.colors.body,formatter:v=>{if(v>=data.max)return '';const q=fromIndex(v);if(v===data.min&&q.quarter!==1)return `${q.year}Q${q.quarter}`;return q.quarter===1?String(q.year):((chart.getWidth()-150*unit)/(data.max-data.min)>=30*unit?'Q'+q.quarter:'');}},axisTick:{show:false},splitLine:{lineStyle:{color:'#E3E7EC'}},axisLine:{lineStyle:{color:'#CDD3D9'}}},
+        xAxis:{type:'value',min:data.min,max:data.max,interval:1,axisLabel:{fontSize:16*unit,color:KZ_TOKENS.colors.body,formatter:v=>{if(v>=data.max)return '';const q=fromIndex(v);if(v===data.min&&q.quarter!==1)return `${q.year}Q${q.quarter}`;return q.quarter===1?String(q.year):((chart.getWidth()-150*unit)/(data.max-data.min)>=30*unit?'Q'+q.quarter:'');}},axisTick:{show:false},splitLine:{lineStyle:{color:KZ_TOKENS.charts?.grid||'#E7EBEE'}},axisLine:{lineStyle:{color:KZ_TOKENS.charts?.axis||'#CED3D8'}}},
         yAxis:{type:'category',inverse:true,data:data.tasks.map(t=>t.label),axisLabel:{fontSize:16*unit,color:KZ_TOKENS.colors.body,width:(chart.getWidth()<480?86:116)*unit,overflow:'break'},axisTick:{show:false},axisLine:{show:false}},
         tooltip:{show:false},series:[{type:'custom',coordinateSystem:'cartesian2d',id:'kz-gantt-tasks',silent:true,
           renderItem(params,api){const row=api.value(0),start=api.coord([api.value(1),row]),end=api.coord([api.value(2),row]),height=Math.min(36*unit,api.size([0,1])[1]*.56),t=data.tasks[row];
             const rect=echarts.graphic.clipRectByRect({x:start[0],y:start[1]-height/2,width:end[0]-start[0],height},{x:params.coordSys.x,y:params.coordSys.y,width:params.coordSys.width,height:params.coordSys.height});
             if(!rect)return null;const color=t.color||data.taskColor||KZ_TOKENS.departments[t.department]?.color||KZ_TOKENS.colors.brand;
             return {type:'rect',shape:{...rect,r:7*unit},style:{fill:color,opacity:.78,stroke:t.id===selected?KZ_TOKENS.colors.ink:'transparent',lineWidth:1.5}};},
-          data:data.tasks.map((t,i)=>[i,t.start,t.start+(t.end-t.start)*progress]),encode:{x:[1,2],y:0}}]},{notMerge:true});
+          data:data.tasks.map((t,i,all)=>{const n=all.length,st=n>1?Math.min(.08,.4/(n-1)):0,local=Math.max(0,Math.min(1,(progress-i*st)/(1-(n-1)*st)));return [i,t.start,t.start+(t.end-t.start)*local];}),encode:{x:[1,2],y:0}}]},{notMerge:true});
       status();options.onProgress?.(progress,clone(data));
     }
     function finish(){if(disposed)return;cancelAnimationFrame(raf);raf=0;progress=1;draw();}
-    function play(duration=1000){cancelAnimationFrame(raf);raf=0;if(disposed)return;if(mq.matches){finish();return;}progress=0;draw();let start=null;
-      const tick=now=>{if(disposed)return;start??=now;const p=Math.min(1,(now-start)/duration);progress=1-Math.pow(1-p,3);draw();if(p<1)raf=requestAnimationFrame(tick);else raf=0;};raf=requestAnimationFrame(tick);
+    function play(duration=KZ_TOKENS.motion?.duration_ms?.data??1000){cancelAnimationFrame(raf);raf=0;if(disposed)return;if(mq.matches){finish();return;}progress=0;draw();let start=null;
+      // Same data easing as charts: tokens.motion.easing.data (cubic-bezier, solved by bisection).
+      const b=KZ_TOKENS.motion?.easing?.data||[.33,1,.68,1],curve=x=>{let lo=0,hi=1;for(let i=0;i<20;i++){const t=(lo+hi)/2,bx=3*(1-t)**2*t*b[0]+3*(1-t)*t*t*b[2]+t**3;bx<x?lo=t:hi=t;}const t=(lo+hi)/2;return 3*(1-t)**2*t*b[1]+3*(1-t)*t*t*b[3]+t**3;};
+      const tick=now=>{if(disposed)return;start??=now;const p=Math.min(1,(now-start)/duration);progress=curve(p);draw();if(p<1)raf=requestAnimationFrame(tick);else raf=0;};raf=requestAnimationFrame(tick);
     }
     mq.addEventListener('change',()=>{if(mq.matches)finish();},{signal});
     document.addEventListener('visibilitychange',()=>{if(document.hidden)finish();},{signal});

@@ -49,6 +49,6 @@ class ViewportAssets(unittest.TestCase):
  def test_selected_asset_cannot_hide_crop_collision(self):
   r=self.assets[1]['renditions'][0];r['protected_regions']=[[10,10,100,100]];r['subject_rects']=[[50,50,100,100]];self.assertIn('IMAGE-RENDITION-COLLISION',self.codes())
  def test_optical_exemption_cannot_carry_hidden_asset_overrides(self):
-  self.plan['track']='site';self.plan['target_viewports']=[[1280,720],[1440,900],[1920,1080],[2560,1080]];self.plan['pages'][0]['motion_objects']=[dict(id='a',role='card',enter='fade',exit='fade',hover='tilt',ambient='none')]
+  self.plan['track']='site';self.plan['target_viewports']=[[1280,720],[1536,730],[1920,940],[2560,1080]];self.plan['pages'][0]['motion_objects']=[dict(id='a',role='card',enter='fade',exit='fade',hover='tilt',ambient='none')]
   self.image.update(mode='global_procedural_optical_field',procedural_evidence='actual-field.js');self.assertIn('IMAGE-VIEWPORT-MODE',self.codes())
 if __name__=='__main__':unittest.main()
