@@ -1,0 +1,76 @@
+{
+  "scope": "approved native brand objects copied after ppt-master export; not an exporter",
+  "input_sha256": "2e2c4af233fdb2f1fe36f24b22c68aacd700af0d87bb9c1b0768b43f8672679c",
+  "output_sha256": "50eea638114359e892ff67fbed34130a4ca915110535cf50ce66a1bca17225b1",
+  "asset_sha256": "906dc32ffe4f374ae6cb7e6500236b4680681e67598b7ef4ab438d553c219578",
+  "changed_parts": [
+    "ppt/slides/slide2.xml",
+    "ppt/slides/slide3.xml",
+    "ppt/slides/slide4.xml"
+  ],
+  "bindings": [
+    {
+      "slide": 2,
+      "removed_ids": [
+        "3",
+        "4",
+        "5",
+        "6"
+      ],
+      "native_shape_ids": [
+        "39",
+        "40",
+        "41",
+        "42"
+      ],
+      "native_signatures": [
+        "1e3ac3e9f339c7a39590c5e57e9cb569e713d0bb4030910fe67e48aeae57153a",
+        "7e59501613b89cd0dfb5cdfe6662bbb237b49ddf9428216590b4db2430c5e197",
+        "6bf1c3071f8fe05042727182297ce214d02ea3c77a6bcc2a6776cb7c5da4505b",
+        "6ae7b08dc6828626a43469c4574e7256ad297985875a13fb51620a22a62b013f"
+      ]
+    },
+    {
+      "slide": 3,
+      "removed_ids": [
+        "3",
+        "4",
+        "5",
+        "6"
+      ],
+      "native_shape_ids": [
+        "19",
+        "20",
+        "21",
+        "22"
+      ],
+      "native_signatures": [
+        "1e3ac3e9f339c7a39590c5e57e9cb569e713d0bb4030910fe67e48aeae57153a",
+        "7e59501613b89cd0dfb5cdfe6662bbb237b49ddf9428216590b4db2430c5e197",
+        "6bf1c3071f8fe05042727182297ce214d02ea3c77a6bcc2a6776cb7c5da4505b",
+        "6ae7b08dc6828626a43469c4574e7256ad297985875a13fb51620a22a62b013f"
+      ]
+    },
+    {
+      "slide": 4,
+      "removed_ids": [
+        "3",
+        "4",
+        "5",
+        "6"
+      ],
+      "native_shape_ids": [
+        "19",
+        "20",
+        "21",
+        "22"
+      ],
+      "native_signatures": [
+        "1e3ac3e9f339c7a39590c5e57e9cb569e713d0bb4030910fe67e48aeae57153a",
+        "7e59501613b89cd0dfb5cdfe6662bbb237b49ddf9428216590b4db2430c5e197",
+        "6bf1c3071f8fe05042727182297ce214d02ea3c77a6bcc2a6776cb7c5da4505b",
+        "6ae7b08dc6828626a43469c4574e7256ad297985875a13fb51620a22a62b013f"
+      ]
+    }
+  ]
+}

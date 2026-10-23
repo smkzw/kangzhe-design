@@ -119,7 +119,7 @@ def svg_fragment(kind,content,image,logo):
     k,blocks,cards=layout(kind,content)
     def img(path,r,id):return f'<image id="{id}" data-pptx-role="{ "logo" if id=="logo" else "background"}" href="{escape(path,quote=True)}" x="{r[0]}" y="{r[1]}" width="{r[2]}" height="{r[3]}" preserveAspectRatio="xMidYMid slice"/>'
     # Decorative image bleed uses the root viewport; text capacity is checked above.
-    out=['<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" font-family="Microsoft YaHei, Arial" data-pptx-page-role="'+('cover' if kind=='cover' else 'section' if kind=='section' else 'ending' if kind=='ending' else 'content')+'">','<defs>'+_shadow_filter()+_face_gradient()+'</defs>','<rect width="1280" height="720" fill="#FBFCFD"/>',img(image,k['image'],'hero-image'),img(logo,k['logo'],'logo')]
+    out=['<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" lang="zh-CN" font-family="Microsoft YaHei, Arial" data-pptx-page-role="'+('cover' if kind=='cover' else 'section' if kind=='section' else 'ending' if kind=='ending' else 'content')+'">','<defs>'+_shadow_filter()+_face_gradient()+'</defs>','<rect width="1280" height="720" fill="#FBFCFD"/>',img(image,k['image'],'hero-image'),img(logo,k['logo'],'logo')]
     g=T['glass']
     for i,(x,y,w,h) in enumerate(cards):out.extend([f'<rect id="card-{i}" x="{x}" y="{y}" width="{w}" height="{h}" rx="{g["radius"]}" fill="url(#kz-face)" stroke="{g["border_color"]}" stroke-opacity="{g["border_alpha"]}" stroke-width="1" filter="url(#shadow)"/>',f'<path d="M{x+24} {y+2}h{w*g["highlight_extent_max"]:.1f}" stroke="#FFFFFF" stroke-opacity=".9" stroke-width="1.5"/>'])
     for i,b in enumerate(blocks):
