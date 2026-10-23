@@ -76,5 +76,17 @@
   if(overflow.length)flags.push('FOLD_OVERFLOW');if(coverage<minCoverage)flags.push('LOW_COVERAGE');if(voidRatio>maxVoid)flags.push('LARGE_VOID');
   return{status:flags.length?'FAIL':'PASS',viewport:[W,H],coverage:+coverage.toFixed(3),voidRatio:+voidRatio.toFixed(3),thresholds:{minCoverage,maxVoid},flags,overflow:overflow.slice(0,12)};
  }
- g.KZLayoutQC={inspectCard,inspectTextBounds,inspectFold,inspect(root=document){return [...root.querySelectorAll('.kz-card')].filter(e=>e.getBoundingClientRect().height>0&&e.checkVisibility({checkOpacity:true,checkVisibilityCSS:true})).map(e=>inspectCard(e));}};
+ // 03 孤字行：段落/列表项的末行只有一个汉字（可带标点）。按实际渲染行（Range 行框）判定，不按字符数估算。
+ function inspectOrphans(root=document.body,{selector='p,li,h1,h2,h3,td,th,.kz-kpi-label,.kz-film-caption,[data-kz-role="body"]'}={}){
+  const cjk=/[\u3400-\u9fff\uf900-\ufaff]/,punct=/[\s，。、；：！？）》」』”’…—·,.;:!?)\]]/;const found=[];
+  for(const el of root.querySelectorAll(selector)){
+   if(!el.checkVisibility({checkOpacity:true,checkVisibilityCSS:true})||el.querySelector(selector))continue;
+   const lines=new Map(),walker=document.createTreeWalker(el,NodeFilter.SHOW_TEXT);let node;
+   while(node=walker.nextNode()){const text=node.textContent;for(let i=0;i<text.length;i++){const r=document.createRange();r.setStart(node,i);r.setEnd(node,i+1);const q=r.getClientRects()[0];if(!q||!q.width)continue;const key=Math.round(q.top);if(!lines.has(key))lines.set(key,'');lines.set(key,lines.get(key)+text[i]);}}
+   if(lines.size<2)continue;const last=[...lines.entries()].sort((a,b)=>a[0]-b[0]).at(-1)[1],core=[...last].filter(c=>!punct.test(c));
+   if(core.length===1&&cjk.test(core[0]))found.push({text:el.textContent.trim().slice(0,40),lastLine:last,tag:el.tagName.toLowerCase()});
+  }
+  return{status:found.length?'FAIL':'PASS',orphans:found};
+ }
+ g.KZLayoutQC={inspectCard,inspectTextBounds,inspectFold,inspectOrphans,inspect(root=document){return [...root.querySelectorAll('.kz-card')].filter(e=>e.getBoundingClientRect().height>0&&e.checkVisibility({checkOpacity:true,checkVisibilityCSS:true})).map(e=>inspectCard(e));}};
 })(window);

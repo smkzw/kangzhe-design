@@ -109,7 +109,7 @@
   --kz-pad-compact: 16px;
   --kz-line-body: 1.4;
   --kz-line-title: 1.25;
-  --kz-measure: 46ch;
+  --kz-measure: 34em;
   --kz-gutter: 2.5vw;
   --kz-fold-header: 64px;
   --kz-fold-gap: clamp(14px,1.1vw,24px);

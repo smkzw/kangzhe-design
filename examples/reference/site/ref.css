@@ -1,0 +1,33 @@
+/* Page-level layout for the site/stream reference; materials, motion and fold grid come from kz-glass.css. */
+html,body{margin:0}
+body{background:var(--kz-canvas)}
+.kz-ref{position:relative;isolation:isolate;min-height:100vh;overflow-x:clip}
+.kz-ref .kz-film-carrier{justify-content:center;gap:10px}
+.kz-carrier-facts{list-style:none;margin:6px 0 0;padding:0;display:grid;gap:10px;width:min(100%,26em)}
+.kz-carrier-facts li{font-size:var(--kz-type-site-body);line-height:1.4;padding:10px 14px;border-radius:12px;background:var(--kz-thin-face);border:1px solid rgba(var(--kz-face-border-rgb),var(--kz-thin-border-alpha))}
+.kz-ref-nodes{position:absolute;right:2%;top:5%;bottom:5%;width:34%;display:flex;flex-direction:column;justify-content:space-around;gap:10px;margin:0;padding:0;list-style:none}
+.kz-ref-node{position:relative;z-index:1;padding:12px 16px;border-radius:16px;background:rgba(255,255,255,.8);border:1px solid rgba(var(--kz-face-border-rgb),.3);box-shadow:var(--kz-elev-rest)}
+.kz-ref-node b{display:block;font-size:var(--kz-type-site-body)}.kz-ref-node span{font-size:var(--kz-type-body-floor);color:var(--kz-body)}
+.kz-ref .kz-kpi .kz-number.kz-risk{color:var(--kz-risk)}
+.kz-ref-section{padding:48px 0}
+.kz-ref-section>h2{font-size:var(--kz-type-page-title);line-height:var(--kz-line-title);margin:0 0 8px}
+.kz-ref-section>p{font-size:var(--kz-type-site-body);color:var(--kz-body);max-width:52em;margin:0 0 22px;line-height:1.6}
+.kz-ref .kz-card .kz-button{margin-top:16px}
+.kz-ref .kz-card ul li{font-size:var(--kz-type-site-body)}
+.kz-ref-split{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:var(--kz-gap)}
+.kz-ref-table{border-collapse:collapse;width:100%;font-size:var(--kz-type-body-floor)}
+.kz-ref-table th,.kz-ref-table td{text-align:left;padding:12px 10px;border-bottom:1px solid #DDE2E6;vertical-align:top;line-height:1.5}
+.kz-ref-table th{width:9em;color:var(--kz-ink);background:rgba(255,153,0,.08)}
+.kz-ref-intro{font-size:var(--kz-type-site-body);color:var(--kz-body);margin:0 0 16px}
+.kz-ref-foot{display:flex;justify-content:space-between;gap:24px;padding:28px 0 44px;font-size:var(--kz-type-body-floor);color:var(--kz-muted)}
+/* Stream: reading column + side notes; the chapter index stays put while reading. */
+.kz-stream{display:grid;grid-template-columns:minmax(200px,2fr) minmax(0,7fr) minmax(220px,3fr);gap:32px 40px;align-items:start}
+.kz-stream-toc{position:sticky;top:24px;display:grid;gap:6px;grid-column:1;grid-row:1 / span 6}
+.kz-stream-toc a{font-size:var(--kz-type-body-floor);color:var(--kz-body);text-decoration:none;padding:6px 12px;border-radius:12px}
+.kz-stream-toc a[aria-current]{background:rgba(255,255,255,.85);color:var(--kz-ink);font-weight:700;box-shadow:var(--kz-elev-rest)}
+.kz-stream-chapter{grid-column:2;display:grid;gap:18px}
+.kz-stream-chapter h2{font-size:var(--kz-type-page-title);margin:0}
+.kz-stream-chapter p{font-size:20px;line-height:1.75;margin:0;max-width:var(--kz-measure)}
+.kz-stream-aside{grid-column:3}
+.kz-stream-aside .kz-card p{font-size:var(--kz-type-body-floor);line-height:1.6}
+@media print{.kz-stream{grid-template-columns:1fr}.kz-stream-toc{display:none}.kz-stream-chapter,.kz-stream-aside{grid-column:1}}

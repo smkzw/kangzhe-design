@@ -282,6 +282,26 @@
     return {dispose(){abort.abort();cancelAnimationFrame(raf);for(const f of fields)f.style.removeProperty('--kz-field-shift');}};
   }
 
+  /* ---------- Storyboard: states → seamless frames with FILM-03 reading time ----------
+     Each state: {label, caption, facts?:[], geometry:{x,y,w,h,r}, tint?:[r,g,b,a]}. Hold time per state =
+     max(min_hold, characters / chars_per_second + read_start). Moves between states, then a closing move
+     back to state 0 so frame 1 equals frame 0 (FILM-04). phaseAt/enterAt share the same clock as the Film. */
+  function storyboard(states,{charsPerSecond=6,readStartMs=1200,minHoldMs=2000,moveMs=900,closeMs=1200,tint=[255,250,240,.9]}={}){
+    if(!Array.isArray(states)||states.length<2)throw Error('分镜至少需要两个业务状态');
+    const holds=states.map(s=>{const chars=[s.label,s.caption,...(s.facts||[])].join('').replace(/\s/g,'').length;return Math.max(minHoldMs,chars/charsPerSecond*1000+readStartMs);});
+    const total=holds.reduce((a,b)=>a+b,0)+moveMs*(states.length-1)+closeMs;
+    const frames=[],enterAt=[0];let t=0;
+    const frame=(time,s)=>({t:Math.min(1,time/total),...s.geometry,tint:s.tint||tint,label:s.label,caption:s.caption||''});
+    states.forEach((s,i)=>{
+      if(!s.geometry)throw Error('分镜状态缺少 geometry：'+s.label);
+      if(i>0){enterAt.push((t-moveMs/2)/total);}
+      frames.push(frame(t,s));t+=holds[i];frames.push(frame(t,s));if(i<states.length-1)t+=moveMs;
+    });
+    const closeAt=(t+closeMs/2)/total;frames.push({...frame(total,states[0]),t:1});frames[0].t=0;
+    function phaseAt(p){if(p>=closeAt)return 0;let k=0;for(let i=1;i<enterAt.length;i++)if(p>=enterAt[i])k=i;return k;}
+    return {frames,duration:Math.round(total),holds,enterAt,closeAt,phaseAt};
+  }
+
   /* ---------- Relation links inside a film stage ----------
      Deterministic and seekable: called from Film onRender with each link's own reveal progress (0–1).
      Paths are recomputed from the live rects, so they follow the carrier as it changes shape. */
@@ -320,5 +340,5 @@
       dispose(){disposed=true;finish();}
     };
   }
-  global.KZMotion={Film,mountTilt,reveal,mountPage,mountSections,mountField,countUp,drawLinks,sample,validateFrames};
+  global.KZMotion={Film,mountTilt,reveal,mountPage,mountSections,mountField,countUp,drawLinks,storyboard,sample,validateFrames};
 })(window);

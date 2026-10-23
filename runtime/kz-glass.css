@@ -14,6 +14,9 @@
 .kz :focus-visible {outline:3px solid var(--kz-focus);outline-offset:4px;}
 .kz [hidden] {display:none!important;}
 .kz h1,.kz h2,.kz h3,.kz p {margin-top:0;}
+/* 03 孤字行：段落避免末行单字，短标签/标题均衡断行；以 KZLayoutQC.inspectOrphans 实测复核，不替代改写。 */
+.kz p,.kz li,.kz td,.kz th,.kz dd {text-wrap:pretty;}
+.kz h1,.kz h2,.kz h3,.kz .kz-kpi-label,.kz .kz-kpi-note,.kz .kz-step b,.kz .kz-step p,.kz .kz-film-carrier-label {text-wrap:balance;}
 .kz p:last-child {margin-bottom:0;}
 .kz .kz-wide {width:calc(100% - 2 * var(--kz-gutter));margin-inline:auto;max-width:none;}
 .kz .kz-reading {max-width:var(--kz-measure);}
@@ -85,7 +88,7 @@
   box-shadow:inset 0 2px 3px rgba(255,255,255,.95),inset 0 -2px 6px rgba(224,172,77,.10),var(--kz-elev-overlay);border-radius:28px;}
 .kz .kz-film-carrier::before {content:"";position:absolute;left:7%;top:5%;width:28%;height:16%;border-radius:50%;background:radial-gradient(ellipse,rgba(255,255,255,.90),transparent 72%);pointer-events:none;}
 .kz .kz-film-carrier-label {font-size:calc(26px * var(--kz-component-u,1));font-weight:700;line-height:1.3;white-space:nowrap;opacity:var(--kz-film-text,1);}
-.kz .kz-film-carrier-sub {font-size:calc(var(--kz-type-body-floor) * var(--kz-component-u,1));line-height:1.5;text-align:center;max-width:28ch;margin:0;color:var(--kz-body);opacity:var(--kz-film-text,1);}
+.kz .kz-film-carrier-sub {font-size:calc(var(--kz-type-body-floor) * var(--kz-component-u,1));line-height:1.5;text-align:center;max-width:min(100%,30em);margin:0;color:var(--kz-body);opacity:var(--kz-film-text,1);}
 .kz .kz-film-caption {font-size:calc(var(--kz-type-body-floor) * var(--kz-component-u,1));line-height:1.5;min-height:calc(48px * var(--kz-component-u,1));margin:12px 0 0;opacity:var(--kz-film-text,1);}
 
 .kz .kz-film-links {position:absolute;inset:0;width:100%;height:100%;pointer-events:none;overflow:visible;z-index:0;}
@@ -136,6 +139,7 @@
 .kz .kz-fold-head nav a[aria-current] {background:rgba(255,255,255,.85);box-shadow:inset 0 1px 0 #fff,0 2px 8px rgba(var(--kz-shadow-rgb),.08);color:var(--kz-ink);font-weight:700;}
 .kz .kz-crumb {font-size:var(--kz-type-body-floor);color:var(--kz-muted);white-space:nowrap;overflow:hidden;text-overflow:clip;}
 .kz .kz-crumb b,.kz .kz-crumb [aria-current] {color:var(--kz-ink);font-weight:700;}
+.kz .kz-crumb a {color:var(--kz-body);text-decoration:none;border-bottom:1px solid rgba(64,64,64,.28);}
 .kz .kz-fold-grid {display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:var(--kz-fold-gap);min-height:0;}
 .kz .kz-fold-lead {grid-column:span 4;display:flex;flex-direction:column;gap:var(--kz-fold-gap);min-height:0;}
 .kz .kz-fold-stage {grid-column:span 8;min-height:0;display:grid;grid-template-rows:auto minmax(0,1fr) auto;gap:12px;padding:20px 24px;border-radius:28px;
@@ -154,6 +158,10 @@
 .kz .kz-kpi .kz-number {font-size:clamp(28px,2vw,38px);}
 .kz .kz-kpi .kz-unit {font-size:var(--kz-type-body-floor);font-weight:400;margin-left:4px;color:var(--kz-muted);}
 .kz .kz-kpi .kz-kpi-label {font-size:var(--kz-type-body-floor);color:var(--kz-body);margin-top:6px;line-height:1.45;}
+.kz .kz-kpi .kz-kpi-note {font-size:var(--kz-type-body-floor);color:var(--kz-muted);margin-top:4px;line-height:1.45;}
+/* Secondary detail that is also available elsewhere on the page: shown only where the fold has the height for it. */
+.kz .kz-detail-tall {display:none;}
+@media (min-height:1000px) {.kz .kz-detail-tall {display:revert;}}
 /* Short viewports (1536×730, 1280×720): four KPI tiles share one row instead of pushing the lead column below the fold. */
 @media (max-height:820px) {.kz .kz-kpis:has(> :nth-child(4)) {grid-template-columns:repeat(4,minmax(0,1fr));}.kz .kz-kpi {padding:12px 14px;}}
 /* State rail: past / current / upcoming are distinguishable without motion or colour alone (06 §16). */

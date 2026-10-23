@@ -88,7 +88,7 @@ def build():
             f'  --kz-pad-compact: {t["rhythm"]["card_padding_compact"]}px;',
             f'  --kz-line-body: {t["rhythm"]["line_height_body"]};',
             f'  --kz-line-title: {t["rhythm"]["line_height_title"]};',
-            f'  --kz-measure: {t["wide"]["reading_measure_ch"]}ch;',
+            f'  --kz-measure: {t["wide"]["reading_measure_em"]}em;',
             f'  --kz-gutter: {t["wide"]["outer_gutter_vw"]}vw;',
             f'  --kz-fold-header: {fold["header_max_px"]}px;',
             f'  --kz-fold-gap: clamp({fold["gap_px"][0]}px,1.1vw,{fold["gap_px"][1]}px);',
