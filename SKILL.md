@@ -20,7 +20,7 @@ description: 康哲药业医学部正式汇报与医学网页的统一 Liquid Gl
 1. 数值只读 `tokens/tokens.json`；改值后运行 `tools/build_tokens.py`（00）。
 2. 官方 Logo 只用 `assets/logo_bot.svg` 原件，校验哈希（01 CORE-02）。
 3. 双菱形只用于 PPTX 与 HTML-PPT 正文页，取自 `assets/header-mark` 原生资产；站点与流式不用（02 LG-03）。
-4. 卡片是同族玻璃：三停渐变面、rim 折光边、短高光、三层暖色阴影随指针变化；禁止任何通长彩色边条（02 LG-01、ELEV-01、LG-02）。
+4. 卡片是同族玻璃：三停渐变面、rim 折光边、短高光；HTML 轨用三层暖色阴影并随指针变化，PPTX 用单个原生外阴影（02 LG-01、ELEV-01、LG-PPTX）；禁止任何通长彩色边条（LG-02）。
 5. 字号守角色合同与下限；同页同角色同字号同行距；放不下先重排或拆页，不缩字、不裁字；无孤字行（03 TYPE-01/03/04）。
 6. 标题写内容名称，不带冒号或破折号；文字卡有独立卡标题、语义分条与有依据的重点（03 COPY-01/06）。
 7. 只为外部论文与权威指南标注来源；内部来源留在私有台账；不把边界声明当内容（03 COPY-05/08）。
@@ -36,7 +36,7 @@ description: 康哲药业医学部正式汇报与医学网页的统一 Liquid Gl
 - PPTX / HTML-PPT 含封面、目录、章节、尾页时读 `11-hero-layouts.md`；正文页构图读 `13-layout-density.md` BODY-01。
 - 所有 HTML 轨读 `06-motion-film.md`；站点与流式读 `13-layout-density.md`；PPTX 需要动效时读 06 MOTION-07。
 - 按能力读：图表 05、下钻 07、甘特 08、讲稿 09；终审读 10。
-- `python tools/context_pack.py --track <pptx|htmlppt|site|stream> --stage <bootstrap|plan|assets|author|verify> --features charts,film,gantt,drilldown,notes` 输出当前工序要读的文件与哈希；它是索引，不代替阅读。
+- `python tools/context_pack.py --track <pptx|htmlppt|site|stream> --stage <bootstrap|plan|assets|author|verify> --features charts,film,motion,gantt,drilldown,notes` 输出当前工序要读的文件与哈希；它是索引，不代替阅读。
 - 先照参考实现做出一页完整可验的样页，确认上游链路，再扩展全套。
 
 ## 制作顺序

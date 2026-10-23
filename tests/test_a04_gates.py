@@ -41,7 +41,7 @@ class A04Gates(unittest.TestCase):
   self.p['track']='site';self.p['pages'][0]['motion_objects']=[{'id':'a','role':'card','enter':'fade','exit':'fade','hover':'tilt','ambient':'none'}]
   self.assertIn('VIEWPORT-COVERAGE',self.codes());self.assertIn('VIEWPORT-ULTRAWIDE',self.codes())
  def test_site_desktop_matrix_needs_no_mobile(self):
-  self.p['track']='site';self.p['target_viewports']=[[1280,720],[1536,730],[1920,940],[2560,1080]]
+  self.p['track']='site';self.p['target_viewports']=[[1280,720],[1536,730],[1920,940],[1920,1080],[2560,1080]]
   self.p['pages'][0]['motion_objects']=[{'id':'a','role':'card','enter':'fade','exit':'fade','hover':'tilt','ambient':'none'}]
   self.assertEqual(self.codes(),set())
  def test_negative_protection_does_not_bypass_collision(self):
@@ -53,4 +53,10 @@ class A04Gates(unittest.TestCase):
   with tempfile.TemporaryDirectory() as d:
    m=self.asset(Path(d));m['assets'][0]['renditions'][0]['protected_regions']=[[0,0,-1,20]];self.assertIn('IMAGE-RENDITION-BOUNDS',self.codes(m=m))
    m['assets'][0]['renditions'][0]['subject_rects']=[[1270,0,20,20]];self.assertIn('IMAGE-RENDITION-BOUNDS',self.codes(m=m))
+ def test_washed_out_hero_rejected_body_background_allowed(self):
+  with tempfile.TemporaryDirectory() as d:
+   root=Path(d);m=self.asset(root);self.assertNotIn('IMAGE-WASHOUT',self.codes(m=m,root=root))
+   self.p['pages'][0]['kind']='hero';self.assertIn('IMAGE-WASHOUT',self.codes(m=m,root=root))
+   f=root/'bg.png';Image.new('RGB',(2560,1088),(255,170,40)).save(f);m['assets'][0]['sha256']=hashlib.sha256(f.read_bytes()).hexdigest()
+   self.assertNotIn('IMAGE-WASHOUT',self.codes(m=m,root=root))
 if __name__=='__main__':unittest.main()

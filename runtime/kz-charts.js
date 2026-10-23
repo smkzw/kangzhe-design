@@ -14,11 +14,13 @@
   // series declares the department it represents; `role:'comparator'` takes the reserved neutral.
   const palettes=()=>KZ_TOKENS.charts?.categorical||[KZ_TOKENS.colors.brand,KZ_TOKENS.departments.operations.color,KZ_TOKENS.departments.statistics.color,KZ_TOKENS.departments.pv.color];
   const chartTone=(k,f)=>KZ_TOKENS.charts?.[k]||f;
-  function seriesColor(s,i){
+  // Only series without their own colour, comparator role or known department take a categorical slot.
+  const takesSlot=s=>!s.color&&s.role!=='comparator'&&!(s.department&&KZ_TOKENS.departments?.[s.department]);
+  function seriesColor(s,slot){
     if(s.color)return s.color;
     if(s.role==='comparator')return chartTone('comparator','#6E7B8C');
     if(s.department&&KZ_TOKENS.departments?.[s.department])return KZ_TOKENS.departments[s.department].color;
-    const p=palettes();if(i>=p.length)throw Error('类别系列超过固定色序；请合并为“其他”或拆成小多图');return p[i];
+    return palettes()[slot];
   }
   const easeData=()=>{const b=KZ_TOKENS.motion?.easing?.data||[.33,1,.68,1];return x=>{let lo=0,hi=1;for(let i=0;i<20;i++){const t=(lo+hi)/2,bx=3*(1-t)**2*t*b[0]+3*(1-t)*t*t*b[2]+t**3;bx<x?lo=t:hi=t;}const t=(lo+hi)/2;return 3*(1-t)**2*t*b[1]+3*(1-t)*t*t*b[3]+t**3;};};
   // Line reveal draws left→right: points up to the progress position keep their true values; the last
@@ -49,6 +51,7 @@
       if(!Array.isArray(s.values)||s.values.length!==data.categories.length||!s.values.every(finiteOrNull))throw Error('数值长度不一致或存在非有限数');
     }
     if(typeof data.unit!=='string'||!data.unit.trim())throw Error('图表必须声明单位');
+    if(data.series.filter(takesSlot).length>palettes().length)throw Error('类别系列超过固定色序（'+palettes().length+' 色）；请合并为“其他”或拆成小多图');
     if(data.axis){
       for(const k of ['min','max','interval'])if(data.axis[k]!==undefined&&!Number.isFinite(data.axis[k]))throw Error('坐标范围必须为有限数');
       if(data.axis.min!==undefined&&data.axis.max!==undefined&&data.axis.min>=data.axis.max)throw Error('坐标上限必须大于下限');
@@ -88,7 +91,7 @@
       tooltip:{show:progress===1,trigger:'axis',confine:true,valueFormatter:numberFormat,textStyle:{fontSize:16*unit},backgroundColor:'rgba(255,255,255,.96)',borderColor:'#D9DEE3'},
       xAxis:horizontal?value:category,yAxis:horizontal?category:value,
       series:data.series.map((s,i)=>{
-        const color=seriesColor(s,i),vals=line?lineData(s.values,progress):s.values.map((v,j)=>barValue(v,j,n,progress));
+        const color=seriesColor(s,data.series.slice(0,i).filter(takesSlot).length),vals=line?lineData(s.values,progress):s.values.map((v,j)=>barValue(v,j,n,progress));
         const common={id:s.id,name:s.name||s.id,type:line?'line':'bar',data:vals,animation:false,itemStyle:{color},emphasis:{focus:'series'},silent:progress!==1};
         if(line)return {...common,smooth:false,connectNulls:false,symbol:'circle',symbolSize:7,lineStyle:{color,width:3},areaStyle:data.area===false?undefined:{color:new echarts.graphic.LinearGradient(0,0,0,1,[{offset:0,color:rgba(color,.14)},{offset:1,color:rgba(color,.025)}])}};
         return {...common,barMaxWidth:42,itemStyle:{color:new echarts.graphic.LinearGradient(0,0,horizontal?1:0,horizontal?0:1,[{offset:0,color:rgba(color,.68)},{offset:1,color}]),borderRadius:horizontal?[0,6,6,0]:[6,6,0,0]},label:{show:true,position:horizontal?'right':'top',fontSize:16*unit,color:KZ_TOKENS.colors.body,formatter:p=>numberFormat(p.value)}};

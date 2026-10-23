@@ -187,12 +187,21 @@
                     "takeaway",
                     "control",
                     "data",
+                    "reference",
                     "other"
                   ]
                 },
                 "motion_margin": {
                   "type": "number",
                   "minimum": 0
+                },
+                "zone": {
+                  "enum": [
+                    "clear",
+                    "quiet",
+                    "subject"
+                  ],
+                  "description": "04 IMG-02 区域类别；缺省按 clear 处理"
                 }
               },
               "additionalProperties": false
@@ -341,12 +350,21 @@
                               "takeaway",
                               "control",
                               "data",
+                              "reference",
                               "other"
                             ]
                           },
                           "motion_margin": {
                             "type": "number",
                             "minimum": 0
+                          },
+                          "zone": {
+                            "enum": [
+                              "clear",
+                              "quiet",
+                              "subject"
+                            ],
+                            "description": "04 IMG-02 区域类别；缺省按 clear 处理"
                           }
                         },
                         "additionalProperties": false
@@ -460,9 +478,58 @@
                 "detail_reason": {
                   "type": "string",
                   "minLength": 1
+                },
+                "emphasis": {
+                  "enum": [
+                    "applied",
+                    "not_applicable"
+                  ],
+                  "description": "03 COPY-06 文字重点"
+                },
+                "emphasis_reason": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "verbatim_quote": {
+                  "type": "object",
+                  "required": [
+                    "source_locator",
+                    "reason"
+                  ],
+                  "properties": {
+                    "source_locator": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "reason": {
+                      "type": "string",
+                      "minLength": 1
+                    }
+                  },
+                  "additionalProperties": false,
+                  "description": "03 COPY-06：必须连续引述的原文"
                 }
               },
-              "additionalProperties": false
+              "additionalProperties": false,
+              "allOf": [
+                {
+                  "if": {
+                    "properties": {
+                      "emphasis": {
+                        "const": "not_applicable"
+                      }
+                    },
+                    "required": [
+                      "emphasis"
+                    ]
+                  },
+                  "then": {
+                    "required": [
+                      "emphasis_reason"
+                    ]
+                  }
+                }
+              ]
             }
           },
           "takeaway": {
@@ -543,9 +610,75 @@
               },
               "additionalProperties": false
             }
+          },
+          "preset": {
+            "enum": [
+              "cards-3",
+              "cards-2",
+              "split-7-5",
+              "film",
+              "full"
+            ],
+            "description": "13 BODY-01 正文页构图预设（PPTX / HTML-PPT 正文页）"
+          },
+          "body_profile_reason": {
+            "type": "string",
+            "minLength": 1,
+            "description": "03 TYPE-01：整页降为 compact 的原因"
+          },
+          "fold_stage": {
+            "enum": [
+              "film",
+              "figure",
+              "chart"
+            ],
+            "description": "06 FILM-01 / 13 FOLD-02：站点与流式首屏舞台内容；非 film 时写 fold_stage_reason"
+          },
+          "fold_stage_reason": {
+            "type": "string",
+            "minLength": 1
           }
         },
-        "additionalProperties": false
+        "additionalProperties": false,
+        "allOf": [
+          {
+            "if": {
+              "properties": {
+                "body_profile": {
+                  "const": "compact"
+                }
+              },
+              "required": [
+                "body_profile"
+              ]
+            },
+            "then": {
+              "required": [
+                "body_profile_reason"
+              ]
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "fold_stage": {
+                  "enum": [
+                    "figure",
+                    "chart"
+                  ]
+                }
+              },
+              "required": [
+                "fold_stage"
+              ]
+            },
+            "then": {
+              "required": [
+                "fold_stage_reason"
+              ]
+            }
+          }
+        ]
       }
     },
     "contract_revision": {

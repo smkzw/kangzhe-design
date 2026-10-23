@@ -1,7 +1,7 @@
 # 02 统一 Liquid Glass 材质
 
 ## 定位
-康哲化的材料语言：透光、边缘折光、空间层次、柔和阴影和随指针变化的光。它不声称遵守 Apple 的界面规范，也不是全页高强度模糊。Apple 的原始设计面向控件与导航；本包按用户要求扩展到汇报卡片，靠高散射的阅读面承载高密度内容。
+康哲的材料语言包括透光面、边缘折光、空间层次、柔和阴影和随指针移动的光。它借用 Liquid Glass 的思路，但不声称遵守 Apple 的界面规范。用于汇报卡片时，阅读面用高散射承载高密度内容，不做全页强模糊。
 
 ## 一种材料、三个用途 LG-01
 | 用途 | 表现 | 底线 |
@@ -25,11 +25,14 @@
 
 | 级别 | 用于 |
 |---|---|
+| `thin` | 玻璃内的嵌套薄覆层：电影节点、字段、chips（单层轻影，不再模糊） |
 | `rest` | 静止的正文卡、数据外壳、Bento 首屏舞台 |
 | `raised` | 悬停或键盘聚焦的卡（由 `--kz-lift` 从 rest 插值到 raised） |
 | `overlay` | 下钻弹窗、电影载体、工具浮层 |
 
-主光影与环境影按指针光源方向偏移（`elevation.light_offset_px`）：光在左上，影落右下。抬升时卡片同时上移 `elevation.lift_px`。禁止黑硬影、霓虹边和高饱和大光晕。
+表单输入（如甘特编辑字段）用 `elevation.inset` 的内凹影，表示可编辑而非可抬起。同一区域内层级只升不降：舞台（rest）里的节点用 thin，载体用 overlay。
+
+静止时光源在正上方，影落在正下方（各级 x=0）；指针移动时光源跟随指针，主光影与环境影按 `elevation.light_offset_px` 向指针的反方向偏移。抬升时卡片同时上移 `elevation.lift_px`。禁止黑硬影、霓虹边和高饱和大光晕。
 
 ## 指针光源与倾斜 ELEV-02
 桌面鼠标移动时，卡片的光源位置（`--kz-mx/--kz-my`）、rim 角度、高光位置、阴影偏移和抬升一起变化；倾斜由同一组变量合成。`KZMotion.mountTilt` 用临界阻尼弹簧驱动这些变量，静止后停止 rAF；只有被挂载的元素承载 transform。
@@ -56,8 +59,8 @@ opacity 的写入位置会影响玻璃：祖先元素 opacity<1 时，Chromium �
 ## PPTX 玻璃 LG-PPTX
 PPTX 用原生可编辑的渐变填充（停点 alpha 保留）、描边和外阴影，必要时加独立的局部光学贴片；贴片不含文字或数据，不整卡栅格化。
 
-- 阴影：ppt-master 每个对象只转换一个效果；`feDropShadow` 偏移非零才是外阴影，`dx=dy=0` 会变成 glow；导出 alpha ≈ 作者值 × `elevation.pptx.export_alpha_factor`（0.75）。用 `elevation.pptx.rest / raised` 的作者值。
-- 三层阴影在 PPTX 里不叠：同级正文卡只用一个主阴影；hero 或抬升卡需要环境影时，在卡底外加一个径向渐变接触椭圆（中心 α≈0.06 渐到 0），不要在半透明卡面下垫深色底板（会透出来把卡面染灰）。
+- 阴影：ppt-master 每个对象只转换一个效果；`feDropShadow` 偏移非零才是外阴影，`dx=dy=0` 会变成 glow；导出 alpha ≈ 作者值 × `elevation.pptx.export_alpha_factor`（0.75）。PPTX 没有悬停：正文卡、数据外壳与 hero 目录卡用 `elevation.pptx.rest`；需要突出的叙事载体可用 `raised`，一页最多一个。
+- 三层阴影在 PPTX 里不叠：同级正文卡只用一个主阴影；hero 或抬升卡需要环境影时，在卡底外加一个径向渐变接触椭圆（中心 α 取 `elevation.pptx.contact_ellipse_alpha`，渐到 0），不要在半透明卡面下垫深色底板（会透出来把卡面染灰）。
 - inner shadow、soft edge、背景模糊、mask 在 ppt-master 中必须预先栅格化，玻璃卡不用它们。
 - 指针光源、倾斜和动态折射不是 PPTX 的能力，不得宣称实现。
 - `tools/glass_svg.py` 给出上游 Executor 可直接参考的原语；实际导出与回读证据见 `examples/reference/pptx/README.md`。
@@ -66,7 +69,7 @@ PPTX 用原生可编辑的渐变填充（停点 alpha 保留）、描边和外�
 唯一外观来自用户指定的原生对象 `assets/header-mark/source-native.xml`：橙色大形在后，黄色小形在左下前方；倒角、坐标、渐变、阴影、softEdge 和叠放顺序全部保留，不用普通四边形近似，不加侧折面、白色高光线、光晕，不随部门换色，通用玻璃规则不改造它。
 
 - PPTX：ppt-master 导出后用 `tools/bind_header_mark_pptx.py` 按显式页码与对象 ID 替换为原生对象，保留上游原件，再跑上游 `pptx_delivery_check.py`。
-- HTML-PPT：用 `tools/brand_fragments.py` 从同一资产生成内联 SVG，放置矩形由 `tokens.chrome.header_mark.placement_htmlppt_u` 唯一决定；整组 `.kz-mark-float` 竖直微浮动（`motion.header_mark_float`，2px / 6.4s，同相位），不左右漂移、不旋转、不缩放；减少动态、preview、打印、冻结态回到基准。
+- HTML-PPT：用 `tools/brand_fragments.py` 从同一资产生成内联 SVG，放置矩形只取 `tokens.chrome.header_mark.placement_htmlppt_u`（生成为 `--kz-chrome-mark-*`，deck CSS 不写几何数值）；整组 `.kz-mark-float` 竖直微浮动（`motion.header_mark_float`，2px / 6.4s，同相位），不左右漂移、不旋转、不缩放；减少动态、preview、打印、冻结态回到基准。
 - 站点式与流式 HTML 不出现这组装饰，也不保留空占位。
 
 ## 反例与正例

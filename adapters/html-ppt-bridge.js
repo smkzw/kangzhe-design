@@ -9,7 +9,8 @@ const doc=g.document;
 let printing=false;
 function fluidRef(){return (g.KZ_TOKENS&&g.KZ_TOKENS.wide&&g.KZ_TOKENS.wide.htmlppt_reference_height)||720;}
 function writeRatio(v){const s=doc.documentElement.style;s.setProperty('--kz-un',String(v));s.setProperty('--kz-u',`calc(var(--kz-un) * 1px)`);g.dispatchEvent(new Event('kz:fluidratio'));}
-function syncFluidRatio(){if(printing)return;const v=g.innerHeight/fluidRef();if(Number.isFinite(v)&&v>0)writeRatio(v);}
+// A hidden iframe or preview can report innerHeight 0: keep the variables defined (ratio 1) until a real resize.
+function syncFluidRatio(){if(printing)return;const v=g.innerHeight/fluidRef();if(Number.isFinite(v)&&v>0)writeRatio(v);else if(!doc.documentElement.style.getPropertyValue('--kz-un'))writeRatio(1);}
 function resetFluidRatio(){printing=true;writeRatio(1);}
 function restoreFluidRatio(){printing=false;syncFluidRatio();}
 syncFluidRatio();g.addEventListener('resize',syncFluidRatio);

@@ -1,5 +1,40 @@
 # 7.0.0 · 2026-10-24
 
+## KZ7-1024-B02 · 两路独立审阅后的修订
+代码审阅（runtime 与工具）和规范审阅（自洽、可执行性、中文）各自只读完成，确认的问题逐条修复并复测。
+
+运行时
+- 下钻：`snapshot().width` 改用布局宽度，展开动画期间也是最终宽度；`close()` 返回原生关闭并还焦点后兑现的 promise；展开中途关闭时反向折回，不先跳回全尺寸；只有从卡片（`.kz-card` / `data-kz-drill-source`）触发才做共享元素展开，独立按钮或缺省触发时原地打开。
+- 电影：`storyboard()` 返回 `staticProgress`（信息最多的状态停留段中点，可用 `staticState` 指定），参考接线传给 Film，静态帧不再落在移动段或文字淡出窗口里；`phaseAt` 改由同一采样器推导，状态条不会先于载体文字切换；停留时长参数进 `motion.film.storyboard`。
+- 入场：观点句（`.kz-takeaway-card` / `data-kz-takeaway`）最后出现，多隔 `stagger_ms.takeaway_gap`，与 PPTX 回读的 0/70/140/410ms 一致；卡标题用 `distance_px.title` / `duration_ms.title`；表格逐行进入级联；站点章节转场用 `duration_ms.section`。
+- `mountSections`：单个段落出错不再让同批段落永久隐藏；打印样式兜底显示待入场段落。
+- 新增 `KZMotion.fitFold`：`.kz-detail-tall` 按文档倒序收起，直到首屏放得下。实测 1920×1080 首页“资料分组”卡此前底边被切掉。
+- 图表：只有占用类别色的系列计入 5 色上限（自带色、对照组、部门系列不占位），超出时在 `validate` 阶段报错；7.0 起不再循环取色。
+- 甘特：端点命中区读 `tokens.gantt`；`*_known:false` 的任务明确报错（schema 允许对应端点为 null）。
+- html-ppt-bridge：可视区高度为 0（隐藏 iframe、预览）时也写入比率 1，`--kz-u` 不会缺失。
+- KZLayoutQC：`inspectFold` 只把带可见文字或已绘制图形的对象计入覆盖率，卡片外框越出视口也报 `FOLD_OVERFLOW`，缺省阈值与 tokens 一致；`inspectCard` 的 `TEXT_OUTSIDE` 恢复按内边距判断（纵向容差 0.2em、横向 1px，进 `layout.qc`）；`inspectOrphans` 按行带分行，不再把行内小字号片段误判为孤字行。
+
+tokens 与工具
+- 删除无人读取的 token：`wide.desktop_scene_min_width_ratio`、`data_min_width_ratio`，`colors.ribbon_mid`、`table_header`，`rhythm.ink_inset_*`、`sibling_inset_tolerance`，`motion.max_blur_layers_per_region`、`duration_ms.text_swap`、`scale.dialog_from`。
+- 规范里写死的数值登记进 tokens 并接入代码：首屏断点（单测核对 CSS 媒体查询）、导语行长、KPI 与首屏标题字号、弹窗最宽、弹层空白比例、QC 容差、主视觉过曝判据、电影状态变化阈值、PPTX 接触椭圆 alpha、甘特命中区。
+- 阴影：新增 `thin`（玻璃内的嵌套薄覆层，电影节点改用它）与 `inset`（表单字段内凹）；PPTX `raised` 的 alpha 回到单层上限 0.15。
+- 正文页 chrome 几何由 `build_tokens.py` 生成为 `--kz-chrome-*` 变量，deck CSS 不再写几何数值（3 视口 × 5 页 90 个矩形前后一致）。
+- 验收矩阵加入 1920×1080（同屏 F11 全屏）。
+- `qc_plan.py`：四类 hero 主视觉按 `image.washout` 计算过曝并报 `IMAGE-WASHOUT`。
+- `build_tokens.py`：阻尼比 ≥1 时不再除零。`build_dist.py`：在 git 仓库中只打包受版本管理的文件（98 个）。
+- `hero_layout.svg_fragment`：Logo 恢复 `meet`，主视觉保持 `slice`（复测导出不再有 `srcRect` 裁切）。
+- `context_pack.py`：资产阶段补 02、11、13；PPTX 制作阶段补 `glass_svg.py` 与探针说明。
+
+规范
+- 状态词统一为 10 QA-STATUS 的 PASS / WARN / FAIL / BLOCKED / PENDING / N/A；00 的验证范围措辞与之分开。
+- page-plan schema 补规范要求填写的字段：`preset`、`body_profile_reason`（compact 必填）、`fold_stage` 与理由、卡片 `emphasis` / `verbatim_quote`、保护区 `zone` 与 `reference` 角色；gantt schema 允许未知端点为 null。
+- SKILL 硬规则 4 区分 HTML 三层动态阴影与 PPTX 单阴影；00 写明硬规则是摘要，与所有者冲突时以所有者为准。
+- 首屏舞台材料不够电影时改放关系图或图表（`fold_stage`），KPI 不够时用关键事实条，不编造；电影状态下限统一为“三个阅读状态 + 收束帧”。
+- PPTX 入场 delay 统一为“同一拍起点 + n × 70ms”，并与上游定义和回读对齐；ppt-master 基线写明为 `v6.7.3-2-g523e5bd`。
+- HTML-PPT：宿主禁用 headless 时的替代截帧路径；脚手架安装定位与“不复制参考 index.html”；脚本顺序补 ECharts 与 kz-layout-qc。
+- 10 的工具表区分安装包内工具与仓库维护者回归（`tests/` 不随包发布）。
+- COPY-08 判定改正（原文两问的方向写反）；站点、流式补“步骤”；数据更新不补间；chrome 定义；术语统一为观点句、尾页、讲稿、所有者。
+
 ## KZ7-1024-B01 · 分层重构、动效与材质增强、首屏密度、四轨正例
 规范结构
 - 规范只写设计规则：SKILL.md 精简为四轨与引擎、13 条硬规则与读取顺序；验收方法、门表、工具清单集中到 10；事故叙述、轮次编号、具体模型与工具名、重复条款移出正文（原文见提交 `b487472`）。规则编号沿用，新增 ELEV-01/02、LG-PPTX、MOTION-03…08、CHART-01…05、FOLD-01…05、BODY-01、DRILL-05/06、NOTES-01…03、FILM-PLAN、TYPE-04、IMG-06、CORE-01…07。

@@ -16,10 +16,24 @@ def bezier(v):
 
 def spring_linear(zeta, samples=28):
     """Step response of a damped spring, normalized so it settles (0.1%) at t=1, as CSS linear()."""
-    w = math.log(1000) / zeta
-    wd = w * math.sqrt(1 - zeta * zeta)
-    def x(t):
-        return 1 - math.exp(-zeta * w * t) * (math.cos(wd * t) + zeta / math.sqrt(1 - zeta * zeta) * math.sin(wd * t))
+    if zeta < 1:
+        w = math.log(1000) / zeta
+        wd = w * math.sqrt(1 - zeta * zeta)
+        def x(t):
+            return 1 - math.exp(-zeta * w * t) * (math.cos(wd * t) + zeta / math.sqrt(1 - zeta * zeta) * math.sin(wd * t))
+    else:
+        # Critically damped or overdamped: no oscillation; pick the natural frequency that leaves 0.1% at t=1.
+        def step(w, t):
+            if zeta == 1:
+                return 1 - (1 + w * t) * math.exp(-w * t)
+            wd = w * math.sqrt(zeta * zeta - 1)
+            return 1 - math.exp(-zeta * w * t) * (math.cosh(wd * t) + zeta / math.sqrt(zeta * zeta - 1) * math.sinh(wd * t))
+        lo, hi = 1.0, 500.0
+        for _ in range(80):
+            mid = (lo + hi) / 2
+            lo, hi = (mid, hi) if 1 - step(mid, 1) > 1e-3 else (lo, mid)
+        def x(t, w=hi):
+            return step(w, t)
     pts = [f'{x(i / samples):.4f}' for i in range(samples)] + ['1']
     pts[0] = '0'
     return 'linear(' + ','.join(pts) + ')'
@@ -63,6 +77,7 @@ def build():
     srgb = ','.join(map(str, e['shadow_rgb']))
     css.append(f'  --kz-shadow-rgb: {srgb};')
     for name, layers in e['levels'].items(): css.append(f'  --kz-elev-{name}: {shadow_static(layers, srgb)};')
+    css.append(f'  --kz-elev-inset: inset {shadow_static([e["inset"]], srgb)};')
     css.append(f'  --kz-lift-px: {e["lift_px"]}px;')
     for name, v in m['easing'].items(): css.append(f'  --kz-ease-{name}: {bezier(v)};')
     css.append(f'  --kz-ease-spring: {spring_linear(m["spring"]["css_damping_ratio"])};')
@@ -94,7 +109,18 @@ def build():
             f'  --kz-fold-gap: clamp({fold["gap_px"][0]}px,1.1vw,{fold["gap_px"][1]}px);',
             f'  --kz-reference-height: {t["wide"]["htmlppt_reference_height"]};',
             f'  --kz-dialog-width: {t["wide"]["dialog_width_vw"]}vw;',
-            f'  --kz-dialog-max-height: {t["wide"]["dialog_height_vh"]}vh;', '}']
+            f'  --kz-dialog-max-height: {t["wide"]["dialog_height_vh"]}vh;',
+            f'  --kz-lede-max: {fold["lede_max_em"]}em;']
+    # Body-page chrome in canvas units (unitless): HTML-PPT multiplies by --kz-u, so the deck CSS holds no geometry.
+    c, (cw, ch) = t['chrome'], t['units']['canvas_px']
+    named = {'title': c['title'], 'logo': c['logo'], 'body': c['body'], 'mark': c['header_mark']['placement_htmlppt_u']}
+    css += [f'  --kz-canvas-w: {cw};', f'  --kz-canvas-h: {ch};']
+    for name, (x, y, w, h) in named.items():
+        css += [f'  --kz-chrome-{name}-{k}: {v:g};' for k, v in zip('xywh', (x, y, w, h))]
+    x1, y1, x2, _, stroke = c['rule']
+    css += [f'  --kz-chrome-rule-x1: {x1:g};', f'  --kz-chrome-rule-y: {y1:g};', f'  --kz-chrome-rule-x2: {x2:g};', f'  --kz-chrome-rule-stroke: {stroke:g};']
+    css += [f'  --kz-chrome-foot-{k}: {c["footer"][k]:g};' for k in ('left', 'right', 'bottom')]
+    css.append('}')
     # Pointer-lit recipes read --kz-lx/--kz-ly/--kz-lift where they are declared, so they must be
     # declared on the lit element itself, not inherited from :root (custom properties substitute var() at declaration).
     css += ['.kz-card,.kz-lit {',

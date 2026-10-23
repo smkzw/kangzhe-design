@@ -1,6 +1,6 @@
 # PPT Master 适配合同
 
-核对基线：hugohe3/ppt-master v6.7.3（`523e5bd972f9`，2026-10-23），转换器级回读见 `examples/reference/pptx/README.md`。安装位置由宿主决定，执行前按上游 `SKILL.md` 的“paths before commands”取得 `SKILL_DIR`，先跑 `attribution_guard.py`。升级时重读 routing、svg-contract、native-data、animations 与 transitions 文档，再改本页。
+核对基线：hugohe3/ppt-master `523e5bd972f9`（2026-10-23，`git describe` 为 `v6.7.3-2-g523e5bd`，即 v6.7.3 之后的两个往返修复提交），转换器级回读见 `examples/reference/pptx/README.md`。安装位置由宿主决定，执行前按上游 `SKILL.md` 的“paths before commands”取得 `SKILL_DIR`，先跑 `attribution_guard.py`。升级时重读 routing、svg-contract、native-data、animations 与 transitions 文档，再改本页。
 
 ## 插入点
 | 上游步骤 | 本包提供 | 不干预 |
@@ -35,7 +35,7 @@
 ## 动效与 Morph
 - 侧车 `animations.json` 放在项目根，`animation_config.py validate <project>` 校验，导出加 `--animation-config animations.json`（路径相对项目）。
 - 字段：`defaults.transition`、`slides.<页>.animation.trigger`、`groups.<顶层组 id>.{effect,duration,delay,order,decelerate}`、`slides.<页>.transition.{effect:"morph",effect_options:{"morph_by":"object"},duration}`、`morph.{from, pairs.<key>.{from,to}}`。
-- 时序：`with-previous` 起点 = 上一行起点 + delay，`after-previous` 起点 = 上一行结束 + delay；康哲的 70ms 错峰用 with-previous + 每行 delay。
+- 时序：同一拍内的 `with-previous` 行，delay 都从这一拍的起点算，不累加（上游：delay 是“加在已解析起点上的行偏移”）；`after-previous` 行从上一行结束后再加 delay。康哲的错峰用 with-previous，第 n 组写 n × 70ms；实测导出的 `p:cond delay` 为 0 / 70 / 140 / 410。
 - 实测导出：Fade 为 presetID 10、`nodeType="withEffect"`、`decel="70000"`；Morph 两端写成同名 `!!<key>`，目的页 `p159:morph option="byObject"`。
 - 限制：Morph 只用于相邻页，两端同种容器；原生图表、表格、带结构角色的根原语不能配对；只出现在第二页的文字用淡入（可用 `data-pptx-morph-staging="true"` 放画布外）。没有小位移入场预设；不支持段落级逐条出现、自定义路径、按系列出现。
 
@@ -46,7 +46,7 @@ python tools/bind_hero_pptx.py upstream.pptx branded.pptx hero-page-plan.json --
 python3 ${SKILL_DIR}/scripts/pptx_delivery_check.py marked.pptx
 ```
 - 双菱形：`bindings.json` 形如 `{"pages":[{"slide":2,"replace_shape_ids":[3,4,5,6]}]}`，ID 从当次导出的 slide XML 中按名称（`kz-facet-0…3`）查得，不假设各页一致。工具要求 1280×720 画布、对象无正文文字、位于标记边界内，否则直接失败；输出另存，保留上游原件。实测绑定后 `p:timing` 与 Morph 名称完好、交付检查 0 错误。
-- hero 文字框：6.7.0 起普通文本框按字体度量定位首行基线，先在新版本上确认是否仍需绑定；需要时页面 id 前缀为真实页码，只绑定四类 hero 文字的原生框、内边距、固定行高与禁止自动缩字。
+- hero 文字框：6.7.0 起普通文本框按字体度量定位首行基线。先不绑定导出，按 11 HERO-04 回读框位置，误差都 ≤2 逻辑像素就不绑定；需要时页面 id 前缀为真实页码，只绑定四类 hero 文字的原生框、内边距、固定行高与禁止自动缩字。
 - Edit Native PPTX 的 round-trip 会保留不支持的效果载荷；如果从参考 PPTX 出发能原生保留双菱形，可不再绑定（待用户提供参考文件后验证）。
 
 ## 待做（需用户在场）

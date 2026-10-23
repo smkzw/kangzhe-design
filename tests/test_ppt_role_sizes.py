@@ -7,7 +7,7 @@ class PPTRoleSizes(unittest.TestCase):
  def codes(self,track,role,size):
   p=json.loads((R/'agent/fixtures/page-plan.valid.json').read_text());p['track']=track
   if track!='pptx':
-   p['target_viewports']=[[1280,720],[1536,730],[1920,940],[2560,1080]]
+   p['target_viewports']=[[1280,720],[1536,730],[1920,940],[1920,1080],[2560,1080]]
    p['pages'][0]['motion_objects']=[{'id':'a','role':'card','enter':'fade','exit':'fade','hover':'tilt','ambient':'none'}]
   e=p['pages'][0]['elements'][0];e.update(role=role,font_px=size)
   return {f['code'] for f in validate(p) if f['level']=='error'}

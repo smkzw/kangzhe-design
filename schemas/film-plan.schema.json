@@ -187,7 +187,8 @@
           }
         },
         "additionalProperties": false
-      }
+      },
+      "description": "关键帧：至少三个阅读状态加一个回到首状态的收束帧（06 FILM-01）"
     },
     "relations": {
       "type": "array",

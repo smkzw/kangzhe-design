@@ -183,6 +183,10 @@
     const boxes=els.map((el,i)=>({el,i,r:el.getBoundingClientRect()}));
     const rows=[];for(const b of [...boxes].sort((a,c)=>a.r.top-c.r.top||a.r.left-c.r.left)){let row=rows.find(x=>Math.abs(x.top-b.r.top)<=8);if(!row)rows.push(row={top:b.r.top,items:[]});row.items.push(b);}
     const delay=new Map();rows.forEach((row,ri)=>row.items.sort((a,c)=>a.r.left-c.r.left).forEach((b,ci)=>{const order=Number(b.el.dataset.kzOrder);delay.set(b.el,Math.min(max,(Number.isFinite(order)?order:ri+ci)*step));}));
+    // The takeaway enters last, one beat plus takeaway_gap after the other content (same rule as PPTX MOTION-07).
+    const late=el=>!('kzOrder' in el.dataset)&&(el.matches('[data-kz-takeaway]')||!!el.querySelector('.kz-takeaway-card,[data-kz-takeaway]'));
+    const rest=els.filter(el=>!late(el)).map(el=>delay.get(el));
+    if(rest.length<els.length){const at=Math.min(max,(rest.length?Math.max(...rest)+step:0)+tk('stagger_ms.takeaway_gap',200));els.filter(late).forEach(el=>delay.set(el,at));}
     return delay;
   }
   function animateReveal(root,{exit=false}={}) {
@@ -203,8 +207,12 @@
           animations.push(el.animate([{translate:`0 ${tk('distance_px.card',18)*u}px`,scale:String(tk('scale.card_from',.985))},{translate:'0 0',scale:'1'}],{duration:tk('duration_ms.card',520),delay,easing:bez('enter',[.05,.7,.1,1]),fill:'backwards'}));
           for(const g of glassTargets(el))animations.push(g.animate([{opacity:0},{opacity:1}],{duration:Math.round(tk('duration_ms.card',520)*.62),delay,easing:bez('standard',[.2,0,0,1]),fill:'backwards'}));
           // Inner cascade: title, then each bullet/item, after the shell has started to settle.
-          const items=[...el.querySelectorAll('h2,h3,li,[data-kz-reveal-item]')].filter(n=>!n.closest('.kz-chart,.kz-gantt,table,.kz-film-stage')&&n.closest('[data-kz-reveal]')===el);
-          items.forEach((n,j)=>animations.push(n.animate([{opacity:0,translate:`0 ${tk('distance_px.item',6)*u}px`},{opacity:1,translate:'0 0'}],{duration:tk('duration_ms.item',360),delay:delay+tk('stagger_ms.group',90)+Math.min(j*tk('stagger_ms.item',45),tk('stagger_ms.max_total',560)),easing:bez('enter',[.05,.7,.1,1]),fill:'backwards'})));
+          // Table rows join the cascade (reading order, no deformation); cells and charts never move on their own.
+          const items=[...el.querySelectorAll('h2,h3,li,tbody tr,[data-kz-reveal-item]')].filter(n=>!n.closest('.kz-chart,.kz-gantt,.kz-film-stage')&&(n.tagName==='TR'||!n.closest('table'))&&n.closest('[data-kz-reveal]')===el);
+          items.forEach((n,j)=>{
+            const title=/^H\d$/.test(n.tagName),dist=title?tk('distance_px.title',10):tk('distance_px.item',6);
+            animations.push(n.animate([{opacity:0,translate:`0 ${dist*u}px`},{opacity:1,translate:'0 0'}],{duration:title?tk('duration_ms.title',360):tk('duration_ms.item',360),delay:delay+tk('stagger_ms.group',90)+Math.min(j*tk('stagger_ms.item',45),tk('stagger_ms.max_total',560)),easing:bez('enter',[.05,.7,.1,1]),fill:'backwards'}));
+          });
         }
       }
     }catch(error){animations.forEach(a=>a.cancel());throw error;}
@@ -264,12 +272,30 @@
     function show(s){s.removeAttribute('data-kz-pending');pending.delete(s);}
     function play(s){if(!pending.has(s))return;try{const seq=reveal(s);show(s);running.set(s,seq);seq.finished.then(()=>running.delete(s));}catch(error){show(s);throw error;}}
     if(!mq.matches)for(const s of sections){const r=s.getBoundingClientRect();if(r.top>innerHeight*.9){s.setAttribute('data-kz-pending','');pending.add(s);}}
-    const io=new IntersectionObserver(entries=>{for(const e of entries)if(e.isIntersecting){io.unobserve(e.target);play(e.target);}},{threshold});
+    // One failing section must not leave the rest of the batch hidden: report it and carry on.
+    const io=new IntersectionObserver(entries=>{for(const e of entries)if(e.isIntersecting){io.unobserve(e.target);try{play(e.target);}catch(error){(global.reportError||console.error)(error);}}},{threshold});
     pending.forEach(s=>io.observe(s));
     const finishAll=()=>{[...pending].forEach(show);running.forEach(seq=>seq.cancel());running.clear();io.disconnect();};
     global.addEventListener('beforeprint',finishAll,{signal:abort.signal});
     mq.addEventListener('change',finishAll,{signal:abort.signal});
     return {finish:finishAll,dispose(){finishAll();abort.abort();}};
+  }
+
+  /* ---------- First-screen capacity guard (13 FOLD-01) ----------
+     .kz-detail-tall blocks are optional extras: they show only while the whole first screen still fits the
+     viewport. Measured on layout offsets, so entrance translate/scale never counts as overflow. */
+  function fitFold(fold=document.querySelector('.kz-fold')){
+    if(!(fold instanceof HTMLElement))throw Error('首屏根节点不存在');
+    const extras=[...fold.querySelectorAll('.kz-detail-tall')];
+    const top=el=>{let y=0;for(let n=el;n;n=n.offsetParent)y+=n.offsetTop;return y;};
+    const overflows=()=>{const limit=top(fold)+innerHeight+1;return [...fold.querySelectorAll('.kz-fold-lead > *,.kz-fold-stage')].some(el=>top(el)+el.offsetHeight>limit);};
+    // Drop extras from the last one in document order until the first screen fits again.
+    function check(){
+      extras.forEach(el=>el.removeAttribute('data-kz-fit'));
+      for(const el of [...extras].reverse()){if(!overflows())break;el.setAttribute('data-kz-fit','overflow');}
+    }
+    const ro=new ResizeObserver(check);ro.observe(fold);check();document.fonts?.ready.then(()=>{if(fold.isConnected)check();});
+    return {check,dispose(){ro.disconnect();extras.forEach(el=>el.removeAttribute('data-kz-fit'));}};
   }
 
   /* ---------- Ambient field parallax (environment layer only) ---------- */
@@ -286,7 +312,7 @@
      Each state: {label, caption, facts?:[], geometry:{x,y,w,h,r}, tint?:[r,g,b,a]}. Hold time per state =
      max(min_hold, characters / chars_per_second + read_start). Moves between states, then a closing move
      back to state 0 so frame 1 equals frame 0 (FILM-04). phaseAt/enterAt share the same clock as the Film. */
-  function storyboard(states,{charsPerSecond=6,readStartMs=1200,minHoldMs=2000,moveMs=900,closeMs=1200,tint=[255,250,240,.9]}={}){
+  function storyboard(states,{charsPerSecond=tk('film.storyboard.chars_per_second',6),readStartMs=tk('film.storyboard.read_start_ms',1200),minHoldMs=tk('film.storyboard.min_hold_ms',2000),moveMs=tk('film.storyboard.move_ms',900),closeMs=tk('film.storyboard.close_ms',1200),tint=[255,250,240,.9],staticState}={}){
     if(!Array.isArray(states)||states.length<2)throw Error('分镜至少需要两个业务状态');
     const holds=states.map(s=>{const chars=[s.label,s.caption,...(s.facts||[])].join('').replace(/\s/g,'').length;return Math.max(minHoldMs,chars/charsPerSecond*1000+readStartMs);});
     const total=holds.reduce((a,b)=>a+b,0)+moveMs*(states.length-1)+closeMs;
@@ -298,8 +324,13 @@
       frames.push(frame(t,s));t+=holds[i];frames.push(frame(t,s));if(i<states.length-1)t+=moveMs;
     });
     const closeAt=(t+closeMs/2)/total;frames.push({...frame(total,states[0]),t:1});frames[0].t=0;
-    function phaseAt(p){if(p>=closeAt)return 0;let k=0;for(let i=1;i<enterAt.length;i++)if(p>=enterAt[i])k=i;return k;}
-    return {frames,duration:Math.round(total),holds,enterAt,closeAt,phaseAt};
+    // The phase comes from the same sampler as the carrier, so a state rail never runs ahead of the panel text.
+    function phaseAt(p){const i=sample(frames,p).index;return i>=frames.length-1?0:i>>1;}
+    // Static / print / reduced-motion frame: middle of the hold of the most informative state (ties → later).
+    let rich=0;states.forEach((s,i)=>{if((s.facts||[]).length>=(states[rich].facts||[]).length)rich=i;});
+    if(staticState!==undefined){if(!Number.isInteger(staticState)||staticState<0||staticState>=states.length)throw Error('staticState 超出状态范围');rich=staticState;}
+    const staticProgress=(frames[2*rich].t+frames[2*rich+1].t)/2;
+    return {frames,duration:Math.round(total),holds,enterAt,closeAt,phaseAt,staticProgress};
   }
 
   /* ---------- Relation links inside a film stage ----------
@@ -340,5 +371,5 @@
       dispose(){disposed=true;finish();}
     };
   }
-  global.KZMotion={Film,mountTilt,reveal,mountPage,mountSections,mountField,countUp,drawLinks,storyboard,sample,validateFrames};
+  global.KZMotion={Film,mountTilt,reveal,mountPage,mountSections,mountField,fitFold,countUp,drawLinks,storyboard,sample,validateFrames};
 })(window);

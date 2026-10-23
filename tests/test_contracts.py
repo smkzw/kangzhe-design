@@ -20,7 +20,14 @@ class Contracts(unittest.TestCase):
  def test_pagewide_compact(self):
   p=self.p['pages'][0];p['body_profile']='compact'
   for e in p['elements']:e['font_px']=16
-  self.assertEqual(self.errors(self.p),[])
+  self.assertIn('SCHEMA',self.errors(self.p))
+  p['body_profile_reason']='原文规则表需整页保留';self.assertEqual(self.errors(self.p),[])
+ def test_spec_plan_fields_accepted(self):
+  p=self.p['pages'][0];p['preset']='cards-2';p['protected_regions'][0]['zone']='clear'
+  p['protected_regions'].append({'id':'ref','rect':[56,620,1168,24],'role':'reference','zone':'clear'})
+  c=p['cards'][0];c['verbatim_quote']={'source_locator':'方案 5.2','reason':'入选标准须原文'};c['emphasis']='not_applicable'
+  self.assertIn('SCHEMA',self.errors(self.p))
+  c['emphasis_reason']='并列事实无主次';self.assertEqual(self.errors(self.p),[])
  def test_internal_citation_forbidden(self):
   self.p['pages'][0]['sources'][0]['visible']=True;self.assertIn('CITATION',self.errors(self.p))
  def test_external_science_allowed(self):
@@ -49,4 +56,17 @@ class Contracts(unittest.TestCase):
   s=json.loads((ROOT/'schemas/gantt.schema.json').read_text());d=json.loads((ROOT/'examples/gantt-data.json').read_text());self.assertEqual(list(Draft202012Validator(s).iter_errors(d)),[])
  def test_legacy_missing_generation_asset_not_passed(self):
   findings=validate(self.p,{'schema_version':'6.0','assets':[]});self.assertIn('ASSET-MISSING',[x['code']for x in findings])
+ def test_css_breakpoints_follow_tokens(self):
+  # Media queries cannot read custom properties, so the CSS literals are held to the token values here.
+  import re
+  t=json.loads((ROOT/'tokens/tokens.json').read_text())['layout']['fold'];css=(ROOT/'runtime/kz-glass.css').read_text()
+  self.assertIn('@media (min-height:%dpx) {.kz .kz-detail-tall'%t['tall_detail_min_height_px'],css)
+  self.assertIn('@media (max-height:%dpx) {.kz .kz-kpis'%t['kpi_single_row_max_height_px'],css)
+ def test_deck_chrome_geometry_comes_from_tokens(self):
+  import re
+  css=(ROOT/'examples/reference/htmlppt/deck.css').read_text()
+  for sel in ['.kz-mark','.kz-rule','.kz-logo','.kz-foot','.kz-body-title','.kz-body']:
+   rule=re.search(r'\.kz '+re.escape(sel)+r'\{([^}]*)\}',css).group(1)
+   geo=[d for d in rule.split(';') if d.split(':')[0] in ('left','right','top','bottom','width','height') and 'auto' not in d]
+   self.assertTrue(geo and all('--kz-chrome-' in d for d in geo),(sel,geo))
 if __name__=='__main__':unittest.main(verbosity=2)

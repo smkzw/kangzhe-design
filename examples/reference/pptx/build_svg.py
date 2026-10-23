@@ -101,7 +101,7 @@ def build(project, images):
         'slides': {
             '02_scope': {'animation': {'trigger': 'with-previous'}, 'groups': {
                 **{f'card-{i + 1}': {'effect': 'entrance_fade', 'duration': enter, 'delay': round(i * step, 3), 'decelerate': 0.7, 'order': i + 1} for i in range(3)},
-                'takeaway': {'effect': 'entrance_fade', 'duration': enter, 'delay': round(3 * step + 0.2, 3), 'decelerate': 0.7, 'order': 4}}},
+                'takeaway': {'effect': 'entrance_fade', 'duration': enter, 'delay': round(3 * step + motion['stagger_ms']['takeaway_gap'] / 1000, 3), 'decelerate': 0.7, 'order': 4}}},
             '04_flow_b': {'transition': {'effect': 'morph', 'effect_options': {'morph_by': 'object'}, 'duration': 0.8},
                           'morph': {'from': '03_flow_a', 'pairs': {'kz-carrier': {'from': 'carrier', 'to': 'carrier'}}}}
         }

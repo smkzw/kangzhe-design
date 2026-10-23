@@ -73,6 +73,19 @@ await wait(500);
 const closed = await page.evaluate(() => ({ native: document.querySelector("dialog.kz-dialog").open, focus: document.activeElement?.id, film: KZ_LAB.film.snapshot().reasons }));
 check("下钻：收回动画期间状态即为关闭，动画后原生关闭", closing.snap === false && closing.native === true && closed.native === false, { closing, closed });
 check("下钻：焦点回到触发按钮、父电影恢复", closed.focus === "open-details" && !closed.film.includes("dialog"), closed);
+// Closing mid-opening reverses the running expansion instead of jumping to full size; close() resolves after the native close.
+await page.click("#open-details", { label: "open drilldown again" });
+await wait(120);
+const interrupted = await page.evaluate(async () => {
+  const d = document.querySelector("dialog.kz-dialog"), before = d.getBoundingClientRect().width;
+  const done = KZ_LAB.drill.close();
+  // reverse() is a pending playback-rate change: it applies on the next frame, so read after two frames.
+  await new Promise(r => requestAnimationFrame(() => requestAnimationFrame(r)));
+  const rates = d.getAnimations().map(a => a.playbackRate), widthAfter = d.getBoundingClientRect().width;
+  await done;
+  return { before, widthAfter, rates, native: d.open, focus: document.activeElement?.id };
+});
+check("下钻：展开中途关闭时反向折回，close() 在原生关闭后兑现", interrupted.rates.length > 0 && interrupted.rates.every(r => r < 0) && Math.abs(interrupted.widthAfter - interrupted.before) < 40 && !interrupted.native && interrupted.focus === "open-details", interrupted);
 
 // 6. Sections reveal on natural scroll; data reveals play; ambient field shifts.
 const before = await page.evaluate(() => { const t = document.querySelector("[data-kz-pending] [data-kz-reveal]"); return { pending: document.querySelectorAll("[data-kz-pending]").length, hiddenBeforeEntrance: !!t && getComputedStyle(t).opacity === "0", shift: getComputedStyle(document.querySelector(".kz-optical-field")).getPropertyValue("--kz-field-shift") }; });

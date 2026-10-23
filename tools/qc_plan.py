@@ -1,7 +1,7 @@
 """Mechanical preflight for KZ sidecar, NOT visual quality certification."""
 from pathlib import Path
 import argparse,json,re,hashlib
-from PIL import Image
+from PIL import Image,ImageStat
 from jsonschema import Draft202012Validator
 ROOT=Path(__file__).resolve().parents[1]
 def intersects(a,b):
@@ -40,7 +40,7 @@ def validate(plan,manifest=None,asset_root=None):
   if plan['track'] in ['pptx','htmlppt'] and p['kind'] in ['cover','toc','section','ending']:
    expected={'cover':['cover_title'],'toc':['toc_title','toc_label'],'section':['section_number','section_title'],'ending':['ending_title']}[p['kind']]
    actual={e['role'] for e in p['elements']}
-   if 'footer' in actual or any(r['role'] in ['header','footer'] for r in p['protected_regions']):add('HERO-CHROME',pid,'封面、目录、章节和结束页不得显示正文页眉页脚或页码')
+   if 'footer' in actual or any(r['role'] in ['header','footer'] for r in p['protected_regions']):add('HERO-CHROME',pid,'封面、目录、章节和尾页不得显示正文页眉页脚或页码')
    for r in expected:
     if r not in actual:add('HERO-ROLE',pid,'缺少固定角色 '+r)
    if p['kind']=='toc':
@@ -110,7 +110,7 @@ def validate(plan,manifest=None,asset_root=None):
    for region in p['protected_regions']:
     b=region['rect'];m=pad_for(region,tokens);b=[b[0]-m,b[1]-m,b[2]+2*m,b[3]+2*m]
     if intersects(a,b):add('IMAGE-COLLISION',pid+'/'+region['id'],'预期图像主体侵入保护区')
-  if p.get('takeaway') and p['takeaway']['font_px']<tokens['type_px']['takeaway']:add('TAKEAWAY',pid,'强调句字号过小')
+  if p.get('takeaway') and p['takeaway']['font_px']<tokens['type_px']['takeaway']:add('TAKEAWAY',pid,'观点句字号过小')
  if manifest is not None:
   ms=json.loads((ROOT/'schemas/asset-manifest.schema.json').read_text())
   me=list(Draft202012Validator(ms).iter_errors(manifest))
@@ -172,6 +172,12 @@ def _validate_asset(p,a,targets,asset_root,tokens,add,canvas,track):
       try:
        with Image.open(file) as im:
         if list(im.size)!=size:add('ASSET-PIXELS',p['id'],'实际文件尺寸与清单不一致')
+        wash=tokens['image'].get('washout')
+        if wash and p['kind'] in ['cover','toc','section','ending','hero']:
+         # 04 IMG-01: a hero that is almost all brightest-band and nearly colourless has no readable subject.
+         small=im.convert('RGB');small.thumbnail((256,256));hist=small.convert('L').histogram()
+         bright=sum(hist[round(256*(1-wash['bright_band'])):])/sum(hist);sat=ImageStat.Stat(small.convert('HSV').split()[1]).mean[0]/255
+         if bright>wash['bright_share_max'] and sat<wash['saturation_min']:add('IMAGE-WASHOUT',p['id'],f'主视觉 {bright:.0%} 像素落在最亮区间、平均饱和度 {sat:.1%}，主体不可辨')
       except (OSError,ValueError):add('ASSET-DECODE',p['id'],'图像不可解码')
 if __name__=='__main__':
  ap=argparse.ArgumentParser();ap.add_argument('plan',type=Path);ap.add_argument('--manifest',type=Path);ap.add_argument('--asset-root',type=Path);ap.add_argument('--out',type=Path);a=ap.parse_args()

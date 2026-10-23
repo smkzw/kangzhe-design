@@ -11,6 +11,7 @@
   if(scrollports.length)return{id:card.id,status:'NOT_TESTED',reason:'local scrollport requires separate visible-region and reachability QC',scrollports:scrollports.map(el=>({id:el.id,rect:el.getBoundingClientRect().toJSON(),client:[el.clientWidth,el.clientHeight],scroll:[el.scrollWidth,el.scrollHeight]}))};
   const walker=document.createTreeWalker(card,NodeFilter.SHOW_TEXT,{acceptNode(n){const p=n.parentElement;if(!n.textContent.trim()||p.closest('script,style,.notes,[hidden]')||zeroLegacyClip(p)||!p.checkVisibility({checkOpacity:true,checkVisibilityCSS:true}))return NodeFilter.FILTER_REJECT;return NodeFilter.FILTER_ACCEPT;}});
   let node;while(node=walker.nextNode()){const r=document.createRange();r.selectNodeContents(node);for(const q of r.getClientRects())if(q.width&&q.height)ranges.push(q);}
+  const textRanges=ranges.slice();
   for(const el of card.querySelectorAll('.kz-chart,.kz-gantt-plot')){if(!el.checkVisibility({checkOpacity:true,checkVisibilityCSS:true}))continue;const painted=[...el.querySelectorAll('canvas,svg')].some(e=>e.checkVisibility({checkOpacity:true,checkVisibilityCSS:true})&&e.getBoundingClientRect().width>0&&e.getBoundingClientRect().height>0);const r=el.getBoundingClientRect();if(!painted||!r.width||!r.height)continue;const chart=chartLibrary?.getInstanceByDom(el),series=chart?.getModel?.()?.getSeries?.();if(!series)return{id:card.id,status:'NOT_TESTED',reason:'painted chart requires reachable actual ECharts data instance',chart:el.id};if(series.some(v=>v.getData().count()>0))ranges.push(r);}
   if(!ranges.length)return{id:card.id,status:'EMPTY',rect:box.toJSON()};
   const top=Math.min(...ranges.map(r=>r.top)),bottom=Math.max(...ranges.map(r=>r.bottom));
@@ -18,10 +19,13 @@
   const pt=parseFloat(style.paddingTop)*sy,pb=parseFloat(style.paddingBottom)*sy,h=box.height-pt-pb;
   if(h<=0)return{id:card.id,status:'NOT_TESTED',reason:'no usable reading height'};
   const gapTop=top-box.top-pt,gapBottom=box.bottom-pb-bottom,span=(bottom-top)/h,balance=Math.abs(gapTop-gapBottom)/h;
-  const thresholds=g.KZ_TOKENS?.layout||{card_span_warning:.45,vertical_imbalance_warning:.20};
-  // Glyph content areas overhang tight line boxes (line-height 1.25) by a few px, so "outside" means past the card
-  // edge itself; the padding box is only the reference for the top/bottom balance below.
-  const flags=[];if(top<box.top-.5||bottom>box.bottom+.5)flags.push('TEXT_OUTSIDE');
+  const thresholds=g.KZ_TOKENS?.layout||{card_span_warning:.45,vertical_imbalance_warning:.20},qc=thresholds.qc||{};
+  // Text must stay inside the padding box. Glyph content areas overhang tight line boxes (line-height 1.25), so the
+  // vertical allowance is a fraction of the card's font size; horizontally the allowance is a pixel (10 G5-LAYOUT).
+  const sx=card.offsetWidth?box.width/card.offsetWidth:1,pl=parseFloat(style.paddingLeft)*sx,pr=parseFloat(style.paddingRight)*sx;
+  const ty=(qc.text_overhang_em??.2)*parseFloat(style.fontSize)*sy,tx=qc.text_inner_tolerance_px??1;
+  const outside=q=>q.top<box.top+pt-ty||q.bottom>box.bottom-pb+ty||q.left<box.left+pl-tx||q.right>box.right-pr+tx;
+  const flags=[];if(top<box.top-.5||bottom>box.bottom+.5||textRanges.some(outside))flags.push('TEXT_OUTSIDE');
   if(gapBottom>gapTop&&balance>thresholds.vertical_imbalance_warning)flags.push('TOP_HEAVY');
   if(span<thresholds.card_span_warning)flags.push('SPARSE_CONTENT');
   return{id:card.id,layout:card.dataset.kzLayout||'UNDECLARED',rect:box.toJSON(),content:{top,bottom},gapTop,gapBottom,span,balance,flags,status:flags.length?'REVIEW':'MEASURED'};
@@ -53,11 +57,21 @@
  // film carrier/nodes, headings, visible text lines). Reports overflow below/right of the viewport,
  // coverage share and the largest empty axis-aligned rectangle (share of the viewport). A metric, not a verdict.
  function inspectFold(fold=document.querySelector('.kz-fold')||document.body,{content='.kz-card,.kz-kpi,.kz-step,.kz-film-carrier,[data-kz-node],[data-kz-info],h1,h2,.kz-lede,nav,.kz-chart,img:not([alt=""])',cols=64,rows=36}={}){
-  const T=g.KZ_TOKENS?.layout?.fold||{},minCoverage=T.min_coverage??.55,maxVoid=T.max_void_ratio??.22,W=innerWidth,H=innerHeight;
+  const T=g.KZ_TOKENS?.layout?.fold||{},minCoverage=T.min_coverage??.45,maxVoid=T.max_void_ratio??.18,W=innerWidth,H=innerHeight;
   if(!fold||!fold.isConnected)return{status:'NOT_TESTED',reason:'missing fold root'};
   const visible=el=>el.checkVisibility({checkOpacity:true,checkVisibilityCSS:true});
-  const rects=[],overflow=[];
-  for(const el of fold.querySelectorAll(content)){if(!visible(el))continue;const r=el.getBoundingClientRect();if(r.width&&r.height)rects.push(r);}
+  // A box only counts when it actually carries information: visible text or a painted graphic. Empty cards and
+  // placeholder stages do not raise coverage.
+  const sized=el=>{const r=el.getBoundingClientRect();return r.width>0&&r.height>0;};
+  const informative=el=>el.matches('img,canvas,svg')||!!el.innerText?.trim()||[...el.querySelectorAll('img,canvas,svg')].some(x=>visible(x)&&sized(x));
+  const rects=[],overflow=[];let skipped=0;
+  for(const el of fold.querySelectorAll(content)){
+   if(!visible(el))continue;const r=el.getBoundingClientRect();if(!r.width||!r.height)continue;
+   if(!informative(el)){skipped++;continue;}
+   rects.push(r);
+   // A card cut by the viewport edge is not "fully shown" even when its last text line still fits.
+   if(r.bottom>H+1||r.right>W+1)overflow.push({text:'('+(el.className||el.tagName.toLowerCase())+')',rect:r.toJSON()});
+  }
   const walker=document.createTreeWalker(fold,NodeFilter.SHOW_TEXT);let node;
   while(node=walker.nextNode()){
    const p=node.parentElement;if(!node.textContent.trim()||!p||p.closest('script,style,.notes,[hidden]')||!visible(p))continue;
@@ -76,16 +90,18 @@
   }
   const coverage=covered/(cols*rows),voidRatio=largest/(cols*rows),flags=[];
   if(overflow.length)flags.push('FOLD_OVERFLOW');if(coverage<minCoverage)flags.push('LOW_COVERAGE');if(voidRatio>maxVoid)flags.push('LARGE_VOID');
-  return{status:flags.length?'FAIL':'PASS',viewport:[W,H],coverage:+coverage.toFixed(3),voidRatio:+voidRatio.toFixed(3),thresholds:{minCoverage,maxVoid},flags,overflow:overflow.slice(0,12)};
+  return{status:flags.length?'FAIL':'PASS',viewport:[W,H],coverage:+coverage.toFixed(3),voidRatio:+voidRatio.toFixed(3),thresholds:{minCoverage,maxVoid},flags,emptyBoxes:skipped,overflow:overflow.slice(0,12)};
  }
  // 03 孤字行：段落/列表项的末行只有一个汉字（可带标点）。按实际渲染行（Range 行框）判定，不按字符数估算。
  function inspectOrphans(root=document.body,{selector='p,li,h1,h2,h3,td,th,.kz-kpi-label,.kz-film-caption,[data-kz-role="body"]'}={}){
   const cjk=/[\u3400-\u9fff\uf900-\ufaff]/,punct=/[\s，。、；：！？）》」』”’…—·,.;:!?)\]]/;const found=[];
   for(const el of root.querySelectorAll(selector)){
    if(!el.checkVisibility({checkOpacity:true,checkVisibilityCSS:true})||el.querySelector(selector))continue;
-   const lines=new Map(),walker=document.createTreeWalker(el,NodeFilter.SHOW_TEXT);let node;
-   while(node=walker.nextNode()){const text=node.textContent;for(let i=0;i<text.length;i++){const r=document.createRange();r.setStart(node,i);r.setEnd(node,i+1);const q=r.getClientRects()[0];if(!q||!q.width)continue;const key=Math.round(q.top);if(!lines.has(key))lines.set(key,'');lines.set(key,lines.get(key)+text[i]);}}
-   if(lines.size<2)continue;const last=[...lines.entries()].sort((a,b)=>a[0]-b[0]).at(-1)[1],core=[...last].filter(c=>!punct.test(c));
+   // A rendered line is a vertical band; a smaller inline run (unit, <small>) whose centre falls inside the band
+   // belongs to the same line even though its glyph top differs.
+   const lines=[],walker=document.createTreeWalker(el,NodeFilter.SHOW_TEXT);let node;
+   while(node=walker.nextNode()){const text=node.textContent;for(let i=0;i<text.length;i++){const r=document.createRange();r.setStart(node,i);r.setEnd(node,i+1);const q=r.getClientRects()[0];if(!q||!q.width)continue;const c=(q.top+q.bottom)/2;let line=lines.find(l=>c>=l.top&&c<=l.bottom);if(!line)lines.push(line={top:q.top,bottom:q.bottom,text:''});line.text+=text[i];}}
+   if(lines.length<2)continue;const last=lines.sort((a,b)=>a.top-b.top).at(-1).text,core=[...last].filter(c=>!punct.test(c));
    if(core.length===1&&cjk.test(core[0]))found.push({text:el.textContent.trim().slice(0,40),lastLine:last,tag:el.tagName.toLowerCase()});
   }
   return{status:found.length?'FAIL':'PASS',orphans:found};

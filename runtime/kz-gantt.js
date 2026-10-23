@@ -20,6 +20,7 @@
     for(const t of data.tasks){
       if(!t.id||ids.has(t.id))throw Error('任务 id 缺失或重复');ids.add(t.id);
       if(typeof t.label!=='string'||!t.label.trim())throw Error('任务标签为空');
+      if(t.start_known===false||t.end_known===false)throw Error('参考组件不渲染未知端点：任务 '+t.id+' 须由项目另行标示“待定”（08 GANTT-02）');
       if(!Number.isInteger(t.start)||!Number.isInteger(t.end)||t.start>=t.end||t.start<data.min||t.end>data.max)throw Error('任务时间越界或区间无效');
     }
     return true;
@@ -103,7 +104,7 @@
     function rollbackDrag(){if(!drag)return;data=drag.before;drag=null;draw();syncFields();status('本次拖动已取消');}
     plot.addEventListener('pointerdown',event=>{
       if(event.button!==0)return;if(progress!==1)finish();const h=hit(event);if(!h)return;
-      selected=h.t.id;syncFields();const edge=Math.min(14,h.r.w*.24);const mode=h.p[0]<h.r.x+edge?'start':h.p[0]>h.r.x+h.r.w-edge?'end':'move';
+      selected=h.t.id;syncFields();const G=KZ_TOKENS.gantt||{},edge=Math.min(G.handle_px??14,h.r.w*(G.handle_short_ratio??.24));const mode=h.p[0]<h.r.x+edge?'start':h.p[0]>h.r.x+h.r.w-edge?'end':'move';
       drag={id:selected,mode,axis:axisAt(event),start:h.t.start,end:h.t.end,before:clone(data),clientX:event.clientX,moved:false,pointerId:event.pointerId};
       plot.setPointerCapture(event.pointerId);plot.focus();event.preventDefault();draw();
     },{signal});

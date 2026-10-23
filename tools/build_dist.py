@@ -5,17 +5,25 @@ Maintenance and history material stays in the repository only: review/, agent/, 
 examples/validation/. Install the produced directory as one skill (INSTALL.md).
 """
 from pathlib import Path
-import argparse, hashlib, json, shutil
+import argparse, hashlib, json, shutil, subprocess
 R = Path(__file__).resolve().parents[1]
 EXCLUDE = ('.git/', 'dist/', 'review/', 'agent/', 'docs/history/', 'tests/', 'examples/validation/')
-EXCLUDE_NAMES = {'.DS_Store', '__pycache__'}
+EXCLUDE_NAMES = {'.DS_Store', '__pycache__', '.gitignore', '.pytest_cache'}
 
 def included(rel):
     return not rel.startswith(EXCLUDE) and not (set(Path(rel).parts) & EXCLUDE_NAMES) and not rel.endswith('.pyc')
 
+def source_files(target):
+    """Version-controlled files when this is a git checkout (local scratch never ships); otherwise the tree."""
+    try:
+        listed = subprocess.run(['git', '-C', str(R), 'ls-files', '-z'], capture_output=True, check=True).stdout.decode().split('\0')
+        return [rel for rel in listed if rel and (R / rel).is_file()]
+    except (OSError, subprocess.CalledProcessError):
+        return [p.relative_to(R).as_posix() for p in R.rglob('*') if p.is_file() and target not in p.parents]
+
 def build(out):
-    files = sorted(p.relative_to(R).as_posix() for p in R.rglob('*') if p.is_file() and included(p.relative_to(R).as_posix()))
     target = out / 'kangzhe-design'
+    files = sorted(rel for rel in source_files(target) if included(rel))
     if target.exists():
         shutil.rmtree(target)
     entries = []

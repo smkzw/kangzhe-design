@@ -93,5 +93,12 @@ class HeroContracts(unittest.TestCase):
      else:q['protected_regions'].append(dict(id='header',role='header',rect=[0,0,100,90],motion_margin=0))
      with self.subTest(track=track,kind=kind,role=role):self.assertIn('HERO-CHROME',self.errors(p))
  def test_site_not_forced_to_slide_master(self):
-  p=self.page();p['track']='site';p['target_viewports']=[[1280,720],[1536,730],[1920,940],[2560,1080]];p['pages'][0].pop('hero_layout_id');p['pages'][0]['elements']=[];p['pages'][0]['motion_objects']=[{'id':'scene','role':'film','enter':'fade','exit':'fade','hover':'none','ambient':'film'}];self.assertEqual(self.errors(p),set())
+  p=self.page();p['track']='site';p['target_viewports']=[[1280,720],[1536,730],[1920,940],[1920,1080],[2560,1080]];p['pages'][0].pop('hero_layout_id');p['pages'][0]['elements']=[];p['pages'][0]['motion_objects']=[{'id':'scene','role':'film','enter':'fade','exit':'fade','hover':'none','ambient':'film'}];self.assertEqual(self.errors(p),set())
+ def test_svg_logo_keeps_aspect_and_image_fills(self):
+  import re
+  from hero_layout import svg_fragment
+  for kind,content in [('cover',{'title':'汇报示例'}),('section',{'number':'01','title':'研究设计'})]:
+   s=svg_fragment(kind,content,'bg.png','logo.png')
+   modes=dict(re.findall(r'<image id="([^"]+)"[^>]*preserveAspectRatio="([^"]+)"',s))
+   self.assertEqual(modes.get('logo'),'xMidYMid meet',kind);self.assertTrue(all(v.endswith('slice') for k,v in modes.items() if k!='logo'),modes)
 if __name__=='__main__':unittest.main()

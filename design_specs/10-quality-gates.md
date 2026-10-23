@@ -1,9 +1,23 @@
 # 10 质量门与放行
 
-各章写“做成什么样”，本章写“怎么证明做成了”。硬门 FAIL 不能用美观高分抵消；WARN 写理由与影响范围；PENDING 是未测，不是默认通过。
+各章写“做成什么样”，本章写“怎么证明做成了”。
+
+## 状态词 QA-STATUS
+门表、证据记录和交付说明只用以下六个状态词，其他章节引用本表，不另造近义词：
+
+| 状态 | 含义 | 必须附带 |
+|---|---|---|
+| `PASS` | 已按本章方法测过且合格 | 证据路径 |
+| `WARN` | 合格但有已知降级 | 理由与影响范围 |
+| `FAIL` | 测过且不合格 | 问题坐标 |
+| `BLOCKED` | 工具、权限或条件不可用，无法完成 | 所需能力、已完成部分 |
+| `PENDING` | 尚未测 | 原因与下一步 |
+| `N/A` | 本条对该产物不适用 | 原因 |
+
+硬门 FAIL 不能用美观高分抵消；PENDING 不是默认通过。工具返回的内部码（如 `inspectCard` 的 `NOT_TESTED`）在门表里记为 PENDING。
 
 ## 门表
-交付自述（SELF_REPORT，任务交接文件或交付说明的结论段）必须含一节“G0–G9 门表”，每门只取 `PASS + 证据` / `FAIL` / `PENDING` / `N/A + 原因`，不留空、不互相指向。
+交付说明的结论段附一张“G0–G9 门表”：每门填一个状态词，不留空，不写“同 G5”之类的互相指向。
 
 | 门 | 内容 | 最小证据 |
 |---|---|---|
@@ -18,26 +32,27 @@
 | G8 交互 | 下钻宽度与层级、焦点、按键与滚轮隔离、甘特拖改与表单一致、撤销 | 真实指针/键盘/滚轮事件轨迹与断言 |
 | G9 目标环境 | 上游引擎端到端、目标 Office、浏览器与系统、离线与导出 | 实机截图、原生编辑保存回读 |
 
-无讲稿容器的轨道或页面，G7-NOTES 写 `N/A：本轨无讲稿容器`；没有实机投屏条件时，G2、G5 与结论段同时标注“投屏可读性未验证”（G5-PROJ），其余门照常按各自证据取值。
+无讲稿容器的轨道或页面，G7-NOTES 写 `N/A：本轨无讲稿容器`；没有实机投屏条件时，G5-PROJ 记 PENDING（投屏可读性未验证），并在 G2、G5 与结论段注明；其余门照常按各自证据取值。
 
 ## 分阶段检查
 预检一次发现缺依赖 → 布局草图检容量与保护区 → 生图批量完成同风格资产 → 组件阶段跑确定性测试 → 每个语义里程碑做浏览器/视觉审阅 → 最后完整回归。先交付一页完整可验的样页、确认上游链路后再扩展全套；不对每个 CSS 小改动重启全部检查。
 
 ## 工具
+安装包内可用的工具：
+
 | 工具 | 用途 | 不能证明 |
 |---|---|---|
-| `python tests/test_*.py` | 合同、tokens、hero 几何、计划绕过等确定性回归 | 视觉与动态 |
 | `tools/qc_plan.py PLAN [--manifest M --asset-root R]` | 计划语义预检：标题、字号、动态清单、视口矩阵、图像映射、真实像素与哈希 | 视觉放行 |
 | `KZLayoutQC.inspectCard / inspectTextBounds / inspectFold / inspectOrphans` | 卡内纵向分布、阅读区越界、首屏覆盖率与空白、孤字行（浏览器内运行） | 审美与语义 |
-| `tests/ego/runtime_checks.mjs` | 组件实验室的真实指针/键盘/滚动检查（入场分层、弹簧倾斜、电影交叉淡入、下钻展开与按键隔离、段落入场、减少动态） | 交付页本身 |
-| `tests/*_browser.py` | Playwright 版组件检查（维护者环境） | 交付页本身 |
 | ppt-master `svg_quality_checker.py`、`animation_config.py validate`、`pptx_delivery_check.py` | 上游 SVG 合同、动效侧车、成品交付风险 | PowerPoint 实机观感 |
 | html-ppt-skill `scripts/render.sh` | 官方静态截帧 | 普通观众态动态 |
 
+仓库内的维护者回归（`tests/`，不随安装包发布，用于改 runtime、tokens 或规范之后）：`python tests/test_*.py`（合同、tokens、hero 几何、规范结构）；`tests/ego/runtime_checks.mjs`（在 ego lite 中对组件实验室做真实指针、键盘、滚动检查：入场分层、弹簧倾斜、电影交叉淡入、下钻展开与按键隔离、段落入场、减少动态）；`tests/*_browser.py`（Playwright 版，需要可用的独立浏览器环境）。它们证明组件行为，不证明交付页本身。
+
 ## 几何与文字 G5-LAYOUT
 - 用真实 computed style、文字 Range 矩形、容器 client/scroll 尺寸判断越界；“页面没有滚动条”不够。祖先包含子节点不是碰撞。
-- 页缘溢出：每个交付视口逐页取卡片 `getBoundingClientRect()`，超出页面内容边界 >2px 即失败（CSS 裁切不改变溢出事实）；卡内叶级文字越过卡片左右内边界 >1px 计横向溢出。
-- 卡内分布按 03 TYPE-02 实测 T/B/H/R；`inspectCard` 遇到局部滚动区返回 NOT_TESTED，另验可见 scrollport 与全部行列可达。图表内容以实际 ECharts 系列数据计数，取不到实例为 NOT_TESTED。
+- 页缘溢出：每个交付视口逐页取卡片 `getBoundingClientRect()`，超出页面内容边界超过 `layout.qc.page_overflow_px`（2px）即失败（CSS 裁切不改变溢出事实）；卡内叶级文字越过卡片左右内边界超过 `text_inner_tolerance_px`（1px）计横向溢出，纵向允许字形越过内边距 `text_overhang_em`（0.2em）。`inspectCard` 按这三项报 `TEXT_OUTSIDE`。
+- 卡内分布按 03 TYPE-02 实测 T/B/H/R；`inspectCard` 遇到局部滚动区返回 `NOT_TESTED`（记 PENDING），另验可见 scrollport 与全部行列可达。图表内容以实际 ECharts 系列数据计数，取不到实例同样记 PENDING。
 - G5-NESTED：电影最大展开态中的每张子卡也分别测，不用父载体的联合框掩盖内部空白。
 - G5-FOLD：站点/流式首屏在 `tokens.viewports` 每档 `inspectFold` PASS（13 FOLD-03），并在电影初始态与总览帧各测一次。
 - G5-ORPHAN：`inspectOrphans` 在每档视口、电影各阅读状态无孤字行。
@@ -59,16 +74,16 @@
 
 ## 交互 G8
 - 下钻：宽度与高度、层级栈、面包屑、焦点进入与返回、Esc 逐层、背景隔离、展开与收回动画、父电影暂停与恢复；renderer 抛错显示“明细未能加载”时判失败。
-- DRILL-04：在最小交付视口逐层用真实滚轮/触控验证：内容溢出时 scrollTop 双向可变；两端与滚动体外页码不变、背景不动；指针落在横向溢出单元格上的双轴事件仍能纵向滚动；弹层内横滑不翻页；单字母快捷键不冒泡。任务书点名本条而产物没有可溢出弹层时，须提供一个真实溢出的实例，否则记“未验证”。
+- DRILL-04：在最小交付视口逐层用真实滚轮/触控验证：内容溢出时 scrollTop 双向可变；两端与滚动体外页码不变、背景不动；指针落在横向溢出单元格上的双轴事件仍能纵向滚动；弹层内横滑不翻页；单字母快捷键不冒泡。任务书点名本条而产物没有可溢出弹层时，须提供一个真实溢出的实例，否则记 PENDING。
 - 甘特：真实指针拖动整条与两端、Esc/pointercancel 回退、键盘、表单无效输入、撤销与还原（真实指针点击浮层按钮并记录 `elementFromPoint`）、序列化读回、减少动态、离开再返回、表单焦点下方向键不翻页。
 
 ## 可编辑性 G9
 PPTX：抽样编辑一段中文、一个表格格子和一个甘特条（存在时），保存重开检查；图表按 canonical data、缓存与嵌入工作簿结构逐值核对，并在 PowerPoint 检查渲染。本包不调用、打开或修复 Excel，也不通过“编辑数据”启动 Excel；结构核对不叫 Excel 编辑验证。光学装饰图片合法，整页或整卡栅格化不合法。HTML-PPT 必须通过上游的缩放、深链接、方向键与演讲者窗口；编辑表单或弹窗中的按键不触发翻页。
 
 ## 证据
-每项记录 `rule_id、status、artifact、page/scene/object、expected、observed、method、environment、evidence_path、hash、next_action`；未执行写 pending 与原因。QC 每页/每场景结束即写入结果，异常终止保留已有结果和真实退出码，不在末尾补写全绿报告；修仪器与修产品分开归因。
+每项记录 `rule_id、status、artifact、page/scene/object、expected、observed、method、environment、evidence_path、hash、next_action`；未执行记 PENDING 与原因。QC 每页/每场景结束即写入结果，异常终止保留已有结果和真实退出码，不在末尾补写全绿报告；修仪器与修产品分开归因。
 
-视觉审阅帧包写明视口、页面/场景、普通态或静态态、时间/进度、页面与弹层的滚动位置；包含下钻顶部、电影中段与底部。静态截图只证明可见外观：不能据此推断 DOM 不存在或 backdrop-filter 不存在；疑似缺失先由 owner 对照源码与真实滚动复核，保留原判与复核结论。VLM 评分写明模型、提示、输入帧与原始回复，生成者与评审者身份隐藏。“console 零报错”包含浏览器自动请求的 favicon（产物给一个 `data:` favicon 即可）。
+视觉审阅帧包写明视口、页面/场景、普通态或静态态、时间/进度、页面与弹层的滚动位置；包含下钻顶部、电影中段与底部。静态截图只证明可见外观：不能据此推断 DOM 不存在或 backdrop-filter 不存在；疑似缺失先由该规则的所有者对照源码与真实滚动复核，保留原判与复核结论。VLM 评分写明模型、提示、输入帧与原始回复，生成者与评审者身份隐藏。“console 零报错”包含浏览器自动请求的 favicon（产物给一个 `data:` favicon 即可）。
 
 ## 放行等级
 - **设计规范可用**：文档、参数、合同自洽，基础工厂与本地测试可运行。

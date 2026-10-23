@@ -6,7 +6,7 @@ from qc_plan import validate
 class ResponsiveProfiles(unittest.TestCase):
  def plan(self,track='site',profile='responsive',size=18):
   p=json.loads((R/'agent/fixtures/page-plan.valid.json').read_text());p['track']=track
-  if track!='pptx':p['target_viewports']=[[1280,720],[1536,730],[1920,940],[2560,1080]]
+  if track!='pptx':p['target_viewports']=[[1280,720],[1536,730],[1920,940],[1920,1080],[2560,1080]]
   page=p['pages'][0];page['body_profile']=profile
   for e in page['elements']:e['font_px']=size
   if track!='pptx':page['motion_objects']=[{'id':'a','role':'card','enter':'fade','exit':'fade','hover':'tilt','ambient':'none'}]

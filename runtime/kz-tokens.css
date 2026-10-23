@@ -2,7 +2,6 @@
 :root {
   --kz-brand: #FF9900;
   --kz-secondary: #FFCC00;
-  --kz-ribbon-mid: #F5A000;
   --kz-hero-number: #FFA900;
   --kz-ink: #0F1115;
   --kz-body: #404040;
@@ -11,7 +10,6 @@
   --kz-risk: #C00000;
   --kz-white: #FFFFFF;
   --kz-canvas: #FBFCFD;
-  --kz-table-header: #F79646;
   --kz-focus: #B85C00;
   --kz-type-page-title: 32px;
   --kz-type-card-title: 24px;
@@ -35,6 +33,10 @@
   --kz-type-section-number: 112px;
   --kz-type-section-title: 60px;
   --kz-type-ending-title: 104px;
+  --kz-type-kpi-value: 38px;
+  --kz-type-kpi-value-min: 28px;
+  --kz-type-site-h1: 44px;
+  --kz-type-site-h1-min: 32px;
   --kz-medical: #FF9900;
   --kz-medical-tint: #FBE3D6;
   --kz-operations: #407AAA;
@@ -66,6 +68,8 @@
   --kz-elev-rest: 0px 1px 2px 0px rgba(72,52,24,0.06),0px 6px 14px 0px rgba(72,52,24,0.05),0px 18px 40px 0px rgba(72,52,24,0.07);
   --kz-elev-raised: 0px 2px 4px 0px rgba(72,52,24,0.08),0px 12px 24px 0px rgba(72,52,24,0.08),0px 32px 64px 0px rgba(72,52,24,0.11);
   --kz-elev-overlay: 0px 2px 6px 0px rgba(72,52,24,0.08),0px 18px 40px 0px rgba(72,52,24,0.09),0px 44px 90px 0px rgba(72,52,24,0.12);
+  --kz-elev-thin: 0px 1px 2px 0px rgba(72,52,24,0.05);
+  --kz-elev-inset: inset 0px 1px 3px 0px rgba(72,52,24,0.08);
   --kz-lift-px: 3px;
   --kz-ease-standard: cubic-bezier(0.2,0,0,1);
   --kz-ease-enter: cubic-bezier(0.05,0.7,0.1,1);
@@ -85,7 +89,6 @@
   --kz-dur-dialog: 420ms;
   --kz-dur-page: 480ms;
   --kz-dur-section: 640ms;
-  --kz-dur-text-swap: 240ms;
   --kz-dist-card: 18px;
   --kz-dist-title: 10px;
   --kz-dist-item: 6px;
@@ -116,6 +119,32 @@
   --kz-reference-height: 720;
   --kz-dialog-width: 82vw;
   --kz-dialog-max-height: 94vh;
+  --kz-lede-max: 30em;
+  --kz-canvas-w: 1280;
+  --kz-canvas-h: 720;
+  --kz-chrome-title-x: 91;
+  --kz-chrome-title-y: 24;
+  --kz-chrome-title-w: 919;
+  --kz-chrome-title-h: 44;
+  --kz-chrome-logo-x: 1031;
+  --kz-chrome-logo-y: 45;
+  --kz-chrome-logo-w: 158;
+  --kz-chrome-logo-h: 33;
+  --kz-chrome-body-x: 56;
+  --kz-chrome-body-y: 96;
+  --kz-chrome-body-w: 1168;
+  --kz-chrome-body-h: 564;
+  --kz-chrome-mark-x: 0;
+  --kz-chrome-mark-y: 0;
+  --kz-chrome-mark-w: 100;
+  --kz-chrome-mark-h: 90;
+  --kz-chrome-rule-x1: 54;
+  --kz-chrome-rule-y: 80;
+  --kz-chrome-rule-x2: 1257;
+  --kz-chrome-rule-stroke: 1.5;
+  --kz-chrome-foot-left: 24;
+  --kz-chrome-foot-right: 32;
+  --kz-chrome-foot-bottom: 14;
 }
 .kz-card,.kz-lit {
   --kz-rim: linear-gradient(calc(165deg + var(--kz-lx,0) * 50deg),rgba(255,255,255,0.96) 0%,rgba(190,178,161,0.34) 32%,rgba(190,178,161,0.2) 68%,rgba(255,255,255,0.72) 100%);

@@ -14,7 +14,7 @@ PPTX 中的“可编辑”是 PowerPoint 编辑模式下的原生时间条、标
 - 引用既往研究资料的时间条默认只读；允许调整时建立独立的“计划/情景修改层”，原始证据层不被覆盖。
 
 ## 手势与表单 GANTT-03
-整条拖拽保持时长，左右边缘调 start/end；指针通过图表坐标反变换，不能把屏幕 dx 直接当季度偏移（HTML-PPT 有整体缩放、浏览器缩放和 DPR）。用 pointer capture，pointercancel / Esc 回退本次拖动，微小位移视为选中。吸附季度、夹在轴边界内、至少一个季度；禁止负时长、start≥end、NaN、越界和重复 id。左右端命中区至少 12px（短条按条宽比例收窄时仍须可用），密集相邻条防误选。编辑时图表面不倾斜。
+整条拖拽保持时长，左右边缘调 start/end；指针通过图表坐标反变换，不能把屏幕 dx 直接当季度偏移（HTML-PPT 有整体缩放、浏览器缩放和 DPR）。用 pointer capture，pointercancel / Esc 回退本次拖动，微小位移视为选中。吸附季度、夹在轴边界内、至少一个季度；禁止负时长、start≥end、NaN、越界和重复 id。左右端命中区宽 `gantt.handle_px`（14px），短条按条宽的 `gantt.handle_short_ratio` 收窄，仍须能分别拖动两端；密集相邻条防误选。编辑时图表面不倾斜。
 
 点击选择后编辑器同步显示起止年与季度；方向键移动一季度，Shift+方向键调结束季度；表单提供等效功能。输入无效时给具体错误，不清空原值也不悄悄夹成另一个日期。
 
@@ -25,4 +25,4 @@ PPTX 中的“可编辑”是 PowerPoint 编辑模式下的原生时间条、标
 首次出现时条形按 05 CHART-04 的数据缓动依次延伸（上到下小错峰），基于冻结的原始目标数据。用户开始选择、拖动或输入时立即结束揭示、呈现真值并进入编辑；返回页面不重播覆盖修改。缩放和重绘后重新布置把手，不保留旧屏幕坐标。
 
 ## 实现范围
-`runtime/kz-gantt.js` 是季度、单轴参考组件（ECharts custom series）；它读取 `color`、`department`，不渲染 `status`、`dependencies` 与未知端点（`*_known:false` 的任务须由项目另行标示“待定”）。日粒度、依赖自动调度、多人协同、写回源材料都不是已实现能力，不得写进完成清单。
+`runtime/kz-gantt.js` 是季度、单轴参考组件（ECharts custom series）；它读取 `color`、`department`，不渲染 `status` 与 `dependencies`；遇到未知端点（`start_known` / `end_known` 为 false，schema 允许对应端点为 null）直接报错，由项目另行标示“待定”，不让参考组件编造时长。日粒度、依赖自动调度、多人协同、写回源材料都不是已实现能力，不得写进完成清单。

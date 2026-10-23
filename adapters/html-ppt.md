@@ -46,3 +46,5 @@ const bridge = KZHTMLPPT.bind(document.querySelector('.deck'), slide => {
 
 ## 正式静态截帧
 `render.sh` 可能在上游 0.5s 过渡中截帧。确有该问题时，从观众源派生同目录 `capture-only.html`：资源与 hash 导航不变，仅此副本加 `body[data-capture-only]`，项目装配识别后把图表、甘特、电影置于完整终态；观众源不引用捕获样式。改源后重新派生。然后调用原 `render.sh capture-only.html all <out>`，逐页核对 PNG 尺寸、活动页 opacity=1、完整文字与数据。1920 截帧不代替 2560 宽屏运行检查；记录上游与副本 hash 和真实返回码。
+
+宿主禁止 headless 浏览器时（`render.sh` 依赖 headless Chrome），改用宿主允许的有界面浏览器：把可视区设为 1920×1080，逐页打开 `capture-only.html#/N`，等项目的就绪标记（参考实现为 `html[data-kz-deck-ready]`）与活动页 opacity=1 后截帧，按上面的项目核对。门表 G9 的 method 写“替代截帧（原因：宿主禁用 headless）”，不写成 render.sh 通过。

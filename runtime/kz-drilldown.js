@@ -119,31 +119,41 @@
       const prev=this.stack.at(-1);prev.section.hidden=false;this.animateLevel(prev.section,-1);this.sync();this.body.scrollTop=prev.scroll;
       prev.life.resume?.();const f=prev.focus;if(f?.isConnected)f.focus({preventScroll:true});else this.title.focus({preventScroll:true});
     }
+    // Returns a promise that settles once the native dialog has closed and focus is back on the opener.
     close(){
-      if(!this.stack.length)return;
+      if(!this.stack.length)return this.closing?.done??Promise.resolve();
       const opener=this.opener;
-      // Measure while the panel still has its content: it folds back into the card it came from, then closes.
-      const animating=!this.disposed&&this.morph(opener,true),removed=[];
+      // Fold back into the source card: reverse an unfinished opening, otherwise measure the settled panel.
+      const animating=!this.disposed&&(this.reverseOpening()||this.morph(opener,true)),removed=[];
       while(this.stack.length){const rec=this.stack.pop();rec.life.dispose?.();if(animating)removed.push(rec.section);else rec.section.remove();}
       this.restoreBackground?.();this.restoreBackground=null;this.restoreScroll?.();this.restoreScroll=null;this.onClose();
       // Focus can only return once the modal has closed (the page behind a modal dialog is inert).
-      if(animating){Object.assign(this.closing,{sections:removed,opener});this.closing.finished.then(()=>this.finishClosing(),()=>this.finishClosing());}
-      else{this.dialog.close();if(opener?.isConnected)opener.focus({preventScroll:true});}
+      if(animating){const c=Object.assign(this.closing,{sections:removed,opener});c.done=c.finished.then(()=>this.finishClosing(),()=>this.finishClosing());return c.done;}
+      this.dialog.close();if(opener?.isConnected)opener.focus({preventScroll:true});return Promise.resolve();
+    }
+    reverseOpening(){
+      const o=this.opening;this.opening=null;
+      if(!o||o.box.playState!=='running')return false;
+      for(const a of [o.box,o.text]){a.effect.updateTiming({fill:'backwards'});a.reverse();}
+      this.dialog.style.pointerEvents='none';this.closing={finished:o.box.finished,cancel(){o.box.cancel();o.text.cancel();}};
+      return true;
     }
     // Shared-element transition between the source card and the panel (FLIP on the dialog box only).
     morph(trigger,closing){
       const T=global.KZ_TOKENS?.motion||{},reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
-      const source=trigger?.closest?.('.kz-card,[data-kz-drill-source]')||trigger;
+      // Only a card (or a declared source) is a shared element; a bare button or <body> opens in place.
+      const source=trigger?.closest?.('.kz-card,[data-kz-drill-source]');
       if(reduced||document.hidden||!source?.isConnected||!this.dialog.animate)return false;
       const from=source.getBoundingClientRect(),to=this.dialog.getBoundingClientRect();
       if(!from.width||!from.height||!to.width||!to.height)return false;
       const card=`translate(${from.left-to.left}px,${from.top-to.top}px) scale(${from.width/to.width},${from.height/to.height})`;
       const ease=a=>'cubic-bezier('+a.join(',')+')',frame=this.dialog.firstElementChild;
-      const opt={duration:closing?(T.duration_ms?.exit??220):(T.duration_ms?.dialog??420),easing:closing?ease(T.easing?.exit??[.3,0,.8,.15]):ease(T.easing?.enter??[.05,.7,.1,1])};
+      const opt={duration:closing?(T.duration_ms?.exit??220):(T.duration_ms?.dialog??420),easing:closing?ease(T.easing?.exit??[.3,0,.8,.15]):ease(T.easing?.enter??[.05,.7,.1,1]),fill:closing?'forwards':'none'};
       this.dialog.style.transformOrigin='0 0';
       const box=this.dialog.animate(closing?[{transform:'none',opacity:1},{transform:card,opacity:.4}]:[{transform:card,opacity:.4},{transform:'none',opacity:1}],opt);
       const text=frame.animate(closing?[{opacity:1},{opacity:0,offset:.5},{opacity:0}]:[{opacity:0},{opacity:0,offset:.45},{opacity:1}],opt);
       if(closing){this.dialog.style.pointerEvents='none';this.closing={finished:box.finished,cancel(){box.cancel();text.cancel();}};}
+      else{this.opening={box,text};box.finished.then(()=>{if(this.opening?.box===box)this.opening=null;},()=>{});}
       return true;
     }
     finishClosing(){
@@ -154,7 +164,7 @@
       if(matchMedia('(prefers-reduced-motion: reduce)').matches||!section.animate)return;
       section.animate([{opacity:0,translate:`${24*direction}px 0`},{opacity:1,translate:'0 0'}],{duration:T.duration_ms?.item??360,easing:'cubic-bezier('+(T.easing?.enter??[.05,.7,.1,1]).join(',')+')'});
     }
-    snapshot(){return {open:this.dialog.open&&!this.closing,depth:this.stack.length,path:this.stack.map(x=>x.id),width:this.dialog.open&&!this.closing?this.dialog.getBoundingClientRect().width:0,viewport:innerWidth};}
+    snapshot(){return {open:this.dialog.open&&!this.closing,depth:this.stack.length,path:this.stack.map(x=>x.id),width:this.dialog.open&&!this.closing?this.dialog.offsetWidth:0,viewport:innerWidth};}
     dispose(){if(this.disposed)return;this.close();this.finishClosing();this.disposed=true;this.abort.abort();this.dialog.remove();}
   }
   global.KZDrilldown={Drilldown,element};

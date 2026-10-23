@@ -48,7 +48,7 @@
 .kz .kz-card [data-kz-role="body"] {font-size:calc(var(--kz-type-body) * var(--kz-component-u,1));line-height:var(--kz-line-body);}
 .kz [data-kz-density="compact"] {--kz-type-body:var(--kz-type-body-compact);--kz-pad:var(--kz-pad-compact);}
 /* Thin overlay inside a glass shell: same family, no second blur. */
-.kz .kz-thin {background:var(--kz-thin-face);border-radius:calc(14px * var(--kz-component-u,1));padding:calc(14px * var(--kz-component-u,1)) calc(16px * var(--kz-component-u,1));border:1px solid rgba(var(--kz-face-border-rgb),var(--kz-thin-border-alpha));box-shadow:inset 0 1px 0 rgba(255,255,255,.8),0 1px 2px rgba(var(--kz-shadow-rgb),.05);backdrop-filter:none;}
+.kz .kz-thin {background:var(--kz-thin-face);border-radius:calc(14px * var(--kz-component-u,1));padding:calc(14px * var(--kz-component-u,1)) calc(16px * var(--kz-component-u,1));border:1px solid rgba(var(--kz-face-border-rgb),var(--kz-thin-border-alpha));box-shadow:inset 0 1px 0 rgba(255,255,255,.8),var(--kz-elev-thin);backdrop-filter:none;}
 .kz .kz-thin+.kz-thin {margin-top:calc(12px * var(--kz-component-u,1));}
 
 /* Tilt: the tilt element owns `transform`; kz-motion.js only writes --kz-lx/--kz-ly/--kz-lift (spring). */
@@ -65,7 +65,7 @@
 .kz .kz-button:disabled {opacity:.5;cursor:default;}
 .kz .kz-muted {color:var(--kz-muted);}
 .kz .kz-risk {color:var(--kz-risk);font-weight:700;}
-.kz .kz-number {font-family:Arial,var(--kz-font);font-variant-numeric:tabular-nums;font-size:calc(38px * var(--kz-component-u,1));line-height:1.15;font-weight:700;}
+.kz .kz-number {font-family:Arial,var(--kz-font);font-variant-numeric:tabular-nums;font-size:calc(var(--kz-type-kpi-value) * var(--kz-component-u,1));line-height:1.15;font-weight:700;}
 .kz .kz-label {font-size:calc(var(--kz-type-body-floor) * var(--kz-component-u,1));color:var(--kz-muted);}
 .kz .kz-marker {display:inline-grid;place-items:center;min-width:calc(34px * var(--kz-component-u,1));height:calc(34px * var(--kz-component-u,1));padding:0 calc(8px * var(--kz-component-u,1));border-radius:calc(12px * var(--kz-component-u,1));font-size:calc(var(--kz-type-body-floor) * var(--kz-component-u,1));font-weight:700;background:linear-gradient(145deg,rgba(255,204,0,.22),rgba(255,153,0,.14));box-shadow:inset 0 1px 0 rgba(255,255,255,.8);color:var(--kz-ink);margin-bottom:calc(14px * var(--kz-component-u,1));}
 .kz .kz-takeaway {text-align:center;display:flex;align-items:center;justify-content:center;font-size:calc(var(--kz-type-takeaway) * var(--kz-component-u,1));font-weight:700;min-height:calc(72px * var(--kz-component-u,1));}
@@ -122,7 +122,7 @@
 .kz .kz-gantt-plot {height:calc(360px * var(--kz-component-u,1));width:100%;min-width:0;}
 .kz .kz-gantt-editor {padding:calc(20px * var(--kz-component-u,1));border-radius:calc(18px * var(--kz-component-u,1));background:var(--kz-thin-face);border:1px solid rgba(var(--kz-face-border-rgb),var(--kz-thin-border-alpha));box-shadow:inset 0 1px 0 rgba(255,255,255,.8);}
 .kz .kz-gantt-editor label {display:block;font-size:calc(var(--kz-type-body-floor) * var(--kz-component-u,1));font-weight:700;margin-bottom:6px;}
-.kz .kz-gantt-editor select,.kz .kz-gantt-editor input {width:100%;min-width:0;border-radius:10px;border:1px solid rgba(151,154,160,.5);padding:8px;background:rgba(255,255,255,.88);min-height:calc(42px * var(--kz-component-u,1));font-size:calc(var(--kz-type-body-floor) * var(--kz-component-u,1));}
+.kz .kz-gantt-editor select,.kz .kz-gantt-editor input {width:100%;min-width:0;border-radius:10px;border:1px solid rgba(151,154,160,.5);padding:8px;background:rgba(255,255,255,.88);box-shadow:var(--kz-elev-inset);min-height:calc(42px * var(--kz-component-u,1));font-size:calc(var(--kz-type-body-floor) * var(--kz-component-u,1));}
 .kz .kz-gantt-fields {display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:14px;}
 .kz .kz-gantt-status {min-height:24px;font-size:calc(var(--kz-type-body-floor) * var(--kz-component-u,1));margin:12px 0 0;}
 .kz .kz-dirty {display:flex;align-items:center;gap:12px;flex-wrap:wrap;position:absolute;left:0;bottom:0;z-index:6;padding:calc(10px * var(--kz-component-u,1)) calc(14px * var(--kz-component-u,1));border-radius:calc(14px * var(--kz-component-u,1));background:rgba(255,255,255,.88);border:1px solid rgba(143,149,155,.3);box-shadow:var(--kz-elev-raised);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);}
@@ -146,8 +146,8 @@
   background:linear-gradient(160deg,rgba(255,255,255,.56),rgba(255,255,255,.22) 60%,rgba(247,250,252,.4)) padding-box,linear-gradient(165deg,rgba(255,255,255,.9),rgba(190,178,161,.3) 45%,rgba(255,255,255,.6)) border-box;border:1px solid transparent;
   box-shadow:inset 0 1px 0 rgba(255,255,255,.9),var(--kz-elev-rest);}
 /* Ultrawide keeps the 4/8 split: the lead column gains reading width instead of leaving the stage emptier. */
-.kz .kz-fold-lead h1 {font-size:clamp(32px,2.3vw,44px);line-height:1.2;margin:4px 0 8px;}
-.kz .kz-lede {font-size:var(--kz-type-site-body);line-height:1.6;color:var(--kz-body);margin:0;max-width:30em;}
+.kz .kz-fold-lead h1 {font-size:clamp(var(--kz-type-site-h1-min),2.3vw,var(--kz-type-site-h1));line-height:1.2;margin:4px 0 8px;}
+.kz .kz-lede {font-size:var(--kz-type-site-body);line-height:1.6;color:var(--kz-body);margin:0;max-width:var(--kz-lede-max);}
 .kz .kz-fold-stage-head {display:flex;align-items:baseline;gap:16px;min-width:0;}
 .kz .kz-fold-stage-head h2 {font-size:var(--kz-type-card-title);line-height:var(--kz-line-title);margin:0;}
 .kz .kz-fold-stage-head span {font-size:var(--kz-type-body-floor);color:var(--kz-muted);}
@@ -155,13 +155,14 @@
 /* KPI tiles: number + unit + qualifier, never a bare number. */
 .kz .kz-kpis {display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--kz-fold-gap);}
 .kz .kz-kpi {padding:16px 18px;}
-.kz .kz-kpi .kz-number {font-size:clamp(28px,2vw,38px);}
+.kz .kz-kpi .kz-number {font-size:clamp(var(--kz-type-kpi-value-min),2vw,var(--kz-type-kpi-value));}
 .kz .kz-kpi .kz-unit {font-size:var(--kz-type-body-floor);font-weight:400;margin-left:4px;color:var(--kz-muted);}
 .kz .kz-kpi .kz-kpi-label {font-size:var(--kz-type-body-floor);color:var(--kz-body);margin-top:6px;line-height:1.45;}
 .kz .kz-kpi .kz-kpi-note {font-size:var(--kz-type-body-floor);color:var(--kz-muted);margin-top:4px;line-height:1.45;}
 /* Secondary detail that is also available elsewhere on the page: shown only where the fold has the height for it. */
 .kz .kz-detail-tall {display:none;}
 @media (min-height:1000px) {.kz .kz-detail-tall {display:revert;}}
+.kz .kz-detail-tall[data-kz-fit=overflow] {display:none;}
 /* Short viewports (1536×730, 1280×720): four KPI tiles share one row instead of pushing the lead column below the fold. */
 @media (max-height:820px) {.kz .kz-kpis:has(> :nth-child(4)) {grid-template-columns:repeat(4,minmax(0,1fr));}.kz .kz-kpi {padding:12px 14px;}}
 /* State rail: past / current / upcoming are distinguishable without motion or colour alone (06 §16). */
@@ -178,12 +179,13 @@
 
 /* Sections below the fold wait for their entrance (set by KZMotion.mountSections only, so no-JS pages stay visible). */
 .kz [data-kz-pending] [data-kz-reveal],.kz [data-kz-pending][data-kz-reveal] {opacity:0;}
+@media print {.kz [data-kz-pending] [data-kz-reveal],.kz [data-kz-pending][data-kz-reveal] {opacity:1;}}
 
 /* Cross-document chapter transition for site pages (progressive; header stays put). */
 @media (prefers-reduced-motion:no-preference) {
   @view-transition {navigation:auto;}
   ::view-transition-old(root) {animation:var(--kz-dur-exit) var(--kz-ease-exit) both kz-vt-out;}
-  ::view-transition-new(root) {animation:var(--kz-dur-page) var(--kz-ease-enter) both kz-vt-in;}
+  ::view-transition-new(root) {animation:var(--kz-dur-section) var(--kz-ease-enter) both kz-vt-in;}
 }
 @keyframes kz-vt-out {to{opacity:0;translate:0 calc(-1 * var(--kz-dist-exit))}}
 @keyframes kz-vt-in {from{opacity:0;translate:0 var(--kz-dist-section)}}

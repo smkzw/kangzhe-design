@@ -17,7 +17,7 @@
       return p < sb.closeAt ? clamp01((p - start) / span) : 1 - clamp01((p - sb.closeAt) / span);
     };
     let shown = -1;
-    const film = new KZMotion.Film(root, { frames: sb.frames, duration: sb.duration, onRender(f, p, self) {
+    const film = new KZMotion.Film(root, { frames: sb.frames, duration: sb.duration, staticProgress: sb.staticProgress, onRender(f, p, self) {
       const phase = sb.phaseAt(p);
       steps.forEach((n, i) => { n.dataset.state = i < phase ? 'done' : i === phase ? 'current' : 'todo'; n.setAttribute('aria-current', i === phase ? 'step' : 'false'); });
       const pairs = nodes.map((n, i) => { const k = linkProgress(i, p); n.style.opacity = String(.42 + .58 * k); n.style.translate = `${(1 - k) * 8}px 0`; return { id: 'n' + i, from: self.carrier, to: n, progress: k }; });
@@ -50,7 +50,7 @@
 
   function mountMotion() {
     const fold = q('.kz-fold');
-    if (fold) { const page = KZMotion.mountPage(fold); page.enter(); life.push(page); }
+    if (fold) { life.push(KZMotion.fitFold(fold)); const page = KZMotion.mountPage(fold); page.enter(); life.push(page); }
     const counters = qa('.kz-fold [data-kz-count]').map(n => KZMotion.countUp(n, { to: Number(n.dataset.kzCount), decimals: Number(n.dataset.kzDecimals || 0) }));
     setTimeout(() => counters.forEach(c => c.play()), 180);
     qa('[data-kz-section]').forEach(s => life.push(KZMotion.mountTilt(s)));

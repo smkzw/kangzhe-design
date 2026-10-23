@@ -3,7 +3,7 @@
   "status": "passed",
   "file": {
     "path": "/Users/smkzw/Developer/kangzhe-design/examples/reference/pptx/kangzhe_probe.pptx",
-    "bytes": 2134534
+    "bytes": 2134521
   },
   "package": {
     "zip_integrity": "passed",
@@ -141,8 +141,8 @@
     "external": [],
     "uncompressed_bytes": 2135823,
     "archive_compressed_bytes": 2110000,
-    "share_of_archive": 0.988506,
-    "share_of_uncompressed_parts": 0.948289,
+    "share_of_archive": 0.988512,
+    "share_of_uncompressed_parts": 0.948306,
     "top_contributors": [
       {
         "part": "ppt/media/image_ce19777696202c35.png",

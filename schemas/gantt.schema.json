@@ -34,10 +34,18 @@
             "minLength": 1
           },
           "start": {
-            "type": "integer"
+            "type": [
+              "integer",
+              "null"
+            ],
+            "description": "季度 index；start_known=false 时可为 null"
           },
           "end": {
-            "type": "integer"
+            "type": [
+              "integer",
+              "null"
+            ],
+            "description": "[start,end) 的 end；end_known=false 时可为 null"
           },
           "color": {
             "type": "string",
@@ -75,7 +83,51 @@
             "description": "false 时界面须标示待定，不编造时长"
           }
         },
-        "additionalProperties": false
+        "additionalProperties": false,
+        "allOf": [
+          {
+            "if": {
+              "not": {
+                "properties": {
+                  "start_known": {
+                    "const": false
+                  }
+                },
+                "required": [
+                  "start_known"
+                ]
+              }
+            },
+            "then": {
+              "properties": {
+                "start": {
+                  "type": "integer"
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "not": {
+                "properties": {
+                  "end_known": {
+                    "const": false
+                  }
+                },
+                "required": [
+                  "end_known"
+                ]
+              }
+            },
+            "then": {
+              "properties": {
+                "end": {
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        ]
       }
     },
     "taskColor": {

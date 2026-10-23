@@ -33,11 +33,13 @@ def index(track,features,stage='all',seen=None):
   selected+=['schemas/page-plan.schema.json','tools/qc_plan.py']
   if 'film' in features or track in ['htmlppt','site','stream']:selected+=['schemas/film-plan.schema.json']
  elif stage=='assets':
-  selected=['design_specs/04-image-pipeline.md','schemas/asset-manifest.schema.json','tools/qc_plan.py']
+  # 04 hands off to the glass material (02), hero frames (11) and the viewport matrix (13 FOLD-04).
+  selected=['design_specs/04-image-pipeline.md','design_specs/02-liquid-glass.md','design_specs/13-layout-density.md']+(['design_specs/11-hero-layouts.md'] if track in ['pptx','htmlppt'] else [])+['schemas/asset-manifest.schema.json','tools/qc_plan.py']
  elif stage=='author':
   selected=['tokens/tokens.json','runtime/API.md'] if track!='pptx' else ['tokens/tokens.json','adapters/ppt-master.md']
   if track=='htmlppt':selected+=['adapters/html-ppt.md']
   if track in ['pptx','htmlppt']:selected+=['tools/brand_fragments.py','tools/hero_layout.py']
+  if track=='pptx':selected+=['tools/glass_svg.py','examples/reference/pptx/README.md']
   # The current-spec reference implementation is the fastest correct starting point for authoring.
   selected+=['examples/reference/README.md']
  elif stage=='verify':selected=complete+['tools/qc_plan.py']
