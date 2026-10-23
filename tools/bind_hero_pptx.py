@@ -3,17 +3,23 @@ Fails closed on unmatched/duplicate text. Optional explicit native_frame_binding
 also bind brand chrome. All parts outside the declared pages remain unchanged.
 """
 from pathlib import Path
-import argparse,json,zipfile,xml.etree.ElementTree as E,hashlib
+import argparse,json,re,zipfile,xml.etree.ElementTree as E,hashlib
 NS={'a':'http://schemas.openxmlformats.org/drawingml/2006/main','p':'http://schemas.openxmlformats.org/presentationml/2006/main'}
 for k,v in NS.items():E.register_namespace(k,v)
 def norm(s):return ''.join(s.split())
+def _slide_index(page):
+    """Slide number from an explicit `slide`, else the first integer in the page id (p01, 1_cover, slide-3)."""
+    if page.get('slide') is not None:return int(page['slide'])
+    m=re.search(r'\d+',page['id'])
+    if not m:raise ValueError(f'page {page["id"]!r}: no slide number; add "slide": N')
+    return int(m.group())
 def bind(src,dst,plan):
     if src.resolve()==dst.resolve():raise ValueError('Use a separate output; retain upstream original')
     changed={};receipt=[]
     with zipfile.ZipFile(src) as z:
       for page in plan['pages']:
         if not (page.get('hero_layout_id') or page.get('native_frame_bindings')):continue
-        index=int(page['id'].split('_')[0]);name=f'ppt/slides/slide{index}.xml';r=E.fromstring(z.read(name));used=set()
+        index=_slide_index(page);name=f'ppt/slides/slide{index}.xml';r=E.fromstring(z.read(name));used=set()
         for el in page['elements']:
           want=norm(el.get('text',''))
           if not want:continue

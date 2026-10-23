@@ -69,4 +69,11 @@ class Contracts(unittest.TestCase):
    rule=re.search(r'\.kz '+re.escape(sel)+r'\{([^}]*)\}',css).group(1)
    geo=[d for d in rule.split(';') if d.split(':')[0] in ('left','right','top','bottom','width','height') and 'auto' not in d]
    self.assertTrue(geo and all('--kz-chrome-' in d for d in geo),(sel,geo))
+ def test_logo_png_is_the_registered_render(self):
+  t=json.loads((ROOT/'tokens/tokens.json').read_text())['logo']
+  self.assertEqual(hashlib.sha256((ROOT/t['png_path']).read_bytes()).hexdigest(),t['png_sha256'])
+  im=Image.open(ROOT/t['png_path']);self.assertEqual(im.mode,'RGBA');self.assertAlmostEqual(im.size[0]/im.size[1],121/25,places=2)
+ def test_default_reference_plan_passes_preflight(self):
+  p=json.loads((ROOT/'examples/reference/pptx-default/page-plan.json').read_text())
+  self.assertEqual(self.errors(p),[])
 if __name__=='__main__':unittest.main(verbosity=2)

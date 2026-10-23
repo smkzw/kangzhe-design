@@ -57,6 +57,10 @@ class A04Gates(unittest.TestCase):
   with tempfile.TemporaryDirectory() as d:
    root=Path(d);m=self.asset(root);self.assertNotIn('IMAGE-WASHOUT',self.codes(m=m,root=root))
    self.p['pages'][0]['kind']='hero';self.assertIn('IMAGE-WASHOUT',self.codes(m=m,root=root))
-   f=root/'bg.png';Image.new('RGB',(2560,1088),(255,170,40)).save(f);m['assets'][0]['sha256']=hashlib.sha256(f.read_bytes()).hexdigest()
+   # A real approved Kangzhe hero: near-white by design, but with tonal structure, so not washed out.
+   f=root/'bg.png';Image.open(R/'examples/reference/assets/cover.webp').convert('RGB').resize((2560,1088)).save(f);m['assets'][0]['sha256']=hashlib.sha256(f.read_bytes()).hexdigest()
    self.assertNotIn('IMAGE-WASHOUT',self.codes(m=m,root=root))
+   # The same hero blended 60% toward white loses its subject.
+   Image.blend(Image.open(f),Image.new('RGB',(2560,1088),(255,255,255)),.6).save(f);m['assets'][0]['sha256']=hashlib.sha256(f.read_bytes()).hexdigest()
+   self.assertIn('IMAGE-WASHOUT',self.codes(m=m,root=root))
 if __name__=='__main__':unittest.main()

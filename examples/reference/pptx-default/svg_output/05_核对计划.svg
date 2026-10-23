@@ -1,0 +1,87 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" lang="zh-CN" font-family="Microsoft YaHei, Arial" data-pptx-page-role="content">
+  <defs>
+    <linearGradient id="kz-face" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FFFDFB" stop-opacity="0.62"/><stop offset="0.48" stop-color="#FFFBF2" stop-opacity="0.55"/><stop offset="1" stop-color="#FFF5E4" stop-opacity="0.5"/></linearGradient>
+    <linearGradient id="kz-glint" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#FFFFFF" stop-opacity="0"/><stop offset="0.5" stop-color="#FFFFFF" stop-opacity="0.95"/><stop offset="1" stop-color="#FFFFFF" stop-opacity="0"/></linearGradient>
+    <filter id="kz-shadow"><feDropShadow dx="0" dy="6" stdDeviation="8" flood-color="#48341A" flood-opacity="0.12"/></filter>
+    <linearGradient id="kz-gradient-2" x1="0" y1="0" x2="1" y2="1"><stop offset="0.0" stop-color="#FFC65A"/><stop offset="0.47" stop-color="#FF9B12"/><stop offset="1.0" stop-color="#EC7A00"/></linearGradient>
+    <filter id="kz-shadow-2" x="-15%" y="-15%" width="130%" height="130%" color-interpolation-filters="sRGB"><feDropShadow dx="0.7542472" dy="0.7542472" stdDeviation="1.4666667" flood-color="#D98213" flood-opacity="0.14"/></filter>
+    <linearGradient id="kz-gradient-3" x1="0" y1="0" x2="1" y2="1"><stop offset="0.0" stop-color="#FFF07A"/><stop offset="0.47" stop-color="#FFD21A"/><stop offset="1.0" stop-color="#EFB600"/></linearGradient>
+    <filter id="kz-shadow-3" x="-15%" y="-15%" width="130%" height="130%" color-interpolation-filters="sRGB"><feDropShadow dx="0.7542472" dy="0.7542472" stdDeviation="1.4666667" flood-color="#D8A500" flood-opacity="0.14"/></filter>
+  </defs>
+  <image id="bg" data-pptx-role="background" href="../images/body_quiet.png" x="0" y="0" width="1280" height="720" preserveAspectRatio="xMidYMid slice"/>
+  <g id="header-mark" data-pptx-role="decoration" data-pptx-bounds="0 0 100 90">
+    <g data-kz-header-mark="kz-header-mark-reference-20260930">
+      <path id="kz-facet-0" data-kz-source-shape="kz-facet-o" data-pptx-role="decoration" d="M55.0000000,9.0000000 L94.0000000,9.0000000 L64.0000000,71.0000000 L24.0000000,71.0000000 Z" fill="#FF9900" fill-opacity="0.01"/>
+      <path id="kz-facet-1" data-kz-source-shape="kz-facet-y" data-pptx-role="decoration" d="M23.0000000,42.0000000 L45.0000000,42.0000000 L28.0000000,78.0000000 L5.0000000,78.0000000 Z" fill="#FFCC00" fill-opacity="0.01"/>
+      <path id="kz-facet-2" data-kz-source-shape="kz-facet-o-candy" data-pptx-role="decoration" d="M53.8372703,11.3254593 L57.6000000,9.0000000 L91.4000000,9.0000000 L92.8675066,11.3403675 L65.1324934,68.6596325 L61.4000000,71.0000000 L26.6000000,71.0000000 L25.1627297,68.6745407 Z" fill="url(#kz-gradient-2)" fill-opacity="1" filter="url(#kz-shadow-2)"/>
+      <path id="kz-facet-3" data-kz-source-shape="kz-facet-y-candy" data-pptx-role="decoration" d="M22.1950656,43.6099738 L24.8000000,42.0000000 L43.2000000,42.0000000 L44.2313911,43.6276115 L28.7686089,76.3723885 L26.2000000,78.0000000 L6.8000000,78.0000000 L5.8049344,76.3900262 Z" fill="url(#kz-gradient-3)" fill-opacity="1" filter="url(#kz-shadow-3)"/>
+    </g>
+  </g>
+  <g id="title" data-pptx-bounds="91 24 919 44">
+    <text x="91" y="56" font-size="32" font-weight="bold" fill="#0F1115">核对计划</text>
+  </g>
+  <line id="rule" data-pptx-role="decoration" x1="54" y1="80" x2="1257" y2="80" stroke="#FF9900" stroke-width="1.5"/>
+  <image id="logo" data-pptx-role="logo" href="../images/logo.png" x="1031" y="45" width="158" height="33" preserveAspectRatio="xMidYMid meet"/>
+
+  <g id="plan-card" data-pptx-bounds="56 108 1168 540">
+    <rect x="56" y="108" width="1168" height="540" rx="24" fill="url(#kz-face)" stroke="#BEB2A1" stroke-opacity="0.45" stroke-width="1" filter="url(#kz-shadow)"/>
+    <rect x="80" y="109" width="350" height="1.5" fill="url(#kz-glint)"/>
+    <text x="80" y="156" font-size="24" font-weight="bold" fill="#0F1115">季度安排</text>
+    <text x="1200" y="156" font-size="16" fill="#64676B" text-anchor="end">合成示例数据｜条形颜色表示负责部门</text>
+    <g id="check-plan-gantt">
+      <rect id="deadline-quarter" x="664" y="176" width="268" height="360" fill="#FF9900" fill-opacity="0.07"/>
+      <g font-size="20" font-weight="bold" fill="#0F1115" text-anchor="middle">
+        <text x="530" y="203">2026Q4</text>
+        <text x="798" y="203">2027Q1</text>
+        <text x="1066" y="203">2027Q2</text>
+      </g>
+      <g id="check-plan-gantt-chartArea">
+        <g id="plan-grid" stroke="#E7EBEE" stroke-width="1">
+          <line x1="80" y1="216" x2="1200" y2="216"/>
+          <line x1="80" y1="280" x2="1200" y2="280"/>
+          <line x1="80" y1="344" x2="1200" y2="344"/>
+          <line x1="80" y1="408" x2="1200" y2="408"/>
+          <line x1="80" y1="472" x2="1200" y2="472"/>
+          <line x1="664" y1="176" x2="664" y2="536"/>
+          <line x1="932" y1="176" x2="932" y2="536"/>
+        </g>
+        <line id="plan-axis" x1="80" y1="536" x2="1200" y2="536" stroke="#CED3D8" stroke-width="2"/>
+        <line id="plan-axis-start" x1="396" y1="176" x2="396" y2="536" stroke="#CED3D8" stroke-width="1"/>
+        <!-- chart-plot-area: object=check-plan-gantt | 396,216,1200,536 -->
+        <g font-size="20" fill="#0F1115">
+          <text x="80" y="242">缺失资料补收</text>
+          <text x="80" y="306">版本差异确认</text>
+          <text x="80" y="370">完整性复核</text>
+          <text x="80" y="434">安全性报告核对</text>
+          <text x="80" y="498">审阅意见形成</text>
+        </g>
+        <g font-size="16" fill="#64676B">
+          <text x="80" y="266">医学部</text>
+          <text x="80" y="330">医学部</text>
+          <text x="80" y="394">数统</text>
+          <text x="80" y="458">PV</text>
+          <text x="80" y="522">医学部</text>
+        </g>
+        <rect x="404" y="234" width="520" height="28" rx="8" fill="#FF9900"/>
+        <rect x="672" y="298" width="252" height="28" rx="8" fill="#FF9900"/>
+        <rect x="672" y="362" width="520" height="28" rx="8" fill="#587B3B"/>
+        <rect x="672" y="426" width="520" height="28" rx="8" fill="#A85F34"/>
+        <rect x="940" y="490" width="252" height="28" rx="8" fill="#FF9900"/>
+      </g>
+    </g>
+    <g id="plan-legend" font-size="16" fill="#404040">
+      <rect x="80" y="562" width="16" height="12" rx="3" fill="#FF9900"/>
+      <text x="102" y="574">医学部</text>
+      <rect x="170" y="562" width="16" height="12" rx="3" fill="#587B3B"/>
+      <text x="192" y="574">数统</text>
+      <rect x="244" y="562" width="16" height="12" rx="3" fill="#A85F34"/>
+      <text x="266" y="574">PV</text>
+    </g>
+    <text x="80" y="620" font-size="20" fill="#404040">补收与版本确认<tspan font-weight="bold" fill="#0F1115">在 2027Q1 内完成</tspan>，复核与审阅意见在 2027Q2</text>
+  </g>
+
+  <g id="footer" data-pptx-role="footer" data-pptx-bounds="24 682 1224 26">
+    <text x="24" y="702" font-size="18" fill="#808080">产品中心-医学部｜2026年10月</text>
+    <text x="1248" y="702" font-size="18" fill="#808080" text-anchor="end">5 / 6</text>
+  </g>
+</svg>

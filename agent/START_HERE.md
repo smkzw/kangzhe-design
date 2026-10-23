@@ -1,4 +1,4 @@
-> 7.0 起：本目录是 6.x 验证流程的历史资料，不随安装包发布；当前状态见 `review/CURRENT_STATUS.md`，制作入口见根目录 `SKILL.md` 与 `examples/reference/`。
+> 7.0 起：本目录是 6.x 验证流程的历史资料，不随安装包发布；当前状态见根目录 `STATUS.md`，制作入口见根目录 `SKILL.md` 与 `examples/reference/`。
 
 # Agent 执行入口 · KZ6-0929
 

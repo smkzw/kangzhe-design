@@ -174,10 +174,10 @@ def _validate_asset(p,a,targets,asset_root,tokens,add,canvas,track):
         if list(im.size)!=size:add('ASSET-PIXELS',p['id'],'实际文件尺寸与清单不一致')
         wash=tokens['image'].get('washout')
         if wash and p['kind'] in ['cover','toc','section','ending','hero']:
-         # 04 IMG-01: a hero that is almost all brightest-band and nearly colourless has no readable subject.
-         small=im.convert('RGB');small.thumbnail((256,256));hist=small.convert('L').histogram()
-         bright=sum(hist[round(256*(1-wash['bright_band'])):])/sum(hist);sat=ImageStat.Stat(small.convert('HSV').split()[1]).mean[0]/255
-         if bright>wash['bright_share_max'] and sat<wash['saturation_min']:add('IMAGE-WASHOUT',p['id'],f'主视觉 {bright:.0%} 像素落在最亮区间、平均饱和度 {sat:.1%}，主体不可辨')
+         # 04 IMG-01: a washed-out hero has almost no tonal structure. The Kangzhe near-white glass look is mostly
+         # bright pixels by design, so brightness share is not the signal; the luminance spread is.
+         small=im.convert('L');small.thumbnail((wash['sample_px'],wash['sample_px']));std=ImageStat.Stat(small).stddev[0]
+         if std<wash['luminance_std_min']:add('IMAGE-WASHOUT',p['id'],f'主视觉灰度标准差 {std:.1f} 低于 {wash["luminance_std_min"]}，主体不可辨')
       except (OSError,ValueError):add('ASSET-DECODE',p['id'],'图像不可解码')
 if __name__=='__main__':
  ap=argparse.ArgumentParser();ap.add_argument('plan',type=Path);ap.add_argument('--manifest',type=Path);ap.add_argument('--asset-root',type=Path);ap.add_argument('--out',type=Path);a=ap.parse_args()

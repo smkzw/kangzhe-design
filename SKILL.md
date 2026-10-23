@@ -9,7 +9,7 @@ description: 康哲药业医学部正式汇报与医学网页的统一 Liquid Gl
 ## 四轨与引擎
 | 轨道 | 制作引擎 | 轨道配方 | 参考实现 |
 |---|---|---|---|
-| 可编辑 PPTX | ppt-master（必须） | `design_specs/tracks-pptx.md` · `adapters/ppt-master.md` | `examples/reference/pptx/` |
+| 可编辑 PPTX | ppt-master（必须） | `design_specs/tracks-pptx.md` · `adapters/ppt-master.md` | `examples/reference/pptx-default/` |
 | HTML-PPT | html-ppt-skill 脚手架（必须） | `design_specs/tracks-htmlppt.md` · `adapters/html-ppt.md` | `examples/reference/htmlppt/` |
 | 站点式 HTML | 项目现有结构 + 本包 runtime | `design_specs/tracks-site.md` | `examples/reference/site/` |
 | 流式 HTML | 同上 | `design_specs/tracks-stream.md` | `examples/reference/stream/` |
@@ -36,7 +36,8 @@ description: 康哲药业医学部正式汇报与医学网页的统一 Liquid Gl
 - PPTX / HTML-PPT 含封面、目录、章节、尾页时读 `11-hero-layouts.md`；正文页构图读 `13-layout-density.md` BODY-01。
 - 所有 HTML 轨读 `06-motion-film.md`；站点与流式读 `13-layout-density.md`；PPTX 需要动效时读 06 MOTION-07。
 - 按能力读：图表 05、下钻 07、甘特 08、讲稿 09；终审读 10。
-- `python tools/context_pack.py --track <pptx|htmlppt|site|stream> --stage <bootstrap|plan|assets|author|verify> --features charts,film,motion,gantt,drilldown,notes` 输出当前工序要读的文件与哈希；它是索引，不代替阅读。
+- 本包的工具需要 Python 3.10+ 与 `requirements.txt`（jsonschema、Pillow）。把本文件所在目录记为 `KZ_DIR`，命令写成 `python3 "$KZ_DIR/tools/…"`，不依赖当前目录。
+- `python3 "$KZ_DIR/tools/context_pack.py" --track <pptx|htmlppt|site|stream> --stage <bootstrap|plan|assets|author|verify> --features charts,film,motion,gantt,drilldown,notes` 输出当前工序要读的文件与哈希；它是索引，不代替阅读。
 - 先照参考实现做出一页完整可验的样页，确认上游链路，再扩展全套。
 
 ## 制作顺序
@@ -46,4 +47,4 @@ description: 康哲药业医学部正式汇报与医学网页的统一 Liquid Gl
 不出现播放、暂停、重播、进度滑杆、“开始播放下一页”等控件；后台暂停、离屏、编辑、减少动态与 QC seek 接口保留。PPTX 要求原生可编辑的文字、表格、形状与图表，并做 PowerPoint 编辑保存回读；不调用、打开或修复 Excel，也不通过“编辑数据”启动 Excel。
 
 ## 维护资料
-`review/`、`agent/`、`docs/history/`、`tests/`、`examples/validation/` 是维护与历史资料，不进安装包（`tools/build_dist.py`）。当前验证状态只看 `review/CURRENT_STATUS.md`。
+`review/`、`agent/`、`docs/history/`、`tests/`、`examples/validation/` 是维护与历史资料，不进安装包（`tools/build_dist.py`）。当前验证状态见 `STATUS.md`。

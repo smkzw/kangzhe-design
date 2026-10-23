@@ -36,17 +36,24 @@
 - 侧车 `animations.json` 放在项目根，`animation_config.py validate <project>` 校验，导出加 `--animation-config animations.json`（路径相对项目）。
 - 字段：`defaults.transition`、`slides.<页>.animation.trigger`、`groups.<顶层组 id>.{effect,duration,delay,order,decelerate}`、`slides.<页>.transition.{effect:"morph",effect_options:{"morph_by":"object"},duration}`、`morph.{from, pairs.<key>.{from,to}}`。
 - 时序：同一拍内的 `with-previous` 行，delay 都从这一拍的起点算，不累加（上游：delay 是“加在已解析起点上的行偏移”）；`after-previous` 行从上一行结束后再加 delay。康哲的错峰用 with-previous，第 n 组写 n × 70ms；实测导出的 `p:cond delay` 为 0 / 70 / 140 / 410。
-- 实测导出：Fade 为 presetID 10、`nodeType="withEffect"`、`decel="70000"`；Morph 两端写成同名 `!!<key>`，目的页 `p159:morph option="byObject"`。
+- 实测导出：Fade 为 presetID 10、`nodeType="withEffect"`、`decel="70000"`；Wipe 为 presetID 22，`direction: "down"` → subtype 4（自底部）、`"left"` → 8（自左）、`"up"` → 1（自顶部）；Morph 两端写成同名 `!!<key>`，目的页 `p159:morph option="byObject"`。Default 路由下导出器自动读取项目根的 `animations.json`，不必加 `--animation-config`。
 - 限制：Morph 只用于相邻页，两端同种容器；原生图表、表格、带结构角色的根原语不能配对；只出现在第二页的文字用淡入（可用 `data-pptx-morph-staging="true"` 放画布外）。没有小位移入场预设；不支持段落级逐条出现、自定义路径、按系列出现。
+
+## Default 路由里的康哲输入
+- Stage 1：画布 `ppt169`（康哲 PPTX 为 1280×720，初始化时可直接 `--format ppt169`），一般选自由设计；康哲不是 ppt-master 的模板工作区。
+- Stage 2：三个方向的配色、字体、正文字号由 tokens 固定（`typography.fixed: true`，正文 20 px），方向之间只在叙事与构图上不同，并在方向说明里写明这一点。**确认页会按正文基准重算标题、副标题、注释字号**（候选里的 `typography.sizes` 只做兼容读入，不显示），所以交接说明里请用户在页面上把它们改成康哲值（标题 32、副标题 24、注释 16 px），确认后核对 `result.json` 的 `typography.sizes`；不一致时由用户在对话里明确更正，Design Spec §I 记下更正来源。
+- §VIII 与 `spec_lock.md images`：页面引用的每个位图都要登记，包括官方 Logo（复制 `assets/logo_bot.png` 到项目 `images/`，`source=user`、`crop=no-crop`）；漏登记的是计划外图片。
+- Executor：ppt-master 要求页面 SVG 由主 agent 手写，脚本不直接写 `svg_output/`。`hero_layout.svg_fragment`、`brand_fragments.facets` 打印的是片段与参考页，由 agent 拼进页面。
+- 本机若对 `127.0.0.1` 的反向 DNS 很慢（`socket.getfqdn` 秒级），确认页与实时预览的 `--daemon` 会在健康检查超时后被杀；改用不带 `--daemon` 的前台进程放到后台运行，再用浏览器打开。
 
 ## 品牌绑定（导出之后）
 ```bash
-python tools/bind_header_mark_pptx.py upstream.pptx marked.pptx bindings.json --receipt mark-binding.json
-python tools/bind_hero_pptx.py upstream.pptx branded.pptx hero-page-plan.json --receipt frame-binding.json
-python3 ${SKILL_DIR}/scripts/pptx_delivery_check.py marked.pptx
+python3 "$KZ_DIR/tools/bind_header_mark_pptx.py" upstream.pptx marked.pptx bindings.json --receipt mark-binding.json
+python3 "$KZ_DIR/tools/bind_hero_pptx.py" marked.pptx branded.pptx page-plan.json --receipt frame-binding.json
+python3 "$SKILL_DIR/scripts/pptx_delivery_check.py" branded.pptx
 ```
 - 双菱形：`bindings.json` 形如 `{"pages":[{"slide":2,"replace_shape_ids":[3,4,5,6]}]}`，ID 从当次导出的 slide XML 中按名称（`kz-facet-0…3`）查得，不假设各页一致。工具要求 1280×720 画布、对象无正文文字、位于标记边界内，否则直接失败；输出另存，保留上游原件。实测绑定后 `p:timing` 与 Morph 名称完好、交付检查 0 错误。
-- hero 文字框：6.7.0 起普通文本框按字体度量定位首行基线。先不绑定导出，按 11 HERO-04 回读框位置，误差都 ≤2 逻辑像素就不绑定；需要时页面 id 前缀为真实页码，只绑定四类 hero 文字的原生框、内边距、固定行高与禁止自动缩字。
+- hero 文字框：6.7.3 导出会把文字框收缩到内容大小（实测封面标题 1096×148 → 538×86，x/y 偏 2–3 px），所以四类 hero 页通常需要绑定。先按 11 HERO-04 回读，误差都 ≤2 逻辑像素才可不绑定。工具直接读 page-plan：页码取页面的 `slide` 字段，否则取页面 id 中的第一个整数（`p01`、`1_cover` 都可）；只绑定四类 hero 文字的原生框、内边距、固定行高与禁止自动缩字。绑定后回读偏差为 0。
 - Edit Native PPTX 的 round-trip 会保留不支持的效果载荷；如果从参考 PPTX 出发能原生保留双菱形，可不再绑定（待用户提供参考文件后验证）。
 
 ## 待做（需用户在场）

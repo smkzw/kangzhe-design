@@ -11,7 +11,9 @@ EXCLUDE = ('.git/', 'dist/', 'review/', 'agent/', 'docs/history/', 'tests/', 'ex
 EXCLUDE_NAMES = {'.DS_Store', '__pycache__', '.gitignore', '.pytest_cache'}
 
 def included(rel):
-    return not rel.startswith(EXCLUDE) and not (set(Path(rel).parts) & EXCLUDE_NAMES) and not rel.endswith('.pyc')
+    # Sample decks are evidence, attached to the GitHub release; agents read the plans and SVGs instead.
+    sample_deck = rel.startswith('examples/') and rel.endswith('.pptx')
+    return not rel.startswith(EXCLUDE) and not (set(Path(rel).parts) & EXCLUDE_NAMES) and not rel.endswith('.pyc') and not sample_deck
 
 def source_files(target):
     """Version-controlled files when this is a git checkout (local scratch never ships); otherwise the tree."""
@@ -34,7 +36,7 @@ def build(out):
         data = (R / rel).read_bytes()
         entries.append({'path': rel, 'bytes': len(data), 'sha256': 'sha256:' + hashlib.sha256(data).hexdigest()})
     manifest = {'version': (R / 'VERSION').read_text().strip(), 'revision': (R / 'REVISION').read_text().strip(),
-                'scope': 'installable skill content; maintenance material (review/, agent/, docs/history/, tests/, examples/validation/) excluded',
+                'scope': 'installable skill content; maintenance material (review/, agent/, docs/history/, tests/, examples/validation/) and sample .pptx decks excluded',
                 'files': entries}
     text = json.dumps(manifest, ensure_ascii=False, indent=1) + '\n'
     (target / 'PACKAGE_MANIFEST.json').write_text(text)

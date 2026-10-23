@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" lang="zh-CN" font-family="Microsoft YaHei, Arial" data-pptx-page-role="ending">
+  <rect id="page-bg" width="1280" height="720" fill="#FBFCFD"/>
+  <image id="hero-image" data-pptx-role="background" href="../images/ending_hero.png" x="0" y="0" width="1280" height="720" preserveAspectRatio="xMidYMid slice"/>
+  <image id="logo" data-pptx-role="logo" href="../images/logo.png" x="56" y="44" width="240" height="50" preserveAspectRatio="xMidYMid meet"/>
+  <g id="ending-title" data-pptx-bounds="92 184 1096 138">
+    <text x="92" y="277.6" font-size="104" font-weight="bold" fill="#0F1115">请确认两件事</text>
+  </g>
+  <g id="ending-subtitle" data-pptx-bounds="92 334 1096 42">
+    <text x="92" y="359.2" font-size="28" fill="#404040">4 份资料 2027Q1 内补收，2 项差异确认后再比较</text>
+  </g>
+  <g id="ending-meta" data-pptx-bounds="92 394 1096 28">
+    <text x="92" y="412" font-size="20" fill="#64676B">产品中心-医学部｜2026年10月</text>
+  </g>
+</svg>

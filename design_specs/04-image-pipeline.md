@@ -5,7 +5,7 @@ PPTX 与 HTML-PPT 逐页登记 `asset_id`：封面、目录、章节、尾页各
 
 站点与流式的首页和章节首屏要么有生成主视觉，要么使用全站统一、实际运行的程序化光场（计划写 `global_procedural_optical_field` 并列出运行文件）。普通 CSS 渐变不构成替代。正文深层信息不强制每卡生图。
 
-主视觉交付时把平均饱和度与亮度分布写进资产清单的 `review.evidence`。判据在 `image.washout`：亮度落在最亮 `bright_band`（1/16）区间的像素超过 `bright_share_max`（70%）且平均饱和度低于 `saturation_min`（5%），按“主体不可辨”重新构图或调整裁切；`tools/qc_plan.py --asset-root` 对四类 hero 页自动计算并报 `IMAGE-WASHOUT`。多画幅裁切以主体为锚，不一律中心裁切。
+主视觉交付时把亮度分布写进资产清单的 `review.evidence`。康哲的浅色玻璃画面本来就以高亮像素为主，亮像素比例不能说明主体是否可辨；判据看明暗结构：缩到 `image.washout.sample_px` 长边后的灰度标准差低于 `luminance_std_min`（7），按“主体不可辨”重新构图或调整裁切。`tools/qc_plan.py --asset-root` 对四类 hero 页自动计算并报 `IMAGE-WASHOUT`（2026-10-24 标定：批准的 hero 8.5–12.9，同图叠加 60% 白色后 3.4–5.2）。多画幅裁切以主体为锚，不一律中心裁切。
 
 ## 能力发现与隐私 IMG-06
 调用当前环境真实可用的生图能力；PPT Master 已有生图 manifest 阶段时，在其阶段加入保护区与审阅合同，不另起并行流程。一项资产只有一个负责环节。

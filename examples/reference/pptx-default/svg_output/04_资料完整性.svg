@@ -1,0 +1,132 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" lang="zh-CN" font-family="Microsoft YaHei, Arial" data-pptx-page-role="content">
+  <defs>
+    <linearGradient id="kz-face" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FFFDFB" stop-opacity="0.62"/><stop offset="0.48" stop-color="#FFFBF2" stop-opacity="0.55"/><stop offset="1" stop-color="#FFF5E4" stop-opacity="0.5"/></linearGradient>
+    <linearGradient id="kz-glint" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#FFFFFF" stop-opacity="0"/><stop offset="0.5" stop-color="#FFFFFF" stop-opacity="0.95"/><stop offset="1" stop-color="#FFFFFF" stop-opacity="0"/></linearGradient>
+    <filter id="kz-shadow"><feDropShadow dx="0" dy="6" stdDeviation="8" flood-color="#48341A" flood-opacity="0.12"/></filter>
+    <linearGradient id="kz-gradient-2" x1="0" y1="0" x2="1" y2="1"><stop offset="0.0" stop-color="#FFC65A"/><stop offset="0.47" stop-color="#FF9B12"/><stop offset="1.0" stop-color="#EC7A00"/></linearGradient>
+    <filter id="kz-shadow-2" x="-15%" y="-15%" width="130%" height="130%" color-interpolation-filters="sRGB"><feDropShadow dx="0.7542472" dy="0.7542472" stdDeviation="1.4666667" flood-color="#D98213" flood-opacity="0.14"/></filter>
+    <linearGradient id="kz-gradient-3" x1="0" y1="0" x2="1" y2="1"><stop offset="0.0" stop-color="#FFF07A"/><stop offset="0.47" stop-color="#FFD21A"/><stop offset="1.0" stop-color="#EFB600"/></linearGradient>
+    <filter id="kz-shadow-3" x="-15%" y="-15%" width="130%" height="130%" color-interpolation-filters="sRGB"><feDropShadow dx="0.7542472" dy="0.7542472" stdDeviation="1.4666667" flood-color="#D8A500" flood-opacity="0.14"/></filter>
+  </defs>
+  <image id="bg" data-pptx-role="background" href="../images/body_quiet.png" x="0" y="0" width="1280" height="720" preserveAspectRatio="xMidYMid slice"/>
+  <g id="header-mark" data-pptx-role="decoration" data-pptx-bounds="0 0 100 90">
+    <g data-kz-header-mark="kz-header-mark-reference-20260930">
+      <path id="kz-facet-0" data-kz-source-shape="kz-facet-o" data-pptx-role="decoration" d="M55.0000000,9.0000000 L94.0000000,9.0000000 L64.0000000,71.0000000 L24.0000000,71.0000000 Z" fill="#FF9900" fill-opacity="0.01"/>
+      <path id="kz-facet-1" data-kz-source-shape="kz-facet-y" data-pptx-role="decoration" d="M23.0000000,42.0000000 L45.0000000,42.0000000 L28.0000000,78.0000000 L5.0000000,78.0000000 Z" fill="#FFCC00" fill-opacity="0.01"/>
+      <path id="kz-facet-2" data-kz-source-shape="kz-facet-o-candy" data-pptx-role="decoration" d="M53.8372703,11.3254593 L57.6000000,9.0000000 L91.4000000,9.0000000 L92.8675066,11.3403675 L65.1324934,68.6596325 L61.4000000,71.0000000 L26.6000000,71.0000000 L25.1627297,68.6745407 Z" fill="url(#kz-gradient-2)" fill-opacity="1" filter="url(#kz-shadow-2)"/>
+      <path id="kz-facet-3" data-kz-source-shape="kz-facet-y-candy" data-pptx-role="decoration" d="M22.1950656,43.6099738 L24.8000000,42.0000000 L43.2000000,42.0000000 L44.2313911,43.6276115 L28.7686089,76.3723885 L26.2000000,78.0000000 L6.8000000,78.0000000 L5.8049344,76.3900262 Z" fill="url(#kz-gradient-3)" fill-opacity="1" filter="url(#kz-shadow-3)"/>
+    </g>
+  </g>
+  <g id="title" data-pptx-bounds="91 24 919 44">
+    <text x="91" y="56" font-size="32" font-weight="bold" fill="#0F1115">资料完整性</text>
+  </g>
+  <line id="rule" data-pptx-role="decoration" x1="54" y1="80" x2="1257" y2="80" stroke="#FF9900" stroke-width="1.5"/>
+  <image id="logo" data-pptx-role="logo" href="../images/logo.png" x="1031" y="45" width="158" height="33" preserveAspectRatio="xMidYMid meet"/>
+
+  <g id="data-card" data-pptx-bounds="56 108 667.33 540">
+    <rect x="56" y="108" width="667.33" height="540" rx="24" fill="url(#kz-face)" stroke="#BEB2A1" stroke-opacity="0.45" stroke-width="1" filter="url(#kz-shadow)"/>
+    <rect x="80" y="109" width="200" height="1.5" fill="url(#kz-glint)"/>
+    <text x="80" y="156" font-size="24" font-weight="bold" fill="#0F1115">各资料组应收与已收</text>
+    <text x="699.33" y="156" font-size="16" fill="#64676B" text-anchor="end">合成示例数据｜单位：份</text>
+    <g id="completeness-legend" font-size="16" fill="#404040">
+      <rect x="80" y="178" width="16" height="12" rx="3" fill="#6E7B8C"/>
+      <text x="102" y="190">应收</text>
+      <rect x="150" y="178" width="16" height="12" rx="3" fill="#D46B08"/>
+      <text x="172" y="190">已收</text>
+    </g>
+    <g id="completeness-bars" data-pptx-replace-with="chart" data-pptx-fallback-sha256="7b53e07732f4cca39d9b81d63f2252180aa94aa4ee092bc6634be2e3ba213440">
+      <metadata type="application/json">
+        {
+          "name": "completeness-bars",
+          "x": 80, "y": 200, "width": 619.33, "height": 428,
+          "plot_area": {"x": 116, "y": 212, "width": 583.33, "height": 378},
+          "type": "column",
+          "grouping": "clustered",
+          "categories": ["方案与修订", "中心记录", "实验室数据", "安全性报告"],
+          "series": [
+            {"name": "应收", "values": [2, 12, 6, 4]},
+            {"name": "已收", "values": [2, 9, 6, 3]}
+          ],
+          "axes": {"value": {"minimum": 0, "maximum": 15, "major_unit": 5}},
+          "data_labels": {"show_value": true},
+          "style": {"colors": ["#6E7B8C", "#D46B08"], "axis_color": "#CED3D8", "grid_color": "#E7EBEE", "text_color": "#404040", "font_family": "Microsoft YaHei"}
+        }
+      </metadata>
+      <g id="completeness-bars-chartArea">
+        <g id="completeness-grid" stroke="#E7EBEE" stroke-width="1">
+          <line x1="116" y1="212" x2="699.33" y2="212"/>
+          <line x1="116" y1="338" x2="699.33" y2="338"/>
+          <line x1="116" y1="464" x2="699.33" y2="464"/>
+        </g>
+        <g font-size="16" fill="#404040" text-anchor="end">
+          <text x="108" y="595">0</text>
+          <text x="108" y="469">5</text>
+          <text x="108" y="343">10</text>
+          <text x="108" y="217">15</text>
+        </g>
+        <line id="completeness-axis" x1="116" y1="590" x2="699.33" y2="590" stroke="#CED3D8" stroke-width="2"/>
+        <!-- chart-plot-area: object=completeness-bars | 116,212,699.33,590 -->
+        <g fill="#6E7B8C">
+          <rect x="147.25" y="539.6" width="41.67" height="50.4" rx="4"/>
+          <rect x="293.08" y="287.6" width="41.67" height="302.4" rx="4"/>
+          <rect x="438.91" y="438.8" width="41.67" height="151.2" rx="4"/>
+          <rect x="584.75" y="489.2" width="41.67" height="100.8" rx="4"/>
+        </g>
+        <g fill="#D46B08">
+          <rect x="188.92" y="539.6" width="41.67" height="50.4" rx="4"/>
+          <rect x="334.75" y="363.2" width="41.67" height="226.8" rx="4"/>
+          <rect x="480.58" y="438.8" width="41.67" height="151.2" rx="4"/>
+          <rect x="626.42" y="514.4" width="41.67" height="75.6" rx="4"/>
+        </g>
+        <g font-size="16" fill="#404040" text-anchor="middle">
+          <text x="168.09" y="531.6">2</text>
+          <text x="313.92" y="279.6">12</text>
+          <text x="459.75" y="430.8">6</text>
+          <text x="605.59" y="481.2">4</text>
+          <text x="209.75" y="531.6">2</text>
+          <text x="355.58" y="355.2">9</text>
+          <text x="501.41" y="430.8">6</text>
+          <text x="647.25" y="506.4">3</text>
+          <text x="188.92" y="616">方案与修订</text>
+          <text x="334.75" y="616">中心记录</text>
+          <text x="480.58" y="616">实验室数据</text>
+          <text x="626.42" y="616">安全性报告</text>
+        </g>
+      </g>
+    </g>
+  </g>
+
+  <g id="takeaway" data-pptx-bounds="747.33 108 476.67 140">
+    <rect x="747.33" y="108" width="476.67" height="140" rx="24" fill="url(#kz-face)" stroke="#BEB2A1" stroke-opacity="0.45" stroke-width="1" filter="url(#kz-shadow)"/>
+    <rect x="771.33" y="109" width="143" height="1.5" fill="url(#kz-glint)"/>
+    <text x="985.67" y="187" font-size="24" font-weight="bold" fill="#0F1115" text-anchor="middle">缺口集中在中心记录与安全性报告</text>
+  </g>
+
+  <g id="kpi-totals" data-pptx-bounds="747.33 272 476.67 128">
+    <rect x="747.33" y="272" width="148.22" height="128" rx="18" fill="url(#kz-face)" stroke="#BEB2A1" stroke-opacity="0.45" stroke-width="1" filter="url(#kz-shadow)"/>
+    <text x="821.44" y="336" font-size="32" font-weight="bold" fill="#0F1115" text-anchor="middle">24<tspan font-size="16" font-weight="normal" fill="#64676B"> 份</tspan></text>
+    <text x="821.44" y="372" font-size="16" fill="#404040" text-anchor="middle">应收</text>
+    <rect x="911.56" y="272" width="148.22" height="128" rx="18" fill="url(#kz-face)" stroke="#BEB2A1" stroke-opacity="0.45" stroke-width="1" filter="url(#kz-shadow)"/>
+    <text x="985.67" y="336" font-size="32" font-weight="bold" fill="#0F1115" text-anchor="middle">20<tspan font-size="16" font-weight="normal" fill="#64676B"> 份</tspan></text>
+    <text x="985.67" y="372" font-size="16" fill="#404040" text-anchor="middle">已收</text>
+    <rect x="1075.78" y="272" width="148.22" height="128" rx="18" fill="url(#kz-face)" stroke="#BEB2A1" stroke-opacity="0.45" stroke-width="1" filter="url(#kz-shadow)"/>
+    <text x="1149.89" y="336" font-size="32" font-weight="bold" fill="#C00000" text-anchor="middle">4<tspan font-size="16" font-weight="normal" fill="#64676B"> 份</tspan></text>
+    <text x="1149.89" y="372" font-size="16" fill="#404040" text-anchor="middle">缺口</text>
+  </g>
+
+  <g id="gap-card" data-pptx-bounds="747.33 424 476.67 224">
+    <rect x="747.33" y="424" width="476.67" height="224" rx="24" fill="url(#kz-face)" stroke="#BEB2A1" stroke-opacity="0.45" stroke-width="1" filter="url(#kz-shadow)"/>
+    <rect x="771.33" y="425" width="143" height="1.5" fill="url(#kz-glint)"/>
+    <text x="771.33" y="472" font-size="24" font-weight="bold" fill="#0F1115">缺口与口径</text>
+    <text x="771.33" y="514" font-size="20" fill="#404040">
+      <tspan x="771.33" dy="0">• 中心记录缺 <tspan font-weight="bold" fill="#C00000">3 份</tspan></tspan>
+      <tspan x="771.33" dy="42">• 安全性报告缺 <tspan font-weight="bold" fill="#C00000">1 份</tspan></tspan>
+      <tspan x="771.33" dy="42">• 缺失保留为空值，<tspan font-weight="bold">不按零处理，也不插补</tspan></tspan>
+    </text>
+  </g>
+
+  <g id="footer" data-pptx-role="footer" data-pptx-bounds="24 682 1224 26">
+    <text x="24" y="702" font-size="18" fill="#808080">产品中心-医学部｜2026年10月</text>
+    <text x="1248" y="702" font-size="18" fill="#808080" text-anchor="end">4 / 6</text>
+  </g>
+</svg>

@@ -1,0 +1,985 @@
+{
+ "schema_version": "6.1",
+ "contract_revision": "7.0",
+ "track": "pptx",
+ "canvas": [
+  1280,
+  720
+ ],
+ "target_viewports": [
+  [
+   1280,
+   720
+  ]
+ ],
+ "pages": [
+  {
+   "id": "p01",
+   "kind": "cover",
+   "title": "研究资料完整性核对",
+   "hero_layout_id": "cover-01",
+   "body_profile": "standard",
+   "elements": [
+    {
+     "id": "p01-cover_title-0",
+     "role": "cover_title",
+     "font_px": 56,
+     "line_height": 1.25,
+     "text": "研究资料完整性核对",
+     "rect": [
+      92,
+      164,
+      1096,
+      148
+     ]
+    },
+    {
+     "id": "p01-hero_subtitle-1",
+     "role": "hero_subtitle",
+     "font_px": 28,
+     "line_height": 1.25,
+     "text": "合成示例｜应收 24 份，已收 20 份",
+     "rect": [
+      92,
+      322,
+      1096,
+      42
+     ]
+    },
+    {
+     "id": "p01-hero_meta-2",
+     "role": "hero_meta",
+     "font_px": 20,
+     "line_height": 1.25,
+     "text": "产品中心-医学部｜2026年10月",
+     "rect": [
+      92,
+      382,
+      1096,
+      28
+     ]
+    }
+   ],
+   "protected_regions": [
+    {
+     "id": "p01-logo",
+     "rect": [
+      56,
+      44,
+      240,
+      50
+     ],
+     "role": "logo",
+     "zone": "clear"
+    },
+    {
+     "id": "p01-cover_title-0",
+     "rect": [
+      92,
+      164,
+      1096,
+      148
+     ],
+     "role": "title",
+     "zone": "clear"
+    },
+    {
+     "id": "p01-hero_subtitle-1",
+     "rect": [
+      92,
+      322,
+      1096,
+      42
+     ],
+     "role": "title",
+     "zone": "clear"
+    },
+    {
+     "id": "p01-hero_meta-2",
+     "rect": [
+      92,
+      382,
+      1096,
+      28
+     ],
+     "role": "title",
+     "zone": "clear"
+    }
+   ],
+   "image": {
+    "mode": "generated",
+    "asset_id": "cover_hero",
+    "subject_rects": []
+   },
+   "sources": [
+    {
+     "id": "brief",
+     "kind": "internal",
+     "visible": false,
+     "locator": "sources/资料完整性核对_brief.md"
+    }
+   ],
+   "cards": []
+  },
+  {
+   "id": "p02",
+   "kind": "toc",
+   "title": "汇报章节",
+   "hero_layout_id": "toc-01",
+   "body_profile": "standard",
+   "elements": [
+    {
+     "id": "p02-toc_title-0",
+     "role": "toc_title",
+     "font_px": 48,
+     "line_height": 1.25,
+     "text": "汇报章节",
+     "rect": [
+      68,
+      28,
+      860,
+      68
+     ]
+    },
+    {
+     "id": "p02-toc_number-1",
+     "role": "toc_number",
+     "font_px": 40,
+     "line_height": 1.25,
+     "text": "01",
+     "rect": [
+      92.0,
+      192,
+      60,
+      58
+     ]
+    },
+    {
+     "id": "p02-toc_label-2",
+     "role": "toc_label",
+     "font_px": 32,
+     "line_height": 1.25,
+     "text": "研究范围",
+     "rect": [
+      160.0,
+      201,
+      249.33333333333331,
+      40
+     ]
+    },
+    {
+     "id": "p02-toc_description-3",
+     "role": "toc_description",
+     "font_px": 20,
+     "line_height": 1.25,
+     "text": "对象、时间窗与资料组",
+     "rect": [
+      92.0,
+      259,
+      317.3333333333333,
+      25
+     ]
+    },
+    {
+     "id": "p02-toc_number-4",
+     "role": "toc_number",
+     "font_px": 40,
+     "line_height": 1.25,
+     "text": "02",
+     "rect": [
+      481.3333333333333,
+      192,
+      60,
+      58
+     ]
+    },
+    {
+     "id": "p02-toc_label-5",
+     "role": "toc_label",
+     "font_px": 32,
+     "line_height": 1.25,
+     "text": "资料完整性",
+     "rect": [
+      549.3333333333333,
+      201,
+      249.33333333333331,
+      40
+     ]
+    },
+    {
+     "id": "p02-toc_description-6",
+     "role": "toc_description",
+     "font_px": 20,
+     "line_height": 1.25,
+     "text": "应收与已收、缺口所在",
+     "rect": [
+      481.3333333333333,
+      259,
+      317.3333333333333,
+      25
+     ]
+    },
+    {
+     "id": "p02-toc_number-7",
+     "role": "toc_number",
+     "font_px": 40,
+     "line_height": 1.25,
+     "text": "03",
+     "rect": [
+      870.6666666666666,
+      192,
+      60,
+      58
+     ]
+    },
+    {
+     "id": "p02-toc_label-8",
+     "role": "toc_label",
+     "font_px": 32,
+     "line_height": 1.25,
+     "text": "核对计划",
+     "rect": [
+      938.6666666666666,
+      201,
+      249.33333333333331,
+      40
+     ]
+    },
+    {
+     "id": "p02-toc_description-9",
+     "role": "toc_description",
+     "font_px": 20,
+     "line_height": 1.25,
+     "text": "补收、确认与复核",
+     "rect": [
+      870.6666666666666,
+      259,
+      317.3333333333333,
+      25
+     ]
+    }
+   ],
+   "protected_regions": [
+    {
+     "id": "p02-logo",
+     "rect": [
+      1024,
+      44,
+      200,
+      44
+     ],
+     "role": "logo",
+     "zone": "clear"
+    },
+    {
+     "id": "p02-toc_title-0",
+     "rect": [
+      68,
+      28,
+      860,
+      68
+     ],
+     "role": "title",
+     "zone": "clear"
+    },
+    {
+     "id": "p02-toc_number-1",
+     "rect": [
+      92.0,
+      192,
+      60,
+      58
+     ],
+     "role": "title",
+     "zone": "clear"
+    },
+    {
+     "id": "p02-toc_label-2",
+     "rect": [
+      160.0,
+      201,
+      249.33333333333331,
+      40
+     ],
+     "role": "title",
+     "zone": "clear"
+    },
+    {
+     "id": "p02-toc_description-3",
+     "rect": [
+      92.0,
+      259,
+      317.3333333333333,
+      25
+     ],
+     "role": "title",
+     "zone": "clear"
+    },
+    {
+     "id": "p02-toc_number-4",
+     "rect": [
+      481.3333333333333,
+      192,
+      60,
+      58
+     ],
+     "role": "title",
+     "zone": "clear"
+    },
+    {
+     "id": "p02-toc_label-5",
+     "rect": [
+      549.3333333333333,
+      201,
+      249.33333333333331,
+      40
+     ],
+     "role": "title",
+     "zone": "clear"
+    },
+    {
+     "id": "p02-toc_description-6",
+     "rect": [
+      481.3333333333333,
+      259,
+      317.3333333333333,
+      25
+     ],
+     "role": "title",
+     "zone": "clear"
+    },
+    {
+     "id": "p02-toc_number-7",
+     "rect": [
+      870.6666666666666,
+      192,
+      60,
+      58
+     ],
+     "role": "title",
+     "zone": "clear"
+    },
+    {
+     "id": "p02-toc_label-8",
+     "rect": [
+      938.6666666666666,
+      201,
+      249.33333333333331,
+      40
+     ],
+     "role": "title",
+     "zone": "clear"
+    },
+    {
+     "id": "p02-toc_description-9",
+     "rect": [
+      870.6666666666666,
+      259,
+      317.3333333333333,
+      25
+     ],
+     "role": "title",
+     "zone": "clear"
+    }
+   ],
+   "image": {
+    "mode": "generated",
+    "asset_id": "toc_hero",
+    "subject_rects": []
+   },
+   "sources": [
+    {
+     "id": "brief",
+     "kind": "internal",
+     "visible": false,
+     "locator": "sources/资料完整性核对_brief.md"
+    }
+   ],
+   "cards": [
+    {
+     "id": "p02-card-0",
+     "material": "liquid_glass",
+     "edge_decoration": "neutral_hairline",
+     "layout_mode": "centered",
+     "detail": "not_needed",
+     "detail_reason": "目录卡只作导航"
+    },
+    {
+     "id": "p02-card-1",
+     "material": "liquid_glass",
+     "edge_decoration": "neutral_hairline",
+     "layout_mode": "centered",
+     "detail": "not_needed",
+     "detail_reason": "目录卡只作导航"
+    },
+    {
+     "id": "p02-card-2",
+     "material": "liquid_glass",
+     "edge_decoration": "neutral_hairline",
+     "layout_mode": "centered",
+     "detail": "not_needed",
+     "detail_reason": "目录卡只作导航"
+    }
+   ]
+  },
+  {
+   "id": "p03",
+   "kind": "body",
+   "title": "研究范围",
+   "preset": "cards-3",
+   "body_profile": "standard",
+   "elements": [
+    {
+     "id": "p03-page_title-6367",
+     "role": "page_title",
+     "font_px": 32,
+     "line_height": 1.375,
+     "text": "研究范围"
+    },
+    {
+     "id": "p03-footer-3104",
+     "role": "footer",
+     "font_px": 18,
+     "line_height": 1.4,
+     "text": "产品中心-医学部｜2026年10月"
+    },
+    {
+     "id": "p03-card_title-1744",
+     "role": "card_title",
+     "font_px": 24,
+     "line_height": 1.25,
+     "text": "研究人群与时间窗"
+    },
+    {
+     "id": "p03-card_title-7592",
+     "role": "card_title",
+     "font_px": 24,
+     "line_height": 1.25,
+     "text": "纳入资料"
+    },
+    {
+     "id": "p03-card_title-8049",
+     "role": "card_title",
+     "font_px": 24,
+     "line_height": 1.25,
+     "text": "方案版本"
+    },
+    {
+     "id": "p03-body-529",
+     "role": "body",
+     "font_px": 20,
+     "line_height": 1.4,
+     "text": "研究对象：成人受试者"
+    },
+    {
+     "id": "p03-body-9211",
+     "role": "body",
+     "font_px": 20,
+     "line_height": 1.4,
+     "text": "评价时间窗：第 16 周"
+    },
+    {
+     "id": "p03-body-8879",
+     "role": "body",
+     "font_px": 20,
+     "line_height": 1.4,
+     "text": "方案与修订、中心记录"
+    },
+    {
+     "id": "p03-body-7325",
+     "role": "body",
+     "font_px": 20,
+     "line_height": 1.4,
+     "text": "实验室数据、安全性报告"
+    },
+    {
+     "id": "p03-body-1821",
+     "role": "body",
+     "font_px": 20,
+     "line_height": 1.4,
+     "text": "V2.1 与 V2.3 并排比较"
+    },
+    {
+     "id": "p03-body-1574",
+     "role": "body",
+     "font_px": 20,
+     "line_height": 1.4,
+     "text": "2 项差异待确认：筛选窗口、终点评价时间点"
+    }
+   ],
+   "protected_regions": [
+    {
+     "id": "p03-header",
+     "rect": [
+      0,
+      0,
+      1280,
+      88
+     ],
+     "role": "header",
+     "zone": "clear"
+    },
+    {
+     "id": "p03-logo",
+     "rect": [
+      1031,
+      45,
+      158,
+      33
+     ],
+     "role": "logo",
+     "zone": "clear"
+    },
+    {
+     "id": "p03-body",
+     "rect": [
+      56,
+      96,
+      1168,
+      564
+     ],
+     "role": "body",
+     "zone": "quiet"
+    },
+    {
+     "id": "p03-footer",
+     "rect": [
+      0,
+      668,
+      1280,
+      52
+     ],
+     "role": "footer",
+     "zone": "clear"
+    }
+   ],
+   "image": {
+    "mode": "generated",
+    "asset_id": "body_quiet",
+    "subject_rects": []
+   },
+   "sources": [
+    {
+     "id": "brief",
+     "kind": "internal",
+     "visible": false,
+     "locator": "sources/资料完整性核对_brief.md"
+    }
+   ],
+   "cards": [
+    {
+     "id": "card-1",
+     "material": "liquid_glass",
+     "edge_decoration": "neutral_hairline",
+     "layout_mode": "distributed",
+     "detail": "not_available",
+     "detail_reason": "PPTX 不提供下钻；明细在讲者备注",
+     "emphasis": "not_applicable",
+     "emphasis_reason": "并列事实，无需额外强调"
+    },
+    {
+     "id": "card-2",
+     "material": "liquid_glass",
+     "edge_decoration": "neutral_hairline",
+     "layout_mode": "distributed",
+     "detail": "not_available",
+     "detail_reason": "PPTX 不提供下钻；明细在讲者备注",
+     "emphasis": "not_applicable",
+     "emphasis_reason": "资料组清单，无需额外强调"
+    },
+    {
+     "id": "card-3",
+     "material": "liquid_glass",
+     "edge_decoration": "neutral_hairline",
+     "layout_mode": "distributed",
+     "detail": "not_available",
+     "detail_reason": "PPTX 不提供下钻；明细在讲者备注",
+     "emphasis": "applied"
+    }
+   ],
+   "takeaway": null
+  },
+  {
+   "id": "p04",
+   "kind": "body",
+   "title": "资料完整性",
+   "preset": "split-7-5",
+   "body_profile": "standard",
+   "elements": [
+    {
+     "id": "p04-page_title-7367",
+     "role": "page_title",
+     "font_px": 32,
+     "line_height": 1.375,
+     "text": "资料完整性"
+    },
+    {
+     "id": "p04-footer-3104",
+     "role": "footer",
+     "font_px": 18,
+     "line_height": 1.4,
+     "text": "产品中心-医学部｜2026年10月"
+    },
+    {
+     "id": "p04-card_title-4035",
+     "role": "card_title",
+     "font_px": 24,
+     "line_height": 1.25,
+     "text": "各资料组应收与已收"
+    },
+    {
+     "id": "p04-chart_label-708",
+     "role": "chart_label",
+     "font_px": 16,
+     "line_height": 1.4,
+     "text": "份"
+    },
+    {
+     "id": "p04-card_title-9233",
+     "role": "card_title",
+     "font_px": 24,
+     "line_height": 1.25,
+     "text": "缺口与口径"
+    },
+    {
+     "id": "p04-body-3047",
+     "role": "body",
+     "font_px": 20,
+     "line_height": 1.4,
+     "text": "中心记录缺 3 份"
+    },
+    {
+     "id": "p04-body-7984",
+     "role": "body",
+     "font_px": 20,
+     "line_height": 1.4,
+     "text": "安全性报告缺 1 份"
+    },
+    {
+     "id": "p04-body-788",
+     "role": "body",
+     "font_px": 20,
+     "line_height": 1.4,
+     "text": "缺失保留为空值，不按零处理，也不插补"
+    }
+   ],
+   "protected_regions": [
+    {
+     "id": "p04-header",
+     "rect": [
+      0,
+      0,
+      1280,
+      88
+     ],
+     "role": "header",
+     "zone": "clear"
+    },
+    {
+     "id": "p04-logo",
+     "rect": [
+      1031,
+      45,
+      158,
+      33
+     ],
+     "role": "logo",
+     "zone": "clear"
+    },
+    {
+     "id": "p04-body",
+     "rect": [
+      56,
+      96,
+      1168,
+      564
+     ],
+     "role": "body",
+     "zone": "quiet"
+    },
+    {
+     "id": "p04-footer",
+     "rect": [
+      0,
+      668,
+      1280,
+      52
+     ],
+     "role": "footer",
+     "zone": "clear"
+    }
+   ],
+   "image": {
+    "mode": "generated",
+    "asset_id": "body_quiet",
+    "subject_rects": []
+   },
+   "sources": [
+    {
+     "id": "brief",
+     "kind": "internal",
+     "visible": false,
+     "locator": "sources/资料完整性核对_brief.md"
+    }
+   ],
+   "cards": [
+    {
+     "id": "chart",
+     "material": "liquid_glass",
+     "edge_decoration": "neutral_hairline",
+     "layout_mode": "stack",
+     "detail": "not_available",
+     "detail_reason": "PPTX 不提供下钻；明细在讲者备注",
+     "emphasis": "not_applicable",
+     "emphasis_reason": "数据卡"
+    },
+    {
+     "id": "gap",
+     "material": "liquid_glass",
+     "edge_decoration": "neutral_hairline",
+     "layout_mode": "distributed",
+     "detail": "not_available",
+     "detail_reason": "PPTX 不提供下钻；明细在讲者备注",
+     "emphasis": "applied"
+    }
+   ],
+   "takeaway": {
+    "text": "缺口集中在中心记录与安全性报告",
+    "font_px": 24,
+    "align": "center",
+    "rationale": "材料：中心记录 12/9、安全性报告 4/3，其余两组齐全"
+   }
+  },
+  {
+   "id": "p05",
+   "kind": "body",
+   "title": "核对计划",
+   "preset": "full",
+   "body_profile": "standard",
+   "elements": [
+    {
+     "id": "p05-page_title-9739",
+     "role": "page_title",
+     "font_px": 32,
+     "line_height": 1.375,
+     "text": "核对计划"
+    },
+    {
+     "id": "p05-footer-3104",
+     "role": "footer",
+     "font_px": 18,
+     "line_height": 1.4,
+     "text": "产品中心-医学部｜2026年10月"
+    },
+    {
+     "id": "p05-card_title-4576",
+     "role": "card_title",
+     "font_px": 24,
+     "line_height": 1.25,
+     "text": "季度安排"
+    },
+    {
+     "id": "p05-chart_label-6014",
+     "role": "chart_label",
+     "font_px": 16,
+     "line_height": 1.4,
+     "text": "缺失资料补收｜医学部"
+    },
+    {
+     "id": "p05-chart_label-4459",
+     "role": "chart_label",
+     "font_px": 16,
+     "line_height": 1.4,
+     "text": "2026Q4"
+    },
+    {
+     "id": "p05-body-3827",
+     "role": "body",
+     "font_px": 20,
+     "line_height": 1.4,
+     "text": "补收与版本确认在 2027Q1 内完成"
+    }
+   ],
+   "protected_regions": [
+    {
+     "id": "p05-header",
+     "rect": [
+      0,
+      0,
+      1280,
+      88
+     ],
+     "role": "header",
+     "zone": "clear"
+    },
+    {
+     "id": "p05-logo",
+     "rect": [
+      1031,
+      45,
+      158,
+      33
+     ],
+     "role": "logo",
+     "zone": "clear"
+    },
+    {
+     "id": "p05-body",
+     "rect": [
+      56,
+      96,
+      1168,
+      564
+     ],
+     "role": "body",
+     "zone": "quiet"
+    },
+    {
+     "id": "p05-footer",
+     "rect": [
+      0,
+      668,
+      1280,
+      52
+     ],
+     "role": "footer",
+     "zone": "clear"
+    }
+   ],
+   "image": {
+    "mode": "generated",
+    "asset_id": "body_quiet",
+    "subject_rects": []
+   },
+   "sources": [
+    {
+     "id": "brief",
+     "kind": "internal",
+     "visible": false,
+     "locator": "sources/资料完整性核对_brief.md"
+    }
+   ],
+   "cards": [
+    {
+     "id": "gantt",
+     "material": "liquid_glass",
+     "edge_decoration": "neutral_hairline",
+     "layout_mode": "stack",
+     "detail": "not_available",
+     "detail_reason": "PPTX 不提供下钻；明细在讲者备注",
+     "emphasis": "not_applicable",
+     "emphasis_reason": "甘特数据面"
+    }
+   ],
+   "takeaway": null
+  },
+  {
+   "id": "p06",
+   "kind": "ending",
+   "title": "请确认两件事",
+   "hero_layout_id": "ending-01",
+   "body_profile": "standard",
+   "elements": [
+    {
+     "id": "p06-ending_title-0",
+     "role": "ending_title",
+     "font_px": 104,
+     "line_height": 1.25,
+     "text": "请确认两件事",
+     "rect": [
+      92,
+      184,
+      1096,
+      138
+     ]
+    },
+    {
+     "id": "p06-hero_subtitle-1",
+     "role": "hero_subtitle",
+     "font_px": 28,
+     "line_height": 1.25,
+     "text": "4 份资料 2027Q1 内补收，2 项差异确认后再比较",
+     "rect": [
+      92,
+      334,
+      1096,
+      42
+     ]
+    },
+    {
+     "id": "p06-hero_meta-2",
+     "role": "hero_meta",
+     "font_px": 20,
+     "line_height": 1.25,
+     "text": "产品中心-医学部｜2026年10月",
+     "rect": [
+      92,
+      394,
+      1096,
+      28
+     ]
+    }
+   ],
+   "protected_regions": [
+    {
+     "id": "p06-logo",
+     "rect": [
+      56,
+      44,
+      240,
+      50
+     ],
+     "role": "logo",
+     "zone": "clear"
+    },
+    {
+     "id": "p06-ending_title-0",
+     "rect": [
+      92,
+      184,
+      1096,
+      138
+     ],
+     "role": "title",
+     "zone": "clear"
+    },
+    {
+     "id": "p06-hero_subtitle-1",
+     "rect": [
+      92,
+      334,
+      1096,
+      42
+     ],
+     "role": "title",
+     "zone": "clear"
+    },
+    {
+     "id": "p06-hero_meta-2",
+     "rect": [
+      92,
+      394,
+      1096,
+      28
+     ],
+     "role": "title",
+     "zone": "clear"
+    }
+   ],
+   "image": {
+    "mode": "generated",
+    "asset_id": "ending_hero",
+    "subject_rects": []
+   },
+   "sources": [
+    {
+     "id": "brief",
+     "kind": "internal",
+     "visible": false,
+     "locator": "sources/资料完整性核对_brief.md"
+    }
+   ],
+   "cards": []
+  }
+ ]
+}

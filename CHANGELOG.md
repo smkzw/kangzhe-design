@@ -1,5 +1,25 @@
 # 7.0.0 · 2026-10-24
 
+## KZ7-1024-B03 · 安装实测与 ppt-master Default 全流程正例
+把三套技能装进 `~/.claude/skills`，以用户视角跑通 ppt-master 6.7.3 的 Default Generate 路由（两次确认页、Design Spec/lock、手写 SVG、最终检查、verify-charts、备注、动效、原生图表导出、品牌绑定、交付检查、OOXML 回读），并在 PowerPoint 中打开交付文件。流程中暴露的问题逐条修复。
+
+安装包
+- 新增 `requirements.txt`（jsonschema、Pillow）与随包的 `STATUS.md`（当前验证状态；`review/` 不随包发布，原指向失效）。
+- SKILL.md 的命令改为 `python3 "$KZ_DIR/tools/…"`，不依赖当前目录（宿主常没有 `python` 命令）。
+- 新增 `assets/logo_bot.png`：官方 SVG 原样渲染的 10× 透明 PNG，哈希登记在 `tokens.logo.png_sha256`；ppt-master 不做 SVG 图片映射，agent 不必各自栅格化（01 CORE-02）。
+- INSTALL.md 改写为面向任意读 `SKILL.md` 目录的宿主，并列出两个引擎的安装与核对版本。
+- 安装包不再包含 `.pptx` 样例成品（改作 Release 附件），包体 4.1MB → 2.2MB。
+
+PPTX 轨
+- 新增 `examples/reference/pptx-default/`：Default 全流程正例（素材、Design Spec、执行锁、page-plan、资产清单、6 页手写 SVG、动效、备注、绑定回执、交付检查与 OOXML 回读）；tracks-pptx 与 context_pack 指向它。
+- `hero_layout.svg_fragment`：目录页 page role 写成 `toc`（原为 `content`）；每张目录卡的卡面与编号、标题、说明合为一个根组，成为一个编辑与动画单元。
+- `bind_hero_pptx.py` 直接读 page-plan：页码取 `slide` 字段或页面 id 中的第一个整数（原只接受 `1_cover` 形式）。实测 6.7.3 导出会把 hero 文字框收缩到内容大小（封面标题 538×86），超出 HERO-04 容差，四类 hero 页因此需要绑定；绑定后偏差 0。
+- 06 MOTION-07 / adapter：`entrance_wipe` 方向以预设表为准，自底部写 `"down"`（presetSubtype 4），自左 `"left"`（8）；`pptx_animations.py --describe` 的注释说法相反。Default 自动读取项目根 `animations.json`。
+- adapter 新增“Default 路由里的康哲输入”：Stage 2 确认页会按正文基准重算角色字号，康哲字号要在页面上固定并核对 `result.json`；Logo PNG 与所有位图登记 §VIII 与执行锁；页面 SVG 由主 agent 手写；本机反向 DNS 慢时确认页与预览改用前台进程。
+
+图像
+- `IMAGE-WASHOUT` 改用亮度标准差（`image.washout.luminance_std_min` 7）：康哲浅色玻璃 hero 本来就有 84–91% 高亮像素，B02 的“亮像素比例 + 饱和度”判据对批准过的三张 hero 全部误报。标定：批准 hero 8.5–12.9，同图叠加 60% 白色后 3.4–5.2。
+
 ## KZ7-1024-B02 · 两路独立审阅后的修订
 代码审阅（runtime 与工具）和规范审阅（自洽、可执行性、中文）各自只读完成，确认的问题逐条修复并复测。
 

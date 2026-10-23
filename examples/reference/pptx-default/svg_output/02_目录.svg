@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" lang="zh-CN" font-family="Microsoft YaHei, Arial" data-pptx-page-role="toc">
+  <defs>
+    <filter id="kz-shadow"><feDropShadow dx="0" dy="6" stdDeviation="8" flood-color="#48341A" flood-opacity="0.12"/></filter>
+    <linearGradient id="kz-face" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FFFDFB" stop-opacity="0.62"/><stop offset="0.48" stop-color="#FFFBF2" stop-opacity="0.55"/><stop offset="1" stop-color="#FFF5E4" stop-opacity="0.5"/></linearGradient>
+  </defs>
+  <rect id="page-bg" width="1280" height="720" fill="#FBFCFD"/>
+  <image id="hero-image" data-pptx-role="background" href="../images/toc_hero.png" x="0" y="90" width="1280" height="720" preserveAspectRatio="xMidYMid slice"/>
+  <image id="logo" data-pptx-role="logo" href="../images/logo.png" x="1024" y="44" width="200" height="44" preserveAspectRatio="xMidYMid meet"/>
+  <g id="toc-title" data-pptx-bounds="68 28 860 68">
+    <text x="68" y="71.2" font-size="48" font-weight="bold" fill="#0F1115">汇报章节</text>
+  </g>
+  <g id="toc-card-1" data-pptx-bounds="68 160 365.33 136">
+    <rect x="68" y="160" width="365.33" height="136" rx="24" fill="url(#kz-face)" stroke="#BEB2A1" stroke-opacity="0.45" stroke-width="1" filter="url(#kz-shadow)"/>
+    <path d="M92 162h109.6" stroke="#FFFFFF" stroke-opacity="0.9" stroke-width="1.5"/>
+    <text x="92" y="228" font-size="40" font-weight="bold" fill="#FF9900">01</text>
+    <text x="160" y="229.8" font-size="32" font-weight="bold" fill="#0F1115">研究范围</text>
+    <text x="92" y="277" font-size="20" fill="#404040">对象、时间窗与资料组</text>
+  </g>
+  <g id="toc-card-2" data-pptx-bounds="457.33 160 365.33 136">
+    <rect x="457.33" y="160" width="365.33" height="136" rx="24" fill="url(#kz-face)" stroke="#BEB2A1" stroke-opacity="0.45" stroke-width="1" filter="url(#kz-shadow)"/>
+    <path d="M481.33 162h109.6" stroke="#FFFFFF" stroke-opacity="0.9" stroke-width="1.5"/>
+    <text x="481.33" y="228" font-size="40" font-weight="bold" fill="#FF9900">02</text>
+    <text x="549.33" y="229.8" font-size="32" font-weight="bold" fill="#0F1115">资料完整性</text>
+    <text x="481.33" y="277" font-size="20" fill="#404040">应收与已收、缺口所在</text>
+  </g>
+  <g id="toc-card-3" data-pptx-bounds="846.67 160 365.33 136">
+    <rect x="846.67" y="160" width="365.33" height="136" rx="24" fill="url(#kz-face)" stroke="#BEB2A1" stroke-opacity="0.45" stroke-width="1" filter="url(#kz-shadow)"/>
+    <path d="M870.67 162h109.6" stroke="#FFFFFF" stroke-opacity="0.9" stroke-width="1.5"/>
+    <text x="870.67" y="228" font-size="40" font-weight="bold" fill="#FF9900">03</text>
+    <text x="938.67" y="229.8" font-size="32" font-weight="bold" fill="#0F1115">核对计划</text>
+    <text x="870.67" y="277" font-size="20" fill="#404040">补收、确认与复核</text>
+  </g>
+</svg>

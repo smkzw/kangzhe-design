@@ -1,15 +1,6 @@
-# 当前状态 · 2026-10-24（7.0.0 / KZ7-1024-B02）
+# 当前状态
 
-整体 **PARTIAL**：规范、runtime 与四轨正例已重构，经两路独立只读审阅（代码、规范）后修订并在本机复测；上游 Default 全流程、PowerPoint 实机与 Windows/Safari 尚未覆盖。
-
-| 证据层 | 已完成（本机实测） | 未完成 / 边界 |
-|---|---|---|
-| 单元测试 | `tests/test_*.py` 12 个文件全部通过（新增 schema 字段、CSS 断点与 tokens 同步、deck chrome 取变量、hero Logo `meet`、主视觉过曝等用例） | Python 3.10+；系统自带 3.9 不满足 |
-| 组件（ego lite 0.6.0.16 / Chromium 154） | `tests/ego/runtime_checks.mjs` 20/20：入场 opacity 在玻璃本层、弹簧倾斜与复位、倾斜上限 4°、电影交叉淡入可 seek、载体无 backdrop-filter、KPI 终值、下钻展开/宽幅/按键隔离/折回/焦点归还/父电影恢复、展开中途关闭反向折回且 `close()` 在原生关闭后兑现、段落入场、光场视差、图表揭示、折线左→右、减少动态 | Playwright 版 `tests/*_browser.py` 已按 7.0 API 更新但未在本机运行（本机规则不启第二浏览器） |
-| 站点 / 流式正例 | 3 页 × 6 视口（5 档矩阵 + 1920×900）在电影初始态与静态帧各测 `inspectFold`，全部 PASS（初始态 0.45–0.53 / ≤0.13；静态帧 0.50–0.60）；`inspectOrphans` 无孤字 | 1920×940 初始态贴近阈值 0.45；未做独立 VLM 审美复核；Safari、跨文档 view transition（需 HTTP 同源）未测 |
-| HTML-PPT 正例 | html-ppt-skill fd16290 `new-deck.sh` 起步；8 页 × 5 视口与 1280×610、1366×640 无越界/孤字/卡片告警；chrome 几何改由 tokens 变量驱动后 90 个矩形不变；入场时序与 PPTX 一致；深链接、方向键、O、`?preview`、减少动态；翻页时玻璃不失效 | `render.sh`（headless）未跑，替代截帧路径已写入 adapter；S 演讲者窗口、打印未测；总览中图表缩略图为空（上游限制） |
-| PPTX | ppt-master 523e5bd（v6.7.3-2）真实 checker（0 阻断）/ animation validate / export / delivery_check（0 错误）2026-10-24 复测通过；OOXML 回读：渐变 alpha、外阴影、原生项目符号、YaHei/Arial、Fade 0/70/140/410ms、Morph `!!kz-carrier`、hero Logo 无裁切；双菱形原生绑定后动画完好 | 只是转换器级探针，不是 Default 全流程（有 BLOCKING 门需用户在场）；PowerPoint 渲染与编辑回读未做（AppleEvent 超时，疑似等待系统授权）；原生图表未覆盖 |
-| 生图 | 正例复用历史真实生图（转 WebP，登记来源哈希） | hero 长边 1672 < 2560（WARN）；缺合格的超宽正文背景 |
+7.0 起当前状态写在仓库根的 `STATUS.md`（随安装包发布）。本文件保留 6.x 的历史记录，只描述各自当时的范围。
 
 历史记录（6.x）保留在下方，只描述各自当时的范围。
 

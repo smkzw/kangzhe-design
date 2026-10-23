@@ -39,7 +39,7 @@ def index(track,features,stage='all',seen=None):
   selected=['tokens/tokens.json','runtime/API.md'] if track!='pptx' else ['tokens/tokens.json','adapters/ppt-master.md']
   if track=='htmlppt':selected+=['adapters/html-ppt.md']
   if track in ['pptx','htmlppt']:selected+=['tools/brand_fragments.py','tools/hero_layout.py']
-  if track=='pptx':selected+=['tools/glass_svg.py','examples/reference/pptx/README.md']
+  if track=='pptx':selected+=['tools/glass_svg.py','examples/reference/pptx-default/README.md','examples/reference/pptx-default/page-plan.json']
   # The current-spec reference implementation is the fastest correct starting point for authoring.
   selected+=['examples/reference/README.md']
  elif stage=='verify':selected=complete+['tools/qc_plan.py']

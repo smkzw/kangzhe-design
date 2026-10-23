@@ -60,7 +60,7 @@ html-ppt-skill 自带的 `animations.css`（data-anim）与 `fx-runtime` 不在�
 - **入场**：正文内容组用 `entrance_fade`，`trigger: with-previous`（进入页面即自动发生，不增加点击），时长 `duration_ms.card`/1000，`decelerate: 0.7` 近似 `easing.enter`。
   - 同一页的 with-previous 行属于同一拍，每行的 delay 都从这一拍的起点算，不累加：第 n 组（n 从 0 起）`delay = n × stagger_ms.card / 1000`。
   - 观点句在最后一组之后再隔 `stagger_ms.takeaway_gap`：`delay = (组数 × stagger_ms.card + takeaway_gap) / 1000`。参考实现三组卡片加观点句，导出回读为 0 / 70 / 140 / 410ms。PPTX 没有 18px 小位移预设（`entrance_ascend` 移动约 10% 画高），小位移不映射，明写降级为纯淡入。
-- **图表**：整个图表对象用 `entrance_wipe`，方向为自底部，时长 `duration_ms.data`/1000；不承诺按系列生长。上游两份文档对 `direction` 的含义说法相反，导出后以 `p:timing` 回读为准：自底部应为 `presetSubtype="4"`。
+- **图表**：整个图表对象用 `entrance_wipe`，方向为自底部，时长 `duration_ms.data`/1000；不承诺按系列生长。ppt-master 的预设表录自 PowerPoint，`direction` 取起始边：自底部写 `"down"`（导出 `presetSubtype="4"`），自左写 `"left"`（`presetSubtype="8"`）。`pptx_animations.py --describe` 的注释说法相反，以导出后 `p:timing` 回读的 presetSubtype 为准（2026-10-24 Default 正例实测）。时间轴类数据面（甘特）可用自左擦入。
 - **退出**：换页本身完成退出，不写 exit 动画。
 - **叙事载体（一形不切）**：用 Morph 承载。相邻两页的载体组用同一个 `morph.pairs.<key>`，导出为同名 `!!<key>`；目的页 `transition: morph, morph_by: object`，0.8s。载体必须是普通内容 `<g>`（原生图表、表格、带结构角色的组不能配对），两端结构同构；只出现在第二页的文字用淡入。Morph 只能在 PowerPoint 中验收，LibreOffice 不算；不支持 Morph 的客户端回退为淡入淡出。
 - 页眉双菱形、页脚、Logo、背景保持静态（结构角色会被自动排除）。

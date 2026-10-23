@@ -119,12 +119,22 @@ def svg_fragment(kind,content,image,logo):
     k,blocks,cards=layout(kind,content)
     def img(path,r,id):return f'<image id="{id}" data-pptx-role="{ "logo" if id=="logo" else "background"}" href="{escape(path,quote=True)}" x="{r[0]}" y="{r[1]}" width="{r[2]}" height="{r[3]}" preserveAspectRatio="{"xMidYMid meet" if id=="logo" else "xMidYMid slice"}"/>'
     # Decorative image bleed uses the root viewport; text capacity is checked above.
-    out=['<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" lang="zh-CN" font-family="Microsoft YaHei, Arial" data-pptx-page-role="'+('cover' if kind=='cover' else 'section' if kind=='section' else 'ending' if kind=='ending' else 'content')+'">','<defs>'+_shadow_filter()+_face_gradient()+'</defs>','<rect width="1280" height="720" fill="#FBFCFD"/>',img(image,k['image'],'hero-image'),img(logo,k['logo'],'logo')]
+    role={'cover':'cover','toc':'toc','section':'section','ending':'ending'}[kind]
+    out=['<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" lang="zh-CN" font-family="Microsoft YaHei, Arial" data-pptx-page-role="'+role+'">','<defs>'+_shadow_filter()+_face_gradient()+'</defs>','<rect id="page-bg" width="1280" height="720" fill="#FBFCFD"/>',img(image,k['image'],'hero-image'),img(logo,k['logo'],'logo')]
     g=T['glass']
-    for i,(x,y,w,h) in enumerate(cards):out.extend([f'<rect id="card-{i}" x="{x}" y="{y}" width="{w}" height="{h}" rx="{g["radius"]}" fill="url(#kz-face)" stroke="{g["border_color"]}" stroke-opacity="{g["border_alpha"]}" stroke-width="1" filter="url(#shadow)"/>',f'<path d="M{x+24} {y+2}h{w*g["highlight_extent_max"]:.1f}" stroke="#FFFFFF" stroke-opacity=".9" stroke-width="1.5"/>'])
+    def text(b):
+        x,y,w,h=b['rect'];f=b['font_px']
+        s=[f'<text x="{x:g}" y="{y+f*.9:g}" font-size="{f:g}" font-weight="{"bold" if b["bold"] else "normal"}" fill="{b["color"]}">']
+        s+=[f'<tspan x="{x:g}" dy="{0 if j==0 else f*1.25:g}">{escape(line)}</tspan>' for j,line in enumerate(b['lines'])]
+        return ''.join(s)+'</text>'
+    # A TOC card and its number, label and description are one editable and animatable unit (one root group).
+    for i,(x,y,w,h) in enumerate(cards):
+        out.append(f'<g id="toc-card-{i+1}" data-pptx-bounds="{x:.2f} {y:g} {w:.2f} {h:g}">'
+                   f'<rect x="{x:.2f}" y="{y:g}" width="{w:.2f}" height="{h:g}" rx="{g["radius"]}" fill="url(#kz-face)" stroke="{g["border_color"]}" stroke-opacity="{g["border_alpha"]}" stroke-width="1" filter="url(#shadow)"/>'
+                   f'<path d="M{x+24:.2f} {y+2:g}h{w*g["highlight_extent_max"]:.1f}" stroke="#FFFFFF" stroke-opacity="0.9" stroke-width="1.5"/>'
+                   +''.join(text(b) for b in blocks if b.get('card_index')==i)+'</g>')
     for i,b in enumerate(blocks):
-        x,y,w,h=b['rect'];f=b['font_px'];lines=b['lines']
-        out.append(f'<g id="hero-text-{i}" data-pptx-bounds="{x} {y} {w} {h}"><text x="{x}" y="{y+f*.9}" font-size="{f}" font-weight="{700 if b["bold"] else 400}" fill="{b["color"]}">')
-        for j,line in enumerate(lines):out.append(f'<tspan x="{x}" dy="{0 if j==0 else f*1.25}">{escape(line)}</tspan>')
-        out.append('</text></g>')
+        if b.get('card_index') is not None:continue
+        x,y,w,h=b['rect']
+        out.append(f'<g id="hero-{b["role"].replace("_","-")}" data-pptx-bounds="{x:g} {y:g} {w:g} {h:g}">'+text(b)+'</g>')
     return '\n'.join(out+['</svg>'])

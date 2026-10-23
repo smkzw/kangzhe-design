@@ -101,4 +101,14 @@ class HeroContracts(unittest.TestCase):
    s=svg_fragment(kind,content,'bg.png','logo.png')
    modes=dict(re.findall(r'<image id="([^"]+)"[^>]*preserveAspectRatio="([^"]+)"',s))
    self.assertEqual(modes.get('logo'),'xMidYMid meet',kind);self.assertTrue(all(v.endswith('slice') for k,v in modes.items() if k!='logo'),modes)
+ def test_svg_toc_role_and_card_units(self):
+  import xml.etree.ElementTree as E
+  from hero_layout import svg_fragment
+  s=svg_fragment('toc',{'title':'汇报章节','items':[{'title':'研究范围','description':'对象'},{'title':'资料完整性'}]},'bg.png','logo.png')
+  r=E.fromstring(s);ns='{http://www.w3.org/2000/svg}'
+  self.assertEqual(r.get('data-pptx-page-role'),'toc')
+  cards=[g for g in r.findall(ns+'g') if g.get('id','').startswith('toc-card-')]
+  self.assertEqual(len(cards),2)
+  self.assertEqual([''.join(t.itertext()) for t in cards[0].findall(ns+'text')],['01','研究范围','对象'])
+  self.assertTrue(all(g.get('data-pptx-bounds') for g in r.findall(ns+'g')))
 if __name__=='__main__':unittest.main()
