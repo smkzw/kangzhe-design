@@ -1,3 +1,19 @@
+# 当前状态 · 2026-10-24（7.0.0 / KZ7-1024-B01）
+
+整体 **PARTIAL**：规范、runtime 与四轨正例已重构并在本机实测；上游 Default 全流程、PowerPoint 实机与 Windows/Safari 尚未覆盖。
+
+| 证据层 | 已完成（本机实测） | 未完成 / 边界 |
+|---|---|---|
+| 单元测试 | `tests/test_*.py` 12 个文件全部通过（含新增 test_spec_structure） | Python 3.10+；系统自带 3.9 不满足 |
+| 组件（ego lite / Chromium 154） | `tests/ego/runtime_checks.mjs` 18/18：入场 opacity 在玻璃本层、弹簧倾斜与复位、倾斜上限 4°、电影交叉淡入可 seek、载体无 backdrop-filter、KPI 终值、下钻展开/宽幅/按键隔离/折回/焦点归还/父电影恢复、段落入场、光场视差、图表揭示、折线左→右、减少动态 | Playwright 版 `tests/*_browser.py` 未在本机运行（本机规则不启第二浏览器）；`chart_axis_browser.py` 的缺口断言需按折线 `[x,y]` 数据更新 |
+| 站点 / 流式正例 | 3 页 × 4 视口 `inspectFold` PASS（覆盖率 0.45–0.51，最大空白 ≤0.13）；载体文字不越界；5 个电影进度点无孤字 | 未做独立 VLM 审美复核；Safari 未测 |
+| HTML-PPT 正例 | html-ppt-skill fd16290 `new-deck.sh` 起步；8 页 × 4 视口无越界/孤字/卡片告警；字号 20/24 逻辑 px；深链接、方向键、O、`?preview`、减少动态；翻页时玻璃不失效 | `render.sh`（headless）未跑；S 演讲者窗口、打印未测；总览中图表缩略图为空（上游限制） |
+| PPTX | ppt-master 523e5bd 真实 checker / animation validate / export / delivery_check 通过；OOXML 回读：渐变 alpha、外阴影（alpha 9% = 0.12×0.75）、原生项目符号、YaHei/Arial 主题字体、Fade 随上一项错峰、Morph `!!kz-carrier`；双菱形原生绑定后动画完好 | 只是转换器级探针，不是 Default 全流程（有 BLOCKING 门需用户在场）；PowerPoint 渲染与编辑回读未做（AppleScript 驱动 AppleEvent 超时，疑似等待系统授权）；原生图表未覆盖 |
+| 生图 | 正例复用历史真实生图（转 WebP，登记来源哈希） | hero 长边 1672 < 2560（WARN）；缺合格的超宽正文背景 |
+
+历史记录（6.x）保留在下方，只描述各自当时的范围。
+
+---
 # 当前状态 · 2026-10-07（6.1.3 / A08）
 
 版本保持单一6.1.3（A08 为规范条款增补与运行时修正：tokens.glass 近白高透光、`.kz-card::after` 局部短高光、`.kz-dirty` 浮层化、`.kz-dialog-body` 字号规则；FILM-01 复合判据、动态保护区包络、性能白名单、DRILL-04 不适用口径、GANTT-04 工具条合同、HERO-05 机检、COPY-08 语义层与豁免、门表法定化、09 计时口径、tracks-site 单页变体、04 主视觉自验，逐条见 CHANGELOG。此前 A06 为规范条款增补与运行时修正：`--kz-un` 字号换算类型修正、DRILL-03/04 键隔离与滚轮路由参考实现、header_mark/footer 几何收编 tokens 并钉死页脚日期格式、FILM-01 状态增量量化、G5-PROJ 级联标注、page-plan cards 逐卡 detail 登记，逐条见 CHANGELOG），skill名kangzhe-design。以下为 A04 R23（6.0.0）收尾事实，继续有效：修正已确认问题，停止新增测试派发，发布GitHub并同步本机harness。源码收尾完成；发布与安装绑定最终manifest及私有PUBLIC_INSTALL.json。**发布安装与整体验收分开：完整四轨连续两轮验收未完成，不宣称无缺陷。**

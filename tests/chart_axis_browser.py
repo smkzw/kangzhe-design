@@ -28,12 +28,12 @@ with sync_playwright() as pw:
         const options=KZCharts.option(d),axis=options.yAxis,got=[axis.min,axis.max,axis.interval];
         const element=document.createElement('div');element.style.cssText='width:800px;height:400px';document.body.append(element);
         const controller=KZCharts.mount(element,d);controller.renderProgress(.25);const first=controller.chart.getOption().yAxis[0];controller.finish();const final=controller.chart.getOption().yAxis[0];
-        out.push({name:c.name,expected:c.expected,actual:got,pass:JSON.stringify(got)===JSON.stringify(c.expected)&&first.min===final.min&&first.max===final.max&&first.interval===final.interval&&JSON.stringify(final?controller.getData().series[0].values:[])===JSON.stringify(c.v),gapPreserved:options.series[0].data[1]===null,area:!!options.series[0].areaStyle});
+        out.push({name:c.name,expected:c.expected,actual:got,pass:JSON.stringify(got)===JSON.stringify(c.expected)&&first.min===final.min&&first.max===final.max&&first.interval===final.interval&&JSON.stringify(final?controller.getData().series[0].values:[])===JSON.stringify(c.v),gapPreserved:(d=>d===null||(Array.isArray(d)&&d[1]===null))(options.series[0].data[1]),area:!!options.series[0].areaStyle});
         controller.dispose();element.remove();
       }
       const large={kind:'line',categories:Array.from({length:200000},(_,i)=>String(i)),series:[{id:'large',values:Array.from({length:200000},(_,i)=>i===1?null:i%8)}],unit:'份'};
       const largeOption=KZCharts.option(large);
-      out.push({name:'200000-values-no-argument-spread',pass:largeOption.yAxis.max===8&&largeOption.series[0].data.length===200000,gapPreserved:largeOption.series[0].data[1]===null,area:!!largeOption.series[0].areaStyle});
+      out.push({name:'200000-values-no-argument-spread',pass:largeOption.yAxis.max===8&&largeOption.series[0].data.length===200000,gapPreserved:(d=>d===null||(Array.isArray(d)&&d[1]===null))(largeOption.series[0].data[1]),area:!!largeOption.series[0].areaStyle});
       const element=document.createElement('div');element.style.cssText='width:320px;height:300px';document.body.append(element);
       const min=KZGantt.qindex(2024,3),max=KZGantt.qindex(2026,1),data={min,max,tasks:[{id:'quarter-probe',label:'季度核对',start:min,end:min+2}]};
       const g=KZGantt.mount(element,data),formatter=g.chart.getOption().xAxis[0].axisLabel.formatter;

@@ -1,5 +1,15 @@
 # 测试入口
 
+| 文件 | 内容 | 运行 |
+|---|---|---|
+| `test_*.py` | 合同、tokens、hero 几何、双菱形、计划绕过、视口资产、上下文路由、规范结构 | `for t in tests/test_*.py; do python "$t"; done`（需 jsonschema、Pillow） |
+| `ego/runtime_checks.mjs` | 组件实验室的真实指针/键盘/滚动检查 | `ego-browser nodejs < tests/ego/runtime_checks.mjs`（先把脚本里的 `KZ_ROOT` 改为本仓库路径） |
+| `*_browser.py`、`*.cjs` | Playwright / Node 版组件检查 | 维护者环境：`python tests/browser_smoke.py --chromium <path> --out <dir>` 等 |
+
+7.0 已把 `chart_axis_browser.py`、`tilt_pointer_browser.py`、`browser_smoke.py` 的断言改为新接口（折线 `[x,y]` 数据、倾斜由变量驱动且上限 6°），但这些 Playwright 脚本未在本次本机环境运行。以下为 6.x 时期的说明，仅作历史参考。
+
+# 测试入口
+
 `test_contracts.py`、`test_hero.py` 与 `test_a04_gates.py` 覆盖字号、固定版式、引用、图像及计划绕过等确定性合同；以实际测试输出计数，不以文档数字作为证据。`browser_smoke.py` 使用真实Chromium、真实ECharts和真实pointer/keyboard事件，不用mock；采用本地依赖内联harness，以便受管理策略限制的环境复现。`film_cycle.py`约40秒观察正常36秒时钟，不是独立视觉审片。
 
 先用宿主已有环境。缺依赖时按该环境安全安装 `jsonschema Pillow playwright`；Chromium路径通过 `--chromium` 指定，不猜每个平台路径。运行命令见根README。

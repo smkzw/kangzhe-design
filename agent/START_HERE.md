@@ -1,3 +1,5 @@
+> 7.0 起：本目录是 6.x 验证流程的历史资料，不随安装包发布；当前状态见 `review/CURRENT_STATUS.md`，制作入口见根目录 `SKILL.md` 与 `examples/reference/`。
+
 # Agent 执行入口 · KZ6-0929
 
 **当前R23策略：**用户要求快速收尾，不再派发新测试；先读CURRENT_HANDOFF.md、KNOWN_GAPS.md首表与review/CURRENT_STATUS.md。以下长期验证目标不触发当前自动续跑。

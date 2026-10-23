@@ -8,6 +8,10 @@ def intersects(a,b):
  return min(a[0]+a[2],b[0]+b[2])>max(a[0],b[0]) and min(a[1]+a[3],b[1]+b[3])>max(a[1],b[1])
 def in_bounds(rect,w,h):
  return rect[2]>0 and rect[3]>0 and rect[0]>=0 and rect[1]>=0 and rect[0]+rect[2]<=w and rect[1]+rect[3]<=h
+def pad_for(region,tokens):
+ # 04 IMG-02: static regions pad safety_pad_px; regions that move (declared motion_margin) pad at least motion_safety_pad_px.
+ m=region.get('motion_margin',0)
+ return max(tokens['image']['safety_pad_px'],m,tokens['image']['motion_safety_pad_px'] if m else 0)
 def validate(plan,manifest=None,asset_root=None):
  findings=[]
  def add(code,where,message,level='error'):findings.append(dict(code=code,where=where,message=message,level=level))
@@ -104,7 +108,7 @@ def validate(plan,manifest=None,asset_root=None):
   for a in image.get('subject_rects',[]):
    if not in_bounds(a,w,h):add('IMAGE-BOUNDS',pid,'图像主体区域越界')
    for region in p['protected_regions']:
-    b=region['rect'];m=max(tokens['image']['safety_pad_px'],region.get('motion_margin',0));b=[b[0]-m,b[1]-m,b[2]+2*m,b[3]+2*m]
+    b=region['rect'];m=pad_for(region,tokens);b=[b[0]-m,b[1]-m,b[2]+2*m,b[3]+2*m]
     if intersects(a,b):add('IMAGE-COLLISION',pid+'/'+region['id'],'预期图像主体侵入保护区')
   if p.get('takeaway') and p['takeaway']['font_px']<tokens['type_px']['takeaway']:add('TAKEAWAY',pid,'强调句字号过小')
  if manifest is not None:
@@ -156,7 +160,7 @@ def _validate_asset(p,a,targets,asset_root,tokens,add,canvas,track):
       if regions is None:add('IMAGE-PROTECTION-MAP',p['id'],'非基准视口有主体时必须登记实际保护区，不猜测fluid坐标')
       else:
        for region in regions:
-        rect=region['rect'];pad=max(tokens['image']['safety_pad_px'],region.get('motion_margin',0))*unit
+        rect=region['rect'];pad=pad_for(region,tokens)*unit
         expanded=[rect[0]-pad,rect[1]-pad,rect[2]+2*pad,rect[3]+2*pad]
         if any(intersects(subject,expanded) for subject in r['subject_rects']):add('IMAGE-RENDITION-COLLISION',p['id']+'/'+region['id'],'主体侵入页面实际保护区含运动安全外扩')
     if not asset_root:add('ASSET-PIXELS-PENDING',p['id'],'没有资产根目录，未从图像文件核验真实像素','pending')

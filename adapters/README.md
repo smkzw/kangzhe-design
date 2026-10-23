@@ -1,7 +1,8 @@
 # 指定制作引擎的适配层
 
-PPTX → `ppt-master.md`；HTML-PPT → `html-ppt.md` 与增量生命周期桥 `html-ppt-bridge.js`。这两个适配合同基于已读取源码，不代表端到端集成完成。
+- PPTX → `ppt-master.md`（hugohe3/ppt-master）。
+- HTML-PPT → `html-ppt.md` 与生命周期桥 `html-ppt-bridge.js`（lewislulu/html-ppt-skill）。
 
-站点与流式无强制新增框架；沿用用户项目现有 HTML/CSS/JS 或 React 结构，选取本包的主题、Film/图表/下钻/甘特组件，避免双时钟、双导航。不同轨道共享设计 token 和业务数据，而非硬把 DOM 行为搬进 PPTX。
+站点式与流式不强制新框架：沿用项目现有结构，取用本包 tokens、玻璃、电影、图表、下钻、甘特组件，避免双时钟、双导航。
 
-所有第三方命令都以真实安装版本为准。上游接口变化在适配层解决，品牌和内容规则只由 design_specs 各 owner 修改。
+上游接口变化在适配层解决；品牌与内容规则只由 design_specs 的各所有者修改。所有第三方命令以真实安装的版本为准，本页记录的是核对基线与实测结果，不代替实际运行证据。

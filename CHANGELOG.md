@@ -1,3 +1,46 @@
+# 7.0.0 · 2026-10-24
+
+## KZ7-1024-B01 · 分层重构、动效与材质增强、首屏密度、四轨正例
+规范结构
+- 规范只写设计规则：SKILL.md 精简为四轨与引擎、13 条硬规则与读取顺序；验收方法、门表、工具清单集中到 10；事故叙述、轮次编号、具体模型与工具名、重复条款移出正文（原文见提交 `b487472`）。规则编号沿用，新增 ELEV-01/02、LG-PPTX、MOTION-03…08、CHART-01…05、FOLD-01…05、BODY-01、DRILL-05/06、NOTES-01…03、FILM-PLAN、TYPE-04、IMG-06、CORE-01…07。
+- 新增 13「首屏、页面构图与信息密度」；12-reference-patterns 移入 docs/history（ARCO 证据不在公共包，不能作为规范引用）。
+- 删除 test_a04_gates 的措辞锚点测试，改为 tests/test_spec_structure.py：每条规则只有一个所有者、引用的规则必须存在、规范正文无事故史标记、文中 token 路径存在、SKILL 引用的文件存在、版本一致。
+- tools/build_dist.py：安装包排除 review/agent/docs/history/tests/examples/validation（4.1MB / 99 文件，仓库 58MB）。
+
+材质与阴影
+- tokens：`elevation`（rest/raised/overlay 三层暖色阴影、光源偏移、抬升、PPTX 作者值与 ×0.75 导出系数）、`glass.rim/specular/thin/carrier_face_gradient`、`colors.focus`；删除未被读取且与 ≤0.62 规则冲突的 `face_alpha*`。
+- kz-glass.css：rim 渐变边、随指针转动；镜面光斑与顶边短高光随指针移动；阴影由 `--kz-lift/--kz-lx/--kz-ly` 插值；无 JS 时 `@property` 悬停抬升；`.kz-thin` 补齐同族材质；电影载体去掉 backdrop-filter（消除与 FILM-05 的冲突）。
+- 指针光与阴影配方生成在 `.kz-card,.kz-lit` 上（自定义属性的 var() 在声明元素解析，放 :root 不会随卡片变化）。
+
+动效
+- tokens.motion 重构：四条缓动（enter/exit/standard/data）+ CSS linear() 弹簧、分层时长、位移、缩放、错峰、倾斜（正文 4° / hero 6°）、浮动（hero 6px 错相；双菱形 2px 同相，独立 `.kz-mark-float`）、视差、电影参数。
+- 入场：reveal 层只用独立 translate/scale；opacity 写在玻璃本层——实测祖先 opacity<1 时 backdrop-filter 全程失效、结束时跳出。行列波浪错峰 + 卡内标题/条目级联；退出改加速曲线（原减速曲线可见时长约 80ms）。
+- 新增 `mountSections`（段落首次可见入场）、`mountField`（环境光场视差）、`countUp`、`storyboard`（按 FILM-03 计时生成首尾无缝关键帧）、`drawLinks`（随载体变形的关系连线）；倾斜改共享临界阻尼弹簧，静止停 rAF。
+- 电影文字在不同文案的状态间交叉淡入（`--kz-film-text`，可 seek），不再在插值中点硬切。
+- 图表：折线自左向右描出（不再整条从零抬起）、柱形错峰长出；类别色序 `charts.categorical` 与部门色分离（已过 dataviz 校验），对照组保留中性色。
+- 下钻：从卡片展开、关闭折回；对话框内全部按键不冒泡（含上游 S/O/F/A）。
+- 站点跨文档章节转场；HTML-PPT 翻页改为容器瞬时切换、背景与卡片各自淡入、去掉 ±30px 横移；康哲 deck 不加载 html-ppt animations.css。
+- PPTX：经 ppt-master `animations.json` 的入场（Fade、随上一项、70ms 错峰、decel 0.7）与 Morph 载体合同（06 MOTION-07）。
+
+首屏与密度
+- 验收视口改为浏览器可视区：1280×720、1536×730、1920×940、2560×1080（`tokens.viewports`，取代 `site_viewports`）；qc_plan 对 HTML 三轨都检查矩阵。
+- Bento 首屏（12 栏，左 4 导读、右 8 电影与状态条）、KPI 卡、状态条、`.kz-detail-tall`；`KZLayoutQC.inspectFold`（覆盖率 ≥0.45、最大空白 ≤0.18，按实测校准）。
+- `KZLayoutQC.inspectOrphans` 孤字检测；`text-wrap: pretty/balance`；中文阅读行宽改为 34em（46ch 只有约 25 字）；`inspectCard` 的 TEXT_OUTSIDE 改按卡边框判断（修正行高 1.25 下字形外溢的误报）。
+
+HTML-PPT 单位
+- html-ppt-bridge 只维护一个比率：`--kz-un = innerHeight/720`（不钳制）与 `--kz-u = calc(var(--kz-un)*1px)`；修正矮视口（1080@150%）文字比框大约 18%、捏合缩放反向缩字的问题。
+
+一致性修复
+- schema `contract_revision` A06 → 7.0（此前 SKILL 写 A08 而 schema 只接受 A06）；gantt schema 补 owner/department/status/dependencies/start_known/end_known/taskColor（runtime 已读取 department/taskColor）。
+- hero 主视觉的 y 偏移登记为构图；宽屏 fluid 铺满、底对齐，不再出现顶带。HERO-05 目录右缘以自身对称边距为锚（原 1212 vs 1224 永远不满足）。
+- hero_layout：`html_fluid_fragment`（--kz-u 几何 / --kz-un 字号 / 右锚 / 目录随宽展开 / 入场顺序）；`svg_fragment` 用 tokens 的玻璃渐变与阴影、cover 裁切、根 lang；glass_svg 的阴影与高光长度取 tokens。
+- brand_fragments：带 `data-pptx-role` 的路径加稳定 id（ppt-master 6.7 checker 报错）；qc_plan 对运动区域使用 `motion_safety_pad_px`。
+- context_pack：路由 13 章、film-plan schema 与参考实现；新增 `motion` 能力（PPTX 动效）。
+
+正例
+- examples/reference：站点首页与章节页、流式文档、HTML-PPT（new-deck.sh 原始输出 + build.py 派生，上游 base/runtime 原样随包）、PPTX 导出探针（ppt-master 523e5bd 实际 checker/validate/export/delivery_check，OOXML 回读记录）；组件实验室改用 Bento 首屏。
+- examples/validation 下的 6.x 样本保留作回溯，不再作为模板。
+
 # 6.1.3 · 2026-10-07
 
 ## A08 · R2 三方审阅回写（玻璃近白高透光、FILM-01 复合判据、门表法定化、计时口径）

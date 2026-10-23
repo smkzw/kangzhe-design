@@ -549,7 +549,8 @@
       }
     },
     "contract_revision": {
-      "const": "A06"
+      "const": "7.0",
+      "description": "page-plan 合同修订号；与包版本独立。7.0 起视口矩阵按 tokens.viewports（浏览器可视区）。"
     },
     "target_viewports": {
       "type": "array",

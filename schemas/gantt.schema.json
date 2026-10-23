@@ -42,10 +42,45 @@
           "color": {
             "type": "string",
             "pattern": "^#[0-9a-fA-F]{6}$"
+          },
+          "owner": {
+            "type": "string"
+          },
+          "department": {
+            "enum": [
+              "medical",
+              "operations",
+              "statistics",
+              "pv"
+            ],
+            "description": "表达部门身份时取部门色"
+          },
+          "status": {
+            "type": "string"
+          },
+          "dependencies": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "uniqueItems": true
+          },
+          "start_known": {
+            "type": "boolean",
+            "description": "false 时界面须标示待定，不编造起点"
+          },
+          "end_known": {
+            "type": "boolean",
+            "description": "false 时界面须标示待定，不编造时长"
           }
         },
         "additionalProperties": false
       }
+    },
+    "taskColor": {
+      "type": "string",
+      "pattern": "^#[0-9a-fA-F]{6}$"
     }
   },
   "additionalProperties": false

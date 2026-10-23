@@ -1,65 +1,54 @@
 # PPT Master 适配合同
 
-## 事实基线与边界
-
-原包核对上游提交 `680de11f1bef4628b68d5daad9dffec569fbd51f`（2026-09-27）。KZ6-0929-A01 已实际执行本机 ppt-master 6.6.0 默认与 Quick 导出；本机安装目录无 Git 元数据，不能将远端提交当作安装 SHA。实际文件树 hash、命令和分项结果见本轮交接。本包没有修改上游；真实导出不等于整套集成验收通过。
-
-唯一 PPTX 制作引擎：`hugohe3/ppt-master`。先读其 `AGENTS.md`、`skills/ppt-master/SKILL.md` 和该版本路由文件。路径、CLI 参数、工作区结构由它负责；本包不另造 PPTX 导出器。
+核对基线：hugohe3/ppt-master v6.7.3（`523e5bd972f9`，2026-10-23），转换器级回读见 `examples/reference/pptx/README.md`。安装位置由宿主决定，执行前按上游 `SKILL.md` 的“paths before commands”取得 `SKILL_DIR`，先跑 `attribution_guard.py`。升级时重读 routing、svg-contract、native-data、animations 与 transitions 文档，再改本页。
 
 ## 插入点
-
-| 上游步骤 | 本包提供 | 不得干预 |
+| 上游步骤 | 本包提供 | 不干预 |
 |---|---|---|
-| 路由与资料接收 | 四轨意图、品牌限定、引用展示策略 | 不把所有任务强制为同一路由 |
-| Strategist / 显式 Quick 的设计决策 | tokens、页面计划、短标题、可选强调句、排版保护区、图片需求 | Quick 不强塞独立确认、spec_lock |
-| 图片准备 | `04-image-pipeline.md` 的图像计划、保护区、主题和 QC 记录 | 沿用图片 manifest 和资产阶段；默认使用其 `image_gen.py`。用户指定外部生图能力时，将真实资产/回执导入该 manifest，不另造导出路线、不臆造 provider 参数 |
-| Executor SVG | 原生文字/数据、透明填充、合法高光/阴影、已批准图片 | 不写 CSS backdrop-filter、任意 SVG 滤镜或整页截图 |
-| native-ready 图表 | `05-charts.md` 的同一数据；逐对象选择 native 标记及元数据 | 不把 ECharts option 当成上游 native JSON |
-| 上游 final checker / export | 补做康哲质量门，保留两份报告 | 不绕过其 checker、原生字段校验、快照同步要求 |
-| 成品视觉复核 | 全页截图、文本/卡片/图片冲突、真正编辑后回读 | SVG 预览不代替 PowerPoint 检查 |
+| 路由与资料接收 | 四轨意图、品牌限定、引用策略 | 不把所有任务强制成同一路由 |
+| Strategist（Default）/ Quick 决策 | tokens、page-plan、短标题、可选观点句、保护区、图像需求、构图预设 | 不替用户通过 BLOCKING 门；Quick 不塞 spec_lock |
+| 图像阶段 | 04 的图像计划、保护区、审阅 | 沿用上游 manifest 与 `image_gen.py`；外部生图结果导入同一 manifest |
+| Executor SVG | 原生文字与数据、渐变 alpha、合法阴影、已批准图片 | 不写 backdrop-filter、任意 SVG 滤镜或整页截图 |
+| 原生图表 | 05 的同一数据、native 标记与元数据 | 不把 ECharts option 当上游 JSON |
+| 动效侧车 | 06 MOTION-07 的 `animations.json` | 不用 auto/mixed/random |
+| checker / export | 康哲质量门另做，保留两份报告 | 不绕过上游 checker 与导出顺序 |
 
-## 原生玻璃
+## SVG 写法要点（6.7.3 已核）
+- 每个内容单元一个顶层 `<g id>` 并声明 `data-pptx-bounds="x y w h"`；顶层组在两轴重叠 >1px 即失败（结构角色组、Morph 暂存组除外）。页标题自成一组。
+- 背景图、横线、Logo、页脚用 `data-pptx-role`（`background / decoration / logo / footer`）；**带角色的原始元素必须有稳定 id**（`brand_fragments` 已加）。不要给卡片、正文、图表加结构角色。
+- 根 `<svg lang="zh-CN">` 声明演示语言；`font-family="Microsoft YaHei, Arial"` 导出为主题字体 latin Arial / ea Microsoft YaHei。
+- `• ` 开头的分行文字导出为原生项目符号 `a:buChar` 加悬挂缩进。
+- 渐变停点的 `stop-opacity` 原生保留；线性渐变转角度，径向渐变只保留焦点。
 
-采用背景图 + 可编辑低饱和半透明卡片 + 局部高光 + 合法外阴影。`tools/glass_svg.py` 仅生成**供上游 Executor 参考的 SVG 原语**，不是另一条 PPTX 制作路线。对象组内文字独立、颜色在通道 alpha 上，不给整体文字降透明度。
+## 阴影
+- 每个对象只转换一个效果；可挂滤镜的只有 rect、circle、polygon、image、path、text 及少数特例组，普通 `<g>` 上的滤镜被拒绝。
+- `feDropShadow` 偏移非零 → 一个外阴影；`dx=dy=0` → glow。`blurRad = stdDeviation × 2 × 9525`，`dist = hypot(dx,dy) × 9525`，导出 alpha ≈ 作者 alpha × 0.75（`tokens.elevation.pptx.export_alpha_factor`）。
+- inner shadow、soft edge、背景模糊、mask 须预先栅格化，玻璃卡不用。
+- 康哲配方见 02 LG-PPTX：作者值 `elevation.pptx.rest`（dy 6、σ 8、α 0.12，导出约 0.09）。实测：blurRad 152400、dist 57150、dir 90°、alpha 9%。
 
-上游已核实的边界：`fill-opacity` / `stroke-opacity` / `stop-opacity`；对象直接引用的 `feDropShadow` 会近似为 DrawingML 效果；普通组上的任意滤镜、真实 backdrop blur 不在此合同内。最终原生表现必须实测。
+## 原生数据
+- 图表：可见 fallback + `data-pptx-replace-with="chart"` 的 JSON 元数据，`stamp_native_fallbacks.py --write` 同步，`verify-charts` 阶段，导出加 `--native-charts-and-tables`。
+- 折线 + 面积：combo 中 area 与 line 两个 plot 共享数据。
+- 值轴：`{"axes":{"value":{"minimum":0,"maximum":8,"major_unit":2}}}`（封闭对象）；扁平 `axes.minimum` 会被拒绝。
+- 甘特：不在原生 chart 类型中（上游明确 fail fast），用可编辑形状与日期表，不写 `type:gantt`。
 
-### 数据对象下的阅读底板（A04 R12 实测）
-原生图表、表格或甘特需要阅读底板时，底板与局部高光应先于数据对象绘制，最终位于数据对象下方，保持为独立、可编辑的静态页面框架原语。当前上游 checker 支持 root 原语的稳定 `id` 与 `data-pptx-role="decoration"`；其 `_carrier_page_frame_role` 与 `_check_animation_group_ids` 明确识别这类页面框架。不要为满足动画分组提示，将底板与原生图表/表格替换标记合并成一个内容组；替换器处理的边界可能包含底板。
+## 动效与 Morph
+- 侧车 `animations.json` 放在项目根，`animation_config.py validate <project>` 校验，导出加 `--animation-config animations.json`（路径相对项目）。
+- 字段：`defaults.transition`、`slides.<页>.animation.trigger`、`groups.<顶层组 id>.{effect,duration,delay,order,decelerate}`、`slides.<页>.transition.{effect:"morph",effect_options:{"morph_by":"object"},duration}`、`morph.{from, pairs.<key>.{from,to}}`。
+- 时序：`with-previous` 起点 = 上一行起点 + delay，`after-previous` 起点 = 上一行结束 + delay；康哲的 70ms 错峰用 with-previous + 每行 delay。
+- 实测导出：Fade 为 presetID 10、`nodeType="withEffect"`、`decel="70000"`；Morph 两端写成同名 `!!<key>`，目的页 `p159:morph option="byObject"`。
+- 限制：Morph 只用于相邻页，两端同种容器；原生图表、表格、带结构角色的根原语不能配对；只出现在第二页的文字用淡入（可用 `data-pptx-morph-staging="true"` 放画布外）。没有小位移入场预设；不支持段落级逐条出现、自定义路径、按系列出现。
 
-只有确属无业务文字、无数据语义的底板/高光可声明为 decoration。正文、图表、表格、任务条和承载内容的卡片仍保持真实内容身份；不得借这个角色隐藏内容重叠。KZ6-0929-A04 R12 在本机 6.6.0 经真实 Default checker、native export 与 PowerPoint 显示验证该组合，仍保留非阻断样式提示。升级时重新读取该版本静态框架与替换标记接口，不复制样页坐标或猜测对象 ID。
-
-## 原生数据与 ECharts 一致
-
-对支持的图表，同时编写可见 fallback 与 `data-pptx-replace-with="chart"` 下的 JSON metadata；SVG-first 基线由上游脚本同步后再检查。原生激活使用该版本支持的 `--native-charts-and-tables`。面积与折线组合必须包含 area + line 两个 plot，共享源数据；不把可见面积删掉后声称一致。
-
-值轴元数据使用 `axes.value.minimum`、`axes.value.maximum`、`axes.value.major_unit`，例如 `{"axes":{"value":{"minimum":0,"maximum":8,"major_unit":2}}}`。不能使用扁平的 `axes.minimum`：A01 对当前上游 `native_objects/chart_data.py::_chart_axes` 的真实调用会拒绝这些未知轴角色。它们也不等同于 ECharts `min/max/interval`，不得直接透传。
-
-Gantt 不在该版本的原生 chart 类型中：输出可编辑任务形状/文本和日期表，不伪造 `type:gantt`。PPTX 放映环境不承诺 HTML 的拖动和编辑框；编辑模式可调整任务形状，数据驱动重新计算由作者工具执行。
-
-## 参考 PPTX 的使用
-
-上传参考仅作为风格和内容组织参考。若需提炼 Brand/Style/Layout/Deck 工作区，走上游 Create Template；原 PPTX 加新资料的保留式编辑，走 Edit Native PPTX。不要把裸 PPTX 假装成可直接使用的 Generate 模板，不要直接覆盖用户原件。
-
-## 升级探针
-
-记录上游 SHA；读取当次真实 route/接口；检查 image manifest、effect grammar、native-data、模板和导出命令；先跑两页小样再批量。任何接口变化先修适配层并记录，不反过来放宽康哲字体、禁色条、可编辑要求。详见 Agent P1。
-
-## 固定 hero 文字框适配（A02）
-上游 `scripts/docs/svg-contract.md` 的 `data-pptx-bounds` 是质量检查提示，不执行裁切或文字重排。实际导出会以文字度量收紧框，无法据此保证固定宽度。完成原引擎 checker 与真实导出后，再运行品牌适配：
-
+## 品牌绑定（导出之后）
 ```bash
-python tools/qc_plan.py hero-page-plan.json
+python tools/bind_header_mark_pptx.py upstream.pptx marked.pptx bindings.json --receipt mark-binding.json
 python tools/bind_hero_pptx.py upstream.pptx branded.pptx hero-page-plan.json --receipt frame-binding.json
+python3 ${SKILL_DIR}/scripts/pptx_delivery_check.py marked.pptx
 ```
+- 双菱形：`bindings.json` 形如 `{"pages":[{"slide":2,"replace_shape_ids":[3,4,5,6]}]}`，ID 从当次导出的 slide XML 中按名称（`kz-facet-0…3`）查得，不假设各页一致。工具要求 1280×720 画布、对象无正文文字、位于标记边界内，否则直接失败；输出另存，保留上游原件。实测绑定后 `p:timing` 与 Morph 名称完好、交付检查 0 错误。
+- hero 文字框：6.7.0 起普通文本框按字体度量定位首行基线，先在新版本上确认是否仍需绑定；需要时页面 id 前缀为真实页码，只绑定四类 hero 文字的原生框、内边距、固定行高与禁止自动缩字。
+- Edit Native PPTX 的 round-trip 会保留不支持的效果载荷；如果从参考 PPTX 出发能原生保留双菱形，可不再绑定（待用户提供参考文件后验证）。
 
-页面 id 前缀必须为真实页码，如 `01_cover`；文字与上游原生对象须唯一精确对应，字号不符或重名直接失败。只绑定四类 hero 文字对象的原生框、内边距、固定行高与禁止自动缩字；图表、工作簿、图片、正文和导航不改动。保留上游原件并对输出重新做原生显示与编辑回读。该步骤不能创建 PPTX，不能绕过上游导出。空辅助文字不创建绑定；长标题精简或拆页，不能自动缩小。
-
-## 固定双菱形原生绑定（A04 用户指定）
-`assets/header-mark/source-native.xml` 是经用户确认的原始品牌形状，不是另一个制片引擎。SVG 预览可调用 `brand_fragments.facets(native=True)`；SVG 转换不能保证原始渐变、softEdge 等字段逐项保真，所以最终必须在 ppt-master 实际导出之后复用原生对象：
-
-```bash
-python tools/bind_header_mark_pptx.py upstream.pptx marked.pptx header-mark-bindings.json --receipt mark-binding.json
-```
-
-绑定 JSON 为 `{"pages":[{"slide":4,"replace_shape_ids":[3,4,5,6,7,8]}]}`；这里只是语法示例，实际 ID 必须从当次导出 XML 检查后填写，不猜测所有页一致。仅列入需要正文 chrome 的页面。工具要求原固定画布、精确对象 ID、对象无正文文字且位于左上标记边界内；不匹配直接失败。保留上游原件，四对象顺序不变，仅为避免碰撞重分配 ID。再次运行上游交付检查，并检查最终截图和 Office 原生编辑。不能把绑定工具当成 PPTX 制作/上游验证的替代品。
+## 待做（需用户在场）
+- 用 Create Template 建康哲 Brand/Style workspace 并注册（上游有确认门）。
+- Default 全流程正例与 PowerPoint 实机编辑保存回读。
