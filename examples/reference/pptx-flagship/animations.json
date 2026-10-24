@@ -1,0 +1,198 @@
+{
+ "defaults": {
+  "transition": {
+   "effect": "fade",
+   "duration": 0.4
+  },
+  "animation": {
+   "effect": "none"
+  }
+ },
+ "slides": {
+  "01_cover": {
+   "animation": {
+    "trigger": "with-previous"
+   },
+   "groups": {
+    "kicker": {
+     "effect": "entrance_fade",
+     "duration": 0.52,
+     "delay": 0.0,
+     "decelerate": 0.7,
+     "order": 1
+    },
+    "title": {
+     "effect": "entrance_fade",
+     "duration": 0.52,
+     "delay": 0.18,
+     "decelerate": 0.7,
+     "order": 2
+    },
+    "lede": {
+     "effect": "entrance_fade",
+     "duration": 0.52,
+     "delay": 0.36,
+     "decelerate": 0.7,
+     "order": 3
+    },
+    "bar-0": {
+     "effect": "entrance_fade",
+     "duration": 0.52,
+     "delay": 0.54,
+     "decelerate": 0.7,
+     "order": 4
+    },
+    "bar-1": {
+     "effect": "entrance_fade",
+     "duration": 0.52,
+     "delay": 0.72,
+     "decelerate": 0.7,
+     "order": 5
+    },
+    "bar-2": {
+     "effect": "entrance_fade",
+     "duration": 0.52,
+     "delay": 0.9,
+     "decelerate": 0.7,
+     "order": 6
+    }
+   }
+  },
+  "02_toc": {
+   "animation": {
+    "trigger": "with-previous"
+   },
+   "groups": {
+    "title": {
+     "effect": "entrance_fade",
+     "duration": 0.52,
+     "delay": 0.0,
+     "decelerate": 0.7,
+     "order": 1
+    },
+    "toc-1": {
+     "effect": "entrance_fade",
+     "duration": 0.52,
+     "delay": 0.18,
+     "decelerate": 0.7,
+     "order": 2
+    },
+    "toc-2": {
+     "effect": "entrance_fade",
+     "duration": 0.52,
+     "delay": 0.36,
+     "decelerate": 0.7,
+     "order": 3
+    },
+    "toc-3": {
+     "effect": "entrance_fade",
+     "duration": 0.52,
+     "delay": 0.54,
+     "decelerate": 0.7,
+     "order": 4
+    }
+   }
+  },
+  "03_section": {
+   "animation": {
+    "trigger": "with-previous"
+   },
+   "groups": {
+    "section-number": {
+     "effect": "entrance_fade",
+     "duration": 0.52,
+     "delay": 0.0,
+     "decelerate": 0.7,
+     "order": 1
+    },
+    "section-title": {
+     "effect": "entrance_fade",
+     "duration": 0.52,
+     "delay": 0.18,
+     "decelerate": 0.7,
+     "order": 2
+    },
+    "section-lede": {
+     "effect": "entrance_fade",
+     "duration": 0.52,
+     "delay": 0.36,
+     "decelerate": 0.7,
+     "order": 3
+    }
+   }
+  },
+  "04_data": {
+   "animation": {
+    "trigger": "with-previous"
+   },
+   "groups": {
+    "title": {
+     "effect": "entrance_fade",
+     "duration": 0.52,
+     "delay": 0.0,
+     "decelerate": 0.7,
+     "order": 1
+    },
+    "paper-head": {
+     "effect": "entrance_fade",
+     "duration": 0.52,
+     "delay": 0.18,
+     "decelerate": 0.7,
+     "order": 2
+    },
+    "completeness-bars": {
+     "effect": "entrance_wipe",
+     "effect_options": {
+      "direction": "down"
+     },
+     "duration": 1.0,
+     "delay": 0.36,
+     "decelerate": 0.7,
+     "order": 3
+    },
+    "kpi": {
+     "effect": "entrance_fade",
+     "duration": 0.52,
+     "delay": 0.54,
+     "decelerate": 0.7,
+     "order": 4
+    },
+    "note": {
+     "effect": "entrance_fade",
+     "duration": 0.52,
+     "delay": 0.72,
+     "decelerate": 0.7,
+     "order": 5
+    }
+   }
+  },
+  "05_ending": {
+   "animation": {
+    "trigger": "with-previous"
+   },
+   "groups": {
+    "title": {
+     "effect": "entrance_fade",
+     "duration": 0.52,
+     "delay": 0.0,
+     "decelerate": 0.7,
+     "order": 1
+    },
+    "ask-1": {
+     "effect": "entrance_fade",
+     "duration": 0.52,
+     "delay": 0.18,
+     "decelerate": 0.7,
+     "order": 2
+    },
+    "ask-2": {
+     "effect": "entrance_fade",
+     "duration": 0.52,
+     "delay": 0.36,
+     "decelerate": 0.7,
+     "order": 3
+    }
+   }
+  }
+ }
+}

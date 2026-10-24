@@ -216,7 +216,8 @@
               "mode": {
                 "enum": [
                   "generated",
-                  "global_procedural_optical_field"
+                  "global_procedural_optical_field",
+                  "flagship_light_field"
                 ]
               },
               "asset_id": {
@@ -372,6 +373,43 @@
                     }
                   },
                   "additionalProperties": false
+                }
+              },
+              "plate": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "file",
+                  "sha256"
+                ],
+                "description": "14 FLAG-10：tools/flagship_plate.py 的回执（PPTX 旗舰的背景光效图）",
+                "properties": {
+                  "file": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "sha256": {
+                    "type": "string",
+                    "pattern": "^[0-9a-f]{64}$"
+                  },
+                  "kind": {
+                    "type": "string"
+                  },
+                  "focus": {
+                    "type": "array"
+                  },
+                  "calm": {
+                    "type": "array"
+                  },
+                  "pool": {
+                    "type": [
+                      "array",
+                      "null"
+                    ]
+                  },
+                  "size_px": {
+                    "type": "array"
+                  }
                 }
               }
             },
@@ -564,7 +602,11 @@
               "cover-01",
               "toc-01",
               "section-01",
-              "ending-01"
+              "ending-01",
+              "flagship-cover",
+              "flagship-toc",
+              "flagship-section",
+              "flagship-ending"
             ]
           },
           "motion_objects": {
@@ -698,6 +740,14 @@
           "minimum": 1
         }
       }
+    },
+    "route": {
+      "enum": [
+        "regular",
+        "flagship"
+      ],
+      "default": "regular",
+      "description": "14 FLAG-01：PPTX 与 HTML-PPT 的路线；缺省为常规"
     }
   },
   "additionalProperties": false,
@@ -710,6 +760,11 @@
               "pptx",
               "htmlppt"
             ]
+          },
+          "route": {
+            "not": {
+              "const": "flagship"
+            }
           }
         }
       },
@@ -790,6 +845,104 @@
                     "properties": {
                       "hero_layout_id": {
                         "const": "ending-01"
+                      }
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "required": [
+          "route"
+        ],
+        "properties": {
+          "route": {
+            "const": "flagship"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "pages": {
+            "items": {
+              "allOf": [
+                {
+                  "if": {
+                    "properties": {
+                      "kind": {
+                        "const": "cover"
+                      }
+                    }
+                  },
+                  "then": {
+                    "required": [
+                      "hero_layout_id"
+                    ],
+                    "properties": {
+                      "hero_layout_id": {
+                        "const": "flagship-cover"
+                      }
+                    }
+                  }
+                },
+                {
+                  "if": {
+                    "properties": {
+                      "kind": {
+                        "const": "toc"
+                      }
+                    }
+                  },
+                  "then": {
+                    "required": [
+                      "hero_layout_id"
+                    ],
+                    "properties": {
+                      "hero_layout_id": {
+                        "const": "flagship-toc"
+                      }
+                    }
+                  }
+                },
+                {
+                  "if": {
+                    "properties": {
+                      "kind": {
+                        "const": "section"
+                      }
+                    }
+                  },
+                  "then": {
+                    "required": [
+                      "hero_layout_id"
+                    ],
+                    "properties": {
+                      "hero_layout_id": {
+                        "const": "flagship-section"
+                      }
+                    }
+                  }
+                },
+                {
+                  "if": {
+                    "properties": {
+                      "kind": {
+                        "const": "ending"
+                      }
+                    }
+                  },
+                  "then": {
+                    "required": [
+                      "hero_layout_id"
+                    ],
+                    "properties": {
+                      "hero_layout_id": {
+                        "const": "flagship-ending"
                       }
                     }
                   }

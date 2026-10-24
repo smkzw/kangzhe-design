@@ -4,6 +4,7 @@
 |---|---|---|
 | `test_*.py` | 合同、tokens、hero 几何、双菱形、计划绕过、视口资产、上下文路由、规范结构 | `for t in tests/test_*.py; do python "$t"; done`（需 jsonschema、Pillow） |
 | `ego/runtime_checks.mjs` | 组件实验室的真实指针/键盘/滚动检查 | `ego-browser nodejs < tests/ego/runtime_checks.mjs`（先把脚本里的 `KZ_ROOT` 改为本仓库路径） |
+| `ego/flagship_checks.mjs` | 旗舰正例的真实按键检查：光场、透镜、身份胶囊、入场顺序、定格可复现、内容页安静区、减少动态与 `?preview` | `ego-browser nodejs < tests/ego/flagship_checks.mjs`（脚本中的 URL 指向本仓库路径） |
 | `*_browser.py`、`*.cjs` | Playwright / Node 版组件检查 | 维护者环境：`python tests/browser_smoke.py --chromium <path> --out <dir>` 等 |
 
 7.0 已把 `chart_axis_browser.py`、`tilt_pointer_browser.py`、`browser_smoke.py` 的断言改为新接口（折线 `[x,y]` 数据、倾斜由变量驱动且上限 6°），但这些 Playwright 脚本未在本次本机环境运行。以下为 6.x 时期的说明，仅作历史参考。

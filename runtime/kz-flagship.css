@@ -1,0 +1,79 @@
+/* Flagship route (14) on the upstream html-ppt deck. body.kz.kzf[data-fit="fluid"]; load after kz-tokens.css and kz-glass.css.
+   Units: geometry calc(N * var(--kz-u)), type calc(var(--kzf-type-*) * var(--kz-un)) — both written by html-ppt-bridge.js. */
+@property --kzf-la { syntax: '<angle>'; inherits: true; initial-value: 210deg; }
+.kzf { background: var(--kzf-canvas); }
+.kzf .deck, .kzf .slide { background: transparent; }
+.kzf .deck { z-index: 1; }
+.kzf .progress-bar { display: none !important; }
+html { transition: --kzf-la 1.4s var(--kz-ease-standard); }
+
+/* shared layers created by KZFlagship.mount */
+.kzf-field { position: fixed; inset: 0; width: 100vw; height: 100vh; display: block; z-index: 0; pointer-events: none; }
+.kzf-field-fallback { background:
+  radial-gradient(60% 55% at 78% 72%, rgba(255,168,20,.30), transparent 70%),
+  radial-gradient(45% 40% at 92% 18%, rgba(255,219,148,.45), transparent 70%),
+  linear-gradient(160deg, var(--kzf-canvas) 40%, #FFF6E6 100%); }
+.kzf-defs { position: absolute; width: 0; height: 0; overflow: hidden; }
+
+/* Slides switch without an opacity ramp on the container (an ancestor with opacity<1 would turn every lens blank).
+   The outgoing slide stays for the exit window while its own contents fade; no ±30px shift. */
+.kzf .slide { padding: 0; transform: none !important; display: block;
+  transition: opacity 0s linear var(--kzf-trans-exit), visibility 0s linear var(--kzf-trans-exit); }
+.kzf .slide.is-active { transition-delay: 0s; }
+.kzf .slide.kzf-leaving { opacity: 1; }
+
+/* entrances: the light moves first; text rises out of a soft blur, glass sets down, after the light has settled */
+.kzf .slide [data-kzf-in] { opacity: 0; }
+.kzf .slide.is-active [data-kzf-in] { animation: kzf-in var(--kzf-text-ms) var(--kz-ease-enter) both;
+  animation-delay: calc(var(--kzf-trans-content-delay) + var(--kzf-i, 0) * var(--kzf-trans-step)); }
+.kzf .slide.is-active .kzf-glass[data-kzf-in] { animation-name: kzf-glass-in; animation-duration: var(--kzf-glass-ms); }
+.kzf .slide:not(.is-active) [data-kzf-in] { opacity: 1; animation: kzf-out var(--kzf-trans-exit) var(--kz-ease-exit) both; }
+@keyframes kzf-in { from { opacity: 0; translate: 0 calc(var(--kzf-text-rise) * var(--kz-u)); filter: blur(calc(var(--kzf-text-blur) * var(--kz-u))); } to { opacity: 1; translate: 0 0; filter: blur(0); } }
+@keyframes kzf-glass-in { from { opacity: 0; scale: var(--kzf-glass-scale-from); translate: 0 calc(var(--kzf-glass-rise) * var(--kz-u)); } to { opacity: 1; scale: 1; translate: 0 0; } }
+@keyframes kzf-out { to { opacity: 0; translate: 0 calc(-10 * var(--kz-u)); } }
+/* static views: reduced motion, upstream ?preview, overview thumbnails and print show the final state */
+/* a page left before its entrance finished: no exit fade (it would flash half-entered text at full opacity) */
+.kzf .slide.kzf-skip [data-kzf-in] { animation: none !important; opacity: 0; }
+@media (prefers-reduced-motion: reduce) { .kzf .slide { transition: none; } .kzf .slide [data-kzf-in] { animation: none !important; opacity: 1; } html { transition: none; } }
+@media screen and (prefers-reduced-motion: reduce) { .kzf .slide:not(.is-active) { visibility: hidden; } }
+body.kzf[data-preview="1"] .slide [data-kzf-in], .kzf .overview [data-kzf-in] { animation: none !important; opacity: 1; filter: none; translate: none; }
+.kzf-frozen * { transition: none !important; }
+
+/* liquid glass: face, lens (backdrop set by KZFlagship), conic rim turning with the light, specular, caustic foot */
+.kzf-glass { border-radius: calc(var(--kzf-glass-radius) * var(--kz-u)); background: var(--kzf-glass-face);
+  box-shadow: inset 0 calc(1 * var(--kz-u)) 0 rgba(255,255,255,.95), inset 0 calc(-24 * var(--kz-u)) calc(46 * var(--kz-u)) calc(-29 * var(--kz-u)) rgba(var(--kzf-glass-rim-warm-rgb), .26),
+    inset calc(9 * var(--kz-u)) 0 calc(26 * var(--kz-u)) calc(-20 * var(--kz-u)) rgba(255,255,255,.5),
+    0 calc(30 * var(--kz-u)) calc(60 * var(--kz-u)) calc(-24 * var(--kz-u)) rgba(var(--kzf-glass-shadow-rgb), .26), 0 calc(5 * var(--kz-u)) calc(12 * var(--kz-u)) rgba(var(--kzf-glass-shadow-rgb), .07); }
+:where(.kzf-glass) { position: relative; }  /* zero specificity: deck CSS may position glass absolutely */
+.kzf-glass::before { content: ""; position: absolute; inset: 0; border-radius: inherit; padding: calc(var(--kzf-glass-rim-width) * var(--kz-u)); pointer-events: none;
+  background: conic-gradient(from var(--kzf-la), #fff 0deg, rgba(255,230,190,.25) 70deg, rgba(var(--kzf-glass-rim-warm-rgb), .85) 140deg, rgba(255,255,255,.9) 180deg, rgba(255,230,190,.25) 250deg, #fff 360deg);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask-composite: exclude; }
+.kzf-glass::after { content: ""; position: absolute; inset: 0; border-radius: inherit; pointer-events: none;
+  background: radial-gradient(120% 70% at 18% 0%, rgba(255,255,255,var(--kzf-glass-spec-alpha)) 0%, transparent 46%), radial-gradient(70% 40% at 50% 104%, rgba(var(--kzf-glass-rim-warm-rgb), var(--kzf-glass-caustic-alpha)) 0%, transparent 70%); }
+.kzf-glass > * { position: relative; z-index: 1; }
+.kzf-lens-fallback { -webkit-backdrop-filter: blur(var(--kzf-lens-fallback-blur)) saturate(1.3); backdrop-filter: blur(var(--kzf-lens-fallback-blur)) saturate(1.3); }
+
+/* identity capsule: the one persistent object; it glides to the corner of each page kind */
+.kzf-identity { position: fixed; left: 0; top: 0; z-index: 30; transform-origin: 0 0; border-radius: 999px;
+  transform: translate(var(--kzf-idx, 0), var(--kzf-idy, 0)) scale(var(--kzf-ids, 1)); transition: transform 1.4s var(--kz-ease-standard);
+  display: flex; align-items: center; gap: calc(var(--kzf-identity-gap) * var(--kz-u)); color: var(--kz-ink);
+  padding: calc(var(--kzf-identity-pad-t) * var(--kz-u)) calc(var(--kzf-identity-pad-r) * var(--kz-u)) calc(var(--kzf-identity-pad-b) * var(--kz-u)) calc(var(--kzf-identity-pad-l) * var(--kz-u)); }
+.kzf-identity img { height: calc(var(--kzf-identity-logo-h) * var(--kz-u)); width: auto; display: block; }
+.kzf-identity-name { font-size: calc(var(--kzf-type-identity-name) * var(--kz-un)); font-weight: 600; letter-spacing: .06em; white-space: nowrap; }
+@media (prefers-reduced-motion: reduce) { .kzf-identity { transition: none; } }
+
+/* typography shared by flagship pages */
+.kzf .kzf-kicker { display: flex; align-items: center; gap: calc(12 * var(--kz-u)); font-size: calc(var(--kzf-type-kicker) * var(--kz-un)); letter-spacing: .3em; color: var(--kzf-accent-ink); font-weight: 600; margin: 0; }
+.kzf .kzf-kicker::before { content: ""; width: calc(37 * var(--kz-u)); height: calc(1 * var(--kz-u)); background: currentColor; }
+.kzf .kzf-numeral { font-weight: var(--kzf-numeral-weight); letter-spacing: -.04em; font-feature-settings: "tnum" 1, "lnum" 1; line-height: 1; }
+.kzf .kzf-rule { height: calc(1 * var(--kz-u)); background: var(--kzf-rule); }
+.kzf .kzf-paper { background: var(--kzf-paper-face); border-radius: calc(var(--kzf-paper-radius) * var(--kz-u)); box-shadow: 0 0 0 calc(1 * var(--kz-u)) var(--kzf-paper-hairline), var(--kzf-paper-shadow); }
+.kzf .kzf-risk { color: var(--kz-risk); font-weight: 700; }
+
+@media print {
+  .kzf-field { display: none !important; }
+  /* the capsule prints on every page (fixed elements repeat per page) at its cover anchor; the ratio is locked to 1 in print */
+  .kzf-identity { transform: none !important; left: calc(var(--kzf-identity-mx) * var(--kz-u)); top: calc(var(--kzf-identity-my) * var(--kz-u)); background: rgba(255,255,255,.92); }
+  .kzf .slide { background: var(--kzf-canvas) !important; }
+  .kzf .slide [data-kzf-in] { animation: none !important; opacity: 1 !important; filter: none !important; translate: none !important; }
+}

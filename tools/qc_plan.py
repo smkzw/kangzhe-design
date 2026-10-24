@@ -20,6 +20,10 @@ def validate(plan,manifest=None,asset_root=None):
  for e in errs:add('SCHEMA','/'.join(map(str,e.absolute_path)),e.message)
  if errs:return findings
  seen=set();w,h=plan['canvas']
+ # 14: the flagship route keeps the floors and the language rules but has its own type contract, hero forms and light field.
+ flagship=plan.get('route','regular')=='flagship';FT=tokens['flagship']['type_px']
+ FLAG_ROLE={'cover_title':'cover_title','hero_subtitle':'lede','hero_meta':'meta','toc_title':'toc_title','toc_number':'toc_numeral','toc_label':'toc_label','toc_description':'toc_description','section_number':'section_numeral','section_title':'section_title','ending_title':'ending_title','page_title':'page_title','card_title':'card_title'}
+ if flagship and plan['track'] not in ['pptx','htmlppt']:add('ROUTE-TRACK','project','旗舰路线只用于 PPTX 与 HTML-PPT')
  targets={tuple(v) for v in plan['target_viewports']}
  required=tokens['viewports'].get(plan['track'])
  if required and not {tuple(v) for v in required}.issubset(targets):add('VIEWPORT-COVERAGE','project','缺少本轨规定的浏览器可视区验收视口：'+', '.join(f'{a}×{b}' for a,b in required))
@@ -43,7 +47,9 @@ def validate(plan,manifest=None,asset_root=None):
    if 'footer' in actual or any(r['role'] in ['header','footer'] for r in p['protected_regions']):add('HERO-CHROME',pid,'封面、目录、章节和尾页不得显示正文页眉页脚或页码')
    for r in expected:
     if r not in actual:add('HERO-ROLE',pid,'缺少固定角色 '+r)
-   if p['kind']=='toc':
+   if p['kind']=='toc' and flagship:
+    if not 1<=len([e for e in p['elements'] if e['role']=='toc_label'])<=4:add('FLAG-CAPACITY',pid,'旗舰目录每页1至4章（14 FLAG-07）')
+   elif p['kind']=='toc':
     labels=[e for e in p['elements'] if e['role']=='toc_label'];n=len(labels)
     if not 1<=n<=6:add('HERO-CAPACITY',pid,'目录每页1至6项，超过必须拆页')
     else:
@@ -65,14 +71,17 @@ def validate(plan,manifest=None,asset_root=None):
    role=el['role'];font=el['font_px'];byrole.setdefault(role,set()).add((round(font,3),round(el['line_height'],3)))
    floor=tokens['type_px']['reference'] if role=='reference' else tokens['type_px']['body_floor']
    if font<floor-.01:add('FONT-FLOOR',pid+'/'+el['id'],'字号低于该角色最低值')
-   if role in ['cover_title','hero_subtitle','hero_meta','toc_title','toc_number','toc_label','toc_description','section_number','section_title','ending_title'] and abs(font-tokens['type_px'][role])>.01:add('HERO-TYPE',pid+'/'+el['id'],'非正文页必须使用固定角色字号，不允许缩字')
-   if plan['track'] in ['pptx','htmlppt'] and role in ['cover_title','hero_subtitle','hero_meta','toc_title','toc_number','toc_label','toc_description','section_number','section_title','ending_title'] and abs(el['line_height']-1.25)>.001:add('HERO-LINEHEIGHT',pid+'/'+el['id'],'固定行高必须为1.25')
+   if flagship:
+    if role in FLAG_ROLE and abs(font-FT[FLAG_ROLE[role]])>.01:add('FLAG-TYPE',pid+'/'+el['id'],'旗舰角色字号须取 tokens.flagship.type_px（14 FLAG-07）')
+    if role=='footer':add('FLAG-CHROME',pid+'/'+el['id'],'旗舰不用固定页脚，由身份胶囊锚定（14 FLAG-06）')
+   elif role in ['cover_title','hero_subtitle','hero_meta','toc_title','toc_number','toc_label','toc_description','section_number','section_title','ending_title'] and abs(font-tokens['type_px'][role])>.01:add('HERO-TYPE',pid+'/'+el['id'],'非正文页必须使用固定角色字号，不允许缩字')
+   if not flagship and plan['track'] in ['pptx','htmlppt'] and role in ['cover_title','hero_subtitle','hero_meta','toc_title','toc_number','toc_label','toc_description','section_number','section_title','ending_title'] and abs(el['line_height']-1.25)>.001:add('HERO-LINEHEIGHT',pid+'/'+el['id'],'固定行高必须为1.25')
    hero=tokens.get('hero_layouts',{}).get(p['kind'])
    anchor={'cover_title':'title','toc_title':'title','section_number':'number','section_title':'title','ending_title':'title','hero_subtitle':'subtitle','hero_meta':'meta'}.get(role)
-   if plan['track'] in ['pptx','htmlppt'] and hero and anchor:
+   if not flagship and plan['track'] in ['pptx','htmlppt'] and hero and anchor:
     expected_rect=hero.get(anchor)
     if expected_rect and (not el.get('rect') or any(abs(a-b)>2 for a,b in zip(el['rect'],expected_rect))):add('HERO-GEOMETRY',pid+'/'+el['id'],'固定文字框位置/尺寸与版式 token 不符')
-   if plan['track'] in ['pptx','htmlppt'] and role in ['page_title','card_title','footer'] and abs(font-tokens['type_px'][role])>.01:add('PPT-ROLE-TYPE',pid+'/'+el['id'],'正文页标题、卡标题和页脚必须使用固定角色字号')
+   if not flagship and plan['track'] in ['pptx','htmlppt'] and role in ['page_title','card_title','footer'] and abs(font-tokens['type_px'][role])>.01:add('PPT-ROLE-TYPE',pid+'/'+el['id'],'正文页标题、卡标题和页脚必须使用固定角色字号')
    if role=='body' and p['body_profile']!='responsive':
     expected=tokens['type_px']['body_compact' if p['body_profile']=='compact' else 'body']
     if abs(font-expected)>.01:add('BODY-PROFILE',pid+'/'+el['id'],'正文未使用整页统一 profile')
@@ -101,7 +110,18 @@ def validate(plan,manifest=None,asset_root=None):
    if not {region['id'] for region in p['protected_regions']}.issubset(ids):add('IMAGE-PROTECTION-COVERAGE',pid,'实际视口保护区漏掉页面对象')
    for region in mapping['protected_regions']:
     if not in_bounds(region['rect'],*viewport):add('IMAGE-RENDITION-BOUNDS',pid+'/'+region['id'],'实际视口保护区越界或尺寸非正')
-  if image['mode']=='global_procedural_optical_field':
+  if flagship and image['mode']!='flagship_light_field':add('FLAG-IMAGE',pid,'旗舰背景用品牌光场（14 FLAG-02）')
+  if image['mode']=='flagship_light_field':
+   if not flagship:add('FLAG-IMAGE-ROUTE',pid,'品牌光场背景只用于旗舰路线')
+   elif plan['track']=='pptx':
+    plate=image.get('plate')
+    if not plate:add('FLAG-PLATE',pid,'PPTX 旗舰每页须登记 tools/flagship_plate.py 回执（14 FLAG-10）')
+    elif asset_root is not None:
+     f=Path(asset_root)/plate['file']
+     if not f.is_file():add('FLAG-PLATE',pid,'光效图文件不存在：'+plate['file'])
+     elif hashlib.sha256(f.read_bytes()).hexdigest()!=plate['sha256']:add('FLAG-PLATE-HASH',pid,'光效图哈希与回执不符')
+   elif not image.get('procedural_evidence'):add('FLAG-IMAGE',pid,'HTML-PPT 旗舰须写明光场实现证据（runtime/kz-flagship.js）')
+  elif image['mode']=='global_procedural_optical_field':
    if plan['track'] not in ['site','stream']:add('IMAGE-REQUIRED',pid,'PPTX/HTML-PPT 无程序化光场免生图豁免')
    if not image.get('procedural_evidence'):add('IMAGE-EXEMPTION',pid,'光场豁免缺少实现证据')
   elif not image.get('asset_id'):add('IMAGE-MAP',pid,'缺少生成图资产映射')

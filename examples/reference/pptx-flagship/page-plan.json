@@ -1,0 +1,438 @@
+{
+ "schema_version": "6.1",
+ "contract_revision": "7.0",
+ "track": "pptx",
+ "route": "flagship",
+ "canvas": [
+  1280,
+  720
+ ],
+ "target_viewports": [
+  [
+   1280,
+   720
+  ]
+ ],
+ "pages": [
+  {
+   "id": "p01",
+   "kind": "cover",
+   "title": "研究资料完整性核对",
+   "hero_layout_id": "flagship-cover",
+   "body_profile": "standard",
+   "elements": [
+    {
+     "id": "p01-cover_title-0",
+     "role": "cover_title",
+     "font_px": 79,
+     "line_height": 1.25,
+     "text": "研究资料完整性核对"
+    },
+    {
+     "id": "p01-hero_subtitle-1",
+     "role": "hero_subtitle",
+     "font_px": 22,
+     "line_height": 1.25,
+     "text": "应收 24 份，已收 20 份；缺口集中在两组资料"
+    },
+    {
+     "id": "p01-hero_meta-2",
+     "role": "hero_meta",
+     "font_px": 16,
+     "line_height": 1.25,
+     "text": "2026年10月　管理层季度汇报"
+    }
+   ],
+   "protected_regions": [
+    {
+     "id": "p01-identity",
+     "rect": [
+      0,
+      0,
+      1,
+      1
+     ],
+     "role": "logo",
+     "zone": "clear"
+    }
+   ],
+   "cards": [],
+   "image": {
+    "mode": "flagship_light_field",
+    "plate": {
+     "file": "p01-plate.png",
+     "sha256": "48c0f31c30b56874a8675780024408ac1df10607d1ec6ef95ba66f4295cd387f",
+     "kind": "cover",
+     "focus": [
+      0.72,
+      0.74
+     ],
+     "size_px": [
+      2560,
+      1440
+     ]
+    }
+   },
+   "sources": [
+    {
+     "id": "brief",
+     "kind": "internal",
+     "visible": false,
+     "locator": "sources/资料完整性核对_brief.md"
+    }
+   ]
+  },
+  {
+   "id": "p02",
+   "kind": "toc",
+   "title": "三个问题，一个决定",
+   "hero_layout_id": "flagship-toc",
+   "body_profile": "standard",
+   "elements": [
+    {
+     "id": "p02-toc_title-0",
+     "role": "toc_title",
+     "font_px": 56,
+     "line_height": 1.25,
+     "text": "三个问题，一个决定"
+    },
+    {
+     "id": "p02-toc_number-1",
+     "role": "toc_number",
+     "font_px": 64,
+     "line_height": 1.25,
+     "text": "01"
+    },
+    {
+     "id": "p02-toc_label-2",
+     "role": "toc_label",
+     "font_px": 30,
+     "line_height": 1.25,
+     "text": "研究范围"
+    },
+    {
+     "id": "p02-toc_description-3",
+     "role": "toc_description",
+     "font_px": 18,
+     "line_height": 1.25,
+     "text": "对象、时间窗与资料组"
+    },
+    {
+     "id": "p02-toc_number-4",
+     "role": "toc_number",
+     "font_px": 64,
+     "line_height": 1.25,
+     "text": "02"
+    },
+    {
+     "id": "p02-toc_label-5",
+     "role": "toc_label",
+     "font_px": 30,
+     "line_height": 1.25,
+     "text": "资料完整性"
+    },
+    {
+     "id": "p02-toc_description-6",
+     "role": "toc_description",
+     "font_px": 18,
+     "line_height": 1.25,
+     "text": "应收与已收、缺口所在"
+    },
+    {
+     "id": "p02-toc_number-7",
+     "role": "toc_number",
+     "font_px": 64,
+     "line_height": 1.25,
+     "text": "03"
+    },
+    {
+     "id": "p02-toc_label-8",
+     "role": "toc_label",
+     "font_px": 30,
+     "line_height": 1.25,
+     "text": "核对计划"
+    },
+    {
+     "id": "p02-toc_description-9",
+     "role": "toc_description",
+     "font_px": 18,
+     "line_height": 1.25,
+     "text": "补收、确认与复核"
+    }
+   ],
+   "protected_regions": [
+    {
+     "id": "p02-identity",
+     "rect": [
+      0,
+      0,
+      1,
+      1
+     ],
+     "role": "logo",
+     "zone": "clear"
+    }
+   ],
+   "cards": [],
+   "image": {
+    "mode": "flagship_light_field",
+    "plate": {
+     "file": "p02-plate.png",
+     "sha256": "feaca9c9be8a2567f1b687127dac32381f5c7f565d67eb1220cef0fbe9734cca",
+     "kind": "toc",
+     "focus": [
+      0.62,
+      0.7
+     ],
+     "size_px": [
+      2560,
+      1440
+     ]
+    }
+   },
+   "sources": [
+    {
+     "id": "brief",
+     "kind": "internal",
+     "visible": false,
+     "locator": "sources/资料完整性核对_brief.md"
+    }
+   ]
+  },
+  {
+   "id": "p03",
+   "kind": "section",
+   "title": "资料完整性",
+   "hero_layout_id": "flagship-section",
+   "body_profile": "standard",
+   "elements": [
+    {
+     "id": "p03-section_number-0",
+     "role": "section_number",
+     "font_px": 373,
+     "line_height": 1.25,
+     "text": "02"
+    },
+    {
+     "id": "p03-section_title-1",
+     "role": "section_title",
+     "font_px": 69,
+     "line_height": 1.25,
+     "text": "资料完整性"
+    },
+    {
+     "id": "p03-body-2",
+     "role": "body",
+     "font_px": 20,
+     "line_height": 1.4,
+     "text": "缺口在哪里，会不会影响组间比较"
+    }
+   ],
+   "protected_regions": [
+    {
+     "id": "p03-identity",
+     "rect": [
+      0,
+      0,
+      1,
+      1
+     ],
+     "role": "logo",
+     "zone": "clear"
+    }
+   ],
+   "cards": [],
+   "image": {
+    "mode": "flagship_light_field",
+    "plate": {
+     "file": "p03-plate.png",
+     "sha256": "45206c9db7cae9419f43f6b1e320657f7fdeb30bac157f1582319be72df7defe",
+     "kind": "section",
+     "focus": [
+      0.25,
+      0.48
+     ],
+     "size_px": [
+      2560,
+      1440
+     ]
+    }
+   },
+   "sources": [
+    {
+     "id": "brief",
+     "kind": "internal",
+     "visible": false,
+     "locator": "sources/资料完整性核对_brief.md"
+    }
+   ]
+  },
+  {
+   "id": "p04",
+   "kind": "body",
+   "title": "缺口集中在中心记录与安全性报告",
+   "body_profile": "standard",
+   "elements": [
+    {
+     "id": "p04-page_title-0",
+     "role": "page_title",
+     "font_px": 38,
+     "line_height": 1.25,
+     "text": "缺口集中在中心记录与安全性报告"
+    },
+    {
+     "id": "p04-card_title-1",
+     "role": "card_title",
+     "font_px": 22,
+     "line_height": 1.25,
+     "text": "各资料组应收与已收"
+    },
+    {
+     "id": "p04-chart_label-2",
+     "role": "chart_label",
+     "font_px": 16,
+     "line_height": 1.4,
+     "text": "份"
+    },
+    {
+     "id": "p04-body-3",
+     "role": "body",
+     "font_px": 20,
+     "line_height": 1.4,
+     "text": "缺失记录保留为空值；不按零处理，也不插补"
+    }
+   ],
+   "protected_regions": [
+    {
+     "id": "p04-identity",
+     "rect": [
+      0,
+      0,
+      1,
+      1
+     ],
+     "role": "logo",
+     "zone": "clear"
+    }
+   ],
+   "cards": [],
+   "image": {
+    "mode": "flagship_light_field",
+    "plate": {
+     "file": "p04-plate.png",
+     "sha256": "5bfd8b60c5d54883fd380a8a01b556ea5c8fd0429c613e14271be603792abdb0",
+     "kind": "content",
+     "focus": [
+      0.8,
+      0.42
+     ],
+     "calm": [
+      [
+       0.0781,
+       0.1444,
+       0.9219,
+       0.2361
+      ],
+      [
+       0.0781,
+       0.2722,
+       0.6508,
+       0.9111
+      ],
+      [
+       0.682,
+       0.7319,
+       0.9219,
+       0.8986
+      ]
+     ],
+     "pool": [
+      0.801953125,
+      0.48541666666666666,
+      0.2643611111111111
+     ],
+     "size_px": [
+      2560,
+      1440
+     ]
+    }
+   },
+   "sources": [
+    {
+     "id": "brief",
+     "kind": "internal",
+     "visible": false,
+     "locator": "sources/资料完整性核对_brief.md"
+    }
+   ]
+  },
+  {
+   "id": "p05",
+   "kind": "ending",
+   "title": "请确认两件事",
+   "hero_layout_id": "flagship-ending",
+   "body_profile": "standard",
+   "elements": [
+    {
+     "id": "p05-ending_title-0",
+     "role": "ending_title",
+     "font_px": 75,
+     "line_height": 1.25,
+     "text": "请确认两件事"
+    },
+    {
+     "id": "p05-body-1",
+     "role": "body",
+     "font_px": 20,
+     "line_height": 1.4,
+     "text": "4 份资料由医学部牵头，2027Q1 内补收"
+    },
+    {
+     "id": "p05-body-2",
+     "role": "body",
+     "font_px": 20,
+     "line_height": 1.4,
+     "text": "版本差异确认之后，再做组间比较"
+    }
+   ],
+   "protected_regions": [
+    {
+     "id": "p05-identity",
+     "rect": [
+      0,
+      0,
+      1,
+      1
+     ],
+     "role": "logo",
+     "zone": "clear"
+    }
+   ],
+   "cards": [],
+   "image": {
+    "mode": "flagship_light_field",
+    "plate": {
+     "file": "p05-plate.png",
+     "sha256": "9ad08f703d7c3253647037b34403ed69886ac1bb356c9fe73b827e56ccce09aa",
+     "kind": "ending",
+     "focus": [
+      0.5,
+      0.66
+     ],
+     "size_px": [
+      2560,
+      1440
+     ]
+    }
+   },
+   "sources": [
+    {
+     "id": "brief",
+     "kind": "internal",
+     "visible": false,
+     "locator": "sources/资料完整性核对_brief.md"
+    }
+   ]
+  }
+ ]
+}

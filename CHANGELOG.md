@@ -1,3 +1,38 @@
+# 7.1.0 · 2026-10-24
+
+## KZ7-1024-B06 · 旗舰路线与选路阻断
+新增旗舰路线（`design_specs/14-flagship.md`），用于对外汇报和向公司顶层领导汇报。方向由用户在三套原型中选定：浅色画布，B（白昼棱镜）的排印与内容页，C（流光液态）的光与液态玻璃；深色舞台不采用。
+
+选路
+- PPTX 与 HTML-PPT 开工前一律阻断，请用户在“常规”和“旗舰”之间选择（SKILL.md、14 FLAG-01）。提问前 Agent 先根据材料与信息判定，给出推荐路线和理由；判据有听众、场合、材料性质、用户措辞、放映环境。站点式与流式不触发。`tools/context_pack.py --route flagship` 加入 14。
+
+旗舰的视觉与动效
+- 页面角色光量分三级：封面、目录、尾页全量；章节页光河从数字下方穿过；内容页的光退让。用户指出原型 C 的光在内容页太扎眼、和卡片抢视线，因此内容页里标了 `data-kzf-calm` 的阅读区以羽化矩形挡住光场，光只留在页边和底边地平线，并在唯一的聚光对象背后聚一池光。
+- 光先转场：翻页时一道暖光波扫过全页，光停下后内容才入场，文字带轻微模糊上移，玻璃从微缩放落定。连续快速翻页时整页光波间隔不短于 700ms（WCAG 2.3.1）。
+- 液态玻璃透镜：Chromium 上用 SVG 位移作 backdrop-filter，只在边缘折射，中心不变形；边缘高光随页面光向转动。每页最多 3 块，图表、表格和正文后面不放。非 Chromium 浏览器退回磨砂。
+- 去掉固定页眉页脚，由一枚身份胶囊（官方 Logo 加“产品中心医学部”）锚定，翻页时滑到各页型的角落。
+- 内容页的阅读面是白纸卡加发丝线；关键数字用超细大号字。
+
+实现
+- `runtime/kz-flagship.js/css`：在上游 html-ppt deck 下方铺一张共用的 WebGL 光场，透镜、胶囊和转场都只在品牌层叠加，导航、hash、总览、演讲者窗口与打印仍归上游。支持 `?kzf-t` / `?kzf-p` 定格；减少动态时只画一帧；`?preview` 与 WebGL 不可用时改用 CSS 渐变光场。
+- `tokens.flagship` 加 `--kzf-*` CSS 变量；`tools/flagship_plate.py` 用 numpy 移植同一光场，供 PPTX 背景使用，结果确定。`requirements.txt` 加入 numpy。
+- 正例：`examples/reference/htmlppt-flagship/`（9 页，同一素材）、`examples/reference/pptx-flagship/`（5 页，ppt-master 导出）。
+- 测试：`tests/test_flagship.py`，覆盖 token 完整且都有使用方、光效图确定性与安静区、选路与路由、qc_plan 的旗舰检查、正例结构；`tests/ego/flagship_checks.mjs` 用真实按键检查运行时。
+
+独立审阅后的修正
+- 启动：上游初始化后第一次出现的 `.is-active` 当作起始页，深链和刷新不再先播一遍从封面过来的转场；`?kzf-p` 从上一页起。
+- 减少动态：翻页后立即重画光场（原来内容页一直顶着 hero 光量），取消页面容器的过渡，新旧两页不再叠显；打印加减少动态时不再出现空白页。
+- 转场：离场页与入场页的安全区、光池按进度交叉过渡；整页光波用独立时钟，被限频的翻页不会掐断正在进行的光波；中途打断时从当前混合状态起步；入场未完成就离开的页不再闪现。
+- 对比度：引导语与编号改用 `flagship.accent_ink`（#9A4D00，在画布上为 5.96:1），封面与尾页的元信息改用正文色。原来用的 `colors.focus` 在画布上只有 4.47:1。
+- 打印保留身份胶囊；处理 WebGL 上下文丢失与恢复；dispose 清理计时器、透镜与变量；胶囊内边距与间距改读 tokens；着色器里 edge0≥edge1 的 smoothstep 改为合法写法。
+- 计划预检：page-plan 加 `route`，旗舰 hero 页写 `flagship-<kind>`，背景写 `flagship_light_field`（PPTX 附光效图回执）；`qc_plan.py` 据此改用旗舰字号与光场检查，并按 `--asset-root` 核对光效图哈希；FLAG-02 补上 03 TYPE-01 角色字号一行。PPTX 旗舰探针附 `page-plan.json`，0 错误。
+- 选路：修改已有 deck 时沿用原路线，不再阻断。`context_pack` 的 assets 阶段按路线给出 14 与光场工具。
+
+验证
+- HTML 旗舰：9 页 × 4 视口版面检查全净；运行时检查 19/19 通过（含连续快速翻页、深链、减少动态与打印回归）。
+- PPTX 旗舰：检查器 0 错误，交付检查 0/0，OOXML 回读正确；PowerPoint 另存 PDF 与编辑保存回读一致。
+- 未覆盖：正常帧率 Chrome/Edge 中的放映观感；非 Chromium 降级；Windows Office。
+
 # 7.0.2 · 2026-10-24
 
 ## KZ7-1024-B05 · 甘特编辑器按需展开、PPTX 错峰拉长、PowerPoint 实机回读

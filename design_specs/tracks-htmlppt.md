@@ -18,3 +18,5 @@
 - 组件实验室不能代替上游端到端。
 
 参考实现：`examples/reference/htmlppt/`（`build.py` 从脚手架派生 `index.html`）。
+
+旗舰路线（14）用同一脚手架与 adapter，另加 `runtime/kz-flagship.css/js`；步骤 4 的正文页 chrome 与背景生图由 14 FLAG-06/07/08 替代。参考实现：`examples/reference/htmlppt-flagship/`。

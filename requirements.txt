@@ -2,3 +2,4 @@
 # The engines keep their own requirements: ppt-master (skills/ppt-master/requirements.txt) and html-ppt-skill.
 jsonschema>=4.18
 Pillow>=9.0
+numpy>=1.24

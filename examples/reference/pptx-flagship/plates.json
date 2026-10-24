@@ -1,0 +1,30 @@
+{
+ "_doc": "tools/flagship_plate.py 渲染的背景光效图（参数见 build_svg.py 的 PLATES），2560×1440 PNG；14 FLAG-10 资产登记。",
+ "plates": [
+  {
+   "file": "p01-plate.png",
+   "sha256": "48c0f31c30b56874a8675780024408ac1df10607d1ec6ef95ba66f4295cd387f",
+   "bytes": 280394
+  },
+  {
+   "file": "p02-plate.png",
+   "sha256": "feaca9c9be8a2567f1b687127dac32381f5c7f565d67eb1220cef0fbe9734cca",
+   "bytes": 260076
+  },
+  {
+   "file": "p03-plate.png",
+   "sha256": "45206c9db7cae9419f43f6b1e320657f7fdeb30bac157f1582319be72df7defe",
+   "bytes": 184570
+  },
+  {
+   "file": "p04-plate.png",
+   "sha256": "5bfd8b60c5d54883fd380a8a01b556ea5c8fd0429c613e14271be603792abdb0",
+   "bytes": 89707
+  },
+  {
+   "file": "p05-plate.png",
+   "sha256": "9ad08f703d7c3253647037b34403ed69886ac1bb356c9fe73b827e56ccce09aa",
+   "bytes": 274797
+  }
+ ]
+}

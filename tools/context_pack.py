@@ -2,11 +2,15 @@
 import argparse,json,hashlib
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1]
-def files(track,features):
+def files(track,features,route='regular'):
  base=['SKILL.md','tokens/tokens.json']+[f'design_specs/{x}.md' for x in ['00-authority','01-core','02-liquid-glass','03-typography-language','04-image-pipeline','tracks-'+track,'13-layout-density','10-quality-gates']]
  if track in ['pptx','htmlppt']:base+=['design_specs/11-hero-layouts.md']
  if track=='pptx':base+=['adapters/ppt-master.md']
  if track=='htmlppt':base+=['adapters/html-ppt.md']
+ # 14: the flagship route layers on the PPTX/HTML-PPT track; its FLAG-02 table names the regular rules it replaces.
+ if route=='flagship':
+  if track not in ['pptx','htmlppt']:raise ValueError('flagship route applies to pptx and htmlppt only')
+  base+=['design_specs/14-flagship.md']
  if track in ['htmlppt','site','stream']:features.add('film')
  if track in ['site','stream']:features.add('drilldown')
  # 'motion' = PPTX animations.json / Morph (06 MOTION-07); HTML tracks always read 06 through 'film'.
@@ -20,12 +24,12 @@ def files(track,features):
  return list(dict.fromkeys(base))
 
 STAGES=('bootstrap','plan','assets','author','verify')
-def index(track,features,stage='all',seen=None):
+def index(track,features,stage='all',seen=None,route='regular'):
  """Route owner paths, not copied rules or a production acceptance verdict."""
- complete=files(track,set(features))
+ complete=files(track,set(features),route)
  if stage=='all': selected=complete
  elif stage=='bootstrap':
-  selected=['SKILL.md','design_specs/00-authority.md','design_specs/tracks-'+track+'.md']
+  selected=['SKILL.md','design_specs/00-authority.md','design_specs/tracks-'+track+'.md']+(['design_specs/14-flagship.md'] if route=='flagship' else [])
   if track=='pptx':selected+=['adapters/ppt-master.md']
   if track=='htmlppt':selected+=['adapters/html-ppt.md']
  elif stage=='plan':
@@ -35,11 +39,14 @@ def index(track,features,stage='all',seen=None):
  elif stage=='assets':
   # 04 hands off to the glass material (02), hero frames (11) and the viewport matrix (13 FOLD-04).
   selected=['design_specs/04-image-pipeline.md','design_specs/02-liquid-glass.md','design_specs/13-layout-density.md']+(['design_specs/11-hero-layouts.md'] if track in ['pptx','htmlppt'] else [])+['schemas/asset-manifest.schema.json','tools/qc_plan.py']
+  # 14 FLAG-10: flagship backgrounds come from the light field (plates for PPTX), not from the image pipeline
+  if route=='flagship':selected+=['design_specs/14-flagship.md']+(['tools/flagship_plate.py'] if track=='pptx' else ['runtime/kz-flagship.js'])
  elif stage=='author':
   selected=['tokens/tokens.json','runtime/API.md'] if track!='pptx' else ['tokens/tokens.json','adapters/ppt-master.md']
   if track=='htmlppt':selected+=['adapters/html-ppt.md']
   if track in ['pptx','htmlppt']:selected+=['tools/brand_fragments.py','tools/hero_layout.py']
-  if track=='pptx':selected+=['tools/glass_svg.py','examples/reference/pptx-default/README.md','examples/reference/pptx-default/page-plan.json']
+  if track=='pptx':selected+=['tools/glass_svg.py']+(['tools/flagship_plate.py','examples/reference/pptx-flagship/README.md'] if route=='flagship' else ['examples/reference/pptx-default/README.md','examples/reference/pptx-default/page-plan.json'])
+  if track=='htmlppt' and route=='flagship':selected+=['design_specs/14-flagship.md','examples/reference/htmlppt-flagship/build.py']
   # The current-spec reference implementation is the fastest correct starting point for authoring.
   selected+=['examples/reference/README.md']
  elif stage=='verify':selected=complete+['tools/qc_plan.py']
@@ -49,14 +56,14 @@ def index(track,features,stage='all',seen=None):
   data=(ROOT/p).read_bytes();sha=hashlib.sha256(data).hexdigest()
   owners.append({'path':p,'sha256':sha,'bytes':len(data),'needs_read':(seen or {}).get(p)!=sha})
  pos=STAGES.index(stage) if stage in STAGES else None
- return {'track':track,'stage':stage,'read_files':selected,'owners':owners,
+ return {'track':track,'route':route,'stage':stage,'read_files':selected,'owners':owners,
          'fingerprints':{o['path']:o['sha256'] for o in owners},
          'prerequisite_stages':list(STAGES[:pos]) if pos is not None else [],
          'next_stage':STAGES[pos+1] if pos is not None and pos+1<len(STAGES) else None,
          'scope':'reading index only; no stage or artifact is accepted by this output',
          'note':'Earlier owner requirements remain active. Hash matches permit reuse only when actually read in the same compatible session; final verification retains every applicable owner. Read implementation definitions when the public API is insufficient, not whole unrelated sources.'}
 if __name__=='__main__':
- ap=argparse.ArgumentParser();ap.add_argument('--track',choices=['pptx','htmlppt','site','stream'],required=True);ap.add_argument('--features',default='',help='comma list: charts,film,motion,drilldown,gantt,notes');ap.add_argument('--stage',choices=['all',*STAGES],default='all');ap.add_argument('--seen',type=Path,help='JSON {"fingerprints": {relative_owner_path: actually_read_sha256}}');a=ap.parse_args()
+ ap=argparse.ArgumentParser();ap.add_argument('--track',choices=['pptx','htmlppt','site','stream'],required=True);ap.add_argument('--route',choices=['regular','flagship'],default='regular',help='14 FLAG-01: chosen route for pptx/htmlppt');ap.add_argument('--features',default='',help='comma list: charts,film,motion,drilldown,gantt,notes');ap.add_argument('--stage',choices=['all',*STAGES],default='all');ap.add_argument('--seen',type=Path,help='JSON {"fingerprints": {relative_owner_path: actually_read_sha256}}');a=ap.parse_args()
  seen=json.loads(a.seen.read_text())['fingerprints'] if a.seen else None
  if seen is not None and (not isinstance(seen,dict) or any(not isinstance(k,str) or not isinstance(v,str) for k,v in seen.items())):ap.error('--seen fingerprints must map paths to string hashes')
- print(json.dumps(index(a.track,set(filter(None,a.features.split(','))),a.stage,seen),ensure_ascii=False,indent=2))
+ print(json.dumps(index(a.track,set(filter(None,a.features.split(','))),a.stage,seen,a.route),ensure_ascii=False,indent=2))

@@ -120,6 +120,24 @@ def build():
     x1, y1, x2, _, stroke = c['rule']
     css += [f'  --kz-chrome-rule-x1: {x1:g};', f'  --kz-chrome-rule-y: {y1:g};', f'  --kz-chrome-rule-x2: {x2:g};', f'  --kz-chrome-rule-stroke: {stroke:g};']
     css += [f'  --kz-chrome-foot-{k}: {c["footer"][k]:g};' for k in ('left', 'right', 'bottom')]
+    # Flagship route (14): type in logical px (deck CSS multiplies by --kz-un), geometry unitless (×--kz-u), motion in ms.
+    f = t['flagship']
+    css += [f'  --kzf-type-{k.replace("_","-")}: {v}px;' for k, v in f['type_px'].items()]
+    css += [f'  --kzf-canvas: {f["canvas"]};', f'  --kzf-rule: {f["rule"]};', f'  --kzf-numeral-weight: {f["numeral_weight"]};',
+            f'  --kzf-glass-face: linear-gradient(155deg,{stops(f["glass"]["face"])});',
+            f'  --kzf-glass-rim-width: {f["glass"]["rim_width"]:g};', f'  --kzf-glass-rim-warm-rgb: {rgb(f["glass"]["rim_warm"])};',
+            f'  --kzf-glass-caustic-alpha: {f["glass"]["caustic_alpha"]};', f'  --kzf-glass-spec-alpha: {f["glass"]["spec_alpha"]};',
+            f'  --kzf-glass-shadow-rgb: {",".join(map(str, f["glass"]["shadow_rgb"]))};', f'  --kzf-glass-radius: {f["glass"]["radius"]:g};',
+            f'  --kzf-paper-face: {f["paper"]["face"]};', f'  --kzf-paper-hairline: {f["paper"]["hairline"]};', f'  --kzf-paper-radius: {f["paper"]["radius"]:g};',
+            '  --kzf-paper-shadow: {}px {}px {}px {}px rgba({},{});'.format(*f['paper']['shadow'][:4], ','.join(map(str, f['glass']['shadow_rgb'])), f['paper']['shadow'][4]),
+            f'  --kzf-identity-logo-h: {f["identity"]["logo_height"]:g};', f'  --kzf-lens-fallback-blur: {f["lens"]["fallback_blur_px"]}px;',
+            f'  --kzf-accent-ink: {f["accent_ink"]};', f'  --kzf-identity-gap: {f["identity"]["gap"]:g};',
+            f'  --kzf-identity-mx: {f["identity"]["margin"][0]:g};', f'  --kzf-identity-my: {f["identity"]["margin"][1]:g};']
+    css += [f'  --kzf-identity-pad-{side}: {v:g};' for side, v in zip('trbl', f['identity']['pad'])]
+    css += [f'  --kzf-trans-{k[:-3].replace("_","-")}: {v}ms;' for k, v in f['transition'].items() if k.endswith('_ms')]
+    en = f['entrance']
+    css += [f'  --kzf-text-ms: {en["text_ms"]}ms;', f'  --kzf-glass-ms: {en["glass_ms"]}ms;', f'  --kzf-text-rise: {en["text_rise"]:g};',
+            f'  --kzf-text-blur: {en["text_blur"]:g};', f'  --kzf-glass-rise: {en["glass_rise"]:g};', f'  --kzf-glass-scale-from: {en["glass_scale_from"]};']
     css.append('}')
     # Pointer-lit recipes read --kz-lx/--kz-ly/--kz-lift where they are declared, so they must be
     # declared on the lit element itself, not inherited from :root (custom properties substitute var() at declaration).

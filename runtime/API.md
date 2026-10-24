@@ -48,6 +48,15 @@
 ## KZHTMLPPT（adapters/html-ppt-bridge.js）
 维护 `--kz-un` 与 `--kz-u`（adapter「单位：一个比率」）。`bind(deck, factory)` → `{sync, dispose}`：factory 收到每个上游直接子 `.slide`，返回 `{enter, leave, dispose}`；总览克隆不挂载；初始化失败会清理已返回的生命周期。
 
+## KZFlagship（runtime/kz-flagship.js，旗舰路线 14）
+`mount(deck, {logo})` → `{ready, frozen, transition, measure, rebuildLenses, dispose}`（`transition` 供 QC 读取当前转场与是否播放了整页光波）。加载顺序在 kz-tokens.js 之后、项目装配之前，CSS 用 `kz-flagship.css`，`body` 加类 `kzf`。它在 deck 下方建一张全屏光场 canvas，在顶层建身份胶囊（`logo` 为官方 Logo 原件的相对路径），给 `.kzf-lens` 生成位移透镜，并监听上游 `.is-active` 变化来驱动光转场；不改导航、hash 与 `.is-active`。
+
+- 页面标记：`data-kzf-kind`（cover / toc / section / content / ending）、`data-kzf-focus="x,y"`（视口比例）、可选 `data-kzf-light`（边缘高光角度）与 `data-kzf-river="a,b"`。
+- 元素标记：`data-kzf-in[="序号"]` 入场（光停下后错峰），`data-kzf-calm` 内容页安静区，`data-kzf-pool` 唯一聚光对象，`.kzf-lens[data-kzf-lens=identity|kpi|bar|section|ask]` 透镜，`.kzf-glass` 玻璃面，`.kzf-paper` 纸卡。
+- `ready`：字体就绪、透镜与胶囊就位后兑现，同时写 `html[data-kzf-ready]`。`frozen`：减少动态、上游 `?preview` 或 QC 定格时为真，项目装配据此把图表与甘特置于终态。
+- QC：`?kzf-t=秒` 定格时钟（入场按该时刻 seek），`?kzf-p=0..1` 定格在从上一页过来的转场中途（未给 `kzf-t` 时时钟取 `flagship.plate.time_s`）。上游初始化后第一次出现的 `.is-active` 当作起始页，深链和刷新不播放转场。`measure()` 在项目改动页面几何后重算光场遮罩。
+- 降级：WebGL2 不可用或 `?preview` 时改用 CSS 渐变光场；非 Chromium 的透镜改为磨砂（`.kzf-lens-fallback`）。
+
 ## KZLayoutQC（runtime/kz-layout-qc.js）
 `inspectCard(card)`、`inspectTextBounds(zone, {tolerance, minOpacity})`、`inspectFold(fold, {content, cols, rows})`、`inspectOrphans(root, {selector})`、`inspectBodySpan(body)`、`inspect(root)`。返回状态与测量值，不是视觉判决（10）。
 

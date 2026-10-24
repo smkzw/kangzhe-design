@@ -1,0 +1,1001 @@
+{
+ "1": {
+  "frames": [
+   {
+    "name": "TextBox 5",
+    "rect": [
+     264.7,
+     69.0,
+     120.0,
+     24.6
+    ],
+    "text": "产品中心医学部",
+    "sizes": [
+     12.0
+    ],
+    "bullets": 0
+   },
+   {
+    "name": "TextBox 8",
+    "rect": [
+     147.4,
+     150.0,
+     273.9,
+     24.6
+    ],
+    "text": "管理层季度汇报 · 合成示例",
+    "sizes": [
+     12.0
+    ],
+    "bullets": 0
+   },
+   {
+    "name": "TextBox 10",
+    "rect": [
+     98.0,
+     186.0,
+     338.7,
+     120.5
+    ],
+    "text": "研究资料",
+    "sizes": [
+     59.2
+    ],
+    "bullets": 0
+   },
+   {
+    "name": "TextBox 11",
+    "rect": [
+     98.0,
+     274.0,
+     422.3,
+     120.5
+    ],
+    "text": "完整性核对",
+    "sizes": [
+     59.2
+    ],
+    "bullets": 0
+   },
+   {
+    "name": "TextBox 13",
+    "rect": [
+     99.1,
+     390.7,
+     477.5,
+     33.9
+    ],
+    "text": "应收 24 份，已收 20 份；缺口集中在两组资料",
+    "sizes": [
+     16.5
+    ],
+    "bullets": 0
+   },
+   {
+    "name": "TextBox 18",
+    "rect": [
+     153.7,
+     489.7,
+     98.3,
+     122.0
+    ],
+    "text": "24",
+    "sizes": [
+     60.0
+    ],
+    "bullets": 0
+   },
+   {
+    "name": "TextBox 19",
+    "rect": [
+     265.3,
+     548.7,
+     96.8,
+     27.7
+    ],
+    "text": "应收（份）",
+    "sizes": [
+     13.5
+    ],
+    "bullets": 0
+   },
+   {
+    "name": "TextBox 21",
+    "rect": [
+     513.7,
+     489.7,
+     98.3,
+     122.0
+    ],
+    "text": "20",
+    "sizes": [
+     60.0
+    ],
+    "bullets": 0
+   },
+   {
+    "name": "TextBox 22",
+    "rect": [
+     625.3,
+     548.7,
+     96.8,
+     27.7
+    ],
+    "text": "已收（份）",
+    "sizes": [
+     13.5
+    ],
+    "bullets": 0
+   },
+   {
+    "name": "TextBox 24",
+    "rect": [
+     920.8,
+     489.7,
+     51.2,
+     122.0
+    ],
+    "text": "4",
+    "sizes": [
+     60.0
+    ],
+    "bullets": 0
+   },
+   {
+    "name": "TextBox 25",
+    "rect": [
+     985.3,
+     548.7,
+     96.8,
+     27.7
+    ],
+    "text": "缺口（份）",
+    "sizes": [
+     13.5
+    ],
+    "bullets": 0
+   },
+   {
+    "name": "TextBox 27",
+    "rect": [
+     99.4,
+     652.0,
+     258.3,
+     24.6
+    ],
+    "text": "2026年10月　管理层季度汇报",
+    "sizes": [
+     12.0
+    ],
+    "bullets": 0
+   }
+  ],
+  "hero_frames": [
+   {
+    "role": "title",
+    "want": [
+     92,
+     164,
+     1096,
+     148
+    ],
+    "got": [
+     147.4,
+     150.0,
+     273.9,
+     24.6
+    ],
+    "max_dev": 822.1
+   },
+   {
+    "role": "subtitle",
+    "want": [
+     92,
+     322,
+     1096,
+     42
+    ],
+    "got": [
+     98.0,
+     274.0,
+     422.3,
+     120.5
+    ],
+    "max_dev": 673.7
+   },
+   {
+    "role": "meta",
+    "want": [
+     92,
+     382,
+     1096,
+     28
+    ],
+    "got": [
+     98.0,
+     274.0,
+     422.3,
+     120.5
+    ],
+    "max_dev": 673.7
+   }
+  ],
+  "timing": [
+   {
+    "preset": "10",
+    "subtype": "0",
+    "delay": "0"
+   },
+   {
+    "preset": "10",
+    "subtype": "0",
+    "delay": "180"
+   },
+   {
+    "preset": "10",
+    "subtype": "0",
+    "delay": "360"
+   },
+   {
+    "preset": "10",
+    "subtype": "0",
+    "delay": "540"
+   },
+   {
+    "preset": "10",
+    "subtype": "0",
+    "delay": "720"
+   },
+   {
+    "preset": "10",
+    "subtype": "0",
+    "delay": "900"
+   }
+  ],
+  "transition": "<p:transition p14:dur=\"400\" xmlns:p14=\"http://schemas.microsoft.com/office/powerpoint/2010/main\"> <p:fade/> </p:transition>",
+  "charts": 0,
+  "shadow_alpha": [
+   16.5
+  ],
+  "gradient_alpha": [
+   12.0,
+   22.0,
+   40.0
+  ],
+  "notes_chars": 0
+ },
+ "2": {
+  "frames": [
+   {
+    "name": "TextBox 5",
+    "rect": [
+     264.7,
+     69.0,
+     120.0,
+     24.6
+    ],
+    "text": "产品中心医学部",
+    "sizes": [
+     12.0
+    ],
+    "bullets": 0
+   },
+   {
+    "name": "TextBox 8",
+    "rect": [
+     147.4,
+     150.0,
+     84.4,
+     24.6
+    ],
+    "text": "汇报章节",
+    "sizes": [
+     12.0
+    ],
+    "bullets": 0
+   },
+   {
+    "name": "TextBox 10",
+    "rect": [
+     98.0,
+     186.7,
+     538.2,
+     86.0
+    ],
+    "text": "三个问题，一个决定",
+    "sizes": [
+     42.0
+    ],
+    "bullets": 0
+   },
+   {
+    "name": "TextBox 13",
+    "rect": [
+     128.0,
+     345.3,
+     79.5,
+     98.0
+    ],
+    "text": "01",
+    "sizes": [
+     48.0
+    ],
+    "bullets": 0
+   },
+   {
+    "name": "TextBox 14",
+    "rect": [
+     128.8,
+     482.7,
+     129.6,
+     46.2
+    ],
+    "text": "研究范围",
+    "sizes": [
+     22.5
+    ],
+    "bullets": 0
+   },
+   {
+    "name": "TextBox 15",
+    "rect": [
+     129.3,
+     530.7,
+     192.2,
+     27.7
+    ],
+    "text": "对象、时间窗与资料组",
+    "sizes": [
+     13.5
+    ],
+    "bullets": 0
+   },
+   {
+    "name": "TextBox 18",
+    "rect": [
+     496.0,
+     345.3,
+     79.5,
+     98.0
+    ],
+    "text": "02",
+    "sizes": [
+     48.0
+    ],
+    "bullets": 0
+   },
+   {
+    "name": "TextBox 19",
+    "rect": [
+     496.8,
+     482.7,
+     161.4,
+     46.2
+    ],
+    "text": "资料完整性",
+    "sizes": [
+     22.5
+    ],
+    "bullets": 0
+   },
+   {
+    "name": "TextBox 20",
+    "rect": [
+     497.3,
+     530.7,
+     192.2,
+     27.7
+    ],
+    "text": "应收与已收、缺口所在",
+    "sizes": [
+     13.5
+    ],
+    "bullets": 0
+   },
+   {
+    "name": "TextBox 23",
+    "rect": [
+     864.0,
+     345.3,
+     79.5,
+     98.0
+    ],
+    "text": "03",
+    "sizes": [
+     48.0
+    ],
+    "bullets": 0
+   },
+   {
+    "name": "TextBox 24",
+    "rect": [
+     864.8,
+     482.7,
+     129.6,
+     46.2
+    ],
+    "text": "核对计划",
+    "sizes": [
+     22.5
+    ],
+    "bullets": 0
+   },
+   {
+    "name": "TextBox 25",
+    "rect": [
+     865.3,
+     530.7,
+     154.1,
+     27.7
+    ],
+    "text": "补收、确认与复核",
+    "sizes": [
+     13.5
+    ],
+    "bullets": 0
+   }
+  ],
+  "hero_frames": [
+   {
+    "role": "title",
+    "want": [
+     68,
+     28,
+     860,
+     68
+    ],
+    "got": null,
+    "max_dev": null
+   }
+  ],
+  "timing": [
+   {
+    "preset": "10",
+    "subtype": "0",
+    "delay": "0"
+   },
+   {
+    "preset": "10",
+    "subtype": "0",
+    "delay": "180"
+   },
+   {
+    "preset": "10",
+    "subtype": "0",
+    "delay": "360"
+   },
+   {
+    "preset": "10",
+    "subtype": "0",
+    "delay": "540"
+   }
+  ],
+  "transition": "<p:transition p14:dur=\"400\" xmlns:p14=\"http://schemas.microsoft.com/office/powerpoint/2010/main\"> <p:fade/> </p:transition>",
+  "charts": 0,
+  "shadow_alpha": [
+   16.5
+  ],
+  "gradient_alpha": [
+   12.0,
+   22.0,
+   40.0
+  ],
+  "notes_chars": 0
+ },
+ "3": {
+  "frames": [
+   {
+    "name": "TextBox 5",
+    "rect": [
+     1042.6,
+     630.0,
+     120.0,
+     24.6
+    ],
+    "text": "产品中心医学部",
+    "sizes": [
+     12.0
+    ],
+    "bullets": 0
+   },
+   {
+    "name": "TextBox 7",
+    "rect": [
+     78.0,
+     77.3,
+     443.9,
+     561.6
+    ],
+    "text": "02",
+    "sizes": [
+     279.8
+    ],
+    "bullets": 0
+   },
+   {
+    "name": "TextBox 11",
+    "rect": [
+     740.4,
+     284.0,
+     84.4,
+     24.6
+    ],
+    "text": "第二部分",
+    "sizes": [
+     12.0
+    ],
+    "bullets": 0
+   },
+   {
+    "name": "TextBox 13",
+    "rect": [
+     691.0,
+     321.3,
+     370.1,
+     105.6
+    ],
+    "text": "资料完整性",
+    "sizes": [
+     51.8
+    ],
+    "bullets": 0
+   },
+   {
+    "name": "TextBox 15",
+    "rect": [
+     692.1,
+     422.7,
+     351.6,
+     33.9
+    ],
+    "text": "缺口在哪里，会不会影响组间比较",
+    "sizes": [
+     16.5
+    ],
+    "bullets": 0
+   }
+  ],
+  "timing": [
+   {
+    "preset": "10",
+    "subtype": "0",
+    "delay": "0"
+   },
+   {
+    "preset": "10",
+    "subtype": "0",
+    "delay": "180"
+   },
+   {
+    "preset": "10",
+    "subtype": "0",
+    "delay": "360"
+   }
+  ],
+  "transition": "<p:transition p14:dur=\"400\" xmlns:p14=\"http://schemas.microsoft.com/office/powerpoint/2010/main\"> <p:fade/> </p:transition>",
+  "charts": 0,
+  "shadow_alpha": [
+   16.5
+  ],
+  "gradient_alpha": [
+   12.0,
+   22.0,
+   40.0
+  ],
+  "notes_chars": 0
+ },
+ "4": {
+  "frames": [
+   {
+    "name": "TextBox 5",
+    "rect": [
+     1042.6,
+     69.0,
+     120.0,
+     24.6
+    ],
+    "text": "产品中心医学部",
+    "sizes": [
+     12.0
+    ],
+    "bullets": 0
+   },
+   {
+    "name": "TextBox 7",
+    "rect": [
+     98.5,
+     106.0,
+     607.2,
+     58.5
+    ],
+    "text": "缺口集中在中心记录与安全性报告",
+    "sizes": [
+     28.5
+    ],
+    "bullets": 0
+   },
+   {
+    "name": "TextBox 11",
+    "rect": [
+     129.1,
+     218.7,
+     211.6,
+     33.9
+    ],
+    "text": "各资料组应收与已收",
+    "sizes": [
+     16.5
+    ],
+    "bullets": 0
+   },
+   {
+    "name": "TextBox 12",
+    "rect": [
+     615.8,
+     224.0,
+     187.8,
+     24.6
+    ],
+    "text": "合成示例数据｜单位：份",
+    "sizes": [
+     12.0
+    ],
+    "bullets": 0
+   },
+   {
+    "name": "TextBox 15",
+    "rect": [
+     149.4,
+     257.0,
+     35.2,
+     24.6
+    ],
+    "text": "应收",
+    "sizes": [
+     12.0
+    ],
+    "bullets": 0
+   },
+   {
+    "name": "TextBox 17",
+    "rect": [
+     225.4,
+     257.0,
+     35.2,
+     24.6
+    ],
+    "text": "已收",
+    "sizes": [
+     12.0
+    ],
+    "bullets": 0
+   },
+   {
+    "name": "TextBox 21",
+    "rect": [
+     958.4,
+     230.7,
+     136.1,
+     231.6
+    ],
+    "text": "4",
+    "sizes": [
+     23.2,
+     114.8
+    ],
+    "bullets": 0
+   },
+   {
+    "name": "TextBox 22",
+    "rect": [
+     914.8,
+     409.0,
+     223.5,
+     24.6
+    ],
+    "text": "资料缺口 · 应收 24 / 已收 20",
+    "sizes": [
+     12.0
+    ],
+    "bullets": 0
+   },
+   {
+    "name": "TextBox 25",
+    "rect": [
+     872.3,
+     544.7,
+     77.8,
+     27.7
+    ],
+    "text": "缺失处理",
+    "sizes": [
+     13.5
+    ],
+    "bullets": 0
+   },
+   {
+    "name": "TextBox 26",
+    "rect": [
+     872.3,
+     576.7,
+     173.2,
+     27.7
+    ],
+    "text": "缺失记录保留为空值",
+    "sizes": [
+     13.5
+    ],
+    "bullets": 0
+   },
+   {
+    "name": "TextBox 27",
+    "rect": [
+     872.3,
+     606.7,
+     192.2,
+     27.7
+    ],
+    "text": "不按零处理，也不插补",
+    "sizes": [
+     13.5
+    ],
+    "bullets": 0
+   }
+  ],
+  "timing": [
+   {
+    "preset": "10",
+    "subtype": "0",
+    "delay": "0"
+   },
+   {
+    "preset": "10",
+    "subtype": "0",
+    "delay": "180"
+   },
+   {
+    "preset": "22",
+    "subtype": "4",
+    "delay": "360"
+   },
+   {
+    "preset": "10",
+    "subtype": "0",
+    "delay": "540"
+   },
+   {
+    "preset": "10",
+    "subtype": "0",
+    "delay": "720"
+   }
+  ],
+  "transition": "<p:transition p14:dur=\"400\" xmlns:p14=\"http://schemas.microsoft.com/office/powerpoint/2010/main\"> <p:fade/> </p:transition>",
+  "charts": 1,
+  "shadow_alpha": [
+   12.0,
+   16.5
+  ],
+  "gradient_alpha": [
+   12.0,
+   22.0,
+   40.0
+  ],
+  "notes_chars": 0
+ },
+ "5": {
+  "frames": [
+   {
+    "name": "TextBox 5",
+    "rect": [
+     264.7,
+     630.0,
+     120.0,
+     24.6
+    ],
+    "text": "产品中心医学部",
+    "sizes": [
+     12.0
+    ],
+    "bullets": 0
+   },
+   {
+    "name": "TextBox 7",
+    "rect": [
+     575.8,
+     170.0,
+     128.5,
+     24.6
+    ],
+    "text": "会议决定事项",
+    "sizes": [
+     12.0
+    ],
+    "bullets": 0
+   },
+   {
+    "name": "TextBox 9",
+    "rect": [
+     399.7,
+     208.0,
+     480.6,
+     114.5
+    ],
+    "text": "请确认两件事",
+    "sizes": [
+     56.2
+    ],
+    "bullets": 0
+   },
+   {
+    "name": "TextBox 12",
+    "rect": [
+     170.0,
+     390.3,
+     79.5,
+     98.0
+    ],
+    "text": "01",
+    "sizes": [
+     48.0
+    ],
+    "bullets": 0
+   },
+   {
+    "name": "TextBox 13",
+    "rect": [
+     267.1,
+     402.7,
+     231.5,
+     33.9
+    ],
+    "text": "4 份资料由医学部牵头",
+    "sizes": [
+     16.5
+    ],
+    "bullets": 0
+   },
+   {
+    "name": "TextBox 14",
+    "rect": [
+     267.1,
+     436.7,
+     170.0,
+     33.9
+    ],
+    "text": "2027Q1 内补收",
+    "sizes": [
+     16.5
+    ],
+    "bullets": 0
+   },
+   {
+    "name": "TextBox 17",
+    "rect": [
+     685.0,
+     390.3,
+     79.5,
+     98.0
+    ],
+    "text": "02",
+    "sizes": [
+     48.0
+    ],
+    "bullets": 0
+   },
+   {
+    "name": "TextBox 18",
+    "rect": [
+     782.1,
+     402.7,
+     188.3,
+     33.9
+    ],
+    "text": "版本差异确认之后",
+    "sizes": [
+     16.5
+    ],
+    "bullets": 0
+   },
+   {
+    "name": "TextBox 19",
+    "rect": [
+     782.1,
+     436.7,
+     141.7,
+     33.9
+    ],
+    "text": "再做组间比较",
+    "sizes": [
+     16.5
+    ],
+    "bullets": 0
+   },
+   {
+    "name": "TextBox 21",
+    "rect": [
+     510.9,
+     652.0,
+     258.3,
+     24.6
+    ],
+    "text": "2026年10月　管理层季度汇报",
+    "sizes": [
+     12.0
+    ],
+    "bullets": 0
+   }
+  ],
+  "timing": [
+   {
+    "preset": "10",
+    "subtype": "0",
+    "delay": "0"
+   },
+   {
+    "preset": "10",
+    "subtype": "0",
+    "delay": "180"
+   },
+   {
+    "preset": "10",
+    "subtype": "0",
+    "delay": "360"
+   }
+  ],
+  "transition": "<p:transition p14:dur=\"400\" xmlns:p14=\"http://schemas.microsoft.com/office/powerpoint/2010/main\"> <p:fade/> </p:transition>",
+  "charts": 0,
+  "shadow_alpha": [
+   16.5
+  ],
+  "gradient_alpha": [
+   12.0,
+   22.0,
+   40.0
+  ],
+  "notes_chars": 0
+ },
+ "chart:ppt/charts/chart401.xml": {
+  "type": [
+   "barChart"
+  ],
+  "barDir": [
+   "col"
+  ],
+  "series": [
+   "应收",
+   "已收"
+  ],
+  "values": [
+   [
+    "2",
+    "12",
+    "6",
+    "4"
+   ],
+   [
+    "2",
+    "9",
+    "6",
+    "3"
+   ]
+  ],
+  "colors": [
+   "6E7B8C",
+   "D46B08"
+  ],
+  "max": [
+   "15"
+  ],
+  "majorUnit": [
+   "5"
+  ]
+ },
+ "fonts": {
+  "latin": [
+   "Arial"
+  ],
+  "ea": [
+   "Microsoft YaHei"
+  ]
+ }
+}

@@ -1,4 +1,4 @@
-# 参考实现（7.0）
+# 参考实现（7.1）
 
 按当前规范制作的正例，用来照着做；`examples/validation/` 下的历史样本只作回溯，不再作为模板。内容全部是合成演示数据，不对应真实研究。
 
@@ -8,6 +8,8 @@
 | 流式 HTML | `stream/index.html` | 同一首屏结构；正文阅读栏 34em + 侧注，章节目录随阅读位置高亮 |
 | HTML-PPT | `htmlppt/index.html` | 由 html-ppt-skill `new-deck.sh` 生成（原始输出 `htmlppt/scaffold.html`），`htmlppt/build.py` 派生；上游 `base.css`/`runtime.js` 原样随包 |
 | PPTX | `pptx/` | 经 ppt-master 流程导出，见该目录 README |
+| HTML-PPT 旗舰（14） | `htmlppt-flagship/index.html` | 同一脚手架与素材；`runtime/kz-flagship.*` 绘制光场、透镜与身份胶囊；内容页光退到页边 |
+| PPTX 旗舰（14） | `pptx-flagship/` | 静态光效图（`tools/flagship_plate.py`）加原生玻璃与原生柱图，经 ppt-master 导出 |
 
 ## 共同做法
 

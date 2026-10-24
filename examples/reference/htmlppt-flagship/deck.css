@@ -1,0 +1,74 @@
+/* Flagship reference layouts (14 FLAG-07/08). Geometry in logical units × --kz-u (1280×720 basis); wide viewports
+   stretch the rows between the side margins instead of centring a 16:9 plate. Type sizes come from --kzf-type-*. */
+.kzf .slide { color: var(--kz-ink); }
+.kzf .slide > * { position: absolute; }
+.kzf .slide > .notes { position: static; }
+.kzf h1, .kzf h2, .kzf h3, .kzf p { margin: 0; }
+.kzf .kzf-lede { font-size: calc(var(--kzf-type-lede) * var(--kz-un)); color: var(--kz-body); line-height: 1.6; }
+.kzf .kzf-lede b, .kzf p b { color: var(--kz-ink); font-weight: 700; }
+.kzf .kzf-risk-num { color: var(--kz-risk); }
+
+/* cover: title block, then one glass data bar across the width, riding the light river */
+.kzf-cover-text { left: calc(100 * var(--kz-u)); top: calc(150 * var(--kz-u)); right: calc(100 * var(--kz-u)); display: flex; flex-direction: column; gap: calc(20 * var(--kz-u)); }
+.kzf-cover-text h1 { font-size: calc(var(--kzf-type-cover-title) * var(--kz-un)); line-height: 1.1; font-weight: 600; letter-spacing: .02em; }
+.kzf .kzf-cover-bar { position: absolute; left: calc(100 * var(--kz-u)); right: calc(100 * var(--kz-u)); top: calc(467 * var(--kz-u)); height: calc(147 * var(--kz-u)); border-radius: 999px; display: grid; grid-template-columns: repeat(3, 1fr); align-items: center; }
+.kzf-cover-bar > div { display: flex; align-items: baseline; justify-content: center; gap: calc(14 * var(--kz-u)); }
+.kzf-cover-bar > div + div { border-left: calc(1 * var(--kz-u)) solid rgba(160,120,60,.3); }
+.kzf-cover-bar .kzf-numeral { font-size: calc(var(--kzf-type-bar-numeral) * var(--kz-un)); }
+.kzf-cover-bar span:not(.kzf-numeral) { font-size: calc(var(--kzf-type-bar-label) * var(--kz-un)); color: var(--kz-body); letter-spacing: .14em; }
+.kzf-cover-meta, .kzf-ending-meta { font-size: calc(var(--kzf-type-meta) * var(--kz-un)); color: var(--kz-body); letter-spacing: .14em; }
+.kzf-cover-meta { left: calc(100 * var(--kz-u)); bottom: calc(44 * var(--kz-u)); }
+
+/* contents: thin numerals on one glass card per chapter */
+.kzf-toc-head { left: calc(100 * var(--kz-u)); top: calc(150 * var(--kz-u)); display: flex; flex-direction: column; gap: calc(18 * var(--kz-u)); }
+.kzf-toc-head h2 { font-size: calc(var(--kzf-type-toc-title) * var(--kz-un)); font-weight: 600; }
+.kzf-toc { left: calc(100 * var(--kz-u)); right: calc(100 * var(--kz-u)); top: calc(330 * var(--kz-u)); height: calc(250 * var(--kz-u)); display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: calc(24 * var(--kz-u)); }
+.kzf .kzf-toc-card { position: relative; padding: calc(30 * var(--kz-u)); display: flex; flex-direction: column; justify-content: flex-end; gap: calc(10 * var(--kz-u)); }
+.kzf-toc-card .kzf-numeral { font-size: calc(var(--kzf-type-toc-numeral) * var(--kz-un)); color: var(--kzf-accent-ink); margin-bottom: auto; }
+.kzf-toc-card b { font-size: calc(var(--kzf-type-toc-label) * var(--kz-un)); font-weight: 600; }
+.kzf-toc-card span:last-child { font-size: calc(var(--kzf-type-toc-description) * var(--kz-un)); color: var(--kz-body); }
+
+/* section: giant thin numeral under a liquid lens; the name sits at the same share of the width on any screen */
+.kzf-section-num { left: calc(80 * var(--kz-u)); top: calc(113 * var(--kz-u)); font-size: calc(var(--kzf-type-section-numeral) * var(--kz-un)); }
+.kzf .kzf-section-lens { position: absolute; left: calc(220 * var(--kz-u)); top: calc(220 * var(--kz-u)); width: calc(267 * var(--kz-u)); height: calc(267 * var(--kz-u)); border-radius: 50%; }
+.kzf-section-text { left: 54%; top: calc(273 * var(--kz-u)); right: calc(100 * var(--kz-u)); display: flex; flex-direction: column; gap: calc(18 * var(--kz-u)); }
+.kzf-section-text h2 { font-size: calc(var(--kzf-type-section-title) * var(--kz-un)); font-weight: 600; }
+
+/* content pages: title + hairline, calm paper reading areas, at most one focal lens with a note under it */
+.kzf-title { left: calc(100 * var(--kz-u)); right: calc(100 * var(--kz-u)); top: calc(104 * var(--kz-u)); display: flex; flex-direction: column; gap: calc(16 * var(--kz-u)); }
+.kzf-title h2 { font-size: calc(var(--kzf-type-page-title) * var(--kz-un)); font-weight: 600; line-height: 1.25; }
+.kzf-cards, .kzf .kzf-data { left: calc(100 * var(--kz-u)); right: calc(447 * var(--kz-u)); top: calc(196 * var(--kz-u)); bottom: calc(64 * var(--kz-u)); }
+.kzf-cards { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: calc(24 * var(--kz-u)); }
+.kzf .kzf-card { position: relative; padding: calc(28 * var(--kz-u)); display: flex; flex-direction: column; gap: calc(18 * var(--kz-u)); }
+.kzf-card h3, .kzf-data-head h3 { font-size: calc(var(--kzf-type-card-title) * var(--kz-un)); font-weight: 600; }
+.kzf-figure { display: flex; flex-direction: column; gap: calc(4 * var(--kz-u)); padding-top: calc(14 * var(--kz-u)); border-top: calc(1 * var(--kz-u)) solid var(--kzf-rule); }
+.kzf-figure b { font-size: calc(var(--kzf-type-section-title) * .6 * var(--kz-un)); font-weight: 600; }
+.kzf-figure span { font-size: calc(var(--kzf-type-note) * var(--kz-un)); color: var(--kz-muted); }
+.kzf-card ul { margin: 0; padding-left: 1.1em; font-size: calc(var(--kzf-type-body) * var(--kz-un)); line-height: 1.7; color: var(--kz-body); }
+.kzf-card ul.kzf-cols-2 { columns: 2; column-gap: calc(18 * var(--kz-u)); }
+.kzf .kzf-data, .kzf .kzf-plan { position: absolute; padding: calc(26 * var(--kz-u)) calc(30 * var(--kz-u)); box-sizing: border-box; display: flex; flex-direction: column; gap: calc(10 * var(--kz-u)); }
+.kzf-data-head { display: flex; justify-content: space-between; align-items: baseline; gap: calc(20 * var(--kz-u)); }
+.kzf-data-head > span { font-size: calc(var(--kzf-type-kpi-label) * var(--kz-un)); color: var(--kz-muted); }
+.kzf .kzf-chart { flex: 1; min-height: 0; height: auto; }
+.kzf .kzf-kpi { position: absolute; right: calc(100 * var(--kz-u)); top: calc(196 * var(--kz-u)); width: calc(307 * var(--kz-u)); height: calc(307 * var(--kz-u)); border-radius: 50%; display: grid; place-items: center; text-align: center; }
+.kzf-kpi-num { font-size: calc(var(--kzf-type-kpi-numeral) * var(--kz-un)); color: var(--kz-risk); }
+.kzf-kpi-num small { font-size: calc(var(--kzf-type-kpi-numeral) * .2 * var(--kz-un)); font-weight: 400; color: var(--kz-body); margin-left: calc(6 * var(--kz-u)); letter-spacing: 0; }
+.kzf-kpi-label { font-size: calc(var(--kzf-type-kpi-label) * var(--kz-un)); color: var(--kz-body); letter-spacing: .12em; margin-top: calc(8 * var(--kz-u)); }
+.kzf-note { right: calc(100 * var(--kz-u)); width: calc(307 * var(--kz-u)); top: calc(527 * var(--kz-u)); border-top: calc(2 * var(--kz-u)) solid var(--kz-ink); padding-top: calc(14 * var(--kz-u)); }
+.kzf-note h3 { font-size: calc(var(--kzf-type-note) * var(--kz-un)); font-weight: 700; margin-bottom: calc(6 * var(--kz-u)); }
+.kzf-note p { font-size: calc(var(--kzf-type-note) * var(--kz-un)); color: var(--kz-body); line-height: 1.65; }
+.kzf .kzf-plan { left: calc(100 * var(--kz-u)); right: calc(100 * var(--kz-u)); top: calc(196 * var(--kz-u)); bottom: calc(64 * var(--kz-u)); }
+.kzf .kzf-plan > .kz-gantt { flex: 1; min-height: 0; grid-template-rows: minmax(0, 1fr) auto; }
+.kzf-legend { display: flex; gap: calc(18 * var(--kz-u)); font-size: calc(var(--kzf-type-kpi-label) * var(--kz-un)); color: var(--kz-body); }
+.kzf-legend i { display: inline-block; width: calc(12 * var(--kz-u)); height: calc(12 * var(--kz-u)); border-radius: calc(3 * var(--kz-u)); margin-right: calc(6 * var(--kz-u)); vertical-align: -1px; }
+.kzf-plan-note { font-size: calc(var(--kzf-type-body) * var(--kz-un)); color: var(--kz-body); }
+
+/* ending: decisions on glass cards over the light river */
+.kzf-ending-head { left: 0; right: 0; top: calc(160 * var(--kz-u)); display: flex; flex-direction: column; align-items: center; gap: calc(18 * var(--kz-u)); }
+.kzf-ending-head .kzf-kicker::after { content: ""; width: calc(37 * var(--kz-u)); height: calc(1 * var(--kz-u)); background: currentColor; }
+.kzf-ending-head h2 { font-size: calc(var(--kzf-type-ending-title) * var(--kz-un)); font-weight: 600; letter-spacing: .05em; }
+.kzf-asks { left: calc(140 * var(--kz-u)); right: calc(140 * var(--kz-u)); top: calc(373 * var(--kz-u)); display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: calc(30 * var(--kz-u)); }
+.kzf .kzf-ask { position: relative; padding: calc(27 * var(--kz-u)) calc(32 * var(--kz-u)); display: flex; align-items: center; gap: calc(20 * var(--kz-u)); }
+.kzf-ask .kzf-numeral { font-size: calc(var(--kzf-type-ask-numeral) * var(--kz-un)); color: var(--kzf-accent-ink); }
+.kzf-ask p { font-size: calc(var(--kzf-type-ask) * var(--kz-un)); line-height: 1.5; }
+.kzf .kzf-ending-meta { left: 0; right: 0; width: max-content; margin-inline: auto; bottom: calc(44 * var(--kz-u)); }
