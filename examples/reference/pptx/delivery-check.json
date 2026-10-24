@@ -3,7 +3,7 @@
   "status": "passed",
   "file": {
     "path": "kangzhe_probe.pptx",
-    "bytes": 2136410
+    "bytes": 2136407
   },
   "package": {
     "zip_integrity": "passed",
@@ -141,8 +141,8 @@
     "external": [],
     "uncompressed_bytes": 2135823,
     "archive_compressed_bytes": 2110000,
-    "share_of_archive": 0.987638,
-    "share_of_uncompressed_parts": 0.940663,
+    "share_of_archive": 0.98764,
+    "share_of_uncompressed_parts": 0.940661,
     "top_contributors": [
       {
         "part": "ppt/media/image_ce19777696202c35.png",

@@ -1,7 +1,7 @@
 {
   "scope": "approved native brand objects copied after ppt-master export; not an exporter",
-  "input_sha256": "003a12252cdb38e6388cecca92953e65b21d6a9fbfd9b75c197a90fa3af8fe67",
-  "output_sha256": "d4da40fe484c95ec63b750eff31c3c7ea0d30c27ee08d7d5d745698c1dcc07f8",
+  "input_sha256": "8896092389404ed543407ee1ee3f15ca9e8304d241022b45c455cfa40318dec0",
+  "output_sha256": "d6cdaa8f4a96cbe4b8b66da9b36319efc19eee15eddf1d1ad355b348e2ed64ea",
   "asset_sha256": "906dc32ffe4f374ae6cb7e6500236b4680681e67598b7ef4ab438d553c219578",
   "changed_parts": [
     "ppt/slides/slide2.xml",

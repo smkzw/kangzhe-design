@@ -1,7 +1,7 @@
 {
   "scope": "declared brand text-frame binding after upstream export",
-  "input_sha256": "9bba1a7504387f31bc40e162e3c7e94b1952e8da030540f32afdf74389b8a3cf",
-  "output_sha256": "22d42fdfd6d3e15ac83b683d335f57118bb3b18b8011364eea4786acb0fffd16",
+  "input_sha256": "66e3ee89f29e859e3c435cd23adc722697b8067f1d3a35ce91425b1885ff225c",
+  "output_sha256": "1a411c10274121e8dee594643d381cba6c1989fc0d10de271aa899237831c954",
   "changed_parts": [
     "ppt/slides/slide1.xml",
     "ppt/slides/slide2.xml",

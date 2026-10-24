@@ -35,7 +35,7 @@
 ## 动效与 Morph
 - 侧车 `animations.json` 放在项目根，`animation_config.py validate <project>` 校验，导出加 `--animation-config animations.json`（路径相对项目）。
 - 字段：`defaults.transition`、`slides.<页>.animation.trigger`、`groups.<顶层组 id>.{effect,duration,delay,order,decelerate}`、`slides.<页>.transition.{effect:"morph",effect_options:{"morph_by":"object"},duration}`、`morph.{from, pairs.<key>.{from,to}}`。
-- 时序：同一拍内的 `with-previous` 行，delay 都从这一拍的起点算，不累加（上游：delay 是“加在已解析起点上的行偏移”）；`after-previous` 行从上一行结束后再加 delay。康哲的错峰用 with-previous，第 n 组写 n × 70ms；实测导出的 `p:cond delay` 为 0 / 70 / 140 / 410。
+- 时序：同一拍内的 `with-previous` 行，delay 都从这一拍的起点算，不累加（上游：delay 是“加在已解析起点上的行偏移”）；`after-previous` 行从上一行结束后再加 delay。康哲的错峰用 with-previous，第 n 组写 n × `stagger_ms.pptx_card`（180ms）；实测导出的 `p:cond delay` 为 0 / 180 / 360 / 740。
 - 实测导出：Fade 为 presetID 10、`nodeType="withEffect"`、`decel="70000"`；Wipe 为 presetID 22，`direction: "down"` → subtype 4（自底部）、`"left"` → 8（自左）、`"up"` → 1（自顶部）；Morph 两端写成同名 `!!<key>`，目的页 `p159:morph option="byObject"`。Default 路由下导出器自动读取项目根的 `animations.json`，不必加 `--animation-config`。
 - 限制：Morph 只用于相邻页，两端同种容器；原生图表、表格、带结构角色的根原语不能配对；只出现在第二页的文字用淡入（可用 `data-pptx-morph-staging="true"` 放画布外）。没有小位移入场预设；不支持段落级逐条出现、自定义路径、按系列出现。
 

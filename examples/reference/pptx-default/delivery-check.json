@@ -3,7 +3,7 @@
   "status": "passed",
   "file": {
     "path": "kangzhe_integrity_default.pptx",
-    "bytes": 4378722
+    "bytes": 4378730
   },
   "package": {
     "zip_integrity": "passed",
@@ -171,8 +171,8 @@
     "external": [],
     "uncompressed_bytes": 4378299,
     "archive_compressed_bytes": 4326033,
-    "share_of_archive": 0.987967,
-    "share_of_uncompressed_parts": 0.946143,
+    "share_of_archive": 0.987965,
+    "share_of_uncompressed_parts": 0.94614,
     "top_contributors": [
       {
         "part": "ppt/media/image_566c6ad9ed48562f.png",

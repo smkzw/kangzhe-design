@@ -18,21 +18,21 @@
     "cover-title": {
      "effect": "entrance_fade",
      "duration": 0.52,
-     "delay": 0,
+     "delay": 0.0,
      "decelerate": 0.7,
      "order": 1
     },
     "cover-subtitle": {
      "effect": "entrance_fade",
      "duration": 0.52,
-     "delay": 0.07,
+     "delay": 0.18,
      "decelerate": 0.7,
      "order": 2
     },
     "cover-meta": {
      "effect": "entrance_fade",
      "duration": 0.52,
-     "delay": 0.14,
+     "delay": 0.36,
      "decelerate": 0.7,
      "order": 3
     }
@@ -46,21 +46,21 @@
     "toc-card-1": {
      "effect": "entrance_fade",
      "duration": 0.52,
-     "delay": 0,
+     "delay": 0.0,
      "decelerate": 0.7,
      "order": 1
     },
     "toc-card-2": {
      "effect": "entrance_fade",
      "duration": 0.52,
-     "delay": 0.07,
+     "delay": 0.18,
      "decelerate": 0.7,
      "order": 2
     },
     "toc-card-3": {
      "effect": "entrance_fade",
      "duration": 0.52,
-     "delay": 0.14,
+     "delay": 0.36,
      "decelerate": 0.7,
      "order": 3
     }
@@ -74,28 +74,28 @@
     "card-population": {
      "effect": "entrance_fade",
      "duration": 0.52,
-     "delay": 0,
+     "delay": 0.0,
      "decelerate": 0.7,
      "order": 1
     },
     "card-documents": {
      "effect": "entrance_fade",
      "duration": 0.52,
-     "delay": 0.07,
+     "delay": 0.18,
      "decelerate": 0.7,
      "order": 2
     },
     "card-versions": {
      "effect": "entrance_fade",
      "duration": 0.52,
-     "delay": 0.14,
+     "delay": 0.36,
      "decelerate": 0.7,
      "order": 3
     },
     "takeaway": {
      "effect": "entrance_fade",
      "duration": 0.52,
-     "delay": 0.41,
+     "delay": 0.74,
      "decelerate": 0.7,
      "order": 4
     }
@@ -109,7 +109,7 @@
     "data-card": {
      "effect": "entrance_fade",
      "duration": 0.52,
-     "delay": 0,
+     "delay": 0.0,
      "decelerate": 0.7,
      "order": 1
     },
@@ -119,28 +119,28 @@
       "direction": "down"
      },
      "duration": 1.0,
-     "delay": 0.07,
+     "delay": 0.18,
      "decelerate": 0.7,
      "order": 2
     },
     "kpi-totals": {
      "effect": "entrance_fade",
      "duration": 0.52,
-     "delay": 0.14,
+     "delay": 0.36,
      "decelerate": 0.7,
      "order": 3
     },
     "gap-card": {
      "effect": "entrance_fade",
      "duration": 0.52,
-     "delay": 0.21,
+     "delay": 0.54,
      "decelerate": 0.7,
      "order": 4
     },
     "takeaway": {
      "effect": "entrance_fade",
      "duration": 0.52,
-     "delay": 0.41,
+     "delay": 0.92,
      "decelerate": 0.7,
      "order": 5
     }
@@ -154,7 +154,7 @@
     "plan-card": {
      "effect": "entrance_fade",
      "duration": 0.52,
-     "delay": 0,
+     "delay": 0.0,
      "decelerate": 0.7,
      "order": 1
     },
@@ -164,21 +164,21 @@
       "direction": "left"
      },
      "duration": 1.0,
-     "delay": 0.07,
+     "delay": 0.18,
      "decelerate": 0.7,
      "order": 2
     },
     "plan-legend": {
      "effect": "entrance_fade",
      "duration": 0.52,
-     "delay": 0.14,
+     "delay": 0.36,
      "decelerate": 0.7,
      "order": 3
     },
     "plan-takeaway": {
      "effect": "entrance_fade",
      "duration": 0.52,
-     "delay": 0.41,
+     "delay": 0.74,
      "decelerate": 0.7,
      "order": 4
     }
@@ -192,21 +192,21 @@
     "ending-title": {
      "effect": "entrance_fade",
      "duration": 0.52,
-     "delay": 0,
+     "delay": 0.0,
      "decelerate": 0.7,
      "order": 1
     },
     "ending-subtitle": {
      "effect": "entrance_fade",
      "duration": 0.52,
-     "delay": 0.07,
+     "delay": 0.18,
      "decelerate": 0.7,
      "order": 2
     },
     "ending-meta": {
      "effect": "entrance_fade",
      "duration": 0.52,
-     "delay": 0.14,
+     "delay": 0.36,
      "decelerate": 0.7,
      "order": 3
     }

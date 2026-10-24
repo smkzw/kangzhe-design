@@ -126,7 +126,7 @@ def build(project, images):
     (svg_dir / '03_flow_a.svg').write_text(page('content', chrome('核对流程') + carrier(360, 212, 560, 260, '界定范围', '先定对象、时间窗和纳入的资料。', ['研究对象：成人受试者', [('评价时间窗：', None), ('第 16 周', 'b')], '纳入资料：4 组']) + steps(0) + footer(3, total)), encoding='utf-8')
     (svg_dir / '04_flow_b.svg').write_text(page('content', chrome('核对流程') + carrier(96, 192, 1088, 300, '清点资料', '逐组登记应收与已收，缺失照原样保留。', [[('应收 24 份，已收 20 份，', None), ('缺 4 份', 'r')], '中心记录缺 3 份，安全性报告缺 1 份', [('缺失记录保留为空值，', None), ('不按零处理', 'b')]]) + steps(1) + footer(4, total)), encoding='utf-8')
     motion = T['motion']
-    enter = motion['duration_ms']['card'] / 1000; step = motion['stagger_ms']['card'] / 1000
+    enter = motion['duration_ms']['card'] / 1000; step = motion['stagger_ms']['pptx_card'] / 1000
     anim = {
         'defaults': {'transition': {'effect': 'fade', 'duration': 0.4}, 'animation': {'effect': 'none'}},
         'slides': {

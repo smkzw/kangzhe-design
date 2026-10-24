@@ -124,9 +124,21 @@
 .kz .kz-gantt-editor label {display:block;font-size:calc(var(--kz-type-body-floor) * var(--kz-component-u,1));font-weight:700;margin-bottom:6px;}
 .kz .kz-gantt-editor select,.kz .kz-gantt-editor input {width:100%;min-width:0;border-radius:10px;border:1px solid rgba(151,154,160,.5);padding:8px;background:rgba(255,255,255,.88);box-shadow:var(--kz-elev-inset);min-height:calc(42px * var(--kz-component-u,1));font-size:calc(var(--kz-type-body-floor) * var(--kz-component-u,1));}
 .kz .kz-gantt-fields {display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:14px;}
+/* Editor on demand (08 GANTT-01): closed = chart only; open = chart 3/4 + editor 1/4, editor fades in. */
+.kz .kz-gantt[data-kz-editor="closed"] {grid-template-columns:minmax(0,1fr);}
+.kz .kz-gantt[data-kz-editor="closed"] .kz-gantt-editor {display:none;}
+.kz .kz-gantt[data-kz-editor="open"] .kz-gantt-editor {animation:kz-gantt-editor-in var(--kz-dur-item) var(--kz-ease-enter) both;}
+@keyframes kz-gantt-editor-in {from {opacity:0;transform:translateX(calc(12px * var(--kz-component-u,1)));}}
+@media (prefers-reduced-motion:reduce) {.kz .kz-gantt[data-kz-editor="open"] .kz-gantt-editor {animation:none;}}
+.kz .kz-gantt-actions {display:flex;gap:calc(10px * var(--kz-component-u,1));margin-top:16px;flex-wrap:wrap;}
 .kz .kz-gantt-status {min-height:24px;font-size:calc(var(--kz-type-body-floor) * var(--kz-component-u,1));margin:12px 0 0;}
 .kz .kz-dirty {display:flex;align-items:center;gap:12px;flex-wrap:wrap;position:absolute;left:0;bottom:0;z-index:6;padding:calc(10px * var(--kz-component-u,1)) calc(14px * var(--kz-component-u,1));border-radius:calc(14px * var(--kz-component-u,1));background:rgba(255,255,255,.88);border:1px solid rgba(143,149,155,.3);box-shadow:var(--kz-elev-raised);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);}
 .kz .kz-dirty[hidden] {display:none;}
+.kz .kz-dirty>span {font-size:calc(var(--kz-type-body-floor) * var(--kz-component-u,1));color:var(--kz-body);}
+/* In the Gantt the edit bar sits in its own row under the plot, so it never covers the quarter labels; it appears when a gesture ends (kz-gantt), so the plot never resizes mid-drag. */
+.kz .kz-gantt>.kz-dirty {position:static;grid-column:1 / -1;justify-self:start;}
+/* A pointer pick is shown by the selected bar's outline; the plot focus ring is for keyboard focus. */
+.kz .kz-gantt-plot[data-kz-pointer]:focus-visible {outline:none;}
 .kz .kz-sr-only {position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important;}
 
 /* ---------- Site / stream first screen (FOLD-01): one viewport, 12 columns, lead 4 + stage 8 ---------- */

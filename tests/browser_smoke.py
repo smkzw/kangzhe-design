@@ -73,6 +73,7 @@ def run(out,exe):
   check('year/quarter form uses inclusive displayed end',d()['start']==8105 and d()['end']==8111,d())
   page.locator('[data-kz-field=sy]').select_option('2028');page.locator('[data-kz-field=sq]').select_option('4');page.locator('[data-kz-field=ey]').select_option('2026');page.locator('[data-kz-field=eq]').select_option('1');before=d();page.get_by_role('button',name='应用时间',exact=True).click()
   check('invalid interval rejected without data mutation',d()==before and '时间无效' in page.locator('.kz-gantt-status').inner_text())
+  page.get_by_role('button',name='完成',exact=True).click();check('完成 closes the editor and the chart takes the card width',page.locator('.kz-gantt').get_attribute('data-kz-editor')=='closed' and not page.locator('.kz-gantt-editor').is_visible())
   page.evaluate('KZ_LAB.gantt.reset()');page.locator('.kz-gantt-plot').focus();page.keyboard.press('ArrowRight');check('keyboard moves task',d()['start']==8105)
   page.keyboard.press('Shift+ArrowRight');check('keyboard extends end',d()['end']==8109,d())
   page.keyboard.press('Control+z');check('keyboard undo',d()['end']==8108)

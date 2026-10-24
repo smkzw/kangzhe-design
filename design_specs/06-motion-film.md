@@ -15,7 +15,7 @@
 | 时长 | `duration_ms.*` | hover 150、title 360、item 360、card 520、exit 220、dialog 420、page 480、section 640、data 1000、count 900 |
 | 位移 | `distance_px.*` | 卡片 18、标题 10、条目 6、退出 8、段落 28；HTML-PPT 乘 `--kz-un` |
 | 缩放 | `scale.*` | 卡片自 0.985 入场，退出至 0.99，弹窗自卡片尺寸展开 |
-| 错峰 | `stagger_ms.*` | 卡片 70、条目 45、组 90、观点句另隔 200（`takeaway_gap`），单页总错峰上限 560 |
+| 错峰 | `stagger_ms.*` | 卡片 70、条目 45、组 90、观点句另隔 200（`takeaway_gap`），单页总错峰上限 560；PPTX 组间 180（`pptx_card`，MOTION-07） |
 | 倾斜 | `tilt.*` | 正文卡 4°、hero 6°、透视 1400px（02 ELEV-02） |
 | 浮动 | `float.*` | hero/目录卡 6px / 7.2s，每张错相 1.3s；双菱形另用 `header_mark_float` 2px / 6.4s 同相 |
 | 视差 | `parallax.*` | 仅环境光场：滚动位移 × 0.06，上限 48px |
@@ -58,8 +58,8 @@ html-ppt-skill 自带的 `animations.css`（data-anim）与 `fx-runtime` 不在�
 
 - **默认**：页面转场 `fade` 0.4s；对象动画默认关闭，只有用户要求动效或交付计划写明时才开启。不用 `auto / mixed / random` 模式。
 - **入场**：正文内容组用 `entrance_fade`，`trigger: with-previous`（进入页面即自动发生，不增加点击），时长 `duration_ms.card`/1000，`decelerate: 0.7` 近似 `easing.enter`。
-  - 同一页的 with-previous 行属于同一拍，每行的 delay 都从这一拍的起点算，不累加：第 n 组（n 从 0 起）`delay = n × stagger_ms.card / 1000`。
-  - 观点句在最后一组之后再隔 `stagger_ms.takeaway_gap`：`delay = (组数 × stagger_ms.card + takeaway_gap) / 1000`。参考实现三组卡片加观点句，导出回读为 0 / 70 / 140 / 410ms。PPTX 没有 18px 小位移预设（`entrance_ascend` 移动约 10% 画高），小位移不映射，明写降级为纯淡入。
+  - 同一页的 with-previous 行属于同一拍，每行的 delay 都从这一拍的起点算，不累加：第 n 组（n 从 0 起）`delay = n × stagger_ms.pptx_card / 1000`。PPTX 用 `pptx_card`（180）而不是 HTML 的 `card`（70）：PPTX 入场是纯淡入，没有位移和卡内级联，70ms 的间隔在放映时看起来是同时出现。
+  - 观点句在最后一组之后再隔 `stagger_ms.takeaway_gap`：`delay = (组数 × stagger_ms.pptx_card + takeaway_gap) / 1000`。参考实现三组卡片加观点句，导出回读为 0 / 180 / 360 / 740ms。PPTX 没有 18px 小位移预设（`entrance_ascend` 移动约 10% 画高），小位移不映射，明写降级为纯淡入。
 - **图表**：整个图表对象用 `entrance_wipe`，方向为自底部，时长 `duration_ms.data`/1000；不承诺按系列生长。ppt-master 的预设表录自 PowerPoint，`direction` 取起始边：自底部写 `"down"`（导出 `presetSubtype="4"`），自左写 `"left"`（`presetSubtype="8"`）。`pptx_animations.py --describe` 的注释说法相反，以导出后 `p:timing` 回读的 presetSubtype 为准（2026-10-24 Default 正例实测）。时间轴类数据面（甘特）可用自左擦入。
 - **退出**：换页本身完成退出，不写 exit 动画。
 - **叙事载体（一形不切）**：用 Morph 承载。相邻两页的载体组用同一个 `morph.pairs.<key>`，导出为同名 `!!<key>`；目的页 `transition: morph, morph_by: object`，0.8s。载体必须是普通内容 `<g>`（原生图表、表格、带结构角色的组不能配对），两端结构同构；只出现在第二页的文字用淡入。Morph 只能在 PowerPoint 中验收，LibreOffice 不算；不支持 Morph 的客户端回退为淡入淡出。

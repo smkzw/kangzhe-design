@@ -25,6 +25,6 @@
 ## 本次验证（2026-10-24，ego lite 0.6.0.16 / Chromium 154，视口 1280×720、1536×730、1920×940、1920×1080、2560×1080，另测 1920×900）
 
 - 站点/流式：`KZLayoutQC.inspectFold` 3 页 × 6 视口，在电影初始态与静态帧各测一次，全部 PASS（初始态覆盖率 0.45–0.53、最大空白 ≤0.13；静态帧 0.50–0.60）。复测前 1920×1080 首页的“资料分组”卡底边被视口切掉，旧口径只看文字没有发现；现在外框越出也报 `FOLD_OVERFLOW`，首屏挂载 `KZMotion.fitFold`。`inspectOrphans` 5 视口 × 4 页无孤字行。
-- HTML-PPT（7.0.1 改为与 PPTX Default 同一素材，10 页）：10 页 × 5 视口无越界与卡片告警，× 4 视口无孤字与词内换行（`inspectOrphans` 的 `splits`），正文页 `inspectBodySpan` ≥0.70。7.0.0 时：8 页 × 5 视口与 1280×610、1366×640 无越界文字、无孤字、无卡片告警（`inspectCard` 已改为按内边距判断越界）；正文页 chrome 几何改由 tokens 生成的变量驱动，3 视口 × 5 页 90 个矩形与改动前逐一相同；入场时序与 PPTX 一致（卡片 0/70/140ms，观点句 410ms），表格逐行入场。
+- HTML-PPT（7.0.1 改为与 PPTX Default 同一素材，10 页）：10 页 × 5 视口无越界与卡片告警，× 4 视口无孤字与词内换行（`inspectOrphans` 的 `splits`），正文页 `inspectBodySpan` ≥0.70。7.0.0 时：8 页 × 5 视口与 1280×610、1366×640 无越界文字、无孤字、无卡片告警（`inspectCard` 已改为按内边距判断越界）；正文页 chrome 几何改由 tokens 生成的变量驱动，3 视口 × 5 页 90 个矩形与改动前逐一相同；入场时序与 PPTX 一致（卡片 0/70/140ms，观点句 410ms；7.0.2 起 PPTX 组间改为 180ms，HTML 不变），表格逐行入场。
 - 组件实验室：`tests/ego/runtime_checks.mjs` 20/20（含展开中途关闭的反向折回）。
 - 未验证：上游 `render.sh`（使用 headless Chrome，本机规则不允许；替代截帧路径见 adapters/html-ppt.md）、S 演讲者窗口、打印、Safari、跨文档 view transition（需要 HTTP 同源，本次只用 file://）。总览里的图表和甘特缩略图为空，原因是上游在组件挂载前就克隆了页面，这是已知限制。

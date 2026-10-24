@@ -103,12 +103,12 @@
    {
     "preset": "10",
     "subtype": "0",
-    "delay": "70"
+    "delay": "180"
    },
    {
     "preset": "10",
     "subtype": "0",
-    "delay": "140"
+    "delay": "360"
    }
   ],
   "transition": "<p:transition ns3:dur=\"400\"> <p:fade /> </p:transition>",
@@ -287,12 +287,12 @@
    {
     "preset": "10",
     "subtype": "0",
-    "delay": "70"
+    "delay": "180"
    },
    {
     "preset": "10",
     "subtype": "0",
-    "delay": "140"
+    "delay": "360"
    }
   ],
   "transition": "<p:transition ns3:dur=\"400\"> <p:fade /> </p:transition>",
@@ -599,17 +599,17 @@
    {
     "preset": "10",
     "subtype": "0",
-    "delay": "70"
+    "delay": "180"
    },
    {
     "preset": "10",
     "subtype": "0",
-    "delay": "140"
+    "delay": "360"
    },
    {
     "preset": "10",
     "subtype": "0",
-    "delay": "410"
+    "delay": "740"
    }
   ],
   "transition": "<p:transition xmlns:p14=\"http://schemas.microsoft.com/office/powerpoint/2010/main\" p14:dur=\"400\"> <p:fade/> </p:transition>",
@@ -865,22 +865,22 @@
    {
     "preset": "22",
     "subtype": "4",
-    "delay": "70"
+    "delay": "180"
    },
    {
     "preset": "10",
     "subtype": "0",
-    "delay": "140"
+    "delay": "360"
    },
    {
     "preset": "10",
     "subtype": "0",
-    "delay": "210"
+    "delay": "540"
    },
    {
     "preset": "10",
     "subtype": "0",
-    "delay": "410"
+    "delay": "920"
    }
   ],
   "transition": "<p:transition xmlns:p14=\"http://schemas.microsoft.com/office/powerpoint/2010/main\" p14:dur=\"400\"> <p:fade/> </p:transition>",
@@ -1216,17 +1216,17 @@
    {
     "preset": "22",
     "subtype": "8",
-    "delay": "70"
+    "delay": "180"
    },
    {
     "preset": "10",
     "subtype": "0",
-    "delay": "140"
+    "delay": "360"
    },
    {
     "preset": "10",
     "subtype": "0",
-    "delay": "410"
+    "delay": "740"
    }
   ],
   "transition": "<p:transition xmlns:p14=\"http://schemas.microsoft.com/office/powerpoint/2010/main\" p14:dur=\"400\"> <p:fade/> </p:transition>",
@@ -1346,12 +1346,12 @@
    {
     "preset": "10",
     "subtype": "0",
-    "delay": "70"
+    "delay": "180"
    },
    {
     "preset": "10",
     "subtype": "0",
-    "delay": "140"
+    "delay": "360"
    }
   ],
   "transition": "<p:transition ns3:dur=\"400\"> <p:fade /> </p:transition>",

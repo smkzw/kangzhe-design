@@ -62,7 +62,7 @@ python3 ${PM}/scripts/pptx_delivery_check.py deck.pptx
 | `pptx_delivery_check` | 绑定后 0 错误、0 建议 |
 | hero 文字框 | 6.7 导出会把文字框收缩到内容大小（封面标题 538×86），偏差超过 HERO-04 的 2 px，因此绑定；绑定后与 tokens 偏差 0 |
 | 原生图表 | `barChart` 簇状柱，两系列 2/12/6/4 与 2/9/6/3，色 #6E7B8C / #D46B08，值轴 0–15、主刻度 5 |
-| 动效 `p:timing` | 封面、结束页标题/副标题/元信息 Fade 0/70/140 ms；目录 Fade 0/70/140；研究范围 0/70/140 + 观点句 410；资料完整性 卡头 0、原生柱图 Wipe 自底部（presetSubtype 4）70、KPI 140、缺失处理 210、观点句 410；核对计划 卡头 0、甘特区 Wipe 自左（8）70、图例 140、结论 410 |
+| 动效 `p:timing` | 组间错峰 `stagger_ms.pptx_card` 180 ms（7.0.2 起，原 70）。封面、结束页标题/副标题/元信息 Fade 0/180/360 ms；目录 Fade 0/180/360；研究范围 0/180/360 + 观点句 740；资料完整性 卡头 0、原生柱图 Wipe 自底部（presetSubtype 4）180、KPI 360、缺失处理 540、观点句 920；核对计划 卡头 0、甘特区 Wipe 自左（8）180、图例 360、结论 740 |
 | 讲者备注 | 6 页均有 |
 | 字体 | 主题 latin Arial / ea Microsoft YaHei |
 

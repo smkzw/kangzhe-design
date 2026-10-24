@@ -30,19 +30,19 @@
     const baseline=clone(input);let data=clone(input),selected=data.tasks[0].id,marked=false,undo=[],drag=null,disposed=false;
     const abort=new AbortController(),signal=abort.signal;let progress=1,raf=0;
     const mq=matchMedia('(prefers-reduced-motion: reduce)');
-    const prior={children:[...root.childNodes],editing:root.dataset.kzEditing,classes:['kz-gantt','kz-interactive'].filter(name=>!root.classList.contains(name))};
+    const prior={children:[...root.childNodes],editing:root.dataset.kzEditing,editor:root.dataset.kzEditor,classes:['kz-gantt','kz-interactive'].filter(name=>!root.classList.contains(name))};
     let plot=null,chart=null,resize=null;
     const releaseAll=()=>{const errors=[];for(const release of [
       ()=>{if(raf){cancelAnimationFrame(raf);raf=0;}},
       ()=>abort.abort(),
       ()=>resize?.disconnect(),
       ()=>chart?.dispose(),
-      ()=>{root.classList.remove(...prior.classes);if(prior.editing===undefined)delete root.dataset.kzEditing;else root.dataset.kzEditing=prior.editing;},
+      ()=>{root.classList.remove(...prior.classes);for(const [key,value] of [['kzEditing',prior.editing],['kzEditor',prior.editor]]){if(value===undefined)delete root.dataset[key];else root.dataset[key]=value;}},
       ()=>root.replaceChildren(...prior.children)
     ]){try{release();}catch(error){errors.push(error);}}return errors;};
     try{
-    root.classList.add('kz-gantt','kz-interactive');root.dataset.kzEditing='true';
-    plot=document.createElement('div');plot.className='kz-gantt-plot';plot.tabIndex=0;plot.setAttribute('role','application');plot.setAttribute('aria-label','可编辑季度甘特图；左右方向键移动，Shift 加方向键调整结束季度');
+    root.classList.add('kz-gantt','kz-interactive');root.dataset.kzEditing='true';root.dataset.kzEditor='closed';
+    plot=document.createElement('div');plot.className='kz-gantt-plot';plot.tabIndex=0;plot.setAttribute('role','application');plot.setAttribute('aria-label','可编辑季度甘特图；点选任务条或按回车打开编辑器，左右方向键移动，Shift 加方向键调整结束季度');
     const editor=document.createElement('div');editor.className='kz-gantt-editor';
     const lab=(text)=>{const x=document.createElement('label');x.textContent=text;return x;};
     const select=document.createElement('select');select.setAttribute('aria-label','选择项目');
@@ -56,7 +56,9 @@
       for(const value of values){const o=document.createElement('option');o.value=value;o.textContent=key.endsWith('q')?'Q'+value:String(value);field.append(o);}
       wrapper.append(field);fields.append(wrapper);
     }
-    const apply=document.createElement('button');apply.type='button';apply.className='kz-button';apply.textContent='应用时间';apply.style.marginTop='16px';editor.append(apply);
+    const actions=document.createElement('div');actions.className='kz-gantt-actions';
+    const apply=document.createElement('button');apply.type='button';apply.className='kz-button';apply.textContent='应用时间';
+    const done=document.createElement('button');done.type='button';done.className='kz-button';done.textContent='完成';actions.append(apply,done);editor.append(actions);
     const hint=document.createElement('p');hint.className='kz-gantt-status';hint.setAttribute('aria-live','polite');editor.append(hint);
     const dirty=document.createElement('div');dirty.className='kz-dirty';dirty.hidden=true;
     const dirtyText=document.createElement('span');const undoB=document.createElement('button'),resetB=document.createElement('button');
@@ -67,7 +69,7 @@
     function task(){return data.tasks.find(t=>t.id===selected);}
     function countDirty(){return data.tasks.filter(t=>{const b=baseline.tasks.find(x=>x.id===t.id);return t.start!==b.start||t.end!==b.end;}).length;}
     function syncFields(){const t=task(),s=fromIndex(t.start),e=fromIndex(t.end-1);select.value=selected;inputs.sy.value=s.year;inputs.sq.value=s.quarter;inputs.ey.value=e.year;inputs.eq.value=e.quarter;}
-    function status(message=''){hint.textContent=message;const n=countDirty();dirty.hidden=!n;dirtyText.textContent=`已修改 ${n} 项`;undoB.disabled=!undo.length;}
+    function status(message=''){hint.textContent=message;const n=countDirty();dirty.hidden=!n||!!drag;dirtyText.textContent=`已修改 ${n} 项`;undoB.disabled=!undo.length;}
     function draw(){
       if(disposed)return;
       const unit=fluidUnit(root),left=(chart.getWidth()<480?96:126)*unit,band=(chart.getWidth()-left-24*unit)/(data.max-data.min);
@@ -108,7 +110,7 @@
       if(event.button!==0)return;if(progress!==1)finish();const h=hit(event);if(!h)return;
       selected=h.t.id;marked=true;syncFields();const G=KZ_TOKENS.gantt||{},edge=Math.min(G.handle_px??14,h.r.w*(G.handle_short_ratio??.24));const mode=h.p[0]<h.r.x+edge?'start':h.p[0]>h.r.x+h.r.w-edge?'end':'move';
       drag={id:selected,mode,axis:axisAt(event),start:h.t.start,end:h.t.end,before:clone(data),clientX:event.clientX,moved:false,pointerId:event.pointerId};
-      plot.setPointerCapture(event.pointerId);plot.focus();event.preventDefault();draw();
+      plot.dataset.kzPointer='true';plot.setPointerCapture(event.pointerId);plot.focus();event.preventDefault();draw();
     },{signal});
     plot.addEventListener('pointermove',event=>{
       if(!drag){const h=hit(event);plot.style.cursor=h?(Math.min(Math.abs(h.p[0]-h.r.x),Math.abs(h.p[0]-h.r.x-h.r.w))<14?'ew-resize':'grab'):'default';return;}
@@ -122,24 +124,31 @@
     plot.addEventListener('pointerup',event=>{
       if(!drag)return;const before=drag.before,changed=JSON.stringify(before)!==JSON.stringify(data);drag=null;
       if(plot.hasPointerCapture(event.pointerId))plot.releasePointerCapture(event.pointerId);
-      if(changed)undo.push(before);draw();syncFields();status(changed?'时间已更新':'项目已选择');
+      if(changed)undo.push(before);draw();syncFields();status(changed?'时间已更新':'项目已选择');openEditor(true);
     },{signal});
     plot.addEventListener('pointercancel',rollbackDrag,{signal});
     plot.addEventListener('focus',()=>{if(!marked&&plot.matches(':focus-visible')){marked=true;draw();}},{signal});
     plot.addEventListener('keydown',e=>{
+      delete plot.dataset.kzPointer;
       if(e.key==='Escape'&&drag){e.preventDefault();rollbackDrag();return;}
+      if(e.key==='Escape'){openEditor(false);return;}
+      if(e.key==='Enter'||e.key===' '){e.preventDefault();marked=true;draw();openEditor(true);return;}
       if(!['ArrowLeft','ArrowRight'].includes(e.key))return;e.preventDefault();e.stopPropagation();const d=e.key==='ArrowRight'?1:-1,t=task();
-      marked=true;commit(t.start+(e.shiftKey?0:d),t.end+d);
+      marked=true;commit(t.start+(e.shiftKey?0:d),t.end+d);openEditor(true);
     },{signal});
     root.addEventListener('keydown',e=>{if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='z'&&!e.target.closest('input,select,textarea')){e.preventDefault();e.stopPropagation();undoOne();return;}if(e.target.closest('input,select,textarea,button,[contenteditable=true]')||['ArrowLeft','ArrowRight','ArrowUp','ArrowDown','PageUp','PageDown','Home','End',' ','Enter','Escape'].includes(e.key))e.stopPropagation();},{signal});
     select.addEventListener('change',()=>{selected=select.value;marked=true;syncFields();draw();},{signal});
     apply.addEventListener('click',()=>commit(qindex(inputs.sy.value,inputs.sq.value),qindex(inputs.ey.value,inputs.eq.value)+1),{signal});
+    done.addEventListener('click',()=>openEditor(false),{signal});
+    editor.addEventListener('keydown',e=>{if(e.key==='Escape'){e.preventDefault();openEditor(false);}},{signal});
+    // The chart fills the card until a task is picked; the editor then takes its column (08 GANTT-01). Closing returns focus to the plot.
+    function openEditor(open=true){const next=open?'open':'closed';if(root.dataset.kzEditor===next)return;root.dataset.kzEditor=next;if(!open&&editor.contains(document.activeElement))plot.focus();}
     function undoOne(){finish();if(undo.length){data=undo.pop();draw();syncFields();status('已撤销');}}
     function reset(){cancelAnimationFrame(raf);progress=1;data=clone(baseline);undo=[];draw();syncFields();status('已还原');}
     undoB.addEventListener('click',undoOne,{signal});resetB.addEventListener('click',reset,{signal});
     resize=new ResizeObserver(()=>{if(drag)rollbackDrag();chart.resize();draw();});resize.observe(plot);
     draw();syncFields();
-    return {chart,root,plot,select(id){if(!data.tasks.some(t=>t.id===id))throw Error('未知任务');selected=id;marked=true;syncFields();draw();},
+    return {chart,root,plot,openEditor,select(id){if(!data.tasks.some(t=>t.id===id))throw Error('未知任务');selected=id;marked=true;syncFields();draw();openEditor(true);},
       play,finish,getProgress:()=>progress,getData:()=>clone(data),getSelected:()=>selected,getDirty:countDirty,commit,undo:undoOne,reset,serialize:()=>JSON.stringify(data),
       geometry(id){const t=data.tasks.find(x=>x.id===id);if(!t)throw Error('未知任务');return rowGeometry(t);},
       importJSON(text){const next=JSON.parse(text);validate(next);if(next.min!==baseline.min||next.max!==baseline.max||next.tasks.length!==baseline.tasks.length||next.tasks.some((t,i)=>t.id!==baseline.tasks[i].id))throw Error('导入仅支持相同任务和时间轴');undo.push(clone(data));data=clone(next);draw();syncFields();},

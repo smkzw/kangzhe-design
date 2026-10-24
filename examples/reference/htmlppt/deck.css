@@ -65,7 +65,7 @@
 /* Chart / gantt cards fill their slot. */
 .kz .kz-data-card{display:flex;flex-direction:column;min-height:0}
 .kz .kz-data-card>.kz-chart{flex:1;min-height:0;height:auto}
-.kz .kz-data-card>.kz-gantt{flex:1;min-height:0}
+.kz .kz-data-card>.kz-gantt{flex:1;min-height:0;grid-template-rows:minmax(0,1fr) auto;row-gap:calc(12 * var(--kz-u))}
 .kz .kz-data-card .kz-gantt-plot{height:100%;min-height:calc(300 * var(--kz-u))}
 .kz .kz-data-head{display:flex;justify-content:space-between;align-items:baseline;gap:16px}
 .kz .kz-data-head h3{margin:0}

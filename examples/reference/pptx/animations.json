@@ -24,14 +24,14 @@
     "hero-hero-subtitle": {
      "effect": "entrance_fade",
      "duration": 0.52,
-     "delay": 0.07,
+     "delay": 0.18,
      "decelerate": 0.7,
      "order": 2
     },
     "hero-hero-meta": {
      "effect": "entrance_fade",
      "duration": 0.52,
-     "delay": 0.14,
+     "delay": 0.36,
      "decelerate": 0.7,
      "order": 3
     }
@@ -52,7 +52,7 @@
     "steps": {
      "effect": "entrance_fade",
      "duration": 0.52,
-     "delay": 0.07,
+     "delay": 0.18,
      "decelerate": 0.7,
      "order": 2
     }
@@ -73,21 +73,21 @@
     "card-2": {
      "effect": "entrance_fade",
      "duration": 0.52,
-     "delay": 0.07,
+     "delay": 0.18,
      "decelerate": 0.7,
      "order": 2
     },
     "card-3": {
      "effect": "entrance_fade",
      "duration": 0.52,
-     "delay": 0.14,
+     "delay": 0.36,
      "decelerate": 0.7,
      "order": 3
     },
     "takeaway": {
      "effect": "entrance_fade",
      "duration": 0.52,
-     "delay": 0.41,
+     "delay": 0.74,
      "decelerate": 0.7,
      "order": 4
     }

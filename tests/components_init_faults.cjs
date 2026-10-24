@@ -111,6 +111,7 @@ check('gantt rollback removes editor DOM and releases chart/observer/abort on us
  assert.equal(x.root.classes.has('kz-interactive'),false);
  assert.equal(x.root.classes.has('orig'),true);
  assert.equal(x.root.dataset.kzEditing,undefined);
+ assert.equal(x.root.dataset.kzEditor,undefined);
  assert.equal(x.root.dataset.kzGantt,'1');
  assert.equal(x.root.dataset.keep,'x');
 });
