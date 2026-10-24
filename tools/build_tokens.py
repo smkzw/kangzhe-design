@@ -125,6 +125,7 @@ def build():
     css += [f'  --kzf-type-{k.replace("_","-")}: {v}px;' for k, v in f['type_px'].items()]
     css += [f'  --kzf-canvas: {f["canvas"]};', f'  --kzf-rule: {f["rule"]};', f'  --kzf-numeral-weight: {f["numeral_weight"]};',
             f'  --kzf-glass-face: linear-gradient(155deg,{stops(f["glass"]["face"])});',
+            f'  --kzf-glass-face-clear: linear-gradient(155deg,{stops(f["glass"]["face_clear"])});',
             f'  --kzf-glass-rim-width: {f["glass"]["rim_width"]:g};', f'  --kzf-glass-rim-warm-rgb: {rgb(f["glass"]["rim_warm"])};',
             f'  --kzf-glass-caustic-alpha: {f["glass"]["caustic_alpha"]};', f'  --kzf-glass-spec-alpha: {f["glass"]["spec_alpha"]};',
             f'  --kzf-glass-shadow-rgb: {",".join(map(str, f["glass"]["shadow_rgb"]))};', f'  --kzf-glass-radius: {f["glass"]["radius"]:g};',

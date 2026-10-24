@@ -42,6 +42,18 @@ class FlagshipTokens(unittest.TestCase):
                 names = [key] + ([f'var(--kzf-trans-{key[:-3].replace("_", "-")})'] if group == 'transition' and key.endswith('_ms') else [])
                 self.assertTrue(any(n in consumers for n in names), f'flagship.{group}.{key}')
 
+    def test_reading_glass_is_frosted(self):
+        # 14 FLAG-05: glass that carries text is semi-transparent frost, not clear glass; the lift keeps white white
+        for role, v in F['lens']['roles'].items():
+            self.assertEqual(len(v), 3, role)
+            self.assertTrue(all(x > 0 for x in v), role)
+        slope, icpt = F['lens']['frost_lift']
+        self.assertAlmostEqual(slope + icpt, 1.0)
+        self.assertGreater(icpt, 0)
+        self.assertLess(F['lens']['frost_saturate'], 1)
+        mean = lambda face: sum(s['alpha'] for s in F['glass'][face]) / len(F['glass'][face])
+        self.assertGreater(mean('face'), mean('face_clear'))
+
 class FlagshipPlate(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
@@ -49,8 +61,8 @@ class FlagshipPlate(unittest.TestCase):
             import numpy  # noqa: F401
         except ImportError:
             raise unittest.SkipTest('numpy not installed (requirements.txt)')
-        from flagship_plate import render
-        cls.render = staticmethod(render)
+        from flagship_plate import lens, render
+        cls.render, cls.lens = staticmethod(render), staticmethod(lens)
 
     def test_deterministic(self):
         a = self.render('cover', [0.72, 0.74], size=(320, 180)).tobytes()
@@ -68,6 +80,41 @@ class FlagshipPlate(unittest.TestCase):
         import numpy as np
         warm = lambda im: (np.asarray(im, dtype=int)[..., 2] < 200).mean()
         self.assertGreater(warm(self.render('cover', [0.72, 0.74], size=(320, 180))), warm(self.render('content', [0.8, 0.4], size=(320, 180))) + 0.05)
+
+    def test_baked_lens_frosts_the_reading_area(self):
+        # PPTX lens picture (14 FLAG-10): transparent outside the shape; the reading area is paler and flatter than
+        # the plate under it; the rim band keeps more colour than the reading area
+        import numpy as np
+        plate = self.render('cover', [0.72, 0.74], size=(640, 360))
+        box, rad = (100, 467, 1080, 147), 73.5
+        img = self.lens(plate, box, rad, 'bar')
+        self.assertEqual(img.tobytes(), self.lens(plate, box, rad, 'bar').tobytes())
+        a = np.asarray(img, dtype=float); w, h = img.size
+        self.assertEqual(img.size, (540, 74))
+        self.assertEqual(a[0, 0, 3], 0)
+        self.assertEqual(a[h // 2, w // 2, 3], 255)
+        under = np.asarray(plate, dtype=float)[234:234 + h, 50:50 + w]
+        mid = (slice(h // 3, 2 * h // 3), slice(w // 4, 3 * w // 4))
+        chroma = lambda px: (px.max(-1) - px.min(-1)).mean()
+        self.assertLess(chroma(a[mid][..., :3]), chroma(under[mid]))
+        self.assertLess(a[mid][..., :3].std(), under[mid].std())
+        self.assertGreater(a[mid][..., :3].mean(), under[mid].mean())
+        self.assertGreater(chroma(a[2:5, w // 4:3 * w // 4, :3]), chroma(a[mid][..., :3]))
+
+    def test_pptx_glass_sits_on_a_baked_lens(self):
+        # every glass shell in the PPTX probe has its lens picture at the same frame, drawn first
+        sys.path.insert(0, str(R / 'examples/reference/pptx-flagship'))
+        import build_svg as B
+        B.LENSES.clear()
+        for page in (B.cover(), B.toc(), B.section(), B.content(), B.ending()):
+            order = re.findall(r'<image id="[\w-]+" data-pptx-role="decoration" href="\.\./images/p0\d-|<(?:rect|circle) id="[\w-]+" data-pptx-role="decoration"[^>]*fill="url\(#kzf-face', page)
+            ahead = 0
+            for tag in order:
+                ahead += 1 if tag.startswith('<image') else -1
+                self.assertGreaterEqual(ahead, 0, page[:80])
+            self.assertEqual(ahead, 0)
+        self.assertEqual(len(B.LENSES), 13)   # 5 identity capsules, bar, 3 TOC cards, section lens, KPI lens, 2 asks
+        self.assertTrue(all(role in F['lens']['roles'] for *_, role in B.LENSES))
 
 class FlagshipRouting(unittest.TestCase):
     def test_context_pack_adds_owner(self):

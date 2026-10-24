@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 """Author the flagship PPTX probe (14 FLAG-10) into an existing ppt-master project: light plates rendered by
-tools/flagship_plate.py as page backgrounds, native glass shapes as a static stand-in for the lenses, the identity
-capsule instead of body chrome, a native column chart, and animations.json (06 MOTION-07).
+tools/flagship_plate.py as page backgrounds, baked lens pictures under native glass shells (frosted reading area,
+refracted rim, as the HTML lens filter), the identity capsule instead of body chrome, a native column chart, and
+animations.json (06 MOTION-07).
 
 Executor-side authoring only; checking and export stay with ppt-master. Usage:
   python3 examples/reference/pptx-flagship/build_svg.py <ppt-master project dir>
@@ -11,7 +12,7 @@ from html import escape
 import argparse, hashlib, json, shutil, sys
 ROOT = Path(__file__).resolve().parents[3]
 sys.path.insert(0, str(ROOT / 'tools'))
-from flagship_plate import render, save  # noqa: E402
+from flagship_plate import lens, render, save  # noqa: E402
 T = json.loads((ROOT / 'tokens/tokens.json').read_text(encoding='utf-8'))
 F, C = T['flagship'], T['colors']
 TY = F['type_px']
@@ -22,10 +23,11 @@ SR = '#' + ''.join(f'{c:02X}' for c in F['glass']['shadow_rgb'])
 RECV = T['charts']['categorical'][0]   # the received series: first categorical hue (05)
 
 def defs():
-    stops = ''.join(f'<stop offset="{s["offset"]}" stop-color="{s["color"]}" stop-opacity="{s["alpha"]}"/>' for s in F['glass']['face'])
+    stops = lambda face: ''.join(f'<stop offset="{s["offset"]}" stop-color="{s["color"]}" stop-opacity="{s["alpha"]}"/>' for s in F['glass'][face])
     sh = F['paper']['shadow']
     return ('<defs>'
-            f'<linearGradient id="kzf-face" x1="0" y1="0" x2="1" y2="1">{stops}</linearGradient>'
+            f'<linearGradient id="kzf-face" x1="0" y1="0" x2="1" y2="1">{stops("face")}</linearGradient>'
+            f'<linearGradient id="kzf-face-clear" x1="0" y1="0" x2="1" y2="1">{stops("face_clear")}</linearGradient>'
             # one native outer shadow per object (ppt-master: one effect per object)
             f'<filter id="kzf-shadow"><feDropShadow dx="0" dy="14" stdDeviation="16" flood-color="{SR}" flood-opacity="0.22"/></filter>'
             f'<filter id="kzf-paper-shadow"><feDropShadow dx="{sh[0]}" dy="{sh[1]}" stdDeviation="{sh[2] / 2:g}" flood-color="{SR}" flood-opacity="{sh[4]}"/></filter>'
@@ -38,22 +40,31 @@ def page(role, inner):
 def bg(name):
     return f'<image id="bg" data-pptx-role="background" href="../images/{name}" x="0" y="0" width="1280" height="720" preserveAspectRatio="xMidYMid slice"/>'
 
-def glass(id_, x, y, w, h, r):
-    """Static stand-in for a lens (no refraction in PowerPoint): warm translucent face, white rim, one soft shadow."""
-    return (f'<rect id="{id_}" data-pptx-role="decoration" x="{x}" y="{y}" width="{w}" height="{h}" rx="{r}" fill="url(#kzf-face)" '
+LENSES = []   # (plate, picture file, box, radius, lens role), baked in build() once the plates exist
+def lens_picture(id_, plate, x, y, w, h, r, role):
+    """What PowerPoint cannot filter live: the plate under the glass, frosted and refracted ahead of time (14 FLAG-10)."""
+    name = f'{plate[:4]}{id_}.png'
+    LENSES.append((plate, name, (x, y, w, h), r, role))
+    return f'<image id="{id_}" data-pptx-role="decoration" href="../images/{name}" x="{x:g}" y="{y:g}" width="{w:g}" height="{h:g}" preserveAspectRatio="none"/>'
+
+def glass(id_, x, y, w, h, r, plate, role):
+    """Baked lens picture under a native shell: face gradient, white rim, one soft shadow."""
+    return (lens_picture(id_.replace('shell', 'lens'), plate, x, y, w, h, r, role)
+            + f'<rect id="{id_}" data-pptx-role="decoration" x="{x}" y="{y}" width="{w}" height="{h}" rx="{r}" fill="url(#kzf-face)" '
             f'stroke="#FFFFFF" stroke-opacity="0.95" stroke-width="{F["glass"]["rim_width"]}" filter="url(#kzf-shadow)"/>')
 
 PT, PR, PB, PL = F['identity']['pad']; GAP = F['identity']['gap']
 LOGO_W = F['identity']['logo_height'] * 1210 / 250            # logo.png is 1210×250
 NAME_W = len(F['identity']['name']) * TY['identity_name'] * 1.06  # bold CJK advance
 IDW, IDH = PL + LOGO_W + GAP + NAME_W + PR, PT + F['identity']['logo_height'] + PB
-def identity(kind):
+def identity(kind, plate):
     corner, scale = F['identity']['anchors'][kind]; mx, my = F['identity']['margin']
     w, h = IDW * scale, IDH * scale
     x = mx if corner[1] == 'l' else 1280 - mx - w
     y = my if corner[0] == 't' else 720 - my - h
     lh = F['identity']['logo_height'] * scale; lw = LOGO_W * scale; pad = PL * scale; gap = GAP * scale
-    return (f'<rect id="identity-shell" data-pptx-role="decoration" x="{x:g}" y="{y:g}" width="{w:g}" height="{h:g}" rx="{h / 2:g}" fill="url(#kzf-face)" stroke="#FFFFFF" stroke-opacity="0.95" stroke-width="1.3" filter="url(#kzf-shadow)"/>'
+    return (lens_picture('identity-lens', plate, x, y, w, h, h / 2, 'identity')
+            + f'<rect id="identity-shell" data-pptx-role="decoration" x="{x:g}" y="{y:g}" width="{w:g}" height="{h:g}" rx="{h / 2:g}" fill="url(#kzf-face)" stroke="#FFFFFF" stroke-opacity="0.95" stroke-width="1.3" filter="url(#kzf-shadow)"/>'
             f'<image id="logo" data-pptx-role="logo" href="../images/logo.png" x="{x + pad:g}" y="{y + (h - lh) / 2:g}" width="{lw:g}" height="{lh:g}" preserveAspectRatio="xMidYMid meet"/>'
             f'<g id="identity-name" data-pptx-bounds="{x + pad + lw + gap - 2:g} {y:g} {w - pad - lw - gap + 2:g} {h:g}"><text x="{x + pad + lw + gap:g}" y="{y + h / 2 + 5.5 * scale:g}" font-size="{TY["identity_name"]}" font-weight="bold" fill="{C["ink"]}">{escape(F["identity"]["name"])}</text></g>')
 
@@ -73,28 +84,30 @@ def cover():
                   f'<text x="{100 + i * 360 + 166}" y="566" font-size="{TY["bar_label"]}" fill="{C["body"]}">{l}</text></g>'
                   for i, (v, l) in enumerate([('24', '应收（份）'), ('20', '已收（份）'), ('4', '缺口（份）')]))
     seps = ''.join(f'<rect id="bar-sep-{i}" data-pptx-role="decoration" x="{100 + i * 360}" y="500" width="1" height="81" fill="#A0783C" fill-opacity="0.3"/>' for i in (1, 2))
-    return page('cover', bg('p01-plate.png') + identity('cover')
+    return page('cover', bg('p01-plate.png') + identity('cover', 'p01-plate.png')
                 + kicker('kicker', 100, 166, '管理层季度汇报 · 合成示例')
                 + f'<g id="title" data-pptx-bounds="100 180 900 205"><text font-size="{TY["cover_title"]}" font-weight="bold" fill="{C["ink"]}"><tspan x="100" y="262">研究资料</tspan><tspan x="100" y="350">完整性核对</tspan></text></g>'
                 + f'<g id="lede" data-pptx-bounds="100 386 900 36"><text x="100" y="412" font-size="{TY["lede"]}" fill="{C["body"]}">应收 24 份，已收 20 份；<tspan font-weight="bold" fill="{C["ink"]}">缺口集中在两组资料</tspan></text></g>'
-                + glass('bar-shell', 100, 467, 1080, 147, 73.5) + seps + bar
+                + glass('bar-shell', 100, 467, 1080, 147, 73.5, 'p01-plate.png', 'bar') + seps + bar
                 + f'<g id="meta" data-pptx-bounds="100 650 600 24"><text x="100" y="668" font-size="{TY["meta"]}" fill="{C["body"]}" letter-spacing="2">{DATE}　管理层季度汇报</text></g>')
 
 def toc():
     cards = ''
     for i, (n, t, d) in enumerate([('01', '研究范围', '对象、时间窗与资料组'), ('02', '资料完整性', '应收与已收、缺口所在'), ('03', '核对计划', '补收、确认与复核')]):
         x = 100 + i * (344 + 24)
-        cards += (glass(f'toc-shell-{i + 1}', x, 330, 344, 250, F['glass']['radius'])
+        cards += (glass(f'toc-shell-{i + 1}', x, 330, 344, 250, F['glass']['radius'], 'p02-plate.png', 'ask')
                   + f'<g id="toc-{i + 1}" data-pptx-bounds="{x} 330 344 250"><text x="{x + 30}" y="408" font-family="{NUM}" font-size="{TY["toc_numeral"]}" fill="{F["accent_ink"]}">{n}</text>'
                   f'<text x="{x + 30}" y="512" font-size="{TY["toc_label"]}" font-weight="bold" fill="{C["ink"]}">{t}</text>'
                   f'<text x="{x + 30}" y="548" font-size="{TY["toc_description"]}" fill="{C["body"]}">{d}</text></g>')
-    return page('toc', bg('p02-plate.png') + identity('toc') + kicker('kicker', 100, 166, '汇报章节')
+    return page('toc', bg('p02-plate.png') + identity('toc', 'p02-plate.png') + kicker('kicker', 100, 166, '汇报章节')
                 + f'<g id="title" data-pptx-bounds="100 180 900 80"><text x="100" y="240" font-size="{TY["toc_title"]}" font-weight="bold" fill="{C["ink"]}">三个问题，一个决定</text></g>' + cards)
 
 def section():
-    return page('section', bg('p03-plate.png') + identity('section')
+    # the lens sits behind the numeral here: native text cannot be refracted, so the number shows through the clear face
+    return page('section', bg('p03-plate.png') + identity('section', 'p03-plate.png')
+                + lens_picture('section-lens-picture', 'p03-plate.png', 220, 220, 267, 267, 133.5, 'section')
                 + f'<g id="section-number" data-pptx-bounds="70 100 480 490"><text x="80" y="440" font-family="{NUM}" font-size="{TY["section_numeral"]}" fill="{C["ink"]}">02</text></g>'
-                + f'<circle id="section-lens" data-pptx-role="decoration" cx="353.5" cy="353.5" r="133.5" fill="url(#kzf-face)" stroke="#FFFFFF" stroke-opacity="0.95" stroke-width="1.3" filter="url(#kzf-shadow)"/>'
+                + f'<circle id="section-lens" data-pptx-role="decoration" cx="353.5" cy="353.5" r="133.5" fill="url(#kzf-face-clear)" stroke="#FFFFFF" stroke-opacity="0.95" stroke-width="1.3" filter="url(#kzf-shadow)"/>'
                 + kicker('kicker', 693, 300, '第二部分')
                 + f'<g id="section-title" data-pptx-bounds="693 314 540 104"><text x="693" y="388" font-size="{TY["section_title"]}" font-weight="bold" fill="{C["ink"]}">资料完整性</text></g>'
                 + f'<g id="section-lede" data-pptx-bounds="693 418 520 36"><text x="693" y="444" font-size="{TY["lede"]}" fill="{C["body"]}">缺口在哪里，会不会影响组间比较</text></g>')
@@ -131,7 +144,7 @@ def chart(x, y, w, h):
 def content():
     paper = (f'<rect id="paper-shell" data-pptx-role="decoration" x="100" y="196" width="733" height="460" rx="{F["paper"]["radius"]}" fill="{F["paper"]["face"]}" '
              f'stroke="{F["paper"]["hairline"]}" stroke-width="1" filter="url(#kzf-paper-shadow)"/>')
-    return page('content', bg('p04-plate.png') + identity('content')
+    return page('content', bg('p04-plate.png') + identity('content', 'p04-plate.png')
                 + f'<g id="title" data-pptx-bounds="100 100 900 60"><text x="100" y="142" font-size="{TY["page_title"]}" font-weight="bold" fill="{C["ink"]}">缺口集中在<tspan fill="{C["risk"]}">中心记录</tspan>与<tspan fill="{C["risk"]}">安全性报告</tspan></text></g>'
                 + f'<rect id="title-rule" data-pptx-role="decoration" x="100" y="168" width="1080" height="1" fill="{F["rule"]}"/>'
                 + paper
@@ -140,6 +153,7 @@ def content():
                 + f'<g id="legend" data-pptx-bounds="130 254 300 24"><rect x="130" y="262" width="12" height="12" rx="3" fill="{T["charts"]["comparator"]}"/><text x="150" y="273" font-size="16" fill="{C["body"]}">应收</text>'
                 f'<rect x="206" y="262" width="12" height="12" rx="3" fill="{RECV}"/><text x="226" y="273" font-size="16" fill="{C["body"]}">已收</text></g>'
                 + chart(130, 290, 670, 346)
+                + lens_picture('kpi-lens-picture', 'p04-plate.png', 873, 196, 307, 307, 153.5, 'kpi')
                 + f'<circle id="kpi-lens" data-pptx-role="decoration" cx="1026.5" cy="349.5" r="153.5" fill="url(#kzf-face)" stroke="#FFFFFF" stroke-opacity="0.95" stroke-width="1.3" filter="url(#kzf-shadow)"/>'
                 + f'<g id="kpi" data-pptx-bounds="900 250 253 200"><text x="1026.5" y="380" font-family="{NUM}" font-size="{TY["kpi_numeral"]}" fill="{C["risk"]}" text-anchor="middle">4<tspan font-size="31" fill="{C["body"]}"> 份</tspan></text>'
                 f'<text x="1026.5" y="425" font-size="{TY["kpi_label"]}" fill="{C["body"]}" text-anchor="middle">资料缺口 · 应收 24 / 已收 20</text></g>'
@@ -151,10 +165,10 @@ def ending():
     asks = ''
     for i, (n, a, b) in enumerate([('01', '4 份资料由医学部牵头', '2027Q1 内补收'), ('02', '版本差异确认之后', '再做组间比较')]):
         x = 140 + i * (485 + 30)
-        asks += (glass(f'ask-shell-{i + 1}', x, 373, 485, 118, 32)
+        asks += (glass(f'ask-shell-{i + 1}', x, 373, 485, 118, 32, 'p05-plate.png', 'ask')
                  + f'<g id="ask-{i + 1}" data-pptx-bounds="{x} 373 485 118"><text x="{x + 32}" y="453" font-family="{NUM}" font-size="{TY["ask_numeral"]}" fill="{F["accent_ink"]}">{n}</text>'
                  f'<text font-size="{TY["ask"]}" fill="{C["ink"]}"><tspan x="{x + 128}" y="424">{a}</tspan><tspan x="{x + 128}" y="458" font-weight="bold">{b}</tspan></text></g>')
-    return page('ending', bg('p05-plate.png') + identity('ending')
+    return page('ending', bg('p05-plate.png') + identity('ending', 'p05-plate.png')
                 + kicker('kicker', 640, 186, '会议决定事项', anchor='middle')
                 + f'<g id="title" data-pptx-bounds="300 196 680 120"><text x="640" y="280" font-size="{TY["ending_title"]}" font-weight="bold" fill="{C["ink"]}" text-anchor="middle">请确认两件事</text></g>'
                 + asks
@@ -197,14 +211,17 @@ def build(project):
     svg_dir, img_dir = project / 'svg_output', project / 'images'
     svg_dir.mkdir(exist_ok=True); img_dir.mkdir(exist_ok=True)
     shutil.copy2(ROOT / T['logo']['png_path'], img_dir / 'logo.png')
-    receipts = []
+    receipts, plates = [], {}
     for name, args in PLATES.items():
-        img = render(args['kind'], args['focus'], args.get('calm', ()), args.get('pool'), size=(2560, 1440))
+        plates[name] = img = render(args['kind'], args['focus'], args.get('calm', ()), args.get('pool'), size=(2560, 1440))
         save(img, img_dir / name)
         receipts.append({'file': name, 'sha256': hashlib.sha256((img_dir / name).read_bytes()).hexdigest(), 'size_px': list(img.size), **args})
+    LENSES.clear()
     pages = {'01_cover.svg': cover(), '02_toc.svg': toc(), '03_section.svg': section(), '04_data.svg': content(), '05_ending.svg': ending()}
     for name, svg in pages.items():
         (svg_dir / name).write_text(svg, encoding='utf-8')
+    for plate, name, box, r, role in LENSES:
+        save(lens(plates[plate], box, r, role), img_dir / name)
     enter = T['motion']['duration_ms']['card'] / 1000; step = T['motion']['stagger_ms']['pptx_card'] / 1000
     fade = lambda i: {'effect': 'entrance_fade', 'duration': enter, 'delay': round(i * step, 3), 'decelerate': 0.7, 'order': i + 1}
     anim = {'defaults': {'transition': {'effect': 'fade', 'duration': 0.4}, 'animation': {'effect': 'none'}},

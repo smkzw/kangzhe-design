@@ -25,4 +25,4 @@
 
 参考实现：`examples/reference/pptx-default/`（Default 全流程正例：确认、计划、手写 SVG、检查、导出、绑定、回读）；`examples/reference/pptx/`（转换器级探针，含 Morph）。
 
-旗舰路线（14 FLAG-10）：每页背景是 `tools/flagship_plate.py` 渲染的静态光效图，玻璃用原生形状静态近似，身份胶囊代替正文页 chrome，不绑定双菱形。参考实现：`examples/reference/pptx-flagship/`。
+旗舰路线（14 FLAG-10）：每页背景是 `tools/flagship_plate.py` 渲染的静态光效图，每块玻璃下垫一张 `flagship_plate.lens()` 烘焙的透镜图（阅读区磨砂、边缘折射），上面是原生玻璃壳，身份胶囊代替正文页 chrome，不绑定双菱形。参考实现：`examples/reference/pptx-flagship/`。

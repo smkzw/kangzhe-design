@@ -9,7 +9,7 @@
 | HTML-PPT | `htmlppt/index.html` | 由 html-ppt-skill `new-deck.sh` 生成（原始输出 `htmlppt/scaffold.html`），`htmlppt/build.py` 派生；上游 `base.css`/`runtime.js` 原样随包 |
 | PPTX | `pptx/` | 经 ppt-master 流程导出，见该目录 README |
 | HTML-PPT 旗舰（14） | `htmlppt-flagship/index.html` | 同一脚手架与素材；`runtime/kz-flagship.*` 绘制光场、透镜与身份胶囊；内容页光退到页边 |
-| PPTX 旗舰（14） | `pptx-flagship/` | 静态光效图（`tools/flagship_plate.py`）加原生玻璃与原生柱图，经 ppt-master 导出 |
+| PPTX 旗舰（14） | `pptx-flagship/` | 静态光效图（`tools/flagship_plate.py`），玻璃是烘焙透镜图加原生玻璃壳，原生柱图，经 ppt-master 导出 |
 
 ## 共同做法
 

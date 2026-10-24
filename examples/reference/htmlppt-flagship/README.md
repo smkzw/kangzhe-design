@@ -3,7 +3,7 @@
 素材与 `../htmlppt/` 相同（研究资料完整性核对，合成数据），9 页：封面、目录、三张章节页、三张内容页（研究范围卡片、应收与已收柱图、季度甘特）、决定事项。
 
 - **构建**：`python3 build.py` 从 `scaffold.html`（html-ppt-skill `new-deck.sh` 原始输出）派生 `index.html`。上游的 `base.css` 与 `runtime.js` 原样随包，SHA 与 `../htmlppt/vendor/` 一致。
-- **品牌层**：`runtime/kz-flagship.css/js` 负责光场、透镜与身份胶囊；`deck.css` 只写页面布局，`deck.js` 只做装配，图表与甘特在光停下后才开始揭示。
+- **品牌层**：`runtime/kz-flagship.css/js` 负责光场、透镜与身份胶囊。承载文字的透镜是半透磨砂玻璃：边缘环带折射，阅读区磨砂、降饱和并提亮，背后的鎏金只剩淡蜜色；章节号上的透镜保持通透（14 FLAG-05）。`deck.css` 只写页面布局，`deck.js` 只做装配，图表与甘特在光停下后才开始揭示。
 - **放映**：用 Microsoft Edge 或 Chrome 打开 `index.html`，←/→ 翻页；S 打开演讲者窗口，O 打开总览，与上游一致。
 
 ## 本次验证（2026-10-24，ego lite 0.6.0.20 / Chromium 154）

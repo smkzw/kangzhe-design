@@ -51,6 +51,8 @@ body.kzf[data-preview="1"] .slide [data-kzf-in], .kzf .overview [data-kzf-in] { 
 .kzf-glass::after { content: ""; position: absolute; inset: 0; border-radius: inherit; pointer-events: none;
   background: radial-gradient(120% 70% at 18% 0%, rgba(255,255,255,var(--kzf-glass-spec-alpha)) 0%, transparent 46%), radial-gradient(70% 40% at 50% 104%, rgba(var(--kzf-glass-rim-warm-rgb), var(--kzf-glass-caustic-alpha)) 0%, transparent 70%); }
 .kzf-glass > * { position: relative; z-index: 1; }
+/* the decorative lens over a section numeral stays clear: it exists to show the bend, it carries no reading text */
+.kzf-glass[data-kzf-lens="section"] { background: var(--kzf-glass-face-clear); }
 .kzf-lens-fallback { -webkit-backdrop-filter: blur(var(--kzf-lens-fallback-blur)) saturate(1.3); backdrop-filter: blur(var(--kzf-lens-fallback-blur)) saturate(1.3); }
 
 /* identity capsule: the one persistent object; it glides to the corner of each page kind */

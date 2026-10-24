@@ -2,7 +2,7 @@
  "1": {
   "frames": [
    {
-    "name": "TextBox 5",
+    "name": "TextBox 6",
     "rect": [
      264.7,
      69.0,
@@ -16,7 +16,7 @@
     "bullets": 0
    },
    {
-    "name": "TextBox 8",
+    "name": "TextBox 9",
     "rect": [
      147.4,
      150.0,
@@ -30,7 +30,7 @@
     "bullets": 0
    },
    {
-    "name": "TextBox 10",
+    "name": "TextBox 11",
     "rect": [
      98.0,
      186.0,
@@ -44,7 +44,7 @@
     "bullets": 0
    },
    {
-    "name": "TextBox 11",
+    "name": "TextBox 12",
     "rect": [
      98.0,
      274.0,
@@ -58,7 +58,7 @@
     "bullets": 0
    },
    {
-    "name": "TextBox 13",
+    "name": "TextBox 14",
     "rect": [
      99.1,
      390.7,
@@ -72,7 +72,7 @@
     "bullets": 0
    },
    {
-    "name": "TextBox 18",
+    "name": "TextBox 20",
     "rect": [
      153.7,
      489.7,
@@ -86,7 +86,7 @@
     "bullets": 0
    },
    {
-    "name": "TextBox 19",
+    "name": "TextBox 21",
     "rect": [
      265.3,
      548.7,
@@ -100,7 +100,7 @@
     "bullets": 0
    },
    {
-    "name": "TextBox 21",
+    "name": "TextBox 23",
     "rect": [
      513.7,
      489.7,
@@ -114,7 +114,7 @@
     "bullets": 0
    },
    {
-    "name": "TextBox 22",
+    "name": "TextBox 24",
     "rect": [
      625.3,
      548.7,
@@ -128,7 +128,7 @@
     "bullets": 0
    },
    {
-    "name": "TextBox 24",
+    "name": "TextBox 26",
     "rect": [
      920.8,
      489.7,
@@ -142,7 +142,7 @@
     "bullets": 0
    },
    {
-    "name": "TextBox 25",
+    "name": "TextBox 27",
     "rect": [
      985.3,
      548.7,
@@ -156,7 +156,7 @@
     "bullets": 0
    },
    {
-    "name": "TextBox 27",
+    "name": "TextBox 29",
     "rect": [
      99.4,
      652.0,
@@ -258,16 +258,16 @@
    16.5
   ],
   "gradient_alpha": [
-   12.0,
-   22.0,
-   40.0
+   36.0,
+   42.0,
+   50.0
   ],
   "notes_chars": 0
  },
  "2": {
   "frames": [
    {
-    "name": "TextBox 5",
+    "name": "TextBox 6",
     "rect": [
      264.7,
      69.0,
@@ -281,7 +281,7 @@
     "bullets": 0
    },
    {
-    "name": "TextBox 8",
+    "name": "TextBox 9",
     "rect": [
      147.4,
      150.0,
@@ -295,7 +295,7 @@
     "bullets": 0
    },
    {
-    "name": "TextBox 10",
+    "name": "TextBox 11",
     "rect": [
      98.0,
      186.7,
@@ -309,7 +309,7 @@
     "bullets": 0
    },
    {
-    "name": "TextBox 13",
+    "name": "TextBox 15",
     "rect": [
      128.0,
      345.3,
@@ -323,7 +323,7 @@
     "bullets": 0
    },
    {
-    "name": "TextBox 14",
+    "name": "TextBox 16",
     "rect": [
      128.8,
      482.7,
@@ -337,7 +337,7 @@
     "bullets": 0
    },
    {
-    "name": "TextBox 15",
+    "name": "TextBox 17",
     "rect": [
      129.3,
      530.7,
@@ -351,7 +351,7 @@
     "bullets": 0
    },
    {
-    "name": "TextBox 18",
+    "name": "TextBox 21",
     "rect": [
      496.0,
      345.3,
@@ -365,7 +365,7 @@
     "bullets": 0
    },
    {
-    "name": "TextBox 19",
+    "name": "TextBox 22",
     "rect": [
      496.8,
      482.7,
@@ -379,7 +379,7 @@
     "bullets": 0
    },
    {
-    "name": "TextBox 20",
+    "name": "TextBox 23",
     "rect": [
      497.3,
      530.7,
@@ -393,7 +393,7 @@
     "bullets": 0
    },
    {
-    "name": "TextBox 23",
+    "name": "TextBox 27",
     "rect": [
      864.0,
      345.3,
@@ -407,7 +407,7 @@
     "bullets": 0
    },
    {
-    "name": "TextBox 24",
+    "name": "TextBox 28",
     "rect": [
      864.8,
      482.7,
@@ -421,7 +421,7 @@
     "bullets": 0
    },
    {
-    "name": "TextBox 25",
+    "name": "TextBox 29",
     "rect": [
      865.3,
      530.7,
@@ -476,16 +476,16 @@
    16.5
   ],
   "gradient_alpha": [
-   12.0,
-   22.0,
-   40.0
+   36.0,
+   42.0,
+   50.0
   ],
   "notes_chars": 0
  },
  "3": {
   "frames": [
    {
-    "name": "TextBox 5",
+    "name": "TextBox 6",
     "rect": [
      1042.6,
      630.0,
@@ -499,7 +499,7 @@
     "bullets": 0
    },
    {
-    "name": "TextBox 7",
+    "name": "TextBox 9",
     "rect": [
      78.0,
      77.3,
@@ -513,7 +513,7 @@
     "bullets": 0
    },
    {
-    "name": "TextBox 11",
+    "name": "TextBox 13",
     "rect": [
      740.4,
      284.0,
@@ -527,7 +527,7 @@
     "bullets": 0
    },
    {
-    "name": "TextBox 13",
+    "name": "TextBox 15",
     "rect": [
      691.0,
      321.3,
@@ -541,7 +541,7 @@
     "bullets": 0
    },
    {
-    "name": "TextBox 15",
+    "name": "TextBox 17",
     "rect": [
      692.1,
      422.7,
@@ -580,14 +580,17 @@
   "gradient_alpha": [
    12.0,
    22.0,
-   40.0
+   36.0,
+   40.0,
+   42.0,
+   50.0
   ],
   "notes_chars": 0
  },
  "4": {
   "frames": [
    {
-    "name": "TextBox 5",
+    "name": "TextBox 6",
     "rect": [
      1042.6,
      69.0,
@@ -601,7 +604,7 @@
     "bullets": 0
    },
    {
-    "name": "TextBox 7",
+    "name": "TextBox 8",
     "rect": [
      98.5,
      106.0,
@@ -615,7 +618,7 @@
     "bullets": 0
    },
    {
-    "name": "TextBox 11",
+    "name": "TextBox 12",
     "rect": [
      129.1,
      218.7,
@@ -629,7 +632,7 @@
     "bullets": 0
    },
    {
-    "name": "TextBox 12",
+    "name": "TextBox 13",
     "rect": [
      615.8,
      224.0,
@@ -643,7 +646,7 @@
     "bullets": 0
    },
    {
-    "name": "TextBox 15",
+    "name": "TextBox 16",
     "rect": [
      149.4,
      257.0,
@@ -657,7 +660,7 @@
     "bullets": 0
    },
    {
-    "name": "TextBox 17",
+    "name": "TextBox 18",
     "rect": [
      225.4,
      257.0,
@@ -671,7 +674,7 @@
     "bullets": 0
    },
    {
-    "name": "TextBox 21",
+    "name": "TextBox 23",
     "rect": [
      958.4,
      230.7,
@@ -686,7 +689,7 @@
     "bullets": 0
    },
    {
-    "name": "TextBox 22",
+    "name": "TextBox 24",
     "rect": [
      914.8,
      409.0,
@@ -700,7 +703,7 @@
     "bullets": 0
    },
    {
-    "name": "TextBox 25",
+    "name": "TextBox 27",
     "rect": [
      872.3,
      544.7,
@@ -714,7 +717,7 @@
     "bullets": 0
    },
    {
-    "name": "TextBox 26",
+    "name": "TextBox 28",
     "rect": [
      872.3,
      576.7,
@@ -728,7 +731,7 @@
     "bullets": 0
    },
    {
-    "name": "TextBox 27",
+    "name": "TextBox 29",
     "rect": [
      872.3,
      606.7,
@@ -776,16 +779,16 @@
    16.5
   ],
   "gradient_alpha": [
-   12.0,
-   22.0,
-   40.0
+   36.0,
+   42.0,
+   50.0
   ],
   "notes_chars": 0
  },
  "5": {
   "frames": [
    {
-    "name": "TextBox 5",
+    "name": "TextBox 6",
     "rect": [
      264.7,
      630.0,
@@ -799,7 +802,7 @@
     "bullets": 0
    },
    {
-    "name": "TextBox 7",
+    "name": "TextBox 8",
     "rect": [
      575.8,
      170.0,
@@ -813,7 +816,7 @@
     "bullets": 0
    },
    {
-    "name": "TextBox 9",
+    "name": "TextBox 10",
     "rect": [
      399.7,
      208.0,
@@ -827,7 +830,7 @@
     "bullets": 0
    },
    {
-    "name": "TextBox 12",
+    "name": "TextBox 14",
     "rect": [
      170.0,
      390.3,
@@ -841,7 +844,7 @@
     "bullets": 0
    },
    {
-    "name": "TextBox 13",
+    "name": "TextBox 15",
     "rect": [
      267.1,
      402.7,
@@ -855,7 +858,7 @@
     "bullets": 0
    },
    {
-    "name": "TextBox 14",
+    "name": "TextBox 16",
     "rect": [
      267.1,
      436.7,
@@ -869,7 +872,7 @@
     "bullets": 0
    },
    {
-    "name": "TextBox 17",
+    "name": "TextBox 20",
     "rect": [
      685.0,
      390.3,
@@ -883,7 +886,7 @@
     "bullets": 0
    },
    {
-    "name": "TextBox 18",
+    "name": "TextBox 21",
     "rect": [
      782.1,
      402.7,
@@ -897,7 +900,7 @@
     "bullets": 0
    },
    {
-    "name": "TextBox 19",
+    "name": "TextBox 22",
     "rect": [
      782.1,
      436.7,
@@ -911,7 +914,7 @@
     "bullets": 0
    },
    {
-    "name": "TextBox 21",
+    "name": "TextBox 24",
     "rect": [
      510.9,
      652.0,
@@ -948,9 +951,9 @@
    16.5
   ],
   "gradient_alpha": [
-   12.0,
-   22.0,
-   40.0
+   36.0,
+   42.0,
+   50.0
   ],
   "notes_chars": 0
  },

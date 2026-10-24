@@ -79,10 +79,13 @@ void main(){ vec2 uv = gl_FragCoord.xy / uRes; uv.y = 1.0 - uv.y;
   c += (hash(gl_FragCoord.xy + fract(uTime * 7.0)) - 0.5) / 255.0;
   o = vec4(clamp(c, 0.0, 1.0), 1.0); }`;
 
-  function lensMap(w, h, rad, bevel, k) {
+  // Displacement map (R/G) and rim mask (A of a second image): the rim refracts, the reading area inside it is frosted.
+  function lensMap(w, h, rad, bevel, k, band) {
     const W = Math.max(8, Math.round(w * k)), H = Math.max(8, Math.round(h * k)), R = rad * k, B = Math.max(2, bevel * k);
     const c = doc.createElement('canvas'); c.width = W; c.height = H;
     const x = c.getContext('2d'), img = x.createImageData(W, H), d = img.data, hw = W / 2, hh = H / 2;
+    const mc = doc.createElement('canvas'); mc.width = W; mc.height = H;
+    const mx = mc.getContext('2d'), mimg = mx.createImageData(W, H), md = mimg.data;
     for (let j = 0; j < H; j++) for (let i = 0; i < W; i++) {
       const px = i + 0.5 - hw, py = j + 0.5 - hh, qx = Math.abs(px) - (hw - R), qy = Math.abs(py) - (hh - R);
       const sd = Math.hypot(Math.max(qx, 0), Math.max(qy, 0)) + Math.min(Math.max(qx, qy), 0) - R, depth = -sd;
@@ -93,8 +96,10 @@ void main(){ vec2 uv = gl_FragCoord.xy / uRes; uv.y = 1.0 - uv.y;
         m = Math.pow(1 - depth / B, 2.2); // convex rim: strongest bend at the edge, zero on the flat top
       }
       const o = (j * W + i) * 4; d[o] = 128 + nx * m * 127; d[o + 1] = 128 + ny * m * 127; d[o + 2] = 128; d[o + 3] = 255;
+      const t = depth / B, rim = depth < 0 ? 0 : t <= band[0] ? 1 : t >= band[1] ? 0 : 1 - (t - band[0]) / (band[1] - band[0]);
+      md[o] = md[o + 1] = md[o + 2] = 255; md[o + 3] = Math.round(rim * rim * (3 - 2 * rim) * 255);
     }
-    x.putImageData(img, 0, 0); return c.toDataURL();
+    x.putImageData(img, 0, 0); mx.putImageData(mimg, 0, 0); return [c.toDataURL(), mc.toDataURL()];
   }
 
   // Layout rect relative to the viewport, ignoring CSS transforms (entrances translate/scale their targets).
@@ -148,10 +153,19 @@ void main(){ vec2 uv = gl_FragCoord.xy / uRes; uv.y = 1.0 - uv.y;
       const rad = Math.min(parseFloat(getComputedStyle(el).borderTopLeftRadius) || 0, W / 2, H / 2);
       const f = doc.createElementNS('http://www.w3.org/2000/svg', 'filter');
       for (const [a, v] of Object.entries({ id, x: 0, y: 0, width: W, height: H, filterUnits: 'userSpaceOnUse', primitiveUnits: 'userSpaceOnUse', 'color-interpolation-filters': 'sRGB' })) f.setAttribute(a, v);
+      const [map, mask] = lensMap(W, H, rad, role[0] * k, T.lens.map_scale, T.lens.rim_band);
+      // rim: lightly frosted, refracted and saturated; centre: frosted (center_frost), desaturated and lifted toward white
+      // (frost_lift), so the light behind reads as a pale tint under the text, not as structure
       f.innerHTML = `<feGaussianBlur in="SourceGraphic" stdDeviation="${T.lens.frost_px}" result="b"/>`
-        + `<feImage href="${lensMap(W, H, rad, role[0] * k, T.lens.map_scale)}" x="0" y="0" width="${W}" height="${H}" preserveAspectRatio="none" result="m"/>`
+        + `<feImage href="${map}" x="0" y="0" width="${W}" height="${H}" preserveAspectRatio="none" result="m"/>`
         + `<feDisplacementMap in="b" in2="m" scale="${role[1] * k}" xChannelSelector="R" yChannelSelector="G" result="d"/>`
-        + `<feColorMatrix in="d" type="saturate" values="${T.lens.saturate}"/>`;
+        + `<feGaussianBlur in="SourceGraphic" stdDeviation="${role[2] * k}" edgeMode="duplicate" result="fb"/>`
+        + `<feColorMatrix in="fb" type="saturate" values="${T.lens.frost_saturate}" result="fs"/>`
+        + `<feComponentTransfer in="fs" result="fz">${['R', 'G', 'B'].map(c => `<feFunc${c} type="linear" slope="${T.lens.frost_lift[0]}" intercept="${T.lens.frost_lift[1]}"/>`).join('')}</feComponentTransfer>`
+        + `<feImage href="${mask}" x="0" y="0" width="${W}" height="${H}" preserveAspectRatio="none" result="rm"/>`
+        + `<feColorMatrix in="d" type="saturate" values="${T.lens.saturate}" result="ds"/>`
+        + `<feComposite in="ds" in2="rm" operator="in" result="rim"/>`
+        + `<feMerge><feMergeNode in="fz"/><feMergeNode in="rim"/></feMerge>`;
       defs.append(f); el.style.backdropFilter = `url(#${id})`;
     }
     const lenses = () => [idEl, ...deck.querySelectorAll(':scope > .slide .kzf-lens')];
