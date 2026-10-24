@@ -1,12 +1,12 @@
 {
- "version": "7.0.0",
- "revision": "KZ7-1024-B03",
+ "version": "7.0.1",
+ "revision": "KZ7-1024-B04",
  "scope": "installable skill content; maintenance material (review/, agent/, docs/history/, tests/, examples/validation/) and sample .pptx decks excluded",
  "files": [
   {
    "path": "CHANGELOG.md",
-   "bytes": 46808,
-   "sha256": "sha256:f22ba2d55baee679fc89895df72d008ff9057af1c6d585867d45008adc9e1c1c"
+   "bytes": 50853,
+   "sha256": "sha256:a4229285de43e79e890df4b49eb6932d0c12ad7017f6c16e78c42ea659e92693"
   },
   {
    "path": "INSTALL.md",
@@ -21,7 +21,7 @@
   {
    "path": "REVISION",
    "bytes": 13,
-   "sha256": "sha256:ab07cdc4edf8da88c5e0644e85cbcca9f06197ef424c28c6bc38ba5619771e8d"
+   "sha256": "sha256:53600ed4d0b33c124d7ee119b70c98e8acbee4e589a3fd0a45ce002761db1882"
   },
   {
    "path": "SKILL.md",
@@ -30,13 +30,13 @@
   },
   {
    "path": "STATUS.md",
-   "bytes": 2500,
-   "sha256": "sha256:c9b02202a781bad36314adfd4396d6e3aa098ef121643aa248614e6bb8514620"
+   "bytes": 3317,
+   "sha256": "sha256:f0fd5a08de460e235c73d24f2d8f1fcf6f3f41c9af2e9eae0865b2c190c7777d"
   },
   {
    "path": "VERSION",
    "bytes": 6,
-   "sha256": "sha256:746472de66b936ac885ca6d6e68058242b4e909e3260c6317f3ec719f78f76cc"
+   "sha256": "sha256:318630f32c0dac5c715d91aecff9c07b2ce055b792ccb015a815cb013ea80fc6"
   },
   {
    "path": "adapters/README.md",
@@ -120,8 +120,8 @@
   },
   {
    "path": "design_specs/03-typography-language.md",
-   "bytes": 10056,
-   "sha256": "sha256:bb1fb205519f0c96ded188532eb3ade814ed66ca0685486f711eadf71ad9d6dd"
+   "bytes": 10254,
+   "sha256": "sha256:eb89bf1ad3d25ace972cf56d33cf49e9290fd8cbf8116c529eb8f0352cb116b0"
   },
   {
    "path": "design_specs/04-image-pipeline.md",
@@ -155,18 +155,18 @@
   },
   {
    "path": "design_specs/10-quality-gates.md",
-   "bytes": 11548,
-   "sha256": "sha256:e7ddb3a4e64eaf97677fc710d987df3981bb6fa1c466011e6faa2f748795b665"
+   "bytes": 11831,
+   "sha256": "sha256:66f4cb1d4b82dd4217be2248d6e0dc25b7c67581eadb1bc59902ca8552b1d45b"
   },
   {
    "path": "design_specs/11-hero-layouts.md",
-   "bytes": 5480,
-   "sha256": "sha256:b35f488bb804fe4ea53cb99d318f05bac07e2cf36f57d85e73dc72ec3e6b9671"
+   "bytes": 5908,
+   "sha256": "sha256:2c5955ada61aaefed437b21d1e2d84e6985d32f783c7d6d45a894558ae26a333"
   },
   {
    "path": "design_specs/13-layout-density.md",
-   "bytes": 6376,
-   "sha256": "sha256:ad045c032028620d5849c7bee5cb16ee041ebb5f7a9569f0307e202d63db33f1"
+   "bytes": 6545,
+   "sha256": "sha256:a8664514f330f8b368dddcadb273d025c8caa5fc30098e118543c50a76412c75"
   },
   {
    "path": "design_specs/tracks-htmlppt.md",
@@ -220,8 +220,8 @@
   },
   {
    "path": "examples/reference/README.md",
-   "bytes": 3307,
-   "sha256": "sha256:da1ef65a6ae8278f87ec0fd7e133fac564b6c75182bc0e1c4b320d08e9674844"
+   "bytes": 3531,
+   "sha256": "sha256:1c03e6b7eda321ae9e8e13da4ca02e6b2316df548aa440c85d0fdbe3a0b2ed83"
   },
   {
    "path": "examples/reference/assets/body-quiet.webp",
@@ -255,23 +255,23 @@
   },
   {
    "path": "examples/reference/htmlppt/build.py",
-   "bytes": 9852,
-   "sha256": "sha256:6ab893dee25344bd41f771a35603f67c95433d6facf240f5851e73fa8dacb909"
+   "bytes": 14096,
+   "sha256": "sha256:3ae63636b2b47780acfe022e3f987c0c10a1be0115de6bbf0f8e42e4487fdbf2"
   },
   {
    "path": "examples/reference/htmlppt/deck.css",
-   "bytes": 7744,
-   "sha256": "sha256:55609baebbf1f2de0c5d399a8c7ac1162f9ac6d360dab378a3677e8beda5449a"
+   "bytes": 9956,
+   "sha256": "sha256:69f669fbd651e3be08943c66818cfbe233552497a08c0889c4ebd92b6c57dfea"
   },
   {
    "path": "examples/reference/htmlppt/deck.js",
-   "bytes": 2588,
-   "sha256": "sha256:fa463d38ca7ffe13ac73f0fe97eed1ba2321b65c7ccb3140d839c4bb9c522ce1"
+   "bytes": 2585,
+   "sha256": "sha256:29c527525382365ea86437bebbb8c33c9c11799f0c89b2f1c90868096ccc81f9"
   },
   {
    "path": "examples/reference/htmlppt/index.html",
-   "bytes": 28486,
-   "sha256": "sha256:95d14bb8ace564b5e5aa638a1b3bcb0e99bbe18e77c5ab3ee8fe5a0239b5bc6c"
+   "bytes": 36386,
+   "sha256": "sha256:fec19d1b3c63f936073c7c5a246799cbceac86cea1c793c2fc3694f69584c779"
   },
   {
    "path": "examples/reference/htmlppt/scaffold.html",
@@ -295,13 +295,13 @@
   },
   {
    "path": "examples/reference/pptx-default/README.md",
-   "bytes": 5938,
-   "sha256": "sha256:f86747c4310dcf809737acfeaf1ff395970730ca6ab6d6a0439f49a67cf907cc"
+   "bytes": 6964,
+   "sha256": "sha256:d35bca387bcad4ebb7acbe12add20b63ab712c10c7f06797374962d3b00a1e98"
   },
   {
    "path": "examples/reference/pptx-default/animations.json",
-   "bytes": 1804,
-   "sha256": "sha256:66467013016376a2a0b7a7cc7ccdf61990bafc9429683f5190ea6a096b14ef63"
+   "bytes": 4013,
+   "sha256": "sha256:48ae068d45567921b11ecae00899604d4a1c7bae4b94e8e66a92d4108df9735b"
   },
   {
    "path": "examples/reference/pptx-default/asset-manifest.json",
@@ -310,8 +310,8 @@
   },
   {
    "path": "examples/reference/pptx-default/delivery-check.json",
-   "bytes": 6825,
-   "sha256": "sha256:3d3c7520a14a282eae67d53534bf2a439911d5bd0c4cc8fab1ad3ef41e8a5da7"
+   "bytes": 6869,
+   "sha256": "sha256:c67681ae993c4711b0f38be43b404d22ffa1631449c0deafe720fb84a5b3e995"
   },
   {
    "path": "examples/reference/pptx-default/design_spec.md",
@@ -321,7 +321,7 @@
   {
    "path": "examples/reference/pptx-default/header-mark-binding.json",
    "bytes": 2124,
-   "sha256": "sha256:853fb7ca63f2c8ffc98dfee4cb5205f466c6ca3af17819ff76d3d49ac5fcf5b6"
+   "sha256": "sha256:c653b77ea96070328bf7745d39ca88c2bc4d501664157f3fc07201649cc04bd2"
   },
   {
    "path": "examples/reference/pptx-default/header-mark-plan.json",
@@ -330,28 +330,28 @@
   },
   {
    "path": "examples/reference/pptx-default/hero-binding.json",
-   "bytes": 5689,
-   "sha256": "sha256:7f3bb9de1ece3cc79eb865b23ec4c9638e4b2f24f9e8e169b5dc003427ae1d7c"
+   "bytes": 5719,
+   "sha256": "sha256:2e462bb0251fb966d6dd2e4e352924192d51930f4da53d97da5109e4023881df"
   },
   {
    "path": "examples/reference/pptx-default/notes-total.md",
-   "bytes": 1945,
-   "sha256": "sha256:c48d03d1b18d88e0425d3baaf392fcca495dfb1e5add258a77bc7280c8ef4e01"
+   "bytes": 1527,
+   "sha256": "sha256:04dbeeea0f1608e94b07e32753f3b4629599f61ef6ebe859da2244d00ab97a09"
   },
   {
    "path": "examples/reference/pptx-default/ooxml-readback.json",
-   "bytes": 3432,
-   "sha256": "sha256:14d5a49288817a516058691996501fc23f16e563046c2dcc26a8f71ba7d98232"
+   "bytes": 18711,
+   "sha256": "sha256:76e3f7df0df5e99115a1fb4d8f7a0fd135f7d38c23bd42ea24da737a3c2b5dd5"
   },
   {
    "path": "examples/reference/pptx-default/page-plan.json",
-   "bytes": 18141,
-   "sha256": "sha256:e0ddb937f82dc5f858c48fe87f221c7ef8e6bc70f413f6039c159783ecb503f7"
+   "bytes": 18133,
+   "sha256": "sha256:bcb6381afeaa8ade174057968fadefa79b5c34686866324f54106174d655fb16"
   },
   {
    "path": "examples/reference/pptx-default/readback.py",
-   "bytes": 3975,
-   "sha256": "sha256:52222a94f027b41011dd24ee1a1840cdcad3f874fbaf8a0a10491045fb9898a4"
+   "bytes": 4032,
+   "sha256": "sha256:d255f988305c85e4c077f6154f27e53b31fa1a3d231db70d537e736ae8e3a95a"
   },
   {
    "path": "examples/reference/pptx-default/source-brief.md",
@@ -365,58 +365,58 @@
   },
   {
    "path": "examples/reference/pptx-default/svg_output/01_封面.svg",
-   "bytes": 1034,
-   "sha256": "sha256:fcfdff3e3083f21c5a9d3073e399bc7deefa2a0b44ebb762a9814418df307b73"
+   "bytes": 1364,
+   "sha256": "sha256:bdb34479ef257cb73302a041763b7d1250791c0742ce67ea1c4d6fe85327bbfd"
   },
   {
    "path": "examples/reference/pptx-default/svg_output/02_目录.svg",
-   "bytes": 2894,
-   "sha256": "sha256:1404fc486c2ccb29ba28b431a8e7ddc7cbacf7f87dcb3e03c5395a809a7785c3"
+   "bytes": 3208,
+   "sha256": "sha256:6b3eeaea2c11de87d21b2a84ee3be0d55d69c410d1e09a95e8e82a04d00a9094"
   },
   {
    "path": "examples/reference/pptx-default/svg_output/03_研究范围.svg",
-   "bytes": 8104,
-   "sha256": "sha256:491e1c29b770996dba5952321e159208d4fbad44fc20df9bb8fe5de061d0ea43"
+   "bytes": 8581,
+   "sha256": "sha256:8bdac361a9fe8b178da114ca11309d869ee505f5e0faafba64040fc9a563ee3f"
   },
   {
    "path": "examples/reference/pptx-default/svg_output/04_资料完整性.svg",
-   "bytes": 10515,
-   "sha256": "sha256:25af9879a0c258901f0c886716881bd349154c11b357aa4505f146e224147edb"
+   "bytes": 10471,
+   "sha256": "sha256:1fabb6805eea856848e098c59cb2de6d5c6dc6471e7a090a28cc7cf2dc83d966"
   },
   {
    "path": "examples/reference/pptx-default/svg_output/05_核对计划.svg",
-   "bytes": 7158,
-   "sha256": "sha256:1360307199940169626c818804b3908e8a4cbdd8daaba68021d508f8f90fbb33"
+   "bytes": 7275,
+   "sha256": "sha256:c063f6aa32f44766569cedc8bbdf4f3dc1a3aa806c9aa9edcef27b6b7d8fd9e5"
   },
   {
    "path": "examples/reference/pptx-default/svg_output/06_结束页.svg",
-   "bytes": 1046,
-   "sha256": "sha256:9ae3b130087e75ca1738b152dd670778b3ca45776f9437010f5dded88117e64a"
+   "bytes": 1076,
+   "sha256": "sha256:0fb0645fc783d916fd2539dae411354343935d490438150532c48a384c47c593"
   },
   {
    "path": "examples/reference/pptx/README.md",
-   "bytes": 2871,
-   "sha256": "sha256:c76a974eb11f01478a602b0dedd62998eec340bf696d8a2fc7d156d4ec5fc694"
+   "bytes": 2923,
+   "sha256": "sha256:b8823d4bb4acd780d4d855c3638954934d2ac9350ad2a5da49eb04854b296b2a"
   },
   {
    "path": "examples/reference/pptx/animations.json",
-   "bytes": 1077,
-   "sha256": "sha256:cc46d87d1b6d512907c5b41a09574a6262f86f4eb115923bc59e33c007bef965"
+   "bytes": 1984,
+   "sha256": "sha256:d083d80ee4e8ae96b5f5a628c1b5ccf030e1a9d16403ab70ee5ffa5c27375011"
   },
   {
    "path": "examples/reference/pptx/build_svg.py",
-   "bytes": 9471,
-   "sha256": "sha256:cc6c1765ad52d9526ebdfbe1a2fbe95ddc94005185412879dd2daf23ce371c4f"
+   "bytes": 12429,
+   "sha256": "sha256:579e56e048f4606fb1886a9a38c15506a3806d51c4e9048b63df6b0ba1d019f1"
   },
   {
    "path": "examples/reference/pptx/delivery-check.json",
-   "bytes": 5134,
-   "sha256": "sha256:3fefecf973c0dce765e242e098e346d0d14fdf7b4b6cb4277bf301d366440f73"
+   "bytes": 5180,
+   "sha256": "sha256:de3efb31b43fc27b8a09a5874606d44ef65b1f2e1fee6699890ad7c5f6a05675"
   },
   {
    "path": "examples/reference/pptx/header-mark-binding.json",
    "bytes": 2124,
-   "sha256": "sha256:244bcb92435dee154bef032a53c328c72fa8a17f775cfc241ef79a061d5a2415"
+   "sha256": "sha256:8702cf78272e877f1fdd90258875e020a00edf7704a3a6ace922676fd54bbc26"
   },
   {
    "path": "examples/reference/pptx/header-mark-plan.json",
@@ -446,7 +446,7 @@
   {
    "path": "examples/reference/site/site.js",
    "bytes": 5014,
-   "sha256": "sha256:9a08a7396f4dfd287616e5246941f2da188610b370b6199eb92611eb1f5fb3ba"
+   "sha256": "sha256:bf545872c334c693b209fd082b3c7fd2eb57a24f9b11639ef3ec743b456783e3"
   },
   {
    "path": "examples/reference/stream/index.html",
@@ -460,8 +460,8 @@
   },
   {
    "path": "runtime/API.md",
-   "bytes": 8769,
-   "sha256": "sha256:1806060933fe6511cb5862ceb3697ef39610f79fdd6d4535a7ffea5c0b1e3501"
+   "bytes": 9194,
+   "sha256": "sha256:90bab2682abdd059d814ff260ce8076a3ad13035df6780a0a315e63ad8b54f86"
   },
   {
    "path": "runtime/README.md",
@@ -485,8 +485,8 @@
   },
   {
    "path": "runtime/kz-gantt.js",
-   "bytes": 15129,
-   "sha256": "sha256:ea9465372894f0aaa57bd8724964a8ee64e31bb0da335bcaf1bfe354c6b36605"
+   "bytes": 15509,
+   "sha256": "sha256:eb7a0ef702cc43555469cc2e1b28a4931727e61f662e7202088e9ee7c5fa19ee"
   },
   {
    "path": "runtime/kz-glass.css",
@@ -495,8 +495,8 @@
   },
   {
    "path": "runtime/kz-layout-qc.js",
-   "bytes": 12056,
-   "sha256": "sha256:d3a135b03d64150eeb2db2c2703227fbf64880f1a0d80a7e22eed9e64b04037d"
+   "bytes": 13836,
+   "sha256": "sha256:dbb1303e365e553d6b64b45425f96175aa8ed5061cd8e0ac67c5a5e6adf4acf0"
   },
   {
    "path": "runtime/kz-motion.js",
@@ -510,8 +510,8 @@
   },
   {
    "path": "runtime/kz-tokens.js",
-   "bytes": 9965,
-   "sha256": "sha256:7f443c0b8d6c8f4bee9a200894e1f85435b638a6ef1400de261179244f71b967"
+   "bytes": 10222,
+   "sha256": "sha256:b5e40a185fd702fe65fd94c7a901856ab578f88a1ba4ab5d29a176400de9a374"
   },
   {
    "path": "schemas/README.md",
@@ -540,8 +540,8 @@
   },
   {
    "path": "tokens/tokens.json",
-   "bytes": 13620,
-   "sha256": "sha256:abc15faff824d2fc7fe53bd39b986acee7189e615c972b6c59ec8915d8ea7144"
+   "bytes": 13890,
+   "sha256": "sha256:54f9cfd05914a9fcf94f614a475474d042d506e7fe69cf6f0638205b3a6e3d4b"
   },
   {
    "path": "tools/bind_header_mark_pptx.py",
@@ -550,8 +550,8 @@
   },
   {
    "path": "tools/bind_hero_pptx.py",
-   "bytes": 4260,
-   "sha256": "sha256:39f2a8c23cda3f9219ac4766d1e0d7a078a0e06ac782a51cee8d6fd3fcf651b1"
+   "bytes": 4649,
+   "sha256": "sha256:280b4d7aab0d60ddaa8d67bb7807ea14ce426df8b5835e5e2a2fea8d7c512983"
   },
   {
    "path": "tools/brand_fragments.py",
@@ -580,8 +580,8 @@
   },
   {
    "path": "tools/hero_layout.py",
-   "bytes": 11913,
-   "sha256": "sha256:633926e8a86eda312deb2a1441f4d77891d93b191fdc2e76faeb14290be40298"
+   "bytes": 13968,
+   "sha256": "sha256:9d90bb7dc70be0fea11a4044edc738744a77943e69d52e9ccb62704568bef21a"
   },
   {
    "path": "tools/inline_preview.py",

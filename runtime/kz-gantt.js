@@ -27,7 +27,7 @@
   }
   function mount(root,input,options={}){
     if(!global.echarts)throw Error('缺少 ECharts');validate(input);
-    const baseline=clone(input);let data=clone(input),selected=data.tasks[0].id,undo=[],drag=null,disposed=false;
+    const baseline=clone(input);let data=clone(input),selected=data.tasks[0].id,marked=false,undo=[],drag=null,disposed=false;
     const abort=new AbortController(),signal=abort.signal;let progress=1,raf=0;
     const mq=matchMedia('(prefers-reduced-motion: reduce)');
     const prior={children:[...root.childNodes],editing:root.dataset.kzEditing,classes:['kz-gantt','kz-interactive'].filter(name=>!root.classList.contains(name))};
@@ -70,15 +70,17 @@
     function status(message=''){hint.textContent=message;const n=countDirty();dirty.hidden=!n;dirtyText.textContent=`已修改 ${n} 项`;undoB.disabled=!undo.length;}
     function draw(){
       if(disposed)return;
-      const unit=fluidUnit(root);
-      chart.setOption({animation:false,grid:{left:(chart.getWidth()<480?96:126)*unit,right:24*unit,top:38*unit,bottom:44*unit},textStyle:{fontFamily:KZ_TOKENS.fonts.fallback_css,fontSize:16*unit},
-        xAxis:{type:'value',min:data.min,max:data.max,interval:1,axisLabel:{fontSize:16*unit,color:KZ_TOKENS.colors.body,formatter:v=>{if(v>=data.max)return '';const q=fromIndex(v);if(v===data.min&&q.quarter!==1)return `${q.year}Q${q.quarter}`;return q.quarter===1?String(q.year):((chart.getWidth()-150*unit)/(data.max-data.min)>=30*unit?'Q'+q.quarter:'');}},axisTick:{show:false},splitLine:{lineStyle:{color:KZ_TOKENS.charts?.grid||'#E7EBEE'}},axisLine:{lineStyle:{color:KZ_TOKENS.charts?.axis||'#CED3D8'}}},
+      const unit=fluidUnit(root),left=(chart.getWidth()<480?96:126)*unit,band=(chart.getWidth()-left-24*unit)/(data.max-data.min);
+      chart.setOption({animation:false,grid:{left,right:24*unit,top:38*unit,bottom:44*unit},textStyle:{fontFamily:KZ_TOKENS.fonts.fallback_css,fontSize:16*unit},
+        xAxis:{type:'value',min:data.min,max:data.max,interval:1,axisLabel:{fontSize:16*unit,color:KZ_TOKENS.colors.body,padding:[0,0,0,band],formatter:v=>{if(v>=data.max)return '';const q=fromIndex(v);if(v===data.min&&q.quarter!==1)return `${q.year}Q${q.quarter}`;
+          // A bare year at Q1 reads as a year boundary, not a quarter; spell the quarter out when there is room.
+          return q.quarter===1?(band>=64*unit?`${q.year}Q1`:String(q.year)):(band>=30*unit?'Q'+q.quarter:'');}},axisTick:{show:false},splitLine:{lineStyle:{color:KZ_TOKENS.charts?.grid||'#E7EBEE'}},axisLine:{lineStyle:{color:KZ_TOKENS.charts?.axis||'#CED3D8'}}},
         yAxis:{type:'category',inverse:true,data:data.tasks.map(t=>t.label),axisLabel:{fontSize:16*unit,color:KZ_TOKENS.colors.body,width:(chart.getWidth()<480?86:116)*unit,overflow:'break'},axisTick:{show:false},axisLine:{show:false}},
         tooltip:{show:false},series:[{type:'custom',coordinateSystem:'cartesian2d',id:'kz-gantt-tasks',silent:true,
           renderItem(params,api){const row=api.value(0),start=api.coord([api.value(1),row]),end=api.coord([api.value(2),row]),height=Math.min(36*unit,api.size([0,1])[1]*.56),t=data.tasks[row];
             const rect=echarts.graphic.clipRectByRect({x:start[0],y:start[1]-height/2,width:end[0]-start[0],height},{x:params.coordSys.x,y:params.coordSys.y,width:params.coordSys.width,height:params.coordSys.height});
             if(!rect)return null;const color=t.color||data.taskColor||KZ_TOKENS.departments[t.department]?.color||KZ_TOKENS.colors.brand;
-            return {type:'rect',shape:{...rect,r:7*unit},style:{fill:color,opacity:.78,stroke:t.id===selected?KZ_TOKENS.colors.ink:'transparent',lineWidth:1.5}};},
+            return {type:'rect',shape:{...rect,r:7*unit},style:{fill:color,opacity:.78,stroke:t.id===selected&&marked?KZ_TOKENS.colors.ink:'transparent',lineWidth:1.5}};},
           data:data.tasks.map((t,i,all)=>{const n=all.length,st=n>1?Math.min(.08,.4/(n-1)):0,local=Math.max(0,Math.min(1,(progress-i*st)/(1-(n-1)*st)));return [i,t.start,t.start+(t.end-t.start)*local];}),encode:{x:[1,2],y:0}}]},{notMerge:true});
       status();options.onProgress?.(progress,clone(data));
     }
@@ -104,7 +106,7 @@
     function rollbackDrag(){if(!drag)return;data=drag.before;drag=null;draw();syncFields();status('本次拖动已取消');}
     plot.addEventListener('pointerdown',event=>{
       if(event.button!==0)return;if(progress!==1)finish();const h=hit(event);if(!h)return;
-      selected=h.t.id;syncFields();const G=KZ_TOKENS.gantt||{},edge=Math.min(G.handle_px??14,h.r.w*(G.handle_short_ratio??.24));const mode=h.p[0]<h.r.x+edge?'start':h.p[0]>h.r.x+h.r.w-edge?'end':'move';
+      selected=h.t.id;marked=true;syncFields();const G=KZ_TOKENS.gantt||{},edge=Math.min(G.handle_px??14,h.r.w*(G.handle_short_ratio??.24));const mode=h.p[0]<h.r.x+edge?'start':h.p[0]>h.r.x+h.r.w-edge?'end':'move';
       drag={id:selected,mode,axis:axisAt(event),start:h.t.start,end:h.t.end,before:clone(data),clientX:event.clientX,moved:false,pointerId:event.pointerId};
       plot.setPointerCapture(event.pointerId);plot.focus();event.preventDefault();draw();
     },{signal});
@@ -123,20 +125,21 @@
       if(changed)undo.push(before);draw();syncFields();status(changed?'时间已更新':'项目已选择');
     },{signal});
     plot.addEventListener('pointercancel',rollbackDrag,{signal});
+    plot.addEventListener('focus',()=>{if(!marked&&plot.matches(':focus-visible')){marked=true;draw();}},{signal});
     plot.addEventListener('keydown',e=>{
       if(e.key==='Escape'&&drag){e.preventDefault();rollbackDrag();return;}
       if(!['ArrowLeft','ArrowRight'].includes(e.key))return;e.preventDefault();e.stopPropagation();const d=e.key==='ArrowRight'?1:-1,t=task();
-      commit(t.start+(e.shiftKey?0:d),t.end+d);
+      marked=true;commit(t.start+(e.shiftKey?0:d),t.end+d);
     },{signal});
     root.addEventListener('keydown',e=>{if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='z'&&!e.target.closest('input,select,textarea')){e.preventDefault();e.stopPropagation();undoOne();return;}if(e.target.closest('input,select,textarea,button,[contenteditable=true]')||['ArrowLeft','ArrowRight','ArrowUp','ArrowDown','PageUp','PageDown','Home','End',' ','Enter','Escape'].includes(e.key))e.stopPropagation();},{signal});
-    select.addEventListener('change',()=>{selected=select.value;syncFields();draw();},{signal});
+    select.addEventListener('change',()=>{selected=select.value;marked=true;syncFields();draw();},{signal});
     apply.addEventListener('click',()=>commit(qindex(inputs.sy.value,inputs.sq.value),qindex(inputs.ey.value,inputs.eq.value)+1),{signal});
     function undoOne(){finish();if(undo.length){data=undo.pop();draw();syncFields();status('已撤销');}}
     function reset(){cancelAnimationFrame(raf);progress=1;data=clone(baseline);undo=[];draw();syncFields();status('已还原');}
     undoB.addEventListener('click',undoOne,{signal});resetB.addEventListener('click',reset,{signal});
     resize=new ResizeObserver(()=>{if(drag)rollbackDrag();chart.resize();draw();});resize.observe(plot);
     draw();syncFields();
-    return {chart,root,plot,select(id){if(!data.tasks.some(t=>t.id===id))throw Error('未知任务');selected=id;syncFields();draw();},
+    return {chart,root,plot,select(id){if(!data.tasks.some(t=>t.id===id))throw Error('未知任务');selected=id;marked=true;syncFields();draw();},
       play,finish,getProgress:()=>progress,getData:()=>clone(data),getSelected:()=>selected,getDirty:countDirty,commit,undo:undoOne,reset,serialize:()=>JSON.stringify(data),
       geometry(id){const t=data.tasks.find(x=>x.id===id);if(!t)throw Error('未知任务');return rowGeometry(t);},
       importJSON(text){const next=JSON.parse(text);validate(next);if(next.min!==baseline.min||next.max!==baseline.max||next.tasks.length!==baseline.tasks.length||next.tasks.some((t,i)=>t.id!==baseline.tasks[i].id))throw Error('导入仅支持相同任务和时间轴');undo.push(clone(data));data=clone(next);draw();syncFields();},

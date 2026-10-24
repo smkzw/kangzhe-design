@@ -49,11 +49,13 @@
 维护 `--kz-un` 与 `--kz-u`（adapter「单位：一个比率」）。`bind(deck, factory)` → `{sync, dispose}`：factory 收到每个上游直接子 `.slide`，返回 `{enter, leave, dispose}`；总览克隆不挂载；初始化失败会清理已返回的生命周期。
 
 ## KZLayoutQC（runtime/kz-layout-qc.js）
-`inspectCard(card)`、`inspectTextBounds(zone, {tolerance, minOpacity})`、`inspectFold(fold, {content, cols, rows})`、`inspectOrphans(root, {selector})`、`inspect(root)`。返回状态与测量值，不是视觉判决（10）。
+`inspectCard(card)`、`inspectTextBounds(zone, {tolerance, minOpacity})`、`inspectFold(fold, {content, cols, rows})`、`inspectOrphans(root, {selector})`、`inspectBodySpan(body)`、`inspect(root)`。返回状态与测量值，不是视觉判决（10）。
 
 - `inspectCard` 的 `TEXT_OUTSIDE`：文字越过内边距（纵向容差 `layout.qc.text_overhang_em`，横向 `text_inner_tolerance_px`）或越过卡片外缘。
 - `inspectFold` 只把带可见文字或已绘制图形的对象计入覆盖率，空卡与空舞台不计，数量见 `emptyBoxes`。
 - `inspectOrphans` 按行带分行：字号较小的行内片段（单位、`<small>`）与所在行合并，不会被误判成单独的末行。
+- `inspectOrphans` 同时返回 `splits`：换行落在中文词内部（`Intl.Segmenter` 分词，如“中心记｜录”）的元素与被拆的词；有孤字为 FAIL，只有拆词为 WARN。
+- `inspectBodySpan` 量 PPT 正文区直接子元素的纵向跨度占正文区高度的比例，低于 `layout.content_span_target` 下限为 WARN；撑满型预设（film、full、split）读作 1。
 
 ## 计划
 `python tools/qc_plan.py PLAN [--manifest MANIFEST --asset-root ROOT --out REPORT]`：schema 与语义预检，输出 error/pending/review。

@@ -3,7 +3,7 @@
   "status": "passed",
   "file": {
     "path": "kangzhe_integrity_default.pptx",
-    "bytes": 4377346
+    "bytes": 4378722
   },
   "package": {
     "zip_integrity": "passed",
@@ -57,7 +57,7 @@
       "latin": [
         {
           "value": "+mn-lt",
-          "count": 111
+          "count": 110
         },
         {
           "value": "Arial",
@@ -75,7 +75,7 @@
       "ea": [
         {
           "value": "+mn-ea",
-          "count": 111
+          "count": 110
         },
         {
           "value": "Microsoft YaHei",
@@ -89,7 +89,7 @@
       "cs": [
         {
           "value": "+mn-cs",
-          "count": 111
+          "count": 110
         },
         {
           "value": "Arial",
@@ -171,8 +171,8 @@
     "external": [],
     "uncompressed_bytes": 4378299,
     "archive_compressed_bytes": 4326033,
-    "share_of_archive": 0.988278,
-    "share_of_uncompressed_parts": 0.949074,
+    "share_of_archive": 0.987967,
+    "share_of_uncompressed_parts": 0.946143,
     "top_contributors": [
       {
         "part": "ppt/media/image_566c6ad9ed48562f.png",
@@ -258,20 +258,24 @@
       }
     },
     "object_animations": {
-      "timing_slide_count": 4,
-      "object_animation_slide_count": 4,
+      "timing_slide_count": 6,
+      "object_animation_slide_count": 6,
       "audio_timing_slide_count": 0,
       "timing_slides": [
+        1,
         2,
         3,
         4,
-        5
+        5,
+        6
       ],
       "object_animation_slides": [
+        1,
         2,
         3,
         4,
-        5
+        5,
+        6
       ],
       "audio_timing_slides": []
     }

@@ -23,9 +23,9 @@
   <line id="rule" data-pptx-role="decoration" x1="54" y1="80" x2="1257" y2="80" stroke="#FF9900" stroke-width="1.5"/>
   <image id="logo" data-pptx-role="logo" href="../images/logo.png" x="1031" y="45" width="158" height="33" preserveAspectRatio="xMidYMid meet"/>
 
-  <g id="data-card" data-pptx-bounds="56 108 667.33 540">
-    <rect x="56" y="108" width="667.33" height="540" rx="24" fill="url(#kz-face)" stroke="#BEB2A1" stroke-opacity="0.45" stroke-width="1" filter="url(#kz-shadow)"/>
-    <rect x="80" y="109" width="200" height="1.5" fill="url(#kz-glint)"/>
+  <rect id="data-card-shell" data-pptx-role="decoration" x="56" y="108" width="667.33" height="540" rx="24" fill="url(#kz-face)" stroke="#BEB2A1" stroke-opacity="0.45" stroke-width="1" filter="url(#kz-shadow)"/>
+  <rect id="data-card-glint" data-pptx-role="decoration" x="80" y="109" width="200" height="1.5" fill="url(#kz-glint)"/>
+  <g id="data-card" data-pptx-bounds="56 108 667.33 92">
     <text x="80" y="156" font-size="24" font-weight="bold" fill="#0F1115">各资料组应收与已收</text>
     <text x="699.33" y="156" font-size="16" fill="#64676B" text-anchor="end">合成示例数据｜单位：份</text>
     <g id="completeness-legend" font-size="16" fill="#404040">
@@ -34,7 +34,9 @@
       <rect x="150" y="178" width="16" height="12" rx="3" fill="#D46B08"/>
       <text x="172" y="190">已收</text>
     </g>
-    <g id="completeness-bars" data-pptx-replace-with="chart" data-pptx-fallback-sha256="7b53e07732f4cca39d9b81d63f2252180aa94aa4ee092bc6634be2e3ba213440">
+  </g>
+
+  <g id="completeness-bars" data-pptx-bounds="80 200 619.33 428" data-pptx-replace-with="chart" data-pptx-fallback-sha256="7b53e07732f4cca39d9b81d63f2252180aa94aa4ee092bc6634be2e3ba213440">
       <metadata type="application/json">
         {
           "name": "completeness-bars",
@@ -94,7 +96,6 @@
         </g>
       </g>
     </g>
-  </g>
 
   <g id="takeaway" data-pptx-bounds="747.33 108 476.67 140">
     <rect x="747.33" y="108" width="476.67" height="140" rx="24" fill="url(#kz-face)" stroke="#BEB2A1" stroke-opacity="0.45" stroke-width="1" filter="url(#kz-shadow)"/>
@@ -102,26 +103,25 @@
     <text x="985.67" y="187" font-size="24" font-weight="bold" fill="#0F1115" text-anchor="middle">缺口集中在中心记录与安全性报告</text>
   </g>
 
-  <g id="kpi-totals" data-pptx-bounds="747.33 272 476.67 128">
-    <rect x="747.33" y="272" width="148.22" height="128" rx="18" fill="url(#kz-face)" stroke="#BEB2A1" stroke-opacity="0.45" stroke-width="1" filter="url(#kz-shadow)"/>
-    <text x="821.44" y="336" font-size="32" font-weight="bold" fill="#0F1115" text-anchor="middle">24<tspan font-size="16" font-weight="normal" fill="#64676B"> 份</tspan></text>
-    <text x="821.44" y="372" font-size="16" fill="#404040" text-anchor="middle">应收</text>
-    <rect x="911.56" y="272" width="148.22" height="128" rx="18" fill="url(#kz-face)" stroke="#BEB2A1" stroke-opacity="0.45" stroke-width="1" filter="url(#kz-shadow)"/>
-    <text x="985.67" y="336" font-size="32" font-weight="bold" fill="#0F1115" text-anchor="middle">20<tspan font-size="16" font-weight="normal" fill="#64676B"> 份</tspan></text>
-    <text x="985.67" y="372" font-size="16" fill="#404040" text-anchor="middle">已收</text>
-    <rect x="1075.78" y="272" width="148.22" height="128" rx="18" fill="url(#kz-face)" stroke="#BEB2A1" stroke-opacity="0.45" stroke-width="1" filter="url(#kz-shadow)"/>
-    <text x="1149.89" y="336" font-size="32" font-weight="bold" fill="#C00000" text-anchor="middle">4<tspan font-size="16" font-weight="normal" fill="#64676B"> 份</tspan></text>
-    <text x="1149.89" y="372" font-size="16" fill="#404040" text-anchor="middle">缺口</text>
+  <g id="kpi-totals" data-pptx-bounds="747.33 272 476.67 176">
+    <rect x="747.33" y="272" width="148.22" height="176" rx="18" fill="url(#kz-face)" stroke="#BEB2A1" stroke-opacity="0.45" stroke-width="1" filter="url(#kz-shadow)"/>
+    <text x="821.44" y="356" font-size="32" font-weight="bold" fill="#0F1115" text-anchor="middle">24<tspan font-size="16" font-weight="normal" fill="#64676B"> 份</tspan></text>
+    <text x="821.44" y="398" font-size="16" fill="#404040" text-anchor="middle">应收</text>
+    <rect x="911.56" y="272" width="148.22" height="176" rx="18" fill="url(#kz-face)" stroke="#BEB2A1" stroke-opacity="0.45" stroke-width="1" filter="url(#kz-shadow)"/>
+    <text x="985.67" y="356" font-size="32" font-weight="bold" fill="#0F1115" text-anchor="middle">20<tspan font-size="16" font-weight="normal" fill="#64676B"> 份</tspan></text>
+    <text x="985.67" y="398" font-size="16" fill="#404040" text-anchor="middle">已收</text>
+    <rect x="1075.78" y="272" width="148.22" height="176" rx="18" fill="url(#kz-face)" stroke="#BEB2A1" stroke-opacity="0.45" stroke-width="1" filter="url(#kz-shadow)"/>
+    <text x="1149.89" y="356" font-size="32" font-weight="bold" fill="#C00000" text-anchor="middle">4<tspan font-size="16" font-weight="normal" fill="#64676B"> 份</tspan></text>
+    <text x="1149.89" y="398" font-size="16" fill="#404040" text-anchor="middle">缺口</text>
   </g>
 
-  <g id="gap-card" data-pptx-bounds="747.33 424 476.67 224">
-    <rect x="747.33" y="424" width="476.67" height="224" rx="24" fill="url(#kz-face)" stroke="#BEB2A1" stroke-opacity="0.45" stroke-width="1" filter="url(#kz-shadow)"/>
-    <rect x="771.33" y="425" width="143" height="1.5" fill="url(#kz-glint)"/>
-    <text x="771.33" y="472" font-size="24" font-weight="bold" fill="#0F1115">缺口与口径</text>
-    <text x="771.33" y="514" font-size="20" fill="#404040">
-      <tspan x="771.33" dy="0">• 中心记录缺 <tspan font-weight="bold" fill="#C00000">3 份</tspan></tspan>
-      <tspan x="771.33" dy="42">• 安全性报告缺 <tspan font-weight="bold" fill="#C00000">1 份</tspan></tspan>
-      <tspan x="771.33" dy="42">• 缺失保留为空值，<tspan font-weight="bold">不按零处理，也不插补</tspan></tspan>
+  <g id="gap-card" data-pptx-bounds="747.33 472 476.67 176">
+    <rect x="747.33" y="472" width="476.67" height="176" rx="24" fill="url(#kz-face)" stroke="#BEB2A1" stroke-opacity="0.45" stroke-width="1" filter="url(#kz-shadow)"/>
+    <rect x="771.33" y="473" width="143" height="1.5" fill="url(#kz-glint)"/>
+    <text x="771.33" y="518" font-size="24" font-weight="bold" fill="#0F1115">缺失处理</text>
+    <text x="771.33" y="560" font-size="20" fill="#404040">
+      <tspan x="771.33" dy="0">• 缺失记录保留为空值</tspan>
+      <tspan x="771.33" dy="42">• <tspan font-weight="bold" fill="#0F1115">不按零处理，也不插补</tspan></tspan>
     </text>
   </g>
 

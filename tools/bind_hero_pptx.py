@@ -6,6 +6,7 @@ from pathlib import Path
 import argparse,json,re,zipfile,xml.etree.ElementTree as E,hashlib
 NS={'a':'http://schemas.openxmlformats.org/drawingml/2006/main','p':'http://schemas.openxmlformats.org/presentationml/2006/main'}
 for k,v in NS.items():E.register_namespace(k,v)
+VALIGN=json.loads((Path(__file__).resolve().parents[1]/'tokens/tokens.json').read_text(encoding='utf-8'))['hero_layouts']['cover'].get('title_valign','top')
 def norm(s):return ''.join(s.split())
 def _slide_index(page):
     """Slide number from an explicit `slide`, else the first integer in the page id (p01, 1_cover, slide-3)."""
@@ -31,7 +32,9 @@ def bind(src,dst,plan):
           if id(s) in used:raise ValueError('Duplicate role binding')
           used.add(id(s));xf=s.find('p:spPr/a:xfrm',NS);off=xf.find('a:off',NS);ext=xf.find('a:ext',NS);x,y,w,h=el['rect'];before={**off.attrib,**ext.attrib};off.set('x',str(round(x*9525)));off.set('y',str(round(y*9525)));ext.set('cx',str(round(w*9525)));ext.set('cy',str(round(h*9525)))
           tx=s.find('p:txBody',NS);bp=tx.find('a:bodyPr',NS)
-          for key,val in {'lIns':'0','rIns':'0','tIns':'0','bIns':'0','anchor':'t','wrap':'square'}.items():bp.set(key,val)
+          # Bottom-aligned hero text (cover title, tokens title_valign) keeps resting on the frame bottom once the frame grows to the token box.
+          anchor='b' if el.get('role')=='cover_title' and VALIGN=='bottom' else 't'
+          for key,val in {'lIns':'0','rIns':'0','tIns':'0','bIns':'0','anchor':anchor,'wrap':'square'}.items():bp.set(key,val)
           for child in list(bp):
             if child.tag.rsplit('}',1)[-1] in ['normAutofit','spAutoFit','noAutofit']:bp.remove(child)
           E.SubElement(bp,'{'+NS['a']+'}noAutofit')

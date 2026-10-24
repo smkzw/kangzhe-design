@@ -55,7 +55,8 @@
 - 卡内分布按 03 TYPE-02 实测 T/B/H/R；`inspectCard` 遇到局部滚动区返回 `NOT_TESTED`（记 PENDING），另验可见 scrollport 与全部行列可达。图表内容以实际 ECharts 系列数据计数，取不到实例同样记 PENDING。
 - G5-NESTED：电影最大展开态中的每张子卡也分别测，不用父载体的联合框掩盖内部空白。
 - G5-FOLD：站点/流式首屏在 `tokens.viewports` 每档 `inspectFold` PASS（13 FOLD-03），并在电影初始态与总览帧各测一次。
-- G5-ORPHAN：`inspectOrphans` 在每档视口、电影各阅读状态无孤字行。
+- G5-ORPHAN：`inspectOrphans` 在每档视口、电影各阅读状态无孤字行，`splits`（词内换行）为空。
+- G5-SPAN（PPTX/HTML-PPT）：正文页内容的纵向跨度达到 `layout.content_span_target` 下限（HTML 用 `inspectBodySpan`；PPTX 按根模块 `data-pptx-bounds` 的上下沿计算），低于下限记 WARN 并说明为何不补内容。
 - G5-WIDE：16:9、2:1、21:9 与更宽视口下 deck 边界贴视口、背景无两侧空带、内容网格达到品牌锚宽度。
 - G5-PROJ：现场投屏的交付物，在最大交付视口 100% 渲染帧上，由独立审阅者按实际观看条件判断可辨；HTML-PPT 的字号按 computed ÷ `--kz-un` 核对。缩小的截图不等于远距离观看。
 - G5-FACET（PPTX/HTML-PPT）：双菱形四个原生形状除 ID 外与批准资产一致；HTML 同几何同色、只整组竖直浮动。G5-MARK-SCOPE：站点/流式的 DOM 与画面不出现双菱形。

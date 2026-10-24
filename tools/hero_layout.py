@@ -7,7 +7,7 @@ ROOT=Path(__file__).resolve().parents[1]
 T=json.loads((ROOT/'tokens/tokens.json').read_text())
 def layout(kind, content):
     k=T['hero_layouts'][kind]; blocks=[];cards=[]
-    def text(role, lines, rect, color='ink', bold=False, card_index=None):
+    def text(role, lines, rect, color='ink', bold=False, card_index=None, valign='top'):
         if isinstance(lines,str):lines=lines.splitlines()
         if lines is None:lines=[]
         if not isinstance(lines,list) or any(not isinstance(line,str) for line in lines):raise ValueError('文字必须为字符串或逐行字符串列表')
@@ -22,9 +22,11 @@ def layout(kind, content):
         if rect[2]<=0 or any(em(line)*size>rect[2]+.01 for line in lines):raise ValueError('固定文字框横向容量不足，请精简或换行/拆页，不能裁字；最终仍须实际字体测量')
         block=dict(role=role,lines=lines,rect=rect,font_px=size,line_height=1.25,color=T['colors'][color],bold=bold)
         if card_index is not None:block['card_index']=card_index
+        if valign=='bottom':block['valign']='bottom'
         blocks.append(block)
     if kind=='cover':
-        text('cover_title',content['title'],k['title'],bold=True)
+        # A one-line title rests on the bottom of its two-line box, so the gap to the subtitle does not depend on line count.
+        text('cover_title',content['title'],k['title'],bold=True,valign=k.get('title_valign','top'))
         text('hero_subtitle',content.get('subtitle',''),k['subtitle'],'body')
         text('hero_meta',content.get('meta',''),k['meta'],'muted')
     elif kind=='section':
@@ -49,14 +51,24 @@ def layout(kind, content):
                 text('toc_description',item['description'],[x+reading['description_left'],y+reading['description_top'],cw-reading['description_left']-reading['description_right'],reading['description_height']],'body',card_index=i)
     return k,blocks,cards
 
+def _valign_css(b):return 'display:flex;align-items:flex-end;' if b.get('valign')=='bottom' else ''
+def _lines_html(b):
+    lines='<br>'.join(escape(x) for x in b['lines'])
+    return f'<span>{lines}</span>' if b.get('valign')=='bottom' else lines
+
+def text_top(b):
+    """Top of the text lines inside the block rect (bottom-aligned blocks rest on the rect bottom)."""
+    x,y,w,h=b['rect']
+    return y+h-len(b['lines'])*b['font_px']*b['line_height'] if b.get('valign')=='bottom' else y
+
 def html_fragment(kind,content,image,logo):
-    k,blocks,cards=layout(kind,content)
+    k,blocks,cards=layout(kind,content);W=T['hero_layouts']['canvas'][0]
     def box(r):return f'left:{r[0]:g}px;top:{r[1]:g}px;width:{r[2]:g}px;height:{r[3]:g}px;'
-    out=[f'<div class="kz-fixed-hero" data-hero-layout="{k["id"]}" style="position:absolute;inset:0;overflow:hidden;background:#FBFCFD;">',f'<img aria-hidden="true" src="{escape(image,quote=True)}" style="position:absolute;{box(k["image"])}object-fit:cover;">',f'<img alt="康哲药业" src="{escape(logo,quote=True)}" style="position:absolute;{box(k["logo"])}object-fit:contain;filter:none;">']
+    out=[f'<div class="kz-fixed-hero" data-hero-layout="{k["id"]}" style="position:absolute;inset:0;overflow:hidden;background:#FBFCFD;">',f'<img aria-hidden="true" src="{escape(image,quote=True)}" style="position:absolute;{box(k["image"])}object-fit:cover;">',*([f'<div class="kz-hero-fade" aria-hidden="true" style="position:absolute;{box([0,k["image"][1],W,T["hero_layouts"]["image_top_fade_px"]])}background:linear-gradient(#FBFCFD,rgba(251,252,253,0));pointer-events:none;"></div>'] if k['image'][1]>0 else []),f'<img alt="康哲药业" src="{escape(logo,quote=True)}" style="position:absolute;{box(k["logo"])}object-fit:contain;filter:none;">']
     def text_html(b, origin=(0,0)):
         r=list(b['rect']);r[0]-=origin[0];r[1]-=origin[1]
         tag='h1' if b['role'] in ['cover_title','toc_title','section_title','ending_title'] else 'p'
-        return f'<{tag} data-hero-role="{b["role"]}" style="position:absolute;{box(r)}margin:0;padding:0;border:0;font-family:var(--kz-font);font-size:{b["font_px"]}px;line-height:1.25;font-weight:{700 if b["bold"] else 400};color:{b["color"]};text-align:left;text-shadow:none;white-space:nowrap;">'+ '<br>'.join(escape(x) for x in b['lines'])+f'</{tag}>'
+        return f'<{tag} data-hero-role="{b["role"]}" style="position:absolute;{box(r)}margin:0;padding:0;border:0;font-family:var(--kz-font);font-size:{b["font_px"]}px;line-height:1.25;font-weight:{700 if b["bold"] else 400};color:{b["color"]};text-align:left;text-shadow:none;white-space:nowrap;{_valign_css(b)}">'+_lines_html(b)+f'</{tag}>'
     card_roles={'toc_number','toc_label','toc_description'}
     for index,r in enumerate(cards):
         x,y,w,h=r
@@ -95,12 +107,14 @@ def html_fluid_fragment(kind,content,image,logo):
         x,y,w,h=b['rect'];x-=origin[0];y-=origin[1]
         geo=f'left:{u(x)};top:{u(y)};right:{u(T["hero_layouts"]["toc"]["reading"]["label_right"])};height:{u(h)};' if inside_card else place([x,y,w,h])
         reveal='' if inside_card else f' data-kz-reveal data-kz-order="{order.get(b["role"],1)}"'
-        return f'<{tag} data-hero-role="{b["role"]}"{reveal} style="position:absolute;{geo}margin:0;padding:0;border:0;font-family:var(--kz-font);font-size:calc({b["font_px"]}px * var(--kz-un,1));line-height:1.25;font-weight:{700 if b["bold"] else 400};color:{b["color"]};text-align:left;text-shadow:none;white-space:nowrap;">'+'<br>'.join(escape(x) for x in b['lines'])+f'</{tag}>'
+        return f'<{tag} data-hero-role="{b["role"]}"{reveal} style="position:absolute;{geo}margin:0;padding:0;border:0;font-family:var(--kz-font);font-size:calc({b["font_px"]}px * var(--kz-un,1));line-height:1.25;font-weight:{700 if b["bold"] else 400};color:{b["color"]};text-align:left;text-shadow:none;white-space:nowrap;{_valign_css(b)}">'+_lines_html(b)+f'</{tag}>'
     ix,iy,iw,ih=k['image']
     out=[f'<div class="kz-fixed-hero kz-hero-fluid" data-hero-layout="{k["id"]}" style="position:absolute;inset:0;overflow:hidden;background:#FBFCFD;">',
-         # Wide fluid view: the image always covers the slide (no top band). A basis rect pushed down (y>0) means the
-         # subject sits low, so the wide crop is anchored to the bottom; review the crop per aspect (04 IMG-03).
-         f'<img class="kz-hero-image" aria-hidden="true" src="{escape(image,quote=True)}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% {"100%" if iy>0 else "50%"};">',
+         # Fluid view: the image covers the slide, bottom-anchored. A basis rect pushed down (y>0) means the subject
+         # sits low, so the cover shifts down by y as in the 16:9 basis (the subject clears the title zone) and a
+         # canvas-to-clear fade hides the image's top edge, as in svg_fragment; review crops per aspect (04 IMG-03).
+         f'<img class="kz-hero-image" aria-hidden="true" src="{escape(image,quote=True)}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% {"100%" if iy>0 else "50%"};{"transform:translateY("+u(iy)+");" if iy>0 else ""}">',
+         *([f'<div class="kz-hero-fade" aria-hidden="true" style="position:absolute;left:0;right:0;top:{u(iy)};height:{u(T["hero_layouts"]["image_top_fade_px"])};background:linear-gradient(#FBFCFD,rgba(251,252,253,0));pointer-events:none;"></div>'] if iy>0 else []),
          f'<img alt="康哲药业" src="{escape(logo,quote=True)}" style="position:absolute;{place(k["logo"],k["logo"][0]>W/2)}object-fit:contain;filter:none;">']
     if cards:
         g=k['grid'];gap=k['gap'];hero_tilt=T['motion']['tilt']['hero_max_deg']
@@ -120,10 +134,15 @@ def svg_fragment(kind,content,image,logo):
     def img(path,r,id):return f'<image id="{id}" data-pptx-role="{ "logo" if id=="logo" else "background"}" href="{escape(path,quote=True)}" x="{r[0]}" y="{r[1]}" width="{r[2]}" height="{r[3]}" preserveAspectRatio="{"xMidYMid meet" if id=="logo" else "xMidYMid slice"}"/>'
     # Decorative image bleed uses the root viewport; text capacity is checked above.
     role={'cover':'cover','toc':'toc','section':'section','ending':'ending'}[kind]
-    out=['<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" lang="zh-CN" font-family="Microsoft YaHei, Arial" data-pptx-page-role="'+role+'">','<defs>'+_shadow_filter()+_face_gradient()+'</defs>','<rect id="page-bg" width="1280" height="720" fill="#FBFCFD"/>',img(image,k['image'],'hero-image'),img(logo,k['logo'],'logo')]
+    # A pushed-down image frame (y>0) leaves a canvas-coloured top band; a canvas-to-clear fade over the image's top
+    # edge keeps that band seamless (11 HERO-03).
+    iy=k['image'][1];fh=T['hero_layouts']['image_top_fade_px']
+    fade_def=f'<linearGradient id="kz-hero-fade" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FBFCFD" stop-opacity="1"/><stop offset="1" stop-color="#FBFCFD" stop-opacity="0"/></linearGradient>' if iy>0 else ''
+    fade=f'<rect id="hero-image-fade" data-pptx-role="background" x="0" y="{iy:g}" width="1280" height="{fh:g}" fill="url(#kz-hero-fade)"/>' if iy>0 else ''
+    out=['<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" lang="zh-CN" font-family="Microsoft YaHei, Arial" data-pptx-page-role="'+role+'">','<defs>'+_shadow_filter()+_face_gradient()+fade_def+'</defs>','<rect id="page-bg" width="1280" height="720" fill="#FBFCFD"/>',img(image,k['image'],'hero-image'),fade,img(logo,k['logo'],'logo')]
     g=T['glass']
     def text(b):
-        x,y,w,h=b['rect'];f=b['font_px']
+        x,y,w,h=b['rect'];f=b['font_px'];y=text_top(b)
         s=[f'<text x="{x:g}" y="{y+f*.9:g}" font-size="{f:g}" font-weight="{"bold" if b["bold"] else "normal"}" fill="{b["color"]}">']
         s+=[f'<tspan x="{x:g}" dy="{0 if j==0 else f*1.25:g}">{escape(line)}</tspan>' for j,line in enumerate(b['lines'])]
         return ''.join(s)+'</text>'

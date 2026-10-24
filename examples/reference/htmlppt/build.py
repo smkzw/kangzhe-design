@@ -9,7 +9,7 @@ Run:  python examples/reference/htmlppt/build.py
 """
 from pathlib import Path
 from html import escape
-import re, sys
+import json, re, sys
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parents[2]
 sys.path.insert(0, str(ROOT / 'tools'))
@@ -38,54 +38,104 @@ def body(n, total, title, preset, inner, notes):
             f'<div class="kz-body" data-preset="{preset}">{inner}</div>'
             f'<aside class="notes">{escape(notes)}</aside></section>')
 
-def card(title, items, marker=None, tilt=True):
-    m = f'<span class="kz-marker">{marker}</span>' if marker else ''
+def card(title, items, figures=(), cols=1, tilt=True):
+    # figures = [(value, label[, 'risk'])]: the numbers the card is about, set above its bullets.
+    fig = ''.join(f'<p class="kz-figure{" is-risk" if len(f) > 2 else ""}"><b>{escape(f[0])}</b><span>{escape(f[1])}</span></p>' for f in figures)
     lis = ''.join(f'<li>{i}</li>' for i in items)
-    return f'<div data-kz-reveal><article class="kz-card"{" data-kz-tilt" if tilt else " data-kz-no-tilt"}>{m}<h3>{escape(title)}</h3><ul>{lis}</ul></article></div>'
+    cls = ' class="kz-cols-2"' if cols == 2 else ''
+    ul = f'<ul{cls}>{lis}</ul>' if items else ''
+    return f'<div data-kz-reveal><article class="kz-card"{" data-kz-tilt" if tilt else " data-kz-no-tilt"}><h3>{escape(title)}</h3>{fig}{ul}</article></div>'
 
-TOTAL = 8
+# Same synthetic brief as ../pptx-default/source-brief.md, so both PPT tracks tell one story with one data set.
+# Component data is emitted into index.html (window.KZ_DECK_DATA) from here; deck.js mounts it.
+Q = lambda year, quarter: year * 4 + quarter - 1  # KZGantt.qindex
+DATA = {
+    'film': {
+        'title': '核对流程',
+        'states': [
+            {'label': '界定范围', 'caption': '先定对象、时间窗和纳入的资料。', 'facts': ['研究对象：成人受试者', '评价时间窗：第 16 周', '纳入资料：4 组']},
+            {'label': '清点资料', 'caption': '逐组登记应收与已收，缺失照原样保留。', 'facts': ['应收 24 份，已收 20 份', '中心记录缺 3 份，安全性报告缺 1 份', '缺失记录保留为空值']},
+            {'label': '比较版本', 'caption': '两版方案并排比较，差异转交确认。', 'facts': ['方案版本：V2.1 与 V2.3', '待确认差异：2 项', '筛选窗口、终点评价时间点']},
+            {'label': '排定计划', 'caption': '把补收与确认排进季度计划。', 'facts': ['补收：医学部，2027Q1 内完成', '版本差异确认：2027Q1', '复核与审阅意见：2027Q2']},
+        ],
+        # What each step leaves behind; the step bar names the action, so the two lists do not repeat each other.
+        'nodes': [
+            {'title': '研究范围', 'text': '成人受试者，第 16 周'},
+            {'title': '资料清单', 'text': '4 组，缺 4 份'},
+            {'title': '待确认差异', 'text': '2 项，转交确认'},
+            {'title': '核对计划', 'text': '2026Q4 至 2027Q2'},
+        ],
+    },
+    'completeness': {'kind': 'column', 'unit': '份', 'decimals': 0, 'description': '合成示例：各资料组应收与已收份数',
+                     'categories': ['方案与修订', '中心记录', '实验室数据', '安全性报告'],
+                     'series': [{'id': 'due', 'name': '应收', 'values': [2, 12, 6, 4], 'role': 'comparator'},
+                                {'id': 'received', 'name': '已收', 'values': [2, 9, 6, 3]}]},
+    'gantt': {'min': Q(2026, 4), 'max': Q(2027, 3), 'tasks': [
+        {'id': 'collect', 'label': '缺失资料补收', 'start': Q(2026, 4), 'end': Q(2027, 2), 'department': 'medical'},
+        {'id': 'confirm', 'label': '版本差异确认', 'start': Q(2027, 1), 'end': Q(2027, 2), 'department': 'medical'},
+        {'id': 'recheck', 'label': '完整性复核', 'start': Q(2027, 1), 'end': Q(2027, 3), 'department': 'statistics'},
+        {'id': 'safety', 'label': '安全性报告核对', 'start': Q(2027, 1), 'end': Q(2027, 3), 'department': 'pv'},
+        {'id': 'opinion', 'label': '审阅意见形成', 'start': Q(2027, 2), 'end': Q(2027, 3), 'department': 'medical'}]},
+}
+
+def film_page(f):
+    s = f['states'][0]
+    facts = ''.join(f'<li>{escape(x)}</li>' for x in s['facts'])
+    nodes = ''.join(f'<li class="kz-deck-node" data-kz-node><b>{escape(n["title"])}</b><span>{escape(n["text"])}</span></li>' for n in f['nodes'])
+    steps = ''.join(f'<li class="kz-step" data-phase="{i}" data-state="{"current" if i == 0 else "todo"}"><span class="kz-step-mark">{i + 1}</span><b>{escape(x["label"])}</b></li>' for i, x in enumerate(f['states']))
+    return ('<div class="kz-film kz-deck-film" data-kz-film><div class="kz-film-stage"><svg class="kz-film-links" aria-hidden="true"></svg>'
+            f'<div class="kz-film-carrier"><strong class="kz-film-carrier-label">{escape(s["label"])}</strong><p class="kz-film-carrier-sub kz-film-caption">{escape(s["caption"])}</p><ul class="kz-carrier-facts">{facts}</ul></div>'
+            f'<ul class="kz-deck-nodes" aria-label="各步产出">{nodes}</ul></div></div>'
+            f'<ol class="kz-steps" aria-label="步骤">{steps}</ol>')
+
+def legend(depts):
+    return '<span class="kz-legend">' + ''.join(f'<span><i style="background:var(--kz-{d})"></i>{n}</span>' for d, n in depts) + '</span>'
+
+TOTAL = 10
 slides = [
-    hero('cover', {'title': '证据组织与资料核对', 'subtitle': '合成示例 · 研究资料审阅流程', 'meta': FOOT, 'title_short': '封面'}, 'cover.webp',
-         '今天用一个合成示例说明资料从界定范围到形成审阅意见的组织方式，内容不对应真实研究。'),
-    hero('toc', {'title': '汇报章节', 'items': [{'title': '研究范围', 'description': '人群、终点与时间窗'}, {'title': '资料核对', 'description': '版本与缺失记录'}, {'title': '核对计划', 'description': '季度安排'}], 'title_short': '目录'}, 'toc.webp',
-         '三部分依次展开：先界定范围，再看资料核对中的版本与缺失，最后是核对计划。'),
-    hero('section', {'number': '01', 'title': '研究范围', 'title_short': '研究范围'}, 'section.webp', '先看研究范围，它决定哪些资料进入核对。'),
+    hero('cover', {'title': '研究资料完整性核对', 'subtitle': '合成示例｜应收 24 份，已收 20 份', 'meta': FOOT, 'title_short': '封面'}, 'cover.webp',
+         '今天汇报一个研究资料包的完整性核对，数据是合成的。按计划应收 24 份，目前收到 20 份，还缺 4 份。希望会上把补收和确认的安排定下来。'),
+    hero('toc', {'title': '汇报章节', 'items': [{'title': '研究范围', 'description': '对象、时间窗与核对流程'}, {'title': '资料完整性', 'description': '应收与已收、缺口所在'}, {'title': '核对计划', 'description': '补收、确认与复核'}], 'title_short': '目录'}, 'toc.webp',
+         '分三部分：先说这次核对的范围和做法，再看各组资料收齐了多少，最后是补收、确认和复核的季度安排。'),
+    hero('section', {'number': '01', 'title': '研究范围', 'title_short': '研究范围'}, 'section.webp', '先看范围。范围定下来，才知道哪些资料要进核对。'),
     body(4, TOTAL, '研究范围', 'cards-3',
-         card('研究人群', ['成人受试者，<b>筛选期 4 周</b>', '既往治疗失败或不耐受', '同期参加其他干预研究者排除'], '01')
-         + card('主要终点', ['第 16 周较基线变化', '<span class="kz-risk">缺失值不按零处理</span>', '分析人群与估计量分开说明'], '02')
-         + card('安全性', ['治疗期间不良事件', '停药原因<b>分开登记</b>', '严重事件单列时间线'], '03')
-         + '<div class="kz-span-all" data-kz-reveal><article class="kz-card kz-takeaway-card" data-kz-no-tilt data-kz-layout="centered"><p>主要终点按第 16 周评价，缺失记录<span class="kz-risk">保留为空值</span></p></article></div>',
-         '三张卡分别对应人群、主要终点和安全性。主要终点这里请注意缺失值的处理：缺失保留为空值，不按零计算。'),
-    body(5, TOTAL, '证据组织过程', 'film',
-         '<div class="kz-film kz-deck-film" data-kz-film><div class="kz-film-stage"><svg class="kz-film-links" aria-hidden="true"></svg>'
-         '<div class="kz-film-carrier"><strong class="kz-film-carrier-label">界定范围</strong><p class="kz-film-carrier-sub kz-film-caption">先明确问题与纳入资料的边界。</p><ul class="kz-carrier-facts"><li>研究对象：成人受试者</li><li>评价时间窗：第 16 周</li><li>纳入资料：方案、中心记录、实验室数据</li></ul></div>'
-         '<ul class="kz-deck-nodes" aria-label="关系"><li class="kz-deck-node" data-kz-node><b>限定 · 研究问题</b><span>对象、范围与时间窗</span></li><li class="kz-deck-node" data-kz-node><b>对应 · 资料分组</b><span>4 组，各组字段不同</span></li><li class="kz-deck-node" data-kz-node><b>连接 · 待确认差异</b><span>2 项版本差异</span></li><li class="kz-deck-node" data-kz-node><b>回收 · 审阅意见</b><span>回到原问题复核</span></li></ul></div></div>'
-         '<ol class="kz-steps" aria-label="阶段"><li class="kz-step" data-phase="0" data-state="current"><span class="kz-step-mark">1</span><b>界定范围</b><p>问题与纳入边界</p></li><li class="kz-step" data-phase="1" data-state="todo"><span class="kz-step-mark">2</span><b>整理证据</b><p>按主题和时间分组</p></li><li class="kz-step" data-phase="2" data-state="todo"><span class="kz-step-mark">3</span><b>审阅差异</b><p>识别待补足限制</p></li><li class="kz-step" data-phase="3" data-state="todo"><span class="kz-step-mark">4</span><b>回到问题</b><p>确认资料是否足够</p></li></ol>',
-         '这一页的画面会自动推进四个阶段：先界定范围，再把资料按主题和时间分组，然后比较差异，最后回到原问题。讲到差异时可以指向右侧第三个节点。'),
-    body(6, TOTAL, '资料完整性', 'split-7-5',
-         '<div data-kz-reveal><article class="kz-card kz-data-card" data-kz-no-tilt><div class="kz-data-head"><h3>各组完整份数</h3><span>单位：份</span></div><div class="kz-chart" data-kz-chart="completeness" role="img" aria-label="方案与修订2份、中心记录9份、实验室数据6份、安全性报告4份"></div></article></div>'
-         '<div class="kz-stack"><div data-kz-reveal><article class="kz-card kz-takeaway-card" data-kz-no-tilt data-kz-layout="centered"><p>中心记录的缺失需要先补足依据，再做组间比较</p></article></div>'
-         '<div data-kz-reveal><article class="kz-card" data-kz-no-tilt><h3>分组数值</h3><table class="kz-deck-table"><thead><tr><th>分组</th><th>完整</th><th>缺失</th></tr></thead><tbody>'
-         '<tr><td>方案与修订</td><td>2</td><td>0</td></tr><tr><td>中心记录</td><td>9</td><td><span class="kz-risk">3</span></td></tr><tr><td>实验室数据</td><td>6</td><td>0</td></tr><tr><td>安全性报告</td><td>4</td><td>0</td></tr></tbody></table></article></div></div>',
-         '图中是各组完整份数。中心记录 12 份里有 3 份缺失，所以右侧的强调句建议先补足依据，再做比较。'),
-    body(7, TOTAL, '核对计划', 'full',
-         '<div data-kz-reveal><article class="kz-card kz-data-card" data-kz-no-tilt><div class="kz-data-head"><h3>季度安排</h3><span>可拖动条形或在右侧修改起止季度</span></div><div data-kz-gantt="plan"></div></article></div>',
-         '四项工作按季度排开。现场如需调整，可以直接拖动条形，修改只保留在本次放映中。'),
-    hero('ending', {'title': '谢谢', 'subtitle': '证据组织与资料核对', 'meta': FOOT, 'title_short': '结束'}, 'ending.webp', '以上是合成示例的完整流程，谢谢。'),
+         card('研究对象与时间窗', [], [('成人受试者', '研究对象'), ('第 16 周', '评价时间窗')])
+         + card('纳入资料', ['方案与修订', '中心记录', '实验室数据', '安全性报告'], [('4 组', '纳入核对')], cols=2)
+         + card('方案版本', ['V2.1 与 V2.3 并排比较', '筛选窗口、终点评价时间点'], [('2 项', '待确认差异', 'risk')])
+         + '<div class="kz-span-all" data-kz-reveal><article class="kz-card kz-takeaway-card" data-kz-no-tilt data-kz-layout="centered"><p>版本差异<span class="kz-risk">确认之后</span>，再做组间比较</p></article></div>',
+         '核对对象是成人受试者，评价时间窗是第 16 周。资料分 4 组：方案与修订、中心记录、实验室数据、安全性报告。方案有 V2.1 和 V2.3 两版，并排比下来有 2 处要确认：筛选窗口和终点评价时间点。这 2 项会影响后面的组间比较，所以确认之前先不比。'),
+    body(5, TOTAL, '核对流程', 'film', film_page(DATA['film']),
+         '核对分四步。先定范围；再逐组清点应收和已收，缺的照原样记成空值；然后把两版方案并排比较，差异转交确认，我们不判断哪一版对；最后把补收和确认排进季度计划。'),
+    hero('section', {'number': '02', 'title': '资料完整性', 'title_short': '资料完整性'}, 'section.webp', '接下来看各组资料收齐了多少。'),
+    body(7, TOTAL, '资料完整性', 'split-7-5',
+         '<div data-kz-reveal><article class="kz-card kz-data-card" data-kz-no-tilt><div class="kz-data-head"><h3>各资料组应收与已收</h3></div><div class="kz-chart" data-kz-chart="completeness" role="img" aria-label="应收与已收：方案与修订 2 与 2，中心记录 12 与 9，实验室数据 6 与 6，安全性报告 4 与 3"></div></article></div>'
+         '<div class="kz-stack"><div data-kz-reveal><article class="kz-card kz-takeaway-card" data-kz-no-tilt data-kz-layout="centered"><p>缺口集中在<span class="kz-risk">中心记录与安全性报告</span></p></article></div>'
+         '<div data-kz-reveal><article class="kz-card" data-kz-no-tilt><h3>应收、已收与缺失</h3><table class="kz-deck-table"><thead><tr><th>资料组</th><th>应收</th><th>已收</th><th>缺失</th></tr></thead><tbody>'
+         '<tr><td>方案与修订</td><td>2</td><td>2</td><td>0</td></tr><tr><td>中心记录</td><td>12</td><td>9</td><td><span class="kz-risk">3</span></td></tr><tr><td>实验室数据</td><td>6</td><td>6</td><td>0</td></tr><tr><td>安全性报告</td><td>4</td><td>3</td><td><span class="kz-risk">1</span></td></tr></tbody></table>'
+         '<p class="kz-table-note">缺失记录保留为空值，<b>不按零处理，也不插补</b></p></article></div></div>',
+         '方案与修订、实验室数据已经收齐，缺口在两组：中心记录缺 3 份，安全性报告缺 1 份。缺的记录在数据里留空，不按零处理，也不插补，这样后面比较时缺口一直看得见。'),
+    hero('section', {'number': '03', 'title': '核对计划', 'title_short': '核对计划'}, 'section.webp', '最后是补收、确认和复核的时间表。'),
+    body(9, TOTAL, '核对计划', 'full',
+         '<div data-kz-reveal><article class="kz-card kz-data-card" data-kz-no-tilt><div class="kz-data-head"><h3>季度安排</h3>' + legend([('medical', '医学部'), ('statistics', '数统'), ('pv', 'PV')]) + '</div>'
+         '<div data-kz-gantt="gantt"></div><p class="kz-gantt-note">补收与版本差异确认<b>在 2027Q1 内完成</b>，复核、安全性报告核对与审阅意见在 2027Q2 内完成</p></article></div>',
+         '关键节点是 2027 年一季度。缺的 4 份由医学部从今年四季度开始补收，一季度内补齐；两版方案的差异也在一季度内确认。数统的完整性复核和 PV 的安全性报告核对从一季度做到二季度，二季度由医学部形成审阅意见。'),
+    hero('ending', {'title': '请确认两件事', 'subtitle': '4 份资料由医学部牵头，2027Q1 内补收；版本差异确认后再做组间比较', 'meta': FOOT, 'title_short': '结束'}, 'ending.webp',
+         '最后请大家确认两件事：一是缺的 4 份资料由医学部牵头，2027 年一季度内补收；二是 2 项版本差异确认之后，再做组间比较。没有不同意见的话，就按这个时间表推进。'),
 ]
 
 src = (HERE / 'scaffold.html').read_text(encoding='utf-8')
 head_end = src.index('</head>')
 head = ('<!DOCTYPE html>\n<!-- Derived from html-ppt-skill new-deck.sh output (scaffold.html) by build.py; do not edit by hand. -->\n'
         '<html lang="zh-CN">\n<head>\n<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">\n'
-        '<title>证据组织与资料核对 · 康哲医学部</title>\n<link rel="icon" href="data:,">\n'
+        '<title>研究资料完整性核对 · 康哲医学部</title>\n<link rel="icon" href="data:,">\n'
         '<link rel="stylesheet" href="vendor/html-ppt/assets/base.css">\n'
         f'<link rel="stylesheet" href="{RT}kz-tokens.css">\n<link rel="stylesheet" href="{RT}kz-glass.css">\n<link rel="stylesheet" href="deck.css">\n</head>\n')
 assert '<div class="deck">' in src and 'assets/runtime.js' in src, 'scaffold structure changed upstream; re-read new-deck.sh output'
 body_html = ('<body class="kz" data-fit="fluid">\n<div class="deck">\n' + '\n'.join(slides) + '\n</div>\n'
              '<script src="vendor/html-ppt/assets/runtime.js"></script>\n'
              + ''.join(f'<script src="{RT}{m}"></script>\n' for m in ['../assets/vendor/echarts.min.js', 'kz-tokens.js', 'kz-motion.js', 'kz-charts.js', 'kz-gantt.js', 'kz-drilldown.js'])
-             + '<script src="../../../adapters/html-ppt-bridge.js"></script>\n<script src="../site/data.js"></script>\n<script src="../site/site.js"></script>\n<script src="deck.js"></script>\n'
+             + '<script src="../../../adapters/html-ppt-bridge.js"></script>\n<script src="../site/site.js"></script>\n'
+             + f'<script>window.KZ_DECK_DATA = {json.dumps(DATA, ensure_ascii=False)};</script>\n<script src="deck.js"></script>\n'
              + f'<script src="{RT}kz-audience.js"></script>\n</body></html>\n')
 (HERE / 'index.html').write_text(head + body_html, encoding='utf-8')
 print('wrote', HERE / 'index.html', len(slides), 'slides')

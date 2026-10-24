@@ -37,7 +37,7 @@
 ## 断行与孤字 TYPE-04
 末行只剩一个汉字（可带标点）即孤字行，必须消除：调整自然断句、共同阅读宽度或段落排版，使末行含完整词组。不逐卡缩字、不压行距、不添字凑行、不用 keep-all 造成长中文溢出。
 
-- HTML：正文 `p/li/td/th` 默认 `text-wrap: pretty`，标题和短标签 `text-wrap: balance`（kz-glass.css 已设）。这是手段，不是证明——以 `KZLayoutQC.inspectOrphans` 在每个交付视口、电影的各阅读状态实测为准。
+- HTML：正文 `p/li/td/th` 默认 `text-wrap: pretty`，标题和短标签 `text-wrap: balance`（kz-glass.css 已设）。这是手段，不是证明——以 `KZLayoutQC.inspectOrphans` 在每个交付视口、电影的各阅读状态实测为准。换行落在词内部（“中心记｜录”“实验室｜数据”）同样不合格：先缩短或改写成短语、放宽共同阅读宽度，`inspectOrphans` 的 `splits` 报出这类拆词。
 - 数字与单位、比较符号与阈值、日期与锚点、完整否定或条件短语尽量不拆开；短词组 `nowrap` 前先量真实宽度，长条件句照常换行。
 - 同一重点的相邻文字统一字重和颜色，标点保持正文样式；展示层的拆分不改写源数组、否定、且/或与日期。
 - PPTX 按真实字体与文本框在 PowerPoint 中核对。

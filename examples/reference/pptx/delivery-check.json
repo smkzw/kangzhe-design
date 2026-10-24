@@ -3,7 +3,7 @@
   "status": "passed",
   "file": {
     "path": "kangzhe_probe.pptx",
-    "bytes": 2134531
+    "bytes": 2136410
   },
   "package": {
     "zip_integrity": "passed",
@@ -57,7 +57,7 @@
       "latin": [
         {
           "value": "+mn-lt",
-          "count": 65
+          "count": 80
         },
         {
           "value": "Arial",
@@ -71,7 +71,7 @@
       "ea": [
         {
           "value": "+mn-ea",
-          "count": 65
+          "count": 80
         },
         {
           "value": "Microsoft YaHei",
@@ -85,7 +85,7 @@
       "cs": [
         {
           "value": "+mn-cs",
-          "count": 65
+          "count": 80
         },
         {
           "value": "Arial",
@@ -141,8 +141,8 @@
     "external": [],
     "uncompressed_bytes": 2135823,
     "archive_compressed_bytes": 2110000,
-    "share_of_archive": 0.988508,
-    "share_of_uncompressed_parts": 0.9483,
+    "share_of_archive": 0.987638,
+    "share_of_uncompressed_parts": 0.940663,
     "top_contributors": [
       {
         "part": "ppt/media/image_ce19777696202c35.png",
@@ -203,14 +203,18 @@
       }
     },
     "object_animations": {
-      "timing_slide_count": 1,
-      "object_animation_slide_count": 1,
+      "timing_slide_count": 3,
+      "object_animation_slide_count": 3,
       "audio_timing_slide_count": 0,
       "timing_slides": [
-        2
+        1,
+        2,
+        3
       ],
       "object_animation_slides": [
-        2
+        1,
+        2,
+        3
       ],
       "audio_timing_slides": []
     }

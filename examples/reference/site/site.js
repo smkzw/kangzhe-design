@@ -20,7 +20,7 @@
     const film = new KZMotion.Film(root, { frames: sb.frames, duration: sb.duration, staticProgress: sb.staticProgress, onRender(f, p, self) {
       const phase = sb.phaseAt(p);
       steps.forEach((n, i) => { n.dataset.state = i < phase ? 'done' : i === phase ? 'current' : 'todo'; n.setAttribute('aria-current', i === phase ? 'step' : 'false'); });
-      const pairs = nodes.map((n, i) => { const k = linkProgress(i, p); n.style.opacity = String(.42 + .58 * k); n.style.translate = `${(1 - k) * 8}px 0`; return { id: 'n' + i, from: self.carrier, to: n, progress: k }; });
+      const pairs = nodes.map((n, i) => { const k = linkProgress(i, p); n.style.opacity = String(.65 + .35 * k); n.style.translate = `${(1 - k) * 8}px 0`; return { id: 'n' + i, from: self.carrier, to: n, progress: k }; });
       if (svg) KZMotion.drawLinks(svg, pairs);
       const index = spec.states.findIndex(s => s.label === f.label);
       if (facts && index !== shown) { shown = index; facts.replaceChildren(...(spec.states[index]?.facts || []).map(t => el('li', null, t))); }

@@ -23,13 +23,14 @@
   <line id="rule" data-pptx-role="decoration" x1="54" y1="80" x2="1257" y2="80" stroke="#FF9900" stroke-width="1.5"/>
   <image id="logo" data-pptx-role="logo" href="../images/logo.png" x="1031" y="45" width="158" height="33" preserveAspectRatio="xMidYMid meet"/>
 
-  <g id="plan-card" data-pptx-bounds="56 108 1168 540">
-    <rect x="56" y="108" width="1168" height="540" rx="24" fill="url(#kz-face)" stroke="#BEB2A1" stroke-opacity="0.45" stroke-width="1" filter="url(#kz-shadow)"/>
-    <rect x="80" y="109" width="350" height="1.5" fill="url(#kz-glint)"/>
+  <rect id="plan-card-shell" data-pptx-role="decoration" x="56" y="108" width="1168" height="540" rx="24" fill="url(#kz-face)" stroke="#BEB2A1" stroke-opacity="0.45" stroke-width="1" filter="url(#kz-shadow)"/>
+  <rect id="plan-card-glint" data-pptx-role="decoration" x="80" y="109" width="350" height="1.5" fill="url(#kz-glint)"/>
+  <g id="plan-card" data-pptx-bounds="56 108 1168 64">
     <text x="80" y="156" font-size="24" font-weight="bold" fill="#0F1115">季度安排</text>
-    <text x="1200" y="156" font-size="16" fill="#64676B" text-anchor="end">合成示例数据｜条形颜色表示负责部门</text>
-    <g id="check-plan-gantt">
-      <rect id="deadline-quarter" x="664" y="176" width="268" height="360" fill="#FF9900" fill-opacity="0.07"/>
+    <text x="1200" y="156" font-size="16" fill="#64676B" text-anchor="end">合成示例数据</text>
+  </g>
+
+  <g id="check-plan-gantt" data-pptx-bounds="80 176 1120 360">
       <g font-size="20" font-weight="bold" fill="#0F1115" text-anchor="middle">
         <text x="530" y="203">2026Q4</text>
         <text x="798" y="203">2027Q1</text>
@@ -68,16 +69,19 @@
         <rect x="672" y="426" width="520" height="28" rx="8" fill="#A85F34"/>
         <rect x="940" y="490" width="252" height="28" rx="8" fill="#FF9900"/>
       </g>
-    </g>
-    <g id="plan-legend" font-size="16" fill="#404040">
+  </g>
+
+  <g id="plan-legend" data-pptx-bounds="80 556 220 26" font-size="16" fill="#404040">
       <rect x="80" y="562" width="16" height="12" rx="3" fill="#FF9900"/>
       <text x="102" y="574">医学部</text>
       <rect x="170" y="562" width="16" height="12" rx="3" fill="#587B3B"/>
       <text x="192" y="574">数统</text>
       <rect x="244" y="562" width="16" height="12" rx="3" fill="#A85F34"/>
       <text x="266" y="574">PV</text>
-    </g>
-    <text x="80" y="620" font-size="20" fill="#404040">补收与版本确认<tspan font-weight="bold" fill="#0F1115">在 2027Q1 内完成</tspan>，复核与审阅意见在 2027Q2</text>
+  </g>
+
+  <g id="plan-takeaway" data-pptx-bounds="80 600 1120 30">
+    <text x="80" y="620" font-size="20" fill="#404040">补收与版本差异确认<tspan font-weight="bold" fill="#0F1115">在 2027Q1 内完成</tspan>，复核、安全性报告核对与审阅意见在 2027Q2 内完成</text>
   </g>
 
   <g id="footer" data-pptx-role="footer" data-pptx-bounds="24 682 1224 26">

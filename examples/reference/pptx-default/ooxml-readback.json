@@ -1,250 +1,1407 @@
 {
-  "1": [
-    {
-      "role": "title",
-      "want": [
-        92,
-        164,
-        1096,
-        148
-      ],
-      "got": [
-        92.0,
-        164.0,
-        1096.0,
-        148.0
-      ],
-      "max_dev": 0.0
-    },
-    {
-      "role": "subtitle",
-      "want": [
-        92,
-        322,
-        1096,
-        42
-      ],
-      "got": [
-        92.0,
-        322.0,
-        1096.0,
-        42.0
-      ],
-      "max_dev": 0.0
-    },
-    {
-      "role": "meta",
-      "want": [
-        92,
-        382,
-        1096,
-        28
-      ],
-      "got": [
-        92.0,
-        382.0,
-        1096.0,
-        28.0
-      ],
-      "max_dev": 0.0
-    }
-  ],
-  "2": [
-    {
-      "role": "title",
-      "want": [
-        68,
-        28,
-        860,
-        68
-      ],
-      "got": [
-        68.0,
-        28.0,
-        860.0,
-        68.0
-      ],
-      "max_dev": 0.0
-    }
-  ],
-  "6": [
-    {
-      "role": "title",
-      "want": [
-        92,
-        184,
-        1096,
-        138
-      ],
-      "got": [
-        92.0,
-        184.0,
-        1096.0,
-        138.0
-      ],
-      "max_dev": 0.0
-    },
-    {
-      "role": "subtitle",
-      "want": [
-        92,
-        334,
-        1096,
-        42
-      ],
-      "got": [
-        92.0,
-        334.0,
-        1096.0,
-        42.0
-      ],
-      "max_dev": 0.0
-    },
-    {
-      "role": "meta",
-      "want": [
-        92,
-        394,
-        1096,
-        28
-      ],
-      "got": [
-        92.0,
-        394.0,
-        1096.0,
-        28.0
-      ],
-      "max_dev": 0.0
-    }
-  ],
-  "timing": {
-    "p02": [
-      {
-        "preset": "10",
-        "subtype": "0",
-        "delay": "0"
-      },
-      {
-        "preset": "10",
-        "subtype": "0",
-        "delay": "70"
-      },
-      {
-        "preset": "10",
-        "subtype": "0",
-        "delay": "140"
-      }
+ "1": {
+  "frames": [
+   {
+    "name": "TextBox 5",
+    "rect": [
+     92.0,
+     164.0,
+     1096.0,
+     148.0
     ],
-    "p03": [
-      {
-        "preset": "10",
-        "subtype": "0",
-        "delay": "0"
-      },
-      {
-        "preset": "10",
-        "subtype": "0",
-        "delay": "70"
-      },
-      {
-        "preset": "10",
-        "subtype": "0",
-        "delay": "140"
-      }
+    "text": "研究资料完整性核对",
+    "sizes": [
+     42.0
     ],
-    "p04": [
-      {
-        "preset": "22",
-        "subtype": "4",
-        "delay": "0"
-      },
-      {
-        "preset": "10",
-        "subtype": "0",
-        "delay": "70"
-      },
-      {
-        "preset": "10",
-        "subtype": "0",
-        "delay": "140"
-      },
-      {
-        "preset": "10",
-        "subtype": "0",
-        "delay": "410"
-      }
+    "bullets": 0
+   },
+   {
+    "name": "TextBox 7",
+    "rect": [
+     92.0,
+     322.0,
+     1096.0,
+     42.0
     ],
-    "p05": [
-      {
-        "preset": "22",
-        "subtype": "8",
-        "delay": "0"
-      }
-    ]
-  },
-  "charts": {
-    "chart:ppt/charts/chart401.xml": {
-      "type": [
-        "barChart"
-      ],
-      "barDir": [
-        "col"
-      ],
-      "series": [
-        "应收",
-        "已收"
-      ],
-      "values": [
-        [
-          "2",
-          "12",
-          "6",
-          "4"
-        ],
-        [
-          "2",
-          "9",
-          "6",
-          "3"
-        ]
-      ],
-      "colors": [
-        "6E7B8C",
-        "D46B08"
-      ],
-      "max": [
-        "15"
-      ],
-      "majorUnit": [
-        "5"
-      ]
-    }
-  },
-  "fonts": {
-    "latin": [
-      "Arial"
+    "text": "合成示例｜应收 24 份，已收 20 份",
+    "sizes": [
+     21.0
     ],
-    "ea": [
-      "Microsoft YaHei"
-    ]
-  },
-  "notes_chars": [
-    72,
-    59,
-    138,
-    129,
-    130,
-    77
+    "bullets": 0
+   },
+   {
+    "name": "TextBox 9",
+    "rect": [
+     92.0,
+     382.0,
+     1096.0,
+     28.0
+    ],
+    "text": "产品中心-医学部｜2026年10月",
+    "sizes": [
+     15.0
+    ],
+    "bullets": 0
+   }
   ],
+  "hero_frames": [
+   {
+    "role": "title",
+    "want": [
+     92,
+     164,
+     1096,
+     148
+    ],
+    "got": [
+     92.0,
+     164.0,
+     1096.0,
+     148.0
+    ],
+    "max_dev": 0.0
+   },
+   {
+    "role": "subtitle",
+    "want": [
+     92,
+     322,
+     1096,
+     42
+    ],
+    "got": [
+     92.0,
+     322.0,
+     1096.0,
+     42.0
+    ],
+    "max_dev": 0.0
+   },
+   {
+    "role": "meta",
+    "want": [
+     92,
+     382,
+     1096,
+     28
+    ],
+    "got": [
+     92.0,
+     382.0,
+     1096.0,
+     28.0
+    ],
+    "max_dev": 0.0
+   }
+  ],
+  "timing": [
+   {
+    "preset": "10",
+    "subtype": "0",
+    "delay": "0"
+   },
+   {
+    "preset": "10",
+    "subtype": "0",
+    "delay": "70"
+   },
+   {
+    "preset": "10",
+    "subtype": "0",
+    "delay": "140"
+   }
+  ],
+  "transition": "<p:transition ns3:dur=\"400\"> <p:fade /> </p:transition>",
+  "charts": 0,
+  "shadow_alpha": [],
+  "gradient_alpha": [],
+  "notes_chars": 74
+ },
+ "2": {
+  "frames": [
+   {
+    "name": "TextBox 5",
+    "rect": [
+     68.0,
+     28.0,
+     860.0,
+     68.0
+    ],
+    "text": "汇报章节",
+    "sizes": [
+     36.0
+    ],
+    "bullets": 0
+   },
+   {
+    "name": "TextBox 9",
+    "rect": [
+     92.0,
+     192.0,
+     60.0,
+     58.0
+    ],
+    "text": "01",
+    "sizes": [
+     30.0
+    ],
+    "bullets": 0
+   },
+   {
+    "name": "TextBox 10",
+    "rect": [
+     160.0,
+     201.0,
+     249.3,
+     40.0
+    ],
+    "text": "研究范围",
+    "sizes": [
+     24.0
+    ],
+    "bullets": 0
+   },
+   {
+    "name": "TextBox 11",
+    "rect": [
+     92.0,
+     259.0,
+     317.3,
+     25.0
+    ],
+    "text": "对象、时间窗与资料组",
+    "sizes": [
+     15.0
+    ],
+    "bullets": 0
+   },
+   {
+    "name": "TextBox 15",
+    "rect": [
+     481.3,
+     192.0,
+     60.0,
+     58.0
+    ],
+    "text": "02",
+    "sizes": [
+     30.0
+    ],
+    "bullets": 0
+   },
+   {
+    "name": "TextBox 16",
+    "rect": [
+     549.3,
+     201.0,
+     249.3,
+     40.0
+    ],
+    "text": "资料完整性",
+    "sizes": [
+     24.0
+    ],
+    "bullets": 0
+   },
+   {
+    "name": "TextBox 17",
+    "rect": [
+     481.3,
+     259.0,
+     317.3,
+     25.0
+    ],
+    "text": "应收与已收、缺口所在",
+    "sizes": [
+     15.0
+    ],
+    "bullets": 0
+   },
+   {
+    "name": "TextBox 21",
+    "rect": [
+     870.7,
+     192.0,
+     60.0,
+     58.0
+    ],
+    "text": "03",
+    "sizes": [
+     30.0
+    ],
+    "bullets": 0
+   },
+   {
+    "name": "TextBox 22",
+    "rect": [
+     938.7,
+     201.0,
+     249.3,
+     40.0
+    ],
+    "text": "核对计划",
+    "sizes": [
+     24.0
+    ],
+    "bullets": 0
+   },
+   {
+    "name": "TextBox 23",
+    "rect": [
+     870.7,
+     259.0,
+     317.3,
+     25.0
+    ],
+    "text": "补收、确认与复核",
+    "sizes": [
+     15.0
+    ],
+    "bullets": 0
+   }
+  ],
+  "hero_frames": [
+   {
+    "role": "title",
+    "want": [
+     68,
+     28,
+     860,
+     68
+    ],
+    "got": [
+     68.0,
+     28.0,
+     860.0,
+     68.0
+    ],
+    "max_dev": 0.0
+   }
+  ],
+  "timing": [
+   {
+    "preset": "10",
+    "subtype": "0",
+    "delay": "0"
+   },
+   {
+    "preset": "10",
+    "subtype": "0",
+    "delay": "70"
+   },
+   {
+    "preset": "10",
+    "subtype": "0",
+    "delay": "140"
+   }
+  ],
+  "transition": "<p:transition ns3:dur=\"400\"> <p:fade /> </p:transition>",
+  "charts": 0,
   "shadow_alpha": [
-    9.0,
-    14.0
+   9.0
   ],
   "gradient_alpha": [
-    36.0,
-    50.0,
-    55.0,
-    62.0
+   50.0,
+   55.0,
+   62.0
   ],
-  "bullets_p04": 3
+  "notes_chars": 39
+ },
+ "3": {
+  "frames": [
+   {
+    "name": "TextBox 8",
+    "rect": [
+     89.7,
+     25.3,
+     138.2,
+     49.3
+    ],
+    "text": "研究范围",
+    "sizes": [
+     24.0
+    ],
+    "bullets": 0
+   },
+   {
+    "name": "TextBox 14",
+    "rect": [
+     79.0,
+     196.3,
+     205.4,
+     37.0
+    ],
+    "text": "研究对象与时间窗",
+    "sizes": [
+     18.0
+    ],
+    "bullets": 0
+   },
+   {
+    "name": "TextBox 16",
+    "rect": [
+     95.4,
+     265.0,
+     69.1,
+     24.6
+    ],
+    "text": "研究对象",
+    "sizes": [
+     12.0
+    ],
+    "bullets": 0
+   },
+   {
+    "name": "TextBox 17",
+    "rect": [
+     95.2,
+     298.3,
+     107.6,
+     30.8
+    ],
+    "text": "成人受试者",
+    "sizes": [
+     15.0
+    ],
+    "bullets": 0
+   },
+   {
+    "name": "TextBox 19",
+    "rect": [
+     95.4,
+     377.0,
+     86.1,
+     24.6
+    ],
+    "text": "评价时间窗",
+    "sizes": [
+     12.0
+    ],
+    "bullets": 0
+   },
+   {
+    "name": "TextBox 20",
+    "rect": [
+     95.2,
+     410.3,
+     81.8,
+     30.8
+    ],
+    "text": "第 16 周",
+    "sizes": [
+     15.0
+    ],
+    "bullets": 0
+   },
+   {
+    "name": "TextBox 24",
+    "rect": [
+     476.4,
+     196.3,
+     103.7,
+     37.0
+    ],
+    "text": "纳入资料",
+    "sizes": [
+     18.0
+    ],
+    "bullets": 0
+   },
+   {
+    "name": "TextBox 25",
+    "rect": [
+     748.6,
+     203.0,
+     54.7,
+     24.6
+    ],
+    "text": "共 4 组",
+    "sizes": [
+     12.0
+    ],
+    "bullets": 0
+   },
+   {
+    "name": "TextBox 27",
+    "rect": [
+     501.9,
+     279.3,
+     107.6,
+     30.8
+    ],
+    "text": "方案与修订",
+    "sizes": [
+     15.0
+    ],
+    "bullets": 0
+   },
+   {
+    "name": "TextBox 29",
+    "rect": [
+     681.1,
+     279.3,
+     86.4,
+     30.8
+    ],
+    "text": "中心记录",
+    "sizes": [
+     15.0
+    ],
+    "bullets": 0
+   },
+   {
+    "name": "TextBox 31",
+    "rect": [
+     501.9,
+     391.3,
+     107.6,
+     30.8
+    ],
+    "text": "实验室数据",
+    "sizes": [
+     15.0
+    ],
+    "bullets": 0
+   },
+   {
+    "name": "TextBox 33",
+    "rect": [
+     670.5,
+     391.3,
+     107.6,
+     30.8
+    ],
+    "text": "安全性报告",
+    "sizes": [
+     15.0
+    ],
+    "bullets": 0
+   },
+   {
+    "name": "TextBox 38",
+    "rect": [
+     873.7,
+     196.3,
+     103.7,
+     37.0
+    ],
+    "text": "方案版本",
+    "sizes": [
+     18.0
+    ],
+    "bullets": 0
+   },
+   {
+    "name": "TextBox 40",
+    "rect": [
+     900.7,
+     276.0,
+     64.0,
+     37.0
+    ],
+    "text": "V2.1",
+    "sizes": [
+     18.0
+    ],
+    "bullets": 0
+   },
+   {
+    "name": "TextBox 43",
+    "rect": [
+     1110.0,
+     276.0,
+     64.0,
+     37.0
+    ],
+    "text": "V2.3",
+    "sizes": [
+     18.0
+    ],
+    "bullets": 0
+   },
+   {
+    "name": "TextBox 45",
+    "rect": [
+     889.9,
+     374.3,
+     168.9,
+     30.8
+    ],
+    "text": "待确认差异：2 项",
+    "sizes": [
+     15.0
+    ],
+    "bullets": 0
+   },
+   {
+    "name": "TextBox 46",
+    "rect": [
+     889.9,
+     408.3,
+     256.0,
+     30.8
+    ],
+    "text": "筛选窗口、终点评价时间点",
+    "sizes": [
+     15.0
+    ],
+    "bullets": 0
+   },
+   {
+    "name": "TextBox 50",
+    "rect": [
+     448.2,
+     529.3,
+     383.5,
+     37.0
+    ],
+    "text": "版本差异确认之后，再做组间比较",
+    "sizes": [
+     18.0
+    ],
+    "bullets": 0
+   },
+   {
+    "name": "TextBox 52",
+    "rect": [
+     23.3,
+     684.7,
+     265.7,
+     27.7
+    ],
+    "text": "产品中心-医学部｜2026年10月",
+    "sizes": [
+     13.5
+    ],
+    "bullets": 0
+   },
+   {
+    "name": "TextBox 53",
+    "rect": [
+     1204.4,
+     684.7,
+     44.4,
+     27.7
+    ],
+    "text": "3 / 6",
+    "sizes": [
+     13.5
+    ],
+    "bullets": 0
+   }
+  ],
+  "timing": [
+   {
+    "preset": "10",
+    "subtype": "0",
+    "delay": "0"
+   },
+   {
+    "preset": "10",
+    "subtype": "0",
+    "delay": "70"
+   },
+   {
+    "preset": "10",
+    "subtype": "0",
+    "delay": "140"
+   },
+   {
+    "preset": "10",
+    "subtype": "0",
+    "delay": "410"
+   }
+  ],
+  "transition": "<p:transition xmlns:p14=\"http://schemas.microsoft.com/office/powerpoint/2010/main\" p14:dur=\"400\"> <p:fade/> </p:transition>",
+  "charts": 0,
+  "shadow_alpha": [
+   9.0,
+   14.0
+  ],
+  "gradient_alpha": [
+   36.0,
+   50.0,
+   55.0,
+   62.0
+  ],
+  "notes_chars": 127
+ },
+ "4": {
+  "frames": [
+   {
+    "name": "TextBox 8",
+    "rect": [
+     89.7,
+     25.3,
+     172.2,
+     49.3
+    ],
+    "text": "资料完整性",
+    "sizes": [
+     24.0
+    ],
+    "bullets": 0
+   },
+   {
+    "name": "TextBox 14",
+    "rect": [
+     79.0,
+     133.3,
+     230.9,
+     37.0
+    ],
+    "text": "各资料组应收与已收",
+    "sizes": [
+     18.0
+    ],
+    "bullets": 0
+   },
+   {
+    "name": "TextBox 15",
+    "rect": [
+     512.1,
+     140.0,
+     187.8,
+     24.6
+    ],
+    "text": "合成示例数据｜单位：份",
+    "sizes": [
+     12.0
+    ],
+    "bullets": 0
+   },
+   {
+    "name": "TextBox 17",
+    "rect": [
+     101.4,
+     174.0,
+     35.2,
+     24.6
+    ],
+    "text": "应收",
+    "sizes": [
+     12.0
+    ],
+    "bullets": 0
+   },
+   {
+    "name": "TextBox 19",
+    "rect": [
+     171.4,
+     174.0,
+     35.2,
+     24.6
+    ],
+    "text": "已收",
+    "sizes": [
+     12.0
+    ],
+    "bullets": 0
+   },
+   {
+    "name": "TextBox 25",
+    "rect": [
+     793.9,
+     164.3,
+     383.5,
+     37.0
+    ],
+    "text": "缺口集中在中心记录与安全性报告",
+    "sizes": [
+     18.0
+    ],
+    "bullets": 0
+   },
+   {
+    "name": "TextBox 28",
+    "rect": [
+     789.5,
+     325.3,
+     63.8,
+     49.3
+    ],
+    "text": "24",
+    "sizes": [
+     12.0,
+     24.0
+    ],
+    "bullets": 0
+   },
+   {
+    "name": "TextBox 29",
+    "rect": [
+     803.8,
+     382.0,
+     35.2,
+     24.6
+    ],
+    "text": "应收",
+    "sizes": [
+     12.0
+    ],
+    "bullets": 0
+   },
+   {
+    "name": "TextBox 31",
+    "rect": [
+     953.8,
+     325.3,
+     63.8,
+     49.3
+    ],
+    "text": "20",
+    "sizes": [
+     12.0,
+     24.0
+    ],
+    "bullets": 0
+   },
+   {
+    "name": "TextBox 32",
+    "rect": [
+     968.1,
+     382.0,
+     35.2,
+     24.6
+    ],
+    "text": "已收",
+    "sizes": [
+     12.0
+    ],
+    "bullets": 0
+   },
+   {
+    "name": "TextBox 34",
+    "rect": [
+     1127.8,
+     325.3,
+     44.2,
+     49.3
+    ],
+    "text": "4",
+    "sizes": [
+     12.0,
+     24.0
+    ],
+    "bullets": 0
+   },
+   {
+    "name": "TextBox 35",
+    "rect": [
+     1132.3,
+     382.0,
+     35.2,
+     24.6
+    ],
+    "text": "缺口",
+    "sizes": [
+     12.0
+    ],
+    "bullets": 0
+   },
+   {
+    "name": "TextBox 39",
+    "rect": [
+     770.4,
+     495.3,
+     103.7,
+     37.0
+    ],
+    "text": "缺失处理",
+    "sizes": [
+     18.0
+    ],
+    "bullets": 0
+   },
+   {
+    "name": "TextBox 40",
+    "rect": [
+     770.5,
+     528.0,
+     218.6,
+     72.8
+    ],
+    "text": "缺失记录保留为空值不按零处理，也不插补",
+    "sizes": [
+     15.0
+    ],
+    "bullets": 2
+   },
+   {
+    "name": "TextBox 42",
+    "rect": [
+     23.3,
+     684.7,
+     265.7,
+     27.7
+    ],
+    "text": "产品中心-医学部｜2026年10月",
+    "sizes": [
+     13.5
+    ],
+    "bullets": 0
+   },
+   {
+    "name": "TextBox 43",
+    "rect": [
+     1204.4,
+     684.7,
+     44.4,
+     27.7
+    ],
+    "text": "4 / 6",
+    "sizes": [
+     13.5
+    ],
+    "bullets": 0
+   }
+  ],
+  "timing": [
+   {
+    "preset": "10",
+    "subtype": "0",
+    "delay": "0"
+   },
+   {
+    "preset": "22",
+    "subtype": "4",
+    "delay": "70"
+   },
+   {
+    "preset": "10",
+    "subtype": "0",
+    "delay": "140"
+   },
+   {
+    "preset": "10",
+    "subtype": "0",
+    "delay": "210"
+   },
+   {
+    "preset": "10",
+    "subtype": "0",
+    "delay": "410"
+   }
+  ],
+  "transition": "<p:transition xmlns:p14=\"http://schemas.microsoft.com/office/powerpoint/2010/main\" p14:dur=\"400\"> <p:fade/> </p:transition>",
+  "charts": 1,
+  "shadow_alpha": [
+   9.0,
+   14.0
+  ],
+  "gradient_alpha": [
+   50.0,
+   55.0,
+   62.0
+  ],
+  "notes_chars": 80
+ },
+ "5": {
+  "frames": [
+   {
+    "name": "TextBox 8",
+    "rect": [
+     89.7,
+     25.3,
+     138.2,
+     49.3
+    ],
+    "text": "核对计划",
+    "sizes": [
+     24.0
+    ],
+    "bullets": 0
+   },
+   {
+    "name": "TextBox 14",
+    "rect": [
+     79.0,
+     133.3,
+     103.7,
+     37.0
+    ],
+    "text": "季度安排",
+    "sizes": [
+     18.0
+    ],
+    "bullets": 0
+   },
+   {
+    "name": "TextBox 15",
+    "rect": [
+     1097.6,
+     140.0,
+     103.0,
+     24.6
+    ],
+    "text": "合成示例数据",
+    "sizes": [
+     12.0
+    ],
+    "bullets": 0
+   },
+   {
+    "name": "TextBox 17",
+    "rect": [
+     488.0,
+     183.0,
+     83.9,
+     30.8
+    ],
+    "text": "2026Q4",
+    "sizes": [
+     15.0
+    ],
+    "bullets": 0
+   },
+   {
+    "name": "TextBox 18",
+    "rect": [
+     756.0,
+     183.0,
+     83.9,
+     30.8
+    ],
+    "text": "2027Q1",
+    "sizes": [
+     15.0
+    ],
+    "bullets": 0
+   },
+   {
+    "name": "TextBox 19",
+    "rect": [
+     1024.0,
+     183.0,
+     83.9,
+     30.8
+    ],
+    "text": "2027Q2",
+    "sizes": [
+     15.0
+    ],
+    "bullets": 0
+   },
+   {
+    "name": "TextBox 31",
+    "rect": [
+     79.2,
+     223.3,
+     128.8,
+     30.8
+    ],
+    "text": "缺失资料补收",
+    "sizes": [
+     15.0
+    ],
+    "bullets": 0
+   },
+   {
+    "name": "TextBox 32",
+    "rect": [
+     79.2,
+     287.3,
+     128.8,
+     30.8
+    ],
+    "text": "版本差异确认",
+    "sizes": [
+     15.0
+    ],
+    "bullets": 0
+   },
+   {
+    "name": "TextBox 33",
+    "rect": [
+     79.2,
+     351.3,
+     107.6,
+     30.8
+    ],
+    "text": "完整性复核",
+    "sizes": [
+     15.0
+    ],
+    "bullets": 0
+   },
+   {
+    "name": "TextBox 34",
+    "rect": [
+     79.2,
+     415.3,
+     150.0,
+     30.8
+    ],
+    "text": "安全性报告核对",
+    "sizes": [
+     15.0
+    ],
+    "bullets": 0
+   },
+   {
+    "name": "TextBox 35",
+    "rect": [
+     79.2,
+     479.3,
+     128.8,
+     30.8
+    ],
+    "text": "审阅意见形成",
+    "sizes": [
+     15.0
+    ],
+    "bullets": 0
+   },
+   {
+    "name": "TextBox 37",
+    "rect": [
+     79.4,
+     250.0,
+     52.2,
+     24.6
+    ],
+    "text": "医学部",
+    "sizes": [
+     12.0
+    ],
+    "bullets": 0
+   },
+   {
+    "name": "TextBox 38",
+    "rect": [
+     79.4,
+     314.0,
+     52.2,
+     24.6
+    ],
+    "text": "医学部",
+    "sizes": [
+     12.0
+    ],
+    "bullets": 0
+   },
+   {
+    "name": "TextBox 39",
+    "rect": [
+     79.4,
+     378.0,
+     35.2,
+     24.6
+    ],
+    "text": "数统",
+    "sizes": [
+     12.0
+    ],
+    "bullets": 0
+   },
+   {
+    "name": "TextBox 40",
+    "rect": [
+     79.4,
+     442.0,
+     21.0,
+     24.6
+    ],
+    "text": "PV",
+    "sizes": [
+     12.0
+    ],
+    "bullets": 0
+   },
+   {
+    "name": "TextBox 41",
+    "rect": [
+     79.4,
+     506.0,
+     52.2,
+     24.6
+    ],
+    "text": "医学部",
+    "sizes": [
+     12.0
+    ],
+    "bullets": 0
+   },
+   {
+    "name": "TextBox 51",
+    "rect": [
+     101.4,
+     558.0,
+     52.2,
+     24.6
+    ],
+    "text": "医学部",
+    "sizes": [
+     12.0
+    ],
+    "bullets": 0
+   },
+   {
+    "name": "TextBox 53",
+    "rect": [
+     191.4,
+     558.0,
+     35.2,
+     24.6
+    ],
+    "text": "数统",
+    "sizes": [
+     12.0
+    ],
+    "bullets": 0
+   },
+   {
+    "name": "TextBox 55",
+    "rect": [
+     265.4,
+     558.0,
+     21.0,
+     24.6
+    ],
+    "text": "PV",
+    "sizes": [
+     12.0
+    ],
+    "bullets": 0
+   },
+   {
+    "name": "TextBox 57",
+    "rect": [
+     79.2,
+     601.3,
+     889.5,
+     30.8
+    ],
+    "text": "补收与版本差异确认在 2027Q1 内完成，复核、安全性报告核对与审阅意见在 2",
+    "sizes": [
+     15.0
+    ],
+    "bullets": 0
+   },
+   {
+    "name": "TextBox 59",
+    "rect": [
+     23.3,
+     684.7,
+     265.7,
+     27.7
+    ],
+    "text": "产品中心-医学部｜2026年10月",
+    "sizes": [
+     13.5
+    ],
+    "bullets": 0
+   },
+   {
+    "name": "TextBox 60",
+    "rect": [
+     1204.4,
+     684.7,
+     44.4,
+     27.7
+    ],
+    "text": "5 / 6",
+    "sizes": [
+     13.5
+    ],
+    "bullets": 0
+   }
+  ],
+  "timing": [
+   {
+    "preset": "10",
+    "subtype": "0",
+    "delay": "0"
+   },
+   {
+    "preset": "22",
+    "subtype": "8",
+    "delay": "70"
+   },
+   {
+    "preset": "10",
+    "subtype": "0",
+    "delay": "140"
+   },
+   {
+    "preset": "10",
+    "subtype": "0",
+    "delay": "410"
+   }
+  ],
+  "transition": "<p:transition xmlns:p14=\"http://schemas.microsoft.com/office/powerpoint/2010/main\" p14:dur=\"400\"> <p:fade/> </p:transition>",
+  "charts": 0,
+  "shadow_alpha": [
+   9.0,
+   14.0
+  ],
+  "gradient_alpha": [
+   50.0,
+   55.0,
+   62.0
+  ],
+  "notes_chars": 105
+ },
+ "6": {
+  "frames": [
+   {
+    "name": "TextBox 4",
+    "rect": [
+     92.0,
+     184.0,
+     1096.0,
+     138.0
+    ],
+    "text": "请确认两件事",
+    "sizes": [
+     78.0
+    ],
+    "bullets": 0
+   },
+   {
+    "name": "TextBox 6",
+    "rect": [
+     92.0,
+     334.0,
+     1096.0,
+     42.0
+    ],
+    "text": "4 份资料由医学部牵头，2027Q1 内补收；版本差异确认后再做组间比较",
+    "sizes": [
+     21.0
+    ],
+    "bullets": 0
+   },
+   {
+    "name": "TextBox 8",
+    "rect": [
+     92.0,
+     394.0,
+     1096.0,
+     28.0
+    ],
+    "text": "产品中心-医学部｜2026年10月",
+    "sizes": [
+     15.0
+    ],
+    "bullets": 0
+   }
+  ],
+  "hero_frames": [
+   {
+    "role": "title",
+    "want": [
+     92,
+     184,
+     1096,
+     138
+    ],
+    "got": [
+     92.0,
+     184.0,
+     1096.0,
+     138.0
+    ],
+    "max_dev": 0.0
+   },
+   {
+    "role": "subtitle",
+    "want": [
+     92,
+     334,
+     1096,
+     42
+    ],
+    "got": [
+     92.0,
+     334.0,
+     1096.0,
+     42.0
+    ],
+    "max_dev": 0.0
+   },
+   {
+    "role": "meta",
+    "want": [
+     92,
+     394,
+     1096,
+     28
+    ],
+    "got": [
+     92.0,
+     394.0,
+     1096.0,
+     28.0
+    ],
+    "max_dev": 0.0
+   }
+  ],
+  "timing": [
+   {
+    "preset": "10",
+    "subtype": "0",
+    "delay": "0"
+   },
+   {
+    "preset": "10",
+    "subtype": "0",
+    "delay": "70"
+   },
+   {
+    "preset": "10",
+    "subtype": "0",
+    "delay": "140"
+   }
+  ],
+  "transition": "<p:transition ns3:dur=\"400\"> <p:fade /> </p:transition>",
+  "charts": 0,
+  "shadow_alpha": [],
+  "gradient_alpha": [],
+  "notes_chars": 82
+ },
+ "chart:ppt/charts/chart401.xml": {
+  "type": [
+   "barChart"
+  ],
+  "barDir": [
+   "col"
+  ],
+  "series": [
+   "应收",
+   "已收"
+  ],
+  "values": [
+   [
+    "2",
+    "12",
+    "6",
+    "4"
+   ],
+   [
+    "2",
+    "9",
+    "6",
+    "3"
+   ]
+  ],
+  "colors": [
+   "6E7B8C",
+   "D46B08"
+  ],
+  "max": [
+   "15"
+  ],
+  "majorUnit": [
+   "5"
+  ]
+ },
+ "fonts": {
+  "latin": [
+   "Arial"
+  ],
+  "ea": [
+   "Microsoft YaHei"
+  ]
+ }
 }

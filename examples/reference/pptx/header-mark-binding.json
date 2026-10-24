@@ -1,7 +1,7 @@
 {
   "scope": "approved native brand objects copied after ppt-master export; not an exporter",
-  "input_sha256": "f070c9d3603fca0cdb12e0993598c2359fe12ea3dbacb1c278e0a98cb7adc3e4",
-  "output_sha256": "225eb73153f92a52a482216fff81ddf04367e8f21c0e26dc8b41b6e2a087f080",
+  "input_sha256": "003a12252cdb38e6388cecca92953e65b21d6a9fbfd9b75c197a90fa3af8fe67",
+  "output_sha256": "d4da40fe484c95ec63b750eff31c3c7ea0d30c27ee08d7d5d745698c1dcc07f8",
   "asset_sha256": "906dc32ffe4f374ae6cb7e6500236b4680681e67598b7ef4ab438d553c219578",
   "changed_parts": [
     "ppt/slides/slide2.xml",
@@ -18,10 +18,10 @@
         "6"
       ],
       "native_shape_ids": [
+        "37",
+        "38",
         "39",
-        "40",
-        "41",
-        "42"
+        "40"
       ],
       "native_signatures": [
         "1e3ac3e9f339c7a39590c5e57e9cb569e713d0bb4030910fe67e48aeae57153a",
@@ -39,10 +39,10 @@
         "6"
       ],
       "native_shape_ids": [
-        "19",
-        "20",
-        "21",
-        "22"
+        "29",
+        "30",
+        "31",
+        "32"
       ],
       "native_signatures": [
         "1e3ac3e9f339c7a39590c5e57e9cb569e713d0bb4030910fe67e48aeae57153a",
@@ -60,10 +60,10 @@
         "6"
       ],
       "native_shape_ids": [
-        "19",
-        "20",
-        "21",
-        "22"
+        "29",
+        "30",
+        "31",
+        "32"
       ],
       "native_signatures": [
         "1e3ac3e9f339c7a39590c5e57e9cb569e713d0bb4030910fe67e48aeae57153a",

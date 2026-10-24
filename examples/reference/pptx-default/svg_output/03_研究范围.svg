@@ -24,49 +24,55 @@
   <line id="rule" data-pptx-role="decoration" x1="54" y1="80" x2="1257" y2="80" stroke="#FF9900" stroke-width="1.5"/>
   <image id="logo" data-pptx-role="logo" href="../images/logo.png" x="1031" y="45" width="158" height="33" preserveAspectRatio="xMidYMid meet"/>
 
-  <g id="card-population" data-pptx-bounds="56 243 373.33 270">
-    <rect x="56" y="243" width="373.33" height="270" rx="24" fill="url(#kz-face)" stroke="#BEB2A1" stroke-opacity="0.45" stroke-width="1" filter="url(#kz-shadow)"/>
-    <rect x="80" y="244" width="112" height="1.5" fill="url(#kz-glint)"/>
-    <text x="80" y="291" font-size="24" font-weight="bold" fill="#0F1115">研究人群与时间窗</text>
-    <rect x="80" y="313" width="325.33" height="80" rx="14" fill="url(#kz-thin)" stroke="#BEB2A1" stroke-opacity="0.26" stroke-width="1"/>
-    <text x="96" y="343" font-size="16" fill="#64676B">研究对象</text>
-    <text x="96" y="375" font-size="20" font-weight="bold" fill="#0F1115">成人受试者</text>
-    <rect x="80" y="405" width="325.33" height="80" rx="14" fill="url(#kz-thin)" stroke="#BEB2A1" stroke-opacity="0.26" stroke-width="1"/>
-    <text x="96" y="435" font-size="16" fill="#64676B">评价时间窗</text>
-    <text x="96" y="467" font-size="20" font-weight="bold" fill="#0F1115">第 16 周</text>
+  <g id="card-population" data-pptx-bounds="56 171 373.33 306">
+    <rect x="56" y="171" width="373.33" height="306" rx="24" fill="url(#kz-face)" stroke="#BEB2A1" stroke-opacity="0.45" stroke-width="1" filter="url(#kz-shadow)"/>
+    <rect x="80" y="172" width="112" height="1.5" fill="url(#kz-glint)"/>
+    <text x="80" y="219" font-size="24" font-weight="bold" fill="#0F1115">研究对象与时间窗</text>
+    <rect x="80" y="243" width="325.33" height="96" rx="14" fill="url(#kz-thin)" stroke="#BEB2A1" stroke-opacity="0.26" stroke-width="1"/>
+    <text x="96" y="281" font-size="16" fill="#64676B">研究对象</text>
+    <text x="96" y="317" font-size="20" font-weight="bold" fill="#0F1115">成人受试者</text>
+    <rect x="80" y="355" width="325.33" height="96" rx="14" fill="url(#kz-thin)" stroke="#BEB2A1" stroke-opacity="0.26" stroke-width="1"/>
+    <text x="96" y="393" font-size="16" fill="#64676B">评价时间窗</text>
+    <text x="96" y="429" font-size="20" font-weight="bold" fill="#0F1115">第 16 周</text>
   </g>
 
-  <g id="card-documents" data-pptx-bounds="453.33 243 373.33 270">
-    <rect x="453.33" y="243" width="373.33" height="270" rx="24" fill="url(#kz-face)" stroke="#BEB2A1" stroke-opacity="0.45" stroke-width="1" filter="url(#kz-shadow)"/>
-    <rect x="477.33" y="244" width="112" height="1.5" fill="url(#kz-glint)"/>
-    <text x="477.33" y="291" font-size="24" font-weight="bold" fill="#0F1115">纳入资料</text>
-    <text x="802.67" y="291" font-size="16" fill="#64676B" text-anchor="end">共四组</text>
+  <g id="card-documents" data-pptx-bounds="453.33 171 373.33 306">
+    <rect x="453.33" y="171" width="373.33" height="306" rx="24" fill="url(#kz-face)" stroke="#BEB2A1" stroke-opacity="0.45" stroke-width="1" filter="url(#kz-shadow)"/>
+    <rect x="477.33" y="172" width="112" height="1.5" fill="url(#kz-glint)"/>
+    <text x="477.33" y="219" font-size="24" font-weight="bold" fill="#0F1115">纳入资料</text>
+    <text x="802.67" y="219" font-size="16" fill="#64676B" text-anchor="end">共 4 组</text>
     <g font-size="20" font-weight="bold" fill="#0F1115" text-anchor="middle">
-      <rect x="477.33" y="313" width="156.67" height="80" rx="14" fill="url(#kz-thin)" stroke="#BEB2A1" stroke-opacity="0.26" stroke-width="1"/>
-      <text x="555.67" y="360">方案与修订</text>
-      <rect x="646" y="313" width="156.67" height="80" rx="14" fill="url(#kz-thin)" stroke="#BEB2A1" stroke-opacity="0.26" stroke-width="1"/>
-      <text x="724.33" y="360">中心记录</text>
-      <rect x="477.33" y="405" width="156.67" height="80" rx="14" fill="url(#kz-thin)" stroke="#BEB2A1" stroke-opacity="0.26" stroke-width="1"/>
-      <text x="555.67" y="452">实验室数据</text>
-      <rect x="646" y="405" width="156.67" height="80" rx="14" fill="url(#kz-thin)" stroke="#BEB2A1" stroke-opacity="0.26" stroke-width="1"/>
-      <text x="724.33" y="452">安全性报告</text>
+      <rect x="477.33" y="243" width="156.67" height="96" rx="14" fill="url(#kz-thin)" stroke="#BEB2A1" stroke-opacity="0.26" stroke-width="1"/>
+      <text x="555.66" y="298">方案与修订</text>
+      <rect x="646" y="243" width="156.67" height="96" rx="14" fill="url(#kz-thin)" stroke="#BEB2A1" stroke-opacity="0.26" stroke-width="1"/>
+      <text x="724.33" y="298">中心记录</text>
+      <rect x="477.33" y="355" width="156.67" height="96" rx="14" fill="url(#kz-thin)" stroke="#BEB2A1" stroke-opacity="0.26" stroke-width="1"/>
+      <text x="555.66" y="410">实验室数据</text>
+      <rect x="646" y="355" width="156.67" height="96" rx="14" fill="url(#kz-thin)" stroke="#BEB2A1" stroke-opacity="0.26" stroke-width="1"/>
+      <text x="724.33" y="410">安全性报告</text>
     </g>
   </g>
 
-  <g id="card-versions" data-pptx-bounds="850.67 243 373.33 270">
-    <rect x="850.67" y="243" width="373.33" height="270" rx="24" fill="url(#kz-face)" stroke="#BEB2A1" stroke-opacity="0.45" stroke-width="1" filter="url(#kz-shadow)"/>
-    <rect x="874.67" y="244" width="112" height="1.5" fill="url(#kz-glint)"/>
-    <text x="874.67" y="291" font-size="24" font-weight="bold" fill="#0F1115">方案版本</text>
-    <rect x="874.67" y="313" width="116" height="80" rx="14" fill="url(#kz-thin)" stroke="#BEB2A1" stroke-opacity="0.26" stroke-width="1"/>
-    <text x="932.67" y="361" font-size="24" font-weight="bold" fill="#0F1115" text-anchor="middle">V2.1</text>
-    <g id="p03-version-compare" data-pptx-authoring="preset" data-pptx-object="shape" data-pptx-prst="leftRightArrow" data-pptx-frame="1006.67 337 61.33 32" fill="#FF9900" stroke="none">
-<path d="M 1006.67 353 L 1022.67 337 L 1022.67 345 L 1052 345 L 1052 337 L 1068 353 L 1052 369 L 1052 361 L 1022.67 361 L 1022.67 369 Z"/>
+  <g id="card-versions" data-pptx-bounds="850.67 171 373.33 306">
+    <rect x="850.67" y="171" width="373.33" height="306" rx="24" fill="url(#kz-face)" stroke="#BEB2A1" stroke-opacity="0.45" stroke-width="1" filter="url(#kz-shadow)"/>
+    <rect x="874.67" y="172" width="112" height="1.5" fill="url(#kz-glint)"/>
+    <text x="874.67" y="219" font-size="24" font-weight="bold" fill="#0F1115">方案版本</text>
+    <rect x="874.67" y="243" width="116" height="96" rx="14" fill="url(#kz-thin)" stroke="#BEB2A1" stroke-opacity="0.26" stroke-width="1"/>
+    <text x="932.67" y="300" font-size="24" font-weight="bold" fill="#0F1115" text-anchor="middle">V2.1</text>
+    <g id="p03-version-compare" data-pptx-authoring="preset" data-pptx-object="shape" data-pptx-prst="leftRightArrow" data-pptx-frame="1006.67 275 61.33 32" fill="#FF9900" stroke="none">
+<path d="M 1006.67 291 L 1022.67 275 L 1022.67 283 L 1052 283 L 1052 275 L 1068 291 L 1052 307 L 1052 299 L 1022.67 299 L 1022.67 307 Z"/>
 </g>
-    <rect x="1084" y="313" width="116" height="80" rx="14" fill="url(#kz-thin)" stroke="#BEB2A1" stroke-opacity="0.26" stroke-width="1"/>
-    <text x="1142" y="361" font-size="24" font-weight="bold" fill="#0F1115" text-anchor="middle">V2.3</text>
-    <rect x="874.67" y="405" width="325.33" height="80" rx="14" fill="url(#kz-thin)" stroke="#BEB2A1" stroke-opacity="0.26" stroke-width="1"/>
-    <text x="890.67" y="437" font-size="20" fill="#404040">待确认差异：<tspan font-weight="bold" fill="#C00000">2 项</tspan></text>
-    <text x="890.67" y="467" font-size="20" fill="#404040">筛选窗口、终点评价时间点</text>
+    <rect x="1084" y="243" width="116" height="96" rx="14" fill="url(#kz-thin)" stroke="#BEB2A1" stroke-opacity="0.26" stroke-width="1"/>
+    <text x="1142" y="300" font-size="24" font-weight="bold" fill="#0F1115" text-anchor="middle">V2.3</text>
+    <rect x="874.67" y="355" width="325.33" height="96" rx="14" fill="url(#kz-thin)" stroke="#BEB2A1" stroke-opacity="0.26" stroke-width="1"/>
+    <text x="890.67" y="393" font-size="20" fill="#404040">待确认差异：<tspan font-weight="bold" fill="#C00000">2 项</tspan></text>
+    <text x="890.67" y="427" font-size="20" fill="#404040">筛选窗口、终点评价时间点</text>
+  </g>
+
+  <g id="takeaway" data-pptx-bounds="56 501 1168 84">
+    <rect x="56" y="501" width="1168" height="84" rx="24" fill="url(#kz-face)" stroke="#BEB2A1" stroke-opacity="0.45" stroke-width="1" filter="url(#kz-shadow)"/>
+    <rect x="80" y="502" width="350" height="1.5" fill="url(#kz-glint)"/>
+    <text x="640" y="552" font-size="24" font-weight="bold" fill="#0F1115" text-anchor="middle">版本差异<tspan fill="#C00000">确认之后</tspan>，再做组间比较</text>
   </g>
 
   <g id="footer" data-pptx-role="footer" data-pptx-bounds="24 682 1224 26">

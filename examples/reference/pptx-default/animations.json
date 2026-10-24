@@ -1,39 +1,215 @@
 {
  "version": 1,
  "defaults": {
-  "transition": {"effect": "fade", "duration": 0.4},
-  "animation": {"effect": "none"}
+  "transition": {
+   "effect": "fade",
+   "duration": 0.4
+  },
+  "animation": {
+   "effect": "none"
+  }
  },
  "slides": {
-  "02_目录": {
-   "animation": {"trigger": "with-previous"},
+  "01_封面": {
+   "animation": {
+    "trigger": "with-previous"
+   },
    "groups": {
-    "toc-card-1": {"effect": "entrance_fade", "duration": 0.52, "delay": 0, "decelerate": 0.7, "order": 1},
-    "toc-card-2": {"effect": "entrance_fade", "duration": 0.52, "delay": 0.07, "decelerate": 0.7, "order": 2},
-    "toc-card-3": {"effect": "entrance_fade", "duration": 0.52, "delay": 0.14, "decelerate": 0.7, "order": 3}
+    "cover-title": {
+     "effect": "entrance_fade",
+     "duration": 0.52,
+     "delay": 0,
+     "decelerate": 0.7,
+     "order": 1
+    },
+    "cover-subtitle": {
+     "effect": "entrance_fade",
+     "duration": 0.52,
+     "delay": 0.07,
+     "decelerate": 0.7,
+     "order": 2
+    },
+    "cover-meta": {
+     "effect": "entrance_fade",
+     "duration": 0.52,
+     "delay": 0.14,
+     "decelerate": 0.7,
+     "order": 3
+    }
+   }
+  },
+  "02_目录": {
+   "animation": {
+    "trigger": "with-previous"
+   },
+   "groups": {
+    "toc-card-1": {
+     "effect": "entrance_fade",
+     "duration": 0.52,
+     "delay": 0,
+     "decelerate": 0.7,
+     "order": 1
+    },
+    "toc-card-2": {
+     "effect": "entrance_fade",
+     "duration": 0.52,
+     "delay": 0.07,
+     "decelerate": 0.7,
+     "order": 2
+    },
+    "toc-card-3": {
+     "effect": "entrance_fade",
+     "duration": 0.52,
+     "delay": 0.14,
+     "decelerate": 0.7,
+     "order": 3
+    }
    }
   },
   "03_研究范围": {
-   "animation": {"trigger": "with-previous"},
+   "animation": {
+    "trigger": "with-previous"
+   },
    "groups": {
-    "card-population": {"effect": "entrance_fade", "duration": 0.52, "delay": 0, "decelerate": 0.7, "order": 1},
-    "card-documents": {"effect": "entrance_fade", "duration": 0.52, "delay": 0.07, "decelerate": 0.7, "order": 2},
-    "card-versions": {"effect": "entrance_fade", "duration": 0.52, "delay": 0.14, "decelerate": 0.7, "order": 3}
+    "card-population": {
+     "effect": "entrance_fade",
+     "duration": 0.52,
+     "delay": 0,
+     "decelerate": 0.7,
+     "order": 1
+    },
+    "card-documents": {
+     "effect": "entrance_fade",
+     "duration": 0.52,
+     "delay": 0.07,
+     "decelerate": 0.7,
+     "order": 2
+    },
+    "card-versions": {
+     "effect": "entrance_fade",
+     "duration": 0.52,
+     "delay": 0.14,
+     "decelerate": 0.7,
+     "order": 3
+    },
+    "takeaway": {
+     "effect": "entrance_fade",
+     "duration": 0.52,
+     "delay": 0.41,
+     "decelerate": 0.7,
+     "order": 4
+    }
    }
   },
   "04_资料完整性": {
-   "animation": {"trigger": "with-previous"},
+   "animation": {
+    "trigger": "with-previous"
+   },
    "groups": {
-    "data-card": {"effect": "entrance_wipe", "effect_options": {"direction": "down"}, "duration": 1.0, "delay": 0, "decelerate": 0.7, "order": 1},
-    "kpi-totals": {"effect": "entrance_fade", "duration": 0.52, "delay": 0.07, "decelerate": 0.7, "order": 2},
-    "gap-card": {"effect": "entrance_fade", "duration": 0.52, "delay": 0.14, "decelerate": 0.7, "order": 3},
-    "takeaway": {"effect": "entrance_fade", "duration": 0.52, "delay": 0.41, "decelerate": 0.7, "order": 4}
+    "data-card": {
+     "effect": "entrance_fade",
+     "duration": 0.52,
+     "delay": 0,
+     "decelerate": 0.7,
+     "order": 1
+    },
+    "completeness-bars": {
+     "effect": "entrance_wipe",
+     "effect_options": {
+      "direction": "down"
+     },
+     "duration": 1.0,
+     "delay": 0.07,
+     "decelerate": 0.7,
+     "order": 2
+    },
+    "kpi-totals": {
+     "effect": "entrance_fade",
+     "duration": 0.52,
+     "delay": 0.14,
+     "decelerate": 0.7,
+     "order": 3
+    },
+    "gap-card": {
+     "effect": "entrance_fade",
+     "duration": 0.52,
+     "delay": 0.21,
+     "decelerate": 0.7,
+     "order": 4
+    },
+    "takeaway": {
+     "effect": "entrance_fade",
+     "duration": 0.52,
+     "delay": 0.41,
+     "decelerate": 0.7,
+     "order": 5
+    }
    }
   },
   "05_核对计划": {
-   "animation": {"trigger": "with-previous"},
+   "animation": {
+    "trigger": "with-previous"
+   },
    "groups": {
-    "plan-card": {"effect": "entrance_wipe", "effect_options": {"direction": "left"}, "duration": 1.0, "delay": 0, "decelerate": 0.7, "order": 1}
+    "plan-card": {
+     "effect": "entrance_fade",
+     "duration": 0.52,
+     "delay": 0,
+     "decelerate": 0.7,
+     "order": 1
+    },
+    "check-plan-gantt": {
+     "effect": "entrance_wipe",
+     "effect_options": {
+      "direction": "left"
+     },
+     "duration": 1.0,
+     "delay": 0.07,
+     "decelerate": 0.7,
+     "order": 2
+    },
+    "plan-legend": {
+     "effect": "entrance_fade",
+     "duration": 0.52,
+     "delay": 0.14,
+     "decelerate": 0.7,
+     "order": 3
+    },
+    "plan-takeaway": {
+     "effect": "entrance_fade",
+     "duration": 0.52,
+     "delay": 0.41,
+     "decelerate": 0.7,
+     "order": 4
+    }
+   }
+  },
+  "06_结束页": {
+   "animation": {
+    "trigger": "with-previous"
+   },
+   "groups": {
+    "ending-title": {
+     "effect": "entrance_fade",
+     "duration": 0.52,
+     "delay": 0,
+     "decelerate": 0.7,
+     "order": 1
+    },
+    "ending-subtitle": {
+     "effect": "entrance_fade",
+     "duration": 0.52,
+     "delay": 0.07,
+     "decelerate": 0.7,
+     "order": 2
+    },
+    "ending-meta": {
+     "effect": "entrance_fade",
+     "duration": 0.52,
+     "delay": 0.14,
+     "decelerate": 0.7,
+     "order": 3
+    }
    }
   }
  }

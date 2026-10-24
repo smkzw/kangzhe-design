@@ -69,4 +69,4 @@
 | `film` | 流程、关系 | 舞台占满宽度，下方状态条 |
 | `full` | 甘特、大表 | 单卡撑满正文区 |
 
-不要把三条 bullet 放进撑满 564 高的卡里（03 TYPE-02 会判 SPARSE / TOP_HEAVY）；内容少时用 `centered` 或缩短卡高，内容多时拆页。正文区整体占用跨度目标 `layout.content_span_target`。参考实现：`examples/reference/htmlppt/`（deck.css 的 `data-preset`）、`examples/reference/pptx/build_svg.py`。
+不要把三条 bullet 放进撑满 564 高的卡里（03 TYPE-02 会判 SPARSE / TOP_HEAVY）；内容少时用 `centered` 或缩短卡高，内容多时拆页。正文区整体占用跨度目标 `layout.content_span_target`（10 G5-SPAN）：内容少的页先给卡片主数字、字段或分栏让卡片有真实内容高度，再放宽卡内留白与行距，不用撑满的空壳凑跨度。参考实现：`examples/reference/htmlppt/`（deck.css 的 `data-preset`）、`examples/reference/pptx/build_svg.py`。

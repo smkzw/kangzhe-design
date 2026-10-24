@@ -1,9 +1,11 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" lang="zh-CN" font-family="Microsoft YaHei, Arial" data-pptx-page-role="cover">
+  <defs><linearGradient id="kz-hero-fade" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FBFCFD" stop-opacity="1"/><stop offset="1" stop-color="#FBFCFD" stop-opacity="0"/></linearGradient></defs>
   <rect id="page-bg" width="1280" height="720" fill="#FBFCFD"/>
   <image id="hero-image" data-pptx-role="background" href="../images/cover_hero.png" x="0" y="40" width="1280" height="720" preserveAspectRatio="xMidYMid slice"/>
+  <rect id="hero-image-fade" data-pptx-role="background" x="0" y="40" width="1280" height="72" fill="url(#kz-hero-fade)"/>
   <image id="logo" data-pptx-role="logo" href="../images/logo.png" x="56" y="44" width="240" height="50" preserveAspectRatio="xMidYMid meet"/>
   <g id="cover-title" data-pptx-bounds="92 164 1096 148">
-    <text x="92" y="214.4" font-size="56" font-weight="bold" fill="#0F1115">研究资料完整性核对</text>
+    <text x="92" y="292.4" font-size="56" font-weight="bold" fill="#0F1115">研究资料完整性核对</text>
   </g>
   <g id="cover-subtitle" data-pptx-bounds="92 322 1096 42">
     <text x="92" y="347.2" font-size="28" fill="#404040">合成示例｜应收 24 份，已收 20 份</text>

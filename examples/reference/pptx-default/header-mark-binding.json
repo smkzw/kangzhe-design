@@ -1,7 +1,7 @@
 {
   "scope": "approved native brand objects copied after ppt-master export; not an exporter",
-  "input_sha256": "646a83be280b45bcefa5d5d890dea0c66cd56ecad20645a77f8fc45d3a5b648f",
-  "output_sha256": "c5f864165b6b6f0add9e4667997e573e76158743c990095c7dbb042d78419f0f",
+  "input_sha256": "f479fbf3114e6e2f0f8d96175338d8db3453f5d97e03dd6c1513bd8e962898a7",
+  "output_sha256": "9bba1a7504387f31bc40e162e3c7e94b1952e8da030540f32afdf74389b8a3cf",
   "asset_sha256": "906dc32ffe4f374ae6cb7e6500236b4680681e67598b7ef4ab438d553c219578",
   "changed_parts": [
     "ppt/slides/slide3.xml",
@@ -18,10 +18,10 @@
         "6"
       ],
       "native_shape_ids": [
-        "51",
-        "52",
-        "53",
-        "54"
+        "55",
+        "56",
+        "57",
+        "58"
       ],
       "native_signatures": [
         "1e3ac3e9f339c7a39590c5e57e9cb569e713d0bb4030910fe67e48aeae57153a",

@@ -7,6 +7,9 @@
    the incoming background and cards fade on their own layers. No ±30px slide shift, so the background stays still. */
 .kz .slide{padding:0;transform:none!important;transition:opacity 0s linear var(--kz-dur-exit),visibility 0s linear var(--kz-dur-exit)}
 .kz .slide.is-active{transition-delay:0s}
+/* The outgoing page's title and chrome leave at once: body pages share the chrome, so only the incoming title is
+   ever seen (no two titles overprinted during the exit window). Print shows every page, so screen only. */
+@media screen{.kz .slide:not(.is-active) .kz-body-title,.kz .slide:not(.is-active) .kz-chrome{visibility:hidden}}
 .kz .slide .kz-bg,.kz .slide .kz-hero-image{opacity:0;transition:opacity var(--kz-dur-page) var(--kz-ease-standard)}
 .kz .slide.is-active .kz-bg,.kz .slide.is-active .kz-hero-image{opacity:1}
 @media (prefers-reduced-motion:reduce){.kz .slide,.kz .slide .kz-bg,.kz .slide .kz-hero-image{transition:none}}
@@ -46,7 +49,7 @@
 .kz .kz-deck-film{position:relative;min-height:0}
 .kz .kz-deck-film .kz-film-stage{height:100%;min-height:0}
 .kz .kz-deck-film .kz-film-carrier{justify-content:center;gap:calc(10px * var(--kz-un,1))}
-.kz .kz-carrier-facts{list-style:none;margin:calc(6 * var(--kz-u)) 0 0;padding:0;display:grid;gap:calc(10 * var(--kz-u));width:min(100%,24em)}
+.kz .kz-carrier-facts{list-style:none;margin:calc(6 * var(--kz-u)) 0 0;padding:0;display:grid;gap:calc(10 * var(--kz-u));width:min(100%,28em)}
 .kz .kz-carrier-facts li{font-size:calc(var(--kz-type-body) * var(--kz-un,1));line-height:1.4;padding:calc(10 * var(--kz-u)) calc(14 * var(--kz-u));border-radius:calc(12 * var(--kz-u));background:var(--kz-thin-face);border:1px solid rgba(var(--kz-face-border-rgb),var(--kz-thin-border-alpha))}
 .kz .kz-deck-nodes{position:absolute;right:0;top:4%;bottom:4%;width:34%;display:flex;flex-direction:column;justify-content:space-around;gap:calc(10 * var(--kz-u));margin:0;padding:0;list-style:none}
 .kz .kz-deck-node{position:relative;z-index:1;padding:calc(12 * var(--kz-u)) calc(16 * var(--kz-u));border-radius:calc(16 * var(--kz-u));background:var(--kz-thin-face);border:1px solid rgba(var(--kz-face-border-rgb),var(--kz-thin-border-alpha));box-shadow:inset 0 1px 0 rgba(255,255,255,.8),var(--kz-elev-thin)}
@@ -67,4 +70,22 @@
 .kz .kz-data-head{display:flex;justify-content:space-between;align-items:baseline;gap:16px}
 .kz .kz-data-head h3{margin:0}
 .kz .kz-data-head span{font-size:calc(var(--kz-type-body-floor) * var(--kz-un,1));color:var(--kz-muted)}
+/* Department legend for the Gantt: swatches use the bar paint (department colour at the bars' .78 opacity). */
+.kz .kz-legend{display:flex;gap:calc(20 * var(--kz-u))}
+.kz .kz-data-head .kz-legend>span{display:inline-flex;align-items:center;gap:calc(8 * var(--kz-u));color:var(--kz-body)}
+.kz .kz-legend i{width:calc(14 * var(--kz-u));height:calc(14 * var(--kz-u));border-radius:calc(4 * var(--kz-u));opacity:.78}
+.kz .kz-table-note,.kz .kz-gantt-note{margin:calc(12 * var(--kz-u)) 0 0;font-size:calc(var(--kz-type-body) * var(--kz-un,1));line-height:1.4;color:var(--kz-body)}
 @media print{.kz .slide{transition:none}.kz .slide .kz-bg,.kz .slide .kz-hero-image{opacity:1}}
+
+/* Lead figure inside a text card: the one number the card is about (03 COPY-04 emphasis; red only for 待确认). */
+.kz .kz-figure{display:flex;align-items:baseline;gap:calc(10px * var(--kz-component-u,1));margin:0 0 calc(14px * var(--kz-component-u,1))}
+.kz .kz-figure b{font-size:calc(var(--kz-type-kpi-value) * var(--kz-component-u,1));line-height:1.1;font-weight:700;color:var(--kz-ink);font-variant-numeric:tabular-nums}
+.kz .kz-figure.is-risk b{color:var(--kz-risk)}
+.kz .kz-figure span{font-size:calc(var(--kz-type-body-floor) * var(--kz-component-u,1));color:var(--kz-body)}
+.kz .kz-card ul.kz-cols-2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:calc(24px * var(--kz-component-u,1));row-gap:calc(10px * var(--kz-component-u,1))}
+.kz .kz-card ul.kz-cols-2>li+li{margin-top:0}
+/* Light text-card pages breathe instead of floating in a band: roomier cards and row gap (13 content_span_target). */
+.kz .kz-body[data-preset^="cards"]{row-gap:calc(36 * var(--kz-u))}
+.kz .kz-body[data-preset^="cards"] .kz-card{padding:calc(var(--kz-pad) * 1.5 * var(--kz-component-u,1))}
+.kz .kz-body[data-preset^="cards"] .kz-card h3{margin-bottom:calc(22px * var(--kz-component-u,1))}
+.kz .kz-body[data-preset^="cards"] .kz-figure{margin-bottom:calc(20px * var(--kz-component-u,1))}

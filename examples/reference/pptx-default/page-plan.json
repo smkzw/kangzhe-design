@@ -448,7 +448,7 @@
      "role": "card_title",
      "font_px": 24,
      "line_height": 1.25,
-     "text": "研究人群与时间窗"
+     "text": "研究对象与时间窗"
     },
     {
      "id": "p03-card_title-7592",
@@ -504,7 +504,14 @@
      "role": "body",
      "font_px": 20,
      "line_height": 1.4,
-     "text": "2 项差异待确认：筛选窗口、终点评价时间点"
+     "text": "待确认差异：2 项；筛选窗口、终点评价时间点"
+    },
+    {
+     "id": "p03-takeaway-1",
+     "role": "takeaway",
+     "font_px": 24,
+     "line_height": 1.4,
+     "text": "版本差异确认之后，再做组间比较"
     }
    ],
    "protected_regions": [
@@ -639,28 +646,14 @@
      "role": "card_title",
      "font_px": 24,
      "line_height": 1.25,
-     "text": "缺口与口径"
-    },
-    {
-     "id": "p04-body-3047",
-     "role": "body",
-     "font_px": 20,
-     "line_height": 1.4,
-     "text": "中心记录缺 3 份"
-    },
-    {
-     "id": "p04-body-7984",
-     "role": "body",
-     "font_px": 20,
-     "line_height": 1.4,
-     "text": "安全性报告缺 1 份"
+     "text": "缺失处理"
     },
     {
      "id": "p04-body-788",
      "role": "body",
      "font_px": 20,
      "line_height": 1.4,
-     "text": "缺失保留为空值，不按零处理，也不插补"
+     "text": "缺失记录保留为空值；不按零处理，也不插补"
     }
    ],
    "protected_regions": [
@@ -797,7 +790,7 @@
      "role": "body",
      "font_px": 20,
      "line_height": 1.4,
-     "text": "补收与版本确认在 2027Q1 内完成"
+     "text": "补收与版本差异确认在 2027Q1 内完成，复核、安全性报告核对与审阅意见在 2027Q2 内完成"
     }
    ],
    "protected_regions": [
@@ -898,7 +891,7 @@
      "role": "hero_subtitle",
      "font_px": 28,
      "line_height": 1.25,
-     "text": "4 份资料 2027Q1 内补收，2 项差异确认后再比较",
+     "text": "4 份资料由医学部牵头，2027Q1 内补收；版本差异确认后再做组间比较",
      "rect": [
       92,
       334,

@@ -5,7 +5,7 @@ import sys
 import zipfile
 from pathlib import Path
 
-K = Path.home() / '.claude/skills/kangzhe-design'
+K = Path(__file__).resolve().parents[3]  # skill root (this file sits in examples/reference/pptx-default/)
 T = json.loads((K / 'tokens/tokens.json').read_text())
 z = zipfile.ZipFile(sys.argv[1])
 names = z.namelist()

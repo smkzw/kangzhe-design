@@ -62,11 +62,17 @@ python3 ${PM}/scripts/pptx_delivery_check.py deck.pptx
 | `pptx_delivery_check` | 绑定后 0 错误、0 建议 |
 | hero 文字框 | 6.7 导出会把文字框收缩到内容大小（封面标题 538×86），偏差超过 HERO-04 的 2 px，因此绑定；绑定后与 tokens 偏差 0 |
 | 原生图表 | `barChart` 簇状柱，两系列 2/12/6/4 与 2/9/6/3，色 #6E7B8C / #D46B08，值轴 0–15、主刻度 5 |
-| 动效 `p:timing` | 目录与研究范围 Fade 0/70/140 ms；资料完整性 Wipe 自底部（presetSubtype 4）+ Fade 70/140 + 观点句 410 ms；核对计划 Wipe 自左（presetSubtype 8） |
+| 动效 `p:timing` | 封面、结束页标题/副标题/元信息 Fade 0/70/140 ms；目录 Fade 0/70/140；研究范围 0/70/140 + 观点句 410；资料完整性 卡头 0、原生柱图 Wipe 自底部（presetSubtype 4）70、KPI 140、缺失处理 210、观点句 410；核对计划 卡头 0、甘特区 Wipe 自左（8）70、图例 140、结论 410 |
 | 讲者备注 | 6 页均有 |
 | 字体 | 主题 latin Arial / ea Microsoft YaHei |
 
+## 7.0.1 审美修订（同一项目内按页修复后重新导出）
+
+研究范围页加观点句、卡片拉高到正文区 0.73；资料完整性页删去重复的逐组缺口条目；核对计划页去掉无标注的季度带、结论补全；封面/目录顶边加渐变消除接缝，封面一行标题贴框底（绑定 `anchor="b"`）；卡壳改为静态装饰，图表、甘特、观点句各自成动画单元；讲稿改阿拉伯数字。复测：checker 0 错误（3 条既有写法建议），`qc_plan` 0 错误，交付检查 0/0，回读 hero 偏差 0。
+
 ## 过程中的教训（已写回规范或工具）
+
+- ppt-master 要求页面根模块的 `data-pptx-bounds` 互不重叠，卡壳与卡内图表不能是两个重叠的根组；需要“卡壳静止、内容逐个入场”时，卡壳写成 `data-pptx-role="decoration"` 的根级图元，卡头、图表、图例、观点句各自成根组。
 
 - Stage 2 确认页会按正文基准重算标题、副标题、注释字号，候选里写的 `typography.sizes` 不会显示；康哲字号要在页面上手动固定，确认后核对 `result.json` 的 `typography.sizes`（adapters/ppt-master.md）。
 - Logo PNG 要登记进 §VIII 与 `spec_lock.md images`，否则是计划外图片。

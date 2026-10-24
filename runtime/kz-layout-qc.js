@@ -94,17 +94,32 @@
  }
  // 03 孤字行：段落/列表项的末行只有一个汉字（可带标点）。按实际渲染行（Range 行框）判定，不按字符数估算。
  function inspectOrphans(root=document.body,{selector='p,li,h1,h2,h3,td,th,.kz-kpi-label,.kz-film-caption,[data-kz-role="body"]'}={}){
-  const cjk=/[\u3400-\u9fff\uf900-\ufaff]/,punct=/[\s，。、；：！？）》」』”’…—·,.;:!?)\]]/;const found=[];
+  const cjk=/[\u3400-\u9fff\uf900-\ufaff]/,punct=/[\s，。、；：！？）》」』”’…—·,.;:!?)\]]/;const found=[],splits=[];
+  const words=typeof Intl.Segmenter==='function'?new Intl.Segmenter('zh-CN',{granularity:'word'}):null;
   for(const el of root.querySelectorAll(selector)){
    if(!el.checkVisibility({checkOpacity:true,checkVisibilityCSS:true})||el.querySelector(selector))continue;
    // A rendered line is a vertical band; a smaller inline run (unit, <small>) whose centre falls inside the band
-   // belongs to the same line even though its glyph top differs.
-   const lines=[],walker=document.createTreeWalker(el,NodeFilter.SHOW_TEXT);let node;
-   while(node=walker.nextNode()){const text=node.textContent;for(let i=0;i<text.length;i++){const r=document.createRange();r.setStart(node,i);r.setEnd(node,i+1);const q=r.getClientRects()[0];if(!q||!q.width)continue;const c=(q.top+q.bottom)/2;let line=lines.find(l=>c>=l.top&&c<=l.bottom);if(!line)lines.push(line={top:q.top,bottom:q.bottom,text:''});line.text+=text[i];}}
-   if(lines.length<2)continue;const last=lines.sort((a,b)=>a.top-b.top).at(-1).text,core=[...last].filter(c=>!punct.test(c));
+   // belongs to the same line even though its glyph top differs. `at` is the line's first offset in the element text.
+   // `full` is the element text with a newline at each <br> or block boundary, so segmentation never joins across them.
+   const lines=[],walker=document.createTreeWalker(el,NodeFilter.SHOW_TEXT|NodeFilter.SHOW_ELEMENT);let node,full='',cut=false;
+   while(node=walker.nextNode()){if(node.nodeType===1){if(node.tagName==='BR'||!getComputedStyle(node).display.startsWith('inline'))cut=true;continue;}
+    if(cut&&full){full+='\n';}cut=false;const text=node.textContent,offset=full.length;full+=text;
+    for(let i=0;i<text.length;i++){const r=document.createRange();r.setStart(node,i);r.setEnd(node,i+1);const q=r.getClientRects()[0];if(!q||!q.width)continue;const c=(q.top+q.bottom)/2;let line=lines.find(l=>c>=l.top&&c<=l.bottom);if(!line)lines.push(line={top:q.top,bottom:q.bottom,text:'',at:offset+i});line.text+=text[i];}}
+   if(lines.length<2)continue;lines.sort((a,b)=>a.top-b.top);const last=lines.at(-1).text,core=[...last].filter(c=>!punct.test(c));
    if(core.length===1&&cjk.test(core[0]))found.push({text:el.textContent.trim().slice(0,40),lastLine:last,tag:el.tagName.toLowerCase()});
+   // A wrap inside a Chinese word (中心记|录) reads as a broken term even when no line is a lone character.
+   if(words)for(const s of words.segment(full)){if(!s.isWordLike||s.segment.length<2||!cjk.test(s.segment))continue;if(lines.slice(1).some(l=>l.at>s.index&&l.at<s.index+s.segment.length))splits.push({text:el.textContent.trim().slice(0,40),word:s.segment,tag:el.tagName.toLowerCase()});}
   }
-  return{status:found.length?'FAIL':'PASS',orphans:found};
+  return{status:found.length?'FAIL':splits.length?'WARN':'PASS',orphans:found,splits};
  }
- g.KZLayoutQC={inspectCard,inspectTextBounds,inspectFold,inspectOrphans,inspect(root=document){return [...root.querySelectorAll('.kz-card')].filter(e=>e.getBoundingClientRect().height>0&&e.checkVisibility({checkOpacity:true,checkVisibilityCSS:true})).map(e=>inspectCard(e));}};
+ // PPT body region (13 BODY-01): vertical span of its direct children over the region height against
+ // layout.content_span_target. Below the floor the page floats in a band; full-height presets read 1.
+ function inspectBodySpan(body=document.querySelector('.kz-body')){
+  const target=g.KZ_TOKENS?.layout?.content_span_target||[.7,.92];if(!body)return{status:'N/A',span:null,target};
+  const b=body.getBoundingClientRect(),rs=[...body.children].filter(c=>c.checkVisibility({checkVisibilityCSS:true})).map(c=>c.getBoundingClientRect()).filter(r=>r.height>0);
+  if(!rs.length||!b.height)return{status:'N/A',span:null,target};
+  const span=(Math.max(...rs.map(r=>r.bottom))-Math.min(...rs.map(r=>r.top)))/b.height;
+  return{status:span<target[0]?'WARN':'PASS',span:+span.toFixed(3),target};
+ }
+ g.KZLayoutQC={inspectCard,inspectTextBounds,inspectFold,inspectOrphans,inspectBodySpan,inspect(root=document){return [...root.querySelectorAll('.kz-card')].filter(e=>e.getBoundingClientRect().height>0&&e.checkVisibility({checkOpacity:true,checkVisibilityCSS:true})).map(e=>inspectCard(e));}};
 })(window);

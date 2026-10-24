@@ -111,4 +111,20 @@ class HeroContracts(unittest.TestCase):
   self.assertEqual(len(cards),2)
   self.assertEqual([''.join(t.itertext()) for t in cards[0].findall(ns+'text')],['01','研究范围','对象'])
   self.assertTrue(all(g.get('data-pptx-bounds') for g in r.findall(ns+'g')))
+ def test_cover_title_rests_on_box_bottom(self):
+  import re
+  from hero_layout import svg_fragment,html_fluid_fragment
+  t=json.loads((R/'tokens/tokens.json').read_text());x,y,w,h=t['hero_layouts']['cover']['title'];f=t['type_px']['cover_title']
+  one=svg_fragment('cover',{'title':'汇报示例'},'bg.png','logo.png');two=svg_fragment('cover',{'title':['第一行','第二行']},'bg.png','logo.png')
+  first=lambda s:float(re.search(r'<g id="hero-cover-title"[^>]*><text x="[^"]+" y="([^"]+)"',s).group(1))
+  self.assertAlmostEqual(first(one),y+h-f*1.25+f*.9,places=3);self.assertAlmostEqual(first(two),y+h-2*f*1.25+f*.9,places=3)
+  self.assertIn('align-items:flex-end',re.search(r'<h1 data-hero-role="cover_title"[^>]*>',html_fluid_fragment('cover',{'title':'汇报示例'},'bg.png','logo.png')).group(0))
+ def test_pushed_down_image_has_seamless_top_edge(self):
+  from hero_layout import svg_fragment,html_fluid_fragment
+  t=json.loads((R/'tokens/tokens.json').read_text());fh=t['hero_layouts']['image_top_fade_px']
+  toc=svg_fragment('toc',{'title':'汇报章节','items':[{'title':'研究范围'}]},'bg.png','logo.png')
+  self.assertIn(f'<rect id="hero-image-fade" data-pptx-role="background" x="0" y="{t["hero_layouts"]["toc"]["image"][1]}" width="1280" height="{fh}"',toc)
+  self.assertNotIn('hero-image-fade',svg_fragment('ending',{'title':'谢谢'},'bg.png','logo.png'))
+  sec=html_fluid_fragment('section',{'number':'01','title':'研究设计'},'bg.png','logo.png');iy=t['hero_layouts']['section']['image'][1]
+  self.assertIn(f'transform:translateY(calc({iy} * var(--kz-u)))',sec);self.assertIn('kz-hero-fade',sec)
 if __name__=='__main__':unittest.main()
