@@ -31,9 +31,9 @@
 - `mountField(root=document)` → `{dispose}`：环境光场随滚动位移（限幅）。
 - `fitFold(fold)` → `{check, dispose}`：首屏容量守卫。`.kz-detail-tall` 在媒体查询允许时先显示，若首屏左栏或舞台的布局底边越出视口，按文档倒序逐个加 `data-kz-fit=overflow` 收起，直到放下；尺寸变化与字体加载后重算。按布局偏移测量，入场位移不算越出。
 - `countUp(el, {to, from=0, decimals=0, duration})` → `{play, seek(p), finish, progress, dispose}`：终值写入 `aria-label`；减少动态或后台时直接终值。
-- `storyboard(states, opts)` → `{frames, duration, holds, enterAt, closeAt, phaseAt(p), staticProgress}`：每个 state 为 `{label, caption, facts?, geometry:{x,y,w,h,r}, tint?}`；输出合法、首尾一致的 Film 关键帧与业务阶段映射。`opts` 默认取 `motion.film.storyboard`，另可传 `staticState`（静态帧所用状态的序号）。`phaseAt` 与 `sample` 用同一采样；把 `staticProgress` 传给 `new Film`，减少动态、打印与 `?preview` 才会停在停留段而不是移动途中。
+- `storyboard(states, opts)` → `{frames, duration, holds, enterAt, closeAt, sceneAt, phaseAt(p), staticProgress}`：每个 state 为 `{label, caption, facts?, geometry:{x,y,w,h,r}, tint?}`；输出合法、首尾一致的 Film 关键帧与业务阶段映射。`opts` 默认取 `motion.film.storyboard`，另可传 `staticState`（静态帧所用状态的序号）。`phaseAt` 与 `sample` 用同一采样；把 `staticProgress` 传给 `new Film`，减少动态、打印与 `?preview` 才会停在停留段而不是移动途中。
 - `drawLinks(svg, pairs)`：`pairs=[{id, from:Element, to:Element, progress}]`，按实时矩形画三次贝塞尔连线，`progress` 决定描绘长度；在 Film `onRender` 中调用即可随载体变形。
-- `new Film(root, {frames, duration, onRender, managedText, staticProgress, minCarrierWidth})`：root 内须有 `.kz-film-stage` 与其中唯一的 `.kz-film-carrier`。帧 `{t,x,y,w,h,r,tint:[r,g,b,a],label,caption}`：至少四帧、t 严格递增且含 0 与 1、几何归一化且不越出舞台、r ∈ [0,0.5]、首尾几何/材质/文字一致。方法 `pause(reason)`、`resume(reason)`、`seek(p)`、`snapshot()`、`dispose()`；没有 play/reset。`onRender(frame, p, film)` 的 frame 带 `index` 与 `textAlpha`；默认模式下 runtime 写 label/caption 并设 `--kz-film-text`。构造成功设 `root.dataset.kzReady='true'`，`kzProgress` 随渲染更新。
+- `new Film(root, {frames, duration, onRender, managedText, staticProgress, minCarrierWidth, scenes})`：root 内须有 `.kz-film-stage` 与其中唯一的 `.kz-film-carrier`。帧 `{t,x,y,w,h,r,tint:[r,g,b,a],label,caption}`：至少四帧、t 严格递增且含 0 与 1、几何归一化且不越出舞台、r ∈ [0,0.5]、首尾几何/材质/文字一致。方法 `pause(reason)`、`resume(reason)`、`seek(p)`、`snapshot()`、`dispose()`；没有 play/reset。传 `scenes`（严格递增、落在 [0,1) 的停点，通常是 `storyboard().sceneAt`）时进入 HTML-PPT 的 scene 模式（06 MOTION-09）：从 `scenes[0]` 开始，不自动循环；另有 `scene`、`moving`、`toScene(i)`、`next()`、`prev()`、`playThrough()`，`next()`/`prev()` 返回 `true` 表示已消费。根节点 `data-kz-scene` 标出当前 scene。`onRender(frame, p, film)` 的 frame 带 `index` 与 `textAlpha`；默认模式下 runtime 写 label/caption 并设 `--kz-film-text`。构造成功设 `root.dataset.kzReady='true'`，`kzProgress` 随渲染更新。
 - `sample(frames, p)`、`validateFrames(frames)`：低级函数。
 
 ## KZCharts
@@ -45,8 +45,24 @@
 ## KZDrilldown
 `new Drilldown({host, onOpen, onClose})`；`push({id, title, render}, trigger)`，render 收到 `(section, drill)`，返回可选 `{pause, resume, dispose}`；`pop()`、`close()`、`snapshot()`、`dispose()`。trigger 位于 `.kz-card` 或 `[data-kz-drill-source]` 内时从该卡片展开，否则原地打开。`close()` 返回 promise：调用时状态即关闭（`snapshot().open=false`、背景隔离解除、`onClose`），折回动画结束、原生 close 并还焦点后兑现；展开中途关闭会反向折回。`snapshot().width` 用布局宽度（`offsetWidth`），不受展开动画的 transform 影响。`KZDrilldown.element(tag, cls, text)` 是用 textContent 建节点的小工具。
 
+## KZScenes（runtime/kz-scenes.js，演示舞台 15）
+`mount(root, {scenes, loop, staticScene, onScene})` → `Stage`。root 内的 `[data-kz-scene-canvas]`（没有则 root）是画布，其中每个 `[data-kz-obj="id"]` 是一个持久对象；可选 `[data-kz-scene-caption]`（说明句）与 `[data-kz-scene-rail]`（状态条，自动生成序号）。
+- scene：`{id, caption, set: {objId: state}, order?: [objId…], hold?}`。状态是相对上一 scene 的增量：`x y w h`（画布比例）、`opacity scale rotate`、`fill color stroke`、`draw`（SVG 描绘 0–1）、`count` + `decimals unit`、`text`、`attr`（数值型 SVG 属性）、`cls`（类名开关）。`from` 是首次出现前的隐藏起点，`via: [[x,y]…]` 是本次运动的途经点。对象写入 `[data-kz-obj-text]` 子节点（若有）。
+- 步进模式（`loop:false`，HTML-PPT）与循环模式（`loop:true`，站点）。方法同 Film 的 scene 接口：`pause resume seek scene moving toScene next prev playThrough snapshot dispose`，另有 `stops`（各 scene 的进度）与 `audit()` → `{scenes, objects, transitions:[{scene, changed, entered, travel, grow, caption}]}`（15 DEMO-03）。时长读 `motion.scenes`。
+- `KZScenes.layout`：`grid(n, {box, cols, gap, valign})`、`bars(values, {box, max, gap})`、`scale(domain, range)`、`rows(n, {box, gap})`、`cols(n, {box, gap})`，都返回画布比例的矩形。
+
+## KZDemo（runtime/kz-demo.js，15 DEMO-02）
+`mount(root, kind, data, {loop, staticScene})` → `Stage`；所有数字与说明句由 data 计算。
+- `units`：`{unit, groups:[{name, due, received}], owner, deadline, note}`
+- `calc`：`{unit, rows:[{name, a, b}], aLabel, bLabel, diffLabel, note}`
+- `story`：`{unit, groups:[{name, a, b}], aLabel, bLabel, gapLabel, takeaway?, note}`
+- `timeline`：`{min, max, tasks:[{id, label, start, end, department}], milestone?:{at, label, flag?}, note}`，季度同 KZGantt
+- `decision`：`{nodes:[{id, label, x, y, w, h?, kind:'in'|'q'|'out'}], edges:[{from, to, label?}], cases:[{id, label, detail, path:[nodeId…]}], intro, summary?, note}`
+- `compare`：`{left, right, leftTag?, rightTag?, rows:[{label, left, right}], rightOrder?, tray, note}`
+示例数据：`examples/motion/data.js`。
+
 ## KZHTMLPPT（adapters/html-ppt-bridge.js）
-维护 `--kz-un` 与 `--kz-u`（adapter「单位：一个比率」）。`bind(deck, factory)` → `{sync, dispose}`：factory 收到每个上游直接子 `.slide`，返回 `{enter, leave, dispose}`；总览克隆不挂载；初始化失败会清理已返回的生命周期。
+维护 `--kz-un` 与 `--kz-u`（adapter「单位：一个比率」）。`bind(deck, factory)` → `{sync, dispose}`：factory 收到每个上游直接子 `.slide`，返回 `{enter(info), leave, dispose, next?, prev?}`；`info = {direction:'forward'|'backward', attended}`。桥接在捕获阶段把翻页键与滑动先交给活动页的 `next()`/`prev()`，返回 `true` 时不交上游（06 MOTION-09）；总览克隆不挂载；初始化失败会清理已返回的生命周期。
 
 ## KZFlagship（runtime/kz-flagship.js，旗舰路线 14）
 `mount(deck, {logo})` → `{ready, frozen, transition, measure, rebuildLenses, dispose}`（`transition` 供 QC 读取当前转场与是否播放了整页光波）。加载顺序在 kz-tokens.js 之后、项目装配之前，CSS 用 `kz-flagship.css`，`body` 加类 `kzf`。它在 deck 下方建一张全屏光场 canvas，在顶层建身份胶囊（`logo` 为官方 Logo 原件的相对路径），给 `.kzf-lens` 生成位移透镜，并监听上游 `.is-active` 变化来驱动光转场；不改导航、hash 与 `.is-active`。

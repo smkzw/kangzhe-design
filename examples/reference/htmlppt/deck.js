@@ -1,5 +1,6 @@
 /* Additive wiring only: the upstream runtime owns navigation, hash, overview, presenter and print.
-   One lifecycle per direct .slide child (KZHTMLPPT.bind); every component pauses when its slide is inactive. */
+   One lifecycle per direct .slide child (KZHTMLPPT.bind); every component pauses when its slide is inactive.
+   The film steps by scene: the bridge offers next/previous presses to life.next()/prev() first (06 MOTION-09). */
 (function () {
   'use strict';
   const deck = document.querySelector('.deck'), D = window.KZ_DECK_DATA, mq = matchMedia('(prefers-reduced-motion: reduce)');
@@ -13,15 +14,27 @@
   const bridge = KZHTMLPPT.bind(deck, slide => {
     const page = KZMotion.mountPage(slide);
     const filmRoot = slide.querySelector('[data-kz-film]');
-    const film = filmRoot ? KZRefSite.mountFoldFilm(filmRoot, deckFilm) : null;
+    const demoRoot = slide.querySelector('[data-kz-demo-kind]');
+    // One scene stepper per slide: the carrier film or a demonstrative stage (15 DEMO); both step by scene.
+    const film = filmRoot ? KZRefSite.mountFoldFilm(filmRoot, deckFilm, { scenes: true })
+      : demoRoot ? KZDemo.mount(demoRoot, demoRoot.dataset.kzDemoKind, D.demos[demoRoot.dataset.kzDemoData]) : null;
     film?.pause('engine-inactive');
     const ce = slide.querySelector('[data-kz-chart]'), chart = ce ? KZCharts.mount(ce, D[ce.dataset.kzChart]) : null;
     const ge = slide.querySelector('[data-kz-gantt]'), gantt = ge ? KZGantt.mount(ge, D[ge.dataset.kzGantt]) : null;
     const life = {
-      enter() {
+      // info.direction 'backward': entered from a later slide, so show the last scene complete;
+      // info.attended false (presenter window, deep link): play the scenes through once.
+      enter(info = {}) {
         if (frozen()) { page.finish(); chart?.finish(); gantt?.finish(); film?.seek(film.staticProgress); return; }
-        page.enter(); film?.resume('engine-inactive'); chart?.play(); gantt?.play();
+        page.enter(); chart?.play(); gantt?.play();
+        if (film) {
+          film.toScene(info.direction === 'backward' ? film.scenes.length - 1 : 0);
+          if (!info.attended && info.direction !== 'backward') film.playThrough();
+          film.resume('engine-inactive');
+        }
       },
+      next() { return !frozen() && !!film?.next(); },
+      prev() { return !frozen() && !!film?.prev(); },
       leave() { page.leave(); film?.pause('engine-inactive'); chart?.pause(); gantt?.pause(); },
       finish() { page.finish(); chart?.finish(); gantt?.finish(); film?.seek(film.staticProgress); },
       dispose() { lives.delete(life); for (const x of [page, film, chart, gantt]) x?.dispose(); },

@@ -66,6 +66,12 @@
       if(activeCarriers.has(this.carrier))throw Error('电影载体已由另一时钟挂载，请先dispose');
       this.carrier.dataset.kzCarrierId=this.carrier.dataset.kzCarrierId||('kz-carrier-'+(++serial));
       this.identity=this.carrier;this.p=0;this.raf=0;this.last=0;this.disposed=false;
+      // Scene mode (HTML-PPT, 06 MOTION-09): progress stops at each scene; next()/prev() move between them, no loop.
+      if(options.scenes!=null){
+        const sc=options.scenes;
+        if(!Array.isArray(sc)||!sc.length||sc.some((t,i)=>!Number.isFinite(t)||t<0||t>=1||(i&&t<=sc[i-1])))throw Error('scene 定格点须为 0–1 内严格递增的进度');
+        this.scenes=sc.slice();this.p=this.target=sc[0];
+      }else this.scenes=null;
       this.reasons=new Set();this.abort=new AbortController();this.signal=this.abort.signal;
       this.onRender=options.onRender||(()=>{});this.staticProgress=options.staticProgress??tk('film.static_progress',.74);
       // A project business clock may own text; frame geometry remains managed here.
@@ -97,6 +103,7 @@
       s.left=(f.x*100)+'%';s.top=(f.y*100)+'%';s.width=(f.w*100)+'%';s.height=(f.h*100)+'%';
       const radius=Math.min(this.stage.clientWidth*f.w,this.stage.clientHeight*f.h)*f.r;
       s.borderRadius=radius+'px';s.backgroundColor=`rgba(${f.tint[0]},${f.tint[1]},${f.tint[2]},${f.tint[3]})`;
+      if(this.scenes)this.root.dataset.kzScene=String(this.scene);
       if(this.managedText){
         if(this.label&&this.label.textContent!==f.label)this.label.textContent=f.label;
         if(this.caption&&this.caption.textContent!==f.caption)this.caption.textContent=f.caption;
@@ -105,16 +112,46 @@
       this.onRender(f,this.p,this);
       this.root.dataset.kzProgress=this.p.toFixed(5);
     }
-    tick(now) {
+    tick() {
       this.raf=0;if(this.disposed||this.reasons.size)return;
-      const dt=this.last?Math.min(now-this.last,100):0;this.last=now;
-      this.p=(this.p+dt/this.duration)%1;this.render();this.raf=requestAnimationFrame(t=>this.tick(t));
+      // performance.now(), not the rAF timestamp: some engines stamp frames on a vsync grid that runs slower than
+      // the wall clock (ego lite 0.6.1: 891 ms of stamps over 1495 ms), which would stretch every motion.
+      const now=performance.now();
+      // Real elapsed time, so a dropped-frame display never slows the film down. Pause/resume resets `last`,
+      // so background time is never added; a single stall is capped at film.max_frame_gap_ms.
+      const dt=this.last?Math.min(now-this.last,tk('film.max_frame_gap_ms',2000)):0;this.last=now;
+      if(this.scenes){this.p=Math.min(this.target,this.p+dt/this.duration);this.render();if(this.p<this.target)this.raf=requestAnimationFrame(()=>this.tick());return;}
+      this.p=(this.p+dt/this.duration)%1;this.render();this.raf=requestAnimationFrame(()=>this.tick());
     }
+    run(){if(!this.disposed&&!this.reasons.size&&!this.raf){this.last=0;this.raf=requestAnimationFrame(()=>this.tick());}}
     pause(reason='user') {if(this.disposed)return;this.reasons.add(reason);cancelAnimationFrame(this.raf);this.raf=0;this.last=0;}
-    resume(reason='user') {if(this.disposed)return;this.reasons.delete(reason);if(!this.reasons.size&&!this.raf){this.last=0;this.raf=requestAnimationFrame(t=>this.tick(t));}}
-    seek(p) {if(this.disposed)return;if(!Number.isFinite(p))throw Error('进度不是有限数');this.p=clamp(p);this.last=0;this.render();}
-    snapshot(){return {progress:this.p,geometry:this.geometry,carrierId:this.carrier.dataset.kzCarrierId,sameNode:this.carrier===this.identity,connected:this.carrier.isConnected,running:!!this.raf,reasons:[...this.reasons],style:{left:this.carrier.style.left,top:this.carrier.style.top,width:this.carrier.style.width,height:this.carrier.style.height,radius:this.carrier.style.borderRadius,color:this.carrier.style.backgroundColor},rect:this.carrier.getBoundingClientRect().toJSON()};}
-    dispose(){if(this.disposed)return;this.pause('disposed');this.disposed=true;this.abort.abort();this.io.disconnect();this.resize.disconnect();this.mq.removeEventListener('change',this.mqChange);delete this.root.dataset.kzReady;delete this.root.dataset.kzProgress;this.root.style.removeProperty('--kz-film-text');activeFilms.delete(this.root);activeCarriers.delete(this.carrier);}
+    resume(reason='user') {if(this.disposed)return;this.reasons.delete(reason);this.run();}
+    seek(p) {if(this.disposed)return;if(!Number.isFinite(p))throw Error('进度不是有限数');this.p=clamp(p);this.target=this.p;this.last=0;this.render();}
+    /* ---------- Scenes ---------- */
+    // Index of the last scene reached (a scene whose stop is at or behind the current progress).
+    get scene(){if(!this.scenes)return -1;let i=0;while(i<this.scenes.length-1&&this.p>=this.scenes[i+1]-1e-6)i++;return i;}
+    get moving(){return !!this.scenes&&this.p<this.target-1e-6;}
+    toScene(i){if(!this.scenes)throw Error('电影未启用 scene');this.seek(this.scenes[Math.max(0,Math.min(this.scenes.length-1,Math.trunc(i)))]);}
+    // Next scene: finish a move in progress, else play the move into the next scene and stop there.
+    // The static hold before that move is skipped (it changes nothing on screen), so a press plays motion at once.
+    next(){
+      if(!this.scenes||this.disposed||this.reasons.has('reduced-motion'))return false;
+      const stop=this.scenes.find(t=>t>this.p+1e-6);if(stop===undefined)return false;
+      if(this.moving||this.reasons.size){this.seek(stop);return true;}
+      const held=this.frames.filter(f=>f.t>=this.p&&f.t<stop).at(-1),a=sample(this.frames,this.p,0),b=held&&sample(this.frames,held.t,0);
+      if(b&&['x','y','w','h','r'].every(k=>Math.abs(a[k]-b[k])<1e-6)&&a.tint.every((v,j)=>Math.abs(v-b.tint[j])<1e-6)&&a.label===b.label&&a.caption===b.caption)this.p=held.t;
+      this.target=stop;this.run();return true;
+    }
+    // Previous scene: cut back to it (no rewind, FILM-04); a move in progress returns to the scene it left.
+    prev(){
+      if(!this.scenes||this.disposed||this.reasons.has('reduced-motion'))return false;
+      const stop=[...this.scenes].reverse().find(t=>t<this.p-1e-6);if(stop===undefined)return false;
+      this.seek(stop);return true;
+    }
+    // Unattended entry (presenter window, deep link): play every remaining scene once at reading pace, then stop.
+    playThrough(){if(!this.scenes)throw Error('电影未启用 scene');this.target=this.scenes.at(-1);this.run();}
+    snapshot(){return {progress:this.p,scene:this.scene,moving:this.moving,geometry:this.geometry,carrierId:this.carrier.dataset.kzCarrierId,sameNode:this.carrier===this.identity,connected:this.carrier.isConnected,running:!!this.raf,reasons:[...this.reasons],style:{left:this.carrier.style.left,top:this.carrier.style.top,width:this.carrier.style.width,height:this.carrier.style.height,radius:this.carrier.style.borderRadius,color:this.carrier.style.backgroundColor},rect:this.carrier.getBoundingClientRect().toJSON()};}
+    dispose(){if(this.disposed)return;this.pause('disposed');this.disposed=true;this.abort.abort();this.io.disconnect();this.resize.disconnect();this.mq.removeEventListener('change',this.mqChange);delete this.root.dataset.kzReady;delete this.root.dataset.kzProgress;delete this.root.dataset.kzScene;this.root.style.removeProperty('--kz-film-text');activeFilms.delete(this.root);activeCarriers.delete(this.carrier);}
   }
 
   /* ---------- Pointer light + tilt: one shared critically damped spring loop ---------- */
@@ -128,9 +165,13 @@
     const st=s.el.style;st.setProperty('--kz-lx',s.pos.lx.toFixed(4));st.setProperty('--kz-ly',s.pos.ly.toFixed(4));st.setProperty('--kz-lift',s.pos.lift.toFixed(4));
     return moving;
   }
-  function loop(now){
-    const dt=Math.min((now-(loopLast||now))/1000,1/30);loopLast=now;
-    for(const s of springs)if(!stepSpring(s,dt))springs.delete(s);
+  function loop(){
+    const now=performance.now();
+    // Fixed 1/60 s substeps over the real elapsed time (capped like the film), so the spring keeps its speed
+    // on a dropped-frame display instead of slowing down with the frame rate.
+    const elapsed=Math.min((now-(loopLast||now))/1000,tk('film.max_frame_gap_ms',2000)/1000);loopLast=now;
+    const n=Math.max(1,Math.ceil(elapsed*60)),dt=elapsed/n;
+    for(const s of springs){let moving=true;for(let i=0;i<n&&moving;i++)moving=stepSpring(s,dt);if(!moving)springs.delete(s);}
     loopRaf=springs.size?requestAnimationFrame(loop):0;if(!loopRaf)loopLast=0;
   }
   const kick=s=>{springs.add(s);if(!loopRaf)loopRaf=requestAnimationFrame(loop);};
@@ -208,7 +249,7 @@
           for(const g of glassTargets(el))animations.push(g.animate([{opacity:0},{opacity:1}],{duration:Math.round(tk('duration_ms.card',520)*.62),delay,easing:bez('standard',[.2,0,0,1]),fill:'backwards'}));
           // Inner cascade: title, then each bullet/item, after the shell has started to settle.
           // Table rows join the cascade (reading order, no deformation); cells and charts never move on their own.
-          const items=[...el.querySelectorAll('h2,h3,li,tbody tr,[data-kz-reveal-item]')].filter(n=>!n.closest('.kz-chart,.kz-gantt,.kz-film-stage')&&(n.tagName==='TR'||!n.closest('table'))&&n.closest('[data-kz-reveal]')===el);
+          const items=[...el.querySelectorAll('h2,h3,li,tbody tr,[data-kz-reveal-item]')].filter(n=>!n.closest('.kz-chart,.kz-gantt,.kz-film-stage,.kz-demo')&&(n.tagName==='TR'||!n.closest('table'))&&n.closest('[data-kz-reveal]')===el);
           items.forEach((n,j)=>{
             const title=/^H\d$/.test(n.tagName),dist=title?tk('distance_px.title',10):tk('distance_px.item',6);
             animations.push(n.animate([{opacity:0,translate:`0 ${dist*u}px`},{opacity:1,translate:'0 0'}],{duration:title?tk('duration_ms.title',360):tk('duration_ms.item',360),delay:delay+tk('stagger_ms.group',90)+Math.min(j*tk('stagger_ms.item',45),tk('stagger_ms.max_total',560)),easing:bez('enter',[.05,.7,.1,1]),fill:'backwards'}));
@@ -330,7 +371,9 @@
     let rich=0;states.forEach((s,i)=>{if((s.facts||[]).length>=(states[rich].facts||[]).length)rich=i;});
     if(staticState!==undefined){if(!Number.isInteger(staticState)||staticState<0||staticState>=states.length)throw Error('staticState 超出状态范围');rich=staticState;}
     const staticProgress=(frames[2*rich].t+frames[2*rich+1].t)/2;
-    return {frames,duration:Math.round(total),holds,enterAt,closeAt,phaseAt,staticProgress};
+    // Scene stops for HTML-PPT (06 MOTION-09): the start of each state's hold, where the carrier has arrived.
+    const sceneAt=states.map((_,i)=>frames[2*i].t);
+    return {frames,duration:Math.round(total),holds,enterAt,closeAt,phaseAt,staticProgress,sceneAt};
   }
 
   /* ---------- Relation links inside a film stage ----------
@@ -366,7 +409,7 @@
     render(1);
     return {
       play(){if(disposed)return;cancelAnimationFrame(raf);if(media().matches||document.hidden){finish();return;}let start=null;render(0);
-        const tick=now=>{start??=now;render((now-start)/duration);raf=p<1?requestAnimationFrame(tick):0;};raf=requestAnimationFrame(tick);},
+        const tick=()=>{const now=performance.now();start??=now;render((now-start)/duration);raf=p<1?requestAnimationFrame(tick):0;};raf=requestAnimationFrame(tick);},
       seek:render,finish,get progress(){return p;},
       dispose(){disposed=true;finish();}
     };

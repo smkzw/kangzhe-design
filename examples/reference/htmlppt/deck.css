@@ -31,6 +31,12 @@
 .kz .kz-body[data-preset="split-7-5"]{grid-template-columns:minmax(0,7fr) minmax(0,5fr)}
 .kz .kz-body[data-preset="film"]{grid-template-rows:minmax(0,1fr) auto}
 .kz .kz-body[data-preset="full"]{grid-template-columns:minmax(0,1fr)}
+/* Demo page (15 DEMO-05): reading card left at its content height, scene stage right at full height. */
+.kz .kz-body[data-preset="demo"]{grid-template-columns:minmax(0,4fr) minmax(0,7fr)}
+.kz .kz-body[data-preset="demo"]>:first-child{align-self:center}
+.kz .kz-body[data-preset="demo"]>:first-child .kz-card{height:auto}
+.kz .kz-body[data-preset="demo"]>:last-child{height:100%;min-height:0}
+.kz .kz-deck-demo{height:100%;min-height:0}
 .kz .kz-body>*{min-width:0;min-height:0}
 .kz .kz-body .kz-card{height:100%}
 /* Text cards take their content height (TYPE-02: no full-height shells around three bullets); the card group

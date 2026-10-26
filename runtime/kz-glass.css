@@ -46,6 +46,8 @@
 .kz .kz-card ul,.kz .kz-card ol {padding-left:1.2em;margin:0;}
 .kz .kz-card li+li {margin-top:calc(10px * var(--kz-component-u,1));}
 .kz .kz-card [data-kz-role="body"] {font-size:calc(var(--kz-type-body) * var(--kz-component-u,1));line-height:var(--kz-line-body);}
+/* 03 TYPE-01 auxiliary text (12pt / 16 logical px) on any page: notes, captions, table body, card side facts. */
+.kz .kz-text-secondary,.kz .kz-card .kz-text-secondary,.kz [data-kz-role="secondary"],.kz .kz-card [data-kz-role="secondary"] {font-size:calc(var(--kz-type-secondary) * var(--kz-component-u,1));line-height:var(--kz-line-body);}
 .kz [data-kz-density="compact"] {--kz-type-body:var(--kz-type-body-compact);--kz-pad:var(--kz-pad-compact);}
 /* Thin overlay inside a glass shell: same family, no second blur. */
 .kz .kz-thin {background:var(--kz-thin-face);border-radius:calc(14px * var(--kz-component-u,1));padding:calc(14px * var(--kz-component-u,1)) calc(16px * var(--kz-component-u,1));border:1px solid rgba(var(--kz-face-border-rgb),var(--kz-thin-border-alpha));box-shadow:inset 0 1px 0 rgba(255,255,255,.8),var(--kz-elev-thin);backdrop-filter:none;}
@@ -221,3 +223,71 @@
 
 /* Audience surface: autoplay without player chrome. Internal lifecycle API remains. */
 .kz .kz-film-controls,.kz [data-kz-pause],.kz [data-kz-replay],.kz input[data-kz-progress],.kz [data-kz-progress-text],.kz [data-kz-motion-toggle],.kz .kz-motion-toggle,.kz #motion-toggle,.kz #kz-motion-toggle {display:none!important;}
+
+/* ---------- Demo stages (15 DEMO): KZScenes objects are absolutely placed by the engine (translate / size in px of
+   the canvas); styles here only give them material and type. Text sizes keep the 03 floors via --kz-component-u. ---------- */
+.kz .kz-demo {position:relative;display:grid;grid-template-rows:minmax(0,1fr) auto;gap:calc(10px * var(--kz-component-u,1));min-height:0;height:100%;}
+.kz .kz-demo-canvas {position:relative;min-height:0;overflow:hidden;container-type:inline-size;border-radius:calc(20px * var(--kz-component-u,1));background:linear-gradient(160deg,rgba(255,255,255,.62),rgba(255,248,236,.4));border:1px solid rgba(var(--kz-face-border-rgb),.3);}
+.kz .kz-demo-obj {position:absolute;left:0;top:0;box-sizing:border-box;will-change:translate,opacity;font-size:calc(var(--kz-type-secondary) * var(--kz-component-u,1));line-height:1.35;color:var(--kz-ink);}
+.kz .kz-demo-foot {display:flex;align-items:center;justify-content:space-between;gap:calc(16px * var(--kz-component-u,1));min-height:calc(44px * var(--kz-component-u,1));}
+.kz .kz-demo-caption {margin:0;min-width:0;word-break:keep-all;overflow-wrap:anywhere;font-size:calc(var(--kz-type-body) * var(--kz-component-u,1));line-height:1.4;font-weight:700;color:var(--kz-ink);text-wrap:balance;}
+.kz .kz-demo-rail {display:flex;gap:calc(6px * var(--kz-component-u,1));list-style:none;margin:0;padding:0;flex:none;}
+.kz .kz-demo-rail li {min-width:calc(26px * var(--kz-component-u,1));height:calc(26px * var(--kz-component-u,1));border-radius:calc(9px * var(--kz-component-u,1));display:grid;place-items:center;font:700 calc(var(--kz-type-secondary) * var(--kz-component-u,1))/1 Arial,var(--kz-font);background:rgba(15,17,21,.06);color:var(--kz-muted);transition:background-color var(--kz-dur-item) var(--kz-ease-standard),color var(--kz-dur-item) var(--kz-ease-standard);}
+.kz .kz-demo-rail li[data-state="done"] {background:rgba(255,153,0,.22);color:var(--kz-ink);}
+.kz .kz-demo-rail li[data-state="current"] {background:var(--kz-brand);color:#fff;}
+.kz .kz-demo-tag {flex:none;margin-left:auto;font-size:calc(var(--kz-type-secondary) * var(--kz-component-u,1));color:var(--kz-muted);padding:calc(2px * var(--kz-component-u,1)) calc(10px * var(--kz-component-u,1));border-radius:999px;background:rgba(255,255,255,.7);}
+.kz .kz-demo-mark {aspect-ratio:1;border-radius:22%;background:#D5DBE1;}
+.kz .kz-demo-mark.is-missing {box-shadow:inset 0 0 0 calc(2px * var(--kz-component-u,1)) var(--kz-risk);}
+.kz .kz-demo-mark.is-ghost {background:transparent;box-shadow:inset 0 0 0 calc(2px * var(--kz-component-u,1)) rgba(192,0,0,.45);border:1px dashed rgba(192,0,0,.5);}
+.kz .kz-demo-label,.kz .kz-demo-count,.kz .kz-demo-tick,.kz .kz-demo-edge {text-align:center;}
+.kz .kz-demo-label.is-left {text-align:left;font-size:calc(var(--kz-type-body) * var(--kz-component-u,1));}
+.kz .kz-demo-count {font-size:calc(var(--kz-type-body) * var(--kz-component-u,1));font-weight:700;font-variant-numeric:tabular-nums;}
+.kz .kz-demo-figure {font-size:calc(var(--kz-type-card-title) * var(--kz-component-u,1));font-weight:700;text-align:center;}
+.kz .kz-demo-obj.is-risk,.kz .kz-demo-count.is-risk {color:var(--kz-risk);}
+.kz .kz-demo-label.is-risk,.kz .kz-demo-label.is-on {font-weight:700;}
+.kz .kz-demo-tray {border-radius:calc(16px * var(--kz-component-u,1));border:1.5px dashed rgba(192,0,0,.5);background:rgba(192,0,0,.05);padding:calc(8px * var(--kz-component-u,1));font-size:calc(var(--kz-type-secondary) * var(--kz-component-u,1));font-weight:700;color:var(--kz-risk);text-align:center;}
+.kz .kz-demo-head {font-weight:700;font-size:calc(var(--kz-type-secondary) * var(--kz-component-u,1));color:var(--kz-muted);}
+.kz .kz-demo-head.is-num {text-align:center;}
+.kz .kz-demo-cell {font-size:calc(var(--kz-type-body) * var(--kz-component-u,1));}
+.kz .kz-demo-cell.is-num,.kz .kz-demo-token,.kz .kz-demo-sum,.kz .kz-demo-eq {text-align:center;font-family:Arial,var(--kz-font);font-variant-numeric:tabular-nums;}
+.kz .kz-demo-token {font-size:calc(var(--kz-type-body) * var(--kz-component-u,1));font-weight:700;border-radius:calc(10px * var(--kz-component-u,1));background:rgba(110,123,140,.16);padding:calc(2px * var(--kz-component-u,1)) 0;}
+.kz .kz-demo-token.is-b {background:rgba(255,153,0,.2);}
+.kz .kz-demo-op {text-align:center;font-size:calc(var(--kz-type-body) * var(--kz-component-u,1));color:var(--kz-muted);}
+.kz .kz-demo-sum {font-size:calc(var(--kz-type-card-title) * var(--kz-component-u,1));font-weight:700;text-align:left;}
+.kz .kz-demo-eq {font-size:calc(var(--kz-type-kpi-value) * var(--kz-component-u,1));font-weight:700;line-height:1.1;}
+.kz .kz-demo-check {font-size:calc(var(--kz-type-body) * var(--kz-component-u,1));font-weight:700;color:var(--kz-statistics);}
+.kz .kz-demo-tick {font-size:calc(var(--kz-type-secondary) * var(--kz-component-u,1));color:var(--kz-muted);border-left:1px solid rgba(15,17,21,.12);}
+.kz .kz-demo-tick.is-on {color:var(--kz-ink);font-weight:700;}
+.kz .kz-demo-bar {border-radius:calc(6px * var(--kz-component-u,1));background:var(--kz-medical);z-index:2;}
+.kz .kz-demo-bar.is-statistics {background:var(--kz-statistics);}
+.kz .kz-demo-bar.is-pv {background:var(--kz-pv);}
+.kz .kz-demo-bar.is-comparator {background:#6E7B8C;z-index:1;}
+.kz .kz-demo-bar.is-gap {background:repeating-linear-gradient(135deg,rgba(192,0,0,.75) 0 4px,rgba(192,0,0,.35) 4px 8px);z-index:3;}
+.kz .kz-demo-done {color:var(--kz-statistics);font-weight:700;font-size:calc(var(--kz-type-body) * var(--kz-component-u,1));}
+.kz .kz-demo-playhead {background:var(--kz-risk);border-radius:2px;z-index:4;}
+.kz .kz-demo-band {background:rgba(255,153,0,.12);border-radius:calc(10px * var(--kz-component-u,1));z-index:0;}
+.kz .kz-demo-flag {text-align:center;font-weight:700;color:var(--kz-ink);}
+.kz .kz-demo-axis {background:rgba(15,17,21,.35);}
+.kz .kz-demo-callout {font-size:calc(var(--kz-type-card-title) * var(--kz-component-u,1));font-weight:700;text-align:right;}
+.kz .kz-demo-links {position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-events:none;}
+.kz .kz-demo-links path {stroke-width:2.5;fill:none;}
+/* Node boxes are fractions of the canvas, so their label size follows the canvas width (cqw) between the
+   secondary and body roles; every node on a stage gets the same size (03 TYPE-03). */
+.kz .kz-demo-node {display:grid;place-items:center;padding:0 min(calc(10px * var(--kz-component-u,1)),1cqw);border-radius:calc(14px * var(--kz-component-u,1));background:rgba(255,255,255,.88);border:1px solid rgba(var(--kz-face-border-rgb),.45);font-size:clamp(calc(var(--kz-type-secondary) * var(--kz-component-u,1)),2.5cqw,calc(var(--kz-type-body) * var(--kz-component-u,1)));line-height:1.25;white-space:nowrap;font-weight:700;text-align:center;box-shadow:var(--kz-elev-thin);}
+.kz .kz-demo-node.is-out {background:rgba(255,248,236,.95);}
+.kz .kz-demo-node.is-on {border-color:var(--kz-brand);box-shadow:0 0 0 2px rgba(255,153,0,.35);}
+.kz .kz-demo-edge {font-size:calc(var(--kz-type-secondary) * var(--kz-component-u,1));color:var(--kz-muted);background:rgba(255,255,255,.8);border-radius:999px;}
+.kz .kz-demo-case {padding:calc(4px * var(--kz-component-u,1)) calc(10px * var(--kz-component-u,1));border-radius:999px;background:var(--kz-ink);color:#fff;font-size:calc(var(--kz-type-secondary) * var(--kz-component-u,1));white-space:nowrap;text-align:center;z-index:5;}
+.kz .kz-demo-doc {border-radius:calc(18px * var(--kz-component-u,1));background:rgba(255,255,255,.75);border:1px solid rgba(var(--kz-face-border-rgb),.4);box-shadow:var(--kz-elev-thin);}
+.kz .kz-demo-row {display:flex;flex-wrap:wrap;align-items:center;align-content:center;justify-content:space-between;column-gap:calc(8px * var(--kz-component-u,1));padding:0 calc(10px * var(--kz-component-u,1));border-radius:calc(10px * var(--kz-component-u,1));background:rgba(110,123,140,.1);font-size:calc(var(--kz-type-secondary) * var(--kz-component-u,1));line-height:1.3;}
+.kz .kz-demo-row-k {color:var(--kz-muted);white-space:nowrap;}
+.kz .kz-demo-tray-k {font-size:calc(var(--kz-type-secondary) * var(--kz-component-u,1));font-weight:700;color:var(--kz-ink);}
+.kz .kz-demo-row-v {font-weight:700;color:var(--kz-ink);white-space:nowrap;}
+.kz .kz-demo-row.is-diff {background:rgba(192,0,0,.1);}
+.kz .kz-demo-row.is-diff .kz-demo-row-v {color:var(--kz-risk);}
+.kz .kz-demo-mark-sign {text-align:center;font-size:calc(var(--kz-type-secondary) * var(--kz-component-u,1));color:var(--kz-statistics);font-weight:700;}
+.kz .kz-demo-mark-sign.is-diff {color:var(--kz-risk);}
+/* Demo split layouts: reading side complete and still, stage side carries the scenes (15 DEMO-05). */
+.kz .kz-demo-split {display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:calc(24px * var(--kz-component-u,1));min-height:0;}
+.kz .kz-demo-split[data-side="left"] {grid-template-columns:minmax(0,7fr) minmax(0,5fr);}
+@media (prefers-reduced-motion:reduce){.kz .kz-demo-rail li{transition:none}}

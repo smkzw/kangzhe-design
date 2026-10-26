@@ -1,6 +1,6 @@
 # 06 动作、编排与电影
 
-本章拥有动作词汇（token）、编排、电影，以及 HTML-PPT 与 PPTX 的动效接入；数据揭示的语义归 05 CHART-04，指针光与倾斜归 02 ELEV-02，下钻展开归 07 DRILL-05，它们都使用本章的 token 与编排。HTML-PPT 保留上游翻页控制，站点与流式保留自然滚动。动画在观众端自然自动发生，不出现播放、暂停、重播、进度条、时间码或“开始播放下一页”等控件（包括悬停唤出的）；后台暂停与 QC seek 接口保留，不属于观众界面。
+本章拥有动作词汇（token）、编排、电影，以及 HTML-PPT 与 PPTX 的动效接入；演示性动画的形式、密度与内容依据归 15 DEMO，它用本章的时钟、scene 步进与生命周期；数据揭示的语义归 05 CHART-04，指针光与倾斜归 02 ELEV-02，下钻展开归 07 DRILL-05，它们都使用本章的 token 与编排。HTML-PPT 保留上游翻页控制，站点与流式保留自然滚动。站点与流式的动画在观众端自然自动发生；HTML-PPT 的电影与演示按 scene 随演讲者原有的翻页键与滑动推进（MOTION-09）。两者都不出现播放、暂停、重播、进度条、时间码或“开始播放下一页”等控件（包括悬停唤出的）；后台暂停与 QC seek 接口保留，不属于观众界面。
 
 ## 动作词汇 MOTION-03
 全部取自 `tokens.motion`，runtime 生成为 `--kz-ease-*`、`--kz-dur-*`、`--kz-dist-*` 变量，JS 通过 `KZ_TOKENS.motion` 读取。
@@ -49,9 +49,32 @@
 html-ppt-skill 自带的 `animations.css`（data-anim）与 `fx-runtime` 不在康哲 deck 中加载：其中多数属于上面的禁止项，且不处理减少动态、不可 seek。不加载之后，上游的 A 键也不再注入动画。需要的有方向入场（fade-up/left/right）、依次出现、连线描绘等语义，由 MOTION-04 与 `KZMotion.drawLinks` 实现，每种动作只有一个实现。
 
 ## HTML-PPT 动效 MOTION-08
-- 生命周期只用 `KZHTMLPPT.bind(deck, factory)`：每个上游直接子 `.slide` 一个生命周期，enter 时 `mountPage.enter()`、图表 play、电影 `resume('engine-inactive')`；leave 时反向；overview 克隆不挂载。
+- 生命周期只用 `KZHTMLPPT.bind(deck, factory)`：每个上游直接子 `.slide` 一个生命周期，`enter(info)` 时 `mountPage.enter()`、图表 play、电影或演示定位到入场 scene 后 `resume('engine-inactive')`；leave 时反向；overview 克隆不挂载。有 scene 的页另实现 `next()` / `prev()`（MOTION-09）。
 - 翻页：上游给 `.slide` 0.5s 透明度渐变和 ±30px 横移。康哲 deck 在品牌层改为“容器瞬时切换、离开页在退出窗口（`duration_ms.exit`）内保持可见、背景图与卡片各自淡入”，去掉横移；理由是容器透明度渐变会让整页玻璃失效再跳回（02 LG-04），横移会让同一张背景错位重影。减少动态下全部取消过渡。参考实现 `examples/reference/htmlppt/deck.css`。
 - 不改写上游导航、hash 或 `.is-active`；dialog 内所有按键不冒泡到上游（07 DRILL-04）。
+
+## HTML-PPT 按 scene 步进 MOTION-09
+HTML-PPT 是演讲者控场的放映。页内的电影（FILM）与演示（15 DEMO）不按站点的方式连续自动循环，而是切成 scene：电影的每个 `states` 项是一个 scene，演示的每个 `scenes` 项是一个 scene。每次按键只播放一个 scene 的运动，然后停住。
+
+| 输入 | 本页还有下一个 scene | 已在最后一个 scene |
+|---|---|---|
+| →、↓、空格、PageDown、Enter，左滑、上滑 | 播放进入下一个 scene 的运动并停住 | 翻到下一页（上游） |
+| ←、↑、PageUp、Backspace，右滑、下滑 | 瞬时回到上一个 scene（不倒带） | 在 scene 0 时翻到上一页 |
+
+- **运动中再按一次**：立即完成当前运动并停在该 scene，不跳过下一个 scene。
+- **入场**：
+  - 演讲者亲手翻入时（`motion.film.scene.attended_window_ms` 内有本地按键、滑动或点击），只显示 scene 0，等待下一次按键；
+  - 无人操作的入场（演讲者窗口同步、深链、首次加载）一次走完全部 scene 后停住，观众屏不会停在空白的起始态；
+  - 从后一页退回时直接显示最后一个 scene。
+- **桥接**：
+  - `adapters/html-ppt-bridge.js` 在捕获阶段先把按键与滑动交给当前页的 `next()` / `prev()`：返回 `true` 表示本页消费，返回其他值则交还上游。
+  - 上游没有绑定 ↑/↓ 与纵向滑动，桥接在本页无 scene 可走时把它们转成 →/← 交给上游。
+  - 滑动阈值与上游一致（`motion.film.scene.swipe_min_px`、`swipe_ratio`、`swipe_max_ms`）。
+  - 输入框、按钮、dialog、甘特编辑、总览与讲稿窗口内的按键不拦截。
+- **运动速度**：按真实时间进行，每个 scene 的运动时长取电影 `storyboard.move_ms` 或演示 `scenes.move_ms`；HTML-PPT 没有停留段，停留由演讲者决定。
+- **减少动态与静态帧**：减少动态、冻结、打印时显示静态总览帧，按键直接翻页。
+- **讲稿**：讲稿按 scene 分段（09）。
+- **站点与流式**：仍按 FILM-03/04 自动循环，不接受这些按键。
 
 ## PPTX 动效 MOTION-07（经 ppt-master）
 动效写在 ppt-master 项目的 `animations.json` 侧车，由上游 `animation_config.py validate` 校验、`svg_to_pptx.py --animation-config animations.json` 导出。
@@ -68,13 +91,13 @@ html-ppt-skill 自带的 `animations.css`（data-anim）与 `fx-runtime` 不在�
 
 ## 动画电影
 ### 什么才算电影 FILM-01
-同时具备：有材料依据的叙事问题；至少三个有关联的阅读状态（film-plan 的 `states` 另含一个回到首状态的收束帧，所以至少 4 项）；一个可识别并持续存在的主载体；建立、解释、关系变化、收束的顺序；自动推进；首尾无跳切地接续；静态完整信息随时可读。
+同时具备：有材料依据的叙事问题；至少三个有关联的阅读状态（film-plan 的 `states` 另含一个回到首状态的收束帧，所以至少 4 项）；一个可识别并持续存在的主载体；建立、解释、关系变化、收束的顺序；推进方式符合轨道（站点与流式自动推进、首尾无跳切地接续；HTML-PPT 按 scene 由演讲者推进，MOTION-09）；静态完整信息随时可读。
 
 相邻主要状态必须同时满足：(a) 主载体几何（x/y/w/h/r，归一化到舞台；tint 按通道 ÷255）至少一项变化超过 `motion.film.state_delta_min`；(b) 至少一个新的可见信息对象（文本、节点、连线）进入，或既有对象的可读内容实质增加。收束段还须先让上一状态的内部信息退出或归位，再收小载体。只换标题、几何相同、或载体膨胀而里面没有新信息，都不算独立状态，应合并并缩短总时长。`relations` 必须有可见的 DOM 对应物（节点、连线或高亮），只写在说明文字里的关系不算。
 
 不算电影：背景粒子、几张卡轮流淡入、滚轮不动就不推进、录制的视频、截图之间交叉淡入。
 
-**站点首页、每个独立章节页和流式文档首页的首屏舞台默认放电影。** 材料达不到本条（没有三个有依据的关联状态）时，舞台改放有依据的关系图或 ECharts 图表，page-plan 写 `fold_stage` 与理由，不为凑电影编造状态。流式一级章节入口用章节电影或章节首区块。不要求每个小标题都循环。HTML-PPT 的流程、关系、章节页优先用电影，密集原文表与统计明细页用稳定的分组入场即可。
+**站点首页、每个独立章节页和流式文档首页的首屏舞台默认放电影。** 材料达不到本条（没有三个有依据的关联状态）时，舞台改放有依据的关系图或 ECharts 图表，page-plan 写 `fold_stage` 与理由，不为凑电影编造状态。流式一级章节入口用章节电影或章节首区块。不要求每个小标题都循环。HTML-PPT 的流程、关系、章节页优先用电影，密集原文表与统计明细页用稳定的分组入场即可。只有卡片入场和卡片间连线的页面不算电影，也不算演示；讲方法、规则、计算、数据或计划的页面，按 15 DEMO-01 配演示舞台。
 
 ### 先写电影设计书 FILM-PLAN
 每部电影一份 `film-plan.json`（`schemas/film-plan.schema.json`）：`id / page_id / question / audience_message`、`source_claim_ids`（合成示例标 synthetic）、`carrier_id`、`protected_regions`（运动对象按扫掠包络）、`states`（几何、材质、文案、数据、解释任务）、`relations`（谁、何时、为什么，无依据的因果不画成因果箭头）、`timing`、`loop_contract / static_summary`（写明由哪些已有 DOM 承担静态总览：电影节点、状态条、左栏要点；不另建总览卡，见 13 FOLD-01）` / lifecycle_api / audience_playback_ui=false / reduced_motion / cleanup`。含数量的电影旁附数据对账表：画面对象 → 源字段 → 单位 → 计算 → 受众标签，条目数与字段数、单版本与两版本比较分别核对。
@@ -92,18 +115,20 @@ html-ppt-skill 自带的 `animations.css`（data-anim）与 `fx-runtime` 不在�
 - 阶段计划：稳定时间轴上任务条依序延伸；用户点击条即暂停电影进入编辑，动画不覆盖修改。
 
 ### 时间 FILM-03
-参考时长约 36 秒（`motion.film.default_ms`），通常 3–6 个阅读状态；停留由信息量决定：中文约 5–7 字/秒加起读时间，关键说明至少 2 秒。文字稳定后才开始计停留；关键观点和限制必须在第一圈就完整呈现并可读。`KZMotion.storyboard(states)` 按这一规则从状态列表生成关键帧，参数在 `motion.film.storyboard`：
+本条约束站点与流式的连续循环；HTML-PPT 的 scene 只按 `move_ms` 运动，没有停留段（MOTION-09）。参考时长约 36 秒（`motion.film.default_ms`），通常 3–6 个阅读状态；停留由信息量决定：中文约 5–7 字/秒加起读时间，关键说明至少 2 秒。文字稳定后才开始计停留；关键观点和限制必须在第一圈就完整呈现并可读。`KZMotion.storyboard(states)` 按这一规则从状态列表生成关键帧，参数在 `motion.film.storyboard`：
 
 停留 = max(`min_hold_ms`, 字数 ÷ `chars_per_second` + `read_start_ms`)；状态间移动 `move_ms`；最后用 `close_ms` 收回首状态。
 
-它同时返回 `phaseAt(p)`、`enterAt[]` 和 `staticProgress`。标题、编号、节点、连线和数值都由 `phaseAt(p)` 取当前状态，不各自维护阈值表；`phaseAt` 与载体用同一个采样器，状态条不会先于载体文字切换。
+它同时返回 `phaseAt(p)`、`enterAt[]`、`sceneAt[]`（每个状态停留段的起点，HTML-PPT 的 scene 停点）和 `staticProgress`。标题、编号、节点、连线和数值都由 `phaseAt(p)` 取当前状态，不各自维护阈值表；`phaseAt` 与载体用同一个采样器，状态条不会先于载体文字切换。
 
 ### 首尾接续 FILM-04
-起点与终点是同一叙事语境：最后一段把载体带回首状态，x/y/w/h/r/tint/文字逐项相同（容差 `motion.film.seek_tolerance`），速度在接缝处趋近零；不黑帧、不白闪、不瞬移、不在接缝偷偷隐藏载体。业务上不适合回圈时设计“回到总览”的尾段，不用无语义的倒带。
+适用于连续循环（站点、流式）。HTML-PPT 的 scene 模式不回圈：最后一个 scene 之后再按键就翻页。起点与终点是同一叙事语境：最后一段把载体带回首状态，x/y/w/h/r/tint/文字逐项相同（容差 `motion.film.seek_tolerance`），速度在接缝处趋近零；不黑帧、不白闪、不瞬移、不在接缝偷偷隐藏载体。业务上不适合回圈时设计“回到总览”的尾段，不用无语义的倒带。
 
 ### 控制与生命周期 FILM-05
 - 暂停原因是集合：`hidden / offscreen / editing / modal / dialog / reduced-motion / engine-inactive / capture / qc`；只有对应原因解除才恢复，解除一个不清除其他。离屏或幻灯片不活动时停 RAF；恢复不因累计后台时间跳段。
 - `seek(p)` 直接得到完整一致的状态（几何、文字、交叉淡入、节点、连线、数值都由 p 决定），不依赖播放路径；QC 可冻结指定进度。
+- **时钟**：所有时钟（电影、演示、图表、甘特、计数、弹簧）都读 `performance.now()`，不用 rAF 回调里的时间戳。部分浏览器的时间戳会慢于真实时间。单帧最大步长为 `motion.film.max_frame_gap_ms`，不按每帧 100ms 之类截断，否则低帧率时整部电影成倍变慢。弹簧按 1/60 秒定步长子步积分。帧率低时只掉帧，时长不变。
+- **scene 接口**（Film 传 `scenes`，演示舞台天然具备）：`scene`、`moving`、`toScene(i)`、`next()`、`prev()`、`playThrough()`；`next()` 播放到下一个停点后停住，`prev()` 瞬时回到上一个停点，二者返回 `true` 表示已消费（MOTION-09）。
 - 挂载、卸载、再进入不重复注册监听，不重复初始化 ECharts，不留定时器；组件拥有 pause/resume/seek/dispose；同一属性只有一个动画写入方，重复挂载在改属性之前拒绝。
 - 中断路径只终止本次清理拥有的补间及其写入的属性，不对同一目标做不分属性的 kill/clear。
 - 性能：承载 backdrop-filter 的表面不逐帧动画 width/height/x/y。runtime 的电影载体因此不带 backdrop-filter，改用高散射面加 overlay 阴影。

@@ -71,6 +71,7 @@ def validate(plan,manifest=None,asset_root=None):
    role=el['role'];font=el['font_px'];byrole.setdefault(role,set()).add((round(font,3),round(el['line_height'],3)))
    floor=tokens['type_px']['reference'] if role=='reference' else tokens['type_px']['body_floor']
    if font<floor-.01:add('FONT-FLOOR',pid+'/'+el['id'],'字号低于该角色最低值')
+   if role=='secondary' and abs(font-tokens['type_px']['secondary'])>.01:add('SECONDARY-TYPE',pid+'/'+el['id'],'辅助文字固定用 type_px.secondary（03 TYPE-01）')
    if flagship:
     if role in FLAG_ROLE and abs(font-FT[FLAG_ROLE[role]])>.01:add('FLAG-TYPE',pid+'/'+el['id'],'旗舰角色字号须取 tokens.flagship.type_px（14 FLAG-07）')
     if role=='footer':add('FLAG-CHROME',pid+'/'+el['id'],'旗舰不用固定页脚，由身份胶囊锚定（14 FLAG-06）')
@@ -86,7 +87,7 @@ def validate(plan,manifest=None,asset_root=None):
     expected=tokens['type_px']['body_compact' if p['body_profile']=='compact' else 'body']
     if abs(font-expected)>.01:add('BODY-PROFILE',pid+'/'+el['id'],'正文未使用整页统一 profile')
   for role,styles in byrole.items():
-   if role in ['body','card_title','chart_label'] and len(styles)>1:add('TYPE-UNIFORM',pid+'/'+role,'同页同角色字号或行距不一致')
+   if role in ['body','card_title','chart_label','secondary'] and len(styles)>1:add('TYPE-UNIFORM',pid+'/'+role,'同页同角色字号或行距不一致')
   for source in p['sources']:
    if source['visible'] and source['kind'] not in ['scientific_paper','guideline','consensus','guidance']:add('CITATION',pid+'/'+source['id'],'该资料类型不添加观众可见来源脚注')
   for region in p['protected_regions']:

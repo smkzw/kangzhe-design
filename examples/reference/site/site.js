@@ -6,18 +6,21 @@
   const life = [];
 
   // First-screen film from a storyboard: carrier facts, step rail, nodes and links share the film clock.
-  function mountFoldFilm(root, spec) {
+  // {scenes:true} (HTML-PPT) stops at each state for the presenter (06 MOTION-09); sites keep the loop.
+  function mountFoldFilm(root, spec, { scenes = false } = {}) {
     const sb = KZMotion.storyboard(spec.states);
     const nodes = qa('[data-kz-node]', root), steps = qa('.kz-steps [data-phase]'), svg = q('.kz-film-links', root), facts = q('.kz-carrier-facts', root);
     const span = .03, linkProgress = (i, p) => {
-      // Node i joins when state i begins (node 0 from the start); all but node 0 withdraw in the closing move.
+      // Node i joins during the move into state i and is complete when the carrier arrives (the scene stop);
+      // node 0 is there from the start; all but node 0 withdraw in the closing move.
       const start = sb.enterAt[i] ?? 0;
       if (i === 0) return 1;
       if (p < start) return 0;
-      return p < sb.closeAt ? clamp01((p - start) / span) : 1 - clamp01((p - sb.closeAt) / span);
+      const stop = sb.sceneAt[i] ?? sb.closeAt; // more nodes than states: the extra ones complete at the close
+      return p < sb.closeAt ? (stop > start ? clamp01((p - start) / (stop - start)) : 1) : 1 - clamp01((p - sb.closeAt) / span);
     };
     let shown = -1;
-    const film = new KZMotion.Film(root, { frames: sb.frames, duration: sb.duration, staticProgress: sb.staticProgress, onRender(f, p, self) {
+    const film = new KZMotion.Film(root, { frames: sb.frames, duration: sb.duration, staticProgress: sb.staticProgress, scenes: scenes ? sb.sceneAt : null, onRender(f, p, self) {
       const phase = sb.phaseAt(p);
       steps.forEach((n, i) => { n.dataset.state = i < phase ? 'done' : i === phase ? 'current' : 'todo'; n.setAttribute('aria-current', i === phase ? 'step' : 'false'); });
       const pairs = nodes.map((n, i) => { const k = linkProgress(i, p); n.style.opacity = String(.65 + .35 * k); n.style.translate = `${(1 - k) * 8}px 0`; return { id: 'n' + i, from: self.carrier, to: n, progress: k }; });

@@ -27,6 +27,7 @@
 - 非 16:9 视口的固定文字框宽度取 `min(w·u, 视口宽 − x·u − 右留距·u)`，背景与正文网格仍铺满。
 - hero 页用 `hero_layout.html_fluid_fragment`。
 - 上游注入的 `.progress-bar` 由 kz-glass.css 隐藏。
+- 上游只绑定 →/←/空格/PageDown/PageUp/Enter/Backspace 与横向滑动；↑/↓ 与纵向滑动由桥接在本页无 scene 可走时转交为 →/←。
 
 ### 翻页与动效
 品牌层覆盖上游翻页（06 MOTION-08）：`.kz .slide{transform:none; transition: opacity 0s linear var(--kz-dur-exit)}`、`.is-active` 去掉延迟、背景图与 hero 主视觉各自淡入、减少动态取消过渡。生命周期用 `KZHTMLPPT.bind`：
@@ -38,7 +39,7 @@ const bridge = KZHTMLPPT.bind(document.querySelector('.deck'), slide => {
 });
 ```
 
-图表、甘特、Film 加入同一个 factory：enter 时 play / `resume('engine-inactive')`，leave 时 pause。`?preview`、打印、减少动态走静态终态（`page.finish()`、`chart.finish()`、`film.seek(film.staticProgress)`）。完整示例：`examples/reference/htmlppt/deck.js`。
+图表、甘特、Film 与演示舞台加入同一个 factory：enter 时 play / `resume('engine-inactive')`，leave 时 pause。Film 用 `{scenes: storyboard.sceneAt}` 构造，演示用 `KZDemo.mount`，生命周期再实现 `next()` / `prev()` 并在 `enter(info)` 里按 `info.direction` 定位到 scene 0 或最后一个 scene，`info.attended` 为假时 `playThrough()`（06 MOTION-09）。`?preview`、打印、减少动态走静态终态（`page.finish()`、`chart.finish()`、`film.seek(film.staticProgress)`）。完整示例：`examples/reference/htmlppt/deck.js`。
 
 ### 已知限制
 - O 总览中的图表/甘特缩略图为空（上游先克隆后挂载）；需要时在组件挂载后重建总览，或在交付说明中列为限制。

@@ -118,7 +118,7 @@
       renderProgress(0);
       let start=null;
       const curve=easeData();
-      function tick(now){if(disposed)return;start??=now;const p=Math.min(1,(now-start)/duration);renderProgress(curve(p));if(p<1)raf=requestAnimationFrame(tick);else raf=0;}
+      function tick(){if(disposed)return;const now=performance.now();start??=now;const p=Math.min(1,(now-start)/duration);renderProgress(curve(p));if(p<1)raf=requestAnimationFrame(tick);else raf=0;}
       raf=requestAnimationFrame(tick);
     }
     try{

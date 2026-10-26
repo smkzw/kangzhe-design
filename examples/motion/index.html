@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>康哲视觉系统 · 演示动画形式</title><link rel="icon" href="data:,">
+<link rel="stylesheet" href="../../runtime/kz-tokens.css"><link rel="stylesheet" href="../../runtime/kz-glass.css">
+<style>
+body{margin:0}.gal{position:relative;isolation:isolate;min-height:100vh;padding:48px clamp(24px,4vw,72px) 64px;font-size:18px}
+.gal h1{font-size:44px;line-height:1.25;margin:0 0 10px}.gal-lede{font-size:18px;color:var(--kz-body);max-width:48em;margin:0 0 36px}
+.gal-form{margin:0 0 56px}.gal-form .kz-demo-split{align-items:stretch}.gal .kz-demo.gal-stage{height:clamp(440px,60vh,620px)}
+.gal-card h2{font-size:24px;line-height:1.35;margin:0 0 12px}.gal-card p,.gal-card li{font-size:18px;line-height:1.55}
+.gal-card ul{margin:0;padding-left:1.1em}.gal-card code{font-size:16px}.gal-k{display:inline-block;font-size:16px;color:var(--kz-muted);margin-bottom:8px}
+.gal pre{font-size:16px;line-height:1.5;background:rgba(15,17,21,.04);border-radius:14px;padding:16px 18px;overflow:auto;margin:12px 0 0}
+@media(max-width:1000px){.gal .kz-demo-split{grid-template-columns:1fr}}
+</style></head>
+<body class="kz"><main class="gal"><div aria-hidden="true" class="kz-optical-field"></div>
+<header><span class="gal-k">康哲视觉系统 7.1 · 15 DEMO</span><h1>演示动画的六种形式</h1>
+<p class="gal-lede">同一份合成示例（研究资料完整性核对）用六种演示形式讲述。每块舞台都由数据驱动：方块、柱、数字与路径都从数据算出，场景之间对象保持同一身份。站点中自动循环播放；放进 HTML-PPT 时按 scene 由演讲者翻页推进。</p></header>
+<section class="gal-form" data-form="units"><div class="kz-demo-split"><article class="kz-card gal-card"><span class="gal-k">形式 1 · 单位流动</span><h2>一个方块代表一份资料</h2><ul><li>适合：计数、清点、入组与脱落、资料或样本的去向</li><li>动作：散点归组 → 状态着色 → 缺口放大 → 缺失飞入补收清单</li><li>依据：每个方块对应一条记录，数量从数据算出</li></ul></article><div class="gal-stage" data-demo="units"></div></div></section>
+<section class="gal-form" data-form="calc"><div class="kz-demo-split"><article class="kz-card gal-card"><span class="gal-k">形式 2 · 计算演示</span><h2>数字从原表飞进算式</h2><ul><li>适合：剂量换算、窗口期推算、样本量、合计与差额</li><li>动作：原表 → 逐项相加 → 相减得结果 → 逐行核对回原表</li><li>依据：算式与结果都由数据计算，终值即真值</li></ul></article><div class="gal-stage" data-demo="calc"></div></div></section>
+<section class="gal-form" data-form="story"><div class="kz-demo-split"><article class="kz-card gal-card"><span class="gal-k">形式 3 · 数据动画图</span><h2>同一组数据逐幕换编码</h2><ul><li>适合：结果解读、亚组差异、构成与总量</li><li>动作：应收柱 → 叠已收 → 差额标红 → 按缺口重排 → 堆叠成总量</li><li>依据：全程同一刻度；空值不当 0；颜色跟随实体</li></ul></article><div class="gal-stage" data-demo="story"></div></div></section>
+<section class="gal-form" data-form="timeline"><div class="kz-demo-split"><article class="kz-card gal-card"><span class="gal-k">形式 4 · 时间轴推演</span><h2>时间指针逐季走过计划</h2><ul><li>适合：项目计划、访视日程、给药周期、里程碑</li><li>动作：指针逐季推进，任务条随之延伸，完成打勾，里程碑季度展开</li><li>依据：季度模型 [start, end)，每幕说明由任务数据生成</li></ul></article><div class="gal-stage" data-demo="timeline"></div></div></section>
+<section class="gal-form" data-form="decision"><div class="kz-demo-split"><article class="kz-card gal-card"><span class="gal-k">形式 5 · 判定走查</span><h2>示例个案沿规则路径前进</h2><ul><li>适合：入排判定、SAE 上报、偏离处理、资料核对规则</li><li>动作：路径绘出 → 示例 A、B、C 依次走过各自分支 → 结果计数</li><li>依据：路径来自材料中的规则；个案明确标为示例</li></ul></article><div class="gal-stage" data-demo="decision"></div></div></section>
+<section class="gal-form" data-form="compare"><div class="kz-demo-split"><article class="kz-card gal-card"><span class="gal-k">形式 6 · 版本对比</span><h2>两版逐条对齐，差异拉出</h2><ul><li>适合：方案修订、说明书更新、两种做法对比</li><li>动作：两版并排 → 滑到一起对齐 → 一致条目锁定 → 差异条目拉出转交</li><li>依据：逐条比对两版取值，一致与差异由取值算出；只列材料中的条目</li></ul></article><div class="gal-stage" data-demo="compare"></div></div></section>
+<section class="gal-form"><article class="kz-card gal-card"><span class="gal-k">自定义</span><h2>没有合适形式时，直接写 scene</h2>
+<p>舞台里放带 <code>data-kz-obj</code> 的对象，scene 只写变化；没写的属性沿用上一幕。几何取画布比例（0–1）。</p>
+<pre>const stage = KZScenes.mount(root, { loop: true, scenes: [
+  { id: 'a', caption: '应收 24 份', set: { box: { x: .1, y: .3, w: .2, h: .3, fill: '#D5DBE1' } } },
+  { id: 'b', caption: '缺口移到右侧', set: { box: { x: .7, fill: '#C00000', via: [[.4, .1]] } } },
+] });</pre></article></section>
+</main>
+<script src="../../runtime/kz-tokens.js"></script><script src="../../runtime/kz-scenes.js"></script><script src="../../runtime/kz-demo.js"></script>
+<script src="data.js"></script><script src="gallery.js"></script>
+<script src="../../runtime/kz-audience.js"></script>
+</body></html>

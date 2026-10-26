@@ -14,7 +14,9 @@ def files(track,features,route='regular'):
  if track in ['htmlppt','site','stream']:features.add('film')
  if track in ['site','stream']:features.add('drilldown')
  # 'motion' = PPTX animations.json / Morph (06 MOTION-07); HTML tracks always read 06 through 'film'.
- table={'charts':'05-charts','film':'06-motion-film','motion':'06-motion-film','drilldown':'07-drilldown','gantt':'08-gantt','notes':'09-speaker-notes'}
+ # Any motion brings 15 (demonstrative stages; DEMO-06 is the PPTX degradation).
+ if features&{'film','motion'}:features.add('demo')
+ table={'charts':'05-charts','film':'06-motion-film','motion':'06-motion-film','demo':'15-demo-motion','drilldown':'07-drilldown','gantt':'08-gantt','notes':'09-speaker-notes'}
  for f in sorted(features):
   if f not in table:raise ValueError('Unknown feature: '+f)
   base+=['design_specs/'+table[f]+'.md']
@@ -63,7 +65,7 @@ def index(track,features,stage='all',seen=None,route='regular'):
          'scope':'reading index only; no stage or artifact is accepted by this output',
          'note':'Earlier owner requirements remain active. Hash matches permit reuse only when actually read in the same compatible session; final verification retains every applicable owner. Read implementation definitions when the public API is insufficient, not whole unrelated sources.'}
 if __name__=='__main__':
- ap=argparse.ArgumentParser();ap.add_argument('--track',choices=['pptx','htmlppt','site','stream'],required=True);ap.add_argument('--route',choices=['regular','flagship'],default='regular',help='14 FLAG-01: chosen route for pptx/htmlppt');ap.add_argument('--features',default='',help='comma list: charts,film,motion,drilldown,gantt,notes');ap.add_argument('--stage',choices=['all',*STAGES],default='all');ap.add_argument('--seen',type=Path,help='JSON {"fingerprints": {relative_owner_path: actually_read_sha256}}');a=ap.parse_args()
+ ap=argparse.ArgumentParser();ap.add_argument('--track',choices=['pptx','htmlppt','site','stream'],required=True);ap.add_argument('--route',choices=['regular','flagship'],default='regular',help='14 FLAG-01: chosen route for pptx/htmlppt');ap.add_argument('--features',default='',help='comma list: charts,film,motion,demo,drilldown,gantt,notes');ap.add_argument('--stage',choices=['all',*STAGES],default='all');ap.add_argument('--seen',type=Path,help='JSON {"fingerprints": {relative_owner_path: actually_read_sha256}}');a=ap.parse_args()
  seen=json.loads(a.seen.read_text())['fingerprints'] if a.seen else None
  if seen is not None and (not isinstance(seen,dict) or any(not isinstance(k,str) or not isinstance(v,str) for k,v in seen.items())):ap.error('--seen fingerprints must map paths to string hashes')
  print(json.dumps(index(a.track,set(filter(None,a.features.split(','))),a.stage,seen,a.route),ensure_ascii=False,indent=2))

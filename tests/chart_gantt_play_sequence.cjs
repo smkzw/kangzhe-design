@@ -21,6 +21,7 @@ function clock(){let now=0,next=1;const queued=new Map();return{
  requestAnimationFrame(cb){const id=next++;queued.set(id,cb);return id;},
  cancelAnimationFrame(id){queued.delete(id);},
  pending(){return queued.size},
+ now(){return now;},
  step(dt){now+=dt;const cbs=[...queued.values()];queued.clear();for(const cb of cbs)cb(now);}}}
 const drain=(c,dt)=>{for(let i=0;i<16&&c.pending();i++)c.step(dt);};
 const CHART_DATA={kind:'bar',categories:['Q1','Q2','Q3','Q4'],series:[{id:'s1',name:'系列一',values:[3,null,5,7]}],unit:'份'};
@@ -33,7 +34,7 @@ function chartsEnv({matches=false}={}){
  const doc=tracker(),win=tracker(),mq=tracker();doc.hidden=false;mq.matches=matches;
  const echarts={init:()=>chart,graphic:{LinearGradient:function(){}}};
  const context={window:win,document:doc,matchMedia:()=>mq,ResizeObserver:class{observe(){}disconnect(){}},echarts,KZ_TOKENS:TOKENS,
-  requestAnimationFrame:c.requestAnimationFrame,cancelAnimationFrame:c.cancelAnimationFrame,innerHeight:720};
+  requestAnimationFrame:c.requestAnimationFrame,cancelAnimationFrame:c.cancelAnimationFrame,performance:{now:c.now},innerHeight:720};
  win.echarts=echarts;
  vm.runInNewContext(SOURCES.charts,context);
  return {chart,doc,win,mq,clock:c,context};
@@ -47,7 +48,7 @@ function ganttEnv({matches=false}={}){
  const mq=tracker();mq.matches=matches;
  const win=tracker();win.echarts={init:()=>chart};
  const context={window:win,document:doc,matchMedia:()=>mq,ResizeObserver:class{observe(){}disconnect(){}},
-  AbortController,echarts:win.echarts,KZ_TOKENS:TOKENS,requestAnimationFrame:c.requestAnimationFrame,cancelAnimationFrame:c.cancelAnimationFrame,innerHeight:720};
+  AbortController,echarts:win.echarts,KZ_TOKENS:TOKENS,requestAnimationFrame:c.requestAnimationFrame,cancelAnimationFrame:c.cancelAnimationFrame,performance:{now:c.now},innerHeight:720};
  vm.runInNewContext(SOURCES.gantt,context);
  const root=element('div');
  return {chart,doc,win,mq,clock:c,root,context};

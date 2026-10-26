@@ -1,3 +1,86 @@
+# 7.1.2 · 2026-10-26
+
+## KZ7-1026-B08 · HTML-PPT 按 scene 步进、12pt 辅助文字、演示性动画
+用户反馈三点：
+1. HTML-PPT 的动画没有按 scene 截断，默认以超慢速连续播放，演讲者无法手动控制。要求按 scene 区分，滑动或方向键后开启下一个 scene。
+2. 最小字号放开到约 PowerPoint 的 12 号字。
+3. 用本技能做的动画大多仍是卡片入场加卡片间连线。要求按页面内容做演示性、示例性的动画：形式多样，多 scene、高密度、大幅度，例如左右分栏，一边展示本页内容，一边用动画做示范，或做成基于数据的动画数据图；并把要求写进技能，提供可复用的示例与框架。
+
+原因（已核实）
+- 慢速：
+  - 电影时钟每帧最多推进 100ms，帧率低时整部电影成倍变慢（1 fps 时慢 10 倍）；
+  - 时钟取 rAF 回调的时间戳，而 ego lite 0.6.1 的时间戳慢于真实时间（实测 1495ms 内只走了 891ms）。
+- 无法控制：HTML-PPT 照搬了站点的 36 秒连续循环，FILM-01 又把“自动推进”写成必备条件，放映时没有给演讲者留出节奏。
+
+HTML-PPT scene 步进（06 MOTION-09）
+- 每个电影状态就是一个 scene。入场只显示 scene 0。
+- →、↓、空格、PageDown、左滑、上滑：各播放一个 scene 的运动后停住；已在最后一个 scene 时再按才翻页。
+- ←、↑、右滑、下滑：瞬时退回上一个 scene，不倒带。
+- 运动中再按一次：完成当前运动，不会跳过下一个 scene。
+- 从后一页退回：显示最后一个 scene。
+- 演讲者窗口、深链、首次加载等无人操作的入场：一次走完全部 scene。
+- 减少动态：直接翻页。
+- 实现：
+  - `Film` 新增 `scenes` 选项与 `next/prev/toScene/playThrough`；`storyboard` 返回 `sceneAt`；
+  - `html-ppt-bridge.js` 在捕获阶段先把按键与滑动交给活动页；上游没有绑定的 ↑/↓ 与纵向滑动转交为 →/←；
+  - 阈值见 `motion.film.scene`。
+- 时钟（FILM-05）：
+  - 电影、图表、甘特、计数、弹簧一律读 `performance.now()`；
+  - 单帧最大步长改为 `motion.film.max_frame_gap_ms`；弹簧按 1/60 秒定步长积分；
+  - 帧率低时只掉帧，不再变慢。
+- FILM-01/03/04 改为按轨道区分：站点与流式自动循环，HTML-PPT 按 scene 步进。讲稿按 scene 分段（09 NOTES-02）。
+
+12pt 辅助文字（03 TYPE-01）
+- 新增 `secondary` 角色：`type_pt.secondary` 12，`type_px.secondary` 16。
+- 用于注释、图注、表体、图表轴与图例、卡内旁注、状态条与演示舞台标签。任何页都可以用，不必整页切换 compact。
+- 正文仍为 15pt，标题不变；同页同角色仍只有一个字号。
+- page-plan 的角色枚举加入 `secondary`，`qc_plan.py` 新增 SECONDARY-TYPE 检查。
+- 页脚是固定的页面框架，保持 13.5pt。
+
+演示性动画（新增 15 DEMO）
+- DEMO-01 写明何时必须做：讲方法、规则、判定、计算、数据、计划、版本对比的页面要用演示舞台；只有卡片入场和连线不算演示。
+- DEMO-02 形式目录：单位流动、计算演示、数据动画图、时间轴推演、判定走查、版本对比，另可自定义。
+- DEMO-03 密度与幅度门槛：`motion.scenes.density`，由 `Stage.audit()` 出回执。
+- DEMO-04 内容依据：数字与说明句由数据算出，合成示例要标明，并附 scene 台账。
+- DEMO-05 分栏版式：HTML-PPT 用 `data-preset="demo"`，站点用 `.kz-demo-split`。
+- DEMO-06 PPTX 降级：一个 scene 一页，用 Morph 配对。参考实现尚未覆盖。
+- 新增 runtime：
+  - `runtime/kz-scenes.js`（`KZScenes`）：通用演示舞台，支持持久对象、scene 增量、错峰、途经点、步进与循环、seek、`audit()`；
+  - `runtime/kz-demo.js`（`KZDemo`）：六种形式；
+  - `kz-glass.css` 新增 Demo stages 段。
+- 示例：
+  - 新增 `examples/motion/`：六种形式的站点式图库，左右分栏，舞台循环播放；
+  - HTML-PPT 参考 deck 增至 12 页，第 8 页“缺口与补收”（单位流动）、第 9 页“缺失与差异的处理”（判定走查）按 scene 步进，讲稿按 scene 分段；
+  - 参考 deck 的电影页改为 scene 模式。
+- 同步更新：00 规则所有者表、13 BODY-01 加 `demo` 预设、10 G7-SCENE / G7-DEMO、HTML-PPT 与站点轨道、两个 adapter、`runtime/API.md`、SKILL.md 硬规则 5/10/11 与读取顺序；`context_pack.py` 对所有带动效的任务路由到 15。
+
+验证
+- 单元测试 137 项通过，新增 `tests/test_demo_motion.py`：
+  - secondary 字号；
+  - scene 与密度 token 都有使用方；
+  - 时钟不取 rAF 时间戳；
+  - 六种形式都有规范、API、数据与图库；
+  - 参考 deck 的演示页与脚本顺序；
+  - 路由。
+- ego lite 0.6.1.11（Chromium 156）真实按键与触控：
+  - `tests/ego/scene_checks.mjs` 15/15，多次运行均通过；
+  - 新增 `tests/ego/demo_checks.mjs` 16/16：六种形式全部达到密度门槛；每个 scene 在 1600×1000 与 1280×800 下无文字重叠、出界、溢出；无论前进、后退还是循环回到某个 scene，画面都一致；deck 第 8、9 页逐 scene 步进、退回、翻页；焦点在按钮上时 → 仍进一个 scene；减少动态；无脚本错误；
+  - `flagship_checks.mjs` 19/19；
+  - `runtime_checks.mjs` 16/20：失败的 4 项（离开时弹簧回到静止、下钻收回与焦点归还）与 7.1.1 的已知失败相同（当时 15/20）。
+- 独立代码审查发现 6 处缺陷，均已修复并补了回归检查：
+  - 往回切 scene 或循环回到开头时，后面 scene 设的类名与文字不复原；
+  - 数值与文字写同一槽位时，继承来的数值压过新文字（units 缺口 scene 显示“9 / 12 份”而不是“缺 3 份”）；
+  - 焦点在按钮或链接上时，按键直接翻页并跳过本页 scene（上游不看事件目标）；
+  - 预备状态带上了途经点，循环收尾时对象倒走；
+  - 画满的连线仍带虚线，在大画布上可能画不到终点；
+  - `site.js` 节点数多于状态时会出现 NaN。
+- 两个 ego 脚本改为在文档加载前注入错误收集。此前 `scene_checks` 读取的错误列表没有任何代码写入，无论有无脚本错误都会通过。
+- 未覆盖：
+  - 正常帧率 Chrome/Edge 的放映观感；
+  - S 演讲者窗口中逐 scene 同步的实际观感；
+  - 平板真机滑动；
+  - PPTX 的演示降级。
+
 # 7.1.1 · 2026-10-24
 
 ## KZ7-1024-B07 · 旗舰玻璃改为半透磨砂

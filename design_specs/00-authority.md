@@ -17,7 +17,7 @@
 | 字号、中文表达、标题、观点、引用、孤字 | 03-typography-language |
 | 生图、保护区、资产登记 | 04-image-pipeline |
 | 数值图（语义、配色、揭示动画、PPTX 原生） | 05-charts |
-| 动作词汇、编排、电影、HTML-PPT 与 PPTX 动效 | 06-motion-film |
+| 动作词汇、编排、电影、时钟、HTML-PPT scene 步进与 PPTX 动效 | 06-motion-film |
 | 下钻 | 07-drilldown |
 | 甘特 | 08-gantt |
 | 讲者备注 | 09-speaker-notes |
@@ -25,6 +25,7 @@
 | 封面、目录、章节、尾页 | 11-hero-layouts |
 | 首屏、页面构图与信息密度、验收视口 | 13-layout-density |
 | 选路阻断与判定、旗舰路线（光场、页面角色光量、透镜、身份胶囊、旗舰 PPTX 配套） | 14-flagship |
+| 演示性动画（何时必须做、形式、密度与幅度、内容依据、分栏版式、PPTX 降级） | 15-demo-motion |
 
 一个主题只在其所有者处定义；其他章节只引用编号，不复述条文。
 

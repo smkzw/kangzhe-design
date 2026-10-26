@@ -9,6 +9,7 @@
 | 卡标题 | 18pt | 24 |
 | 正文（standard） | 15pt | 20 |
 | 正文下限 / compact 整页 | 12pt | 16 |
+| 辅助文字（secondary） | 12pt | 16 |
 | 观点句 | 18–20pt | 24–26.67 |
 | 参考文献（唯一可更小） | 8pt | 10.67 |
 
@@ -23,6 +24,13 @@
 | KPI 标签、状态条说明、导航、正文下限 | `site_body_floor`（16） |
 
 封面、目录、章节、尾页使用 11 的专用字号，不套这里的页标题。听众必须读的图表轴、图例、表体、标签、注释、按钮、编辑字段和下钻文字同样不低于下限。
+
+**辅助文字 secondary**（`type_pt.secondary` / `type_px.secondary`）
+- 承担注释、图注、表体、图表轴与图例、卡内旁注、状态条与演示舞台的标签。
+- 任何页都可以用，不必整页切成 compact。卡标题、正文与页标题不受影响。
+- page-plan 的文本角色写 `secondary`，HTML 用 `.kz-text-secondary` 或 `data-kz-role="secondary"`。
+- 不能用来承载正文论点，也不能把放不下的正文改标成 secondary。
+- 页脚是固定的页面框架（13.5pt），不属于这个角色。
 
 - **同页同角色只有一个字号、一个行距、一套间距。** compact 是整页正文档，不是挤不下时给单卡用的开关；降档在 page-plan 写原因。
 - HTML-PPT 的 px 是逻辑画布单位：实际 computed 字号 ÷ `--kz-un` 的使用值来核对（`--kz-un` 由 html-ppt-bridge 维护，见 adapter）。

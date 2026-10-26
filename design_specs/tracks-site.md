@@ -5,12 +5,12 @@
 ## 步骤
 1. **计划**：事实清单 → 页面结构（首页、章节、明细）→ page-plan（`track: site`，`body_profile: responsive`，`target_viewports` 取 `tokens.viewports.site`）→ 每个首屏舞台写 film-plan（06 FILM-PLAN），材料不够电影时写 `fold_stage` 与理由 → `tools/qc_plan.py` 预检。
 2. **资产**：首页与章节首屏用生成主视觉或全站程序化光场（04 IMG-01），登记资产清单。
-3. **页面**：Bento 首屏（13 FOLD-02）、下方段落（FOLD-05）、宽幅下钻（07）。组件接入 `KZMotion.fitFold` 与 `mountPage`（首屏）、`mountSections`（段落）、`mountField`（光场）、`storyboard` + `Film`（电影，传入 `staticProgress`）、`KZCharts`、`KZDrilldown`；接线方式见 `examples/reference/site/site.js`。
+3. **页面**：Bento 首屏（13 FOLD-02）、下方段落（FOLD-05）、宽幅下钻（07）。组件接入 `KZMotion.fitFold` 与 `mountPage`（首屏）、`mountSections`（段落）、`mountField`（光场）、`storyboard` + `Film`（电影，传入 `staticProgress`）、`KZDemo`（讲方法与数据的段落，循环模式，`.kz-demo-split` 分栏，15 DEMO-05）、`KZCharts`、`KZDrilldown`；接线方式见 `examples/reference/site/site.js`。
 4. **验收**：10 的 G5-FOLD（每档视口在电影初始态与静态帧各跑一次 `inspectFold`）、G5-ORPHAN、G7（入场、电影完整周期、减少动态、打印）、G8（下钻按键、滚轮、焦点）；交付说明附 G0–G9 门表。
 
 ## 结构
 - 首页与每个独立章节页：13 FOLD-01/02 的 Bento 首屏（一屏放下，左导读、右电影与状态条）。
-- 首屏以下：13 FOLD-05 的段落（标题 + 说明 + 卡组/图表/表格），段落首次可见时入场。
+- 首屏以下：13 FOLD-05 的段落（标题 + 说明 + 卡组/图表/表格/演示舞台），段落首次可见时入场。讲方法与数据的段落优先用演示舞台（15 DEMO-01）。
 - 明细：07 的宽幅下钻（L0→L1→L2），或独立长文页并有返回来源。进入明细暂停父电影，返回恢复。
 - 页间跳转用跨文档转场（06 MOTION-05），站点头部不动。
 

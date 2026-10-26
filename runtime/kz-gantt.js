@@ -90,7 +90,7 @@
     function play(duration=KZ_TOKENS.motion?.duration_ms?.data??1000){cancelAnimationFrame(raf);raf=0;if(disposed)return;if(mq.matches){finish();return;}progress=0;draw();let start=null;
       // Same data easing as charts: tokens.motion.easing.data (cubic-bezier, solved by bisection).
       const b=KZ_TOKENS.motion?.easing?.data||[.33,1,.68,1],curve=x=>{let lo=0,hi=1;for(let i=0;i<20;i++){const t=(lo+hi)/2,bx=3*(1-t)**2*t*b[0]+3*(1-t)*t*t*b[2]+t**3;bx<x?lo=t:hi=t;}const t=(lo+hi)/2;return 3*(1-t)**2*t*b[1]+3*(1-t)*t*t*b[3]+t**3;};
-      const tick=now=>{if(disposed)return;start??=now;const p=Math.min(1,(now-start)/duration);progress=curve(p);draw();if(p<1)raf=requestAnimationFrame(tick);else raf=0;};raf=requestAnimationFrame(tick);
+      const tick=()=>{if(disposed)return;const now=performance.now();start??=now;const p=Math.min(1,(now-start)/duration);progress=curve(p);draw();if(p<1)raf=requestAnimationFrame(tick);else raf=0;};raf=requestAnimationFrame(tick);
     }
     mq.addEventListener('change',()=>{if(mq.matches)finish();},{signal});
     document.addEventListener('visibilitychange',()=>{if(document.hidden)finish();},{signal});

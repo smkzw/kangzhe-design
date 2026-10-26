@@ -41,7 +41,7 @@
 
 ## Default 路由里的康哲输入
 - Stage 1：画布 `ppt169`（康哲 PPTX 为 1280×720，初始化时可直接 `--format ppt169`），一般选自由设计；康哲不是 ppt-master 的模板工作区。
-- Stage 2：三个方向的配色、字体、正文字号由 tokens 固定（`typography.fixed: true`，正文 20 px），方向之间只在叙事与构图上不同，并在方向说明里写明这一点。**确认页会按正文基准重算标题、副标题、注释字号**（候选里的 `typography.sizes` 只做兼容读入，不显示），所以交接说明里请用户在页面上把它们改成康哲值（标题 32、副标题 24、注释 16 px），确认后核对 `result.json` 的 `typography.sizes`；不一致时由用户在对话里明确更正，Design Spec §I 记下更正来源。
+- Stage 2：三个方向的配色、字体、正文字号由 tokens 固定（`typography.fixed: true`，正文 20 px），方向之间只在叙事与构图上不同，并在方向说明里写明这一点。**确认页会按正文基准重算标题、副标题、注释字号**（候选里的 `typography.sizes` 只做兼容读入，不显示），所以交接说明里请用户在页面上把它们改成康哲值（标题 32、副标题 24、注释 16 px），确认后核对 `result.json` 的 `typography.sizes`；不一致时由用户在对话里明确更正，Design Spec §I 记下更正来源。注释、图注、表体、图表轴与图例、卡内旁注按 03 TYPE-01 的 secondary 角色写 12pt（SVG 16px），任何页都可用，不必把整页切成 compact；页脚仍按 chrome 的 13.5pt。
 - §VIII 与 `spec_lock.md images`：页面引用的每个位图都要登记，包括官方 Logo（复制 `assets/logo_bot.png` 到项目 `images/`，`source=user`、`crop=no-crop`）；漏登记的是计划外图片。
 - Executor：ppt-master 要求页面 SVG 由主 agent 手写，脚本不直接写 `svg_output/`。`hero_layout.svg_fragment`、`brand_fragments.facets` 打印的是片段与参考页，由 agent 拼进页面。
 - 本机若对 `127.0.0.1` 的反向 DNS 很慢（`socket.getfqdn` 秒级），确认页与实时预览的 `--daemon` 会在健康检查超时后被杀；改用不带 `--daemon` 的前台进程放到后台运行，再用浏览器打开。

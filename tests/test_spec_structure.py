@@ -3,7 +3,7 @@ from pathlib import Path
 import json, re, unittest
 R = Path(__file__).resolve().parents[1]
 NORMATIVE = [R / 'SKILL.md', *sorted((R / 'design_specs').glob('*.md')), *sorted((R / 'adapters').glob('*.md')), R / 'runtime/API.md', R / 'runtime/README.md']
-RULE = re.compile(r'\b(CORE|LG|ELEV|TYPE|COPY|IMG|CHART|MOTION|FILM|DRILL|GANTT|NOTES|HERO|FOLD|BODY)-(\d{2}|PPTX|PLAN)\b')
+RULE = re.compile(r'\b(CORE|LG|ELEV|TYPE|COPY|IMG|CHART|MOTION|FILM|DRILL|GANTT|NOTES|HERO|FOLD|BODY|DEMO)-(\d{2}|PPTX|PLAN)\b')
 TOKENS = json.loads((R / 'tokens/tokens.json').read_text())
 
 def text(p):

@@ -6,7 +6,8 @@
 |---|---|---|
 | 站点式 HTML | `site/index.html`、`site/chapter.html` | Bento 首屏（左 4 栏标题/KPI/要点，右 8 栏电影与状态条）；下方段落入场、宽幅下钻、图表与甘特 |
 | 流式 HTML | `stream/index.html` | 同一首屏结构；正文阅读栏 34em + 侧注，章节目录随阅读位置高亮 |
-| HTML-PPT | `htmlppt/index.html` | 由 html-ppt-skill `new-deck.sh` 生成（原始输出 `htmlppt/scaffold.html`），`htmlppt/build.py` 派生；上游 `base.css`/`runtime.js` 原样随包 |
+| HTML-PPT | `htmlppt/index.html` | 由 html-ppt-skill `new-deck.sh` 生成（原始输出 `htmlppt/scaffold.html`），`htmlppt/build.py` 派生；上游 `base.css`/`runtime.js` 原样随包。电影页与第 8、9 页演示按 scene 步进（06 MOTION-09、15 DEMO） |
+| 演示性动画图库（15） | `../motion/index.html` | 六种演示形式的站点式分栏示例，舞台循环播放；数据在 `../motion/data.js` |
 | PPTX | `pptx/` | 经 ppt-master 流程导出，见该目录 README |
 | HTML-PPT 旗舰（14） | `htmlppt-flagship/index.html` | 同一脚手架与素材；`runtime/kz-flagship.*` 绘制光场、透镜与身份胶囊；内容页光退到页边 |
 | PPTX 旗舰（14） | `pptx-flagship/` | 静态光效图（`tools/flagship_plate.py`），玻璃是烘焙透镜图加原生玻璃壳，原生柱图，经 ppt-master 导出 |
@@ -14,7 +15,7 @@
 ## 共同做法
 
 - 阅读内容写在 HTML 里，脚本只负责行为（无 JS 时内容仍完整）。
-- 电影用 `KZMotion.storyboard(states)` 生成关键帧：停留时长按字数计算，最后一段回到首状态；载体内的分项事实、右侧节点与连线、下方状态条都由同一个进度驱动。
+- 电影用 `KZMotion.storyboard(states)` 生成关键帧：站点停留时长按字数计算，最后一段回到首状态；HTML-PPT 用 `sceneAt` 按 scene 步进；载体内的分项事实、右侧节点与连线、下方状态条都由同一个进度驱动。
 - 首屏在 `tokens.viewports` 每一档内一屏放下；可视区高度 ≥1000px 时才显示 `.kz-detail-tall` 次要说明（这些内容在页面其他位置完整可得）。
 
 ## 生图资产

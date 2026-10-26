@@ -88,10 +88,36 @@ def film_page(f):
             f'<ul class="kz-deck-nodes" aria-label="各步产出">{nodes}</ul></div></div>'
             f'<ol class="kz-steps" aria-label="步骤">{steps}</ol>')
 
+DEMOS = {
+    # 15 DEMO: the same synthetic brief, shown as worked demonstrations; every number on stage is computed by
+    # runtime/kz-demo.js from these inputs.
+    'units': {'unit': '份', 'owner': '医学部', 'deadline': '2027Q1', 'note': '合成示例',
+              'groups': [{'name': '方案与修订', 'due': 2, 'received': 2}, {'name': '中心记录', 'due': 12, 'received': 9},
+                         {'name': '实验室数据', 'due': 6, 'received': 6}, {'name': '安全性报告', 'due': 4, 'received': 3}]},
+    'decision': {'note': '合成示例', 'intro': '每份资料都按同一条路径判定',
+                 'nodes': [{'id': 'in', 'label': '资料登记', 'x': .01, 'y': .42, 'w': .14, 'kind': 'in'},
+                           {'id': 'got', 'label': '收到了吗？', 'x': .19, 'y': .42, 'w': .17},
+                           {'id': 'miss', 'label': '保留空值·补收', 'x': .45, 'y': .12, 'w': .26, 'kind': 'out'},
+                           {'id': 'conf', 'label': '差异已确认？', 'x': .45, 'y': .6, 'w': .2},
+                           {'id': 'cmp', 'label': '进入组间比较', 'x': .77, 'y': .38, 'w': .22, 'kind': 'out'},
+                           {'id': 'wait', 'label': '暂不比较', 'x': .77, 'y': .74, 'w': .22, 'kind': 'out'}],
+                 'edges': [{'from': 'in', 'to': 'got'}, {'from': 'got', 'to': 'miss', 'label': '未收到'}, {'from': 'got', 'to': 'conf', 'label': '已收到'},
+                           {'from': 'conf', 'to': 'cmp', 'label': '已确认'}, {'from': 'conf', 'to': 'wait', 'label': '未确认'}],
+                 'cases': [{'id': 'a', 'label': '示例 A', 'detail': '已收，差异已确认', 'path': ['in', 'got', 'conf', 'cmp']},
+                           {'id': 'b', 'label': '示例 B', 'detail': '中心记录缺失', 'path': ['in', 'got', 'miss']},
+                           {'id': 'c', 'label': '示例 C', 'detail': '已收，差异待确认', 'path': ['in', 'got', 'conf', 'wait']}],
+                 'summary': '缺失不按零处理；差异确认之前不做组间比较'},
+}
+
+def demo_page(kind, title, items, figures=()):
+    # Reading side complete and still; the stage beside it steps scene by scene (15 DEMO-05, 06 MOTION-09).
+    return (card(title, items, figures, tilt=False)
+            + f'<div data-kz-reveal><div class="kz-deck-demo" data-kz-demo-kind="{kind}" data-kz-demo-data="{kind}" role="img" aria-label="{escape(title)}的演示"></div></div>')
+
 def legend(depts):
     return '<span class="kz-legend">' + ''.join(f'<span><i style="background:var(--kz-{d})"></i>{n}</span>' for d, n in depts) + '</span>'
 
-TOTAL = 10
+TOTAL = 12
 slides = [
     hero('cover', {'title': '研究资料完整性核对', 'subtitle': '合成示例｜应收 24 份，已收 20 份', 'meta': FOOT, 'title_short': '封面'}, 'cover.webp',
          '今天汇报一个研究资料包的完整性核对，数据是合成的。按计划应收 24 份，目前收到 20 份，还缺 4 份。希望会上把补收和确认的安排定下来。'),
@@ -114,8 +140,16 @@ slides = [
          '<tr><td>方案与修订</td><td>2</td><td>2</td><td>0</td></tr><tr><td>中心记录</td><td>12</td><td>9</td><td><span class="kz-risk">3</span></td></tr><tr><td>实验室数据</td><td>6</td><td>6</td><td>0</td></tr><tr><td>安全性报告</td><td>4</td><td>3</td><td><span class="kz-risk">1</span></td></tr></tbody></table>'
          '<p class="kz-table-note">缺失记录保留为空值，<b>不按零处理，也不插补</b></p></article></div></div>',
          '方案与修订、实验室数据已经收齐，缺口在两组：中心记录缺 3 份，安全性报告缺 1 份。缺的记录在数据里留空，不按零处理，也不插补，这样后面比较时缺口一直看得见。'),
+    body(8, TOTAL, '缺口与补收', 'demo',
+         demo_page('units', '清点结果', ['应收 24 份，已收 20 份', '中心记录缺 3 份，安全性报告缺 1 份', '缺失记录保留为空值，<b>不按零处理，也不插补</b>', '4 份由医学部牵头，<b>2027Q1 内补收</b>'], [('4 份', '缺口', 'risk')]),
+         '【1】先看总量：应收 24 份，一个方块代表一份。【2】按四个资料组分开。【3】收到的变实心，缺的留空，不按零处理。'
+         '【4】缺口集中在中心记录和安全性报告，一共 4 份。【5】这 4 份进入补收清单，由医学部牵头，2027 年一季度内补齐。'),
+    body(9, TOTAL, '缺失与差异的处理', 'demo',
+         demo_page('decision', '判定规则', ['资料未收到：保留空值，进入补收清单', '已收到：先看版本差异是否已确认', '差异确认之后，<b>才做组间比较</b>']),
+         '【1】每份资料走同一条判定路径。【2】示例 A 已收、差异已确认，进入组间比较。【3】示例 B 是缺失的中心记录，保留空值，进入补收清单。'
+         '【4】示例 C 已收，但差异还没确认，先不比较。【5】两条规则：缺失不按零处理，差异确认之前不比较。'),
     hero('section', {'number': '03', 'title': '核对计划', 'title_short': '核对计划'}, 'section.webp', '最后是补收、确认和复核的时间表。'),
-    body(9, TOTAL, '核对计划', 'full',
+    body(11, TOTAL, '核对计划', 'full',
          '<div data-kz-reveal><article class="kz-card kz-data-card" data-kz-no-tilt><div class="kz-data-head"><h3>季度安排</h3>' + legend([('medical', '医学部'), ('statistics', '数统'), ('pv', 'PV')]) + '</div>'
          '<div data-kz-gantt="gantt"></div><p class="kz-gantt-note">补收与版本差异确认<b>在 2027Q1 内完成</b>，复核、安全性报告核对与审阅意见在 2027Q2 内完成</p></article></div>',
          '关键节点是 2027 年一季度。缺的 4 份由医学部从今年四季度开始补收，一季度内补齐；两版方案的差异也在一季度内确认。数统的完整性复核和 PV 的安全性报告核对从一季度做到二季度，二季度由医学部形成审阅意见。'),
@@ -133,9 +167,9 @@ head = ('<!DOCTYPE html>\n<!-- Derived from html-ppt-skill new-deck.sh output (s
 assert '<div class="deck">' in src and 'assets/runtime.js' in src, 'scaffold structure changed upstream; re-read new-deck.sh output'
 body_html = ('<body class="kz" data-fit="fluid">\n<div class="deck">\n' + '\n'.join(slides) + '\n</div>\n'
              '<script src="vendor/html-ppt/assets/runtime.js"></script>\n'
-             + ''.join(f'<script src="{RT}{m}"></script>\n' for m in ['../assets/vendor/echarts.min.js', 'kz-tokens.js', 'kz-motion.js', 'kz-charts.js', 'kz-gantt.js', 'kz-drilldown.js'])
+             + ''.join(f'<script src="{RT}{m}"></script>\n' for m in ['../assets/vendor/echarts.min.js', 'kz-tokens.js', 'kz-motion.js', 'kz-scenes.js', 'kz-demo.js', 'kz-charts.js', 'kz-gantt.js', 'kz-drilldown.js'])
              + '<script src="../../../adapters/html-ppt-bridge.js"></script>\n<script src="../site/site.js"></script>\n'
-             + f'<script>window.KZ_DECK_DATA = {json.dumps(DATA, ensure_ascii=False)};</script>\n<script src="deck.js"></script>\n'
+             + f'<script>window.KZ_DECK_DATA = {json.dumps({**DATA, "demos": DEMOS}, ensure_ascii=False)};</script>\n<script src="deck.js"></script>\n'
              + f'<script src="{RT}kz-audience.js"></script>\n</body></html>\n')
 (HERE / 'index.html').write_text(head + body_html, encoding='utf-8')
 print('wrote', HERE / 'index.html', len(slides), 'slides')

@@ -2,7 +2,7 @@
 
 康哲药业医学部的单一 Liquid Glass 设计技能，覆盖可编辑 PPTX、HTML-PPT、站点式 HTML、流式 HTML。PPTX 始终经 hugohe3/ppt-master 制作，HTML-PPT 始终从 lewislulu/html-ppt-skill 脚手架起步；本包负责品牌与内容表达、图像保护、材质、动效与组件、验收，不替代上游的路由、缩放、导航与导出。
 
-7.1 为 PPTX 与 HTML-PPT 增加旗舰路线（`design_specs/14-flagship.md`，用于对外与顶层汇报：浅色画布上的全屏光场、液态玻璃透镜与身份胶囊），开工前先请用户在常规与旗舰之间选路。
+7.1 为 PPTX 与 HTML-PPT 增加旗舰路线（`design_specs/14-flagship.md`，用于对外与顶层汇报：浅色画布上的全屏光场、液态玻璃透镜与身份胶囊），开工前先请用户在常规与旗舰之间选路。7.1.2 让 HTML-PPT 的电影与演示按 scene 随翻页键与滑动推进，新增 12pt 辅助文字角色，并新增演示性动画（`design_specs/15-demo-motion.md`，六种可复用形式，图库见 `examples/motion/index.html`）。
 
 7.0 是一次分层重构：规范只写设计规则，验收方法集中在 `design_specs/10-quality-gates.md`，事故史移出正文；新增阴影层级与指针光源、token 化的动作词汇与编排、Bento 首屏与密度指标、按浏览器可视区的验收视口，以及四轨的正例。变化逐条见 [CHANGELOG](CHANGELOG.md)，验证状态见 [STATUS.md](STATUS.md)。
 
@@ -31,4 +31,4 @@ python3 tools/build_dist.py            # 生成 dist/kangzhe-design 与 PACKAGE_
 
 需要 Python 3.10+ 与 `requirements.txt`（`jsonschema`、`Pillow`）；安装方法见 [INSTALL.md](INSTALL.md)，当前验证状态见 [STATUS.md](STATUS.md)；浏览器检查需要能发真实指针事件的浏览器驱动（`tests/ego/` 用 ego-browser，`tests/*_browser.py` 用 Playwright）。
 
-打开 `examples/reference/site/index.html` 看站点首屏，`examples/reference/htmlppt/index.html` 看 HTML-PPT（方向键翻页），`examples/component-lab.html` 看组件。内容均为合成示例，不对应真实研究。
+打开 `examples/reference/site/index.html` 看站点首屏，`examples/reference/htmlppt/index.html` 看 HTML-PPT（方向键逐 scene 推进与翻页），`examples/motion/index.html` 看演示性动画，`examples/component-lab.html` 看组件。内容均为合成示例，不对应真实研究。
