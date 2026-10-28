@@ -217,12 +217,43 @@
 .kz.kz-background-paused .kz-float,.kz.kz-background-paused .kz-mark-float {animation-play-state:paused;}
 /* html-ppt upstream injects this outside .deck. Numeric footer remains. */
 .kz .progress-bar {display:none!important;}
+/* 02 LG-02: upstream html-ppt's .card-accent paints a 3px coloured top edge; Kangzhe cards carry no edge bars. */
+.kz .card-accent {border-top:0!important;}
 .kz .kz-card-reading {position:relative;z-index:1;}
 .kz [data-kz-layout="centered"] .kz-card-reading {display:flex;flex-direction:column;justify-content:center;min-height:100%;}
 .kz [data-kz-layout="distributed"] .kz-card-reading {display:flex;flex-direction:column;justify-content:center;gap:calc(36px * var(--kz-component-u,1));min-height:100%;}
 
 /* Audience surface: autoplay without player chrome. Internal lifecycle API remains. */
 .kz .kz-film-controls,.kz [data-kz-pause],.kz [data-kz-replay],.kz input[data-kz-progress],.kz [data-kz-progress-text],.kz [data-kz-motion-toggle],.kz .kz-motion-toggle,.kz #motion-toggle,.kz #kz-motion-toggle {display:none!important;}
+
+/* ---------- Dense pages (13 FOLD-06): a compact chapter head on non-home pages, and a 12-column sheet for
+   everything below the first screen; blocks sit side by side and are as tall as their content. ---------- */
+.kz .kz-chapter {display:grid;grid-template-rows:var(--kz-fold-header) auto;gap:6px;padding:0 var(--kz-gutter) var(--kz-dense-gap);}
+.kz .kz-chapter-title {display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:var(--kz-fold-gap);align-items:end;}
+.kz .kz-chapter-title>:first-child {grid-column:span 5;min-width:0;}
+.kz .kz-chapter-title h1 {font-size:clamp(var(--kz-type-site-h1-min),2.3vw,var(--kz-type-site-h1));line-height:1.2;margin:4px 0 6px;}
+.kz .kz-chapter-title .kz-lede {margin:0;}
+.kz .kz-chapter-title .kz-kpis {grid-column:span 7;grid-template-columns:repeat(4,minmax(0,1fr));}
+.kz .kz-sheet {display:grid;grid-template-columns:repeat(12,minmax(0,1fr));grid-auto-flow:row dense;gap:var(--kz-dense-gap);align-items:stretch;padding:0 var(--kz-gutter) var(--kz-dense-gap);}
+.kz .kz-sheet>* {grid-column:span 12;min-width:0;display:flex;flex-direction:column;}
+.kz .kz-sheet>*>.kz-card {flex:1;}
+.kz .kz-sheet>[data-span="3"] {grid-column:span 3;}
+.kz .kz-sheet>[data-span="4"] {grid-column:span 4;}
+.kz .kz-sheet>[data-span="5"] {grid-column:span 5;}
+.kz .kz-sheet>[data-span="6"] {grid-column:span 6;}
+.kz .kz-sheet>[data-span="7"] {grid-column:span 7;}
+.kz .kz-sheet>[data-span="8"] {grid-column:span 8;}
+.kz .kz-sheet>[data-span="9"] {grid-column:span 9;}
+.kz .kz-sheet-head {display:flex;flex-direction:row;align-items:baseline;gap:16px;flex-wrap:wrap;margin:8px 0 -8px;}
+.kz .kz-sheet-head h2 {font-size:var(--kz-type-page-title);line-height:var(--kz-line-title);margin:0;}
+.kz .kz-sheet-head p {font-size:var(--kz-type-site-body);color:var(--kz-body);margin:0;line-height:1.5;}
+.kz .kz-sheet .kz-card h3 {margin-top:0;}
+.kz .kz-sheet-stage {display:grid;grid-template-rows:auto minmax(0,1fr);gap:10px;}
+.kz .kz-sheet-stage .kz-demo {height:clamp(300px,46vh,var(--kz-dense-stage-max));}
+/* Charts on scrolling pages take their height from the width (HTML-PPT keeps the preset height). */
+.kz:not([data-fit="fluid"]) .kz-sheet .kz-chart,.kz:not([data-fit="fluid"]) .kz-stream .kz-chart {height:auto;aspect-ratio:var(--kz-chart-aspect);min-height:220px;max-height:var(--kz-dense-stage-max);}
+@media(min-aspect-ratio:2/1) {.kz:not([data-fit="fluid"]) .kz-sheet .kz-chart,.kz:not([data-fit="fluid"]) .kz-stream .kz-chart {aspect-ratio:calc(var(--kz-chart-aspect) * 1.25);}}
+@media(max-width:1100px) {.kz .kz-sheet>[data-span] {grid-column:span 12;}.kz .kz-chapter-title>:first-child,.kz .kz-chapter-title .kz-kpis {grid-column:span 12;}}
 
 /* ---------- Demo stages (15 DEMO): KZScenes objects are absolutely placed by the engine (translate / size in px of
    the canvas); styles here only give them material and type. Text sizes keep the 03 floors via --kz-component-u. ---------- */
@@ -240,6 +271,7 @@
 .kz .kz-demo-mark.is-missing {box-shadow:inset 0 0 0 calc(2px * var(--kz-component-u,1)) var(--kz-risk);}
 .kz .kz-demo-mark.is-ghost {background:transparent;box-shadow:inset 0 0 0 calc(2px * var(--kz-component-u,1)) rgba(192,0,0,.45);border:1px dashed rgba(192,0,0,.5);}
 .kz .kz-demo-label,.kz .kz-demo-count,.kz .kz-demo-tick,.kz .kz-demo-edge {text-align:center;}
+.kz .kz-demo-label {text-wrap:balance;}
 .kz .kz-demo-label.is-left {text-align:left;font-size:calc(var(--kz-type-body) * var(--kz-component-u,1));}
 .kz .kz-demo-count {font-size:calc(var(--kz-type-body) * var(--kz-component-u,1));font-weight:700;font-variant-numeric:tabular-nums;}
 .kz .kz-demo-figure {font-size:calc(var(--kz-type-card-title) * var(--kz-component-u,1));font-weight:700;text-align:center;}
@@ -277,7 +309,7 @@
 .kz .kz-demo-node.is-out {background:rgba(255,248,236,.95);}
 .kz .kz-demo-node.is-on {border-color:var(--kz-brand);box-shadow:0 0 0 2px rgba(255,153,0,.35);}
 .kz .kz-demo-edge {font-size:calc(var(--kz-type-secondary) * var(--kz-component-u,1));color:var(--kz-muted);background:rgba(255,255,255,.8);border-radius:999px;}
-.kz .kz-demo-case {padding:calc(4px * var(--kz-component-u,1)) calc(10px * var(--kz-component-u,1));border-radius:999px;background:var(--kz-ink);color:#fff;font-size:calc(var(--kz-type-secondary) * var(--kz-component-u,1));white-space:nowrap;text-align:center;z-index:5;}
+.kz .kz-demo-case {padding:calc(4px * var(--kz-component-u,1)) calc(10px * var(--kz-component-u,1));border-radius:999px;background:var(--kz-ink);color:#fff;font-size:calc(var(--kz-type-secondary) * var(--kz-component-u,1));white-space:nowrap;text-align:center;z-index:5;min-width:max-content;}
 .kz .kz-demo-doc {border-radius:calc(18px * var(--kz-component-u,1));background:rgba(255,255,255,.75);border:1px solid rgba(var(--kz-face-border-rgb),.4);box-shadow:var(--kz-elev-thin);}
 .kz .kz-demo-row {display:flex;flex-wrap:wrap;align-items:center;align-content:center;justify-content:space-between;column-gap:calc(8px * var(--kz-component-u,1));padding:0 calc(10px * var(--kz-component-u,1));border-radius:calc(10px * var(--kz-component-u,1));background:rgba(110,123,140,.1);font-size:calc(var(--kz-type-secondary) * var(--kz-component-u,1));line-height:1.3;}
 .kz .kz-demo-row-k {color:var(--kz-muted);white-space:nowrap;}
@@ -287,6 +319,88 @@
 .kz .kz-demo-row.is-diff .kz-demo-row-v {color:var(--kz-risk);}
 .kz .kz-demo-mark-sign {text-align:center;font-size:calc(var(--kz-type-secondary) * var(--kz-component-u,1));color:var(--kz-statistics);font-weight:700;}
 .kz .kz-demo-mark-sign.is-diff {color:var(--kz-risk);}
+/* Schematic vocabulary (15 DEMO-08): icons, dots, lanes, bins, blocks, heat cells and SVG links carry the content;
+   none of them paints a coloured edge bar on a box (02 LG-02). */
+.kz .kz-demo-icon {aspect-ratio:1;border-radius:28%;display:grid;place-items:center;background:rgba(255,255,255,.92);border:1px solid rgba(var(--kz-face-border-rgb),.5);box-shadow:var(--kz-elev-thin);color:var(--kz-ink);z-index:3;}
+.kz .kz-demo-icon .kz-icon {width:62%;height:62%;}
+.kz .has-icon {display:flex;align-items:center;justify-content:center;gap:.4em;}
+.kz .has-icon > .kz-icon {width:1.2em;height:1.2em;flex:none;}
+.kz .kz-demo-head.has-icon {justify-content:flex-start;}
+.kz .kz-demo-tray.has-icon {align-items:flex-start;}
+.kz .is-glyph > .kz-icon {display:block;width:100%;height:auto;stroke-width:2.4;}
+.kz .kz-demo-icon.is-on {color:var(--kz-brand);border-color:rgba(255,153,0,.6);}
+.kz .kz-demo-icon.is-risk {color:var(--kz-risk);background:transparent;border:0;box-shadow:none;}
+.kz .kz-demo-icon.is-fail {color:#fff;background:var(--kz-risk);border-color:var(--kz-risk);}
+.kz .kz-demo-icon.is-hot {color:var(--kz-risk);border-color:rgba(192,0,0,.55);box-shadow:0 0 0 3px rgba(192,0,0,.12);}
+.kz .kz-demo-badge {aspect-ratio:1;border-radius:999px;display:grid;place-items:center;background:var(--kz-risk);color:#fff;font:700 calc(var(--kz-type-secondary) * var(--kz-component-u,1))/1 Arial,var(--kz-font);z-index:4;}
+.kz .kz-demo-note {font-size:calc(var(--kz-type-secondary) * var(--kz-component-u,1));color:var(--kz-body);text-align:center;line-height:1.3;text-wrap:balance;}
+.kz .kz-demo-note.is-risk {color:var(--kz-risk);font-weight:700;}
+.kz .kz-demo-label.is-strong {font-weight:700;}
+.kz .kz-demo-label.is-start,.kz .kz-demo-note.is-start {text-align:left;}
+.kz .kz-demo-node.is-small {font-size:calc(var(--kz-type-secondary) * var(--kz-component-u,1));}
+.kz .kz-demo-bin {border-radius:calc(16px * var(--kz-component-u,1));border:1.5px dashed rgba(110,123,140,.5);background:rgba(255,255,255,.55);padding:calc(8px * var(--kz-component-u,1));font-size:calc(var(--kz-type-secondary) * var(--kz-component-u,1));font-weight:700;text-align:center;color:var(--kz-ink);}
+.kz .kz-demo-bin.is-ok {border-color:rgba(88,123,59,.6);background:rgba(88,123,59,.06);color:var(--kz-statistics);}
+.kz .kz-demo-bin.is-risk {border-color:rgba(192,0,0,.5);background:rgba(192,0,0,.05);color:var(--kz-risk);}
+.kz .kz-demo-bin.is-muted {color:var(--kz-muted);}
+.kz .kz-demo-bin.is-list {text-align:left;border-style:solid;border-color:rgba(var(--kz-face-border-rgb),.45);}
+.kz .kz-demo-lane {border-radius:calc(14px * var(--kz-component-u,1));background:rgba(110,123,140,.07);}
+.kz .kz-demo-dot {aspect-ratio:1;border-radius:999px;background:#C9CFD6;display:grid;place-items:center;z-index:3;}
+.kz .kz-demo-dot.is-treat,.kz .kz-demo-dot.is-medical {background:var(--kz-brand);}
+.kz .kz-demo-dot.is-comparator {background:#6E7B8C;}
+.kz .kz-demo-dot.is-statistics {background:var(--kz-statistics);}
+.kz .kz-demo-dot.is-pv {background:var(--kz-pv);}
+.kz .kz-demo-dot.is-operations {background:var(--kz-operations);}
+.kz .kz-demo-dot.is-ok {background:var(--kz-statistics);}
+.kz .kz-demo-dot.is-risk,.kz .kz-demo-dot.is-over {background:var(--kz-risk);}
+.kz .kz-demo-dot.is-hollow {background:transparent;box-shadow:inset 0 0 0 calc(2px * var(--kz-component-u,1)) var(--kz-risk);}
+.kz .kz-demo-dot.is-num {background:var(--kz-ink);color:#fff;font:700 calc(var(--kz-type-secondary) * var(--kz-component-u,1))/1 Arial,var(--kz-font);}
+.kz .kz-demo-dot.is-num.is-risk {background:var(--kz-risk);}
+.kz .kz-demo-dot.is-num.is-moved {box-shadow:0 0 0 3px rgba(255,153,0,.45);}
+.kz .kz-demo-block {border-radius:calc(10px * var(--kz-component-u,1));background:rgba(255,153,0,.22);}
+.kz .kz-demo-block.is-total {background:rgba(255,153,0,.16);}
+.kz .kz-demo-block.is-p1 {background:rgba(110,123,140,.22);}
+.kz .kz-demo-block.is-p2 {background:rgba(255,204,0,.26);}
+.kz .kz-demo-block.is-p3 {background:rgba(110,123,140,.13);}
+.kz .kz-demo-block.is-focus {background:rgba(255,153,0,.12);}
+.kz .kz-demo-block.is-child {background:rgba(255,255,255,.82);border:1px solid rgba(var(--kz-face-border-rgb),.5);}
+.kz .kz-demo-block.is-child.is-flag {background:rgba(192,0,0,.12);border-color:rgba(192,0,0,.45);}
+.kz .kz-demo-paper {border-radius:calc(12px * var(--kz-component-u,1));background:#fff;border:1px solid rgba(var(--kz-face-border-rgb),.5);box-shadow:var(--kz-elev-thin);}
+.kz .kz-demo-finding {display:grid;align-content:center;gap:2px;padding:0 calc(10px * var(--kz-component-u,1));border-radius:calc(10px * var(--kz-component-u,1));background:rgba(192,0,0,.08);font-size:calc(var(--kz-type-secondary) * var(--kz-component-u,1));}
+.kz .kz-demo-finding b {color:var(--kz-risk);}
+.kz .kz-demo-finding span {color:var(--kz-body);}
+.kz .kz-demo-heat {border-radius:calc(6px * var(--kz-component-u,1));background:rgba(110,123,140,.08);}
+.kz .kz-demo-heat.is-mid {background:rgba(255,153,0,.14);}
+.kz .kz-demo-heat.is-high {background:rgba(192,0,0,.12);}
+.kz .kz-demo-dep {background:rgba(15,17,21,.32);border-radius:2px;z-index:1;}
+.kz .kz-demo-dep.is-risk {background:var(--kz-risk);}
+.kz .kz-demo-threshold {background:repeating-linear-gradient(90deg,var(--kz-risk) 0 8px,transparent 8px 14px);opacity:.8;}
+.kz .kz-demo-tick.is-x,.kz .kz-demo-tick.is-y {border-left:0;}
+.kz .kz-demo-tick.is-y {text-align:right;}
+.kz .kz-demo-axis.is-soft {background:rgba(15,17,21,.1);}
+.kz .kz-demo-bar.is-ghost {background:transparent;border:1.5px dashed rgba(110,123,140,.55);z-index:1;}
+.kz .kz-demo-bar.is-done {background:rgba(15,17,21,.28);z-index:3;}
+.kz .kz-demo-bar.is-slip {background:var(--kz-risk);}
+.kz .kz-demo-bar.is-moved {box-shadow:0 0 0 2px rgba(192,0,0,.35);}
+.kz .kz-demo-bar.is-crit {box-shadow:0 0 0 3px rgba(255,153,0,.55);}
+.kz .kz-demo-bar.is-recover {background:var(--kz-statistics);}
+.kz .kz-demo-node.is-fail {border-color:var(--kz-risk);color:var(--kz-risk);}
+.kz .kz-demo-node.is-crit {box-shadow:0 0 0 3px rgba(192,0,0,.3);}
+.kz .kz-demo-links path.is-rail {stroke:#C9CFD6;}
+.kz .kz-demo-links path.is-lane {stroke-dasharray:6 6;}
+.kz .kz-demo-links path.is-trace {stroke-width:3;opacity:0;}
+.kz .kz-demo-links path.is-series {stroke:var(--kz-brand);stroke-width:3;}
+.kz .kz-demo-links path.is-series.is-comparator {stroke:#6E7B8C;}
+.kz .kz-demo-links path.is-broken {stroke-dasharray:4 5;}
+/* Fact strip under a stacked stage: facts the form computed from its data (KZDemo.renderFacts). */
+.kz .kz-demo-facts {display:grid;grid-auto-flow:column;grid-auto-columns:minmax(0,1fr);gap:calc(14px * var(--kz-component-u,1));}
+.kz .kz-demo-fact {display:grid;gap:2px;padding:calc(10px * var(--kz-component-u,1)) calc(14px * var(--kz-component-u,1));border-radius:calc(14px * var(--kz-component-u,1));background:rgba(255,255,255,.72);border:1px solid rgba(var(--kz-face-border-rgb),.4);box-shadow:var(--kz-elev-thin);}
+.kz .kz-demo-fact b {font:700 calc(var(--kz-type-card-title) * var(--kz-component-u,1))/1.15 Arial,var(--kz-font);color:var(--kz-ink);}
+.kz .kz-demo-fact span {font-size:calc(var(--kz-type-secondary) * var(--kz-component-u,1));color:var(--kz-body);}
+.kz .kz-demo-fact.is-risk b {color:var(--kz-risk);}
+/* Lead line above a full-width stage (demo-wide): one takeaway and two or three short points on one row. */
+.kz .kz-demo-lead {display:flex;align-items:baseline;gap:calc(20px * var(--kz-component-u,1));flex-wrap:wrap;}
+.kz .kz-demo-lead b {font-size:calc(var(--kz-type-card-title) * var(--kz-component-u,1));}
+.kz .kz-demo-lead span {font-size:calc(var(--kz-type-body) * var(--kz-component-u,1));color:var(--kz-body);}
 /* Demo split layouts: reading side complete and still, stage side carries the scenes (15 DEMO-05). */
 .kz .kz-demo-split {display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:calc(24px * var(--kz-component-u,1));min-height:0;}
 .kz .kz-demo-split[data-side="left"] {grid-template-columns:minmax(0,7fr) minmax(0,5fr);}

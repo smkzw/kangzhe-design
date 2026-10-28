@@ -2,6 +2,12 @@
  "schema_version": "6.1",
  "contract_revision": "7.0",
  "track": "pptx",
+ "image_capability": {
+  "decision": "default_set",
+  "asked_user": true,
+  "detected": [],
+  "user_answer": "用户提供康哲历史生图作为本例素材，本次不新生图"
+ },
  "canvas": [
   1280,
   720
@@ -107,8 +113,8 @@
     }
    ],
    "image": {
-    "mode": "generated",
-    "asset_id": "cover_hero",
+    "mode": "default_set",
+    "asset_id": "cover",
     "subject_rects": []
    },
    "sources": [
@@ -383,8 +389,8 @@
     }
    ],
    "image": {
-    "mode": "generated",
-    "asset_id": "toc_hero",
+    "mode": "default_set",
+    "asset_id": "toc",
     "subject_rects": []
    },
    "sources": [
@@ -561,8 +567,8 @@
     }
    ],
    "image": {
-    "mode": "generated",
-    "asset_id": "body_quiet",
+    "mode": "default_set",
+    "asset_id": "body-quiet",
     "subject_rects": []
    },
    "sources": [
@@ -703,8 +709,8 @@
     }
    ],
    "image": {
-    "mode": "generated",
-    "asset_id": "body_quiet",
+    "mode": "default_set",
+    "asset_id": "body-quiet",
     "subject_rects": []
    },
    "sources": [
@@ -840,8 +846,8 @@
     }
    ],
    "image": {
-    "mode": "generated",
-    "asset_id": "body_quiet",
+    "mode": "default_set",
+    "asset_id": "body-quiet",
     "subject_rects": []
    },
    "sources": [
@@ -960,8 +966,8 @@
     }
    ],
    "image": {
-    "mode": "generated",
-    "asset_id": "ending_hero",
+    "mode": "default_set",
+    "asset_id": "ending",
     "subject_rects": []
    },
    "sources": [

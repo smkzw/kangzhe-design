@@ -25,19 +25,12 @@ window.KZ_REF = {
     method: { title: '核对方法', intro: '两人独立核对，差异由第三人复核。', rows: [['独立核对', '两名核对人分别登记'], ['差异复核', '第三人对照原始记录复核'], ['确认依据', '收到依据后登记处理结果'], ['未确认', '未收到依据的项目继续待确认']] }
   },
   chapter: {
-    film: {
-      title: '两个版本的字段比较',
-      states: [
-        { label: '登记版本', caption: '两个方案版本分别登记形成时间。', facts: ['V2.1：2026年3月形成', 'V2.3：2026年6月形成', '比较范围：7 个字段'], geometry: { x: .03, y: .06, w: .5, h: .72, r: .14 } },
-        { label: '逐项比较', caption: '同一字段并排比较，不改写原值。', facts: ['一致：5 项', '口径不同：2 项', '缺失：0 项'], geometry: { x: .03, y: .04, w: .56, h: .86, r: .1 } },
-        { label: '转交确认', caption: '差异转交确认，依据到位后登记结果。', facts: ['筛选窗口：4 周 / 6 周', '主要终点时间点：第 16 周 / 第 24 周', '状态：待确认'], geometry: { x: .03, y: .03, w: .58, h: .9, r: .08 } }
-      ],
-      nodes: [
-        { title: 'V2.1 · 2026年3月', text: '7 个字段已登记' },
-        { title: 'V2.3 · 2026年6月', text: '7 个字段已登记' },
-        { title: '差异 · 2 项', text: '转交确认，暂不推断' }
-      ]
-    },
+    // 15 DEMO compare: two protocol versions field by field; a field matches when its two values are identical.
+    compare: { note: '合成示例', left: '方案 V2.1', right: '方案 V2.3', leftTag: 'V2.1', rightTag: 'V2.3', tray: '转交确认',
+      rows: [{ label: '研究对象', left: '成人受试者', right: '成人受试者' }, { label: '随机化', left: '1:1，按中心分层', right: '1:1，按中心分层' },
+        { label: '给药方案', left: '每周一次', right: '每周一次' }, { label: '访视计划', left: '每 4 周一次', right: '每 4 周一次' },
+        { label: '安全性指标', left: '不良事件、实验室', right: '不良事件、实验室' }, { label: '筛选窗口', left: '4 周', right: '6 周' },
+        { label: '主要终点时间点', left: '第 16 周', right: '第 24 周' }], rightOrder: [1, 0, 3, 2, 4, 6, 5] },
     trend: { kind: 'line', unit: '份', decimals: 0, description: '合成示例：每月累计登记资料份数，5 月记录缺失', categories: ['3月', '4月', '5月', '6月', '7月'], series: [{ id: 'registered', name: '累计登记', values: [3, 5, null, 9, 12] }] },
     gantt: { min: 8104, max: 8112, tasks: [{ id: 'register', label: '版本登记', start: 8104, end: 8106 }, { id: 'compare', label: '逐项比较', start: 8105, end: 8108 }, { id: 'confirm', label: '差异确认', start: 8107, end: 8110 }, { id: 'review', label: '回到原问题', start: 8109, end: 8111 }] }
   }

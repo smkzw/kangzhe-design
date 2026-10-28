@@ -12,6 +12,18 @@ def pad_for(region,tokens):
  # 04 IMG-02: static regions pad safety_pad_px; regions that move (declared motion_margin) pad at least motion_safety_pad_px.
  m=region.get('motion_margin',0)
  return max(tokens['image']['safety_pad_px'],m,tokens['image']['motion_safety_pad_px'] if m else 0)
+def default_set():
+ # 04 IMG-07: the shipped fallback backgrounds; every hash of the same picture (shipped JPEG, original PNG, WebP
+ # transcodes) identifies it, so a deck cannot pass the fallback set off as a generated image.
+ d=json.loads((ROOT/'assets/backgrounds/default-set.json').read_text())
+ return {a['id']:a for a in d['assets']},{h for a in d['assets'] for h in [a['sha256'],a['source_sha256'],*[x['sha256'] for x in a.get('aliases',[])]]}
+def warm_share(im,style):
+ # 04 IMG-07: share of the coloured pixels whose hue is in the Kangzhe orange-yellow band (None: almost no colour)
+ small=im.convert('HSV');small.thumbnail((style['sample_px'],style['sample_px']))
+ px=list(small.getdata());lo,hi=style['warm_hue_deg']
+ col=[h*360/255 for h,s,v in px if s/255>style['saturation_min'] and v/255>style['value_min']]
+ if len(col)<style['colored_share_min']*len(px):return None
+ return sum(lo<=h<=hi for h in col)/len(col)
 def validate(plan,manifest=None,asset_root=None):
  findings=[]
  def add(code,where,message,level='error'):findings.append(dict(code=code,where=where,message=message,level=level))
@@ -24,6 +36,10 @@ def validate(plan,manifest=None,asset_root=None):
  flagship=plan.get('route','regular')=='flagship';FT=tokens['flagship']['type_px']
  FLAG_ROLE={'cover_title':'cover_title','hero_subtitle':'lede','hero_meta':'meta','toc_title':'toc_title','toc_number':'toc_numeral','toc_label':'toc_label','toc_description':'toc_description','section_number':'section_numeral','section_title':'section_title','ending_title':'ending_title','page_title':'page_title','card_title':'card_title'}
  if flagship and plan['track'] not in ['pptx','htmlppt']:add('ROUTE-TRACK','project','旗舰路线只用于 PPTX 与 HTML-PPT')
+ # 04 IMG-07: regular PPTX/HTML-PPT decks pass the image-capability gate (detect, then ask the user) before assets.
+ cap=plan.get('image_capability');DEFAULT,DEFAULT_HASHES=default_set()
+ if not flagship and plan['track'] in ['pptx','htmlppt'] and not cap:add('IMAGE-CAPABILITY','project','PPTX/HTML-PPT 常规路线须先过生图能力闸门：检测生图能力并询问用户（04 IMG-07）')
+ if cap and (flagship or plan['track'] not in ['pptx','htmlppt']):add('IMAGE-CAPABILITY','project','生图能力闸门只用于 PPTX/HTML-PPT 常规路线','warning')
  targets={tuple(v) for v in plan['target_viewports']}
  required=tokens['viewports'].get(plan['track'])
  if required and not {tuple(v) for v in required}.issubset(targets):add('VIEWPORT-COVERAGE','project','缺少本轨规定的浏览器可视区验收视口：'+', '.join(f'{a}×{b}' for a,b in required))
@@ -111,6 +127,12 @@ def validate(plan,manifest=None,asset_root=None):
    if not {region['id'] for region in p['protected_regions']}.issubset(ids):add('IMAGE-PROTECTION-COVERAGE',pid,'实际视口保护区漏掉页面对象')
    for region in mapping['protected_regions']:
     if not in_bounds(region['rect'],*viewport):add('IMAGE-RENDITION-BOUNDS',pid+'/'+region['id'],'实际视口保护区越界或尺寸非正')
+  if cap and image['mode'] in ['generated','default_set'] and image['mode']!=cap['decision']:add('IMAGE-STRATEGY',pid,'页面图像方式与生图能力闸门的结论不一致（04 IMG-07）')
+  if image['mode']=='default_set':
+   a=DEFAULT.get(image.get('asset_id'))
+   if flagship or plan['track'] not in ['pptx','htmlppt']:add('IMAGE-DEFAULT-SET',pid,'缺省背景套只用于 PPTX/HTML-PPT 常规路线')
+   elif not a:add('IMAGE-DEFAULT-SET',pid,'asset_id 不在缺省背景套 assets/backgrounds/default-set.json 中')
+   elif p['kind'] not in a['page_kinds']:add('IMAGE-DEFAULT-SET',pid,f'缺省背景套的 {a["id"]} 用于 {"/".join(a["page_kinds"])} 页，不用于 {p["kind"]} 页')
   if flagship and image['mode']!='flagship_light_field':add('FLAG-IMAGE',pid,'旗舰背景用品牌光场（14 FLAG-02）')
   if image['mode']=='flagship_light_field':
    if not flagship:add('FLAG-IMAGE-ROUTE',pid,'品牌光场背景只用于旗舰路线')
@@ -125,13 +147,23 @@ def validate(plan,manifest=None,asset_root=None):
   elif image['mode']=='global_procedural_optical_field':
    if plan['track'] not in ['site','stream']:add('IMAGE-REQUIRED',pid,'PPTX/HTML-PPT 无程序化光场免生图豁免')
    if not image.get('procedural_evidence'):add('IMAGE-EXEMPTION',pid,'光场豁免缺少实现证据')
-  elif not image.get('asset_id'):add('IMAGE-MAP',pid,'缺少生成图资产映射')
+  elif image['mode']=='generated' and not image.get('asset_id'):add('IMAGE-MAP',pid,'缺少生成图资产映射')
   for a in image.get('subject_rects',[]):
    if not in_bounds(a,w,h):add('IMAGE-BOUNDS',pid,'图像主体区域越界')
    for region in p['protected_regions']:
     b=region['rect'];m=pad_for(region,tokens);b=[b[0]-m,b[1]-m,b[2]+2*m,b[3]+2*m]
     if intersects(a,b):add('IMAGE-COLLISION',pid+'/'+region['id'],'预期图像主体侵入保护区')
   if p.get('takeaway') and p['takeaway']['font_px']<tokens['type_px']['takeaway']:add('TAKEAWAY',pid,'观点句字号过小')
+ # 15 DEMO-05/09: demo pages use a demo preset, adjacent demo pages rotate it, process demos show right and wrong cases
+ if plan['track']=='htmlppt':
+  prev=None
+  for p in plan['pages']:
+   d=p.get('demo') or {};pre=p.get('preset','')
+   if 'kind' not in d:prev=None;continue
+   if not pre.startswith('demo'):add('DEMO-PRESET',p['id'],'演示页须用 demo / demo-mirror / demo-wide / demo-stack 预设之一（15 DEMO-05）')
+   elif pre==prev:add('DEMO-PRESET-REPEAT',p['id'],f'与上一演示页重复预设 {pre}；相邻演示页轮换构图（15 DEMO-05）')
+   if d['kind'] in ['flow','decision','audit'] and not {'positive','negative','complex_negative'}<=set(d.get('cases',[])):add('DEMO-CASES',p['id'],'流程、判定、核查类演示须含正例、简单反例与复杂反例（15 DEMO-09）')
+   prev=pre if pre.startswith('demo') else None
  if manifest is not None:
   ms=json.loads((ROOT/'schemas/asset-manifest.schema.json').read_text())
   me=list(Draft202012Validator(ms).iter_errors(manifest))
@@ -147,6 +179,7 @@ def validate(plan,manifest=None,asset_root=None):
     for viewport in targets:required.setdefault(choices.get(viewport,p['image'].get('asset_id')),set()).add(viewport)
     for asset_id,asset_targets in required.items():
      _validate_asset(p,assets.get(asset_id),asset_targets,asset_root,tokens,add,plan['canvas'],plan['track'])
+     if assets.get(asset_id,{}).get('sha256') in DEFAULT_HASHES:add('IMAGE-DEFAULT-AS-GENERATED',p['id'],'登记为生成图的资产是缺省背景套；没有生图时 image.mode 写 default_set（04 IMG-07）')
  else:add('ASSET-NOT-CHECKED','project','仅完成生成前计划检查；未验证实际生成与合成审阅','pending')
  return findings
 
@@ -199,6 +232,8 @@ def _validate_asset(p,a,targets,asset_root,tokens,add,canvas,track):
          # bright pixels by design, so brightness share is not the signal; the luminance spread is.
          small=im.convert('L');small.thumbnail((wash['sample_px'],wash['sample_px']));std=ImageStat.Stat(small).stddev[0]
          if std<wash['luminance_std_min']:add('IMAGE-WASHOUT',p['id'],f'主视觉灰度标准差 {std:.1f} 低于 {wash["luminance_std_min"]}，主体不可辨')
+        style=tokens['image'].get('style');share=style and warm_share(im,style)
+        if share is not None and share<style['warm_share_min']:add('IMAGE-STYLE',p['id'],f'有色像素中暖色（橙黄）只占 {share:.0%}，低于 {style["warm_share_min"]:.0%}，偏离康哲浅色橙黄 liquid glass 风格（04 IMG-07）','warning')
       except (OSError,ValueError):add('ASSET-DECODE',p['id'],'图像不可解码')
 if __name__=='__main__':
  ap=argparse.ArgumentParser();ap.add_argument('plan',type=Path);ap.add_argument('--manifest',type=Path);ap.add_argument('--asset-root',type=Path);ap.add_argument('--out',type=Path);a=ap.parse_args()

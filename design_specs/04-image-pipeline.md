@@ -1,7 +1,7 @@
 # 04 主动生图与版式保护
 
 ## 生成是计划中的工序 IMG-01
-PPTX 与 HTML-PPT 逐页登记 `asset_id`：封面、目录、章节、尾页各有主题相符的生成主视觉；正文页绑定安静的生成背景，可在章节内复用。不要求每页重画，要求每页有合格映射；同任务已批准的缓存可复用，记录原始回执与哈希。
+PPTX 与 HTML-PPT 逐页登记 `asset_id`：封面、目录、章节、尾页各有主题相符的生成主视觉；正文页绑定安静的生成背景，可在章节内复用。开工前先过 IMG-07 的生图能力闸门；用户确认没有生图能力时，改用缺省背景套。不要求每页重画，要求每页有合格映射；同任务已批准的缓存可复用，记录原始回执与哈希。
 
 站点与流式的首页和章节首屏要么有生成主视觉，要么使用全站统一、实际运行的程序化光场（计划写 `global_procedural_optical_field` 并列出运行文件）。普通 CSS 渐变不构成替代。正文深层信息不强制每卡生图。
 
@@ -12,7 +12,45 @@ PPTX 与 HTML-PPT 逐页登记 `asset_id`：封面、目录、章节、尾页各
 
 用户指定某个技能或服务生图时，只使用它的生成接口：先读该技能/服务的接口文档与参数说明，再发真实请求；包装脚本没有暴露的参数不等于服务不支持。回执区分请求尺寸与实际尺寸，实际尺寸以解码文件为准。不引入该技能的其他风格或审批规则，生成结果仍守本章与 02。
 
-提示词只含去识别的视觉概念、公开主题和品牌要求；不上传内部方案全文、患者资料或未公开数值。回执只保留必要摘要，不泄露密钥。工具不可用时记 BLOCKED（10 QA-STATUS），可出布局草案但不能标完成，CSS 渐变不能顶替“生图通过”。
+提示词只含去识别的视觉概念、公开主题和品牌要求；不上传内部方案全文、患者资料或未公开数值。回执只保留必要摘要，不泄露密钥。闸门（IMG-07）选定生图后，接口在制作中途不可用时记 BLOCKED（10 QA-STATUS），可出布局草案但不能标完成；要换成缺省背景套，须告诉用户并改写闸门结论，不得静默换图。CSS 渐变不能顶替“生图通过”。
+
+## 生图能力闸门与缺省背景套 IMG-07（PPTX / HTML-PPT 常规路线）
+两条轨道都要求按讲稿主题生成背景（IMG-01、IMG-05）。能不能生图取决于当前环境，所以在开工时确认，不默认沿用参考实现的图。旗舰路线用程序化光效图（14），不过这道闸门；站点与流式可以用程序化光场，也不过。
+
+1. **先检测**，不先提问。逐项核对并记下证据：
+   - 宿主技能列表里的生图 skill；
+   - 可用的生图类 MCP 工具；
+   - ppt-master `image_gen.py` 的后端是否已配置（只看配置项是否存在，不读出、不打印密钥）；
+   - 用户在本次任务里点名的服务。
+2. **⛔ 询问用户**（阻断，得到回答前不进入资产工序）。把检测结果和推荐写在问题里，选项为：
+   - 用检测到的某个 skill 或接口生图（检测到时推荐这一项）；
+   - 用户另行指定 skill 或接口；
+   - 没有生图能力，用缺省背景套。
+
+   开工时若同时要选路（14 FLAG-01），先选路；选了旗舰就不再问本项。修改已有 deck 时沿用它原来的结论。
+3. **登记**：page-plan 写 `image_capability`（`decision`、`provider`、`asked_user: true`、`detected`、可选 `user_answer`）。全套 deck 用同一种方式：
+   - `generated` 时各页 `image.mode` 写 `generated`；
+   - `default_set` 时各页写 `default_set`。
+
+**选生图时**：
+- 照 IMG-01 至 IMG-05 生成与审阅。
+- 每条提示词都以同一段风格锚开头，同一套 deck 的光向一致：
+
+  > Style anchor (identical for every image in this deck): Kangzhe light liquid-glass optical material on a near-white field; translucent warm-white glass with soft refraction, thin bright rims and short highlights; colour only as faint refracted light in brand orange #FF9900 and secondary yellow #FFCC00; one soft light source from the upper left; calm, airy, formal medical style. No dark background, no neon, no saturated blue, green or purple, no text, numbers, logos or watermarks.
+
+- 接口支持参考图时，把缺省背景套里同类页面的图作为风格参考传入。IMG-03 第一遍审裸图时，把它和该参考图放在一起比较。
+- 检查：
+  - `tools/qc_plan.py --asset-root` 计算有色像素中暖色的比例，低于 `image.style.warm_share_min` 报 `IMAGE-STYLE`（WARN）；
+  - 登记成生成图的资产若哈希属于缺省背景套，报 `IMAGE-DEFAULT-AS-GENERATED`（失败）。
+
+**用缺省背景套时**：
+- 清单在 `assets/backgrounds/default-set.json`：封面、目录、章节、尾页主视觉，加一张正文安静背景。JPEG 格式，PPTX 与 HTML 都能直接用。
+- 各页 `image.asset_id` 写清单里的 id，按页型对应：`qc_plan.py` 核对 id 与页型，用错页型报 `IMAGE-DEFAULT-SET`。
+- 已知限制照实写进交付说明：
+  - 长边 1672，hero 清晰度 WARN；
+  - 没有超宽正文背景；
+  - 背景与讲稿主题无关。
+- 裸图已审过，合成审阅（IMG-03 第二遍、G4-BODY）照做。
 
 ## 先布局，再画保护区 IMG-02
 先固定页型、字号、卡片与图表的真实几何，再生成 `protected_regions`：页眉、Logo、标题、正文卡、图表绘图区、必要标签、观点、参考行、页脚。每个区域记录 rect、对象 id、用途和外扩：静态外扩 `tokens.image.safety_pad_px`，会运动的对象按扫掠包络外扩 `tokens.image.motion_safety_pad_px`。

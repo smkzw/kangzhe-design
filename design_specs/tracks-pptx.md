@@ -10,8 +10,8 @@
 ## 步骤
 1. **计划**：事实清单 → 页型与信息层级（03 COPY-01/06）→ 每页构图预设（13 BODY-01）→ hero 版式 ID（11）→ page-plan（`schemas/page-plan.schema.json`）与 `tools/qc_plan.py` 预检。PPTX 的 page-plan 写 `canvas: [1280,720]`、`target_viewports: [[1280,720]]`；`font_px` 用 1280×720 画布的逻辑 px，等于 pt × 4/3（24pt 页标题写 32）。合格示例：`examples/reference/pptx-default/page-plan.json`（hero 文字框取自 `hero_layout.layout()`）。
 2. **注入上游设计阶段**：01 chrome 与 tokens 进品牌与版式；02 材质进 `visual_style_behavior`（写明玻璃配方是渐变面、细边与高光、柔和外阴影叠加，避免 Executor 按上游“每个容器只用一种层次手段”的默认简化掉）；03/04/05/09 进策划、图像清单、SVG 与 notes。Stage 2 字号与 §VIII 登记的做法见 adapter“Default 路由里的康哲输入”。
-3. **图像**：在上游图像阶段按 04 加保护区与审阅；不另起并行生图流程。
-4. **Executor SVG**：正文卡用 `tools/glass_svg.py` 原语（渐变 alpha + 一个 `feDropShadow`，参数取 `elevation.pptx`）；hero 以 `tools/hero_layout.svg_fragment` 的输出为底稿（片段由 agent 写进页面，脚本不直接写 `svg_output/`）；双菱形用 `brand_fragments.facets(native=True)`；bullet 写 `• ` 前缀（导出为原生项目符号）。每个内容单元一个带 `data-pptx-bounds` 的顶层 `<g id>`；背景、横线、Logo、页脚用结构角色。
+3. **图像**：先过 04 IMG-07 的生图能力闸门（检测后询问用户；选生图则在上游图像阶段生成，否则用缺省背景套 `assets/backgrounds/`）；在上游图像阶段按 04 加保护区与审阅，不另起并行生图流程。
+4. **Executor SVG**：卡片不画贴边色条（02 LG-02），ppt-master 文档里的 accent bar 建议在康哲中不用；正文卡用 `tools/glass_svg.py` 原语（渐变 alpha + 一个 `feDropShadow`，参数取 `elevation.pptx`）；hero 以 `tools/hero_layout.svg_fragment` 的输出为底稿（片段由 agent 写进页面，脚本不直接写 `svg_output/`）；双菱形用 `brand_fragments.facets(native=True)`；bullet 写 `• ` 前缀（导出为原生项目符号）。每个内容单元一个带 `data-pptx-bounds` 的顶层 `<g id>`；背景、横线、Logo、页脚用结构角色。
 5. **数据**：原生图表按 05 CHART-05；甘特用原生形状（08）。
 6. **动效**：需要时按 06 MOTION-07 写 `animations.json`（入场随上一项、错峰、Morph 承载载体）。
 7. **检查与导出**：严格按上游 Step 7 的顺序：`svg_quality_checker.py`（最终门）→ 备注拆分 → `finalize_svg.py` → 有动效时 `animation_config.py validate <project>` → `svg_to_pptx.py`（Default 自动读取项目根的 `animations.json`；康哲要求原生图表，加 `--native-charts-and-tables`）。
@@ -20,7 +20,7 @@
 
 ## 必验
 - 全文可编辑优先于逐像素模拟玻璃：正文、卡、图、表原生；光学背景是独立图片。
-- 每页内容区与标题/页脚取原值，不用改字号补救空间；正文背景按 04 IMG-05 单独生成。
+- 每页内容区与标题/页脚取原值，不用改字号补救空间；正文背景按 04 IMG-05 单独生成（闸门结论为缺省背景套时用其正文背景）。
 - 指针倾斜、弹窗下钻、日期联动不属于 PPTX 能力。
 
 参考实现：`examples/reference/pptx-default/`（Default 全流程正例：确认、计划、手写 SVG、检查、导出、绑定、回读）；`examples/reference/pptx/`（转换器级探针，含 Morph）。

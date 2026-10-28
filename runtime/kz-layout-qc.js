@@ -121,5 +121,62 @@
   const span=(Math.max(...rs.map(r=>r.bottom))-Math.min(...rs.map(r=>r.top)))/b.height;
   return{status:span<target[0]?'WARN':'PASS',span:+span.toFixed(3),target};
  }
- g.KZLayoutQC={inspectCard,inspectTextBounds,inspectFold,inspectOrphans,inspectBodySpan,inspect(root=document){return [...root.querySelectorAll('.kz-card')].filter(e=>e.getBoundingClientRect().height>0&&e.checkVisibility({checkOpacity:true,checkVisibilityCSS:true})).map(e=>inspectCard(e));}};
+ // 02 LG-02: a coloured, thin mark hugging one edge of a card-like box (anything with a fill, border or shadow).
+ // Four ways to draw one: a single coloured border side, an edge pseudo-element, a sharp one-sided inset
+ // shadow, or a child element along the edge. Lengths are compared with the edge; sizes in logical px.
+ function inspectEdgeBars(root=document.body){
+  const T=Object.assign({hug_px:4,max_thickness_px:12,neutral_saturation_max:.18,alpha_min:.3,warn_ratio:.2,forbid_ratio:.5},g.KZ_TOKENS?.glass?.edge_bar);
+  const un=parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--kz-un'))||1,hug=T.hug_px*un,thin=T.max_thickness_px*un;
+  const rgba=s=>{const m=String(s).match(/rgba?\(([^)]+)\)/);if(!m)return null;const v=m[1].split(/[,\s/]+/).filter(Boolean).map(parseFloat);return[v[0],v[1],v[2],v.length>3?v[3]:1];};
+  const colours=s=>[...String(s).matchAll(/rgba?\([^)]+\)/g)].map(m=>rgba(m[0]));
+  const coloured=c=>{if(!c)return false;const mx=Math.max(c[0],c[1],c[2]),mn=Math.min(c[0],c[1],c[2]);return c[3]>=T.alpha_min&&mx>0&&(mx-mn)/mx>T.neutral_saturation_max;};
+  const paint=st=>coloured(rgba(st.backgroundColor))||colours(st.backgroundImage).some(coloured);
+  const boxy=(el,st)=>{const r=el.getBoundingClientRect();if(r.width<40||r.height<24||el===document.body||el===document.documentElement||el.matches('.slide,.deck,.kz-body,.kz-optical-field,.kz-fold,svg *'))return false;
+   return el.matches('.kz-card,.kz-kpi,.kz-step,.kz-demo,.kz-dialog')||(rgba(st.backgroundColor)?.[3]>.05)||st.backgroundImage!=='none'||st.boxShadow!=='none'||['Top','Right','Bottom','Left'].some(s=>parseFloat(st['border'+s+'Width'])>0);};
+  const out=[],level=r=>r>=T.forbid_ratio?'fail':r>=T.warn_ratio?'warn':null,name=el=>el.id?'#'+el.id:el.tagName.toLowerCase()+(el.classList.length?'.'+[...el.classList].slice(0,2).join('.'):'');
+  // a thin coloured rect inside the card box, near one edge → which edge and how much of it
+  const along=(R,q,detail,kind,card)=>{const w=q.right-q.left,h=q.bottom-q.top;if(w<=0||h<=0)return;let side=null,ratio=0;
+   if(w<=thin&&h>w){if(Math.abs(q.left-R.left)<=hug)side='left';else if(Math.abs(R.right-q.right)<=hug)side='right';ratio=h/R.height;}
+   else if(h<=thin&&w>h){if(Math.abs(q.top-R.top)<=hug)side='top';else if(Math.abs(R.bottom-q.bottom)<=hug)side='bottom';ratio=w/R.width;}
+   const lv=side&&level(ratio);if(lv)out.push({card:name(card),side,kind,detail,ratio:+ratio.toFixed(2),level:lv});};
+  for(const card of root.querySelectorAll('*')){
+   const st=getComputedStyle(card);if(!card.checkVisibility?.({checkOpacity:true,checkVisibilityCSS:true})||!boxy(card,st))continue;
+   const R=card.getBoundingClientRect(),sides=['Top','Right','Bottom','Left'].map(s=>({s:s.toLowerCase(),w:parseFloat(st['border'+s+'Width'])||0,c:st['border'+s+'Color']}));
+   for(const b of sides){if(b.w<1.5||!coloured(rgba(b.c)))continue;if(sides.every(o=>Math.abs(o.w-b.w)<.5&&o.c===b.c))continue; // an even frame is a state, not a bar
+    out.push({card:name(card),side:b.s,kind:'border',detail:`${b.w}px ${b.c}`,ratio:1,level:'fail'});}
+   for(const part of String(st.boxShadow).split(/,(?![^(]*\))/)){if(!/inset/.test(part))continue;const c=rgba(part),n=part.replace(/rgba?\([^)]+\)/,'').match(/-?[\d.]+px/g)?.map(parseFloat)||[];const[x=0,y=0,blur=0,spread=0]=n;
+    if(coloured(c)&&blur<=4&&spread<=0&&Math.max(Math.abs(x),Math.abs(y))>=1.5&&(x===0||y===0))out.push({card:name(card),side:x>0?'left':x<0?'right':y>0?'top':'bottom',kind:'inset-shadow',detail:part.trim(),ratio:1,level:'fail'});}
+   for(const pseudo of['::before','::after']){const p=getComputedStyle(card,pseudo);if(p.content==='none'||p.display==='none'||!paint(p))continue;
+    const w=parseFloat(p.width),h=parseFloat(p.height);if(!Number.isFinite(w)||!Number.isFinite(h))continue;const px=v=>v==='auto'?null:parseFloat(v);
+    const l=px(p.left),t=px(p.top),r=px(p.right),b=px(p.bottom),x0=l!=null?R.left+l:r!=null?R.right-r-w:R.left,y0=t!=null?R.top+t:b!=null?R.bottom-b-h:R.top;
+    along(R,{left:x0,top:y0,right:x0+w,bottom:y0+h},pseudo,'pseudo',card);}
+   for(const child of card.children){const cs=getComputedStyle(child);if(child.closest('svg')||!paint(cs)||!child.checkVisibility?.({checkOpacity:true,checkVisibilityCSS:true}))continue;along(R,child.getBoundingClientRect(),name(child),'child',card);}
+  }
+  return{status:out.some(o=>o.level==='fail')?'FAIL':out.length?'WARN':'PASS',bars:out};
+ }
+ // 13 FOLD-07: information density of every viewport-high window of a scrolling page. Only ink counts: text
+ // lines, painted figures (charts, Gantt plots, images, SVG, demo objects) and tables; card boxes do not, so an
+ // empty or half-empty card shows up as void. Layout boxes are used (entrance opacity is ignored), so the page
+ // need not be scrolled. Windows step by the viewport height; the last one is aligned to the page bottom.
+ function inspectScroll(root=document.body,{from=0,cols=48,rows=27}={}){
+  const T=Object.assign({min_ink:.2,max_void_ratio:.16},g.KZ_TOKENS?.layout?.dense),sy=scrollY,ink=[];
+  const add=r=>{if(r.width>2&&r.height>2)ink.push({l:r.left,r:r.right,t:r.top+sy,b:r.bottom+sy});};
+  const walker=document.createTreeWalker(root,NodeFilter.SHOW_TEXT,{acceptNode(n){const p=n.parentElement;return n.textContent.trim()&&!p.closest('script,style,.notes,[hidden],[aria-hidden="true"],.kz-optical-field')&&p.checkVisibility({checkVisibilityCSS:true})?NodeFilter.FILTER_ACCEPT:NodeFilter.FILTER_REJECT;}});
+  let n;while(n=walker.nextNode()){const r=document.createRange();r.selectNodeContents(n);for(const q of r.getClientRects())add(q);}
+  for(const e of root.querySelectorAll('canvas,img,table,.kz-chart,.kz-gantt-plot,svg:not(.kz-optical-field svg),[data-kz-obj]'))if(e.checkVisibility({checkVisibilityCSS:true})&&!e.closest('[aria-hidden="true"]:not(.kz-film-links)'))add(e.getBoundingClientRect());
+  // the measured page ends at the last content above the page footer (the footer strip is not reading content)
+  const foot=[...root.querySelectorAll('footer')].map(f=>f.getBoundingClientRect().top+sy),end=foot.length?Math.min(...foot):Infinity;
+  const H=Math.min(Math.max(document.documentElement.scrollHeight,root.scrollHeight),Math.max(...ink.filter(q=>q.t<end).map(q=>q.b),innerHeight)),W=innerWidth,vh=innerHeight,tops=[];
+  for(let y=from;y<H-vh;y+=vh)tops.push(y);tops.push(Math.max(from,H-vh));
+  const windows=[...new Set(tops)].map(top=>{
+   const grid=[];let hit=0;
+   // a cell is ink when any ink box overlaps it (a centre sample misses text lines thinner than a cell)
+   for(let r=0;r<rows;r++){const row=[];const y0=top+r*vh/rows,y1=y0+vh/rows;for(let c=0;c<cols;c++){const x0=c*W/cols,x1=x0+W/cols,on=ink.some(q=>q.l<x1&&q.r>x0&&q.t<y1&&q.b>y0);row.push(on);if(on)hit++;}grid.push(row);}
+   const h=Array(cols).fill(0);let best=0;
+   for(let r=0;r<rows;r++){for(let c=0;c<cols;c++)h[c]=grid[r][c]?0:h[c]+1;const st=[];for(let c=0;c<=cols;c++){const v=c<cols?h[c]:0;let s=c;while(st.length&&st.at(-1)[1]>=v){const[i,hv]=st.pop();best=Math.max(best,hv*(c-i));s=i;}st.push([s,v]);}}
+   const w={top:Math.round(top),ink:+(hit/(cols*rows)).toFixed(3),void:+(best/(cols*rows)).toFixed(3)};
+   w.flags=[...(w.ink<T.min_ink?['LOW_INK']:[]),...(w.void>T.max_void_ratio?['VOID']:[])];return w;});
+  return{status:windows.some(w=>w.flags.length)?'WARN':'PASS',height:H,viewport:[W,vh],thresholds:{min_ink:T.min_ink,max_void_ratio:T.max_void_ratio},windows};
+ }
+ g.KZLayoutQC={inspectCard,inspectTextBounds,inspectFold,inspectOrphans,inspectBodySpan,inspectEdgeBars,inspectScroll,inspect(root=document){return [...root.querySelectorAll('.kz-card')].filter(e=>e.getBoundingClientRect().height>0&&e.checkVisibility({checkOpacity:true,checkVisibilityCSS:true})).map(e=>inspectCard(e));}};
 })(window);

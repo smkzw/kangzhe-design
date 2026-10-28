@@ -1,0 +1,108 @@
+{
+ "_doc": "04 IMG-07 缺省背景套：PPTX 与 HTML-PPT 常规路线在用户确认没有生图能力时使用。来源是康哲 A03 批次的历史真实生图（原始回执在维护仓库 examples/validation/KZ6-0929-A03/asset-provenance.json，不随包），本套为 JPEG q90 转码，未重新生成。已知限制：长边 1672 低于 tokens.image.hero_min_long_edge_px（hero 清晰度 WARN）；没有超宽正文背景；只有一张正文背景，各章节共用。使用时 page-plan 的 image.mode 写 default_set，asset_id 写下面的 id；source_sha256 与 aliases 是同一图的原图与 WebP 转码，qc_plan 用它们识别“把缺省套当生图”的情况。",
+ "version": "7.1.3",
+ "assets": [
+  {
+   "id": "cover",
+   "role": "封面主视觉",
+   "page_kinds": [
+    "cover",
+    "hero"
+   ],
+   "file": "assets/backgrounds/cover.jpg",
+   "sha256": "05a89c53098121b8fef2aef60c45067e901707b9929bba121153fceac7ecefcd",
+   "actual_size": [
+    1672,
+    941
+   ],
+   "source_sha256": "aa4f7119df6ff40267fd8e6ed813c97bb93bd5a1666009f0d2686917a46c2871",
+   "aliases": [
+    {
+     "file": "examples/reference/assets/cover.webp",
+     "sha256": "f49a77b3779197dc3da607cab1abd8e781a1752a59a05c0f6ddf483bddd966c4"
+    }
+   ]
+  },
+  {
+   "id": "toc",
+   "role": "目录主视觉",
+   "page_kinds": [
+    "toc"
+   ],
+   "file": "assets/backgrounds/toc.jpg",
+   "sha256": "1a783394fcfb935c1f361badf48f4d06f12e69622f47634c1019cacacfbf6c91",
+   "actual_size": [
+    1672,
+    941
+   ],
+   "source_sha256": "566c6ad9ed48562fcc95847cdde63decdcc997f34c8a9c5e49b89b7c1a06c545",
+   "aliases": [
+    {
+     "file": "examples/reference/assets/toc.webp",
+     "sha256": "a0605c608295ba363da7e686142c570eda72a26916a04a7435c9c4f4fb31e1d0"
+    }
+   ]
+  },
+  {
+   "id": "section",
+   "role": "章节页主视觉",
+   "page_kinds": [
+    "section"
+   ],
+   "file": "assets/backgrounds/section.jpg",
+   "sha256": "673c34b185db844309bc4a0aea909775e222695dd2a901dddb516d454d7dc850",
+   "actual_size": [
+    1672,
+    941
+   ],
+   "source_sha256": "380560cab7c937415e855be13fafe448490cbab1adfcbba95f7999402707574e",
+   "aliases": [
+    {
+     "file": "examples/reference/assets/section.webp",
+     "sha256": "b6c57e2353f4df286283b4bfc47c9dac6722477ea350394b22dbaaf219768466"
+    }
+   ]
+  },
+  {
+   "id": "ending",
+   "role": "尾页主视觉",
+   "page_kinds": [
+    "ending"
+   ],
+   "file": "assets/backgrounds/ending.jpg",
+   "sha256": "b86f7c43307b7540d2b5474f1238a0e43ec3f2e9afc07a3ebea7f48d509444d2",
+   "actual_size": [
+    1672,
+    941
+   ],
+   "source_sha256": "33680aee0826cf66e90f895047766f732d8eb3da3af849de4ce41cbbeddf8db0",
+   "aliases": [
+    {
+     "file": "examples/reference/assets/ending.webp",
+     "sha256": "112c304cabe5d474627fe003e4de6cd34d87068383e516e2f2cf464bf7e32d3a"
+    }
+   ]
+  },
+  {
+   "id": "body-quiet",
+   "role": "正文页安静背景（各正文页复用）",
+   "page_kinds": [
+    "body",
+    "flow_section"
+   ],
+   "file": "assets/backgrounds/body-quiet.jpg",
+   "sha256": "420c6c8e12670e6e220b187584fc311e6829d9c172e467b377d8d539fbe854fa",
+   "actual_size": [
+    1672,
+    941
+   ],
+   "source_sha256": "ce19777696202c355b2d13cda6fb5b6b2172edfc58e7e93e3b231cfd9f2aed73",
+   "aliases": [
+    {
+     "file": "examples/reference/assets/body-quiet.webp",
+     "sha256": "193a17b2e926aa10dace71799d1577d431d86ba0ae1e4adf74819cc782f4a829"
+    }
+   ]
+  }
+ ]
+}

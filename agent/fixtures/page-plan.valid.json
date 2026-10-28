@@ -1,6 +1,14 @@
 {
  "schema_version": "6.1",
  "track": "pptx",
+ "image_capability": {
+  "decision": "generated",
+  "provider": "fixture-image-service",
+  "asked_user": true,
+  "detected": [
+   "fixture-image-service"
+  ]
+ },
  "canvas": [
   1280,
   720

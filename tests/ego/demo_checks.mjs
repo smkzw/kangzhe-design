@@ -1,6 +1,7 @@
 // Demonstrative motion (15 DEMO): density receipts, per-scene layout and deck stepping, in ego lite.
 // Run: ego-browser nodejs < tests/ego/demo_checks.mjs   (prints JSON; exit code 1 when any check fails)
-// Gallery: examples/motion/ (six forms, loop mode). Deck: reference HTML-PPT slides 8 (units) and 9 (decision).
+// Gallery: examples/motion/ (sixteen forms, loop mode). Deck: reference HTML-PPT slides 8 (units) and 9 (decision);
+// template deck examples/motion/deck/ (ten forms, four presets).
 const task = await taskSpace("kangzhe-scene-checks");
 const page = task.page("p1");
 const ROOT = "file:///Users/smkzw/Developer/kangzhe-design/examples/";
@@ -19,7 +20,7 @@ const viewport = (width, height) => page.cdp("Emulation.setDeviceMetricsOverride
 // Visible text objects that overlap each other, leave the canvas or overflow their box; caption line count.
 const PROBE = root => {
   const cv = root.querySelector("[data-kz-scene-canvas]"), C = cv.getBoundingClientRect();
-  const skip = /kz-demo-(doc|tray|band|playhead|axis|bar|mark|links)\b/;
+  const skip = /kz-demo-(doc|tray|band|playhead|axis|bar|mark|links|bin|lane|paper|block|heat|dep|threshold|icon|dot)\b/;
   const els = [...cv.querySelectorAll("[data-kz-obj]")].filter(e => !(e instanceof SVGElement) && !skip.test(e.className) && getComputedStyle(e).visibility !== "hidden" && +getComputedStyle(e).opacity > .05 && e.textContent.trim());
   const R = els.map(e => ({ id: e.dataset.kzObj, r: e.getBoundingClientRect(), of: e.scrollWidth > e.clientWidth + 1 || e.scrollHeight > e.clientHeight + 1 }));
   const out = [], hit = (a, b) => Math.min(a.right, b.right) - Math.max(a.left, b.left) > 2 && Math.min(a.bottom, b.bottom) - Math.max(a.top, b.top) > 2;
@@ -39,11 +40,14 @@ const dens = await page.evaluate(() => {
   for (const [f, s] of Object.entries(KZ_GALLERY)) {
     const a = s.audit(), thin = a.transitions.filter(t => t.changed < T.min_changed_per_scene).map(t => t.scene);
     const large = a.transitions.filter(t => t.travel >= T.large_travel || t.grow >= T.large_grow).length;
-    out[f] = { scenes: a.scenes, objects: a.objects, thin, large, pass: a.scenes >= T.min_scenes && a.objects >= T.min_objects && !thin.length && large >= T.min_large_scenes };
+    // space: the fullest scene covers min_canvas_coverage of the canvas grid; figures, not only text boxes
+    s.pause("qc"); const cov = s.stops.map(t => { s.seek(t); return s.coverage(); }); s.resume("qc");
+    const peak = Math.max(...cov.map(c => c.cells)), figures = Math.max(...cov.map(c => c.figures));
+    out[f] = { scenes: a.scenes, objects: a.objects, thin, large, peak, figures, pass: a.scenes >= T.min_scenes && a.objects >= T.min_objects && !thin.length && large >= T.min_large_scenes && peak >= T.min_canvas_coverage && figures >= T.min_figures };
   }
   return out;
 });
-check("六种演示都达到 DEMO-03 密度门槛", Object.values(dens).every(d => d.pass) && Object.keys(dens).length === 6, dens);
+check("十六种演示都达到 DEMO-03 密度、空间与图形门槛", Object.values(dens).every(d => d.pass) && Object.keys(dens).length === 16, dens);
 const layout = {};
 for (const [w, h] of [[1600, 1000], [1280, 800]]) {
   await viewport(w, h); await page.waitForTimeout(300);
@@ -76,6 +80,35 @@ const pathFree = await page.evaluate(() => {
 check("scene 与到达路径无关（前进、后退、循环回到 scene 0 一致）", !Object.keys(pathFree.out).length, pathFree.out);
 check("units 缺口 scene 显示缺口而不是继承的计数", pathFree.gap === "缺 3 份", pathFree.gap);
 const gErr = await page.evaluate(() => window.__kzErrors || []);
+// Data-shape regressions (code review, 7.1.3): variants of the gallery data must give true captions or throw.
+const shapes = await page.evaluate(() => {
+  const D = JSON.parse(JSON.stringify(KZ_MOTION_DATA)), host = document.createElement("div");
+  host.style.cssText = "position:absolute;left:0;top:0;width:900px;height:500px"; document.body.append(host);
+  const run = (kind, data) => { const el = document.createElement("div"); el.style.height = "500px"; host.replaceChildren(el); try { const st = KZDemo.mount(el, kind, data); st.pause("qc"); return { st, caps: st.spec.scenes.map(x => x.caption).join(" | ") }; } catch (e) { return { err: String(e.message) }; } };
+  const out = {};
+  const g = JSON.parse(JSON.stringify(D.gantt)); g.recover = { task: "collect", by: 1, action: "加派人手" };
+  out.ganttSameTask = /推迟 1 个月/.test(run("gantt", g).caps || "");
+  const g2 = JSON.parse(JSON.stringify(D.gantt)); g2.slip.by = 5; out.ganttOffAxisThrows = !!run("gantt", g2).err;
+  const c = JSON.parse(JSON.stringify(D.curve)); c.window.to = 5; out.curveNullWindowThrows = !!run("curve", c).err;
+  const c3 = JSON.parse(JSON.stringify(D.curve)); c3.series.push({ name: "第三组", role: "comparator", values: [50, 52, 55, 57, 60, 61, 63] });
+  const r3 = run("curve", c3); r3.st.seek(r3.st.stops[1]); out.curveThirdShown = +getComputedStyle(r3.st.canvas.querySelector('[data-kz-obj="d2_6"]')).opacity > .5;
+  const k = JSON.parse(JSON.stringify(D.consort)); delete k.arms[1].lost; k.arms[1].n = 164; out.consortNoLost = !run("consort", k).err;
+  const k2 = JSON.parse(JSON.stringify(D.consort)); k2.arms[0].lost.push({ reason: "其他", n: 999 }); out.consortOverLostThrows = !!run("consort", k2).err;
+  const f = JSON.parse(JSON.stringify(D.flow)); f.cases = [f.cases[0]]; out.flowNoFailNoWorst = !/问题集中/.test(run("flow", f).caps || "x问题集中");
+  const f0 = JSON.parse(JSON.stringify(D.flow)); f0.cases[1].steps[1].back = "reg"; const r0 = run("flow", f0);
+  out.flowBackToFirstInside = !r0.err && [...r0.st.canvas.querySelectorAll("path.is-trace")].every(pth => !/M-|L-/.test(pth.getAttribute("d")));
+  const fb = JSON.parse(JSON.stringify(D.flow)); fb.cases[1].steps[1].back = "nope"; out.flowBadBackThrows = !!run("flow", fb).err;
+  out.breakdownDecimals = !run("breakdown", { unit: "亿元", total: { label: "总额" }, parts: [{ label: "A", value: .3, children: [{ label: "a1", value: .1 }, { label: "a2", value: .2 }] }, { label: "B", value: .2 }] }).err;
+  const m = JSON.parse(JSON.stringify(D.matrix)); m.x.levels = ["1", "2", "3", "4", "5"]; out.matrixNonSquare = /3 档 × 发生可能性 5 档/.test(run("matrix", m).caps || "");
+  const t = JSON.parse(JSON.stringify(D.timeline)); t.tasks[0].end = t.max + 2; const rt = run("timeline", t);
+  rt.st.seek(rt.st.stops.at(-1)); out.timelineNoStrayTick = +getComputedStyle(rt.st.canvas.querySelector('[data-kz-obj="tc0"]')).opacity < .05;
+  const rn = run("network", D.network); rn.st.seek(rn.st.stops[3]);
+  out.networkOnlyCurrentRoute = [...rn.st.canvas.querySelectorAll("path[data-kz-obj^='lk']")].filter(pth => /255, ?153, ?0|#FF9900/i.test(getComputedStyle(pth).stroke)).length === 3;
+  const rf = run("flow", D.flow); rf.st.seek(0); const rail = rf.st.canvas.querySelector('[data-kz-obj="rail"]'), before = rf.st.coverage().cells; rail.remove(); out.coverageCountsStraightLinks = rf.st.coverage().cells < before;
+  host.remove();
+  return out;
+});
+check("数据形态回归：延误与追赶同一任务、时间轴外里程碑、空值窗口、第三条曲线、无脱落组、脱落超额、全部通过、退回首站、无效退回、小数子项、非方阵、轴外完成勾、通道高亮、直线覆盖", Object.values(shapes).every(Boolean), shapes);
 
 // 2. deck: the demo slides step scene by scene like the film (06 MOTION-09)
 await viewport(1920, 1080);
@@ -121,7 +154,41 @@ await page.keyboard.press("ArrowRight"); await page.waitForTimeout(300); const r
 check("减少动态：演示停在静态 scene，按键直接翻页", r1.slide === 8 && r1.scene > 0 && !r1.moving && r2.slide === 9, { r1, r2 });
 await page.cdp("Emulation.setEmulatedMedia", { features: [] });
 
-const errors = [...gErr, ...await page.evaluate(() => window.__kzErrors || [])];
+const dErr = await page.evaluate(() => window.__kzErrors || []);
+
+// 4. template deck: every demo slide at three viewports — stage share, clean layout in every scene, preset rotation
+const tpl = {}, presets = [];
+for (const [w, h] of [[1920, 1080], [1280, 720], [2560, 1080]]) {
+  await viewport(w, h);
+  for (let n = 2; n <= 11; n++) {
+    await page.goto("about:blank"); await page.goto(ROOT + `motion/deck/index.html#/${n}`);
+    await page.waitForFunction(() => document.documentElement.dataset.kzDeckReady === "true", undefined, { timeout: 15000 });
+    await page.waitForTimeout(600);
+    const r = await page.evaluate(P => {
+      const T = KZ_TOKENS.motion.scenes.density, sl = document.querySelector(".slide.is-active"), f = [...KZ_DECK.lives].find(x => x.film?.root?.closest?.(".slide.is-active")).film;
+      f.pause("qc"); const issues = {};
+      for (let i = 0; i < f.stops.length; i++) { f.seek(f.stops[i]); const iss = new Function("root", "return (" + P + ")(root)")(f.root); if (iss.length) issues[i] = iss; }
+      const S = sl.getBoundingClientRect(), D = f.root.getBoundingClientRect(), share = D.width * D.height / (S.width * S.height);
+      const preset = sl.querySelector(".kz-body").dataset.preset, facts = sl.querySelector("[data-kz-demo-facts]");
+      return { kind: f.root.dataset.kzDemo, preset, share: +share.toFixed(3), issues, factsOk: !facts || facts.children.length >= 3, pass: share >= T.min_stage_share && !Object.keys(issues).length && (!facts || facts.children.length >= 3) };
+    }, PROBE.toString());
+    if (w === 1920) presets.push(r.preset);
+    if (!r.pass) tpl[`${w}x${h} ${n}`] = r;
+  }
+}
+check("模板组十页：舞台占比、每个 scene 版面干净、事实条（1920×1080、1280×720、2560×1080）", !Object.keys(tpl).length, tpl);
+check("模板组相邻演示页不重复预设，四个预设都出现", presets.every((p, i) => !i || p !== presets[i - 1]) && new Set(presets).size === 4, presets);
+// stepping: → walks the scenes of a template slide one by one, then pages
+await viewport(1920, 1080);
+await page.goto("about:blank"); await page.goto(ROOT + "motion/deck/index.html#/2");
+await page.waitForFunction(() => document.documentElement.dataset.kzDeckReady === "true", undefined, { timeout: 15000 });
+await page.waitForTimeout(600);
+const tSeen = [(await cur()).scene];
+for (let k = 1; k < 5; k++) { await page.keyboard.press("ArrowRight"); tSeen.push((await settle()).scene); }
+await page.keyboard.press("ArrowRight"); await page.waitForTimeout(300);
+check("模板组第 2 页 → 逐 scene 前进，最后一个 scene 后翻页", tSeen.join() === "0,1,2,3,4" && (await cur()).slide === 3, { tSeen, after: await cur() });
+
+const errors = [...gErr, ...dErr, ...await page.evaluate(() => window.__kzErrors || [])];
 check("无脚本错误", !errors.length, errors);
 await page.cdp("Emulation.clearDeviceMetricsOverride", {});
 if (wasMin) await task.cdp("Browser.setWindowBounds", { windowId, bounds: { windowState: "minimized" } });

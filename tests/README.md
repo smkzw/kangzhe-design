@@ -2,11 +2,11 @@
 
 | 文件 | 内容 | 运行 |
 |---|---|---|
-| `test_*.py` | 合同、tokens、hero 几何、双菱形、计划绕过、视口资产、上下文路由、规范结构 | `for t in tests/test_*.py; do python "$t"; done`（需 jsonschema、Pillow） |
+| `test_*.py` | 合同、tokens、hero 几何、双菱形、计划绕过、视口资产、上下文路由、规范结构、边缘色条（`test_edge_bars.py`）、生图能力闸门（`test_image_gate.py`）、演示形式与模板组（`test_demo_motion.py`） | `for t in tests/test_*.py; do python "$t"; done`（需 jsonschema、Pillow） |
 | `ego/runtime_checks.mjs` | 组件实验室的真实指针/键盘/滚动检查 | `ego-browser nodejs < tests/ego/runtime_checks.mjs`（先把脚本里的 `KZ_ROOT` 改为本仓库路径） |
 | `ego/flagship_checks.mjs` | 旗舰正例的真实按键检查：光场、透镜、身份胶囊、入场顺序、定格可复现、内容页安静区、减少动态与 `?preview` | `ego-browser nodejs < tests/ego/flagship_checks.mjs`（脚本中的 URL 指向本仓库路径） |
 | `ego/scene_checks.mjs` | HTML-PPT 按 scene 步进（06 MOTION-09）：真实按键与触控、入场方向、运动时长、减少动态 | `ego-browser nodejs < tests/ego/scene_checks.mjs` |
-| `ego/demo_checks.mjs` | 演示舞台（15 DEMO）：密度门槛、每个 scene 的版面、deck 演示页步进、减少动态 | `ego-browser nodejs < tests/ego/demo_checks.mjs` |
+| `ego/demo_checks.mjs` | 演示舞台（15 DEMO）：16 种形式的密度、画布覆盖与图形门槛，每个 scene 的版面，路径无关，参考 deck 演示页步进，模板组 `examples/motion/deck/` 三档视口的舞台占比、版面、事实条与预设轮换，减少动态 | `ego-browser nodejs < tests/ego/demo_checks.mjs` |
 | `*_browser.py`、`*.cjs` | Playwright / Node 版组件检查 | 维护者环境：`python tests/browser_smoke.py --chromium <path> --out <dir>` 等 |
 
 7.0 已把 `chart_axis_browser.py`、`tilt_pointer_browser.py`、`browser_smoke.py` 的断言改为新接口（折线 `[x,y]` 数据、倾斜由变量驱动且上限 6°），但这些 Playwright 脚本未在本次本机环境运行。以下为 6.x 时期的说明，仅作历史参考。

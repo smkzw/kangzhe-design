@@ -64,6 +64,9 @@
     const dirtyText=document.createElement('span');const undoB=document.createElement('button'),resetB=document.createElement('button');
     for(const [b,text] of [[undoB,'撤销'],[resetB,'还原全部']]){b.type='button';b.className='kz-button';b.textContent=text;}
     dirty.append(dirtyText,undoB,resetB);root.replaceChildren(plot,editor,dirty);
+    // 13 FOLD-06: on scrolling pages the plot is as tall as its rows; HTML-PPT keeps the preset's fixed plot.
+    const dense=KZ_TOKENS.layout&&KZ_TOKENS.layout.dense;
+    if(dense&&!root.closest('[data-fit="fluid"]'))plot.style.height=(dense.gantt_axis_px+data.tasks.length*dense.gantt_row_px)+'px';
     for(const t of data.tasks){const o=document.createElement('option');o.value=t.id;o.textContent=t.label;select.append(o);}
     chart=echarts.init(plot,null,{renderer:'canvas'});
     function task(){return data.tasks.find(t=>t.id===selected);}

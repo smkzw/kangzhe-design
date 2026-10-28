@@ -48,18 +48,33 @@
 ## KZScenes（runtime/kz-scenes.js，演示舞台 15）
 `mount(root, {scenes, loop, staticScene, onScene})` → `Stage`。root 内的 `[data-kz-scene-canvas]`（没有则 root）是画布，其中每个 `[data-kz-obj="id"]` 是一个持久对象；可选 `[data-kz-scene-caption]`（说明句）与 `[data-kz-scene-rail]`（状态条，自动生成序号）。
 - scene：`{id, caption, set: {objId: state}, order?: [objId…], hold?}`。状态是相对上一 scene 的增量：`x y w h`（画布比例）、`opacity scale rotate`、`fill color stroke`、`draw`（SVG 描绘 0–1）、`count` + `decimals unit`、`text`、`attr`（数值型 SVG 属性）、`cls`（类名开关）。`from` 是首次出现前的隐藏起点，`via: [[x,y]…]` 是本次运动的途经点。对象写入 `[data-kz-obj-text]` 子节点（若有）。
-- 步进模式（`loop:false`，HTML-PPT）与循环模式（`loop:true`，站点）。方法同 Film 的 scene 接口：`pause resume seek scene moving toScene next prev playThrough snapshot dispose`，另有 `stops`（各 scene 的进度）与 `audit()` → `{scenes, objects, transitions:[{scene, changed, entered, travel, grow, caption}]}`（15 DEMO-03）。时长读 `motion.scenes`。
+- 步进模式（`loop:false`，HTML-PPT）与循环模式（`loop:true`，站点）。方法同 Film 的 scene 接口：`pause resume seek scene moving toScene next prev playThrough snapshot dispose`，另有 `stops`（各 scene 的进度）、`audit()` → `{scenes, objects, transitions:[{scene, changed, entered, travel, grow, caption}]}` 与 `coverage({cols, rows})` → `{cells, figures, texts}`（当前 scene 可见对象触及的画布网格比例，连线按笔画计；图形对象与文字对象的个数；15 DEMO-03）。没有任何 scene 写到的对象保持标记里的样子、可见（例如只靠 clipPath 揭示的曲线）。时长读 `motion.scenes`。
 - `KZScenes.layout`：`grid(n, {box, cols, gap, valign})`、`bars(values, {box, max, gap})`、`scale(domain, range)`、`rows(n, {box, gap})`、`cols(n, {box, gap})`，都返回画布比例的矩形。
 
-## KZDemo（runtime/kz-demo.js，15 DEMO-02）
-`mount(root, kind, data, {loop, staticScene})` → `Stage`；所有数字与说明句由 data 计算。
+## KZIcons（runtime/kz-icons.js，15 DEMO-08）
+`svg(name, {title})` → 24×24 线性图标（`currentColor` 描边，状态类改色）；`names` 列出全部图标：doc doc-check doc-x doc-missing person people site building lab pill syringe calendar clock check cross warn search database send shield flag chart sign archive lock rework escalate unlink。
+
+## KZDemo（runtime/kz-demo.js + kz-demo-patterns.js，15 DEMO-02）
+`mount(root, kind, data, {loop, staticScene})` → `Stage`；所有数字与说明句由 data 计算。`forms` 列出已注册形式；`define(kind, fn)` 注册新形式，`fn(root, data, opt)` 返回 Stage；`renderFacts(el, stage)` 把形式算出的 `stage.facts`（`[{value, label, risk?}]`）渲染成事实条（`demo-stack` 预设）。
+`kit` 是搭建工具：`frame(root, kind, note)` 建画布与底栏，`obj(cv, id, cls, text)` 建持久对象，`icon(cv, id, name, cls)` 图标对象，`lead(node, name)` 文字前加图标（文字移入 `[data-kz-obj-text]`），`glyph(node, name, fallback)` 只放一个图标，`links(cv)` → `{svg, path(id, d, cls)}` 画布级连线层（0–1000 坐标），`pts([[x,y]…])` 折线路径，另有 `S C MUTE SOFT sum fmt el`。
 - `units`：`{unit, groups:[{name, due, received}], owner, deadline, note}`
 - `calc`：`{unit, rows:[{name, a, b}], aLabel, bLabel, diffLabel, note}`
 - `story`：`{unit, groups:[{name, a, b}], aLabel, bLabel, gapLabel, takeaway?, note}`
 - `timeline`：`{min, max, tasks:[{id, label, start, end, department}], milestone?:{at, label, flag?}, note}`，季度同 KZGantt
 - `decision`：`{nodes:[{id, label, x, y, w, h?, kind:'in'|'q'|'out'}], edges:[{from, to, label?}], cases:[{id, label, detail, path:[nodeId…]}], intro, summary?, note}`
 - `compare`：`{left, right, leftTag?, rightTag?, rows:[{label, left, right}], rightOrder?, tray, note}`
-示例数据：`examples/motion/data.js`。
+- `decision` 的节点可带 `icon`（KZIcons 名称）。
+- `flow`：`{stations:[{id, label, icon, rule}], cases:[{id, label, detail, steps:[{at, result:'pass'|'fail', back?}]}], bins?:{accept, rework, escalate}, intro?, summary?, note}`；带 `back` 的失败退回该环节返工，不带 `back` 的失败升级
+- `gantt`：`{labels:[期名…], unit, tasks:[{id, label, start, end, department, deps?:[id…]}], milestone:{label, after:[id…]}, today, todayLabel?, slip:{task, by, reason}, recover?:{task, by, action}, note}`；`[start,end)` 以期计，按依赖前推排期
+- `swimlane`：`{lanes:[{id, label, icon, department}], steps:[{lane, label, days, sla}], unit, limit, caseLabel, chunks?, note}`
+- `consort`：`{unit, per, screened, excluded:[{reason, n}], arms:[{name, role:'treat'|'comparator', n, lost:[{reason, n}]}], note}`；各组合计须等于随机化人数
+- `curve`：`{x:[标签…], unit, series:[{name, values:[数值|null], role?}], threshold?:{value, label}, window?:{from, to, label}, events?:[{at, label}], takeaway?, note}`；`unit` 为 `%` 时差值写“个百分点”
+- `breakdown`：`{unit, total:{label}, parts:[{label, value, children?:[{label, value, flag?}]}], focus?, takeaway?, note}`
+- `audit`：`{title, fields:[{label, value, ok, rule?}], groups?, note}`
+- `matrix`：`{x:{label, levels}, y:{label, levels}, items:[{label, at:[xi, yi], after?:[xi, yi], action?}], high, note}`
+- `network`：`{nodes:[{id, label, icon, x, y}], links:[{from, to}], packets:[{label, route:[id…], blocked?:[from, to], note?}], intro?, note}`；节点坐标是网络区的比例，右侧留给数据包台账
+- `schedule`：`{unit, span:[d0, d1], visits:[{label, day, window:[-a, +b]}], subjects:[{label, actual:[日|null…]}], note}`
+数据自相矛盾时形式抛错（例如分组合计不等于随机化人数、阻断通道不在路径上）。示例数据：`examples/motion/data.js`。
 
 ## KZHTMLPPT（adapters/html-ppt-bridge.js）
 维护 `--kz-un` 与 `--kz-u`（adapter「单位：一个比率」）。`bind(deck, factory)` → `{sync, dispose}`：factory 收到每个上游直接子 `.slide`，返回 `{enter(info), leave, dispose, next?, prev?}`；`info = {direction:'forward'|'backward', attended}`。桥接在捕获阶段把翻页键与滑动先交给活动页的 `next()`/`prev()`，返回 `true` 时不交上游（06 MOTION-09）；总览克隆不挂载；初始化失败会清理已返回的生命周期。

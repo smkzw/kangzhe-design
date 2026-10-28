@@ -111,6 +111,11 @@ def build():
             f'  --kz-dialog-width: {t["wide"]["dialog_width_vw"]}vw;',
             f'  --kz-dialog-max-height: {t["wide"]["dialog_height_vh"]}vh;',
             f'  --kz-lede-max: {fold["lede_max_em"]}em;']
+    dense = t['layout']['dense']
+    css += [f'  --kz-dense-head-max: {dense["head_max_vh"] * 100:g}vh;',
+            f'  --kz-dense-stage-max: {dense["stage_max_vh"] * 100:g}vh;',
+            f'  --kz-dense-gap: {dense["section_gap_px"]}px;',
+            f'  --kz-chart-aspect: {dense["chart_aspect"]};']
     # Body-page chrome in canvas units (unitless): HTML-PPT multiplies by --kz-u, so the deck CSS holds no geometry.
     c, (cw, ch) = t['chrome'], t['units']['canvas_px']
     named = {'title': c['title'], 'logo': c['logo'], 'body': c['body'], 'mark': c['header_mark']['placement_htmlppt_u']}

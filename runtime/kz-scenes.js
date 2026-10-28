@@ -77,12 +77,13 @@
     }
     // Every object's full state in every scene: a scene inherits whatever it does not set. An object first set in
     // a later scene waits hidden at that state (or at its `from` state, to travel in) and appears in that scene.
+    // An object no scene mentions is static and visible as drawn (a path revealed only through its clip, a frame).
     resolve() {
       const scenes = this.spec.scenes, clean = o => { const { from, ...rest } = o; return rest; }, noVia = o => { const { via, ...rest } = o; return rest; };
       let prev = {};
       for (const id of this.objects.keys()) {
         const k = scenes.findIndex(s => s.set?.[id]), s0 = k < 0 ? {} : scenes[k].set[id];
-        prev[id] = k === 0 ? { ...DEFAULT, ...clean(s0) } : { ...DEFAULT, ...noVia(clean(s0)), ...(s0.from || {}), opacity: 0 };
+        prev[id] = k <= 0 ? { ...DEFAULT, ...clean(s0) } : { ...DEFAULT, ...noVia(clean(s0)), ...(s0.from || {}), opacity: 0 };
       }
       const shown = new Set(scenes[0].set ? Object.keys(scenes[0].set) : []);
       this.states = scenes.map((s, i) => {
@@ -159,7 +160,8 @@
         st.visibility = (s.opacity ?? 1) <= .001 ? 'hidden' : ''; // '' inherits, so a hidden slide hides its stage
         if (s.fill) (el instanceof SVGElement ? el.setAttribute('fill', css(rgba(s.fill))) : st.backgroundColor = css(rgba(s.fill)));
         if (s.color) st.color = css(rgba(s.color));
-        if (s.stroke) el.setAttribute('stroke', css(rgba(s.stroke)));
+        // inline, so a scene's stroke wins over a class default (a muted rail lights up when a route uses it)
+        if (s.stroke) st.stroke = css(rgba(s.stroke));
         for (const [k, v] of Object.entries(s.attr || {})) el.setAttribute(k, (+v).toFixed(2));
         // a fully drawn line carries no dash (path length and a non-scaling stroke's dash units can differ)
         if (s.draw != null && el.getTotalLength) { if (s.draw >= .999) { st.strokeDasharray = ''; st.strokeDashoffset = ''; } else { const L = el.getTotalLength(); st.strokeDasharray = `${L} ${L}`; st.strokeDashoffset = String(L * (1 - clamp(s.draw))); } }
@@ -215,6 +217,27 @@
         return { scene: this.spec.scenes[i + 1].id, changed, entered, travel: +travel.toFixed(3), grow: +grow.toFixed(2), caption: this.spec.scenes[i + 1].caption || '' };
       });
       return { scenes: this.spec.scenes.length, objects: this.objects.size, transitions: per };
+    }
+    // Space receipt for QC (15 DEMO-03), measured in the DOM at the current scene: the share of canvas cells that
+    // visible objects touch, and how many of them are figures (icons, marks, bars, links) rather than text.
+    coverage({ cols, rows } = {}) {
+      [cols, rows] = [cols || tk('scenes.density.coverage_grid', [24, 14])[0], rows || tk('scenes.density.coverage_grid', [24, 14])[1]];
+      const C = this.canvas.getBoundingClientRect(), hit = new Set(); let figures = 0, texts = 0;
+      if (!C.width || !C.height) return { cells: 0, figures: 0, texts: 0 };
+      for (const el of this.canvas.querySelectorAll('[data-kz-obj]')) {
+        const cs = getComputedStyle(el); if (cs.visibility === 'hidden' || +cs.opacity < .05 || el.closest('defs')) continue;
+        // a straight horizontal or vertical link has a zero-height or zero-width box: only skip boxes empty both ways
+        const r = el.getBoundingClientRect(); if (r.width < 1 && r.height < 1 || !(el instanceof SVGGeometryElement) && (r.width < 1 || r.height < 1)) continue;
+        const figure = el instanceof SVGElement || !!el.querySelector('svg') || !el.textContent.trim();
+        figure ? figures++ : texts++;
+        const mark = (px, py) => { const x = Math.floor((px - C.left) / C.width * cols), y = Math.floor((py - C.top) / C.height * rows); if (x >= 0 && x < cols && y >= 0 && y < rows) hit.add(x + ',' + y); };
+        // a link counts the cells its stroke passes through, not its bounding box
+        if (el instanceof SVGGeometryElement) { const len = el.getTotalLength(), M = el.getScreenCTM(); for (let t = 0; t <= 80; t++) { const pt = el.getPointAtLength(len * t / 80), q = new DOMPoint(pt.x, pt.y).matrixTransform(M); mark(q.x, q.y); } continue; }
+        const x0 = Math.max(0, Math.floor((r.left - C.left) / C.width * cols)), x1 = Math.min(cols - 1, Math.floor((r.right - C.left - .5) / C.width * cols));
+        const y0 = Math.max(0, Math.floor((r.top - C.top) / C.height * rows)), y1 = Math.min(rows - 1, Math.floor((r.bottom - C.top - .5) / C.height * rows));
+        for (let x = x0; x <= x1; x++) for (let y = y0; y <= y1; y++) hit.add(x + ',' + y);
+      }
+      return { cells: +(hit.size / (cols * rows)).toFixed(3), figures, texts };
     }
     snapshot() { return { progress: this.p, scene: this.scene, moving: this.moving, reasons: [...this.reasons], loop: this.loop }; }
     dispose() {

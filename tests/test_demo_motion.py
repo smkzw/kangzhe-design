@@ -1,6 +1,7 @@
-"""7.1.2: secondary type role, scene/demo tokens wired to consumers, demo forms and their examples in place."""
+"""7.1.2: secondary type role, scene/demo tokens wired to consumers, demo forms and their examples in place.
+7.1.3: sixteen data-driven forms, icons, the four demo presets and their rotation, the HTML-PPT template deck."""
 from pathlib import Path
-import json, re, sys, unittest
+import copy, json, re, sys, unittest
 R = Path(__file__).resolve().parents[1]; sys.path.insert(0, str(R / 'tools'))
 from qc_plan import validate
 from context_pack import files
@@ -48,12 +49,17 @@ class SceneTokens(unittest.TestCase):
                 self.assertIn('performance.now()', src)
                 self.assertNotRegex(src, r'requestAnimationFrame\(\s*(?:\(?\s*\w+\s*\)?\s*=>\s*this\.\w+\(\s*\w+\s*\)|this\.\w+\.bind)')
 
+def all_forms():
+    base = re.search(r"const FORMS = \{([^}]*)\}", read('runtime/kz-demo.js')).group(1).replace(' ', '').split(',')
+    return base + re.findall(r"def\('(\w+)'", read('runtime/kz-demo-patterns.js'))
+
 class DemoForms(unittest.TestCase):
     def test_each_form_is_documented_and_exemplified(self):
-        forms = re.search(r"const FORMS = \{([^}]*)\}", read('runtime/kz-demo.js')).group(1).replace(' ', '').split(',')
+        forms = all_forms()
         spec, api, data = read('design_specs/15-demo-motion.md'), read('runtime/API.md'), read('examples/motion/data.js')
         gallery = read('examples/motion/index.html')
-        self.assertEqual(len(forms), 6)
+        self.assertEqual(len(forms), 16)
+        self.assertEqual(len(set(forms)), 16)
         for f in forms:
             with self.subTest(form=f):
                 self.assertIn(f'`{f}`', spec)
@@ -65,8 +71,61 @@ class DemoForms(unittest.TestCase):
         html = read('examples/reference/htmlppt/index.html')
         self.assertEqual(html.count('<section class="slide'), 12)
         self.assertEqual(sorted(set(re.findall(r'data-kz-demo-kind="(\w+)"', html))), ['decision', 'units'])
-        for s in ('kz-scenes.js', 'kz-demo.js'):
+        for s in ('kz-scenes.js', 'kz-icons.js', 'kz-demo.js', 'kz-demo-patterns.js'):
             self.assertLess(html.index(s), html.index('html-ppt-bridge.js'))
+
+    def test_template_deck_covers_the_new_forms_and_rotates_presets(self):
+        html = read('examples/motion/deck/index.html')
+        kinds = re.findall(r'data-kz-demo-kind="(\w+)"', html)
+        self.assertEqual(sorted(kinds), sorted(all_forms()[6:]))
+        presets = re.findall(r'class="kz-body" data-preset="([\w-]+)"', html)
+        self.assertEqual(len(presets), len(kinds))
+        self.assertEqual(set(presets), {'demo', 'demo-mirror', 'demo-wide', 'demo-stack'})
+        self.assertTrue(all(a != b for a, b in zip(presets, presets[1:])), presets)
+        order = [html.index(f'runtime/{m}"') for m in ('kz-scenes.js', 'kz-icons.js', 'kz-demo.js', 'kz-demo-patterns.js')]
+        self.assertEqual(order, sorted(order))
+        # every demo slide has notes with one 【n】 per scene of its stage (five scenes each)
+        notes = re.findall(r'<aside class="notes">([^<]*)</aside>', html)[1:-1]
+        self.assertEqual([len(re.findall(r'【\d】', n)) for n in notes], [5] * len(kinds))
+
+    def test_icons_used_exist(self):
+        names = set(re.findall(r"^\s*'?([\w-]+)'?: '", read('runtime/kz-icons.js'), re.M))
+        used = set(re.findall(r"icon: '([\w-]+)'", read('examples/motion/data.js')))
+        # literal names in icon(cv, id, name) and lead/glyph(obj(…), name); unknown names also throw at mount
+        for src in ('runtime/kz-demo.js', 'runtime/kz-demo-patterns.js'):
+            used |= set(re.findall(r"icon\(cv, '\w+'(?: \+ \w+)?, '([\w-]+)'", read(src)))
+            used |= set(re.findall(r"(?:lead|glyph)\(.*?\), '([\w-]+)'", read(src)))
+        self.assertTrue(used, 'no icon references found')
+        self.assertLessEqual(used, names, used - names)
+
+class DemoPlan(unittest.TestCase):
+    # 15 DEMO-01/05/09 in the page plan: demo pages declare kind and a demo preset, adjacent ones rotate it
+    def plan(self, pages):
+        p = json.loads(read('agent/fixtures/page-plan.valid.json')); p['track'] = 'htmlppt'
+        p['target_viewports'] = [[1280, 720], [1536, 730], [1920, 940], [1920, 1080], [2560, 1080]]
+        page = p['pages'][0]; page['motion_objects'] = [{'id': c['id'], 'role': 'card', 'enter': 'fade', 'exit': 'fade', 'hover': 'tilt', 'ambient': 'none'} for c in page['cards']] or [{'id': 'a', 'role': 'card', 'enter': 'fade', 'exit': 'fade', 'hover': 'tilt', 'ambient': 'none'}]
+        out = []
+        for i, (preset, demo) in enumerate(pages):
+            q = copy.deepcopy(page); q['id'] = f'p{i:02d}'; q['preset'] = preset
+            if demo is not None: q['demo'] = demo
+            out.append(q)
+        p['pages'] = out
+        return {f['code'] for f in validate(p) if f['level'] == 'error'}
+
+    def test_rotation_passes(self):
+        cases = ['positive', 'negative', 'complex_negative']
+        self.assertEqual(self.plan([('demo-mirror', {'kind': 'flow', 'cases': cases}), ('demo-wide', {'kind': 'gantt'}), ('cards-3', None), ('demo-mirror', {'kind': 'units'})]) & {'DEMO-PRESET', 'DEMO-PRESET-REPEAT', 'DEMO-CASES', 'SCHEMA'}, set())
+
+    def test_adjacent_repeat_and_wrong_preset_fail(self):
+        self.assertIn('DEMO-PRESET-REPEAT', self.plan([('demo', {'kind': 'units'}), ('demo', {'kind': 'calc'})]))
+        self.assertIn('DEMO-PRESET', self.plan([('cards-3', {'kind': 'units'})]))
+
+    def test_process_demos_need_both_cases(self):
+        self.assertIn('DEMO-CASES', self.plan([('demo', {'kind': 'flow', 'cases': ['positive']})]))
+
+    def test_no_demo_needs_a_reason(self):
+        self.assertIn('SCHEMA', self.plan([('cards-3', {'none': ''})]))
+        self.assertNotIn('SCHEMA', self.plan([('cards-3', {'none': '纯结论页'})]))
 
     def test_motion_routes_to_demo_owner(self):
         for track in ('htmlppt', 'site', 'stream'):

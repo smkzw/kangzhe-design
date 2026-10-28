@@ -2,7 +2,7 @@
 
 康哲药业医学部的单一 Liquid Glass 设计技能，覆盖可编辑 PPTX、HTML-PPT、站点式 HTML、流式 HTML。PPTX 始终经 hugohe3/ppt-master 制作，HTML-PPT 始终从 lewislulu/html-ppt-skill 脚手架起步；本包负责品牌与内容表达、图像保护、材质、动效与组件、验收，不替代上游的路由、缩放、导航与导出。
 
-7.1 为 PPTX 与 HTML-PPT 增加旗舰路线（`design_specs/14-flagship.md`，用于对外与顶层汇报：浅色画布上的全屏光场、液态玻璃透镜与身份胶囊），开工前先请用户在常规与旗舰之间选路。7.1.2 让 HTML-PPT 的电影与演示按 scene 随翻页键与滑动推进，新增 12pt 辅助文字角色，并新增演示性动画（`design_specs/15-demo-motion.md`，六种可复用形式，图库见 `examples/motion/index.html`）。
+7.1 为 PPTX 与 HTML-PPT 增加旗舰路线（`design_specs/14-flagship.md`，用于对外与顶层汇报：浅色画布上的全屏光场、液态玻璃透镜与身份胶囊），开工前先请用户在常规与旗舰之间选路。7.1.2 让 HTML-PPT 的电影与演示按 scene 随翻页键与滑动推进，新增 12pt 辅助文字角色，并新增演示性动画（`design_specs/15-demo-motion.md`）。7.1.3 禁止卡片边缘装饰色条并提供检查工具，PPT 两轨出图前先过生图能力闸门（没有生图能力时用登记的缺省背景套），站点与流式非首页改为章节头 + 密排网格并测逐屏密度，演示形式增至 16 种（图库 `examples/motion/index.html`，HTML-PPT 模板组 `examples/motion/deck/index.html`）。
 
 7.0 是一次分层重构：规范只写设计规则，验收方法集中在 `design_specs/10-quality-gates.md`，事故史移出正文；新增阴影层级与指针光源、token 化的动作词汇与编排、Bento 首屏与密度指标、按浏览器可视区的验收视口，以及四轨的正例。变化逐条见 [CHANGELOG](CHANGELOG.md)，验证状态见 [STATUS.md](STATUS.md)。
 

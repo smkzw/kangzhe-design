@@ -51,7 +51,26 @@ opacity 的写入位置会影响玻璃：祖先元素 opacity<1 时，Chromium �
 打开宽幅下钻时，后方页面的文字不得透到弹窗阅读面上。`kz-drilldown.js` 在弹窗之外互不嵌套的背景根节点上临时挂隔离类：模糊后方、暂停后方 CSS 动画；弹窗及其内容不加 filter。返回上层保持隔离，关闭或 dispose 后释放，并保留原有 class、style 与滚动锁（多实例引用计数）。只看 `CSS.supports` 或声明值不能证明隔离有效，须看实际画面。
 
 ## 色条禁令 LG-02
-任何轨道、密度、卡型都不得用沿卡片一条边覆盖大部分长度的彩色条作装饰：border-left/top、独立矩形、伪元素、inset 阴影、渐变伪装、带色通长底边都算。可以用短编号、文字色、语义图标、局部光晕、短高光。卡片四周的中性细折光边、甘特条、统计柱、正文页固定橙线不属于色条。检测须结合对象角色与几何位置，不能简单禁止所有长矩形。
+适用于全部四条轨道（PPTX、HTML-PPT、站点式、流式）、常规与旗舰路线、所有密度与卡型。凡是有底色、边框或阴影的盒子都算卡片：正文卡、KPI、表格外壳、图表外壳、下钻面板、状态条格、演示舞台、侧注。
+
+**禁止**：沿卡片任一条边的彩色装饰条，全高（贴左边或右边的竖条）和全宽（贴顶边或底边的横条）都禁止。以下画法都算：
+- CSS：单边着色的 `border-left/right/top/bottom`；贴边的 `::before`/`::after` 色块；无模糊或小模糊的单边 inset 阴影；渐变做成的贴边色带；带色的通长底边。
+- PPTX/SVG：贴着卡边的细长 `rect`、`line` 或 path。
+- 上游默认件同样禁用：html-ppt 的 `.card-accent`（3px 彩色顶边）与带竖条的主题，ppt-master 文档建议的贴边 accent bar。`kz-glass.css` 已去掉 `.card-accent` 的顶边，项目不得再写回。上游 72px 宽的 `.divider-accent` 是不贴卡边的短标记，可以用。
+
+**判定**（数值见 `glass.edge_bar`）：
+- 贴边：离卡片边缘不超过 `hug_px`；细长：厚度不超过 `max_thickness_px`；有色：饱和度高于 `neutral_saturation_max` 且不透明度不低于 `alpha_min`。
+- 三项都满足、长度达到该边的 `forbid_ratio`，判失败；长度在 `warn_ratio` 与 `forbid_ratio` 之间判 WARN，并写明它是什么语义标记。
+- 检测：HTML 用 `KZLayoutQC.inspectEdgeBars`，PPTX 用 `tools/check_edge_bars.py`（10 G5）。page-plan 卡片的 `edge_decoration` 只能是 `none`、`neutral_hairline` 或 `localized_highlight`。
+
+**可用的替代**：卡标题前的短编号或小圆点、文字颜色、语义图标、不超过 `warn_ratio` 的短色标、局部光晕、短高光、图例与标签旁的部门色小色块。
+
+**不算色条**：
+- 卡片四周等宽的中性细折光边；
+- 甘特条、统计柱、演示舞台里的数据对象；
+- 正文页固定的橙色页眉横线（01 chrome）；
+- 表格表头行：整行浅底、行内有列名，属于表格结构；
+- 不在卡片上的排版分隔线：中性墨色，位于无底色、无边框的文字段开头，长度不超过该文字列宽（例如旗舰关键数字下方的说明段）。彩色分隔线仍然禁止。
 
 ## 圆角与空间
 正文卡、紧凑卡、对话框分别用 `glass.radius`、`radius_compact`、`radius_dialog`。外壳与内层圆角按内边距同心缩减。不把所有卡做成药丸形；自由形液态载体只出现在有语义的电影或 hero 中。

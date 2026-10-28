@@ -38,8 +38,8 @@
     for (const [a, b] of rows) { const tr = el('tr'); tr.append(el('th', null, a), el('td', null, b)); t.append(tr); }
     return t;
   }
-  function mountDetails(details, film) {
-    const drill = new KZDrilldown.Drilldown({ host: q('.kz') || document.body, onOpen() { film?.pause('dialog'); }, onClose() { film?.resume('dialog'); } });
+  function mountDetails(details, players) {
+    const drill = new KZDrilldown.Drilldown({ host: q('.kz') || document.body, onOpen() { players.forEach(x => x.pause('dialog')); }, onClose() { players.forEach(x => x.resume('dialog')); } });
     const render = id => (container, manager) => {
       const d = details[id];
       container.append(el('p', 'kz-ref-intro', d.intro), table(d.rows));
@@ -52,9 +52,11 @@
   }
 
   function mountMotion() {
-    const fold = q('.kz-fold');
-    if (fold) { life.push(KZMotion.fitFold(fold)); const page = KZMotion.mountPage(fold); page.enter(); life.push(page); }
-    const counters = qa('.kz-fold [data-kz-count]').map(n => KZMotion.countUp(n, { to: Number(n.dataset.kzCount), decimals: Number(n.dataset.kzDecimals || 0) }));
+    // Home: the one-screen Bento fold (13 FOLD-01). Other pages: a compact chapter head (13 FOLD-06).
+    const fold = q('.kz-fold'), head = q('.kz-chapter');
+    if (fold) life.push(KZMotion.fitFold(fold));
+    if (fold || head) { const page = KZMotion.mountPage(fold || head); page.enter(); life.push(page); }
+    const counters = qa('.kz-fold [data-kz-count], .kz-chapter [data-kz-count]').map(n => KZMotion.countUp(n, { to: Number(n.dataset.kzCount), decimals: Number(n.dataset.kzDecimals || 0) }));
     setTimeout(() => counters.forEach(c => c.play()), 180);
     qa('[data-kz-section]').forEach(s => life.push(KZMotion.mountTilt(s)));
     life.push(KZMotion.mountSections(document), KZMotion.mountField(document), ...counters);
@@ -76,8 +78,11 @@
       const R = window.KZ_REF, out = {};
       mountMotion();
       const filmRoot = q('.kz-fold .kz-film');
-      if (filmRoot) out.film = mountFoldFilm(filmRoot, kind === 'chapter' ? R.chapter.film : R.home.film);
-      out.drill = mountDetails(R.details, out.film);
+      if (filmRoot) out.film = mountFoldFilm(filmRoot, R.home.film);
+      // a demonstrative stage (15 DEMO) loops on sites; it pauses itself offscreen and in dialogs
+      const demoRoot = q('[data-kz-demo]');
+      if (demoRoot) { out.demo = KZDemo.mount(demoRoot, demoRoot.dataset.kzDemo, R[kind][demoRoot.dataset.kzDemo], { loop: true }); life.push(out.demo); }
+      out.drill = mountDetails(R.details, [out.film, out.demo].filter(Boolean));
       out.completeness = chart('chart-completeness', R.home.completeness);
       out.trend = chart('chart-trend', R.chapter.trend);
       const g = q('#gantt');

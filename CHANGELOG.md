@@ -1,3 +1,83 @@
+# 7.1.3 · 2026-10-29
+
+## KZ7-1029-B09 · 卡片边缘色条闸、生图能力闸门、非首页密排、演示动画模板组
+用户反馈四点：
+1. 卡片边缘的全高或全宽装饰色条仍偶有出现，问规范是否没写清、是否覆盖所有轨道。
+2. HTML-PPT 与 PPTX 似乎共用一套背景图。有生图能力时应积极生图，图要贴近讲稿主题并保持 liquid glass 风格；建议 PPTX 加闸门问用户有没有生图 skill 或接口，确认没有才用缺省背景套；HTML-PPT 规范若没有背景要求就不加。
+3. 站点式与流式 HTML 的非首页纵向空间利用率低、信息密度不够，问是否规范写死。
+4. HTML-PPT 的多 scene 演示调用不积极且写死：版式单一（都是左卡右动画）、密度低、元素单一（卡片加文字）。要求从规范层解决，并给出至少 10 套可复用、数据驱动的模板，含流程正反例（特别是复杂反例）与甘特推进。
+
+原因（已核实）
+- 色条：规则只在 02 LG-02 写过一句“大部分长度”，没有阈值；轨道与适配器都没有重复；上游 html-ppt 的 `.card-accent`（3px 彩色顶边）、竖条主题与 ppt-master 文档里的 accent bar 都会带进来；10 的门表写了检查，但没有任何实现。
+- 背景：04 IMG-01/05 与 HTML-PPT 轨道第 4 步对两条 PPT 轨道都已要求生图，这不是新要求；缺的是“先确认有没有生图能力”这一步，以及一套正式登记、可校验的缺省背景，所以没有能力时各自拿参考图凑。闸门对 PPTX 与 HTML-PPT 两轨都加。旗舰路线用程序化光场，不适用。
+- 密度：13 FOLD-01 让每个章节页都占一个 100svh 的 Bento 首屏；FOLD-05 只管行长，没有密度指标；卡高不随内容；流式正文 34em 夹在目录与侧注之间，右侧大片空白。改前参考页首屏以下 31 个窗口里 23 个最大空白超过 0.19。
+- 演示：15 只列了六种形式和一个 `demo` 预设，没有空间与图形门槛，也没有正反例要求，图库与参考 deck 都是左卡右舞台、文字框为主。
+
+卡片边缘色条（02 LG-02）
+- 重写 LG-02：四条轨道、两条路线都适用；有填充、描边或阴影的框都算卡片；列出 CSS 与 PPTX/SVG 的各种画法（单边边框、边缘伪元素、单侧内阴影、边缘子元素、SVG 细长矩形），以及上游 `.card-accent`、竖条主题、ppt-master accent bar。
+- 判定阈值 `glass.edge_bar`：贴边 ≤ `hug_px`、厚度 ≤ `max_thickness_px`、彩色（饱和度与不透明度）、长度占边 ≥ `warn_ratio` 为 WARN、≥ `forbid_ratio` 为不通过。
+- 允许的替代：短色标、圆点、图标、不超过 `warn_ratio` 的短色块、部门色块；不算色条的情形：均匀的中性 rim、数据对象、页面框架的橙色规则线、表头行、无框文字的中性分隔线。
+- 检查工具：HTML 用 `KZLayoutQC.inspectEdgeBars`；PPTX 用 `tools/check_edge_bars.py <svg 目录>`（跟随 translate，非零退出码表示有色条）。`kz-glass.css` 中和上游 `.card-accent`。
+- 同步：四条轨道、两个适配器、SKILL 硬规则 4、10 G5-EDGE。
+
+生图能力闸门（04 IMG-07）
+- PPTX 与 HTML-PPT 常规路线在出图前：检测本机生图能力（skill、接口、环境变量）→ ⛔ 询问用户 → 在 page-plan 写 `image_capability`（`decision` generated/default_set、`provider`、`asked_user`、`detected`、`user_answer`）。
+- 有能力：按讲稿主题逐页生图，提示词带 liquid glass 风格锚（英文锚句写在 IMG-07），`qc_plan` 对暖色占比做风格 WARN。
+- 没有能力：用登记的缺省背景套 `assets/backgrounds/`（封面、目录、章节、尾页、安静正文五张，`default-set.json` 记录页型、哈希与原图哈希），`image.mode` 写 `default_set`。
+- `qc_plan` 新增 IMAGE-CAPABILITY、IMAGE-STRATEGY、IMAGE-DEFAULT-SET（id 与页型须匹配）、IMAGE-DEFAULT-AS-GENERATED（缺省图不得冒充生成图）、IMAGE-STYLE。
+- 参考 `pptx-default` 改为 `default_set`；SKILL 新增“生图能力闸门”一节与硬规则 8；PPTX 与 HTML-PPT 轨道配方同步。
+
+非首页密排（13 FOLD-01/05/06/07）
+- FOLD-01 的一屏 Bento 只管站点首页与流式文档首页。
+- 新增 FOLD-06：章节页用紧凑章节头 `.kz-chapter`（标题与 KPI 一行，高度 ≤ `head_max_vh`），正文用 12 栏密排网格 `.kz-sheet`（`data-span` 3–9，段落标题行 `.kz-sheet-head`，舞台高度 ≤ `stage_max_vh`）。
+- 新增 FOLD-07：逐屏密度 `KZLayoutQC.inspectScroll`，只计墨迹（文字行、图表与甘特绘图区、图片、SVG、表格、演示对象），不计卡片外框与页尾；每个视口高的窗口墨迹 ≥ `min_ink`、最大空白 ≤ `max_void_ratio`。格子与墨迹框有重叠即计墨迹（中心点采样会漏掉比格子薄的文字行）。阈值 0.35 / 0.17：7.1.3 参考页全部通过，7.1.2 参考页每页至少一档视口不过。
+- 滚动页图表按宽高比定高（`chart_aspect` 3.2，超宽屏 ×1.25），甘特按任务数定高（`gantt_row_px`、`gantt_axis_px`）。
+- 参考实现：章节页改为章节头 + 密排网格，首屏电影换成 compare 演示；首页首屏以下改为密排网格；流式改三栏，图表进第三栏。
+- 同步：10 G5-FOLD / G5-DENSE、站点与流式轨道、06 FILM-01。
+
+演示动画（15 DEMO）
+- DEMO-01：方法、流程、规则、判定、计算、数据、计划、版本对比、风险、数据流转页 MUST 用演示舞台；每个讲方法或数据的章节 MUST 至少一页演示；page-plan 写 `demo: {kind, cases?}` 或 `demo: {none: 理由}`。
+- DEMO-02：形式从 6 种增至 16 种。新增 `flow` 流程正反例、`gantt` 甘特推进、`swimlane` 跨部门泳道、`consort` 受试者流、`curve` 曲线解读、`breakdown` 构成拆解、`audit` 逐项核查、`matrix` 风险矩阵、`network` 数据流转、`schedule` 访视窗口。元素与文字全部来自数据，数据自相矛盾时抛错。
+- DEMO-03：新增空间与图形门槛 `min_canvas_coverage`（最满 scene 的画布网格覆盖率，连线按笔画计）、`min_figures`（图标、点、条、块、连线）、`min_stage_share`（HTML-PPT 舞台占幻灯片面积），由新的 `Stage.coverage()` 出回执。
+- DEMO-05：四个构图预设 `demo`、`demo-mirror`、`demo-wide`、`demo-stack`（舞台在上、下方事实条，`KZDemo.renderFacts`）；相邻演示页不重复预设，`qc_plan` 检查 DEMO-PRESET、DEMO-PRESET-REPEAT。
+- 新增 DEMO-08 视觉词汇：图标与示意图为主、文字只做标注；状态用同一对象换样式表达；列出反模式。
+- 新增 DEMO-09 正例与反例：流程、规则、核查类演示至少一个正例、一个简单反例、一个复杂反例，反例路径画在舞台上，汇总 scene 给出计数；`qc_plan` 检查 DEMO-CASES。
+- 新增 runtime：
+  - `runtime/kz-icons.js`（`KZIcons`）：28 个本包绘制的线性图标；
+  - `runtime/kz-demo-patterns.js`：十种新形式，用 `KZDemo.kit` 搭建，也是写项目自定义形式的范例；
+  - `KZDemo.define / forms / kit / renderFacts`；`kit.lead`、`kit.glyph` 给文字加图标；
+  - `KZScenes.Stage.coverage()`；没有任何 scene 写到的对象保持标记里的样子、可见。
+- 前六种形式升级：判定节点、版本对比的文档与结论带图标，核对勾叉改为图标，计算演示每行加同刻度条，数据动画图标出数值、堆叠后各段带名称。
+- 示例：
+  - `examples/motion/`：16 种形式，左右、通栏、上下四种排法；
+  - 新增 `examples/motion/deck/`：HTML-PPT 模板组 12 页，十种新形式各一页，四个预设轮换，讲稿按 scene 分段，可复制一页改数据直接用；
+  - 参考 deck 与模板组共用 `build.py` 的 `write_deck`。
+- 同步：00 规则所有者表、13 BODY-01 四个预设、10 G7-DEMO、HTML-PPT 轨道（脚本顺序加 `kz-icons.js`、`kz-demo-patterns.js`）、`runtime/API.md`、SKILL 硬规则 11、page-plan schema（`preset` 枚举、`demo` 字段）。
+
+验证
+- 单元测试 161 项通过。新增 `tests/test_edge_bars.py`（9 项）、`tests/test_image_gate.py`（9 项）；`tests/test_demo_motion.py` 增至 14 项：16 种形式都有规范、API、数据与图库；模板组覆盖十种新形式、预设轮换、讲稿每页 5 个 scene 段；图标名都存在；page-plan 演示声明、预设轮换与正反例检查。
+- ego lite 0.6.1.13（Chromium 156）：
+  - `tests/ego/demo_checks.mjs` 20/20：16 种形式都达到密度、空间与图形门槛；每个 scene 在 1600×1000 与 1280×800 下无文字重叠、出界、溢出；scene 与到达路径无关；参考 deck 第 8、9 页步进；模板组十页在 1920×1080、1280×720、2560×1080 下舞台占比、版面与事实条全部通过，相邻不重复预设，→ 逐 scene 前进后翻页；减少动态；数据形态回归 14 项；无脚本错误；
+  - `scene_checks.mjs` 15/15，`flagship_checks.mjs` 19/19；
+  - `runtime_checks.mjs` 19/20：失败的一项是“下钻展开中途关闭时反向折回”，按 7.1.2 的代码（HEAD）重跑三次也失败两次，随 ego lite 的帧调度时好时坏，与本轮改动无关；7.1.2 记录的另外三项已知失败本轮通过。
+  - 站点首页、章节页、流式页在 1920×940、1536×730、2560×1080、1280×720 下逐屏密度全部通过，`inspectEdgeBars` 0 处色条；参考 PPTX 的 6 张 SVG 经 `check_edge_bars.py` 0 处色条。
+- 独立代码审查发现 12 处缺陷和 1 处轻微问题，均已修复，并在 `demo_checks.mjs` 的“数据形态回归”或 `test_edge_bars.py` 里补了检查：
+  - 甘特：追赶的任务就是延误的那项时，两次调整互相覆盖，结论写成“回到原计划”；延误把里程碑推出时间轴时，标签和旗标出错（现在报错，要求加长时间轴）；
+  - 曲线：窗口终点是空值时差值算错（现在报错）；首个值为空时起点标签错；第三条曲线不显示却计入文案；
+  - 受试者流：没有脱落的组直接抛错；脱落超过该组人数不报错；省略 `per` 时说明写“每点 undefined 例”；
+  - 流程：全部通过时仍点名“问题集中在第一站”；退回第一站时路径出画布；退回不存在的环节不报错；同一托盘个案多时溢出；
+  - 构成拆解：小数子项合计用严格相等，误报不符；
+  - 风险矩阵：非方阵时说明写错档数；
+  - 时间轴：任务在轴外结束时，完成勾因“从未设置即可见”停在画布左上角；
+  - 数据流：前面数据包点亮的通道一直亮着；连带发现舞台的 `stroke` 写成属性，被类样式盖住，通道高亮从未显示，现改为内联样式；
+  - `coverage()` 漏算水平和竖直的直线；
+  - `check_edge_bars.py` 读 style 时没去掉键名前的空格，`rgba()` 的透明度被忽略。
+- 前六种形式也给出事实条数据，`demo-stack` 可以用在任何形式上。
+- 未覆盖：
+  - 真实生图接口的出图与风格审阅（本机无生图能力，参考例走缺省背景套）；
+  - 正常帧率 Chrome/Edge 与 PowerPoint 的放映观感；
+  - PPTX 的演示降级（DEMO-06）仍无参考实现。
+
 # 7.1.2 · 2026-10-26
 
 ## KZ7-1026-B08 · HTML-PPT 按 scene 步进、12pt 辅助文字、演示性动画

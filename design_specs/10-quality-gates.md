@@ -26,7 +26,7 @@
 | G2 语言与排版 | 标题规则、观点句、同角色同字号、字号下限、无孤字、无翻译腔与生产口吻 | `qc_plan.py`、`inspectOrphans`、语义审阅 |
 | G3 生图前 | 保护区与扫掠区、资产计划 | page-plan、mask/overlay |
 | G4 生图后 | 实际调用、裸图与合成、裁切、颜色、冲突；G4-BODY 三类正文合成 | 回执/哈希、逐页截图、问题坐标 |
-| G5 材料与布局 | 玻璃可感知、无色条、无裁字、卡内节奏、首屏与密度 | computed style/OOXML、`inspectCard`、`inspectFold`、全尺寸渲染 |
+| G5 材料与布局 | 玻璃可感知、无色条、无裁字、卡内节奏、首屏与密度 | `inspectEdgeBars`（HTML）、`tools/check_edge_bars.py`（PPTX 的 SVG）、`inspectCard`、`inspectFold`、`inspectScroll`、全尺寸渲染 |
 | G6 数据 | HTML 用 ECharts、PPTX 对象类型、数据一致、null/单位/区间 | 数据对账、图表缓存与工作簿结构读回 |
 | G7 动态 | 编排与对象清单、电影同节点与接缝、HTML-PPT scene 步进、演示密度与内容依据、无播放器、后台暂停/seek/减少动态/离屏、锚元素、状态可辨 | 状态日志、正常速度完整周期、关键帧、真实指针样本 |
 | G8 交互 | 下钻宽度与层级、焦点、按键与滚轮隔离、甘特拖改与表单一致、撤销 | 真实指针/键盘/滚轮事件轨迹与断言 |
@@ -45,7 +45,8 @@
 | 工具 | 用途 | 不能证明 |
 |---|---|---|
 | `tools/qc_plan.py PLAN [--manifest M --asset-root R]` | 计划语义预检：标题、字号、动态清单、视口矩阵、图像映射、真实像素与哈希 | 视觉放行 |
-| `KZLayoutQC.inspectCard / inspectTextBounds / inspectFold / inspectOrphans` | 卡内纵向分布、阅读区越界、首屏覆盖率与空白、孤字行（浏览器内运行） | 审美与语义 |
+| `KZLayoutQC.inspectCard / inspectTextBounds / inspectFold / inspectOrphans / inspectEdgeBars / inspectScroll` | 卡内纵向分布、阅读区越界、首屏覆盖率与空白、孤字行、卡片边缘色条、滚动页逐屏墨迹与空白（浏览器内运行） | 审美与语义 |
+| `tools/check_edge_bars.py SVG目录` | PPTX 页面 SVG 中贴卡边的彩色细条（02 LG-02） | 导出后的手工改动 |
 | ppt-master `svg_quality_checker.py`、`animation_config.py validate`、`pptx_delivery_check.py` | 上游 SVG 合同、动效侧车、成品交付风险 | PowerPoint 实机观感 |
 | html-ppt-skill `scripts/render.sh` | 官方静态截帧 | 普通观众态动态 |
 
@@ -56,7 +57,9 @@
 - 页缘溢出：每个交付视口逐页取卡片 `getBoundingClientRect()`，超出页面内容边界超过 `layout.qc.page_overflow_px`（2px）即失败（CSS 裁切不改变溢出事实）；卡内叶级文字越过卡片左右内边界超过 `text_inner_tolerance_px`（1px）计横向溢出，纵向允许字形越过内边距 `text_overhang_em`（0.2em）。`inspectCard` 按这三项报 `TEXT_OUTSIDE`。
 - 卡内分布按 03 TYPE-02 实测 T/B/H/R；`inspectCard` 遇到局部滚动区返回 `NOT_TESTED`（记 PENDING），另验可见 scrollport 与全部行列可达。图表内容以实际 ECharts 系列数据计数，取不到实例同样记 PENDING。
 - G5-NESTED：电影最大展开态中的每张子卡也分别测，不用父载体的联合框掩盖内部空白。
-- G5-FOLD：站点/流式首屏在 `tokens.viewports` 每档 `inspectFold` PASS（13 FOLD-03），并在电影初始态与总览帧各测一次。
+- G5-FOLD：站点首页与流式文档首页的首屏在 `tokens.viewports` 每档 `inspectFold` PASS（13 FOLD-03），并在电影初始态与总览帧各测一次。
+- G5-DENSE：站点与流式的每个页面在每档视口 `inspectScroll` PASS（13 FOLD-07），演示舞台在 scene 0 与静态 scene 各测一次。
+- G5-EDGE：所有轨道无卡片边缘色条（02 LG-02）：HTML 每页 `inspectEdgeBars` 无 fail，PPTX 对 `svg_output/` 跑 `tools/check_edge_bars.py` 无 fail；WARN 须写明语义。
 - G5-ORPHAN：`inspectOrphans` 在每档视口、电影各阅读状态无孤字行，`splits`（词内换行）为空。
 - G5-SPAN（PPTX/HTML-PPT）：正文页内容的纵向跨度达到 `layout.content_span_target` 下限（HTML 用 `inspectBodySpan`；PPTX 按根模块 `data-pptx-bounds` 的上下沿计算），低于下限记 WARN 并说明为何不补内容。
 - G5-WIDE：16:9、2:1、21:9 与更宽视口下 deck 边界贴视口、背景无两侧空带、内容网格达到品牌锚宽度。
@@ -78,8 +81,9 @@
   - 深链与演讲者窗口入场走完全部 scene；减少动态直接翻页；
   - scene 运动时长与 `move_ms` 一致，记录浏览器帧率，低帧率下不变慢；
   - 维护仓库的参考脚本 `tests/ego/scene_checks.mjs`（不随安装包）。
-- **G7-DEMO**（15 DEMO-03/04）：
-  - 每个演示舞台导出 `audit()` 回执并对照 `motion.scenes.density`；
+- **G7-DEMO**（15 DEMO-03/04/05/08/09）：
+  - 每个演示舞台导出 `audit()` 回执并对照 `motion.scenes.density`；逐 scene 取 `coverage()`，最满的 scene 达到 `min_canvas_coverage`，图形对象达到 `min_figures`；HTML-PPT 演示页的舞台面积达到 `min_stage_share`；
+  - page-plan 的演示页写 `demo`，相邻演示页不重复预设（qc_plan DEMO-PRESET-REPEAT）；流程、规则、核查类演示有正例、简单反例与复杂反例；
   - 每个 scene seek 后检查文字对象无重叠、无出界、无溢出，说明不超过两行；
   - 演示数据对账表逐项核对；
   - 维护仓库的参考脚本 `tests/ego/demo_checks.mjs`（不随安装包）。

@@ -217,6 +217,7 @@
               "mode": {
                 "enum": [
                   "generated",
+                  "default_set",
                   "global_procedural_optical_field",
                   "flagship_light_field"
                 ]
@@ -660,9 +661,72 @@
               "cards-2",
               "split-7-5",
               "film",
-              "full"
+              "full",
+              "demo",
+              "demo-mirror",
+              "demo-wide",
+              "demo-stack"
             ],
             "description": "13 BODY-01 正文页构图预设（PPTX / HTML-PPT 正文页）"
+          },
+          "demo": {
+            "description": "15 DEMO-01/02/05：HTML-PPT 演示页写形式 kind（KZDemo 形式名，或 custom 表示 KZScenes 自定义舞台）；讲方法或数据却不做演示时写 none 与理由。preset 须是 demo 预设之一。",
+            "oneOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "kind": {
+                    "enum": [
+                      "units",
+                      "calc",
+                      "story",
+                      "timeline",
+                      "decision",
+                      "compare",
+                      "flow",
+                      "gantt",
+                      "swimlane",
+                      "consort",
+                      "curve",
+                      "breakdown",
+                      "audit",
+                      "matrix",
+                      "network",
+                      "schedule",
+                      "custom"
+                    ]
+                  },
+                  "cases": {
+                    "type": "array",
+                    "items": {
+                      "enum": [
+                        "positive",
+                        "negative",
+                        "complex_negative"
+                      ]
+                    },
+                    "description": "DEMO-09：流程、规则、核查类演示含有的个案类型"
+                  }
+                },
+                "required": [
+                  "kind"
+                ],
+                "additionalProperties": false
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "none": {
+                    "type": "string",
+                    "minLength": 1
+                  }
+                },
+                "required": [
+                  "none"
+                ],
+                "additionalProperties": false
+              }
+            ]
           },
           "body_profile_reason": {
             "type": "string",
@@ -749,6 +813,58 @@
       ],
       "default": "regular",
       "description": "14 FLAG-01：PPTX 与 HTML-PPT 的路线；缺省为常规"
+    },
+    "image_capability": {
+      "type": "object",
+      "description": "04 IMG-07：PPTX / HTML-PPT 常规路线的生图能力闸门结果（先检测、再问用户）",
+      "required": [
+        "decision",
+        "asked_user",
+        "detected"
+      ],
+      "properties": {
+        "decision": {
+          "enum": [
+            "generated",
+            "default_set"
+          ]
+        },
+        "provider": {
+          "type": "string",
+          "minLength": 1,
+          "description": "实际使用的生图 skill 或接口名称"
+        },
+        "asked_user": {
+          "const": true
+        },
+        "detected": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Agent 检测到的生图能力（无则为空数组）"
+        },
+        "user_answer": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "decision": {
+                "const": "generated"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "provider"
+            ]
+          }
+        }
+      ]
     }
   },
   "additionalProperties": false,

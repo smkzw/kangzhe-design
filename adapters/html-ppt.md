@@ -26,7 +26,7 @@
 - 正文页 chrome 放在每张正文页内（打印也保留）：`brand_fragments.facets(prefix)` 生成的内联 SVG 双菱形，放置矩形 `tokens.chrome.header_mark.placement_htmlppt_u`；`tokens.chrome.rule` 是端点数组 `[x1,y1,x2,y2,stroke]`，HTML 写 `left:x1·u; right:(1280−x2)·u; top:y1·u; height:stroke·u`；Logo 右锚；页脚两槽，页码可静态写入。
 - 非 16:9 视口的固定文字框宽度取 `min(w·u, 视口宽 − x·u − 右留距·u)`，背景与正文网格仍铺满。
 - hero 页用 `hero_layout.html_fluid_fragment`。
-- 上游注入的 `.progress-bar` 由 kz-glass.css 隐藏。
+- 上游注入的 `.progress-bar` 由 kz-glass.css 隐藏；上游 `.card-accent` 的 3px 彩色顶边也由 kz-glass.css 去掉，不用带竖条的主题（02 LG-02）。
 - 上游只绑定 →/←/空格/PageDown/PageUp/Enter/Backspace 与横向滑动；↑/↓ 与纵向滑动由桥接在本页无 scene 可走时转交为 →/←。
 
 ### 翻页与动效

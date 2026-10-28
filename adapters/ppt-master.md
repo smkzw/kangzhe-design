@@ -15,6 +15,7 @@
 
 ## SVG 写法要点（6.7.3 已核）
 - 每个内容单元一个顶层 `<g id>` 并声明 `data-pptx-bounds="x y w h"`；顶层组在两轴重叠 >1px 即失败（结构角色组、Morph 暂存组除外）。页标题自成一组。
+- 上游 Executor 文档建议用 accent bar 做分隔或强调，部分模板在卡片左边加细色条；康哲不用（02 LG-02），导出前对 `svg_output/` 跑 `tools/check_edge_bars.py`。
 - 背景图、横线、Logo、页脚用 `data-pptx-role`（`background / decoration / logo / footer`）；**带角色的原始元素必须有稳定 id**（`brand_fragments` 已加）。不要给卡片、正文、图表加结构角色。
 - 根 `<svg lang="zh-CN">` 声明演示语言；`font-family="Microsoft YaHei, Arial"` 导出为主题字体 latin Arial / ea Microsoft YaHei。
 - `• ` 开头的分行文字导出为原生项目符号 `a:buChar` 加悬挂缩进。

@@ -36,6 +36,15 @@
 .kz .kz-body[data-preset="demo"]>:first-child{align-self:center}
 .kz .kz-body[data-preset="demo"]>:first-child .kz-card{height:auto}
 .kz .kz-body[data-preset="demo"]>:last-child{height:100%;min-height:0}
+/* The other demo presets rotate the composition (15 DEMO-05): stage left with notes right, a full-width stage under
+   a lead line, a stage over a strip of computed facts. Consecutive demo pages do not repeat a preset. */
+.kz .kz-body[data-preset="demo-mirror"]{grid-template-columns:minmax(0,7fr) minmax(0,4fr)}
+.kz .kz-body[data-preset="demo-mirror"]>:first-child{order:2;align-self:center}
+.kz .kz-body[data-preset="demo-mirror"]>:first-child .kz-card{height:auto}
+.kz .kz-body[data-preset="demo-wide"]{grid-template-columns:minmax(0,1fr);grid-template-rows:auto minmax(0,1fr);gap:calc(14 * var(--kz-u))}
+.kz .kz-body[data-preset="demo-stack"]{grid-template-columns:minmax(0,1fr);grid-template-rows:minmax(0,1fr) auto;gap:calc(14 * var(--kz-u))}
+.kz .kz-body[data-preset="demo-stack"]>:first-child{order:2}
+.kz .kz-body[data-preset^="demo"] .kz-deck-demo{height:100%}
 .kz .kz-deck-demo{height:100%;min-height:0}
 .kz .kz-body>*{min-width:0;min-height:0}
 .kz .kz-body .kz-card{height:100%}

@@ -121,6 +121,10 @@
   --kz-dialog-width: 82vw;
   --kz-dialog-max-height: 94vh;
   --kz-lede-max: 30em;
+  --kz-dense-head-max: 26vh;
+  --kz-dense-stage-max: 60vh;
+  --kz-dense-gap: 24px;
+  --kz-chart-aspect: 3.2;
   --kz-canvas-w: 1280;
   --kz-canvas-h: 720;
   --kz-chrome-title-x: 91;
