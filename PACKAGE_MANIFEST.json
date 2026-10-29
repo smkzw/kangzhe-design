@@ -10,13 +10,13 @@
   },
   {
    "path": "INSTALL.md",
-   "bytes": 2661,
-   "sha256": "sha256:b9ae0dac382fee8f7832f30f712ea5edd34a016b9da81d823f05e0044fd3185c"
+   "bytes": 2976,
+   "sha256": "sha256:c721a7d77362fc6680a979d5feee87aa034f665554969b4c13e695f1368ecbef"
   },
   {
    "path": "README.md",
-   "bytes": 3598,
-   "sha256": "sha256:60fbe693447f4ac0a2006751187a8db1e8f7a4a763f2d6bd8f953708e2c010fb"
+   "bytes": 3848,
+   "sha256": "sha256:7ceb99206923c295ad496b7acb6f576f47f988a60457abcce0d5d68b7c50ee24"
   },
   {
    "path": "REVISION",
@@ -25,8 +25,8 @@
   },
   {
    "path": "SKILL.md",
-   "bytes": 8716,
-   "sha256": "sha256:81fa0c949ced16470a930d12f53fe24b83be10569548defcb4e833de98e89e89"
+   "bytes": 8718,
+   "sha256": "sha256:1006f9668e15515a25cee919af86c5137bf45f62bca3714315a78416888a1360"
   },
   {
    "path": "STATUS.md",
