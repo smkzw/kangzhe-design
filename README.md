@@ -26,7 +26,7 @@
 python3 tools/context_pack.py --track htmlppt --stage bootstrap --features charts,film,gantt,drilldown,notes
 python3 tools/build_tokens.py          # 改 tokens 后
 python3 tools/qc_plan.py examples/reference/pptx-default/page-plan.json
-python3 tools/check_edge_bars.py examples/reference/pptx-default/svg   # 02 LG-02：有色条即非零退出
+python3 tools/check_edge_bars.py examples/reference/pptx-default/svg_output   # 02 LG-02：有色条即非零退出
 for t in tests/test_*.py; do python3 "$t"; done
 python3 tools/build_dist.py            # 生成 dist/kangzhe-design 与 PACKAGE_MANIFEST.json
 ```
