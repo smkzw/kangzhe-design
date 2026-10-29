@@ -1,4 +1,4 @@
-# Kangzhe Design 7.1
+# Kangzhe Design 7.1.3
 
 康哲药业医学部的单一 Liquid Glass 设计技能，覆盖可编辑 PPTX、HTML-PPT、站点式 HTML、流式 HTML。PPTX 始终经 hugohe3/ppt-master 制作，HTML-PPT 始终从 lewislulu/html-ppt-skill 脚手架起步；本包负责品牌与内容表达、图像保护、材质、动效与组件、验收，不替代上游的路由、缩放、导航与导出。
 
@@ -10,7 +10,8 @@
 | 目录 | 内容 |
 |---|---|
 | `SKILL.md` | 入口：四轨与引擎、硬规则、读取顺序 |
-| `design_specs/` | 规则所有者（00–11、13、14 旗舰路线）与四个轨道配方 |
+| `design_specs/` | 规则所有者（00–11、13 密排、14 旗舰路线、15 演示动画）与四个轨道配方 |
+| `assets/` | 官方 Logo、双菱形原生形状、缺省背景套（04 IMG-07，含哈希清单）与 ECharts |
 | `tokens/` | 唯一数值源；`tools/build_tokens.py` 生成 `runtime/kz-tokens.*` |
 | `runtime/` | 玻璃 CSS、动效、图表、甘特、下钻、布局 QC；接口见 `runtime/API.md` |
 | `adapters/` | ppt-master 与 html-ppt-skill 的插入点、实测事实、HTML-PPT 生命周期桥 |
@@ -25,6 +26,7 @@
 python3 tools/context_pack.py --track htmlppt --stage bootstrap --features charts,film,gantt,drilldown,notes
 python3 tools/build_tokens.py          # 改 tokens 后
 python3 tools/qc_plan.py examples/reference/pptx-default/page-plan.json
+python3 tools/check_edge_bars.py examples/reference/pptx-default/svg   # 02 LG-02：有色条即非零退出
 for t in tests/test_*.py; do python3 "$t"; done
 python3 tools/build_dist.py            # 生成 dist/kangzhe-design 与 PACKAGE_MANIFEST.json
 ```

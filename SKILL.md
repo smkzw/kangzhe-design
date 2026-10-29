@@ -2,7 +2,7 @@
 name: kangzhe-design
 description: 康哲药业医学部正式汇报与医学网页的统一 Liquid Glass 设计系统。用于康哲 design、康哲 design 3D、康哲风格、可编辑 PPTX、HTML PPT、站点式 HTML、流式 HTML；PPTX 与 HTML-PPT 分常规与旗舰两条路线（旗舰用于对外与顶层汇报）。PPTX 配合 ppt-master；HTML-PPT 配合 html-ppt-skill。只安装本技能，不再安装旧扁平版或 3D 版。
 ---
-# Kangzhe Design 7.1
+# Kangzhe Design 7.1.3
 
 品牌、内容表达、视觉、动效与验收层，不是另一套 PPT 引擎。四轨共用一套 tokens 与材质，没有 flat 开关或第二套配色。PPTX 与 HTML-PPT 各有两条路线：常规（日常与内部汇报）和旗舰（对外与顶层汇报，`design_specs/14-flagship.md`）。
 

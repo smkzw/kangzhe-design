@@ -16,7 +16,7 @@
    - PPTX：[hugohe3/ppt-master](https://github.com/hugohe3/ppt-master) 的 `skills/ppt-master/`，并安装它自己的 `requirements.txt`。本版核对 `523e5bd`（v6.7.3 之后两个修复提交）。
    - HTML-PPT：[lewislulu/html-ppt-skill](https://github.com/lewislulu/html-ppt-skill)（技能名 `html-ppt`）。本版核对 `fd16290`。
    站点式与流式 HTML 只需要本技能。
-5. 自检：`python3 kangzhe-design/tools/context_pack.py --track pptx --stage bootstrap` 能列出文件；`VERSION` 与 `STATUS.md` 版本一致；`assets/logo_bot.svg`、`assets/logo_bot.png` 的 SHA-256 等于 `tokens/tokens.json` 的 `logo.sha256`、`logo.png_sha256`。开一个新会话，确认宿主只发现一个 `name: kangzhe-design`。
+5. 自检：`python3 kangzhe-design/tools/context_pack.py --track pptx --stage bootstrap` 能列出文件；`VERSION` 与 `STATUS.md` 版本一致；`assets/logo_bot.svg`、`assets/logo_bot.png` 的 SHA-256 等于 `tokens/tokens.json` 的 `logo.sha256`、`logo.png_sha256`；缺省背景套 `assets/backgrounds/` 的哈希等于 `default-set.json`（`python3 kangzhe-design/tools/qc_plan.py kangzhe-design/examples/reference/pptx-default/page-plan.json` 不报哈希错）；`python3 kangzhe-design/tools/check_edge_bars.py kangzhe-design/examples/reference/pptx-default/svg` 退出码 0。开一个新会话，确认宿主只发现一个 `name: kangzhe-design`。
 
 本包不修改模型服务配置，不内置账号或密钥，不捆绑字体（PPTX 用目标机已有的 Microsoft YaHei 与 Arial）。安装包不含维护资料（`review/`、`agent/`、`tests/`、历史样本）与 `.pptx` 样例成品；样例成品作为 Release 附件提供。
 
