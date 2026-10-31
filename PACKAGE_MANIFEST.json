@@ -1,12 +1,12 @@
 {
- "version": "7.2.3",
+ "version": "7.2.4",
  "revision": "KZ7-1031-B13",
  "scope": "installable skill content; maintenance material (review/, agent/, docs/history/, tests/, examples/validation/) and sample .pptx decks excluded",
  "files": [
   {
    "path": "CHANGELOG.md",
-   "bytes": 87234,
-   "sha256": "sha256:8f4b5a0298cc9a1c95167b031ce31c3ec47d1b4b25b586ba8b11de60428d7070"
+   "bytes": 89460,
+   "sha256": "sha256:7d8607e8cbcbfa1d9f4f7b8c813e62cfb8c1d14bc5dba0978e6b9219a5dc4f2c"
   },
   {
    "path": "INSTALL.md",
@@ -16,7 +16,7 @@
   {
    "path": "README.md",
    "bytes": 5183,
-   "sha256": "sha256:dba5100e3d66d27dd2ecf73314f1074ec8063ba82ef8910bc7d595fc758ae4e9"
+   "sha256": "sha256:0d1976c0c4e7a37fc0b82f526f0233333be17b9dbaeed18bc1aa9814982dee13"
   },
   {
    "path": "REVISION",
@@ -25,18 +25,18 @@
   },
   {
    "path": "SKILL.md",
-   "bytes": 10023,
-   "sha256": "sha256:00552a9580c0cc36310e989add423a6efdd7db92fdf73124977f9e544474a010"
+   "bytes": 10133,
+   "sha256": "sha256:cfb66c5ec6b1fa238af50f6d1b2b754e3220cf3d2180c23ad0462dbc12c2c3e1"
   },
   {
    "path": "STATUS.md",
-   "bytes": 12349,
-   "sha256": "sha256:944630e1a4d2ea0a847b12ef0456591ea1c51ab5eebb616b3923da329d9a57ed"
+   "bytes": 12561,
+   "sha256": "sha256:2309709a4435058fad4d2d999398dc0ec2f5e6d05ce4370b2945066151a09c38"
   },
   {
    "path": "VERSION",
    "bytes": 6,
-   "sha256": "sha256:a67c99b29d2fa4806f7b3b9a660cc67f76ded12e6160bff6df3c39e3f3083c35"
+   "sha256": "sha256:f2b48b91ae6a73a55c3d69079b4428b3f8c73e63046da6e73f0eee958e8aea8f"
   },
   {
    "path": "adapters/README.md",
@@ -50,13 +50,13 @@
   },
   {
    "path": "adapters/html-ppt.md",
-   "bytes": 7231,
-   "sha256": "sha256:0512c5fcf6fd78c7e452d75d4eead9609318a31731099a71b2bb740fd333a3e6"
+   "bytes": 7395,
+   "sha256": "sha256:8d1b0bec93646b83cbea36c9f02e17c652d7b9dda1c77d2c42064dc55f739d43"
   },
   {
    "path": "adapters/ppt-master.md",
-   "bytes": 11921,
-   "sha256": "sha256:3c5fbe83603ad84e55acfab3a5ec733972e873c63f184d108cc0c7e333f24c27"
+   "bytes": 12110,
+   "sha256": "sha256:7c29fb25e14bb7b0a4cc3b3936f24fc06d48b302ebebccc88440ab8a36c08fb7"
   },
   {
    "path": "assets/README.md",
@@ -745,8 +745,8 @@
   },
   {
    "path": "design_specs/03-typography-language.md",
-   "bytes": 15208,
-   "sha256": "sha256:5d80d940abfe17e647008ce21c97667ed30def8d673f598487f877171b11e565"
+   "bytes": 16313,
+   "sha256": "sha256:17f2152bb4335e63bc06a130bbc454558b060ecb3cd2df35eecd82b0c2e34f31"
   },
   {
    "path": "design_specs/04-image-pipeline.md",
@@ -780,8 +780,8 @@
   },
   {
    "path": "design_specs/10-quality-gates.md",
-   "bytes": 14996,
-   "sha256": "sha256:6f1cc859c17c9ca8f60d546cda03130bb9ed320952e710208458687c0e9c8ef6"
+   "bytes": 15203,
+   "sha256": "sha256:e30dff2dc44ae6df9a89818b05b769f74de346558d5f7bab126ef2c67a889427"
   },
   {
    "path": "design_specs/11-hero-layouts.md",
@@ -1215,8 +1215,8 @@
   },
   {
    "path": "examples/templates/criteria-long.json",
-   "bytes": 3159,
-   "sha256": "sha256:a02955d3a6cfdd30e86c6e01f94512eb32e3c48ff68c0d5dc966a015c3cf6431"
+   "bytes": 3236,
+   "sha256": "sha256:d993515f6ff84adfb76e3c5fab2d0f76e95264870cdd9cbdb69f9d2cadfa09f5"
   },
   {
    "path": "examples/templates/criteria.json",
@@ -1230,8 +1230,8 @@
   },
   {
    "path": "examples/templates/deck/index.html",
-   "bytes": 279901,
-   "sha256": "sha256:ec3fd10143c4529588f91083130c9a05b68ad7cbccde01f840000471af5755cc"
+   "bytes": 280279,
+   "sha256": "sha256:e3c169d437ea97ccbcee0ecd7f86b6929716092e3f4ccd5bd79543c55348e213"
   },
   {
    "path": "examples/templates/discussion-paths.json",
@@ -1430,8 +1430,8 @@
   },
   {
    "path": "runtime/kz-layouts.css",
-   "bytes": 7619,
-   "sha256": "sha256:082889fffa4c70fae317aa6fb25a0a9f231b53ebc12ad8dade29e0c8469345d9"
+   "bytes": 8021,
+   "sha256": "sha256:70bb9e579f3b9f1e3cab898ee3d3c933ac884f394b4355f7292d6377c3f57354"
   },
   {
    "path": "runtime/kz-motion.js",
@@ -1451,7 +1451,7 @@
   {
    "path": "runtime/kz-tokens.js",
    "bytes": 21439,
-   "sha256": "sha256:09f9cf298dfed5aec2ada329e5e90b9789fe0823c72dc450c300730c666e9a74"
+   "sha256": "sha256:d0350af9e765dccfe38ed923682cc672b640cff39e1a5e3cb8b5bdae7a93eb8c"
   },
   {
    "path": "schemas/README.md",
@@ -1481,7 +1481,7 @@
   {
    "path": "tokens/tokens.json",
    "bytes": 27047,
-   "sha256": "sha256:200cc4ac2a2d4fbbb4e9a48dcf77bd0f112c663ab4096e083d8a9a85c8c8da89"
+   "sha256": "sha256:52c525d481026a8884e21db0c2896b4cbe8d6b6d7b8f52c753dd9c9eb4735ef2"
   },
   {
    "path": "tools/bind_header_mark_pptx.py",
@@ -1525,8 +1525,8 @@
   },
   {
    "path": "tools/check_kz_project.py",
-   "bytes": 14518,
-   "sha256": "sha256:eb4a1590032ac72d009b7a41e4a4694b9e1d9352e1101fbfbb053f538affa8a6"
+   "bytes": 15838,
+   "sha256": "sha256:eaa05f1b19570b8768729f7d021c8dd50ac785b4b5181451efbd4c95de5a9e44"
   },
   {
    "path": "tools/check_notes.py",
@@ -1535,8 +1535,8 @@
   },
   {
    "path": "tools/context_pack.py",
-   "bytes": 7066,
-   "sha256": "sha256:30d7f68cbc9645ba688efdbe293c319536e5094a425e538134377330d4119185"
+   "bytes": 7092,
+   "sha256": "sha256:3d7f511e942296935ef94bd8f78a6abc604a351a937b720644355a69d921de8e"
   },
   {
    "path": "tools/flagship_plate.py",
@@ -1570,8 +1570,8 @@
   },
   {
    "path": "tools/kz_layout.py",
-   "bytes": 11657,
-   "sha256": "sha256:7b144e8584987e002d75bfded56922c51ad603dcf63ad4fae392b5e17ca915eb"
+   "bytes": 14767,
+   "sha256": "sha256:f504b475d37578f7c0228ef38d40afc8bda7cfad1fdd6aabc6e548c1920bc422"
   },
   {
    "path": "tools/kz_layouts/__init__.py",
@@ -1615,8 +1615,8 @@
   },
   {
    "path": "tools/kz_layouts/patterns/clinical.py",
-   "bytes": 11185,
-   "sha256": "sha256:0095a608ed611cfb4fcd69b3b99b9b0669f04c1f74c76a46904951f2eeae7ae1"
+   "bytes": 12826,
+   "sha256": "sha256:d543d6d43e33d7af6902c7a8ef49eea6bf6443dafc0ea694fdb8d261d7381779"
   },
   {
    "path": "tools/kz_layouts/patterns/general.py",
@@ -1645,8 +1645,8 @@
   },
   {
    "path": "tools/kz_layouts/tree.py",
-   "bytes": 19130,
-   "sha256": "sha256:37cd58987a65308dc29fb150688b26e70fb6925473797c206634a0beba6b7339"
+   "bytes": 20230,
+   "sha256": "sha256:fa7fbf8d9edf578b399e6e2042d54276a210405678b7f9d8a07933c5b6652d91"
   },
   {
    "path": "tools/kz_titles.py",
@@ -1657,6 +1657,11 @@
    "path": "tools/make_safe_mask.py",
    "bytes": 727,
    "sha256": "sha256:9b738b5aec846eb1b170c0bd11269ab011349251a289af58f6278f84905a7222"
+  },
+  {
+   "path": "tools/protocol_lists.py",
+   "bytes": 8878,
+   "sha256": "sha256:ef927ed40789bbd734a9b5b104e35ded039ec154336c37587d5b1bb7c63b0915"
   },
   {
    "path": "tools/qc_plan.py",

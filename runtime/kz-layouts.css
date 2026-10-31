@@ -3,6 +3,8 @@
    trees are solved for PPTX by tools/kz_layouts/tree.py; here the browser lays them out with grid and flex.
    Cards keep their content distributed over their height (03 TYPE-02): stacks space their groups evenly.
    Rules sit under .kzl-root so a template's role sizes win over the generic .kz-card p/li sizes of kz-glass.css. */
+/* --kz-lh: the list item's line height in px, inherited by its number disc (registered so 1lh resolves on the li) */
+@property --kz-lh{syntax:"<length>";inherits:true;initial-value:0px}
 .kz .kz-body[data-preset="kzl"]{grid-template-columns:minmax(0,1fr);grid-template-rows:minmax(0,1fr)}
 .kz .kzl-root{display:flex;flex-direction:column;min-height:0;height:100%}
 .kz .kzl-root .kzl-stack{display:flex;flex-direction:column;min-height:0;min-width:0;flex:1 1 auto}
@@ -40,12 +42,14 @@
 .kz .kzl-root .kzl-items{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;justify-content:space-evenly;gap:calc(var(--gap) * var(--kz-u));flex:1 1 auto;min-height:0}
 .kz .kzl-root .kzl-cols{display:grid;grid-template-columns:repeat(var(--cols),minmax(0,1fr));flex:1 1 auto;min-height:0}
 .kz .kzl-root .kzl-cols>.kzl-items{height:100%}
-.kz .kzl-root .kzl-items li{font-size:inherit;line-height:inherit;display:grid;grid-template-columns:calc(1.55em) minmax(0,1fr);align-items:start;margin:0}
+.kz .kzl-root .kzl-items li{--kz-lh:1lh;font-size:inherit;line-height:inherit;display:grid;grid-template-columns:calc(1.55em) minmax(0,1fr);align-items:start;margin:0}
 .kz .kzl-root .kzl-items li:has(>.kzl-mk.is-number){grid-template-columns:max(1.55em,calc(29 * var(--kz-u))) minmax(0,1fr)}
 .kz .kzl-root .kzl-items li .kzl-li{min-width:0}
+.kz .kzl-root .kzl-items.is-top{justify-content:flex-start}
+.kz .kzl-root .kzl-items li.is-sub{grid-template-columns:1.55em minmax(0,1fr);padding-left:max(1.55em,calc(29 * var(--kz-u)))}
 .kz .kzl-root .kzl-mk{display:grid;place-items:center;height:1.5em;color:var(--kz-brand)}
 .kz .kzl-root .kzl-mk.is-dot::before{content:"";width:.32em;height:.32em;border-radius:50%;background:currentColor}
-.kz .kzl-root .kzl-mk.is-number{border-radius:50%;background:var(--kz-brand);color:#FFF;font-weight:700;font-size:max(.62em,calc(14 * var(--kz-u)));width:max(1.85em,calc(22 * var(--kz-u)));height:max(1.85em,calc(22 * var(--kz-u)));margin-top:.2em;line-height:1}
+.kz .kzl-root .kzl-mk.is-number{border-radius:50%;background:var(--kz-brand);color:#FFF;font-weight:700;font-size:max(.62em,calc(14 * var(--kz-u)));--d:max(1.85em,calc(22 * var(--kz-u)));width:var(--d);height:var(--d);margin:calc((var(--kz-lh) - var(--d)) / 2) 0;line-height:1}
 .kz .kzl-root .kzl-mk.is-icon .kz-icon{width:1em;height:1em}
 .kz .kzl-root .kzl-items li.is-ok .kzl-mk{color:var(--kz-statistics)}
 .kz .kzl-root .kzl-items li.is-risk .kzl-mk{color:var(--kz-risk)}

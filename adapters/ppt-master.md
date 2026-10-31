@@ -53,9 +53,10 @@
 
 ```bash
 python3 "$KZ_DIR/tools/kz_layout.py" list                                   # 选模板；example <模板> 给数据合同
-python3 "$KZ_DIR/tools/kz_layout.py" render criteria p05.json --track pptx --title 入选与排除标准 \
+python3 "$KZ_DIR/tools/protocol_lists.py" protocol.docx --from 排除标准 --key exclusion > excl.json   # 入排标准从 Word 取：编号与子项层级照方案
+python3 "$KZ_DIR/tools/kz_layout.py" render criteria excl.json --track pptx --title 排除标准 \
         --out <project>/kz_fragments --first 5 --total 18 \
-        --source <project>/sources/protocol.txt                            # 条款类页必加：逐字核对方案原文（03 COPY-09）
+        --source protocol.docx                                              # 条款类页必加：逐字核对方案原文，.docx 还核对编号层级（03 COPY-09）
 cp "$KZ_DIR"/assets/icons/kangzhe/*.svg <project>/icons/kangzhe/            # <use data-icon="kangzhe/…"> 在这里解析
 # Executor 逐页审 kz_fragments/page_NN.svg，放进 svg_output/（可再改）；背景与 Logo 的相对路径默认 ../images/body_quiet.jpg、../images/logo.png
 python3 "$SKILL_DIR/scripts/stamp_native_fallbacks.py" <project>/svg_output --write

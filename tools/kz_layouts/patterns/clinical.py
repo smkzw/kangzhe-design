@@ -10,35 +10,38 @@ _CRIT = (('inclusion', 'inclusion_title', '入选标准', 'user-check', 'brand')
 def _criteria_split(data, fits):
     """One page: inclusion and exclusion side by side. More than one page: the lists flow through two columns per
     page, inclusion first, exclusion straight after (dense first, then split; 03 COPY-03). A list that carries on in
-    the next column or page keeps its plain card title and its numbering; there is no 'continued' label."""
+    the next column or page keeps its plain card title and its numbering; there is no 'continued' label.
+    An item {"text": stem, "items": [...]} is a protocol stem with its sub-items (tools/protocol_lists.py): the stem
+    keeps the protocol number, the sub-items hang under it and may carry on in the next column."""
     from ..paginate import partition
     from ..text import plain
     lists = {k: list(data.get(k, [])) for k, *_ in _CRIT}
-    vol = [max(1, sum(len(plain(t)) for t in lists[k])) for k, *_ in _CRIT]
+    vol = [max(1, sum(len(plain(u['text'])) for u in _flat(lists[k]))) for k, *_ in _CRIT]
     w = data.get('weights') or [max(0.8, min(1.25, v / (sum(vol) / 2))) for v in vol]
     for role in ('body', 'secondary'):
         one = {**data, 'weights': w, 'role': role, 'layout': 'pair', 'start': {k: 1 for k in lists}}
         if fits(one): return [{**one, 'page_of': [1, 1]}]
     role = 'secondary'
     import re
-    def fits_one(k, text):
-        return fits({**data, 'role': role, 'layout': 'flow', 'cols': [[{'key': k, 'start': 1, 'items': [text]}]]})
-    def pieces(k, n, t):
+    def fits_one(k, text, level=0):  # a sub-item is measured at its own (indented) width
+        return fits({**data, 'role': role, 'layout': 'flow', 'cols': [[{'key': k, 'start': 1, 'items': [{'text': text, 'n': 1, 'level': level}]}]]})
+    def pieces(k, n, t, level=0):
         """A criterion taller than a column is broken at its own clause ends (；。) and carries on in the next column
         without a number and without a 'continued' label; the words are not touched (03 COPY-09)."""
-        if fits_one(k, t): return [t]
+        if fits_one(k, t, level): return [t]
         out, cur = [], ''
         for c in re.findall(r'[^；。]+[；。]?', t):
-            if not cur or fits_one(k, cur + c): cur += c; continue
+            if not cur or fits_one(k, cur + c, level): cur += c; continue
             out.append(cur); cur = c
         out.append(cur)
-        bad = [x for x in out if not fits_one(k, x)]
+        bad = [x for x in out if not fits_one(k, x, level)]
         if bad: raise ValueError(f'{k} 第 {n + 1} 条有一句单独一栏也放不下，请检查原文：{bad[0][:30]}')
         return out
-    units = {k: [] for k in lists}  # each unit is a whole criterion or one piece of it; 'n' keeps the source number
+    units = {k: [] for k in lists}  # each unit is a stem, a sub-item or one piece of either; 'n' keeps the source number
     for k in lists:
-        for n, t in enumerate(lists[k]):
-            for i, x in enumerate(pieces(k, n, t)): units[k].append({'text': x, 'n': n + 1, **({'marker': 'none'} if i else {})})
+        for u in _flat(lists[k]):
+            for i, x in enumerate(pieces(k, u['n'] - 1, u['text'], u.get('level', 0))):
+                units[k].append({**u, 'text': x, **({'marker': 'none'} if i else {})})
     flow = [(k, i) for k, *_ in _CRIT for i in range(len(units[k]))]
     def segs(run):  # consecutive flow positions → [{'key', 'start', 'items'}] per list
         out = []
@@ -48,11 +51,20 @@ def _criteria_split(data, fits):
             else: out.append({'key': k, 'start': u['n'], 'items': [u]})
         return out
     def page(cols): return {**data, 'role': role, 'layout': 'flow', 'cols': [segs(c) for c in cols]}
+    def stem(pos):  # a stem whose sub-items follow it: it never ends a column on its own
+        k, i = pos; u = units[k][i]; nx = units[k][i + 1] if i + 1 < len(units[k]) else None
+        return not u.get('level') and nx is not None and nx.get('level') and nx['n'] == u['n']
+    def unstrand(cols):
+        cols = [list(c) for c in cols]
+        for a in range(len(cols) - 1):
+            if len(cols[a]) > 1 and stem(cols[a][-1]): cols[a + 1].insert(0, cols[a].pop())
+        return cols
     pages, cols, cur = [], [], []
     for pos in flow:
         if fits(page(cols + [cur + [pos]])): cur.append(pos); continue
         if not cur: raise ValueError(f'{pos[0]} 第 {units[pos[0]][pos[1]]["n"]} 条单独一栏也放不下，请检查原文')
-        cols.append(cur); cur = [pos]
+        carry = [cur.pop()] if len(cur) > 1 and stem(cur[-1]) else []
+        cols.append(cur); cur = carry + [pos]
         if len(cols) == 2: pages.append(cols); cols = []
     cols.append(cur); pages.append(cols)
     # widow balance: a last page under half full shares the last two pages' columns evenly (earlier pages stay full)
@@ -61,12 +73,25 @@ def _criteria_split(data, fits):
     if len(pages) > 1 and sum(hs(tail)) < 0.5 * sum(hs([pos for c in pages[-2] for pos in c])):
         run = [pos for c in pages[-2] + pages[-1] for pos in c]; ends = partition(hs(run), [1] * 4); a = 0; cols = []
         for b in ends: cols.append(run[a:b]); a = b
+        cols = unstrand(cols)
         if len(cols) == 4 and all(fits(page(cols[i:i + 2])) for i in (0, 2)): pages[-2:] = [cols[:2], cols[2:]]
     elif len(tail) > 1:  # otherwise the last page's own two columns are evened out
-        cut = partition(hs(tail), [1, 1])[0]
-        if fits(page([tail[:cut], tail[cut:]])): pages[-1] = [tail[:cut], tail[cut:]]
+        cut = partition(hs(tail), [1, 1])[0]; two = unstrand([tail[:cut], tail[cut:]])
+        if fits(page(two)): pages[-1] = two
     out = [page(c) for c in pages]
     for n, p in enumerate(out, 1): p['page_of'] = [n, len(out)]
+    return out
+
+def _flat(items):
+    """Criteria list → units: a plain criterion or a stem {'text', 'n'}, then its sub-items {'text', 'n', 'level': 1}
+    ('marker': 'none' when the protocol wrote the label into the text, as in （1）鼻塞)."""
+    import re
+    out = []
+    for n, it in enumerate(items, 1):
+        if isinstance(it, str): out.append({'text': it, 'n': n}); continue
+        out.append({'text': it['text'], 'n': n})
+        for c in it.get('items', []):
+            out.append({'text': c, 'n': n, 'level': 1, **({'marker': 'none'} if re.match(r'\s*(?:[（(]\s*\d+\s*[）)]|[①-⑳])', c) else {})})
     return out
 
 @pattern('criteria', scene='临床试验', title='入选与排除标准（原文密排）', density='高',
@@ -75,13 +100,13 @@ def criteria(d):
     role = d.get('role', 'body'); meta = {k: (d.get(tk, title), icon, tone) for k, tk, title, icon, tone in _CRIT}
     def card(key, items, start):
         title, icon, tone = meta[key]
-        return Card([Items(items, marker='number', start=start, role=role, tone=tone)], title=title, icon=icon, justify='start', gap=12)
+        return Card([Items(items, marker='number', start=start, role=role, tone=tone, align='top')], title=title, icon=icon, justify='start', gap=12)
     if d.get('layout') == 'flow':
         body = Row([Stack([card(s['key'], s['items'], s['start']) for s in col], justify='fill', gap=L['gap'], flex=1) if col else Stack([])
                     for col in d['cols']] + [Stack([])] * (2 - len(d['cols'])), flex=1)
     else:
         present = [k for k in meta if d.get(k)]
-        body = Row([card(k, d[k], d.get('start', {}).get(k, 1)) for k in present],
+        body = Row([card(k, _flat(d[k]), d.get('start', {}).get(k, 1)) for k in present],
                    weights=(d.get('weights') or [1, 1]) if len(present) == 2 else [1], flex=1)
     return Stack([body] + ([Text(d['note'], 'label')] if d.get('note') else []), justify='fill', gap=12)
 

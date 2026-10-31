@@ -20,8 +20,13 @@ endpoint, SAE and AESI definitions, SoA) also take --source <protocol text>: eve
 must then be found word for word in the protocol (spaces and full/half-width forms ignored), so a summary cannot pass
 as the original. The receipt records the result; tools/check_kz_project.py reports rule pages without it.
 
+    python3 "$KZ_DIR/tools/protocol_lists.py" protocol.docx --from 排除标准 --key exclusion > excl.json
     python3 "$KZ_DIR/tools/kz_layout.py" render criteria excl.json --track pptx --title 排除标准 \
-            --out <project>/kz_fragments --source sources/protocol.txt
+            --out <project>/kz_fragments --source protocol.docx
+
+Criteria come from the protocol .docx through tools/protocol_lists.py, not from a text export: Word keeps the
+criterion numbers and the sub-item levels in its numbering, which a txt/md conversion drops. With a .docx --source the
+receipt also records whether item n is protocol item n with the same sub-items.
 """
 from pathlib import Path
 import argparse, hashlib, json, re, sys
@@ -118,6 +123,29 @@ def not_in_source(want, source_text):
         out.append(w)
     return out
 
+def numbering_findings(data, docx):
+    """Criteria data against the protocol's numbered lists (tools/protocol_lists.py): item n must be protocol item n,
+    a stem keeps its sub-items as sub-items, nothing merged, promoted, dropped or renumbered (03 COPY-09)."""
+    import protocol_lists as PL
+    _, blocks = PL.lists(docx); out = []
+    trim = lambda t: normal(T.plain(t)).rstrip('；;。.，,')
+    for key in ('inclusion', 'exclusion'):
+        items = data.get(key)
+        if not items: continue
+        want = [(it if isinstance(it, str) else it['text'], [] if isinstance(it, str) else it.get('items', [])) for it in items]
+        b = next((b for b in blocks if b['items'] and trim(b['items'][0]['text']) == trim(want[0][0])), None)
+        if b is None:
+            out.append({'key': key, 'n': 1, 'problem': '第 1 条不是方案里任何一个编号列表的第 1 条（引导语被删、子项被并入或顺序改动）'}); continue
+        src = [(it['text'], [c['text'] for c in it['items']]) for it in b['items']]
+        for n, ((t, kids), s_) in enumerate(zip(want, src), 1):
+            st, skids = s_
+            if trim(t) != trim(st): out.append({'key': key, 'n': n, 'problem': f'与方案第 {n} 条不同：方案为“{st[:24]}”'}); break
+            if [trim(k) for k in kids] != [trim(k) for k in skids]:
+                out.append({'key': key, 'n': n, 'problem': f'子项与方案不同：方案有 {len(skids)} 个子项，数据有 {len(kids)} 个'}); break
+        else:
+            if len(want) != len(src): out.append({'key': key, 'n': min(len(want), len(src)) + 1, 'problem': f'方案该列表有 {len(src)} 条，数据有 {len(want)} 条'})
+    return out
+
 def unescape(s):
     import html
     return html.unescape(s)
@@ -148,10 +176,20 @@ def render_cmd(a):
                       'first_row': (p['data']['row_start'] + 1) if p['data'].get('row_start') is not None else None, 'rows': len(p['data']['rows']) if isinstance(p['data'].get('rows'), list) else None,
                       'cols': ranges(p['data'].get('cols'))} for i, (p, f) in enumerate(zip(pages, files))],
            'verbatim': {'checked': len(source_strings(data)), 'missing': missing}}
+    numbering = []
     if a.source:
-        sp = Path(a.source); want = source_strings(data); bad = not_in_source(want, sp.read_text(encoding='utf-8'))
+        sp = Path(a.source); want = source_strings(data); docx = sp.suffix.lower() == '.docx'
+        if docx:
+            import protocol_lists as PL
+            stext = PL.docx_text(sp)
+        else: stext = sp.read_text(encoding='utf-8')
+        bad = not_in_source(want, stext)
         rec['source_check'] = {'source': str(sp.resolve()), 'source_sha256': hashlib.sha256(sp.read_bytes()).hexdigest(),
                                'checked': len(want), 'not_in_source': bad}
+        if a.pattern == 'criteria':
+            # numbers and levels exist only in the Word file; a text export keeps the words and loses both
+            numbering = numbering_findings(data, sp) if docx else []
+            rec['source_check']['numbering'] = {'checked': docx, 'mismatch': numbering}
     rec['rule'] = a.pattern in RULE_PATTERNS or bool(a.source)
     rp = out / 'kz-layout-receipt.json'
     log = json.loads(rp.read_text(encoding='utf-8')) if rp.exists() else {'runs': []}
@@ -172,7 +210,10 @@ def render_cmd(a):
     for s in missing: print(f'  missing from the rendered pages: {s[:60]}', file=sys.stderr)
     bad = rec.get('source_check', {}).get('not_in_source', [])
     for s in bad: print(f'  not word for word in the source (03 COPY-09: rule text is not summarised): {s[:60]}', file=sys.stderr)
-    return 1 if over or missing or bad else 0
+    for m in numbering: print(f'  {m["key"]} 第 {m["n"]} 条编号或层级与方案不符：{m["problem"]}；用 tools/protocol_lists.py 从 docx 取数据', file=sys.stderr)
+    if a.pattern == 'criteria' and a.source and not rec['source_check']['numbering']['checked']:
+        print('  note: numbering not checked — pass the protocol .docx as --source (a text export drops Word numbering and sub-item levels)', file=sys.stderr)
+    return 1 if over or missing or bad or numbering else 0
 
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
@@ -183,7 +224,7 @@ def main():
     r.add_argument('--track', choices=['pptx', 'html'], required=True); r.add_argument('--title', required=True)
     r.add_argument('--out', required=True); r.add_argument('--first', type=int, default=1); r.add_argument('--total', type=int)
     r.add_argument('--background', default='../images/body_quiet.jpg'); r.add_argument('--logo', default='../images/logo.png')
-    r.add_argument('--source', help='protocol text: rule data must occur in it word for word (03 COPY-09)')
+    r.add_argument('--source', help='protocol .docx (preferred: numbering and sub-item levels are checked too) or text: rule data must occur in it word for word (03 COPY-09)')
     a = ap.parse_args()
     if a.cmd == 'list':
         cat = K.catalog(); ex = example_files()

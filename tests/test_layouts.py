@@ -40,7 +40,7 @@ class Verbatim(unittest.TestCase):
         seen = {'inclusion': [], 'exclusion': []}
         for p in pages:
             for col in p['data']['cols']:
-                for seg in col: seen[seg['key']] += list(range(seg['start'], seg['start'] + len(seg['items'])))
+                for seg in col: seen[seg['key']] += [u['n'] for u in seg['items'] if not u.get('level') and u.get('marker') != 'none']
             self.assertIsNone(re.search(r'[（(]续[）)]|续表|（续', page_text(p['svg'], 'pptx')))
         for k in seen: self.assertEqual(seen[k], list(range(1, len(d[k]) + 1)), k)
 
@@ -179,7 +179,7 @@ class ReviewRegressions(unittest.TestCase):
     def test_rotation_counts_uses_once_per_streak(self):
         from check_kz_project import receipt_checks
         mk = lambda pat, ns: {'pattern': pat, 'track': 'pptx', 'pages': [{'n': n, 'file': f'p{n}', 'overflow_px': 0} for n in ns], 'verbatim': {'missing': []},
-                              'source_check': {'checked': 1, 'not_in_source': []}}
+                              'source_check': {'checked': 1, 'not_in_source': [], 'numbering': {'checked': True, 'mismatch': []}}}
         found = []; add = lambda *a: found.append(a)
         receipt_checks([mk('criteria', [1, 2, 3]), mk('kv-table', [4])], add); self.assertEqual(found, [])
         receipt_checks([mk('table-band', [1]), mk('table-band', [2]), mk('table-band', [3]), mk('table-band', [4])], add)

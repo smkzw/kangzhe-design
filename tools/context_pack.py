@@ -50,7 +50,7 @@ def index(track,features,stage='all',seen=None,route='regular'):
   if track=='htmlppt':selected+=['adapters/html-ppt.md']
   if track in ['pptx','htmlppt']:selected+=['tools/brand_fragments.py','tools/hero_layout.py']
   # 13 BODY-02: regular-route body pages come from the template library (same page data for both tracks)
-  if track in ['pptx','htmlppt'] and route!='flagship':selected+=['design_specs/13-layout-density.md','tools/kz_layout.py','examples/templates/pages.py']+(['runtime/kz-layouts.css'] if track=='htmlppt' else [])
+  if track in ['pptx','htmlppt'] and route!='flagship':selected+=['design_specs/13-layout-density.md','tools/kz_layout.py','tools/protocol_lists.py','examples/templates/pages.py']+(['runtime/kz-layouts.css'] if track=='htmlppt' else [])
   if track=='pptx':selected+=['tools/glass_svg.py']+(['tools/flagship_plate.py','examples/reference/pptx-flagship/README.md'] if route=='flagship' else ['examples/reference/pptx-default/README.md','examples/reference/pptx-default/page-plan.json'])
   if track=='htmlppt' and route=='flagship':selected+=['design_specs/14-flagship.md','examples/reference/htmlppt-flagship/build.py']
   # 09: PPTX and HTML-PPT decks carry speaker notes by default (ppt-master enables them outside Quick); 03 owns the title rule

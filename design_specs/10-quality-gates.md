@@ -50,6 +50,7 @@
 | `tools/check_kz_project.py 项目 [--plan --pptx]` | 10 G-KZ：闸门与白底合成回执、色条、字号下限、页标题、讲稿、模板原文核对、轮换、强调、视觉载体、高亮哨兵 | 审美与医学语义 |
 | `tools/check_notes.py 讲稿 [--plan]` | 09 讲稿：hero 页句数、报幕套话（错误），行话、翻译腔、长句、口头语（警告）；读 PPTX、`notes/total.md` 或 HTML-PPT | 逻辑、重点与医学准确性要通读 |
 | `tools/kz_layout.py render` | 模板页生成与原文核对回执（13 BODY-02、03 COPY-09） | 选型是否合适 |
+| `tools/protocol_lists.py 方案.docx --from 排除标准` | 从 Word 自动编号读出条款的方案编号与子项层级，直接输出入排标准数据（03 COPY-09） | 方案以外的条款来源 |
 | `tools/quiet_plate.py` | 生成背景合成到白底并量阅读区安静度（04 IMG-08） | 主题是否相符 |
 | `tools/check_edge_bars.py SVG目录` | PPTX 页面 SVG 中贴卡边的彩色细条（02 LG-02） | 导出后的手工改动 |
 | ppt-master `svg_quality_checker.py`、`animation_config.py validate`、`pptx_delivery_check.py` | 上游 SVG 合同、动效侧车、成品交付风险 | PowerPoint 实机观感 |

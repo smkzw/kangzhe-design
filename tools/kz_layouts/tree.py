@@ -193,14 +193,21 @@ def KpiTile(value, label, tone='brand'):
 class Items(Node):
     """List with drawn markers: 'dot', 'number' (orange disc with the item number, numbering continues across
     pages through `start`), 'check', 'cross', or an icon name per item. One paragraph per item; continuation lines
-    hang under the text, not under the marker."""
-    def __init__(self, items, marker='dot', start=1, role='body', gap=None, columns=1, col_gap=None, tone='brand'):
+    hang under the text, not under the marker. An item {'level': 1} is a sub-item: it hangs under its parent's text
+    with a dot ('marker': 'none' when its text carries its own label such as （1）). align='spread' spaces the items
+    over the card's spare height; align='top' keeps them at item_gap from the top (rule text read down a column)."""
+    def __init__(self, items, marker='dot', start=1, role='body', gap=None, columns=1, col_gap=None, tone='brand', align='spread'):
         self.items, self.marker, self.start, self.role, self.columns, self.tone = list(items), marker, start, role, columns, tone
-        self.flex = 1  # a list takes the spare height of its card and spaces its items over it
+        self.align = align
+        self.flex = 1  # a list takes the spare height of its card (and, when spread, spaces its items over it)
         s = ROLES[role][0]
         self.gap = L['item_gap'] if gap is None else gap
         self.col_gap = col_gap or L['gap']
         self.mw = {'dot': s * 0.9, 'number': max(s * 1.55, max(22, s * 1.15) + 7), 'check': s * 1.25, 'cross': s * 1.25}.get(marker, s * 1.5)
+        self.sw = s * 0.9  # sub-item dot column
+    def _ind(self, it):
+        """Left offset of an item's text: the marker column, plus the sub-item dot column for a sub-item."""
+        return self.mw + (self.sw if isinstance(it, dict) and it.get('level') else 0)
     def _cols(self, hs=None):
         """Column-major split into consecutive runs with balanced heights (hs: measured item heights; text length
         when no width is known, as in html()). Numbering reads down one column, then the next."""
@@ -212,22 +219,26 @@ class Items(Node):
         return [Text(it if isinstance(it, str) else it['text'], self.role) for it in self.items]
     def measure(self, w):
         cw = (w - self.col_gap * (self.columns - 1)) / self.columns
-        ts = self._texts(); hs = [t.measure(cw - self.mw) for t in ts]
+        ts = self._texts(); hs = [t.measure(cw - self._ind(it)) for t, it in zip(ts, self.items)]
         return max(sum(hs[i] for i in col) + self.gap * (len(col) - 1) for col in self._cols(hs))
     def place(self, x, y, w, h, out):
         cw = (w - self.col_gap * (self.columns - 1)) / self.columns
         ts = self._texts(); s, lead = ts[0].size, ts[0].lead if ts else (20, 1.5)
-        for ci, col in enumerate(self._cols([t.measure(cw - self.mw) for t in ts])):
+        tw = [cw - self._ind(it) for it in self.items]
+        for ci, col in enumerate(self._cols([t.measure(w_) for t, w_ in zip(ts, tw)])):
             cx, cy = x + ci * (cw + self.col_gap), y
-            used = sum(ts[i].measure(cw - self.mw) for i in col) + self.gap * (len(col) - 1)
-            gap = self.gap + (max(0, h - used) / max(1, len(col) - 1) if len(col) > 1 and h - used > 0 else 0)
-            gap = min(gap, self.gap + L['item_gap_stretch_max'])
-            cy += max(0, h - used - (gap - self.gap) * (len(col) - 1)) / 2  # what the capped gaps leave is split above and below
+            used = sum(ts[i].measure(tw[i]) for i in col) + self.gap * (len(col) - 1)
+            gap = self.gap
+            if self.align == 'spread':
+                gap += max(0, h - used) / max(1, len(col) - 1) if len(col) > 1 and h - used > 0 else 0
+                gap = min(gap, self.gap + L['item_gap_stretch_max'])
+                cy += max(0, h - used - (gap - self.gap) * (len(col) - 1)) / 2  # what the capped gaps leave is split above and below
             for i in col:
-                it = self.items[i]; th = ts[i].measure(cw - self.mw)
+                it = self.items[i]; th = ts[i].measure(tw[i]); sub = isinstance(it, dict) and it.get('level')
                 mk = it.get('marker') if isinstance(it, dict) else None
-                out.append({'k': 'marker', 'kind': mk or self.marker, 'n': (it.get('n') if isinstance(it, dict) else None) or self.start + i, 'x': cx, 'y': cy, 'size': s, 'lead': lead, 'tone': (it.get('tone') if isinstance(it, dict) else None) or self.tone})
-                ts[i].place(cx + self.mw, cy, cw - self.mw, th, out)
+                out.append({'k': 'marker', 'kind': mk or ('dot' if sub else self.marker), 'n': (it.get('n') if isinstance(it, dict) else None) or self.start + i,
+                            'x': cx + (self.mw if sub else 0), 'y': cy, 'size': s, 'lead': lead, 'tone': (it.get('tone') if isinstance(it, dict) else None) or self.tone})
+                ts[i].place(cx + self._ind(it), cy, tw[i], th, out)
                 cy += th + gap
     def html(self):
         tag = 'ol' if self.marker == 'number' else 'ul'
@@ -237,10 +248,12 @@ class Items(Node):
             t = it if isinstance(it, str) else it['text']; mk = (it.get('marker') if isinstance(it, dict) else None) or self.marker
             tone = (it.get('tone') if isinstance(it, dict) else None) or self.tone
             num = (it.get('n') if isinstance(it, dict) else None) or self.start + i
+            sub = isinstance(it, dict) and it.get('level')
+            if sub and not (isinstance(it, dict) and it.get('marker')): mk = 'dot'
             sym = (f'<span class="kzl-mk is-number">{num}</span>' if mk == 'number' else '<span class="kzl-mk is-none"></span>' if mk == 'none' else '<span class="kzl-mk is-dot"></span>' if mk == 'dot'
                    else f'<span class="kzl-mk is-icon">{icon_svg("check" if mk == "check" else "cross" if mk == "cross" else mk)}</span>')
-            lis.append(f'<li class="is-{tone}">{sym}<span class="kzl-li">{runs_html(t)}</span></li>')
-        cls = f'kzl-items kzl-{CSS_ROLE[self.role]}'
+            lis.append(f'<li class="is-{tone}{" is-sub" if sub else ""}">{sym}<span class="kzl-li">{runs_html(t)}</span></li>')
+        cls = f'kzl-items kzl-{CSS_ROLE[self.role]}' + (' is-top' if self.align == 'top' else '')
         if self.columns > 1:
             lists = ''.join(f'<{tag} class="{cls}" style="--gap:{self.gap:g}">' + ''.join(lis[i] for i in col) + f'</{tag}>' for col in self._cols())
             return f'<div class="kzl-cols" style="--cols:{len(self._cols())};column-gap:{u(self.col_gap)}">{lists}</div>'
