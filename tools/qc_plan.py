@@ -3,6 +3,8 @@ from pathlib import Path
 import argparse,json,re,hashlib
 from PIL import Image,ImageStat
 from jsonschema import Draft202012Validator
+import sys;sys.path.insert(0,str(Path(__file__).resolve().parent))
+from kz_titles import title_findings
 ROOT=Path(__file__).resolve().parents[1]
 def intersects(a,b):
  return min(a[0]+a[2],b[0]+b[2])>max(a[0],b[0]) and min(a[1]+a[3],b[1]+b[3])>max(a[1],b[1])
@@ -48,8 +50,7 @@ def validate(plan,manifest=None,asset_root=None):
   pid=p['id']
   if pid in seen:add('ID',pid,'重复页面 id')
   seen.add(pid)
-  if re.search(r'[：:—–]|\s-\s',p['title']):add('TITLE',pid,'页面标题不应有冒号或破折号')
-  if len(p['title'])>24:add('TITLE-REVIEW',pid,'长标题需要语言审阅；不是自动截短', 'review')
+  for lv,code,msg in title_findings(p['title'],p.get('kind')):add(code,pid,msg,'error' if lv=='error' else 'review')
   byrole={}
   if plan['track'] in ['htmlppt','site','stream']:
    motion=p['motion_objects']; ids=[m['id'] for m in motion]

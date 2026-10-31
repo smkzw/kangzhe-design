@@ -99,8 +99,8 @@ def toc():
                   + f'<g id="toc-{i + 1}" data-pptx-bounds="{x} 330 344 250"><text x="{x + 30}" y="408" font-family="{NUM}" font-size="{TY["toc_numeral"]}" fill="{F["accent_ink"]}">{n}</text>'
                   f'<text x="{x + 30}" y="512" font-size="{TY["toc_label"]}" font-weight="bold" fill="{C["ink"]}">{t}</text>'
                   f'<text x="{x + 30}" y="548" font-size="{TY["toc_description"]}" fill="{C["body"]}">{d}</text></g>')
-    return page('toc', bg('p02-plate.png') + identity('toc', 'p02-plate.png') + kicker('kicker', 100, 166, '汇报章节')
-                + f'<g id="title" data-pptx-bounds="100 180 900 80"><text x="100" y="240" font-size="{TY["toc_title"]}" font-weight="bold" fill="{C["ink"]}">三个问题，一个决定</text></g>' + cards)
+    return page('toc', bg('p02-plate.png') + identity('toc', 'p02-plate.png') + kicker('kicker', 100, 166, '目录')
+                + f'<g id="title" data-pptx-bounds="100 180 900 80"><text x="100" y="240" font-size="{TY["toc_title"]}" font-weight="bold" fill="{C["ink"]}">汇报章节</text></g>' + cards)
 
 def section():
     # the lens sits behind the numeral here: native text cannot be refracted, so the number shows through the clear face
@@ -145,7 +145,7 @@ def content():
     paper = (f'<rect id="paper-shell" data-pptx-role="decoration" x="100" y="196" width="733" height="460" rx="{F["paper"]["radius"]}" fill="{F["paper"]["face"]}" '
              f'stroke="{F["paper"]["hairline"]}" stroke-width="1" filter="url(#kzf-paper-shadow)"/>')
     return page('content', bg('p04-plate.png') + identity('content', 'p04-plate.png')
-                + f'<g id="title" data-pptx-bounds="100 100 900 60"><text x="100" y="142" font-size="{TY["page_title"]}" font-weight="bold" fill="{C["ink"]}">缺口集中在<tspan fill="{C["risk"]}">中心记录</tspan>与<tspan fill="{C["risk"]}">安全性报告</tspan></text></g>'
+                + f'<g id="title" data-pptx-bounds="100 100 900 60"><text x="100" y="142" font-size="{TY["page_title"]}" font-weight="bold" fill="{C["ink"]}">资料缺口分布</text></g>'
                 + f'<rect id="title-rule" data-pptx-role="decoration" x="100" y="168" width="1080" height="1" fill="{F["rule"]}"/>'
                 + paper
                 + f'<g id="paper-head" data-pptx-bounds="126 214 680 34"><text x="130" y="240" font-size="{TY["card_title"]}" font-weight="bold" fill="{C["ink"]}">各资料组应收与已收</text>'
@@ -191,9 +191,9 @@ def page_plan(receipts):
     ident = lambda pid, kind: {'id': f'{pid}-identity', 'rect': [0, 0, 1, 1], 'role': 'logo', 'zone': 'clear'}
     pages = [
         ('p01', 'cover', '研究资料完整性核对', [el('p01', 0, 'cover_title', TY['cover_title'], '研究资料完整性核对'), el('p01', 1, 'hero_subtitle', TY['lede'], '应收 24 份，已收 20 份；缺口集中在两组资料'), el('p01', 2, 'hero_meta', TY['meta'], DATE + '　管理层季度汇报')]),
-        ('p02', 'toc', '三个问题，一个决定', [el('p02', 0, 'toc_title', TY['toc_title'], '三个问题，一个决定')] + [el('p02', i + 1, r, TY[k], t) for i, (r, k, t) in enumerate([('toc_number', 'toc_numeral', '01'), ('toc_label', 'toc_label', '研究范围'), ('toc_description', 'toc_description', '对象、时间窗与资料组'), ('toc_number', 'toc_numeral', '02'), ('toc_label', 'toc_label', '资料完整性'), ('toc_description', 'toc_description', '应收与已收、缺口所在'), ('toc_number', 'toc_numeral', '03'), ('toc_label', 'toc_label', '核对计划'), ('toc_description', 'toc_description', '补收、确认与复核')])]),
+        ('p02', 'toc', '汇报章节', [el('p02', 0, 'toc_title', TY['toc_title'], '汇报章节')] + [el('p02', i + 1, r, TY[k], t) for i, (r, k, t) in enumerate([('toc_number', 'toc_numeral', '01'), ('toc_label', 'toc_label', '研究范围'), ('toc_description', 'toc_description', '对象、时间窗与资料组'), ('toc_number', 'toc_numeral', '02'), ('toc_label', 'toc_label', '资料完整性'), ('toc_description', 'toc_description', '应收与已收、缺口所在'), ('toc_number', 'toc_numeral', '03'), ('toc_label', 'toc_label', '核对计划'), ('toc_description', 'toc_description', '补收、确认与复核')])]),
         ('p03', 'section', '资料完整性', [el('p03', 0, 'section_number', TY['section_numeral'], '02'), el('p03', 1, 'section_title', TY['section_title'], '资料完整性'), el('p03', 2, 'body', T['type_px']['body'], '缺口在哪里，会不会影响组间比较', 1.4)]),
-        ('p04', 'body', '缺口集中在中心记录与安全性报告', [el('p04', 0, 'page_title', TY['page_title'], '缺口集中在中心记录与安全性报告'), el('p04', 1, 'card_title', TY['card_title'], '各资料组应收与已收'), el('p04', 2, 'chart_label', T['type_px']['chart_label'], '份', 1.4), el('p04', 3, 'body', T['type_px']['body'], '缺失记录保留为空值；不按零处理，也不插补', 1.4)]),
+        ('p04', 'body', '资料缺口分布', [el('p04', 0, 'page_title', TY['page_title'], '资料缺口分布'), el('p04', 1, 'card_title', TY['card_title'], '各资料组应收与已收'), el('p04', 2, 'chart_label', T['type_px']['chart_label'], '份', 1.4), el('p04', 3, 'body', T['type_px']['body'], '缺失记录保留为空值；不按零处理，也不插补', 1.4)]),
         ('p05', 'ending', '请确认两件事', [el('p05', 0, 'ending_title', TY['ending_title'], '请确认两件事'), el('p05', 1, 'body', T['type_px']['body'], '4 份资料由医学部牵头，2027Q1 内补收', 1.4), el('p05', 2, 'body', T['type_px']['body'], '版本差异确认之后，再做组间比较', 1.4)]),
     ]
     by_file = {r['file']: r for r in receipts}

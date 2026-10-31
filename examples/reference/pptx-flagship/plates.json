@@ -3,28 +3,28 @@
  "plates": [
   {
    "file": "p01-plate.png",
-   "sha256": "48c0f31c30b56874a8675780024408ac1df10607d1ec6ef95ba66f4295cd387f",
-   "bytes": 280394
+   "sha256": "88b271b625a8b74c2d525baacca47815624e9f79135d67293796e38c46e89deb",
+   "bytes": 299038
   },
   {
    "file": "p02-plate.png",
-   "sha256": "feaca9c9be8a2567f1b687127dac32381f5c7f565d67eb1220cef0fbe9734cca",
-   "bytes": 260076
+   "sha256": "9f84c526344be92acaae34649ff7cf06e8bbcea8139b79a02b3a090f0528df2a",
+   "bytes": 276570
   },
   {
    "file": "p03-plate.png",
-   "sha256": "45206c9db7cae9419f43f6b1e320657f7fdeb30bac157f1582319be72df7defe",
-   "bytes": 184570
+   "sha256": "7808cd3b21bba92a2ab160c537798a5a443f10746b30aed25bdba827a52b9ff6",
+   "bytes": 197604
   },
   {
    "file": "p04-plate.png",
-   "sha256": "5bfd8b60c5d54883fd380a8a01b556ea5c8fd0429c613e14271be603792abdb0",
-   "bytes": 89707
+   "sha256": "2726cf6e2622f48e5f0f26a0c51ffd8a697762d808942111ba59fc93c983e6d8",
+   "bytes": 97259
   },
   {
    "file": "p05-plate.png",
-   "sha256": "9ad08f703d7c3253647037b34403ed69886ac1bb356c9fe73b827e56ccce09aa",
-   "bytes": 274797
+   "sha256": "2586171c634c283495119c80155787725314405701261a5318cbd600fcf9be38",
+   "bytes": 293169
   }
  ]
 }

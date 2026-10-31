@@ -33,16 +33,17 @@ class EdgeBars(unittest.TestCase):
     def test_coloured_line_on_right_edge_fails(self):
         self.assertEqual(self.levels(CARD + '<line x1="498" y1="110" x2="498" y2="290" stroke="#C00000" stroke-width="4"/>'), [('right', 'fail')])
 
-    def test_short_mark_and_neutral_hairline_pass(self):
-        body = CARD + '<rect x="100" y="120" width="6" height="24" fill="#FF9900"/><rect x="100" y="299" width="400" height="1" fill="#E5E1DA"/>'
-        self.assertEqual(self.levels(body), [])
+    def test_short_edge_mark_warns_and_neutral_hairline_passes(self):
+        # 2026-10-31: card edge bars are forbidden outright; a hugging colour block under 10 % of the edge still warns
+        body = CARD + '<rect x="100" y="120" width="6" height="16" fill="#FF9900"/><rect x="100" y="299" width="400" height="1" fill="#E5E1DA"/>'
+        self.assertEqual(self.levels(body), [('left', 'warn')])
 
     def test_page_chrome_rule_is_not_a_card_bar(self):
         body = '<g data-pptx-role="decoration"><rect x="56" y="88" width="1168" height="2" fill="#FF9900"/></g>' + CARD
         self.assertEqual(self.levels(body), [])
 
-    def test_mid_length_mark_warns(self):
-        self.assertEqual(self.levels(CARD + '<rect x="100" y="100" width="6" height="70" fill="#FF9900"/>'), [('left', 'warn')])
+    def test_mid_length_mark_fails(self):
+        self.assertEqual(self.levels(CARD + '<rect x="100" y="100" width="6" height="70" fill="#FF9900"/>'), [('left', 'fail')])
 
     def test_thresholds_come_from_tokens(self):
         t = json.loads((R / 'tokens/tokens.json').read_text())['glass']['edge_bar']

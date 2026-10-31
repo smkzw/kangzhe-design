@@ -60,7 +60,9 @@ cp "$KZ_DIR"/assets/icons/kangzhe/*.svg <project>/icons/kangzhe/            # <u
 python3 "$SKILL_DIR/scripts/stamp_native_fallbacks.py" <project>/svg_output --write
 python3 "$KZ_DIR/tools/check_kz_project.py" <project> --plan page-plan.json  # 10 G-KZ，导出前
 python3 "$SKILL_DIR/scripts/svg_quality_checker.py" <project> --canonical-authoring --stage final --quick-generate --json
-python3 "$SKILL_DIR/scripts/svg_to_pptx.py" <project> --quick-generate --no-notes --native-charts-and-tables -o out.pptx
+python3 "$KZ_DIR/tools/check_notes.py" <project>/notes/total.md --plan page-plan.json   # 09 讲稿，写完 notes/total.md 后
+python3 "$SKILL_DIR/scripts/total_md_split.py" <project>
+python3 "$SKILL_DIR/scripts/svg_to_pptx.py" <project> --quick-generate --with-notes --native-charts-and-tables -o out.pptx
 python3 "$KZ_DIR/tools/bind_highlight_pptx.py" out.pptx out-hl.pptx --receipt highlight.json
 python3 "$KZ_DIR/tools/check_kz_project.py" <project> --pptx out-hl.pptx     # 高亮哨兵已清
 ```
@@ -69,6 +71,8 @@ python3 "$KZ_DIR/tools/check_kz_project.py" <project> --pptx out-hl.pptx     # �
 - 文字保持上游默认的 `preserve` 文本流（`wrap="none"` 加 `<a:br>`，行已在模板里按微软雅黑实测断好），不加 `--reflow-text`；`data-pptx-frame` 只由上游助手写，不手写。模板量宽时给 4%（`layout.templates.measure_headroom`）余量，抵消检查器偏宽的估算。
 - `render` 的回执 `kz-layout-receipt.json` 记下每页的模板、溢出与原文核对；溢出或缺一条源文字时命令退出 1，按 COPY-09 换模板或拆页，不删字。
 - Quick 路线同样适用；Default 路线在 Design Spec §IX 的 Composition 里写模板名。
+- 讲稿按 09 写进 `notes/total.md`（`# NN_页标题`，页间 `---`）：封面、目录、章节、尾页一句话，正文页说重点和要决定的事，不报幕。ppt-master 的 executor-notes 只管格式与覆盖，用语以 09 为准。Quick 路线默认不嵌讲稿，要加 `--with-notes`。
+- 页标题按 03 COPY-01 写章节或主题名；本页的观点放在模板的结论带（`band`）或观点句里。
 
 ## 品牌绑定（导出之后）
 ```bash

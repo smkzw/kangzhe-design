@@ -151,10 +151,10 @@ if __name__ == '__main__':
     TOTAL = 12
     slides = [
         hero('cover', {'title': '研究资料完整性核对', 'subtitle': '合成示例｜应收 24 份，已收 20 份', 'meta': FOOT, 'title_short': '封面'}, 'cover.webp',
-             '今天汇报一个研究资料包的完整性核对，数据是合成的。按计划应收 24 份，目前收到 20 份，还缺 4 份。希望会上把补收和确认的安排定下来。'),
+             '今天汇报研究资料包的完整性核对，应收 24 份、已收 20 份，需要会上定下补收和确认的安排。'),
         hero('toc', {'title': '汇报章节', 'items': [{'title': '研究范围', 'description': '对象、时间窗与核对流程'}, {'title': '资料完整性', 'description': '应收与已收、缺口所在'}, {'title': '核对计划', 'description': '补收、确认与复核'}], 'title_short': '目录'}, 'toc.webp',
-             '分三部分：先说这次核对的范围和做法，再看各组资料收齐了多少，最后是补收、确认和复核的季度安排。'),
-        hero('section', {'number': '01', 'title': '研究范围', 'title_short': '研究范围'}, 'section.webp', '先看范围。范围定下来，才知道哪些资料要进核对。'),
+             '汇报分三部分：核对范围与做法、各组资料的收齐情况、补收与复核的季度安排。'),
+        hero('section', {'number': '01', 'title': '研究范围', 'title_short': '研究范围'}, 'section.webp', '核对范围决定哪些资料进入核对。'),
         body(4, TOTAL, '研究范围', 'cards-3',
              card('研究对象与时间窗', [], [('成人受试者', '研究对象'), ('第 16 周', '评价时间窗')])
              + card('纳入资料', ['方案与修订', '中心记录', '实验室数据', '安全性报告'], [('4 组', '纳入核对')], cols=2)
@@ -163,7 +163,7 @@ if __name__ == '__main__':
              '核对对象是成人受试者，评价时间窗是第 16 周。资料分 4 组：方案与修订、中心记录、实验室数据、安全性报告。方案有 V2.1 和 V2.3 两版，并排比下来有 2 处要确认：筛选窗口和终点评价时间点。这 2 项会影响后面的组间比较，所以确认之前先不比。'),
         body(5, TOTAL, '核对流程', 'film', film_page(DATA['film']),
              '核对分四步。先定范围；再逐组清点应收和已收，缺的照原样记成空值；然后把两版方案并排比较，差异转交确认，我们不判断哪一版对；最后把补收和确认排进季度计划。'),
-        hero('section', {'number': '02', 'title': '资料完整性', 'title_short': '资料完整性'}, 'section.webp', '接下来看各组资料收齐了多少。'),
+        hero('section', {'number': '02', 'title': '资料完整性', 'title_short': '资料完整性'}, 'section.webp', '24 份资料还缺 4 份，集中在中心记录和安全性报告。'),
         body(7, TOTAL, '资料完整性', 'split-7-5',
              '<div data-kz-reveal><article class="kz-card kz-data-card" data-kz-no-tilt><div class="kz-data-head"><h3>各资料组应收与已收</h3></div><div class="kz-chart" data-kz-chart="completeness" role="img" aria-label="应收与已收：方案与修订 2 与 2，中心记录 12 与 9，实验室数据 6 与 6，安全性报告 4 与 3"></div></article></div>'
              '<div class="kz-stack"><div data-kz-reveal><article class="kz-card kz-takeaway-card" data-kz-no-tilt data-kz-layout="centered"><p>缺口集中在<span class="kz-risk">中心记录与安全性报告</span></p></article></div>'
@@ -179,13 +179,13 @@ if __name__ == '__main__':
              demo_page('decision', '判定规则', ['资料未收到：保留空值，进入补收清单', '已收到：先看版本差异是否已确认', '差异确认之后，<b>才做组间比较</b>'], preset='demo-mirror'),
              '【1】每份资料走同一条判定路径。【2】示例 A 已收、差异已确认，进入组间比较。【3】示例 B 是缺失的中心记录，保留空值，进入补收清单。'
              '【4】示例 C 已收，但差异还没确认，先不比较。【5】两条规则：缺失不按零处理，差异确认之前不比较。'),
-        hero('section', {'number': '03', 'title': '核对计划', 'title_short': '核对计划'}, 'section.webp', '最后是补收、确认和复核的时间表。'),
+        hero('section', {'number': '03', 'title': '核对计划', 'title_short': '核对计划'}, 'section.webp', '补收、确认和复核都安排在 2027 年上半年完成。'),
         body(11, TOTAL, '核对计划', 'full',
              '<div data-kz-reveal><article class="kz-card kz-data-card" data-kz-no-tilt><div class="kz-data-head"><h3>季度安排</h3>' + legend([('medical', '医学部'), ('statistics', '数统'), ('pv', 'PV')]) + '</div>'
              '<div data-kz-gantt="gantt"></div><p class="kz-gantt-note">补收与版本差异确认<b>在 2027Q1 内完成</b>，复核、安全性报告核对与审阅意见在 2027Q2 内完成</p></article></div>',
              '关键节点是 2027 年一季度。缺的 4 份由医学部从今年四季度开始补收，一季度内补齐；两版方案的差异也在一季度内确认。数统的完整性复核和 PV 的安全性报告核对从一季度做到二季度，二季度由医学部形成审阅意见。'),
         hero('ending', {'title': '请确认两件事', 'subtitle': '4 份资料由医学部牵头，2027Q1 内补收；版本差异确认后再做组间比较', 'meta': FOOT, 'title_short': '结束'}, 'ending.webp',
-             '最后请大家确认两件事：一是缺的 4 份资料由医学部牵头，2027 年一季度内补收；二是 2 项版本差异确认之后，再做组间比较。没有不同意见的话，就按这个时间表推进。'),
+             '请确认两件事：缺的 4 份由医学部牵头在 2027 年一季度内补收，2 项版本差异确认后再做组间比较。'),
     ]
 
     write_deck(slides, json.dumps({**DATA, "demos": DEMOS}, ensure_ascii=False), HERE / 'index.html', '研究资料完整性核对')

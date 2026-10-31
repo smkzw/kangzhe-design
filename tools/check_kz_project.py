@@ -11,12 +11,17 @@ Reads <project>/svg_output/*.svg, the template receipts (tools/kz_layout.py writ
   FONT-FLOOR      text below tokens.type_px.reference (03 TYPE-01)
   VERBATIM        a template page that dropped source text, or overflowed (03 COPY-09)
   HIGHLIGHT       sentinel-coloured runs left in the PPTX (run tools/bind_highlight_pptx.py)
+  TITLE           a page title with a colon, dash or sentence punctuation (03 COPY-01: titles name the chapter or topic)
+  NOTES-HERO / NOTES-FILLER   speaker-note errors from tools/check_notes.py (09 NOTES-04/05), read from
+                  <project>/notes/total.md and, with --pptx, the exported speaker notes
 Warnings:
   SMALL-TEXT      more than 15 % of a page's characters under the 12 pt content floor (only axes, legends, sources, n= may be small)
   ROTATION        the same template used more than twice in a row (one list paged across pages is one use),
                   or a deck of six or more template pages using fewer than three templates (13 BODY-02)
   EMPHASIS        a text-heavy page with no bold, dark-red, underline or highlight run (03 COPY-04/06)
   PLAIN-TEXT      a text-heavy page with no icon, chart, table or drawn diagram (13 BODY-02)
+  TITLE-CLAIM / TITLE-LONG    a title that reads as a conclusion or question, or runs past 14 characters
+  NOTES-*         speaker-note warnings (jargon, translationese, long sentences, chatty fillers, missing notes)
 """
 from pathlib import Path
 import argparse, json, re, sys, zipfile
@@ -74,7 +79,16 @@ def texts(svg):
     walk(root, 16, False)
     return out
 
+def page_title(svg):
+    """The text of the body-page title group (<g id="title">, as tools/kz_layouts/page.py and the reference pages write it)."""
+    m = re.search(r'<g\b[^>]*\bid="title"[^>]*>(.*?)</g>', svg, re.S)
+    return re.sub(r'<[^>]+>', '', m.group(1)).strip() if m else None
+
 def page_checks(name, svg, add):
+    from kz_titles import title_findings
+    t = page_title(svg)
+    if t:
+        for lv, code, msg in title_findings(t): add(lv, code, name, f'“{t}”：{msg}')
     ts = texts(svg); total = sum(c for *_, c, _ in ts) or 1
     tiny = [s for s, b, c, e in ts if s < FLOOR and c]
     if tiny: add('error', 'FONT-FLOOR', name, f'{len(tiny)} text object(s) below {FLOOR + 0.05:g} px (smallest {min(tiny):g} px)')
@@ -153,6 +167,14 @@ def main():
         for f in validate(plan):
             if f['level'] == 'error': add('error', 'PLAN', f['where'], f'{f["code"]}: {f["message"]}')
         plate_checks(plan, a.project, add)
+    from check_notes import load, check as check_notes
+    # page kinds: the page-plan when given; otherwise a page with the body-page title group is a content page and
+    # the rest are left to check_notes' guess (cover first, then 目录 / 章节 / 结束 headings)
+    kinds = ([p['kind'] for p in json.loads(a.plan.read_text(encoding='utf-8'))['pages']] if a.plan
+             else ['content' if page_title(f.read_text(encoding='utf-8')) else None for f in svgs])
+    for src in [a.project / 'notes/total.md'] + ([a.pptx] if a.pptx else []):
+        if src.exists():
+            for f in check_notes(load(src), kinds): add(f['level'], f['code'], f'{src.name}:{f["where"]}', f['message'])
     if a.pptx:
         z = zipfile.ZipFile(a.pptx)
         for n in sorted(z.namelist()):

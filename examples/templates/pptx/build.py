@@ -7,7 +7,8 @@
     cp assets/backgrounds/body-quiet.jpg <project>/images/body_quiet.jpg; cp assets/logo_bot.png <project>/images/logo.png
     python3 <ppt-master>/scripts/stamp_native_fallbacks.py <project> --write      # tables and charts
     python3 <ppt-master>/scripts/svg_quality_checker.py <project> --canonical-authoring --stage final --quick-generate --json
-    python3 <ppt-master>/scripts/svg_to_pptx.py <project> --quick-generate --no-notes --native-charts-and-tables -o <out>.pptx
+    python3 <ppt-master>/scripts/total_md_split.py <project>                    # notes/total.md → per-page notes
+    python3 <ppt-master>/scripts/svg_to_pptx.py <project> --quick-generate --with-notes --native-charts-and-tables -o <out>.pptx
     python tools/bind_highlight_pptx.py <out>.pptx <out>.pptx          # ==highlight== runs → native highlight
 --preview writes browser previews (icons inlined, absolute image paths) for screenshots.
 """
@@ -31,8 +32,8 @@ def build(project, preview=None):
     pages = []
     for name, data_file, title, notes in PAGES:
         data = json.loads((HERE.parent / data_file).read_text(encoding='utf-8'))
-        pages += [(title, p) for p in render(name, data, 'pptx')]
-    for n, (title, p) in enumerate(pages, 1):
+        pages += [(title, p, notes) for p in render(name, data, 'pptx')]
+    for n, (title, p, _) in enumerate(pages, 1):
         s = svg_page(title, p['svg'], n, len(pages), background='../images/body_quiet.jpg')
         (out / f'slide_{n:02d}.svg').write_text(s, encoding='utf-8')
         if preview:
@@ -40,6 +41,9 @@ def build(project, preview=None):
             img = str((Path(project) / 'images').resolve()) + '/'
             (Path(preview) / f'page_{n:02d}.svg').write_text(inline_icons(s).replace('../images/', img), encoding='utf-8')
         if p['overflow'] > 0.5: print(f'  page {n}: overflow {p["overflow"]} px', file=sys.stderr)
+    # speaker notes (09) for ppt-master's notes branch: # NN_title per page, --- between pages; split by total_md_split.py
+    (Path(project) / 'notes').mkdir(exist_ok=True)
+    (Path(project) / 'notes/total.md').write_text('\n\n---\n\n'.join(f'# {n:02d}_{t}\n\n{nt}' for n, (t, _, nt) in enumerate(pages, 1)) + '\n', encoding='utf-8')
     print('wrote', len(pages), 'pages to', out)
 
 if __name__ == '__main__':

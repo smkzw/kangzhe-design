@@ -53,9 +53,11 @@ def index(track,features,stage='all',seen=None,route='regular'):
   if track in ['pptx','htmlppt'] and route!='flagship':selected+=['design_specs/13-layout-density.md','tools/kz_layout.py','examples/templates/pages.py']+(['runtime/kz-layouts.css'] if track=='htmlppt' else [])
   if track=='pptx':selected+=['tools/glass_svg.py']+(['tools/flagship_plate.py','examples/reference/pptx-flagship/README.md'] if route=='flagship' else ['examples/reference/pptx-default/README.md','examples/reference/pptx-default/page-plan.json'])
   if track=='htmlppt' and route=='flagship':selected+=['design_specs/14-flagship.md','examples/reference/htmlppt-flagship/build.py']
+  # 09: PPTX and HTML-PPT decks carry speaker notes by default (ppt-master enables them outside Quick); 03 owns the title rule
+  if track in ['pptx','htmlppt']:selected+=['design_specs/03-typography-language.md','design_specs/09-speaker-notes.md','tools/check_notes.py']
   # The current-spec reference implementation is the fastest correct starting point for authoring.
   selected+=['examples/reference/README.md']
- elif stage=='verify':selected=complete+['tools/qc_plan.py']+(['tools/check_kz_project.py'] if track in ['pptx','htmlppt'] else [])
+ elif stage=='verify':selected=complete+['tools/qc_plan.py']+(['tools/check_kz_project.py','tools/check_notes.py','design_specs/09-speaker-notes.md'] if track in ['pptx','htmlppt'] else [])
  else:raise ValueError('Unknown stage: '+stage)
  selected=list(dict.fromkeys(selected));owners=[]
  for p in selected:

@@ -61,7 +61,7 @@
     "mode": "flagship_light_field",
     "plate": {
      "file": "p01-plate.png",
-     "sha256": "48c0f31c30b56874a8675780024408ac1df10607d1ec6ef95ba66f4295cd387f",
+     "sha256": "88b271b625a8b74c2d525baacca47815624e9f79135d67293796e38c46e89deb",
      "kind": "cover",
      "focus": [
       0.72,
@@ -85,7 +85,7 @@
   {
    "id": "p02",
    "kind": "toc",
-   "title": "三个问题，一个决定",
+   "title": "汇报章节",
    "hero_layout_id": "flagship-toc",
    "body_profile": "standard",
    "elements": [
@@ -94,7 +94,7 @@
      "role": "toc_title",
      "font_px": 56,
      "line_height": 1.25,
-     "text": "三个问题，一个决定"
+     "text": "汇报章节"
     },
     {
      "id": "p02-toc_number-1",
@@ -178,7 +178,7 @@
     "mode": "flagship_light_field",
     "plate": {
      "file": "p02-plate.png",
-     "sha256": "feaca9c9be8a2567f1b687127dac32381f5c7f565d67eb1220cef0fbe9734cca",
+     "sha256": "9f84c526344be92acaae34649ff7cf06e8bbcea8139b79a02b3a090f0528df2a",
      "kind": "toc",
      "focus": [
       0.62,
@@ -246,7 +246,7 @@
     "mode": "flagship_light_field",
     "plate": {
      "file": "p03-plate.png",
-     "sha256": "45206c9db7cae9419f43f6b1e320657f7fdeb30bac157f1582319be72df7defe",
+     "sha256": "7808cd3b21bba92a2ab160c537798a5a443f10746b30aed25bdba827a52b9ff6",
      "kind": "section",
      "focus": [
       0.25,
@@ -270,7 +270,7 @@
   {
    "id": "p04",
    "kind": "body",
-   "title": "缺口集中在中心记录与安全性报告",
+   "title": "资料缺口分布",
    "body_profile": "standard",
    "elements": [
     {
@@ -278,7 +278,7 @@
      "role": "page_title",
      "font_px": 38,
      "line_height": 1.25,
-     "text": "缺口集中在中心记录与安全性报告"
+     "text": "资料缺口分布"
     },
     {
      "id": "p04-card_title-1",
@@ -320,7 +320,7 @@
     "mode": "flagship_light_field",
     "plate": {
      "file": "p04-plate.png",
-     "sha256": "5bfd8b60c5d54883fd380a8a01b556ea5c8fd0429c613e14271be603792abdb0",
+     "sha256": "2726cf6e2622f48e5f0f26a0c51ffd8a697762d808942111ba59fc93c983e6d8",
      "kind": "content",
      "focus": [
       0.8,
@@ -413,7 +413,7 @@
     "mode": "flagship_light_field",
     "plate": {
      "file": "p05-plate.png",
-     "sha256": "9ad08f703d7c3253647037b34403ed69886ac1bb356c9fe73b827e56ccce09aa",
+     "sha256": "2586171c634c283495119c80155787725314405701261a5318cbd600fcf9be38",
      "kind": "ending",
      "focus": [
       0.5,

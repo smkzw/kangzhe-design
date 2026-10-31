@@ -60,10 +60,10 @@ opacity 的写入位置会影响玻璃：祖先元素 opacity<1 时，Chromium �
 
 **判定**（数值见 `glass.edge_bar`）：
 - 贴边：离卡片边缘不超过 `hug_px`；细长：厚度不超过 `max_thickness_px`；有色：饱和度高于 `neutral_saturation_max` 且不透明度不低于 `alpha_min`。
-- 三项都满足、长度达到该边的 `forbid_ratio`，判失败；长度在 `warn_ratio` 与 `forbid_ratio` 之间判 WARN，并写明它是什么语义标记。
+- 卡片边缘色条**绝对禁止**，不设豁免，参照稿、用户旧稿或上游模板里有也不沿用。三项都满足、长度达到该边的 `forbid_ratio`（10%）即判失败；更短的贴边色块报 WARN，同样要改掉。
 - 检测：HTML 用 `KZLayoutQC.inspectEdgeBars`，PPTX 用 `tools/check_edge_bars.py`（10 G5）。page-plan 卡片的 `edge_decoration` 只能是 `none`、`neutral_hairline` 或 `localized_highlight`。
 
-**可用的替代**：卡标题前的短编号或小圆点、文字颜色、语义图标、不超过 `warn_ratio` 的短色标、局部光晕、短高光、图例与标签旁的部门色小色块。
+**可用的替代**（都不贴卡边）：卡标题前的短编号或小圆点、文字颜色、语义图标、局部光晕、短高光、图例与标签旁的部门色小色块。
 
 **不算色条**：
 - 卡片四周等宽的中性细折光边；

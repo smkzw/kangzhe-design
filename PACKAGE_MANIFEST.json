@@ -1,12 +1,12 @@
 {
- "version": "7.2.1",
- "revision": "KZ7-1031-B11",
+ "version": "7.2.2",
+ "revision": "KZ7-1031-B12",
  "scope": "installable skill content; maintenance material (review/, agent/, docs/history/, tests/, examples/validation/) and sample .pptx decks excluded",
  "files": [
   {
    "path": "CHANGELOG.md",
-   "bytes": 83707,
-   "sha256": "sha256:ae979338484e17a2642ef72077b79144fae847e96b43a64634815367c4086962"
+   "bytes": 85463,
+   "sha256": "sha256:56bd7df633ab7e2fc94590bb5724bcf0bc9209226305f918592e86f6f2f07d87"
   },
   {
    "path": "INSTALL.md",
@@ -15,28 +15,28 @@
   },
   {
    "path": "README.md",
-   "bytes": 4986,
-   "sha256": "sha256:b092b6417f95474100150b4138c3bb08752428b4807349e7309b8000b8100884"
+   "bytes": 5183,
+   "sha256": "sha256:84faf2b14d4a1afc0499edc1eabdc3a463d5766a46b6618453889223bc99aaba"
   },
   {
    "path": "REVISION",
    "bytes": 13,
-   "sha256": "sha256:d2383907f09f4f7db54c13045dea6938cda8eb82151b5ff9094db61a87e82d83"
+   "sha256": "sha256:a7849f43f68a67cb8ef6e4a4073d19a6a436ce1c3b56a69a9f1216b0d7b82d71"
   },
   {
    "path": "SKILL.md",
-   "bytes": 9569,
-   "sha256": "sha256:d5abe4afd235ab789f70455a8fa8c9763553a21828716e2f0602cd63cf03bcb4"
+   "bytes": 9903,
+   "sha256": "sha256:8db333876e257d206e98e877a991dd9cff0e20ec19b258894477c3d00e7ab238"
   },
   {
    "path": "STATUS.md",
-   "bytes": 10912,
-   "sha256": "sha256:b7b950b59faa843c6c6083e603be49276cdb49fd64be03fd04894495d314fd07"
+   "bytes": 11848,
+   "sha256": "sha256:8455219aefeee17d8526af48e92c2698da97b8f93a029e7252ba63b325258ebb"
   },
   {
    "path": "VERSION",
    "bytes": 6,
-   "sha256": "sha256:d4e1b76ed0d76666ba32fcfaf876e4fb8040a8516f3ef2d9affd040aa10cae9a"
+   "sha256": "sha256:b9e2168d6923b52f481fb5b10042c3f78eab6039795feaf46d043b1d6f1b3927"
   },
   {
    "path": "adapters/README.md",
@@ -50,13 +50,13 @@
   },
   {
    "path": "adapters/html-ppt.md",
-   "bytes": 6853,
-   "sha256": "sha256:8e5ab39d203236a47c66e7d7d724200ed516640519ba976742fb7b2e71249279"
+   "bytes": 7079,
+   "sha256": "sha256:53e55071e4dd177c9e867f5ca776b58529aab0205bdb11fdd6a4341fabfd5d4b"
   },
   {
    "path": "adapters/ppt-master.md",
-   "bytes": 11228,
-   "sha256": "sha256:c85f327577e85d7c4fa0bbd533117b4c445ef12fa95270511c7f6e366de9df06"
+   "bytes": 11843,
+   "sha256": "sha256:0e98303df9563eaff26a4b6d1ff7cc8875cf23617807d9eb5e9f15dcfa420cc5"
   },
   {
    "path": "assets/README.md",
@@ -740,13 +740,13 @@
   },
   {
    "path": "design_specs/02-liquid-glass.md",
-   "bytes": 10271,
-   "sha256": "sha256:e87e2d5dc10846abda29c6ecf742ad5d03e16c3dcc8af69ed276790d2592b8bc"
+   "bytes": 10330,
+   "sha256": "sha256:f4a468e4c7841629278ad4501f038344fa7b41275b50f3a9d7c5a8768f854544"
   },
   {
    "path": "design_specs/03-typography-language.md",
-   "bytes": 12774,
-   "sha256": "sha256:dcee6f3f8fb032f784a1baa4395aae63efbe6cf834407c9eda3bb05fc32c8b05"
+   "bytes": 14214,
+   "sha256": "sha256:8e9f289a9aefa1ab2cd531bdbf5ecfabff83922a7d6cb1c3da55360a55b0d0e0"
   },
   {
    "path": "design_specs/04-image-pipeline.md",
@@ -775,13 +775,13 @@
   },
   {
    "path": "design_specs/09-speaker-notes.md",
-   "bytes": 2321,
-   "sha256": "sha256:ccad0318a380174caf675794fa2204c8f5168c801a002f2538b341306183ebbe"
+   "bytes": 4992,
+   "sha256": "sha256:bc784fbdab00a9d8d257b1557cccf466e1d7127ba87d8b4ce57a6068e3282536"
   },
   {
    "path": "design_specs/10-quality-gates.md",
-   "bytes": 14616,
-   "sha256": "sha256:5ead0d448b74cb9202ef2cbb9b6c2df7d72879b51feb5ea7aa7995a7827d02f1"
+   "bytes": 14996,
+   "sha256": "sha256:6f1cc859c17c9ca8f60d546cda03130bb9ed320952e710208458687c0e9c8ef6"
   },
   {
    "path": "design_specs/11-hero-layouts.md",
@@ -860,13 +860,13 @@
   },
   {
    "path": "examples/motion/deck/build.py",
-   "bytes": 8198,
-   "sha256": "sha256:8c807d99270c7b38201bf6f00f2395a4df941dd3379d6d1ad363057e7f01a8d7"
+   "bytes": 8136,
+   "sha256": "sha256:8d509e2148179fc4843bb91624d3d9aef9765e3da358eeff8d8906622b3ade06"
   },
   {
    "path": "examples/motion/deck/index.html",
-   "bytes": 41844,
-   "sha256": "sha256:ea9b50c0c6875776a71a9e82f04fd45d8ef7bdabcaf5987ac0997331b0db84bd"
+   "bytes": 41845,
+   "sha256": "sha256:19b46c988698a34bd202625fbf8109de393a8eeea5f414166db7f17c8b6e1929"
   },
   {
    "path": "examples/motion/gallery.js",
@@ -920,8 +920,8 @@
   },
   {
    "path": "examples/reference/htmlppt-flagship/build.py",
-   "bytes": 11738,
-   "sha256": "sha256:bf3f81665434ed22dc2c9a3fb13890d7d5a097b3d47a819fff9ec22495b7f5ee"
+   "bytes": 11462,
+   "sha256": "sha256:5e4de5fe9d435b277613c0199fe261381e38b4ec63e3cbd9c2bce640904a5620"
   },
   {
    "path": "examples/reference/htmlppt-flagship/deck.css",
@@ -935,8 +935,8 @@
   },
   {
    "path": "examples/reference/htmlppt-flagship/index.html",
-   "bytes": 11306,
-   "sha256": "sha256:0d048204b1838dc01b26d3d4776759563592a863574e71b7c3a42ccee967492a"
+   "bytes": 11030,
+   "sha256": "sha256:f099664ee928c8da747dff83933098ddccc3e77dcec190ae9871c27e27faff20"
   },
   {
    "path": "examples/reference/htmlppt-flagship/scaffold.html",
@@ -960,8 +960,8 @@
   },
   {
    "path": "examples/reference/htmlppt/build.py",
-   "bytes": 19468,
-   "sha256": "sha256:5a48219fc0a5d3494d184037fd3b66e473bdc4287b32df6af44c722c8b0b2221"
+   "bytes": 19297,
+   "sha256": "sha256:f40d330de213abcf1153f65e287b791c19b073de7bf051ab9b44912077006740"
   },
   {
    "path": "examples/reference/htmlppt/deck.css",
@@ -975,8 +975,8 @@
   },
   {
    "path": "examples/reference/htmlppt/index.html",
-   "bytes": 45285,
-   "sha256": "sha256:d501fa88e2869cd3c863f9136b62ec69974d4b87499678532b3c952fdfe8be50"
+   "bytes": 45177,
+   "sha256": "sha256:c4e141ba68c889cb4f2b6a11db971f653cde160072153c7dda0830cf5b249190"
   },
   {
    "path": "examples/reference/htmlppt/scaffold.html",
@@ -1015,8 +1015,8 @@
   },
   {
    "path": "examples/reference/pptx-default/delivery-check.json",
-   "bytes": 6868,
-   "sha256": "sha256:c1ee3d530fbcf3fcc08bae438f645bef497cc82b675397b84488516592282d16"
+   "bytes": 6869,
+   "sha256": "sha256:36f702f3a06ea8c932b7bd8cde2201a3dc391217b1245875c480e6b16e1023f7"
   },
   {
    "path": "examples/reference/pptx-default/design_spec.md",
@@ -1040,8 +1040,8 @@
   },
   {
    "path": "examples/reference/pptx-default/notes-total.md",
-   "bytes": 1527,
-   "sha256": "sha256:04dbeeea0f1608e94b07e32753f3b4629599f61ef6ebe859da2244d00ab97a09"
+   "bytes": 1359,
+   "sha256": "sha256:0ac0247073acde158450952acf4f748ad38a7e8c537135ef770594cee6721c99"
   },
   {
    "path": "examples/reference/pptx-default/ooxml-readback.json",
@@ -1110,28 +1110,28 @@
   },
   {
    "path": "examples/reference/pptx-flagship/build_svg.py",
-   "bytes": 23400,
-   "sha256": "sha256:36680ee0df16727209dc5a7eda5563bbcdd87d333a95e7bd5eab1a01d4a9b42f"
+   "bytes": 23200,
+   "sha256": "sha256:2e6aa781c41df85350063c62137ca5295386f8f72cfa61c3c5ef3947cd35768d"
   },
   {
    "path": "examples/reference/pptx-flagship/delivery-check.json",
-   "bytes": 13485,
-   "sha256": "sha256:d8c76ed791a860933cb45cb56b591e290f0bc9641ca1cfd124b1f0497f2df51d"
+   "bytes": 13493,
+   "sha256": "sha256:8bbb11720bdd6c95faad76d4c8e27ca41a1d060741507d0979d57dbd2429972a"
   },
   {
    "path": "examples/reference/pptx-flagship/ooxml-readback.json",
-   "bytes": 13593,
-   "sha256": "sha256:c8a1da63493c6099366f206b79faebd749aeae030f3ebdf493be529a0039c9e2"
+   "bytes": 13545,
+   "sha256": "sha256:1548d44965b3277292a40a606fc1b2532818fc8b1c66a45ca473ef3b4b63f51a"
   },
   {
    "path": "examples/reference/pptx-flagship/page-plan.json",
-   "bytes": 8298,
-   "sha256": "sha256:89efd788aec94128b1eab1e8c4435c1975c54b048835e89e04ddb9934bfd2bfc"
+   "bytes": 8214,
+   "sha256": "sha256:2e4d342db2d9fa46477675d9aaaf091352b3bdc79e5d19fa2e39f0b3294d61d4"
   },
   {
    "path": "examples/reference/pptx-flagship/plates.json",
    "bytes": 849,
-   "sha256": "sha256:9ba43afcb035e422b9606e21b6fe024f117677357070f537ef8b2cdf2b2eaa5a"
+   "sha256": "sha256:81e0a51a2080b70d3265fada4259d70c1bc0c2a07c73c0ebca7c497d7642b108"
   },
   {
    "path": "examples/reference/pptx/README.md",
@@ -1210,8 +1210,8 @@
   },
   {
    "path": "examples/templates/consort.json",
-   "bytes": 1686,
-   "sha256": "sha256:f0d000cd08035d8614e74b8899fafcef5bc5d38ab6906ca68e84773e60a3aee2"
+   "bytes": 1680,
+   "sha256": "sha256:cbf7533fc2a054f44155723d2a84fea264c7c3c49589d4772c375831e778353e"
   },
   {
    "path": "examples/templates/criteria-long.json",
@@ -1230,8 +1230,8 @@
   },
   {
    "path": "examples/templates/deck/index.html",
-   "bytes": 275560,
-   "sha256": "sha256:a671df5383533a46c7cc4b26ede3b0cabfd4d8da1fe277f67b2b207a53ee3101"
+   "bytes": 279901,
+   "sha256": "sha256:ec3fd10143c4529588f91083130c9a05b68ad7cbccde01f840000471af5755cc"
   },
   {
    "path": "examples/templates/discussion-paths.json",
@@ -1250,8 +1250,8 @@
   },
   {
    "path": "examples/templates/forest.json",
-   "bytes": 1783,
-   "sha256": "sha256:b45d0b427d2099c25823cbe83d41cb287409c3cb8a1375157fe63ab8ee67049e"
+   "bytes": 1776,
+   "sha256": "sha256:baf7e6d57c8dc6d574eb64b7e7f1f9a6f1abd3e36eb070291b8836db089b6b62"
   },
   {
    "path": "examples/templates/funnel.json",
@@ -1300,8 +1300,8 @@
   },
   {
    "path": "examples/templates/pages.py",
-   "bytes": 4309,
-   "sha256": "sha256:be7ee01259193e1ffb9fc76b496ac5333d24595f76b154d4ccbb6a47a4facd02"
+   "bytes": 8972,
+   "sha256": "sha256:c52d578f360813dae9bbf995af591e0feb1bb125942fde004f4a8b8913f2477c"
   },
   {
    "path": "examples/templates/picos.json",
@@ -1310,18 +1310,18 @@
   },
   {
    "path": "examples/templates/pptx/build.py",
-   "bytes": 3018,
-   "sha256": "sha256:f0236759c26a312f2ab754987f380297f05f84a9862ab7d9c1d4944ff7ec7c97"
+   "bytes": 3482,
+   "sha256": "sha256:010e5f9a1eca79c47b749f0b71679ae63bf9d95f5776d834c8183cbbf3ab42dd"
   },
   {
    "path": "examples/templates/process.json",
-   "bytes": 1621,
-   "sha256": "sha256:4b442461bf48a21fdfc9b80e62ab212f4cdeb23a087641fd6b9c8b72131e3068"
+   "bytes": 1624,
+   "sha256": "sha256:3a2e23b80e1851613898505e5ee377055bae579be0931421dde9734e46a6a5c5"
   },
   {
    "path": "examples/templates/quadrant.json",
    "bytes": 1209,
-   "sha256": "sha256:bbc4518fb47416ed04ce428bcc018fa91a5b3e9a240eac7aa2c099836a9bd8a6"
+   "sha256": "sha256:a55de73f85937d8fee5ddd65c04195029cbf2cc8c9234be66a1b12d965a7fcee"
   },
   {
    "path": "examples/templates/quote-evidence.json",
@@ -1336,7 +1336,7 @@
   {
    "path": "examples/templates/roadmap.json",
    "bytes": 1218,
-   "sha256": "sha256:4967d2fbeb003d9729feb80d29fb0392a125619a8542f5c757c502a8ac6a202f"
+   "sha256": "sha256:0a2ee3cabffb5542f514046ae7bd00b1d6995b72300e7e9753774a0445664180"
   },
   {
    "path": "examples/templates/soa.json",
@@ -1445,13 +1445,13 @@
   },
   {
    "path": "runtime/kz-tokens.css",
-   "bytes": 7758,
-   "sha256": "sha256:55494c543211b8629edde4bccc2e600b92acaf8d2da9930021c4bf25b6ccd69f"
+   "bytes": 7751,
+   "sha256": "sha256:c43a8b357e6b57648754fae835fdb4eaf5ae979145942cd02fd123a3fb88d38f"
   },
   {
    "path": "runtime/kz-tokens.js",
-   "bytes": 21398,
-   "sha256": "sha256:a31a696774ed4084c5d029603a785178f443520f006eff0877d4656eebecbee1"
+   "bytes": 21439,
+   "sha256": "sha256:be17ad32c87b846a9f5397d70c64bfcfac336d32e6326fb318c9188d9dda0fb1"
   },
   {
    "path": "schemas/README.md",
@@ -1480,8 +1480,8 @@
   },
   {
    "path": "tokens/tokens.json",
-   "bytes": 27006,
-   "sha256": "sha256:9bf89f7d4718742d5f8e9fd6b655b1793e3bae1d2ee4f9342ae2a400ad256536"
+   "bytes": 27047,
+   "sha256": "sha256:b1cdd1daaf2f85b998072bd9ebef9a39bc0eca606fa4a11b81f2fbeadfc00c13"
   },
   {
    "path": "tools/bind_header_mark_pptx.py",
@@ -1525,13 +1525,18 @@
   },
   {
    "path": "tools/check_kz_project.py",
-   "bytes": 11030,
-   "sha256": "sha256:d46bfcaa786aa2feeb840dfb905e1b8dc8ea4bf4d9a4929052835dac9d03b8fe"
+   "bytes": 12707,
+   "sha256": "sha256:a514d14ac4f995edf1e9ee75b822fe6aeaeb13959fe76d10166e98c80a16c32d"
+  },
+  {
+   "path": "tools/check_notes.py",
+   "bytes": 7927,
+   "sha256": "sha256:2157c430f6aa66333a344bec382476db52812701e3ebb48dd132ea49209a0fa4"
   },
   {
    "path": "tools/context_pack.py",
-   "bytes": 6737,
-   "sha256": "sha256:1b982ba66805f7e7912a6e19dc6a9c158d669da5076043c735baf61ba9d38e75"
+   "bytes": 7066,
+   "sha256": "sha256:30d7f68cbc9645ba688efdbe293c319536e5094a425e538134377330d4119185"
   },
   {
    "path": "tools/flagship_plate.py",
@@ -1644,14 +1649,19 @@
    "sha256": "sha256:fc0fd0c3a40283f67b5f23632db5e58dd4bd7df2ca0ce453c22170115233b475"
   },
   {
+   "path": "tools/kz_titles.py",
+   "bytes": 1543,
+   "sha256": "sha256:4d65ed33cabc59d816e40a3f567204180353b7981a2749c313cc62b21ae281e7"
+  },
+  {
    "path": "tools/make_safe_mask.py",
    "bytes": 727,
    "sha256": "sha256:9b738b5aec846eb1b170c0bd11269ab011349251a289af58f6278f84905a7222"
   },
   {
    "path": "tools/qc_plan.py",
-   "bytes": 21178,
-   "sha256": "sha256:7bda9c53d03290575134e54b54eaa5b690b47bbaca47242c7a04ff2174744e17"
+   "bytes": 21182,
+   "sha256": "sha256:536a3372bb766b3306fee25e00b8caa3b0dd0730856196aa5cfe20c2f9c4ca31"
   },
   {
    "path": "tools/quiet_plate.py",

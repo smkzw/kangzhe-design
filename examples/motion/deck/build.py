@@ -64,11 +64,11 @@ PAGES = [
 TOTAL = len(PAGES) + 2
 FOOT = ref.FOOT
 slides = [ref.hero('cover', {'title': '演示动画模板组', 'subtitle': '合成示例｜十种数据驱动的演示形式', 'meta': FOOT, 'title_short': '封面'}, 'cover.webp',
-                   '这是一组 HTML-PPT 演示页模板，数据都是合成的。每一页的舞台按翻页键逐 scene 推进，所有数字由数据算出。')]
+                   '这组演示页模板用合成数据，每页舞台随翻页键逐步推进，数字都由数据算出。')]
 for n, (kind, preset, title, items, notes) in enumerate(PAGES, start=2):
     slides.append(ref.body(n, TOTAL, title, preset, ref.demo_page(kind, title, items, preset=preset), notes))
 slides.append(ref.hero('ending', {'title': '换上自己的数据', 'subtitle': '复制一页、替换数据与讲稿，舞台自动重新计算', 'meta': FOOT, 'title_short': '结束'}, 'ending.webp',
-                       '要用哪一页，就复制那一页和它的数据，换成自己的内容；舞台上的数字、说明和计数会按新数据重新算。'))
+                       '复制需要的页和它的数据，换成自己的内容，舞台上的数字和说明会按新数据重新计算。'))
 
 if __name__ == '__main__':
     ref.write_deck(slides, '{"demos": window.KZ_MOTION_DATA}', HERE / 'index.html', '演示动画模板组', base=BASE, data_scripts=['../data.js'])

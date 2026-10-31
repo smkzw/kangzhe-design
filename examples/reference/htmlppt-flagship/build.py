@@ -62,15 +62,15 @@ slides = [
           '<div><span class="kzf-numeral">24</span><span>应收（份）</span></div><div><span class="kzf-numeral">20</span><span>已收（份）</span></div>'
           '<div><span class="kzf-numeral kzf-risk-num">4</span><span>缺口（份）</span></div></div>'
           f'<p class="kzf-cover-meta" data-kzf-in="4">{DATE}　管理层季度汇报</p>',
-          '今天汇报一个研究资料包的完整性核对，数据是合成的。按计划应收 24 份，目前收到 20 份，还缺 4 份。希望会上把补收和确认的安排定下来。', light=205),
+          '今天汇报研究资料包的完整性核对，应收 24 份、已收 20 份，需要会上定下补收和确认的安排。', light=205),
     slide('toc', '目录', '0.62,0.70',
-          '<div class="kzf-toc-head"><p class="kzf-kicker" data-kzf-in="0">汇报章节</p><h2 data-kzf-in="0">三个问题，一个决定</h2></div>'
+          '<div class="kzf-toc-head"><p class="kzf-kicker" data-kzf-in="0">目录</p><h2 data-kzf-in="0">汇报章节</h2></div>'
           '<div class="kzf-toc">'
           + ''.join(f'<div class="kzf-toc-card kzf-glass kzf-lens" data-kzf-lens="ask" data-kzf-in="{i + 1}"><span class="kzf-numeral">{n}</span><b>{t}</b><span>{d}</span></div>'
                     for i, (n, t, d) in enumerate([('01', '研究范围', '对象、时间窗与资料组'), ('02', '资料完整性', '应收与已收、缺口所在'), ('03', '核对计划', '补收、确认与复核')]))
           + '</div>',
-          '分三部分：先说这次核对的范围，再看各组资料收齐了多少，最后是补收、确认和复核的季度安排。', light=215),
-    section('01', '研究范围', '范围定下来，才知道哪些资料要进核对', '先看范围。范围定下来，才知道哪些资料要进核对。'),
+          '汇报分三部分：核对范围、各组资料的收齐情况、补收与复核的季度安排。', light=215),
+    section('01', '研究范围', '范围定下来，才知道哪些资料要进核对', '核对范围决定哪些资料进入核对。'),
     content('研究范围', '研究范围',
             '<div class="kzf-cards">'
             '<article class="kzf-paper kzf-card" data-kzf-in="1" data-kzf-calm><h3>研究对象与时间窗</h3>'
@@ -80,14 +80,14 @@ slides = [
             + lens_kpi('2', '项', '待确认的方案差异')
             + note('方案 V2.1 与 V2.3', '差异在筛选窗口与终点评价时间点<br><b>确认之后，再做组间比较</b>'),
             '核对对象是成人受试者，评价时间窗是第 16 周。资料分 4 组：方案与修订、中心记录、实验室数据、安全性报告。方案有 V2.1 和 V2.3 两版，并排比下来有 2 处要确认：筛选窗口和终点评价时间点。这 2 项会影响后面的组间比较，所以确认之前先不比。'),
-    section('02', '资料完整性', '缺口在哪里，会不会影响组间比较', '接下来看各组资料收齐了多少。'),
-    content('缺口集中在<span class="kzf-risk">中心记录</span>与<span class="kzf-risk">安全性报告</span>', '资料完整性',
+    section('02', '资料完整性', '缺口在哪里，会不会影响组间比较', '24 份资料还缺 4 份，集中在中心记录和安全性报告。'),
+    content('资料缺口分布', '资料缺口分布',
             '<article class="kzf-paper kzf-data" data-kzf-in="1" data-kzf-calm><div class="kzf-data-head"><h3>各资料组应收与已收</h3><span>合成示例数据｜单位：份</span></div>'
             '<div class="kz-chart kzf-chart" data-kz-chart="completeness" role="img" aria-label="应收与已收：方案与修订 2 与 2，中心记录 12 与 9，实验室数据 6 与 6，安全性报告 4 与 3"></div></article>'
             + lens_kpi('4', '份', '资料缺口 · 应收 24 / 已收 20')
             + note('缺失处理', '缺失记录保留为空值<br><b>不按零处理，也不插补</b>'),
             '方案与修订、实验室数据已经收齐，缺口在两组：中心记录缺 3 份，安全性报告缺 1 份。缺的记录在数据里留空，不按零处理，也不插补，这样后面比较时缺口一直看得见。'),
-    section('03', '核对计划', '补收、确认与复核排进季度', '最后是补收、确认和复核的时间表。'),
+    section('03', '核对计划', '补收、确认与复核排进季度', '补收、确认和复核都安排在 2027 年上半年完成。'),
     content('核对计划', '核对计划',
             '<article class="kzf-paper kzf-plan" data-kzf-in="1" data-kzf-calm><div class="kzf-data-head"><h3>季度安排</h3>' + legend([('medical', '医学部'), ('statistics', '数统'), ('pv', 'PV')]) + '</div>'
             '<div data-kz-gantt="gantt"></div><p class="kzf-plan-note">补收与版本差异确认<b>在 2027Q1 内完成</b>，复核、安全性报告核对与审阅意见在 2027Q2 内完成</p></article>',
@@ -99,7 +99,7 @@ slides = [
           '<div class="kzf-ask kzf-glass kzf-lens" data-kzf-lens="ask" data-kzf-in="2"><span class="kzf-numeral">01</span><p>4 份资料由医学部牵头<br><b>2027Q1 内补收</b></p></div>'
           '<div class="kzf-ask kzf-glass kzf-lens" data-kzf-lens="ask" data-kzf-in="3"><span class="kzf-numeral">02</span><p>版本差异<b>确认之后</b><br>再做组间比较</p></div></div>'
           f'<p class="kzf-ending-meta" data-kzf-in="4">{DATE}　管理层季度汇报</p>',
-          '最后请大家确认两件事：一是缺的 4 份资料由医学部牵头，2027 年一季度内补收；二是 2 项版本差异确认之后，再做组间比较。没有不同意见的话，就按这个时间表推进。', light=225),
+          '请确认两件事：缺的 4 份由医学部牵头在 2027 年一季度内补收，2 项版本差异确认后再做组间比较。', light=225),
 ]
 
 src = (HERE / 'scaffold.html').read_text(encoding='utf-8')
