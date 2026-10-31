@@ -14,6 +14,14 @@ slide_NN.html (the .kz-body content for data-preset="kzl") and charts.json (KZCh
 Every run appends to <out>/kz-layout-receipt.json: pages, overflow, page ranges and the verbatim check
 (every source clause, row and cell must appear in the rendered pages; 03 COPY-09). tools/check_kz_project.py reads it.
 Exit 1 when a page overflows or a source string is missing.
+
+Rule pages (03 COPY-09: criteria, permitted and prohibited medication, visit windows, dosing and stopping rules,
+endpoint, SAE and AESI definitions, SoA) also take --source <protocol text>: every clause, row and cell of the data
+must then be found word for word in the protocol (spaces and full/half-width forms ignored), so a summary cannot pass
+as the original. The receipt records the result; tools/check_kz_project.py reports rule pages without it.
+
+    python3 "$KZ_DIR/tools/kz_layout.py" render criteria excl.json --track pptx --title 排除标准 \
+            --out <project>/kz_fragments --source sources/protocol.txt
 """
 from pathlib import Path
 import argparse, hashlib, json, re, sys
@@ -67,7 +75,18 @@ def missing_strings(want, text):
     sq = [squash(w) for w in want]; out = []
     for w, s in zip(want, sq):
         need = sum(1 for t in sq if s in t)
-        if text.count(s) < need: out.append(w)
+        if text.count(s) >= need: continue
+        # a long criterion may be broken at its clause ends across columns (patterns/clinical.py): its clauses must
+        # then all appear, in order
+        parts = [c for c in re.findall(r'[^；。]+[；。]?', s) if c]
+        if need == 1 and len(parts) > 1:
+            at = 0
+            for c in parts:
+                at = text.find(c, at)
+                if at < 0: break
+                at += len(c)
+            if at >= 0: continue
+        out.append(w)
     return list(dict.fromkeys(out))
 
 def ranges(cols):
@@ -75,7 +94,29 @@ def ranges(cols):
     range [a, b) → {'first_visit', 'last_visit'} (1-based inclusive), the same convention."""
     if cols and len(cols) == 2 and all(isinstance(c, int) for c in cols): return {'first_visit': cols[0] + 1, 'last_visit': cols[1]}
     if not cols or not isinstance(cols[0], list): return cols
-    return [[{'key': s['key'], 'first': s['start'], 'last': s['start'] + len(s['items']) - 1} for s in col] for col in cols]
+    def last(s):
+        it = s['items'][-1]
+        return it['n'] if isinstance(it, dict) and 'n' in it else s['start'] + len(s['items']) - 1
+    return [[{'key': s['key'], 'first': s['start'], 'last': last(s)} for s in col] for col in cols]
+
+RULE_PATTERNS = ('criteria', 'soa')  # always original clauses
+
+def normal(s):
+    """Comparison form for source fidelity: NFKC (full/half width), no whitespace."""
+    import unicodedata
+    return re.sub(r'\s+', '', unicodedata.normalize('NFKC', s))
+
+def not_in_source(want, source_text):
+    """Data strings that do not occur word for word in the source (a line of the protocol may hold several, and a
+    long criterion may be split by the data author at its own clause ends, which still matches clause by clause)."""
+    src = normal(source_text); out = []
+    for w in want:
+        n = normal(w)
+        if len(n) < 4 or n in src: continue
+        parts = [c for c in re.findall(r'[^；;。]+[；;。]?', n) if len(c.strip('；;。')) >= 4]
+        if len(parts) > 1 and all(c.rstrip('；;。') in src for c in parts): continue
+        out.append(w)
+    return out
 
 def unescape(s):
     import html
@@ -107,6 +148,11 @@ def render_cmd(a):
                       'first_row': (p['data']['row_start'] + 1) if p['data'].get('row_start') is not None else None, 'rows': len(p['data']['rows']) if isinstance(p['data'].get('rows'), list) else None,
                       'cols': ranges(p['data'].get('cols'))} for i, (p, f) in enumerate(zip(pages, files))],
            'verbatim': {'checked': len(source_strings(data)), 'missing': missing}}
+    if a.source:
+        sp = Path(a.source); want = source_strings(data); bad = not_in_source(want, sp.read_text(encoding='utf-8'))
+        rec['source_check'] = {'source': str(sp.resolve()), 'source_sha256': hashlib.sha256(sp.read_bytes()).hexdigest(),
+                               'checked': len(want), 'not_in_source': bad}
+    rec['rule'] = a.pattern in RULE_PATTERNS or bool(a.source)
     rp = out / 'kz-layout-receipt.json'
     log = json.loads(rp.read_text(encoding='utf-8')) if rp.exists() else {'runs': []}
     # a new run replaces the pages it writes; an older run that loses some of its pages keeps the rest and records
@@ -124,7 +170,9 @@ def render_cmd(a):
     print(f'{a.pattern}: {len(pages)} page(s) → {out}  ' + ' '.join(files))
     for p in over: print(f'  page {p["n"]}: overflow {p["overflow_px"]} px — shorten nothing; split or choose another template', file=sys.stderr)
     for s in missing: print(f'  missing from the rendered pages: {s[:60]}', file=sys.stderr)
-    return 1 if over or missing else 0
+    bad = rec.get('source_check', {}).get('not_in_source', [])
+    for s in bad: print(f'  not word for word in the source (03 COPY-09: rule text is not summarised): {s[:60]}', file=sys.stderr)
+    return 1 if over or missing or bad else 0
 
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
@@ -135,6 +183,7 @@ def main():
     r.add_argument('--track', choices=['pptx', 'html'], required=True); r.add_argument('--title', required=True)
     r.add_argument('--out', required=True); r.add_argument('--first', type=int, default=1); r.add_argument('--total', type=int)
     r.add_argument('--background', default='../images/body_quiet.jpg'); r.add_argument('--logo', default='../images/logo.png')
+    r.add_argument('--source', help='protocol text: rule data must occur in it word for word (03 COPY-09)')
     a = ap.parse_args()
     if a.cmd == 'list':
         cat = K.catalog(); ex = example_files()

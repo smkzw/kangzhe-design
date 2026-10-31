@@ -20,23 +20,43 @@ def _criteria_split(data, fits):
         one = {**data, 'weights': w, 'role': role, 'layout': 'pair', 'start': {k: 1 for k in lists}}
         if fits(one): return [{**one, 'page_of': [1, 1]}]
     role = 'secondary'
-    flow = [(k, n) for k, *_ in _CRIT for n in range(len(lists[k]))]
+    import re
+    def fits_one(k, text):
+        return fits({**data, 'role': role, 'layout': 'flow', 'cols': [[{'key': k, 'start': 1, 'items': [text]}]]})
+    def pieces(k, n, t):
+        """A criterion taller than a column is broken at its own clause ends (；。) and carries on in the next column
+        without a number and without a 'continued' label; the words are not touched (03 COPY-09)."""
+        if fits_one(k, t): return [t]
+        out, cur = [], ''
+        for c in re.findall(r'[^；。]+[；。]?', t):
+            if not cur or fits_one(k, cur + c): cur += c; continue
+            out.append(cur); cur = c
+        out.append(cur)
+        bad = [x for x in out if not fits_one(k, x)]
+        if bad: raise ValueError(f'{k} 第 {n + 1} 条有一句单独一栏也放不下，请检查原文：{bad[0][:30]}')
+        return out
+    units = {k: [] for k in lists}  # each unit is a whole criterion or one piece of it; 'n' keeps the source number
+    for k in lists:
+        for n, t in enumerate(lists[k]):
+            for i, x in enumerate(pieces(k, n, t)): units[k].append({'text': x, 'n': n + 1, **({'marker': 'none'} if i else {})})
+    flow = [(k, i) for k, *_ in _CRIT for i in range(len(units[k]))]
     def segs(run):  # consecutive flow positions → [{'key', 'start', 'items'}] per list
         out = []
-        for k, n in run:
-            if out and out[-1]['key'] == k: out[-1]['items'].append(lists[k][n])
-            else: out.append({'key': k, 'start': n + 1, 'items': [lists[k][n]]})
+        for k, i in run:
+            u = units[k][i]
+            if out and out[-1]['key'] == k: out[-1]['items'].append(u)
+            else: out.append({'key': k, 'start': u['n'], 'items': [u]})
         return out
     def page(cols): return {**data, 'role': role, 'layout': 'flow', 'cols': [segs(c) for c in cols]}
     pages, cols, cur = [], [], []
     for pos in flow:
         if fits(page(cols + [cur + [pos]])): cur.append(pos); continue
-        if not cur: raise ValueError(f'{pos[0]} 第 {pos[1] + 1} 条单独一栏也放不下，请检查原文')
+        if not cur: raise ValueError(f'{pos[0]} 第 {units[pos[0]][pos[1]]["n"]} 条单独一栏也放不下，请检查原文')
         cols.append(cur); cur = [pos]
         if len(cols) == 2: pages.append(cols); cols = []
     cols.append(cur); pages.append(cols)
     # widow balance: a last page under half full shares the last two pages' columns evenly (earlier pages stay full)
-    hs = lambda run: [len(plain(lists[k][n])) + 12 for k, n in run]
+    hs = lambda run: [len(plain(units[k][i]['text'])) + 12 for k, i in run]
     tail = [pos for c in pages[-1] for pos in c]
     if len(pages) > 1 and sum(hs(tail)) < 0.5 * sum(hs([pos for c in pages[-2] for pos in c])):
         run = [pos for c in pages[-2] + pages[-1] for pos in c]; ends = partition(hs(run), [1] * 4); a = 0; cols = []

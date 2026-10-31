@@ -103,8 +103,10 @@ class ProjectCheck(unittest.TestCase):
         tmp = Path(tempfile.mkdtemp())
         try:
             out = tmp / 'frag'
+            src = tmp / 'protocol.txt'  # the synthetic protocol: the example's clauses, one per line
+            src.write_text('\n'.join(source_strings(data('criteria-long.json'))), encoding='utf-8')
             r = subprocess.run([sys.executable, str(R / 'tools/kz_layout.py'), 'render', 'criteria', str(EX / 'criteria-long.json'), '--track', 'pptx',
-                                '--title', '入选与排除标准', '--out', str(out)], capture_output=True, text=True)
+                                '--title', '入选与排除标准', '--out', str(out), '--source', str(src)], capture_output=True, text=True)
             self.assertEqual(r.returncode, 0, r.stderr)
             (tmp / 'svg_output').mkdir()
             for f in sorted(out.glob('page_*.svg')): shutil.copy(f, tmp / 'svg_output' / f.name)
@@ -176,7 +178,8 @@ class ReviewRegressions(unittest.TestCase):
 
     def test_rotation_counts_uses_once_per_streak(self):
         from check_kz_project import receipt_checks
-        mk = lambda pat, ns: {'pattern': pat, 'track': 'pptx', 'pages': [{'n': n, 'file': f'p{n}', 'overflow_px': 0} for n in ns], 'verbatim': {'missing': []}}
+        mk = lambda pat, ns: {'pattern': pat, 'track': 'pptx', 'pages': [{'n': n, 'file': f'p{n}', 'overflow_px': 0} for n in ns], 'verbatim': {'missing': []},
+                              'source_check': {'checked': 1, 'not_in_source': []}}
         found = []; add = lambda *a: found.append(a)
         receipt_checks([mk('criteria', [1, 2, 3]), mk('kv-table', [4])], add); self.assertEqual(found, [])
         receipt_checks([mk('table-band', [1]), mk('table-band', [2]), mk('table-band', [3]), mk('table-band', [4])], add)
@@ -187,6 +190,58 @@ class Charts(unittest.TestCase):
         js = (R / 'runtime/kz-charts.js').read_text(encoding='utf-8')
         for k in ('forest', 'km'): self.assertIn(f"'{k}'", js.split('const KINDS=')[1].split(';')[0])
         self.assertIn("outerBoundsMode:'none'", js)
+
+class LongCriterion(unittest.TestCase):
+    """OMP run1 (2026-10-31): one exclusion criterion of 700+ characters did not fit a column, so the agent replaced
+    the whole list with a summary. A criterion now breaks at its own clause ends and carries on unnumbered."""
+    def test_overlong_criterion_flows_on_verbatim(self):
+        from kz_layout import missing_strings
+        clause = '筛选前 {n} 个月内发生过需要住院治疗的第 {n} 类合并疾病（研究者判断已稳定且不影响疗效评价者除外）；'
+        long = ''.join(clause.format(n=i) for i in range(1, 19)).rstrip('；') + '。'
+        d = {'inclusion': [f'入选条款 {i}：年龄 18–75 岁，签署知情同意书。' for i in range(1, 6)],
+             'exclusion': [long] + [f'排除条款 {i}：筛选时 eGFR <45 mL/min/1.73 m²。' for i in range(2, 9)]}
+        pages = K.render('criteria', d, 'pptx')
+        self.assertGreater(len(pages), 1)
+        self.assertTrue(all(p['overflow'] <= 0.5 for p in pages))
+        units = [it for p in pages for col in p['data']['cols'] for seg in col for it in seg['items'] if seg['key'] == 'exclusion']
+        first = [u for u in units if u['n'] == 1]
+        self.assertGreater(len(first), 1)                       # criterion 1 was broken
+        self.assertNotIn('marker', first[0]); self.assertTrue(all(u.get('marker') == 'none' for u in first[1:]))
+        self.assertEqual(''.join(u['text'] for u in first), long)  # not a character changed
+        self.assertEqual([u['n'] for u in units if 'marker' not in u], list(range(1, 9)))  # numbering intact
+        import html; text = html.unescape(''.join(page_text(p['svg'], 'pptx') for p in pages))
+        self.assertEqual(missing_strings(source_strings(d), text), [])
+        self.assertNotIn('续', text)
+
+class SourceFidelity(unittest.TestCase):
+    """OMP run1: the agent fed its own summary of the exclusion criteria into a template; data → page was intact,
+    protocol → data was not. --source checks the second link."""
+    PROTOCOL = ('5.2 排除标准\n1. 筛选前 3 个月内使用过 GLP-1 受体激动剂、DPP-4 抑制剂或胰岛素（急性病住院期间短期使用 ≤14 天除外）。\n'
+                '2. 筛选时 eGFR <45 mL/min/1.73 m²（CKD-EPI 公式）；或 ALT、AST >3×ULN。\n')
+    def test_verbatim_passes_and_summary_fails(self):
+        from kz_layout import not_in_source
+        ok = ['筛选前 3 个月内使用过 GLP-1 受体激动剂、DPP-4 抑制剂或胰岛素（急性病住院期间短期使用 ≤14 天除外）。',
+              '筛选时 eGFR <45 mL/min/1.73 m²（CKD-EPI 公式）；或 ALT、AST >3×ULN。',
+              '筛选时 eGFR <45 mL/min/1.73 m²（CKD-EPI 公式）；']  # one clause of a longer criterion
+        self.assertEqual(not_in_source(ok, self.PROTOCOL), [])
+        self.assertEqual(not_in_source(['筛选时ｅＧＦＲ ＜45 mL/min/1.73 m²（CKD-EPI 公式）；'], self.PROTOCOL), [])  # width and spaces ignored
+        summary = ['3 个月内用过 GLP-1、DPP-4 或胰岛素', 'eGFR <45 或肝酶 >3×ULN']
+        self.assertEqual(not_in_source(summary, self.PROTOCOL), summary)
+
+    def test_project_check_flags_unchecked_and_overview_rule_pages(self):
+        from check_kz_project import receipt_checks
+        found = []
+        add = lambda lv, code, where, msg: found.append((lv, code))
+        page = lambda n: {'n': n, 'file': f'page_{n:02d}.svg', 'overflow_px': 0}
+        runs = [{'pattern': 'criteria', 'title': '入选标准', 'track': 'pptx', 'pages': [page(1)], 'verbatim': {'missing': []}},
+                {'pattern': 'table-band', 'title': '排除标准要点', 'track': 'pptx', 'pages': [page(2)], 'verbatim': {'missing': []}},
+                {'pattern': 'table-band', 'title': '禁用药物', 'track': 'pptx', 'pages': [page(3)], 'verbatim': {'missing': []},
+                 'source_check': {'checked': 3, 'not_in_source': ['自写摘要']}}]
+        receipt_checks(runs, add)
+        self.assertIn(('error', 'RULE-SOURCE'), found)       # criteria without --source, and the failed check
+        self.assertIn(('warn', 'RULE-UNCHECKED'), found)
+        self.assertIn(('warn', 'RULE-OVERVIEW'), found)
+        self.assertEqual(sum(1 for f in found if f == ('error', 'RULE-SOURCE')), 2)
 
 class PowerPointReadback(unittest.TestCase):
     """Found in Mac PowerPoint 16.114 (PDF export of the template deck), invisible in the SVG preview and LibreOffice."""

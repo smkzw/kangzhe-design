@@ -24,6 +24,12 @@ class Notes(unittest.TestCase):
         c = codes([('入排', bad, None)], ['content'])
         for want in (('error', 'NOTES-FILLER'), ('warn', 'NOTES-TRANSL'), ('warn', 'NOTES-LIGHT')): self.assertIn(want, c)
 
+    def test_section_notes_that_only_announce_fail(self):
+        # OMP run2 section pages: “先看疾病负担……”“接着看研究怎么设计……”“最后看入排……”
+        for t in ('先看疾病负担和 MG-K10 的设计依据。', '接着看研究怎么设计、人群怎么选、药怎么给。', '最后看入排、访视和安全报告。'):
+            self.assertIn(('error', 'NOTES-FILLER'), codes([('章节', t, None)], ['section']), t)
+        self.assertEqual(codes([('章节', '排除标准有 41 条，筛选时最常卡住的是洗脱期和哮喘控制。', None)], ['section']), [])
+
     def test_jargon_and_long_sentences_warn(self):
         c = codes([('计划', '这一环节要形成闭环并与各中心对齐颗粒度。', None)], ['content'])
         self.assertIn(('warn', 'NOTES-JARGON'), c)

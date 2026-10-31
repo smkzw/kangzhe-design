@@ -226,7 +226,7 @@ class Items(Node):
             for i in col:
                 it = self.items[i]; th = ts[i].measure(cw - self.mw)
                 mk = it.get('marker') if isinstance(it, dict) else None
-                out.append({'k': 'marker', 'kind': mk or self.marker, 'n': self.start + i, 'x': cx, 'y': cy, 'size': s, 'lead': lead, 'tone': (it.get('tone') if isinstance(it, dict) else None) or self.tone})
+                out.append({'k': 'marker', 'kind': mk or self.marker, 'n': (it.get('n') if isinstance(it, dict) else None) or self.start + i, 'x': cx, 'y': cy, 'size': s, 'lead': lead, 'tone': (it.get('tone') if isinstance(it, dict) else None) or self.tone})
                 ts[i].place(cx + self.mw, cy, cw - self.mw, th, out)
                 cy += th + gap
     def html(self):
@@ -236,7 +236,8 @@ class Items(Node):
         for i, it in enumerate(self.items):
             t = it if isinstance(it, str) else it['text']; mk = (it.get('marker') if isinstance(it, dict) else None) or self.marker
             tone = (it.get('tone') if isinstance(it, dict) else None) or self.tone
-            sym = (f'<span class="kzl-mk is-number">{self.start + i}</span>' if mk == 'number' else '<span class="kzl-mk is-dot"></span>' if mk == 'dot'
+            num = (it.get('n') if isinstance(it, dict) else None) or self.start + i
+            sym = (f'<span class="kzl-mk is-number">{num}</span>' if mk == 'number' else '<span class="kzl-mk is-none"></span>' if mk == 'none' else '<span class="kzl-mk is-dot"></span>' if mk == 'dot'
                    else f'<span class="kzl-mk is-icon">{icon_svg("check" if mk == "check" else "cross" if mk == "cross" else mk)}</span>')
             lis.append(f'<li class="is-{tone}">{sym}<span class="kzl-li">{runs_html(t)}</span></li>')
         cls = f'kzl-items kzl-{CSS_ROLE[self.role]}'

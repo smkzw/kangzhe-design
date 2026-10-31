@@ -160,7 +160,9 @@ def render(prims, prefix='u'):
             continue
         if k == 'text': part = (text_svg(p), text_box(p))
         elif k == 'icon': part = (icon_svg(p['name'], p['x'], p['y'], p['size'], p['tone'], p['disc']), [p['x'], p['y'], p['size'], p['size']])
-        elif k == 'marker': part = marker_svg(p)
+        elif k == 'marker':
+            if p['kind'] == 'none': continue  # continuation of a criterion broken across columns: no number
+            part = marker_svg(p)
         elif k == 'badge': part = badge_svg(p)
         else: raise ValueError(k)
         if cur is not None: cur['parts'].append(part)

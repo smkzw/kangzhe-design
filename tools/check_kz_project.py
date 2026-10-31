@@ -11,6 +11,8 @@ Reads <project>/svg_output/*.svg, the template receipts (tools/kz_layout.py writ
   FONT-FLOOR      text below tokens.type_px.reference (03 TYPE-01)
   VERBATIM        a template page that dropped source text, or overflowed (03 COPY-09)
   HIGHLIGHT       sentinel-coloured runs left in the PPTX (run tools/bind_highlight_pptx.py)
+  RULE-SOURCE     a rule page whose data is not word for word in the protocol (kz_layout.py render --source), or a
+                  criteria / SoA page rendered without --source (03 COPY-09)
   TITLE           a page title with a colon, dash or sentence punctuation (03 COPY-01: titles name the chapter or topic)
   NOTES-HERO / NOTES-FILLER   speaker-note errors from tools/check_notes.py (09 NOTES-04/05), read from
                   <project>/notes/total.md and, with --pptx, the exported speaker notes
@@ -20,6 +22,8 @@ Warnings:
                   or a deck of six or more template pages using fewer than three templates (13 BODY-02)
   EMPHASIS        a text-heavy page with no bold, dark-red, underline or highlight run (03 COPY-04/06)
   PLAIN-TEXT      a text-heavy page with no icon, chart, table or drawn diagram (13 BODY-02)
+  RULE-UNCHECKED  a page whose title names rule content (标准、用药、访视窗、给药、停药、补救、SAE、AESI …) rendered without --source
+  RULE-OVERVIEW   a rule page labelled 概览 / 要点 / 摘要: an overview may be added, never used instead of the original pages
   TITLE-CLAIM / TITLE-LONG    a title that reads as a conclusion or question, or runs past 14 characters
   NOTES-*         speaker-note warnings (jargon, translationese, long sentences, chatty fillers, missing notes)
 """
@@ -115,6 +119,16 @@ def receipt_checks(runs, add):
             for s in r['verbatim']['missing']: add('error', 'VERBATIM', f'{track}:{r["pattern"]}', f'source text not on any page: {s[:50]}')
             if r.get('overwritten_pages'):
                 add('error', 'VERBATIM', f'{track}:{r["pattern"]}', f'pages {r["overwritten_pages"]} of this list were overwritten by a later render; render the list again')
+            sc = r.get('source_check')
+            where = f'{track}:{r["pattern"]}:p{r["pages"][0]["n"] if r["pages"] else "?"}'
+            if sc and sc['not_in_source']:
+                add('error', 'RULE-SOURCE', where, f'{len(sc["not_in_source"])} of {sc["checked"]} strings are not word for word in the protocol: {sc["not_in_source"][0][:40]}')
+            elif not sc and r['pattern'] in ('criteria', 'soa'):
+                add('error', 'RULE-SOURCE', where, 'criteria / SoA rendered without --source <protocol text>; rule text must be checked against the original')
+            elif not sc and RULE_WORDS.search(r.get('title', '')):
+                add('warn', 'RULE-UNCHECKED', where, f'“{r["title"]}” reads as rule content; render it with --source <protocol text>')
+            if RULE_WORDS.search(r.get('title', '')) and OVERVIEW.search(r.get('title', '') + json.dumps(r.get('lead', ''), ensure_ascii=False)):
+                add('warn', 'RULE-OVERVIEW', where, f'“{r["title"]}” is an overview of rule content: keep the original pages as well (03 COPY-09)')
         seq.sort(); streaks = []
         for n, pat, k in seq:  # maximal runs of consecutive pages with the same template
             if streaks and streaks[-1][-1][1] == pat and streaks[-1][-1][0] == n - 1: streaks[-1].append((n, pat, k))
@@ -125,6 +139,8 @@ def receipt_checks(runs, add):
         if len(seq) >= 6 and len({p for _, p, _ in seq}) < 3: add('warn', 'ROTATION', f'{track}:deck', f'{len(seq)} template pages use only {sorted({p for _, p, _ in seq})}')
 
 HERO_KINDS = ('cover', 'toc', 'section', 'ending')
+RULE_WORDS = re.compile(r'入选|排除|入排|禁用|允许|合并用药|伴随用药|背景治疗|访视窗|访视流程|评估时间表|给药|停药|剂量调整|补救|SAE|AESI|妊娠|揭盲')
+OVERVIEW = re.compile(r'概览|要点|摘要|概要')
 
 def plate_checks(plan, project, add):
     """Every background of a generated deck needs a passing quiet_plate receipt of the right page kind, and the image

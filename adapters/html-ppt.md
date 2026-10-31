@@ -46,7 +46,7 @@ const bridge = KZHTMLPPT.bind(document.querySelector('.deck'), slide => {
 - 演讲者窗口预览与 fluid 观众窗比例不同；需要同画时向预览传递观众比例，否则列为限制。
 
 ## 模板页（13 BODY-02）
-正文页可用模板库：`python3 "$KZ_DIR/tools/kz_layout.py" render <模板> data.json --track html --title … --out frag/` 写出 `slide_NN.html`（`.kz-body` 内部的标记）与图表数据文件 frag/charts.json（KZCharts 数据，键是图表 id）。
+正文页可用模板库：`python3 "$KZ_DIR/tools/kz_layout.py" render <模板> data.json --track html --title … --out frag/` 写出 `slide_NN.html`（`.kz-body` 内部的标记）与图表数据文件 frag/charts.json（KZCharts 数据，键是图表 id）。入选/排除标准、用药规则、访视窗、SAE/AESI 定义、SoA 等条款页加 `--source <方案文本>`，逐字核对原文（03 COPY-09）。
 
 - 页面骨架照参考实现：`<div class="kz-body" data-preset="kzl">` 里放片段；加载 `runtime/kz-layouts.css`（在 kz-glass.css 之后），图表用 `KZCharts.mount(el, charts[el.dataset.kzChart])` 挂到每个 `[data-kz-chart]`，并纳入翻页生命周期（参考 `examples/reference/htmlppt/deck.js`）。
 - 森林图与 KM 走 ECharts（`kind: forest / km`），示意图是内联 SVG，按 PPTX 求解的高度以 1:1 比例显示，文字字号与 PPTX 相同。
