@@ -1,3 +1,11 @@
+# 7.2.1 · 2026-10-31
+
+## KZ7-1031-B11 · PowerPoint 实机回读修复（原生表格行高、图表标签）
+7.2.0 的 31 页模板样张在 Mac PowerPoint 16.114 打开、编辑、另存、导出 PDF 后逐页查看，发现两处只在 PowerPoint 出现的缺陷（SVG 预览、LibreOffice 与 ppt-master 检查器都看不出）：
+- 原生表格：单元格没写边距，PowerPoint 用默认上下 0.05in，再按微软雅黑自身度量排中文单倍行（16px 约 1.68em），最小行高超过求解器分配的行高，13 行累计多出约 40px，SoA 末行压在脚注上。现在每个单元格写成一段并带 80% 行距、显式边距（`tokens.layout.templates.pptx_table`），复测行距 34.5px 与设计一致。
+- 原生图表：负值柱图的类别标签默认画在零线上、压进柱子，改为 `axes.category.label_position: low`；环图的数值注释与 PowerPoint 的图例相撞，改为把数值并入图例（“恶心 42%”），不再另写注释。
+- 回归测试 `tests/test_layouts.py` PowerPointReadback 2 项，全部 182 项通过。
+
 # 7.2.0 · 2026-10-31
 
 ## KZ7-1031-B10 · 正文模板库（两轨共用 27 套）、原文保真、四种强调、白底合成、开工第一站

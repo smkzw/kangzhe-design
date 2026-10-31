@@ -1,12 +1,12 @@
 {
- "version": "7.2.0",
- "revision": "KZ7-1031-B10",
+ "version": "7.2.1",
+ "revision": "KZ7-1031-B11",
  "scope": "installable skill content; maintenance material (review/, agent/, docs/history/, tests/, examples/validation/) and sample .pptx decks excluded",
  "files": [
   {
    "path": "CHANGELOG.md",
-   "bytes": 82623,
-   "sha256": "sha256:1ace0c386d5e3702493a551d797d6c84d7b5c024844a54cdcb98497a31689c24"
+   "bytes": 83707,
+   "sha256": "sha256:ae979338484e17a2642ef72077b79144fae847e96b43a64634815367c4086962"
   },
   {
    "path": "INSTALL.md",
@@ -16,27 +16,27 @@
   {
    "path": "README.md",
    "bytes": 4986,
-   "sha256": "sha256:09286f9a22913c038183cb080dfece1a26acd448c68ce75e9506009f5d9d2010"
+   "sha256": "sha256:b092b6417f95474100150b4138c3bb08752428b4807349e7309b8000b8100884"
   },
   {
    "path": "REVISION",
    "bytes": 13,
-   "sha256": "sha256:5cfb73439f5c17e2191e36806b30db8c94679f8e4695d5b7ea3c9f800af6a211"
+   "sha256": "sha256:d2383907f09f4f7db54c13045dea6938cda8eb82151b5ff9094db61a87e82d83"
   },
   {
    "path": "SKILL.md",
    "bytes": 9569,
-   "sha256": "sha256:4ffaaba6aaf8825022e2d062a9e4c856b456cc419da6ef7292b8803aba78dc84"
+   "sha256": "sha256:d5abe4afd235ab789f70455a8fa8c9763553a21828716e2f0602cd63cf03bcb4"
   },
   {
    "path": "STATUS.md",
-   "bytes": 10194,
-   "sha256": "sha256:ad2108a7a921637c998d234a8d6410def7b98229cae07ef6e710e618cc0e1bea"
+   "bytes": 10912,
+   "sha256": "sha256:b7b950b59faa843c6c6083e603be49276cdb49fd64be03fd04894495d314fd07"
   },
   {
    "path": "VERSION",
    "bytes": 6,
-   "sha256": "sha256:ad3c32dcfae0ee254ef41e998442869bcf8342caf425113a377b642a80d38398"
+   "sha256": "sha256:d4e1b76ed0d76666ba32fcfaf876e4fb8040a8516f3ef2d9affd040aa10cae9a"
   },
   {
    "path": "adapters/README.md",
@@ -1450,8 +1450,8 @@
   },
   {
    "path": "runtime/kz-tokens.js",
-   "bytes": 20976,
-   "sha256": "sha256:3d0491dc00bd6a6dd03513da694585234db330cb20b642188a1a87e371041db8"
+   "bytes": 21398,
+   "sha256": "sha256:a31a696774ed4084c5d029603a785178f443520f006eff0877d4656eebecbee1"
   },
   {
    "path": "schemas/README.md",
@@ -1480,8 +1480,8 @@
   },
   {
    "path": "tokens/tokens.json",
-   "bytes": 26551,
-   "sha256": "sha256:a67254442faaa8f40e7195ac619ceccd52df8e9d0fedd1f0b2386d62b77d1840"
+   "bytes": 27006,
+   "sha256": "sha256:9bf89f7d4718742d5f8e9fd6b655b1793e3bae1d2ee4f9342ae2a400ad256536"
   },
   {
    "path": "tools/bind_header_mark_pptx.py",
@@ -1590,8 +1590,8 @@
   },
   {
    "path": "tools/kz_layouts/figures.py",
-   "bytes": 25683,
-   "sha256": "sha256:4568de3ee2685761c6b8a917fa00ca3e06631e6f95440bf17882cc30d49732f9"
+   "bytes": 26308,
+   "sha256": "sha256:f0075680629a71be9cf3900107e5e50872fb8c1270f2e8385711fe538d115262"
   },
   {
    "path": "tools/kz_layouts/page.py",

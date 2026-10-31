@@ -188,5 +188,35 @@ class Charts(unittest.TestCase):
         for k in ('forest', 'km'): self.assertIn(f"'{k}'", js.split('const KINDS=')[1].split(';')[0])
         self.assertIn("outerBoundsMode:'none'", js)
 
+class PowerPointReadback(unittest.TestCase):
+    """Found in Mac PowerPoint 16.114 (PDF export of the template deck), invisible in the SVG preview and LibreOffice."""
+    @staticmethod
+    def payload(svg):
+        import html
+        return json.loads(html.unescape(re.search(r'<metadata type="application/json">(.*?)</metadata>', svg, re.S).group(1)))
+
+    def test_table_cells_carry_padding_and_line_spacing(self):
+        # PowerPoint's single CJK line (~1.68 em) plus default margins grew every SoA row and pushed the last row onto the footnotes
+        from kz_layouts.figures import table_svg, PT
+        p = self.payload(table_svg({'columns': ['项目', 'V1'], 'rows': [['知情同意', {'mark': 'dot'}], ['**HbA1c**', '!!≥7.0%!!']]}, (0, 0, 600, 300), 't'))
+        self.assertEqual(p['style']['padding'], {'left': PT['pad_x'], 'right': PT['pad_x'], 'top': PT['pad_y'], 'bottom': PT['pad_y']})
+        for row in [p['columns']] + p['rows']:
+            for c in row:
+                if c.get('merge_continuation'): continue
+                self.assertNotIn('text', c)
+                self.assertTrue(all(q['line_spacing_percent'] == PT['line_spacing_percent'] for q in c['paragraphs']))
+        # the drawn row holds PowerPoint's line at that spacing plus both margins
+        self.assertLessEqual(16 * 1.68 * PT['line_spacing_percent'] / 100 + 2 * PT['pad_y'], 16 * 1.35 + 12)
+
+    def test_category_labels_sit_low_and_doughnut_values_live_in_the_legend(self):
+        from kz_layouts.figures import chart_svg
+        col = self.payload(chart_svg({'kind': 'column', 'categories': ['0.5 mg', '1.0 mg'], 'series': [{'name': 'Δ', 'values': [-1.1, -1.4]}]}, (0, 0, 400, 260), 'c'))
+        self.assertEqual(col['axes']['category'], {'label_position': 'low'})  # not on the zero line, inside negative bars
+        svg = chart_svg({'kind': 'doughnut', 'categories': ['恶心', '腹泻'], 'unit': '%', 'series': [{'name': 'AE', 'values': [42, 58]}]}, (0, 0, 400, 260), 'd')
+        d = self.payload(svg)
+        self.assertNotIn('note', d)  # a note under the ring collided with PowerPoint's legend
+        self.assertEqual(d['categories'], ['恶心 42%', '腹泻 58%'])
+        self.assertIn('恶心 42%', svg.split('</metadata>')[1])
+
 if __name__ == '__main__':
     unittest.main()

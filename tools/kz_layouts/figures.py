@@ -88,16 +88,22 @@ def _line_svg(x, y, lines, size, lead, color, bold=False, anchor='start'):
         out += f'<tspan x="{f(x)}" dy="{f(size * lead)}">' + ''.join(run_svg(t, st, color, bold) for t, st in ln) + '</tspan>'
     return out + '</text>'
 
+PT = TOK['layout']['templates']['pptx_table']
+
 def _payload_cell(c, bold=False, align='l', color=None, fill=None, span=1, header=False):
+    """Every cell is one paragraph with an explicit line spacing (tokens.layout.templates.pptx_table): PowerPoint's
+    single CJK line is taller than the solver's, and the row would grow past the drawn one."""
+    ls = PT['line_spacing_percent']
     if c.get('mark'):
-        out = {'text': MARK[c['mark']], 'color': BRAND_HEX if c['mark'] == 'dot' else C['risk']}
+        out = {'paragraphs': [{'text': MARK[c['mark']], 'line_spacing_percent': ls}], 'color': BRAND_HEX if c['mark'] == 'dot' else C['risk']}
     else:
         text = c.get('text', '')
         runs = [{'text': t, **({'bold': True} if (bold or 'bold' in st or 'risk' in st) else {}), **({'color': C['risk']} if 'risk' in st else {}),
                  **({'underline': True} if 'underline' in st else {})} for t, st in T.parse(text) if t]
-        out = {'paragraphs': [{'runs': runs}]} if len(runs) > 1 or any('underline' in r or ('color' in r) for r in runs) else {'text': T.plain(text)}
-        if bold and 'text' in out: out['bold'] = True
-        if color and 'text' in out: out['color'] = color
+        rich = len(runs) > 1 or any('underline' in r or ('color' in r) for r in runs)
+        out = {'paragraphs': [{'runs': runs, 'line_spacing_percent': ls} if rich else {'text': T.plain(text), 'line_spacing_percent': ls}]}
+        if bold and not rich: out['bold'] = True
+        if color and not rich: out['color'] = color
     out['align'] = {'l': 'l', 'c': 'ctr', 'r': 'r'}[align]
     if fill: out['fill'] = fill
     if span > 1: out['col_span'] = span
@@ -155,7 +161,8 @@ def table_svg(spec, box, gid):
                **({'columns': hrows[0]} if hrows else {}), 'rows': hrows[1:] + brows,
                'column_widths': [round(v, 2) for v in t['cw']], 'row_heights': [round(v, 2) for v in t['hh'] + t['rh']],
                'style': {'font_family': FONT, 'font_size': size, **({'header_fill': HEAD_FILL, 'header_text': INK} if hrows else {}), 'body_text': BODY, 'band_row': False,
-                         'valign': 'middle', 'border_color': RULE, 'border_width': 1}}
+                         'valign': 'middle', 'border_color': RULE, 'border_width': 1,
+                         'padding': {'left': PT['pad_x'], 'right': PT['pad_x'], 'top': PT['pad_y'], 'bottom': PT['pad_y']}}}
     payload['defaults'] = {'cell': {'borders': {'left': NONE, 'right': NONE, 'top': SOLID, 'bottom': SOLID}}}  # horizontal rules only, as drawn
     if len(hrows) > 1: payload['header_rows'] = len(hrows)
     return (f'<g id="{gid}" data-pptx-bounds="{f(x)} {f(y)} {f(t["w"])} {f(total)}" data-pptx-replace-with="table">'
@@ -290,7 +297,8 @@ def chart_svg(spec, box, gid):
     ntype = 'combo' if line_series and bar_series else ('line' if kind == 'line' else 'bar' if horizontal else 'column')
     payload = {'name': gid, 'x': round(x, 2), 'y': round(y, 2), 'width': round(w, 2), 'height': round(h, 2),
                'plot_area': {'x': round(px, 2), 'y': round(py, 2), 'width': round(pw, 2), 'height': round(ph, 2)}, 'type': ntype,
-               'categories': cats, 'axes': {'value': {'minimum': mn, 'maximum': mx, 'major_unit': step}},
+               # category labels at the low end, as drawn: with negative values PowerPoint's default (next_to) puts them on the zero line, inside the bars
+               'categories': cats, 'axes': {'category': {'label_position': 'low'}, 'value': {'minimum': mn, 'maximum': mx, 'major_unit': step}},
                'style': {'colors': cols, 'axis_color': CH['axis'], 'grid_color': CH['grid'], 'text_color': CH['label'], 'font_family': FONT}}
     if ntype == 'combo':
         payload['series'] = [{'name': s['name'], 'values': s['values'], 'type': 'line' if i in line_series else 'column'} for i, s in enumerate(series)]
@@ -308,10 +316,11 @@ def doughnut_svg(spec, box, gid):
     s = spec['series'][0]; vals = s['values']; cats = spec['categories']; tot = sum(v for v in vals if v)
     cols = spec.get('colors') or palette([{} for _ in vals])
     dec = spec.get('decimals'); unit = spec.get('unit', '')
-    note = '，'.join(f'{c} {fmt(v, dec)}{unit if unit == "%" else ""}' for c, v in zip(cats, vals))
+    # the legend carries the values ("恶心 42%"): pie-family native charts take no data labels, and a companion note
+    # under the ring collides with PowerPoint's legend, which it centres on the whole chart frame
+    cats = [f'{c} {fmt(v, dec)}{unit if unit == "%" else ""}' for c, v in zip(cats, vals)]
     leg_w = max(T.width(c, size) for c in cats) * 1.1 + 30
-    note_lines = T.wrap(note, w - 8, size, keep_space=True); note_h = len(note_lines) * size * 1.4 + 6
-    ring_w, ring_h = w - leg_w - 16, h - note_h
+    ring_w, ring_h = w - leg_w - 16, h
     r = min(ring_w, ring_h) / 2 - 4; cx, cy = x + ring_w / 2, y + ring_h / 2; ri = r * 0.62
     out = [f'<g id="{gid}-chartArea">']; a0 = -math.pi / 2
     for v, col in zip(vals, cols):
@@ -326,13 +335,10 @@ def doughnut_svg(spec, box, gid):
     for i, (c, col) in enumerate(zip(cats, cols)):
         yy = ly + i * lh
         out.append(f'<rect x="{f(lx)}" y="{f(yy + lh / 2 - 6)}" width="12" height="12" rx="3" fill="{col}"/><text x="{f(lx + 20)}" y="{f(yy + lh / 2 + size * 0.35)}">{escape(c)}</text>')
-    out.append('</g>')
-    from .svg import baseline
-    out.append(_line_svg(x + w / 2, baseline(y + h - note_h + 6, size, 1.4), note_lines, size, 1.4, CH['label'], anchor='middle'))
-    out.append('</g>')
+    out.append('</g></g>')
     payload = {'name': gid, 'x': round(x, 2), 'y': round(y, 2), 'width': round(w, 2), 'height': round(h, 2), 'type': 'doughnut', 'hole_size': 62,
                'plot_area': {'x': round(cx - r, 2), 'y': round(cy - r, 2), 'width': round(2 * r, 2), 'height': round(2 * r, 2)},
-               'show_legend': True, 'legend_position': 'r', 'note': note,
+               'show_legend': True, 'legend_position': 'r',
                'categories': cats, 'series': [{'name': s['name'], 'values': vals, 'point_colors': cols}], 'style': {'colors': cols, 'font_family': FONT}}
     return (f'<g id="{gid}" data-pptx-bounds="{f(x)} {f(y)} {f(w)} {f(h)}" data-pptx-replace-with="chart">'
             f'<metadata type="application/json">{escape(json.dumps(payload, ensure_ascii=False), quote=False)}</metadata>' + ''.join(out) + '</g>')
