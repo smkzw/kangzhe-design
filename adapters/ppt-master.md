@@ -43,9 +43,32 @@
 ## Default 路由里的康哲输入
 - Stage 1：画布 `ppt169`（康哲 PPTX 为 1280×720，初始化时可直接 `--format ppt169`），一般选自由设计；康哲不是 ppt-master 的模板工作区。
 - Stage 2：三个方向的配色、字体、正文字号由 tokens 固定（`typography.fixed: true`，正文 20 px），方向之间只在叙事与构图上不同，并在方向说明里写明这一点。**确认页会按正文基准重算标题、副标题、注释字号**（候选里的 `typography.sizes` 只做兼容读入，不显示），所以交接说明里请用户在页面上把它们改成康哲值（标题 32、副标题 24、注释 16 px），确认后核对 `result.json` 的 `typography.sizes`；不一致时由用户在对话里明确更正，Design Spec §I 记下更正来源。注释、图注、表体、图表轴与图例、卡内旁注按 03 TYPE-01 的 secondary 角色写 12pt（SVG 16px），任何页都可用，不必把整页切成 compact；页脚仍按 chrome 的 13.5pt。
+- Stage 2 的 `image_usage` 与 `image_ai_path` 由开工第一站的生图能力答案预填（04 IMG-07）：生图 → `["ai","provided"]` 加检测到的路径，三个方向的 `image_strategy` 写同一段康哲风格锚；缺省背景套 → `["provided"]`。确认后 `result.json` 与答案不一致时停下来问用户，不按确认页的默认值走。
 - §VIII 与 `spec_lock.md images`：页面引用的每个位图都要登记，包括官方 Logo（复制 `assets/logo_bot.png` 到项目 `images/`，`source=user`、`crop=no-crop`）；漏登记的是计划外图片。
 - Executor：ppt-master 要求页面 SVG 由主 agent 手写，脚本不直接写 `svg_output/`。`hero_layout.svg_fragment`、`brand_fragments.facets` 打印的是片段与参考页，由 agent 拼进页面。
 - 本机若对 `127.0.0.1` 的反向 DNS 很慢（`socket.getfqdn` 秒级），确认页与实时预览的 `--daemon` 会在健康检查超时后被杀；改用不带 `--daemon` 的前台进程放到后台运行，再用浏览器打开。
+
+## 模板页（13 BODY-02）
+常规路线的正文页用模板库生成，Executor 审过再放进 `svg_output/`：
+
+```bash
+python3 "$KZ_DIR/tools/kz_layout.py" list                                   # 选模板；example <模板> 给数据合同
+python3 "$KZ_DIR/tools/kz_layout.py" render criteria p05.json --track pptx --title 入选与排除标准 \
+        --out <project>/kz_fragments --first 5 --total 18                   # 一份数据可拆成多页，页码接续
+cp "$KZ_DIR"/assets/icons/kangzhe/*.svg <project>/icons/kangzhe/            # <use data-icon="kangzhe/…"> 在这里解析
+# Executor 逐页审 kz_fragments/page_NN.svg，放进 svg_output/（可再改）；背景与 Logo 的相对路径默认 ../images/body_quiet.jpg、../images/logo.png
+python3 "$SKILL_DIR/scripts/stamp_native_fallbacks.py" <project>/svg_output --write
+python3 "$KZ_DIR/tools/check_kz_project.py" <project> --plan page-plan.json  # 10 G-KZ，导出前
+python3 "$SKILL_DIR/scripts/svg_quality_checker.py" <project> --canonical-authoring --stage final --quick-generate --json
+python3 "$SKILL_DIR/scripts/svg_to_pptx.py" <project> --quick-generate --no-notes --native-charts-and-tables -o out.pptx
+python3 "$KZ_DIR/tools/bind_highlight_pptx.py" out.pptx out-hl.pptx --receipt highlight.json
+python3 "$KZ_DIR/tools/check_kz_project.py" <project> --pptx out-hl.pptx     # 高亮哨兵已清
+```
+
+- 模板 SVG 已守本页的写法要点：每张卡、每个图表或表格一个顶层组并带 `data-pptx-bounds`，卡壳是 decoration，表格写 `semantic-table.v2`（逐边框线、`header_rows`、合并单元格），图表带原生 payload 与可见 fallback；甘特、森林图、KM、示意图是原生形状。
+- 文字保持上游默认的 `preserve` 文本流（`wrap="none"` 加 `<a:br>`，行已在模板里按微软雅黑实测断好），不加 `--reflow-text`；`data-pptx-frame` 只由上游助手写，不手写。模板量宽时给 4%（`layout.templates.measure_headroom`）余量，抵消检查器偏宽的估算。
+- `render` 的回执 `kz-layout-receipt.json` 记下每页的模板、溢出与原文核对；溢出或缺一条源文字时命令退出 1，按 COPY-09 换模板或拆页，不删字。
+- Quick 路线同样适用；Default 路线在 Design Spec §IX 的 Composition 里写模板名。
 
 ## 品牌绑定（导出之后）
 ```bash

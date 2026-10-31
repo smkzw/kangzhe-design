@@ -1,0 +1,59 @@
+{
+ "phases": [
+  {
+   "name": "试点",
+   "time": "2026 Q4",
+   "current": true,
+   "items": [
+    {
+     "icon": "database",
+     "title": "本地语料入库",
+     "text": "说明书、指南与 3 个会议摘要库"
+    },
+    {
+     "icon": "message-chatbot",
+     "title": "医学问答试点",
+     "text": "2 个治疗领域、20 名 MSL"
+    }
+   ]
+  },
+  {
+   "name": "扩展",
+   "time": "2027 Q1–Q2",
+   "items": [
+    {
+     "icon": "shield",
+     "title": "审核与留痕",
+     "text": "每条回答保留引用与审核记录"
+    },
+    {
+     "icon": "files",
+     "title": "文献速递",
+     "text": "每周自动汇总，医学经理复核"
+    },
+    {
+     "icon": "api",
+     "title": "接入 CRM",
+     "text": "拜访记录与问答联动"
+    }
+   ]
+  },
+  {
+   "name": "规模化",
+   "time": "2027 Q3–Q4",
+   "items": [
+    {
+     "icon": "world",
+     "title": "全治疗领域上线",
+     "text": "覆盖 6 个领域、全部一线医学人员"
+    },
+    {
+     "icon": "report-analytics",
+     "title": "效果评估",
+     "text": "按审核分与使用时长季度复盘"
+    }
+   ]
+  }
+ ],
+ "band": "先在两个领域把**可溯源与审核**跑通，再扩到全领域"
+}

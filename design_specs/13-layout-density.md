@@ -110,4 +110,16 @@ FOLD-01 的一屏 Bento 首屏只用于站点首页和流式文档首页。章�
 | `demo-wide` | 横向展开的舞台（甘特推进、曲线、泳道） | 上方一行观点句与 2–3 条要点，舞台通栏撑满余下高度 |
 | `demo-stack` | 舞台本身信息量足、只需几个结论数字 | 舞台在上撑满，下方一条由舞台数据算出的事实条（`KZDemo.renderFacts`） |
 
-相邻的演示页不重复同一个 demo 预设（15 DEMO-05，`tools/qc_plan.py` 检查）。不要把三条 bullet 放进撑满 564 高的卡里（03 TYPE-02 会判 SPARSE / TOP_HEAVY）；内容少时用 `centered` 或缩短卡高，内容多时拆页。正文区整体占用跨度目标 `layout.content_span_target`（10 G5-SPAN）：内容少的页先给卡片主数字、字段或分栏让卡片有真实内容高度，再放宽卡内留白与行距，不用撑满的空壳凑跨度。参考实现：`examples/reference/htmlppt/`（deck.css 的 `data-preset`）、`examples/reference/pptx/build_svg.py`。
+相邻的演示页不重复同一个 demo 预设（15 DEMO-05，`tools/qc_plan.py` 检查）。不要把三条 bullet 放进撑满 564 高的卡里（03 TYPE-02 会判 SPARSE / TOP_HEAVY）；内容少时用 `centered` 或缩短卡高，内容多时拆页。正文区整体占用跨度目标 `layout.content_span_target`（10 G5-SPAN）：内容少的页换一个更合适的模板（BODY-02），或缩短卡高、改行列组合，不用撑满的空壳凑跨度，也不为凑高度给每张卡加一个大数字。参考实现：`examples/reference/htmlppt/`（deck.css 的 `data-preset`）、`examples/reference/pptx/build_svg.py`。
+
+## 正文模板库 BODY-02（PPTX / HTML-PPT）
+常规路线的文字、规则、数据、流程、计划类正文页从模板库取版式，不从空白画布手搭卡片。模板把页面数据排成布局树，PPTX 一侧用实测字宽求解几何并写出 ppt-master 合规 SVG（每张卡、每张图表或表格一个顶层组，纵向按 03 TYPE-02 分布），HTML-PPT 一侧输出同一结构的 grid/flex 标记；两轨共用同一份数据。
+
+- 目录：`python3 "$KZ_DIR/tools/kz_layout.py" list`（27 套，按场景分：临床试验、方案讨论、项目汇报、AI 汇报、通用）。每套的数据合同就是 `examples/templates/` 里的示例数据，`kz_layout.py example <模板>` 打印路径；两轨样张：`examples/templates/deck/index.html` 与 `examples/templates/pptx/build.py`。
+- 高密度模板：入选/排除标准原文密排（criteria）、访视流程表（soa）、键值表与规则表（kv-table、table-band）、PICOS、终点、伴随用药、讨论题（含路径示意）、研究设计总览、时间窗口、流程 + 解析、高密度甘特、数据图 + 解读（小多图或侧解读）、森林图、KM 曲线、CONSORT、方案比较、KPI 看板、风险矩阵、分层架构。普通场景另有图标网格、编号要点卡、路线图、漏斗、中心辐射、二维象限、观点引述 + 证据，多数带 `layout` 选项（如 3x2 / 2x3 / 4x1、charts-top / chart-side）。
+- 选型：先按内容类别选模板（规则原文 → criteria / table-band / kv-table；方法与流程 → process / study-schema / windows；数据 → chart-insight / forest / km / kpi-dashboard；计划 → gantt-plan / roadmap；取舍 → options-compare / quadrant / risk-matrix），再看密度。数值图在 HTML 用 ECharts、PPTX 用原生图表；森林图、KM、甘特与示意图在 PPTX 用原生形状，HTML 的森林图与 KM 用 ECharts。
+- 轮换：同一模板连续不超过两页（同一条款列表跨页续排不算）；六页以上的 deck 至少用三种模板。每页至少有一种视觉载体：图标、图表、表格或示意图；纯文字页只在原文规则页出现。
+- 原文条款不压缩（03 COPY-09）：模板先密排再拆页，拆页时编号接着排（第一页 1–6，第二页从 7 起），不写“续”；`kz_layout.py render` 的回执逐条核对源文字都在页上，缺一条即失败。
+- 行内强调用模板标记：`**加粗**`、`!!深红!!`、`__下划线__`、`==高亮==`（03 COPY-04）。
+- 制作：`kz_layout.py render <模板> data.json --track pptx|html --title … --out …` 生成页面；PPTX 的接入步骤见 `adapters/ppt-master.md`“模板页”，HTML 见 `adapters/html-ppt.md`“模板页”。导出前跑 `tools/check_kz_project.py`（10 G-KZ）。
+

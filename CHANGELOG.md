@@ -1,3 +1,43 @@
+# 7.2.0 · 2026-10-31
+
+## KZ7-1031-B10 · 正文模板库（两轨共用 27 套）、原文保真、四种强调、白底合成、开工第一站
+用户反馈七点：
+1. 没有阻断式确认生图能力。
+2. 生成图不受控：没把液态玻璃和康哲风格融合，画面繁杂、和卡片打架；应当白底、只在边缘装饰，封面和章节可以有图案。
+3. 内容页单调，都是“大数字 + 文字卡”。
+4. 没有 SVG、图标和示意图，信息密度低。
+5. 抽取内容时过度压缩，规则和条款不能压缩。
+6. 卡片文字都贴在卡顶，没有纵向分布；关键词和数据没有加粗、下划线、深红或高亮。
+7. 深度思考，做出 Agent 可以直接调用的模板页；HTML-PPT 同样检查。
+
+原因（已核实）
+- 闸门只写在 SKILL 与 IMG-07 的文字里；ppt-master 的 Stage 2 确认页另有 `image_usage` 与 AI 路径，Agent 按上游确认页走就绕过了康哲的闸门，导出前也没有任何工具核对。
+- 正文背景的规则（IMG-05）写对了，但只靠提示词约束，没有构图合同、没有合成兜底、没有安静度检测。
+- 13 BODY-01 写着“内容少的页先给卡片主数字”，参考实现只有“卡片 + 条目”一种版式，正文预设只有 cards / split / full。
+- ppt-master 有图标机制，康哲从未接入；没有流程、时间线、对比、条款、矩阵类版式。
+- COPY-06 的“一般 2–4 条”被当成上限；原文条款保留编号与阈值的要求埋在 COPY-03；没有内容类别和保真等级。
+- PPTX 没有布局求解，Agent 从卡顶往下堆；强调词汇只有加粗和深红。
+
+正文模板库（13 BODY-02）
+- `tools/kz_layouts/`：页面数据 → 布局树。PPTX 一侧按微软雅黑实测字宽求解几何（纵向按 03 TYPE-02 分布），写出 ppt-master 合规 SVG；HTML 一侧输出同一结构的 grid/flex 标记（`runtime/kz-layouts.css`）。
+- 27 套模板：入选/排除标准原文密排、SoA 访视矩阵、键值表、PICOS、编号依据卡、规则表 + 结论带、终点、伴随用药、讨论题（含路径示意）、研究设计总览、时间窗口、流程 + 解析、高密度甘特、数据图 + 解读、森林图、KM + 风险人数、CONSORT、方案比较、KPI 看板、路线图、风险矩阵 + 登记表、分层架构、漏斗、中心辐射、二维象限、观点引述 + 证据、图标网格。
+- 数据图：HTML 用 ECharts（新增 stacked、combo、doughnut、forest、km），PPTX 用原生图表；甘特、森林图、KM 与示意图在 PPTX 是原生形状；表格是 ppt-master semantic-table v2（逐边框线、多级表头、合并单元格）。
+- 图标单一来源 `assets/icons/`（康哲自绘 + Tabler Icons 子集，MIT），生成 `runtime/kz-icons.js` 与 ppt-master `icons/kangzhe/*.svg`。
+- CLI `tools/kz_layout.py`：list / example / render；render 的回执逐条核对源文字都已上页，溢出或缺字即退出 1。
+- 两轨样张：`examples/templates/deck/index.html`（HTML-PPT，31 页）与 `examples/templates/pptx/build.py`（PPTX，31 页）。
+
+原文保真与强调（03）
+- 新增 COPY-09：材料分原文条款、数据、叙述三类；原文条款逐字保留，先密排再拆页，编号接续，不写“续”。
+- COPY-04 强调词汇：加粗、深红、下划线、高亮四种，模板标记 `**`、`!!`、`__`、`==`；加粗文字里的加粗显示为强调色；PPTX 高亮导出后由 `tools/bind_highlight_pptx.py` 改成原生 `a:highlight`。
+- TYPE-02：说明 PPTX 由模板求解纵向分布。
+
+生图（04）
+- SKILL：选路与生图能力在开工第一站一次问完；答案预填 ppt-master Stage 2 的 `image_usage` / AI 路径，确认页不再重新决定。
+- 新增 IMG-08：生成图经 `tools/quiet_plate.py` 合成到白底（正文页只留边缘带，hero 页把文字区提白），量阅读区安静度，回执进 `receipts/`；`tools/kz_image_prompts.py` 按页型生成带风格锚与构图合同的提示词。
+
+检查（10 G-KZ）
+- `tools/check_kz_project.py`：闸门与白底回执、色条、字号下限、模板原文核对与溢出、模板轮换、强调、视觉载体、PPTX 高亮哨兵。
+
 # 7.1.3 · 2026-10-29
 
 ## KZ7-1029-B09 · 卡片边缘色条闸、生图能力闸门、非首页密排、演示动画模板组

@@ -1,0 +1,46 @@
+{
+ "funnel": {
+  "unit": " 例",
+  "stages": [
+   {
+    "label": "预筛",
+    "value": 1240
+   },
+   {
+    "label": "签署知情同意",
+    "value": 486
+   },
+   {
+    "label": "筛选合格",
+    "value": 318
+   },
+   {
+    "label": "随机",
+    "value": 300
+   },
+   {
+    "label": "完成 W26",
+    "value": 277
+   }
+  ]
+ },
+ "insights": [
+  {
+   "icon": "filter",
+   "title": "预筛到签署仅 39%",
+   "text": "病历预筛口径宽，HbA1c 未按近 3 个月结果筛"
+  },
+  {
+   "icon": "user-check",
+   "title": "随机后保留率 92%",
+   "text": "高于方案假设的 85%"
+  },
+  {
+   "icon": "bulb",
+   "title": "改进",
+   "text": "预筛清单增加近 3 个月 HbA1c 与 eGFR"
+  }
+ ],
+ "band": "入组瓶颈在**预筛到签署**；改预筛清单比加中心更省",
+ "note": "合成示例数据，仅用于展示模板"
+}

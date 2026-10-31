@@ -30,6 +30,7 @@
 | G6 数据 | HTML 用 ECharts、PPTX 对象类型、数据一致、null/单位/区间 | 数据对账、图表缓存与工作簿结构读回 |
 | G7 动态 | 编排与对象清单、电影同节点与接缝、HTML-PPT scene 步进、演示密度与内容依据、无播放器、后台暂停/seek/减少动态/离屏、锚元素、状态可辨 | 状态日志、正常速度完整周期、关键帧、真实指针样本 |
 | G8 交互 | 下钻宽度与层级、焦点、按键与滚轮隔离、甘特拖改与表单一致、撤销 | 真实指针/键盘/滚轮事件轨迹与断言 |
+| G-KZ 康哲项目检查 | 生图闸门与白底合成回执、色条、字号下限、模板原文核对与溢出、模板轮换、强调与视觉载体、PPTX 高亮哨兵 | `tools/check_kz_project.py`（导出前与导出后各一次） |
 | G9 目标环境 | 上游引擎端到端、目标 Office、浏览器与系统、离线与导出 | 实机截图、原生编辑保存回读 |
 
 旗舰路线（14）在下列各门内按 FLAG-11 增补证据，不另立门。
@@ -46,6 +47,9 @@
 |---|---|---|
 | `tools/qc_plan.py PLAN [--manifest M --asset-root R]` | 计划语义预检：标题、字号、动态清单、视口矩阵、图像映射、真实像素与哈希 | 视觉放行 |
 | `KZLayoutQC.inspectCard / inspectTextBounds / inspectFold / inspectOrphans / inspectEdgeBars / inspectScroll` | 卡内纵向分布、阅读区越界、首屏覆盖率与空白、孤字行、卡片边缘色条、滚动页逐屏墨迹与空白（浏览器内运行） | 审美与语义 |
+| `tools/check_kz_project.py 项目 [--plan --pptx]` | 10 G-KZ：闸门与白底合成回执、色条、字号下限、模板原文核对、轮换、强调、视觉载体、高亮哨兵 | 审美与医学语义 |
+| `tools/kz_layout.py render` | 模板页生成与原文核对回执（13 BODY-02、03 COPY-09） | 选型是否合适 |
+| `tools/quiet_plate.py` | 生成背景合成到白底并量阅读区安静度（04 IMG-08） | 主题是否相符 |
 | `tools/check_edge_bars.py SVG目录` | PPTX 页面 SVG 中贴卡边的彩色细条（02 LG-02） | 导出后的手工改动 |
 | ppt-master `svg_quality_checker.py`、`animation_config.py validate`、`pptx_delivery_check.py` | 上游 SVG 合同、动效侧车、成品交付风险 | PowerPoint 实机观感 |
 | html-ppt-skill `scripts/render.sh` | 官方静态截帧 | 普通观众态动态 |

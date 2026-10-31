@@ -43,15 +43,19 @@ def index(track,features,stage='all',seen=None,route='regular'):
   selected=['design_specs/04-image-pipeline.md','design_specs/02-liquid-glass.md','design_specs/13-layout-density.md']+(['design_specs/11-hero-layouts.md'] if track in ['pptx','htmlppt'] else [])+['schemas/asset-manifest.schema.json','tools/qc_plan.py']
   # 14 FLAG-10: flagship backgrounds come from the light field (plates for PPTX), not from the image pipeline
   if route=='flagship':selected+=['design_specs/14-flagship.md']+(['tools/flagship_plate.py'] if track=='pptx' else ['runtime/kz-flagship.js'])
+  # 04 IMG-07/08: prompts in the composition contract, then the white-base plate and its reading-zone check
+  elif track in ['pptx','htmlppt']:selected+=['tools/kz_image_prompts.py','tools/quiet_plate.py']
  elif stage=='author':
   selected=['tokens/tokens.json','runtime/API.md'] if track!='pptx' else ['tokens/tokens.json','adapters/ppt-master.md']
   if track=='htmlppt':selected+=['adapters/html-ppt.md']
   if track in ['pptx','htmlppt']:selected+=['tools/brand_fragments.py','tools/hero_layout.py']
+  # 13 BODY-02: regular-route body pages come from the template library (same page data for both tracks)
+  if track in ['pptx','htmlppt'] and route!='flagship':selected+=['design_specs/13-layout-density.md','tools/kz_layout.py','examples/templates/pages.py']+(['runtime/kz-layouts.css'] if track=='htmlppt' else [])
   if track=='pptx':selected+=['tools/glass_svg.py']+(['tools/flagship_plate.py','examples/reference/pptx-flagship/README.md'] if route=='flagship' else ['examples/reference/pptx-default/README.md','examples/reference/pptx-default/page-plan.json'])
   if track=='htmlppt' and route=='flagship':selected+=['design_specs/14-flagship.md','examples/reference/htmlppt-flagship/build.py']
   # The current-spec reference implementation is the fastest correct starting point for authoring.
   selected+=['examples/reference/README.md']
- elif stage=='verify':selected=complete+['tools/qc_plan.py']
+ elif stage=='verify':selected=complete+['tools/qc_plan.py']+(['tools/check_kz_project.py'] if track in ['pptx','htmlppt'] else [])
  else:raise ValueError('Unknown stage: '+stage)
  selected=list(dict.fromkeys(selected));owners=[]
  for p in selected:

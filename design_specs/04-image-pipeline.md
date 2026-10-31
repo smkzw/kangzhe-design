@@ -27,7 +27,8 @@ PPTX 与 HTML-PPT 逐页登记 `asset_id`：封面、目录、章节、尾页各
    - 用户另行指定 skill 或接口；
    - 没有生图能力，用缺省背景套。
 
-   开工时若同时要选路（14 FLAG-01），先选路；选了旗舰就不再问本项。修改已有 deck 时沿用它原来的结论。
+   这一问与选路（14 FLAG-01）在开工第一站一起问（SKILL“开工第一站”）：一次停顿给出两个问题，选了旗舰时本项作废。修改已有 deck 时沿用它原来的结论。
+   ppt-master 的 Stage 2 确认页另有 `image_usage` 与 AI 路径选项，它们由本项的答案预填，不在确认页重新决定：选生图写 `["ai","provided"]`（provided 是官方 Logo）并按检测到的接口填 `image_ai_path`，三个方向的 `image_strategy` 都写成下面的风格锚；选缺省背景套写 `["provided"]`。确认后核对 `result.json`，与本项结论不一致就停下来问用户。
 3. **登记**：page-plan 写 `image_capability`（`decision`、`provider`、`asked_user: true`、`detected`、可选 `user_answer`）。全套 deck 用同一种方式：
    - `generated` 时各页 `image.mode` 写 `generated`；
    - `default_set` 时各页写 `default_set`。
@@ -38,6 +39,7 @@ PPTX 与 HTML-PPT 逐页登记 `asset_id`：封面、目录、章节、尾页各
 
   > Style anchor (identical for every image in this deck): Kangzhe light liquid-glass optical material on a near-white field; translucent warm-white glass with soft refraction, thin bright rims and short highlights; colour only as faint refracted light in brand orange #FF9900 and secondary yellow #FFCC00; one soft light source from the upper left; calm, airy, formal medical style. No dark background, no neon, no saturated blue, green or purple, no text, numbers, logos or watermarks.
 
+- 提示词用 `tools/kz_image_prompts.py page-plan.json --topic <去识别的视觉概念>` 生成：风格锚 + 页型构图合同（IMG-08），每个背景资产一条。
 - 接口支持参考图时，把缺省背景套里同类页面的图作为风格参考传入。IMG-03 第一遍审裸图时，把它和该参考图放在一起比较。
 - 检查：
   - `tools/qc_plan.py --asset-root` 计算有色像素中暖色的比例，低于 `image.style.warm_share_min` 报 `IMAGE-STYLE`（WARN）；
@@ -51,6 +53,14 @@ PPTX 与 HTML-PPT 逐页登记 `asset_id`：封面、目录、章节、尾页各
   - 没有超宽正文背景；
   - 背景与讲稿主题无关。
 - 裸图已审过，合成审阅（IMG-03 第二遍、G4-BODY）照做。
+
+## 白底合成与安静度 IMG-08（PPTX / HTML-PPT 常规路线）
+生成图不直接当背景用。每张图先过 `tools/quiet_plate.py`，按页型合成到白底：
+
+- 正文页：只留画布四边的边缘带（`image.quiet.band_px`，角落最强、向中心渐隐到白），阅读区是白底；卡片、表格、图表压在白底上，不与图案打架。
+- 封面、目录、章节、尾页：保留图案或主物象，但文字区（`hero_layouts` 的标题、副标题、日期、目录栅格、章节号）提成白并羽化，图案只在文字区以外。
+
+合成后量阅读区（正文页为 `chrome.body`，hero 页为各文字区）：灰度标准差、平均明度、有色像素占比不超过 `image.quiet.body` / `image.quiet.hero`。不通过就重新生成（提示词按 IMG-05 收紧），到重试预算仍不通过时，告诉用户并经闸门改用缺省背景套，不静默换图。回执（`--receipt`，含源图与成品哈希、各区读数）放项目 `receipts/<asset_id>.quiet.json`，`tools/check_kz_project.py` 导出前核对（10 G-KZ）。页面引用合成后的成品，不引用原图。
 
 ## 先布局，再画保护区 IMG-02
 先固定页型、字号、卡片与图表的真实几何，再生成 `protected_regions`：页眉、Logo、标题、正文卡、图表绘图区、必要标签、观点、参考行、页脚。每个区域记录 rect、对象 id、用途和外扩：静态外扩 `tokens.image.safety_pad_px`，会运动的对象按扫掠包络外扩 `tokens.image.motion_safety_pad_px`。

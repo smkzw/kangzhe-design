@@ -135,7 +135,7 @@ def write_deck(slides, data, out, title, base='', data_scripts=()):
             '<html lang="zh-CN">\n<head>\n<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">\n'
             f'<title>{escape(title)} · 康哲医学部</title>\n<link rel="icon" href="data:,">\n'
             f'<link rel="stylesheet" href="{base}vendor/html-ppt/assets/base.css">\n'
-            f'<link rel="stylesheet" href="{RT}kz-tokens.css">\n<link rel="stylesheet" href="{RT}kz-glass.css">\n<link rel="stylesheet" href="{base}deck.css">\n</head>\n')
+            f'<link rel="stylesheet" href="{RT}kz-tokens.css">\n<link rel="stylesheet" href="{RT}kz-glass.css">\n<link rel="stylesheet" href="{RT}kz-layouts.css">\n<link rel="stylesheet" href="{base}deck.css">\n</head>\n')
     assert '<div class="deck">' in src and 'assets/runtime.js' in src, 'scaffold structure changed upstream; re-read new-deck.sh output'
     body_html = ('<body class="kz" data-fit="fluid">\n<div class="deck">\n' + '\n'.join(slides) + '\n</div>\n'
                  f'<script src="{base}vendor/html-ppt/assets/runtime.js"></script>\n'

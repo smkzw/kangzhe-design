@@ -1,0 +1,18 @@
+{"gantt": {"months": ["1月", "2月", "3月", "4月", "5月", "6月", "7月", "8月", "9月", "10月", "11月", "12月"], "today": 2.5, "today_label": "3 月中",
+  "tasks": [
+   {"group": "资料收集", "label": "中心资料补收", "from": 0, "to": 4, "done": 0.6, "owner": "运营"},
+   {"group": "资料收集", "label": "版本口径确认", "from": 1, "to": 3, "done": 0.8, "owner": "医学"},
+   {"group": "资料收集", "label": "影像资料归集", "from": 2, "to": 5, "done": 0.2, "owner": "运营", "tone": "blue"},
+   {"group": "核对与审阅", "label": "原始记录比对", "from": 3, "to": 7, "owner": "医学"},
+   {"group": "核对与审阅", "label": "安全性数据核对", "from": 4, "to": 8, "owner": "PV", "tone": "risk"},
+   {"group": "核对与审阅", "label": "医学审阅意见", "from": 6, "to": 9, "owner": "医学"},
+   {"group": "核对与审阅", "label": "质疑发放与关闭", "from": 4, "to": 9, "owner": "数统", "tone": "ok"},
+   {"group": "锁库与报告", "label": "盲态审核", "from": 8, "to": 9.5, "owner": "数统", "tone": "ok"},
+   {"group": "锁库与报告", "label": "数据库锁定", "from": 9.5, "to": 10, "owner": "数统", "tone": "ok"},
+   {"group": "锁库与报告", "label": "统计分析与 TLF", "from": 10, "to": 11.5, "owner": "数统", "tone": "ok"},
+   {"group": "锁库与报告", "label": "CSR 撰写", "from": 10.5, "to": 12, "owner": "医学"}],
+  "milestones": [{"at": 9.5, "label": "数据库锁定"}, {"at": 12, "label": "CSR 定稿"}]},
+ "side": [{"icon": "alert-circle", "tone": "risk", "title": "关键路径", "text": "补收资料 → 安全性核对 → 审阅意见 → 锁库；任一延误锁库顺延"},
+          {"icon": "hourglass", "title": "当前进度", "text": "补收资料完成 **60%**，两家中心回传延迟约 2 周"},
+          {"icon": "user-plus", "title": "资源调整", "text": "PV 增派 1 人，安全性核对可压缩 2 周"}],
+ "band": "数据库锁定计划 **10 月中**；补收资料是关键路径上的首要风险"}

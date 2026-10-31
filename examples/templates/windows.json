@@ -1,0 +1,10 @@
+{"timeline_title": "AE 收集时限",
+ "timeline": {"events": [{"label": "签署 ICF", "sub": "筛选期"}, {"label": "首次给药", "sub": "V3 · W0", "key": true}, {"label": "末次给药", "sub": "V9 · W26"}, {"label": "研究结束", "sub": "V10 · W30", "key": true}],
+  "spans": [{"from": 0, "to": 1, "label": "仅收集与研究流程相关的 AE / SAE", "tone": "muted"},
+            {"from": 1, "to": 3, "label": "收集全部 AE（记录于 eCRF）", "detail": "TEAE = 首次给药后发生或加重的事件；末次给药后 30 天内仍按 TEAE 记录", "tone": "brand"}]},
+ "cards": [
+  {"title": "SAE 严重不良事件", "icon": "alert-circle", "items": ["导致死亡、危及生命、需住院或延长住院、导致残疾或先天异常", "研究者获知后 **24 小时内**上报申办方", "随访至事件结局明确"]},
+  {"title": "AESI 特别关注事件", "icon": "zoom-check", "items": ["急性胰腺炎（脂肪酶 >3×ULN 伴症状）", "甲状腺 C 细胞相关事件、降钙素 ≥50 ng/L", "重度低血糖（需他人协助）"]},
+  {"title": "妊娠", "icon": "user-check", "items": ["妊娠本身不作为 AE，**24 小时内**上报并停药", "随访至分娩及新生儿出生后 3 个月"]}
+ ],
+ "band": "AE 按 CTCAE 5.0 分级、按五分法判定相关性；**SAE、AESI、妊娠**均执行 !!24 小时!! 快速报告"}

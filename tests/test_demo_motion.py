@@ -89,7 +89,7 @@ class DemoForms(unittest.TestCase):
         self.assertEqual([len(re.findall(r'【\d】', n)) for n in notes], [5] * len(kinds))
 
     def test_icons_used_exist(self):
-        names = set(re.findall(r"^\s*'?([\w-]+)'?: '", read('runtime/kz-icons.js'), re.M))
+        names = set(json.loads(read('assets/icons/icons.json'))['icons'])
         used = set(re.findall(r"icon: '([\w-]+)'", read('examples/motion/data.js')))
         # literal names in icon(cv, id, name) and lead/glyph(obj(…), name); unknown names also throw at mount
         for src in ('runtime/kz-demo.js', 'runtime/kz-demo-patterns.js'):

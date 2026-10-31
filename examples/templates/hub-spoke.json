@@ -1,0 +1,42 @@
+{
+ "hub": {
+  "center": {
+   "title": "KZ-001",
+   "sub": "周制剂 GLP-1RA"
+  },
+  "nodes": [
+   {
+    "icon": "droplet",
+    "title": "降糖",
+    "text": "W26 HbA1c 较基线 −1.4%"
+   },
+   {
+    "icon": "scale",
+    "title": "体重",
+    "text": "W26 体重 −3.2 kg"
+   },
+   {
+    "icon": "calendar",
+    "title": "每周一次",
+    "text": "预充笔，依从性 96%"
+   },
+   {
+    "icon": "shield",
+    "title": "耐受",
+    "text": "恶心多为轻度，集中在前 4 周"
+   },
+   {
+    "icon": "heart-rate-monitor",
+    "title": "心血管",
+    "text": "血压、血脂改善，CVOT 待开展"
+   },
+   {
+    "icon": "building-hospital",
+    "title": "可及",
+    "text": "常温运输，适合基层"
+   }
+  ]
+ },
+ "band": "降糖与体重双获益是核心，**耐受性**与**心血管证据**是下一阶段要补的两块",
+ "note": "合成示例数据，仅用于展示模板"
+}

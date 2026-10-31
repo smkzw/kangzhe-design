@@ -1,0 +1,15 @@
+{"band": "1.0 mg 组 W26 HbA1c 降幅 **1.4%**，达标率 !!58%!!，胃肠道不良事件多发生在滴定期并随时间下降",
+ "note": "合成示例数据，仅用于展示模板",
+ "charts": [
+  {"title": "W26 HbA1c 较基线变化", "caption": "最小二乘均值，%", "chart": {"kind": "column", "unit": "%", "decimals": 1, "categories": ["0.5 mg", "1.0 mg", "安慰剂"],
+    "series": [{"name": "HbA1c 变化", "values": [-1.1, -1.4, -0.3]}], "description": "W26 HbA1c 较基线变化：0.5 mg −1.1%，1.0 mg −1.4%，安慰剂 −0.3%"}},
+  {"title": "W26 HbA1c <7.0% 比例", "caption": "受试者比例，%", "chart": {"kind": "bar", "unit": "%", "decimals": 0, "categories": ["0.5 mg", "1.0 mg", "安慰剂"],
+    "series": [{"name": "达标比例", "values": [46, 58, 19]}], "description": "W26 HbA1c 达标比例：0.5 mg 46%，1.0 mg 58%，安慰剂 19%"}},
+  {"title": "胃肠道不良事件构成", "caption": "1.0 mg 组，例次占比", "chart": {"kind": "doughnut", "unit": "%", "decimals": 0, "categories": ["恶心", "腹泻", "呕吐", "便秘", "其他"],
+    "series": [{"name": "构成", "values": [42, 24, 14, 12, 8]}], "description": "1.0 mg 组胃肠道不良事件构成：恶心 42%，腹泻 24%，呕吐 14%，便秘 12%，其他 8%"}}
+ ],
+ "insights": [
+  {"icon": "trending-down", "title": "降糖效果呈剂量依赖", "text": "1.0 mg 较 0.5 mg 多降 **0.3%**，与 II 期量效平台一致"},
+  {"icon": "target", "title": "达标率是安慰剂的 3 倍", "text": "1.0 mg 组 58% 达标，安慰剂 19%"},
+  {"icon": "alert-circle", "title": "胃肠道事件以恶心为主", "text": "多为轻度，集中在前 4 周滴定期"}
+ ]}

@@ -1,12 +1,12 @@
 {
- "version": "7.1.3",
- "revision": "KZ7-1029-B09",
+ "version": "7.2.0",
+ "revision": "KZ7-1031-B10",
  "scope": "installable skill content; maintenance material (review/, agent/, docs/history/, tests/, examples/validation/) and sample .pptx decks excluded",
  "files": [
   {
    "path": "CHANGELOG.md",
-   "bytes": 78391,
-   "sha256": "sha256:82980eae339ff1db13d7be148d5902eb6e61df3cc14301a764f71a99cf442c13"
+   "bytes": 82623,
+   "sha256": "sha256:1ace0c386d5e3702493a551d797d6c84d7b5c024844a54cdcb98497a31689c24"
   },
   {
    "path": "INSTALL.md",
@@ -15,28 +15,28 @@
   },
   {
    "path": "README.md",
-   "bytes": 3855,
-   "sha256": "sha256:9a5869f50fc433d71e41117460bc1d8d653c2e8235ec6593416f4627d02421ae"
+   "bytes": 4986,
+   "sha256": "sha256:09286f9a22913c038183cb080dfece1a26acd448c68ce75e9506009f5d9d2010"
   },
   {
    "path": "REVISION",
    "bytes": 13,
-   "sha256": "sha256:dba61c83bfd873a5145137c8fdaae4a4fb592ccf837c314409a4fc1e7c24369f"
+   "sha256": "sha256:5cfb73439f5c17e2191e36806b30db8c94679f8e4695d5b7ea3c9f800af6a211"
   },
   {
    "path": "SKILL.md",
-   "bytes": 8718,
-   "sha256": "sha256:1006f9668e15515a25cee919af86c5137bf45f62bca3714315a78416888a1360"
+   "bytes": 9569,
+   "sha256": "sha256:4ffaaba6aaf8825022e2d062a9e4c856b456cc419da6ef7292b8803aba78dc84"
   },
   {
    "path": "STATUS.md",
-   "bytes": 8204,
-   "sha256": "sha256:d193ca76f1fe2604c792e07c2bbb47fc0e8093344eacc1ab7858d1a58d6215e9"
+   "bytes": 10194,
+   "sha256": "sha256:ad2108a7a921637c998d234a8d6410def7b98229cae07ef6e710e618cc0e1bea"
   },
   {
    "path": "VERSION",
    "bytes": 6,
-   "sha256": "sha256:d661351159e64a7e7abaafd6216310212ab5b97b033ba925c027962679ce1048"
+   "sha256": "sha256:ad3c32dcfae0ee254ef41e998442869bcf8342caf425113a377b642a80d38398"
   },
   {
    "path": "adapters/README.md",
@@ -50,13 +50,13 @@
   },
   {
    "path": "adapters/html-ppt.md",
-   "bytes": 5934,
-   "sha256": "sha256:42133c94b1dd496ec75244513f936de6f7bf3e249a23e7fc9c7b8295bf22147d"
+   "bytes": 6853,
+   "sha256": "sha256:8e5ab39d203236a47c66e7d7d724200ed516640519ba976742fb7b2e71249279"
   },
   {
    "path": "adapters/ppt-master.md",
-   "bytes": 8544,
-   "sha256": "sha256:e8e9fc5d7cc3a37598634753c5b81038d5dc6a4c67a6717b9ad05bbb5054e9c9"
+   "bytes": 11228,
+   "sha256": "sha256:c85f327577e85d7c4fa0bbd533117b4c445ef12fa95270511c7f6e366de9df06"
   },
   {
    "path": "assets/README.md",
@@ -109,6 +109,601 @@
    "sha256": "sha256:906dc32ffe4f374ae6cb7e6500236b4680681e67598b7ef4ab438d553c219578"
   },
   {
+   "path": "assets/icons/NOTICE.md",
+   "bytes": 1529,
+   "sha256": "sha256:351b4578dce95c941ce7cb37555ede1cb66d3338e22c0dc0f52ff8bd034e4e57"
+  },
+  {
+   "path": "assets/icons/icons.json",
+   "bytes": 21301,
+   "sha256": "sha256:71462bdf2239bfd36403bc155552399d6e734349dcce96862883fda68e6132d1"
+  },
+  {
+   "path": "assets/icons/kangzhe/activity.svg",
+   "bytes": 225,
+   "sha256": "sha256:09641981702ee1bbf4ae1aacbcb43b9e3311045de7e7462922be596da8fb45d4"
+  },
+  {
+   "path": "assets/icons/kangzhe/adjustments.svg",
+   "bytes": 357,
+   "sha256": "sha256:7ec7a9e10612829f7455225e24695053d870d81dce79def0342032b927c6c242"
+  },
+  {
+   "path": "assets/icons/kangzhe/alert-circle.svg",
+   "bytes": 257,
+   "sha256": "sha256:30b38e286233e71089c8a1a6e72c828c75a30fb7bc58059493350a7792edf0e4"
+  },
+  {
+   "path": "assets/icons/kangzhe/api.svg",
+   "bytes": 297,
+   "sha256": "sha256:9e8dbf920863b5b038fa7b00753f5947bf87b3de57a7a9d763387a4a025eccd1"
+  },
+  {
+   "path": "assets/icons/kangzhe/archive.svg",
+   "bytes": 236,
+   "sha256": "sha256:2b6fda7f748cf8348e5e9092280514089f62016738851bbf62e54f241368dbfa"
+  },
+  {
+   "path": "assets/icons/kangzhe/arrow-right.svg",
+   "bytes": 234,
+   "sha256": "sha256:a740bf1528e9c938857033e20168f95e923273fde0b4076e517be8f112ccf311"
+  },
+  {
+   "path": "assets/icons/kangzhe/arrows-split.svg",
+   "bytes": 278,
+   "sha256": "sha256:3737e12270e062bb6e799561b0182c6e210e2a6dfd9d776f1e9785fc8c00afa5"
+  },
+  {
+   "path": "assets/icons/kangzhe/award.svg",
+   "bytes": 344,
+   "sha256": "sha256:5dcb2913ec044a120d2ba6d3ea2ab54c1d7a662e00c0c9db29efea4f37ef74d7"
+  },
+  {
+   "path": "assets/icons/kangzhe/book.svg",
+   "bytes": 300,
+   "sha256": "sha256:f88750607fabcf942654d639e1c33c2df8ed068ae677bcec40aaf28fdad3ba7a"
+  },
+  {
+   "path": "assets/icons/kangzhe/books.svg",
+   "bytes": 612,
+   "sha256": "sha256:24141549098f6bcba66ac9a15247f92fbcd21fcf4a90525087e7a515b520bfb2"
+  },
+  {
+   "path": "assets/icons/kangzhe/building-community.svg",
+   "bytes": 328,
+   "sha256": "sha256:372985264733a163cc343479da1625fa5ead01dab8ed7676605435da6099ccd7"
+  },
+  {
+   "path": "assets/icons/kangzhe/building-hospital.svg",
+   "bytes": 319,
+   "sha256": "sha256:23345435989f6a646acb2af5e7b7b43e67070d4dfe77b03c0a73d2cca01ec61d"
+  },
+  {
+   "path": "assets/icons/kangzhe/building.svg",
+   "bytes": 276,
+   "sha256": "sha256:bc7858a3af5ffcf771bbe7984a7fc37b5af50a4c7b4aab6336e2a656c2301beb"
+  },
+  {
+   "path": "assets/icons/kangzhe/bulb.svg",
+   "bytes": 343,
+   "sha256": "sha256:8b63b606e91be2fa0c67aac3d68dc448ac2afce7ecfb0287e198a0d2cf5f9c6c"
+  },
+  {
+   "path": "assets/icons/kangzhe/calendar-event.svg",
+   "bytes": 330,
+   "sha256": "sha256:ad3eccf3613dffac5e36be2a1016a7f0a5a48e059d92d870ae1a0006b8256c05"
+  },
+  {
+   "path": "assets/icons/kangzhe/calendar-stats.svg",
+   "bytes": 344,
+   "sha256": "sha256:1d49b95d27b19c8f091ccc2462b7fa8c4b4f61e363acc893c53b6ae9eb46d5ce"
+  },
+  {
+   "path": "assets/icons/kangzhe/calendar-time.svg",
+   "bytes": 354,
+   "sha256": "sha256:1c61b7de39d68c704bf86e3addbdfdd2c6cfe27fa381694fb790390a36dd77da"
+  },
+  {
+   "path": "assets/icons/kangzhe/calendar.svg",
+   "bytes": 264,
+   "sha256": "sha256:88f62d99489bb26075cdc499e4a3301a352ed42578cea7caf930a92e9fe98839"
+  },
+  {
+   "path": "assets/icons/kangzhe/certificate.svg",
+   "bytes": 384,
+   "sha256": "sha256:106b139a9c5de309f4a8a8113ea68f43ffac262e3abb36173b319cebdb876b02"
+  },
+  {
+   "path": "assets/icons/kangzhe/chart-bar.svg",
+   "bytes": 447,
+   "sha256": "sha256:16b9fdf554efb4ef26500328e47499143eb5003d43b7be3778c0b21d3bca3914"
+  },
+  {
+   "path": "assets/icons/kangzhe/chart-dots.svg",
+   "bytes": 368,
+   "sha256": "sha256:2a67cd1b924f4d84770148181936e85b711488295da87813e89572cfc5fb1b77"
+  },
+  {
+   "path": "assets/icons/kangzhe/chart-line.svg",
+   "bytes": 236,
+   "sha256": "sha256:065602400ed76b39341b71b1593574d21087e5e1ec3028dd3054624b3827f131"
+  },
+  {
+   "path": "assets/icons/kangzhe/chart-pie.svg",
+   "bytes": 340,
+   "sha256": "sha256:655c49a30436e16b0cf1abd4c458bcf546c7b3c06e5849dff136ade167c77f13"
+  },
+  {
+   "path": "assets/icons/kangzhe/chart.svg",
+   "bytes": 240,
+   "sha256": "sha256:f83779b4e57a21502a766df652d23c40d0110cdd3ef1d6933412df48a3734f11"
+  },
+  {
+   "path": "assets/icons/kangzhe/check.svg",
+   "bytes": 222,
+   "sha256": "sha256:fe5ac5795638d1868edc32e3ff24433bcdae9dd1c93bc745902de4bfeb96abc8"
+  },
+  {
+   "path": "assets/icons/kangzhe/checkbox.svg",
+   "bytes": 281,
+   "sha256": "sha256:51506f2ceb410ffff91bc64070c4087f9cebdf9c923f2207fb03629842b95bda"
+  },
+  {
+   "path": "assets/icons/kangzhe/checklist.svg",
+   "bytes": 302,
+   "sha256": "sha256:c74f0ff72851ee4a9df470bf3d8987438ae71fe7c62b632b7a5d60b10fff3716"
+  },
+  {
+   "path": "assets/icons/kangzhe/chevrons-right.svg",
+   "bytes": 230,
+   "sha256": "sha256:80226b37de7c31493b5543dde0d789dbb97f8d5e860b1f307aa497db689d49d4"
+  },
+  {
+   "path": "assets/icons/kangzhe/circle-check.svg",
+   "bytes": 253,
+   "sha256": "sha256:d141b88747842c2e36561f6030780b34a1518dcb6d00abceab61d1b9348f8db3"
+  },
+  {
+   "path": "assets/icons/kangzhe/circle-x.svg",
+   "bytes": 259,
+   "sha256": "sha256:f97815ae617ea8b6f5137dcfc081d6867c91eb490ad780af158c67cbc0934bf0"
+  },
+  {
+   "path": "assets/icons/kangzhe/clipboard-check.svg",
+   "bytes": 367,
+   "sha256": "sha256:5b80070f05b67823ad1cbe1b1bb4ec7789c6e501ea8087a6c965045902fec7a3"
+  },
+  {
+   "path": "assets/icons/kangzhe/clipboard-list.svg",
+   "bytes": 398,
+   "sha256": "sha256:d22674af191a04d50d97a82ad6258454e5d70b54f83ebe809a36a02ed8c4decc"
+  },
+  {
+   "path": "assets/icons/kangzhe/clock.svg",
+   "bytes": 251,
+   "sha256": "sha256:ed12ecd193c81e4855cd2eb09e9f40dfc63d65ed6450e0abce48782b7e8a9acb"
+  },
+  {
+   "path": "assets/icons/kangzhe/cloud.svg",
+   "bytes": 461,
+   "sha256": "sha256:90364e852167f28813471b82118531b60589a9ff18d0bd0abcfe8f367716df8a"
+  },
+  {
+   "path": "assets/icons/kangzhe/coin.svg",
+   "bytes": 327,
+   "sha256": "sha256:44217b6eb626069b0b3ee2fdd0fa6f06bb37718f5e68176c8efb803d2fb1875c"
+  },
+  {
+   "path": "assets/icons/kangzhe/cpu.svg",
+   "bytes": 371,
+   "sha256": "sha256:43dd97bb2db46bbc45aed26e870de3f9995c70d267a2fbea197bd4fa2aa53a79"
+  },
+  {
+   "path": "assets/icons/kangzhe/cross.svg",
+   "bytes": 223,
+   "sha256": "sha256:a353cb3ee8dbda88ab41f0083cc0353331fdbeaf9d38df0f5c87e78ebd7ca827"
+  },
+  {
+   "path": "assets/icons/kangzhe/database.svg",
+   "bytes": 321,
+   "sha256": "sha256:7e2980634bc27f6c8383f521c0f4600978ce3f482d43fb03d4147ddc2c785e5b"
+  },
+  {
+   "path": "assets/icons/kangzhe/device-analytics.svg",
+   "bytes": 334,
+   "sha256": "sha256:69c24754558b695a568b13c66c3606df3fcdfaba1a31c06845e13a9df4ef6ddb"
+  },
+  {
+   "path": "assets/icons/kangzhe/doc-check.svg",
+   "bytes": 244,
+   "sha256": "sha256:9ebea4768606d485c4533fcbb52e9316130a57a255b636a0c3151bb13f9445a4"
+  },
+  {
+   "path": "assets/icons/kangzhe/doc-missing.svg",
+   "bytes": 291,
+   "sha256": "sha256:7d3a0007a8664427d994c07f58d478e420f2a3e2465aaac50624f5e334d7d090"
+  },
+  {
+   "path": "assets/icons/kangzhe/doc-x.svg",
+   "bytes": 251,
+   "sha256": "sha256:40a6754c84b46d10e2cd5eeaef2ed9dca54bc07d94f56352c960b89e5711b336"
+  },
+  {
+   "path": "assets/icons/kangzhe/doc.svg",
+   "bytes": 244,
+   "sha256": "sha256:7ea5adeee8e9cc355358fbfa7d3406756d5406bfb4733cba101daae70f05bf46"
+  },
+  {
+   "path": "assets/icons/kangzhe/droplet.svg",
+   "bytes": 413,
+   "sha256": "sha256:c39c2d1f2bd3ee86e002d2ea18a1c0fa3fe2e4cc82861430b117e3cba36af1ad"
+  },
+  {
+   "path": "assets/icons/kangzhe/escalate.svg",
+   "bytes": 233,
+   "sha256": "sha256:ccfb600422010c446bf0b0cb8884a798f1ade9db75f221014214fc444106adc6"
+  },
+  {
+   "path": "assets/icons/kangzhe/eye.svg",
+   "bytes": 319,
+   "sha256": "sha256:0e38b83ce09934b1198d1c5627e6d3e3bc0c1a33535eb6fdec4a3403fdfbde48"
+  },
+  {
+   "path": "assets/icons/kangzhe/file-certificate.svg",
+   "bytes": 346,
+   "sha256": "sha256:c55d9df4e23d47760d6880df7e0a5067240551d9b32db831e8f35ca1f9c6418b"
+  },
+  {
+   "path": "assets/icons/kangzhe/file-search.svg",
+   "bytes": 345,
+   "sha256": "sha256:122bf104b0423fae6882426d6e543e27545fb1c377c2cedb2ef0fec0a1ca7ac6"
+  },
+  {
+   "path": "assets/icons/kangzhe/file-text.svg",
+   "bytes": 324,
+   "sha256": "sha256:15780294d80b75342157753169e0c16c9bbbb184b0deb381e856848ee9709755"
+  },
+  {
+   "path": "assets/icons/kangzhe/files.svg",
+   "bytes": 357,
+   "sha256": "sha256:ea4fd1bc3bd6b5571a76034fab2640d59f5eea64aba3e028907dda88ebc167af"
+  },
+  {
+   "path": "assets/icons/kangzhe/filter.svg",
+   "bytes": 304,
+   "sha256": "sha256:2e7cbcba6cbc041961482575f785a9aea4236f1c796660ed00b643dc493973d8"
+  },
+  {
+   "path": "assets/icons/kangzhe/flag.svg",
+   "bytes": 228,
+   "sha256": "sha256:154663641ae3d38d7102c13ea8d780414228034a6d24acb1d5cbc212dcb49aed"
+  },
+  {
+   "path": "assets/icons/kangzhe/flask.svg",
+   "bytes": 282,
+   "sha256": "sha256:94897b81886500150f602f95f5a6d8ef1bac50e87694223bf60e206bc1b8b9ae"
+  },
+  {
+   "path": "assets/icons/kangzhe/folder.svg",
+   "bytes": 284,
+   "sha256": "sha256:53e285210d76f3865cccda77afaa735f828dfef6e92076947d5704059bfd242f"
+  },
+  {
+   "path": "assets/icons/kangzhe/forms.svg",
+   "bytes": 381,
+   "sha256": "sha256:fdd859c8b310374a4bd3f93415d23c51e633e5c7765b0401980e248d7435e5af"
+  },
+  {
+   "path": "assets/icons/kangzhe/gavel.svg",
+   "bytes": 521,
+   "sha256": "sha256:bc9ce5de67666e3ef7ba9ed7f8cb722516fa7e6010b7d1c31764800542ef9118"
+  },
+  {
+   "path": "assets/icons/kangzhe/git-branch.svg",
+   "bytes": 356,
+   "sha256": "sha256:5d35dcca5bd9b46a6b207a2b55e30823d428cd8f414b63f1131323da53c44cb5"
+  },
+  {
+   "path": "assets/icons/kangzhe/git-merge.svg",
+   "bytes": 336,
+   "sha256": "sha256:f5c861afc3449e359d4229ee298b6c45dc3706807308ab546669d10a12b9cec7"
+  },
+  {
+   "path": "assets/icons/kangzhe/heart-rate-monitor.svg",
+   "bytes": 331,
+   "sha256": "sha256:6cffb5feaf6a7294de2b97c850512ba2bcb4a7aa25e8188dea1b00af25edf245"
+  },
+  {
+   "path": "assets/icons/kangzhe/hierarchy.svg",
+   "bytes": 344,
+   "sha256": "sha256:b3185984b5c07c02df73f8ffc3d880cc0f0e6c9fec4bfc37ec2baea4d5ace147"
+  },
+  {
+   "path": "assets/icons/kangzhe/hourglass.svg",
+   "bytes": 343,
+   "sha256": "sha256:08260ff8eed44778ab07bf7b129a690e171ab019c5827a099d428dd838e95556"
+  },
+  {
+   "path": "assets/icons/kangzhe/id-badge.svg",
+   "bytes": 332,
+   "sha256": "sha256:5d23894c5f031c6245dc30fc1557baf7a326d8fbe36cd0914d40637f9ace2823"
+  },
+  {
+   "path": "assets/icons/kangzhe/lab.svg",
+   "bytes": 275,
+   "sha256": "sha256:dafeb94b42bc249634576ae4d1bcaf60ae7c04ec29682aacca9411c6710b88fe"
+  },
+  {
+   "path": "assets/icons/kangzhe/layout-grid.svg",
+   "bytes": 513,
+   "sha256": "sha256:39471d7efffc52f56f9283d5c91850594d7253eb284d7e72a805d2e33551fa0f"
+  },
+  {
+   "path": "assets/icons/kangzhe/list-check.svg",
+   "bytes": 313,
+   "sha256": "sha256:21cb4efa9972a6b72c586ce51402f308bd73a5cd194d847b0f974c6712ec6a2a"
+  },
+  {
+   "path": "assets/icons/kangzhe/list-details.svg",
+   "bytes": 390,
+   "sha256": "sha256:76108f5f87e3f2306da16e789c4baf1e7a192ac380bb4280b8922153fa2d7e9e"
+  },
+  {
+   "path": "assets/icons/kangzhe/list-numbers.svg",
+   "bytes": 290,
+   "sha256": "sha256:174a385d670a70cd63f1a1ac32167faa8a9e4bb9623f6834b3f2a31cc23153ab"
+  },
+  {
+   "path": "assets/icons/kangzhe/lock.svg",
+   "bytes": 249,
+   "sha256": "sha256:ddce24e33815a1c47e3364081a8773608f26499b9a43e3bef7e5b793d39188c1"
+  },
+  {
+   "path": "assets/icons/kangzhe/map-pin.svg",
+   "bytes": 316,
+   "sha256": "sha256:21602ea3430d3182bf78aca15ba4eb3577d4ee7e70d63cce4e2d48ce0bca363d"
+  },
+  {
+   "path": "assets/icons/kangzhe/medical-cross.svg",
+   "bytes": 614,
+   "sha256": "sha256:90a7b224b609107bf14ead9837396f6053076a59b3c573de5bcf2288ab133b8a"
+  },
+  {
+   "path": "assets/icons/kangzhe/message-chatbot.svg",
+   "bytes": 338,
+   "sha256": "sha256:8f74e4c98a60ec9b5efa491a15e45046337528ad73f509990ef743304a53360b"
+  },
+  {
+   "path": "assets/icons/kangzhe/microscope.svg",
+   "bytes": 313,
+   "sha256": "sha256:d8cf9a7f8581b8e221c9463710c48d6e45d2b5c813453faff07573925eceb191"
+  },
+  {
+   "path": "assets/icons/kangzhe/people.svg",
+   "bytes": 337,
+   "sha256": "sha256:7a94f89c64ad389a6854ed574f831ca9aa4a36a41db52b9da211a199da13b96c"
+  },
+  {
+   "path": "assets/icons/kangzhe/person.svg",
+   "bytes": 265,
+   "sha256": "sha256:75e56ffebdf1646879863fed0b1b22e926a543ab499ec183679c79f1fba58d1a"
+  },
+  {
+   "path": "assets/icons/kangzhe/pill.svg",
+   "bytes": 255,
+   "sha256": "sha256:b775fb5c807ed52ce13e6821bcd60d53cd787f122eec19e3aa6e4f68e548f729"
+  },
+  {
+   "path": "assets/icons/kangzhe/plug-connected.svg",
+   "bytes": 364,
+   "sha256": "sha256:cd7092455409b84d76720989fe357cdf771310706cee05f477355050ad350de5"
+  },
+  {
+   "path": "assets/icons/kangzhe/presentation.svg",
+   "bytes": 296,
+   "sha256": "sha256:57a6e1af1f44feb182f676e9d570db69d3b14c691ca0f64d4c69d712ef4aba35"
+  },
+  {
+   "path": "assets/icons/kangzhe/progress-check.svg",
+   "bytes": 437,
+   "sha256": "sha256:056c55510f5f7765b507f6721adeea91b1504299732a0e59b82708e160338939"
+  },
+  {
+   "path": "assets/icons/kangzhe/puzzle.svg",
+   "bytes": 484,
+   "sha256": "sha256:6c49bc2fa28147c6878d86b68a20dc398f3c5fa32132dc5974340539d998e7a9"
+  },
+  {
+   "path": "assets/icons/kangzhe/quote.svg",
+   "bytes": 377,
+   "sha256": "sha256:983fee184b1d738d59b1a655bf3af0e972dc6ebeee45983742442c3e97200345"
+  },
+  {
+   "path": "assets/icons/kangzhe/report-analytics.svg",
+   "bytes": 381,
+   "sha256": "sha256:2d857b93d159d02aef4eaafed4b4f62e3654b7861f64d7c47edfc8a27f30671c"
+  },
+  {
+   "path": "assets/icons/kangzhe/report-medical.svg",
+   "bytes": 374,
+   "sha256": "sha256:a37e5a6f556234ecae662db96380ab5141e99fae324511b97fc4a4012db2abc6"
+  },
+  {
+   "path": "assets/icons/kangzhe/report-search.svg",
+   "bytes": 427,
+   "sha256": "sha256:6ad4061dd0551802bd31d53d380ad4285d73a61c9a09355171be59bb34aa8047"
+  },
+  {
+   "path": "assets/icons/kangzhe/rework.svg",
+   "bytes": 270,
+   "sha256": "sha256:2f606725cc0634b69a8b08140cd0c66333e8bfa20fdeb0fcdcc492016a6c2a21"
+  },
+  {
+   "path": "assets/icons/kangzhe/robot.svg",
+   "bytes": 353,
+   "sha256": "sha256:85f28d068dbd386252f411d67732f3e7c0c66465dbc8a4f65fd8e78bdc93887c"
+  },
+  {
+   "path": "assets/icons/kangzhe/route.svg",
+   "bytes": 327,
+   "sha256": "sha256:fae204d7263e2b725ffd4b4b21343b55952bba933b7eca944a04ccd424bbbacf"
+  },
+  {
+   "path": "assets/icons/kangzhe/scale.svg",
+   "bytes": 300,
+   "sha256": "sha256:b3b29a0fc9c1b2bc0b7531478d4a3f96529e849d075bcec4ae20e9e5a6e27db3"
+  },
+  {
+   "path": "assets/icons/kangzhe/search.svg",
+   "bytes": 266,
+   "sha256": "sha256:7863d2e1483b30d25dc87a536178c64d2ad05a570251928042855fdba5cf3490"
+  },
+  {
+   "path": "assets/icons/kangzhe/send.svg",
+   "bytes": 228,
+   "sha256": "sha256:48921833882528d9bc84c1df95068878a15951a1d9198064c7abc4e90255b541"
+  },
+  {
+   "path": "assets/icons/kangzhe/server.svg",
+   "bytes": 381,
+   "sha256": "sha256:894ae0d66de430abc83bee7df22ae9aa86ad04219479d9f51be7479a3cff9804"
+  },
+  {
+   "path": "assets/icons/kangzhe/settings.svg",
+   "bytes": 759,
+   "sha256": "sha256:f8362e24751430b8bf1f2078c0596e5c7cdc2b909933751311efd3da3feb7203"
+  },
+  {
+   "path": "assets/icons/kangzhe/shield.svg",
+   "bytes": 272,
+   "sha256": "sha256:7f5b628312af1a2eb6a270be56a4c0d6915df0042f0d3aced7908b924dc32441"
+  },
+  {
+   "path": "assets/icons/kangzhe/sign.svg",
+   "bytes": 233,
+   "sha256": "sha256:95301a36b0c8cf755b4f9fa0e9fe84e1c159eb5e45e4eb16281a3df384b5e5a0"
+  },
+  {
+   "path": "assets/icons/kangzhe/site.svg",
+   "bytes": 255,
+   "sha256": "sha256:9ec6823c566c76ef4c9068b662d6d67c37a465e4e3c13b00c23dae2669686fd1"
+  },
+  {
+   "path": "assets/icons/kangzhe/sitemap.svg",
+   "bytes": 487,
+   "sha256": "sha256:a760f766d070781007b48dc539800788cbd9784c70b03f94f7b56acebdba82ab"
+  },
+  {
+   "path": "assets/icons/kangzhe/sparkles.svg",
+   "bytes": 400,
+   "sha256": "sha256:6acb96b83ed011186a8939d68563a9089e150535a5650b02a3a72a7df40367a4"
+  },
+  {
+   "path": "assets/icons/kangzhe/stack-2.svg",
+   "bytes": 257,
+   "sha256": "sha256:ff544c9c8e3f01220575f6457f2da92438e2663cad672043530ff9a849f330bd"
+  },
+  {
+   "path": "assets/icons/kangzhe/stairs-up.svg",
+   "bytes": 248,
+   "sha256": "sha256:3504d12576db2b3ff3c6ee46229af05ea11db82285ea60897671008e82f8052c"
+  },
+  {
+   "path": "assets/icons/kangzhe/stethoscope.svg",
+   "bytes": 346,
+   "sha256": "sha256:c7eff8cb9872d3dbf01e35c261f0adb6ed9bc88daf6ddbab95422cab301af221"
+  },
+  {
+   "path": "assets/icons/kangzhe/syringe.svg",
+   "bytes": 277,
+   "sha256": "sha256:a8893613a7cbae5dd2880e4620d723caed6c799d1c65087ff0b216300344df00"
+  },
+  {
+   "path": "assets/icons/kangzhe/table.svg",
+   "bytes": 298,
+   "sha256": "sha256:9d9b34e1f5081e619e8355bf776b9f382272873e6ee808e1aa7ff804c89f315f"
+  },
+  {
+   "path": "assets/icons/kangzhe/target.svg",
+   "bytes": 311,
+   "sha256": "sha256:1bd6313d9978c28f17a9971b35d87902e5211f69f10260ba8aaa89f9d4a1f7a8"
+  },
+  {
+   "path": "assets/icons/kangzhe/temperature.svg",
+   "bytes": 258,
+   "sha256": "sha256:f86debd387328c17a37f985ff8a1341a66997196fefcf0002adedcb0710eeb08"
+  },
+  {
+   "path": "assets/icons/kangzhe/test-pipe.svg",
+   "bytes": 328,
+   "sha256": "sha256:cc8cc763959efafbd5545eb384a8aac8dc5da906844089aa8ec64bea910f94a1"
+  },
+  {
+   "path": "assets/icons/kangzhe/timeline-event.svg",
+   "bytes": 348,
+   "sha256": "sha256:42524b1d309765e40995f3921287775b65bf0aefa8339cc55efe8e9a9b8aee11"
+  },
+  {
+   "path": "assets/icons/kangzhe/timeline.svg",
+   "bytes": 361,
+   "sha256": "sha256:dd9b419abbf3f1db2a3089c4af95812f4eec5fe8ae713e04b0c3bda007dcd0d6"
+  },
+  {
+   "path": "assets/icons/kangzhe/topology-star.svg",
+   "bytes": 435,
+   "sha256": "sha256:e64a21e2af9022ce71f70612d104de82645a733c45eb240dc08264b229f6e47b"
+  },
+  {
+   "path": "assets/icons/kangzhe/trending-down.svg",
+   "bytes": 235,
+   "sha256": "sha256:ef5c528dcbf124ac4c10a4f7085816afe6fe954c044c9fddaf1c397464f172eb"
+  },
+  {
+   "path": "assets/icons/kangzhe/trending-up.svg",
+   "bytes": 235,
+   "sha256": "sha256:1c0fc67adad464d2bfbe2d223295852072a3cafe56ba0d0a0a0bec201c7b440c"
+  },
+  {
+   "path": "assets/icons/kangzhe/unlink.svg",
+   "bytes": 301,
+   "sha256": "sha256:3b12c86ed0084d02ff90045fc9da4e71edf588f46a116ccc19e479de8b5cd771"
+  },
+  {
+   "path": "assets/icons/kangzhe/user-check.svg",
+   "bytes": 277,
+   "sha256": "sha256:3d658a1b8a072eb2e4c982f880d57e2cbe90baac7296d77ec31408e3470bc53a"
+  },
+  {
+   "path": "assets/icons/kangzhe/user-plus.svg",
+   "bytes": 279,
+   "sha256": "sha256:f3f67f342e5f3d7dd3623acd66b199a5e998537104efb04a941e8d1dc7b05238"
+  },
+  {
+   "path": "assets/icons/kangzhe/user-x.svg",
+   "bytes": 288,
+   "sha256": "sha256:f12a8e06f1c4b2dd16fa3c2b98c2161bd61c9f3f618e6c20f13213536cc16421"
+  },
+  {
+   "path": "assets/icons/kangzhe/vaccine.svg",
+   "bytes": 322,
+   "sha256": "sha256:02a3d1edda649eece592f596578fdcf199e55e71d3560402c9d59862c819e1ed"
+  },
+  {
+   "path": "assets/icons/kangzhe/warn.svg",
+   "bytes": 235,
+   "sha256": "sha256:34d5f80fb1d2b4d95751b2c05b4e5c677670cd604345c2627ff069fc35448a6b"
+  },
+  {
+   "path": "assets/icons/kangzhe/world.svg",
+   "bytes": 313,
+   "sha256": "sha256:1e2c300c2763ca96963b87954f1db604e4583e2f348258de978e3511e1c315da"
+  },
+  {
+   "path": "assets/icons/kangzhe/zoom-check.svg",
+   "bytes": 266,
+   "sha256": "sha256:e2554e6e27664ce27d271e625dd45513caaf32ffb2211a0e6239487bd8b1e88f"
+  },
+  {
    "path": "assets/logo_bot.png",
    "bytes": 17143,
    "sha256": "sha256:72d4f71d422475420e3ff19dee4e07cd517c61d80253d7ff72681085edcbbbd7"
@@ -150,13 +745,13 @@
   },
   {
    "path": "design_specs/03-typography-language.md",
-   "bytes": 10851,
-   "sha256": "sha256:169f38fc27253c2704d9dccf3c9a6e7ca42dbe94a3153779d7d19ee9988ac660"
+   "bytes": 12774,
+   "sha256": "sha256:dcee6f3f8fb032f784a1baa4395aae63efbe6cf834407c9eda3bb05fc32c8b05"
   },
   {
    "path": "design_specs/04-image-pipeline.md",
-   "bytes": 11161,
-   "sha256": "sha256:0097056a4595a3140508fbe833857ba4877816198b191b910e38ff3d1afea884"
+   "bytes": 12978,
+   "sha256": "sha256:495d05463233b9ad768b99f5766bdedc34a28f9ad0b297fbe7a8072433b7f39f"
   },
   {
    "path": "design_specs/05-charts.md",
@@ -185,8 +780,8 @@
   },
   {
    "path": "design_specs/10-quality-gates.md",
-   "bytes": 13923,
-   "sha256": "sha256:362024c637e1664013fb070b95f99ab2e8202cff135f2d16b74f0cd294dc54bd"
+   "bytes": 14616,
+   "sha256": "sha256:5ead0d448b74cb9202ef2cbb9b6c2df7d72879b51feb5ea7aa7995a7827d02f1"
   },
   {
    "path": "design_specs/11-hero-layouts.md",
@@ -195,13 +790,13 @@
   },
   {
    "path": "design_specs/13-layout-density.md",
-   "bytes": 9958,
-   "sha256": "sha256:24d5274abc60573ef5a96187c1068fff9d56caaa31c595e33aa265394396bfaf"
+   "bytes": 12788,
+   "sha256": "sha256:914827705cf14628465c377bc34435fb104cbf56ba8cc4b77bf496ba414606a8"
   },
   {
    "path": "design_specs/14-flagship.md",
-   "bytes": 13675,
-   "sha256": "sha256:f7d88297951e65437a6dd8a3012eb4ea21327fa405238a8c4aaa9c7647cbe0f1"
+   "bytes": 13797,
+   "sha256": "sha256:c679db6a6d0eaa5962b07ca659aa1345dbe0f5c0135f83c1ecbca708406ae7b8"
   },
   {
    "path": "design_specs/15-demo-motion.md",
@@ -365,8 +960,8 @@
   },
   {
    "path": "examples/reference/htmlppt/build.py",
-   "bytes": 19417,
-   "sha256": "sha256:fb26cabbe96d7692553c5b07fa55b76d7064444ceb5ffc81c7b7d24c10e7075c"
+   "bytes": 19468,
+   "sha256": "sha256:5a48219fc0a5d3494d184037fd3b66e473bdc4287b32df6af44c722c8b0b2221"
   },
   {
    "path": "examples/reference/htmlppt/deck.css",
@@ -375,8 +970,8 @@
   },
   {
    "path": "examples/reference/htmlppt/deck.js",
-   "bytes": 3729,
-   "sha256": "sha256:6dd7fc0ac78ecdc934448bbd4e88bd3e806c8670abf060708b474ce81434822a"
+   "bytes": 3945,
+   "sha256": "sha256:0d5020977b6483667f7d9b49fd7d89d107fb3195fa7944431a23701bdabb6b57"
   },
   {
    "path": "examples/reference/htmlppt/index.html",
@@ -599,6 +1194,171 @@
    "sha256": "sha256:24ee8e04dddb18b49dce6dd8b2af54a07d9c6d92a01fb343af79d0e2a23ee251"
   },
   {
+   "path": "examples/templates/allow-deny.json",
+   "bytes": 1087,
+   "sha256": "sha256:7b2a59b8b039d5f47f98e746dedd2215c9aaaeba373b1cd14a2afa90c84db033"
+  },
+  {
+   "path": "examples/templates/architecture.json",
+   "bytes": 1218,
+   "sha256": "sha256:f494e152103d13035f2e026b9dfe129f6772b68309569eb10234a02ee1ecfa40"
+  },
+  {
+   "path": "examples/templates/chart-insight.json",
+   "bytes": 1681,
+   "sha256": "sha256:d8414fad5e4f6ea309d3bd47e83338bdb67ab556cf9d17c9bcaa23939ce399e4"
+  },
+  {
+   "path": "examples/templates/consort.json",
+   "bytes": 1686,
+   "sha256": "sha256:f0d000cd08035d8614e74b8899fafcef5bc5d38ab6906ca68e84773e60a3aee2"
+  },
+  {
+   "path": "examples/templates/criteria-long.json",
+   "bytes": 3159,
+   "sha256": "sha256:a02955d3a6cfdd30e86c6e01f94512eb32e3c48ff68c0d5dc966a015c3cf6431"
+  },
+  {
+   "path": "examples/templates/criteria.json",
+   "bytes": 1664,
+   "sha256": "sha256:4a4a262970d54139951430c1403012988033c4ab7c31fdc740947b5ded130a68"
+  },
+  {
+   "path": "examples/templates/deck/build.py",
+   "bytes": 1538,
+   "sha256": "sha256:ae9c0e51be9ebedc0441748b4f2cedc03d5c58aab7e50387a9cbb74a891bcc7b"
+  },
+  {
+   "path": "examples/templates/deck/index.html",
+   "bytes": 275560,
+   "sha256": "sha256:a671df5383533a46c7cc4b26ede3b0cabfd4d8da1fe277f67b2b207a53ee3101"
+  },
+  {
+   "path": "examples/templates/discussion-paths.json",
+   "bytes": 1749,
+   "sha256": "sha256:fed991d24902554737c7601f8a773695c8481d3f646cbbcac414281436d5d069"
+  },
+  {
+   "path": "examples/templates/discussion.json",
+   "bytes": 1259,
+   "sha256": "sha256:84cbb20e057689d36f8f3b885538fdb867f033b18ec1f46dcd653465df1bc761"
+  },
+  {
+   "path": "examples/templates/endpoints.json",
+   "bytes": 1320,
+   "sha256": "sha256:21e58ccb63de731a7b80d9b029143ecfcb88860354ba951cc084d98573a56e1f"
+  },
+  {
+   "path": "examples/templates/forest.json",
+   "bytes": 1783,
+   "sha256": "sha256:b45d0b427d2099c25823cbe83d41cb287409c3cb8a1375157fe63ab8ee67049e"
+  },
+  {
+   "path": "examples/templates/funnel.json",
+   "bytes": 848,
+   "sha256": "sha256:87aa3aeaac0382fe812f94d4d8640c55eb832a9200f6860b20286380143308aa"
+  },
+  {
+   "path": "examples/templates/gantt-plan.json",
+   "bytes": 2045,
+   "sha256": "sha256:5d32b8299efa55cf0616f2ea63a8c523da77cdaf1624d00663a2a033cc1c0f71"
+  },
+  {
+   "path": "examples/templates/hub-spoke.json",
+   "bytes": 909,
+   "sha256": "sha256:c9d883032e56cde1a23d46538771023199eb49fe07072d200c6934a46b41310e"
+  },
+  {
+   "path": "examples/templates/icon-grid.json",
+   "bytes": 1038,
+   "sha256": "sha256:32119b931825fd68843cbfba36e9203bb1bf4a152459af346d0e25c237014dea"
+  },
+  {
+   "path": "examples/templates/km.json",
+   "bytes": 1643,
+   "sha256": "sha256:db026c9e691ea78a834caed47d26fe740eaeff902da46d26a3f68c8b476a2342"
+  },
+  {
+   "path": "examples/templates/kpi-dashboard.json",
+   "bytes": 1623,
+   "sha256": "sha256:d41e7d671b1b32bb1cd3cf547d1154a0b2bcc0da3abde7b0e57560d38bbf3495"
+  },
+  {
+   "path": "examples/templates/kv-table.json",
+   "bytes": 997,
+   "sha256": "sha256:e38f6e22002d1d37cc1ba009b9b37e6aca6a5e0409d90ef5a72e14d073836c49"
+  },
+  {
+   "path": "examples/templates/numbered-cards.json",
+   "bytes": 1152,
+   "sha256": "sha256:d7201277b64bad896f499da479a5280b7bd724c177de570f6aff323223bdfb12"
+  },
+  {
+   "path": "examples/templates/options-compare.json",
+   "bytes": 1488,
+   "sha256": "sha256:ddd57f6b1b3d434747aff56f8d1c53992eaf1a7ead69f1ad971857297e0c07db"
+  },
+  {
+   "path": "examples/templates/pages.py",
+   "bytes": 4309,
+   "sha256": "sha256:be7ee01259193e1ffb9fc76b496ac5333d24595f76b154d4ccbb6a47a4facd02"
+  },
+  {
+   "path": "examples/templates/picos.json",
+   "bytes": 1281,
+   "sha256": "sha256:92aec394caad70d3e5b92aa7354a70b37231610c894b6b36ce2543da368f4a79"
+  },
+  {
+   "path": "examples/templates/pptx/build.py",
+   "bytes": 3018,
+   "sha256": "sha256:f0236759c26a312f2ab754987f380297f05f84a9862ab7d9c1d4944ff7ec7c97"
+  },
+  {
+   "path": "examples/templates/process.json",
+   "bytes": 1621,
+   "sha256": "sha256:4b442461bf48a21fdfc9b80e62ab212f4cdeb23a087641fd6b9c8b72131e3068"
+  },
+  {
+   "path": "examples/templates/quadrant.json",
+   "bytes": 1209,
+   "sha256": "sha256:bbc4518fb47416ed04ce428bcc018fa91a5b3e9a240eac7aa2c099836a9bd8a6"
+  },
+  {
+   "path": "examples/templates/quote-evidence.json",
+   "bytes": 672,
+   "sha256": "sha256:ddb0c81e19eff794fa040b1bb5ab0fd89e893b5f885f0de44b7349451d27b475"
+  },
+  {
+   "path": "examples/templates/risk-matrix.json",
+   "bytes": 1525,
+   "sha256": "sha256:c2116d1dcc89143947b8bc3c62c9aa33e126cea99fca1d1b163cfc0ede1aad89"
+  },
+  {
+   "path": "examples/templates/roadmap.json",
+   "bytes": 1218,
+   "sha256": "sha256:4967d2fbeb003d9729feb80d29fb0392a125619a8542f5c757c502a8ac6a202f"
+  },
+  {
+   "path": "examples/templates/soa.json",
+   "bytes": 3555,
+   "sha256": "sha256:ebcba21a64c38fb45d61951e3f894a81815ce0950248193e399a8219ae332cbe"
+  },
+  {
+   "path": "examples/templates/study-schema.json",
+   "bytes": 1597,
+   "sha256": "sha256:1164c95222e9a2d962c098892f3872011202857e958928f0e95af6c4da7b9c0b"
+  },
+  {
+   "path": "examples/templates/table-band.json",
+   "bytes": 1229,
+   "sha256": "sha256:9b6440d547257310ab6c5aee73bf62c0cc8db156f2d2ba7ce74da461cd57886d"
+  },
+  {
+   "path": "examples/templates/windows.json",
+   "bytes": 1368,
+   "sha256": "sha256:39a2cb1c42cc67ba1385561e9a09be05a1881d88d47c15232688fb9349ab5a46"
+  },
+  {
    "path": "requirements.txt",
    "bytes": 203,
    "sha256": "sha256:09180cce8f55c9c1c23ef016c4cdc43b559fc9cea06ca69fbe4b419b8b15de37"
@@ -620,8 +1380,8 @@
   },
   {
    "path": "runtime/kz-charts.js",
-   "bytes": 12118,
-   "sha256": "sha256:be8419465a0c1e5ad3c00945bf725b77bbddf4f28bcb5dc23c2c29c67bb5ad65"
+   "bytes": 25852,
+   "sha256": "sha256:c6fa4f816e750fc06ae906e211f02af196d3056fecf00701e3b51373772c1660"
   },
   {
    "path": "runtime/kz-demo-patterns.js",
@@ -660,13 +1420,18 @@
   },
   {
    "path": "runtime/kz-icons.js",
-   "bytes": 3397,
-   "sha256": "sha256:1cb08953f4f87cd63b46e172c992aee5360ef16df92ea1bdee64a240a56977d4"
+   "bytes": 18287,
+   "sha256": "sha256:fe52f8da348943f52f549c8eba83013c1b619de9c5704e0cabaebc0f8725a828"
   },
   {
    "path": "runtime/kz-layout-qc.js",
    "bytes": 21306,
    "sha256": "sha256:89fce289a1f4e31ecb228b8e98fbe77266dee65ced9b84b09bf86026b8e2ff6d"
+  },
+  {
+   "path": "runtime/kz-layouts.css",
+   "bytes": 7619,
+   "sha256": "sha256:082889fffa4c70fae317aa6fb25a0a9f231b53ebc12ad8dade29e0c8469345d9"
   },
   {
    "path": "runtime/kz-motion.js",
@@ -685,8 +1450,8 @@
   },
   {
    "path": "runtime/kz-tokens.js",
-   "bytes": 19038,
-   "sha256": "sha256:6332329fab3d1a591f42f7883252bf4d64208b2f3dbda67206dfe564dea0f7af"
+   "bytes": 20976,
+   "sha256": "sha256:3d0491dc00bd6a6dd03513da694585234db330cb20b642188a1a87e371041db8"
   },
   {
    "path": "schemas/README.md",
@@ -715,8 +1480,8 @@
   },
   {
    "path": "tokens/tokens.json",
-   "bytes": 24408,
-   "sha256": "sha256:2ba720b0bd57518b4513dff31e47ae82a51e4d7fe4eb2102d01621684cbe4ad1"
+   "bytes": 26551,
+   "sha256": "sha256:a67254442faaa8f40e7195ac619ceccd52df8e9d0fedd1f0b2386d62b77d1840"
   },
   {
    "path": "tools/bind_header_mark_pptx.py",
@@ -729,6 +1494,11 @@
    "sha256": "sha256:280b4d7aab0d60ddaa8d67bb7807ea14ce426df8b5835e5e2a2fea8d7c512983"
   },
   {
+   "path": "tools/bind_highlight_pptx.py",
+   "bytes": 3237,
+   "sha256": "sha256:b7f601a1d7c084be157eb0944dcfa8736d84271ce0312fe36c7ecb57708f75f3"
+  },
+  {
    "path": "tools/brand_fragments.py",
    "bytes": 3969,
    "sha256": "sha256:ec8e4dd6fa5a57cf763f7a9398ae82f5974127cd36d50c76e50c3e680ba9a296"
@@ -737,6 +1507,11 @@
    "path": "tools/build_dist.py",
    "bytes": 2724,
    "sha256": "sha256:95e6c547c6ec382475029b4b6716f88bada06471fd58e1b196f31c02db69719f"
+  },
+  {
+   "path": "tools/build_icons.py",
+   "bytes": 2879,
+   "sha256": "sha256:bd33ff7e67e45bac3250b1da67d1bfc2301ae962ee448e3e5127dc452ff9ce26"
   },
   {
    "path": "tools/build_tokens.py",
@@ -749,9 +1524,14 @@
    "sha256": "sha256:6b5745356d2d602a74ccd4db5f7e36c9f1438b9f6d75e9d8fe94decd00a03597"
   },
   {
+   "path": "tools/check_kz_project.py",
+   "bytes": 11030,
+   "sha256": "sha256:d46bfcaa786aa2feeb840dfb905e1b8dc8ea4bf4d9a4929052835dac9d03b8fe"
+  },
+  {
    "path": "tools/context_pack.py",
-   "bytes": 6144,
-   "sha256": "sha256:5816680678a54c985106021a21445ac86d2004bd7980f0544f8a784f648a9af6"
+   "bytes": 6737,
+   "sha256": "sha256:1b982ba66805f7e7912a6e19dc6a9c158d669da5076043c735baf61ba9d38e75"
   },
   {
    "path": "tools/flagship_plate.py",
@@ -779,6 +1559,91 @@
    "sha256": "sha256:68157bf9d49a42d42d52dbe2e18615c19db93649373ca0e9572a1ec27ca8d62e"
   },
   {
+   "path": "tools/kz_image_prompts.py",
+   "bytes": 5138,
+   "sha256": "sha256:882f32cb476ea77cfb5c73987393b0286d7214f3e139f9d8f95660ddf1f51547"
+  },
+  {
+   "path": "tools/kz_layout.py",
+   "bytes": 8871,
+   "sha256": "sha256:6f9bbe87e58846896425f4e61cda283d8d22828f96d526b0adbcb759c50677a2"
+  },
+  {
+   "path": "tools/kz_layouts/__init__.py",
+   "bytes": 2694,
+   "sha256": "sha256:8c4ef008832ef22ae9fcaea49a1de6239a3917382058209d2301b452412c8b49"
+  },
+  {
+   "path": "tools/kz_layouts/diagram_kinds.py",
+   "bytes": 16772,
+   "sha256": "sha256:f5bc7bf326ac3cd1064744d2313f1bf2e116c7c597125d3c2fcb943ad2ec6618"
+  },
+  {
+   "path": "tools/kz_layouts/diagram_more.py",
+   "bytes": 22638,
+   "sha256": "sha256:f95f3685affcc08f4ea6e7ed6dcc69fc41f9d196cab89bfa99e5aa569d5b4a2f"
+  },
+  {
+   "path": "tools/kz_layouts/diagrams.py",
+   "bytes": 2534,
+   "sha256": "sha256:f50ea426898134fac37621664355f95404134dec2f78090aafb11911f03b5302"
+  },
+  {
+   "path": "tools/kz_layouts/figures.py",
+   "bytes": 25683,
+   "sha256": "sha256:4568de3ee2685761c6b8a917fa00ca3e06631e6f95440bf17882cc30d49732f9"
+  },
+  {
+   "path": "tools/kz_layouts/page.py",
+   "bytes": 3165,
+   "sha256": "sha256:09e2cd7f2d32ca0401a210ddc959809aeaf99dc7f89011591537ca2535660b8f"
+  },
+  {
+   "path": "tools/kz_layouts/paginate.py",
+   "bytes": 2206,
+   "sha256": "sha256:e326ce982837b734b46ba9b1a8af653b20c9c9fb7920a833fcf90c3128103c41"
+  },
+  {
+   "path": "tools/kz_layouts/patterns/__init__.py",
+   "bytes": 153,
+   "sha256": "sha256:25730986e73c0cd31ac2a1979737c0a8fc329d0ed60065c3d4e30e6cc9b34de5"
+  },
+  {
+   "path": "tools/kz_layouts/patterns/clinical.py",
+   "bytes": 9998,
+   "sha256": "sha256:50d7206b22d9d7169ee75b9ac46bd830d50aabdaa6f0121f1ffdb2aa840a4295"
+  },
+  {
+   "path": "tools/kz_layouts/patterns/general.py",
+   "bytes": 6739,
+   "sha256": "sha256:57dad8f0261f644dda906f49adf94bb853a42388de70f8253f3b95c9c3ae031e"
+  },
+  {
+   "path": "tools/kz_layouts/patterns/project.py",
+   "bytes": 6189,
+   "sha256": "sha256:8c12eabfb41d199e65fd27bd68ffa33f5d482c072f527b99fdaa385b6fbea1a2"
+  },
+  {
+   "path": "tools/kz_layouts/patterns/protocol.py",
+   "bytes": 9621,
+   "sha256": "sha256:c90b8426dc573b5801b956f4d75bb5cdbca277185452871e5dca8404f60c0d2d"
+  },
+  {
+   "path": "tools/kz_layouts/svg.py",
+   "bytes": 10579,
+   "sha256": "sha256:8f3d4f4f295d40951519589ccb1ea8da08fc1965d227c623432158c3ebd62ab5"
+  },
+  {
+   "path": "tools/kz_layouts/text.py",
+   "bytes": 6178,
+   "sha256": "sha256:e76e964713402cb4f82a7ffe75551884e85e590acc9f16d83a8600fac5b6ce3a"
+  },
+  {
+   "path": "tools/kz_layouts/tree.py",
+   "bytes": 18946,
+   "sha256": "sha256:fc0fd0c3a40283f67b5f23632db5e58dd4bd7df2ca0ce453c22170115233b475"
+  },
+  {
    "path": "tools/make_safe_mask.py",
    "bytes": 727,
    "sha256": "sha256:9b738b5aec846eb1b170c0bd11269ab011349251a289af58f6278f84905a7222"
@@ -787,6 +1652,11 @@
    "path": "tools/qc_plan.py",
    "bytes": 21178,
    "sha256": "sha256:7bda9c53d03290575134e54b54eaa5b690b47bbaca47242c7a04ff2174744e17"
+  },
+  {
+   "path": "tools/quiet_plate.py",
+   "bytes": 6929,
+   "sha256": "sha256:9e88971d429a263022381b58e18729513c23f45cff914003fd8b3faa595a7a8e"
   }
  ]
 }

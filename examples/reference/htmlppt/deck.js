@@ -21,14 +21,15 @@
     film?.pause('engine-inactive');
     // demo-stack: the strip under the stage shows the facts the form computed (15 DEMO-05)
     const facts = slide.querySelector('[data-kz-demo-facts]'); if (facts && demoRoot) KZDemo.renderFacts(facts, film);
-    const ce = slide.querySelector('[data-kz-chart]'), chart = ce ? KZCharts.mount(ce, D[ce.dataset.kzChart]) : null;
+    // every chart on the slide (template pages can carry several, 13 BODY-02); `chart` stays the first for QC
+    const charts = [...slide.querySelectorAll('[data-kz-chart]')].map(ce => KZCharts.mount(ce, D[ce.dataset.kzChart])), chart = charts[0] || null;
     const ge = slide.querySelector('[data-kz-gantt]'), gantt = ge ? KZGantt.mount(ge, D[ge.dataset.kzGantt]) : null;
     const life = {
       // info.direction 'backward': entered from a later slide, so show the last scene complete;
       // info.attended false (presenter window, deep link): play the scenes through once.
       enter(info = {}) {
-        if (frozen()) { page.finish(); chart?.finish(); gantt?.finish(); film?.seek(film.staticProgress); return; }
-        page.enter(); chart?.play(); gantt?.play();
+        if (frozen()) { page.finish(); charts.forEach(c => c.finish()); gantt?.finish(); film?.seek(film.staticProgress); return; }
+        page.enter(); charts.forEach(c => c.play()); gantt?.play();
         if (film) {
           film.toScene(info.direction === 'backward' ? film.scenes.length - 1 : 0);
           if (!info.attended && info.direction !== 'backward') film.playThrough();
@@ -37,10 +38,10 @@
       },
       next() { return !frozen() && !!film?.next(); },
       prev() { return !frozen() && !!film?.prev(); },
-      leave() { page.leave(); film?.pause('engine-inactive'); chart?.pause(); gantt?.pause(); },
-      finish() { page.finish(); chart?.finish(); gantt?.finish(); film?.seek(film.staticProgress); },
-      dispose() { lives.delete(life); for (const x of [page, film, chart, gantt]) x?.dispose(); },
-      film, chart, gantt
+      leave() { page.leave(); film?.pause('engine-inactive'); charts.forEach(c => c.pause()); gantt?.pause(); },
+      finish() { page.finish(); charts.forEach(c => c.finish()); gantt?.finish(); film?.seek(film.staticProgress); },
+      dispose() { lives.delete(life); for (const x of [page, film, ...charts, gantt]) x?.dispose(); },
+      film, chart, charts, gantt
     };
     lives.add(life);
     return life;

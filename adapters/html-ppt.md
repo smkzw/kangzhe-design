@@ -45,6 +45,13 @@ const bridge = KZHTMLPPT.bind(document.querySelector('.deck'), slide => {
 - O 总览中的图表/甘特缩略图为空（上游先克隆后挂载）；需要时在组件挂载后重建总览，或在交付说明中列为限制。
 - 演讲者窗口预览与 fluid 观众窗比例不同；需要同画时向预览传递观众比例，否则列为限制。
 
+## 模板页（13 BODY-02）
+正文页可用模板库：`python3 "$KZ_DIR/tools/kz_layout.py" render <模板> data.json --track html --title … --out frag/` 写出 `slide_NN.html`（`.kz-body` 内部的标记）与图表数据文件 frag/charts.json（KZCharts 数据，键是图表 id）。
+
+- 页面骨架照参考实现：`<div class="kz-body" data-preset="kzl">` 里放片段；加载 `runtime/kz-layouts.css`（在 kz-glass.css 之后），图表用 `KZCharts.mount(el, charts[el.dataset.kzChart])` 挂到每个 `[data-kz-chart]`，并纳入翻页生命周期（参考 `examples/reference/htmlppt/deck.js`）。
+- 森林图与 KM 走 ECharts（`kind: forest / km`），示意图是内联 SVG，按 PPTX 求解的高度以 1:1 比例显示，文字字号与 PPTX 相同。
+- 片段里的 `**`/`!!`/`__`/`==` 已转成 `<b>`、`.kz-risk`、`<u>`、`<mark>`。两轨样张：`examples/templates/deck/index.html`。
+
 ## 正式静态截帧
 `render.sh` 可能在上游 0.5s 过渡中截帧。确有该问题时，从观众源派生同目录 `capture-only.html`：资源与 hash 导航不变，仅此副本加 `body[data-capture-only]`，项目装配识别后把图表、甘特、电影置于完整终态；观众源不引用捕获样式。改源后重新派生。然后调用原 `render.sh capture-only.html all <out>`，逐页核对 PNG 尺寸、活动页 opacity=1、完整文字与数据。1920 截帧不代替 2560 宽屏运行检查；记录上游与副本 hash 和真实返回码。
 

@@ -1,0 +1,10 @@
+{"primary": {"label": "主要终点", "text": "治疗 **26 周** HbA1c 较基线变化（中心实验室，优效设计）"},
+ "band": "W26 主要终点锁定降糖疗效，次要终点覆盖血糖达标、体重与代谢指标，安全性与 PK/PD 贯穿全程",
+ "groups": [
+  {"title": "次要终点·血糖", "icon": "chart-line", "items": ["W26 **HbA1c <7.0%** 的受试者比例", "W26 空腹血糖较基线变化", "W26 7 点自我血糖谱较基线变化"]},
+  {"title": "次要终点·体重与代谢", "icon": "scale", "items": ["W26 体重较基线变化及体重下降 **≥5%** 比例", "W26 腰围、血脂、血压较基线变化"]},
+  {"title": "安全性终点", "icon": "alert-circle", "items": ["AE、SAE、AESI（**胰腺炎、甲状腺 C 细胞事件、低血糖**）", "生命体征、心电图、实验室检查", "注射部位反应与免疫原性（抗药抗体）"]},
+  {"title": "PK / PD", "icon": "activity", "items": ["稀疏采样 PopPK：CL/F、V/F 与协变量", "暴露–效应关系（HbA1c、体重）"]},
+  {"title": "患者报告结局", "icon": "forms", "items": ["DTSQs 治疗满意度", "IWQOL-Lite 体重相关生活质量"]},
+  {"title": "探索性终点", "icon": "microscope", "items": ["β 细胞功能指标（HOMA-β、C 肽）", "生物标志物与基因多态性"]}
+ ]}

@@ -1,0 +1,10 @@
+{"layout": "3x2",
+ "points": [
+  {"icon": "clipboard-check", "title": "知情同意", "text": "核对签署日期早于**首次筛选操作**，版本与伦理批件一致。"},
+  {"icon": "user-check", "title": "入排符合性", "text": "逐条比对入排标准原文与源文件，阈值按**中心实验室**结果判定。"},
+  {"icon": "calendar-event", "title": "访视窗口", "text": "访视日期落在方案规定窗口内；超窗记录 __方案偏离__ 并说明原因。"},
+  {"icon": "test-pipe", "title": "实验室数据", "text": "样本采集时间、单位与参考范围完整，异常值有研究者评估。"},
+  {"icon": "alert-circle", "title": "不良事件", "text": "AE 起止时间、严重程度、因果判断齐全；**SAE 24 小时内上报**。"},
+  {"icon": "file-certificate", "title": "数据签核", "text": "EDC 质疑全部关闭，研究者完成电子签名后进入 ==数据锁定== 。"}
+ ],
+ "takeaway": "六个环节逐项过一遍，问题在入库前发现，而不是在锁库后返工"}

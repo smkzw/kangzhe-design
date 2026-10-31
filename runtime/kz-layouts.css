@@ -1,0 +1,86 @@
+/* Kangzhe 7.2 — template pages for HTML-PPT (13 BODY-02), markup printed by tools/kz_layouts (html.py).
+   Lengths in --kz-u, type in --kz-type-* × --kz-un (both written by adapters/html-ppt-bridge.js). The same template
+   trees are solved for PPTX by tools/kz_layouts/tree.py; here the browser lays them out with grid and flex.
+   Cards keep their content distributed over their height (03 TYPE-02): stacks space their groups evenly.
+   Rules sit under .kzl-root so a template's role sizes win over the generic .kz-card p/li sizes of kz-glass.css. */
+.kz .kz-body[data-preset="kzl"]{grid-template-columns:minmax(0,1fr);grid-template-rows:minmax(0,1fr)}
+.kz .kzl-root{display:flex;flex-direction:column;min-height:0;height:100%}
+.kz .kzl-root .kzl-stack{display:flex;flex-direction:column;min-height:0;min-width:0;flex:1 1 auto}
+.kz .kzl-root .kzl-row{display:grid;min-height:0;flex:1 1 auto}
+.kz .kzl-root .kzl-row>*{min-width:0;min-height:0}
+.kz .kzl-root .kzl-spacer{min-height:0}
+.kz .kzl-root .kzl-card{display:flex;flex-direction:column;box-sizing:border-box;padding:calc(22 * var(--kz-u)) calc(24 * var(--kz-u));min-height:0}
+.kz .kzl-root .kzl-card>.kzl-stack{flex:1 1 auto}
+.kz .kzl-root .kzl-stack>.kzl-card{flex:1 1 auto}
+/* the deck sets .kz-body .kz-card{height:100%}; template cards size from their content and the flex share instead */
+.kz .kzl-root .kzl-card.kzl-card{height:auto}
+.kz .kzl-root .kzl-card.is-tint{background:#FFF6E8}
+.kz .kzl-root .kzl-card.is-risk{background:#FCEDEC}
+.kz .kzl-root .kzl-card.is-plain{background:#FFFFFF}
+.kz .kzl-root .kzl-t{margin:0}
+.kz .kzl-root .kzl-body{font-size:calc(var(--kz-type-body) * var(--kz-un,1));line-height:1.5;color:var(--kz-body)}
+.kz .kzl-root .kzl-secondary{font-size:calc(var(--kz-type-secondary) * var(--kz-un,1));line-height:1.45;color:var(--kz-body)}
+.kz .kzl-root .kzl-t.is-label{color:var(--kz-muted);line-height:1.35}
+.kz .kzl-root .kzl-t.is-item_title{color:var(--kz-ink);font-weight:700;line-height:1.35}
+.kz .kzl-root .kzl-card-title{font-size:calc(var(--kz-type-card-title) * var(--kz-un,1));line-height:1.3;font-weight:700;color:var(--kz-ink)}
+.kz .kzl-root .kzl-takeaway{font-size:calc(var(--kz-type-takeaway) * var(--kz-un,1));line-height:1.4;font-weight:700;color:var(--kz-ink)}
+.kz .kzl-root .kzl-kpi-value{font-size:calc(var(--kz-type-kpi-value) * var(--kz-un,1));line-height:1.1;font-weight:700;color:var(--kz-ink);font-variant-numeric:tabular-nums}
+.kz .kzl-root .kzl-kpi{display:flex;flex-direction:column;gap:calc(4 * var(--kz-u));justify-content:center}
+.kz .kzl-root .kzl-kpi.is-risk b{color:var(--kz-risk)}
+.kz .kzl-root .kzl-kpi.is-brand b{color:var(--kz-focus)}
+.kz .kzl-root .kzl-mark{background:#FFE9B8;color:var(--kz-ink);padding:0 .12em;border-radius:.2em}
+.kz .kzl-root .kzl-t u,.kz .kzl-root .kzl-items u{text-decoration-thickness:.08em;text-underline-offset:.16em}
+.kz .kzl-root .kzl-icon{display:inline-grid;place-items:center;flex:none;width:calc(var(--s) * var(--kz-u));height:calc(var(--s) * var(--kz-u));color:#B85C00}
+.kz .kzl-root .kzl-icon .kz-icon{width:100%;height:100%}
+.kz .kzl-root .kzl-icon.is-disc{border-radius:50%;background:#FFF1DE}
+.kz .kzl-root .kzl-icon.is-disc .kz-icon{width:60%;height:60%}
+.kz .kzl-root .kzl-icon.is-risk{color:var(--kz-risk)}
+.kz .kzl-root .kzl-icon.is-ok{color:var(--kz-statistics)}
+.kz .kzl-root .kzl-lead{display:grid;grid-template-columns:calc(var(--s) * var(--kz-u)) minmax(0,1fr);align-items:start}
+.kz .kzl-root .kzl-items{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;justify-content:space-evenly;gap:calc(var(--gap) * var(--kz-u));flex:1 1 auto;min-height:0}
+.kz .kzl-root .kzl-cols{display:grid;grid-template-columns:repeat(var(--cols),minmax(0,1fr));flex:1 1 auto;min-height:0}
+.kz .kzl-root .kzl-cols>.kzl-items{height:100%}
+.kz .kzl-root .kzl-items li{font-size:inherit;line-height:inherit;display:grid;grid-template-columns:calc(1.55em) minmax(0,1fr);align-items:start;margin:0}
+.kz .kzl-root .kzl-items li:has(>.kzl-mk.is-number){grid-template-columns:max(1.55em,calc(29 * var(--kz-u))) minmax(0,1fr)}
+.kz .kzl-root .kzl-items li .kzl-li{min-width:0}
+.kz .kzl-root .kzl-mk{display:grid;place-items:center;height:1.5em;color:var(--kz-brand)}
+.kz .kzl-root .kzl-mk.is-dot::before{content:"";width:.32em;height:.32em;border-radius:50%;background:currentColor}
+.kz .kzl-root .kzl-mk.is-number{border-radius:50%;background:var(--kz-brand);color:#FFF;font-weight:700;font-size:max(.62em,calc(14 * var(--kz-u)));width:max(1.85em,calc(22 * var(--kz-u)));height:max(1.85em,calc(22 * var(--kz-u)));margin-top:.2em;line-height:1}
+.kz .kzl-root .kzl-mk.is-icon .kz-icon{width:1em;height:1em}
+.kz .kzl-root .kzl-items li.is-ok .kzl-mk{color:var(--kz-statistics)}
+.kz .kzl-root .kzl-items li.is-risk .kzl-mk{color:var(--kz-risk)}
+.kz .kzl-root .kzl-items li.is-risk .kzl-mk.is-number{background:var(--kz-risk);color:#FFF}
+.kz .kzl-root .kzl-items li.is-muted .kzl-mk{color:#9AA1A8}
+.kz .kzl-root .kzl-figure{position:relative;flex:1 1 auto;min-height:calc(var(--min-h,160) * var(--kz-u));min-width:0}
+.kz .kzl-root .kzl-figure>svg{position:absolute;inset:0;width:100%;height:100%}
+.kz .kzl-root .kzl-figure>.kz-chart{position:absolute;inset:0;width:100%;height:100%}
+.kz .kzl-root .kzl-table{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums}
+.kz .kzl-root .kzl-table th,.kz .kzl-root .kzl-table td{padding:calc(6 * var(--kz-u)) calc(10 * var(--kz-u));border-bottom:1px solid #E1E5E9;text-align:left;vertical-align:middle;line-height:1.35}
+.kz .kzl-root .kzl-table th{color:var(--kz-ink);font-weight:700;background:#FFF4E2}
+.kz .kzl-root .kzl-table td.is-num,.kz .kzl-root .kzl-table th.is-num{text-align:right}
+.kz .kzl-root .kzl-badge{display:inline-grid;place-items:center;flex:none;width:calc(var(--s) * var(--kz-u));height:calc(var(--s) * var(--kz-u));border-radius:50%;background:var(--kz-brand);color:#FFF;font-weight:700;font-size:calc(var(--s) * .5 * var(--kz-u));line-height:1}
+.kz .kzl-root .kzl-badge.is-risk{background:var(--kz-risk)}
+.kz .kzl-root .kzl-badge.is-ink{background:var(--kz-ink)}
+.kz .kzl-root .kzl-badge.is-muted{background:#9AA1A8}
+.kz .kzl-root .kzl-badge.is-medical{background:var(--kz-medical)}
+.kz .kzl-root .kzl-badge.is-operations{background:var(--kz-operations)}
+.kz .kzl-root .kzl-badge.is-statistics{background:var(--kz-statistics)}
+.kz .kzl-root .kzl-badge.is-pv{background:var(--kz-pv)}
+.kz .kzl-root .kzl-figure.is-table{display:flex;min-height:0}
+.kz .kzl-root .kzl-figure.is-table>table{height:100%}
+.kz .kzl-root .kzl-table .is-c{text-align:center}
+.kz .kzl-root .kzl-table .is-r{text-align:right}
+.kz .kzl-root .kzl-table td.is-key{background:#FFF8EE;color:var(--kz-ink)}
+.kz .kzl-root .kzl-table td.is-brand{background:#FFF1DE}
+.kz .kzl-root .kzl-table td.is-risk{background:#FCEDEC}
+.kz .kzl-root .kzl-table td.is-tint{background:#FFF8EE}
+.kz .kzl-root .kzl-table td.is-muted{background:#F3F4F6}
+.kz .kzl-root .kzl-table thead tr:not(:last-child) th{border-bottom:1px solid #F2C98A}
+.kz .kzl-root .kzl-dot{color:var(--kz-brand)}
+.kz .kzl-root .kzl-dot.is-key{color:var(--kz-risk)}
+.kz .kzl-root .kzl-badge.is-cat1{background:#D46B08}
+.kz .kzl-root .kzl-badge.is-cat2{background:#008F8A}
+.kz .kzl-root .kzl-badge.is-cat3{background:#7B5CC7}
+.kz .kzl-root .kzl-badge.is-cat4{background:#B38A00}
+.kz .kzl-root .kzl-badge.is-cat5{background:#C4457C}
+.kz .kzl-root .kzl-t.is-item_title b:not(.kz-risk),.kz .kzl-root .kzl-card-title b:not(.kz-risk),.kz .kzl-root .kzl-takeaway b:not(.kz-risk){color:var(--kz-focus)}  /* bold inside bold text shows as the focus colour, as in PPTX */
