@@ -43,7 +43,7 @@
 
 ## 3. 浏览器标题与图标
 
-- `<title>`：`<页面名> · <子系统中文名> · 智研 METRIC`（「智研」与「METRIC」之间有空格）；子系统首页可省略页面名。
+- `<title>`：`<页面名> · [项目代号 · ]<子系统中文名> · 智研 METRIC`（「智研」与「METRIC」之间有空格；项目内页面带项目代号，便于多标签页区分）；子系统首页可省略页面名。
 - `<link rel="icon" type="image/svg+xml" href="…/sub-X.svg">`。
 
 ## 4. 代码片段
@@ -57,3 +57,14 @@
 3. 高度 56px、分隔线、底边、背景按第 2 节。
 4. favicon 为本子系统 `sub-X.svg`；`<title>` 按第 3 节。
 5. 首页与内页一致；截图核对标志清晰、不变形、不裁切。
+
+## 6. 各子系统现状与接入要点（2026-11-11 盘点）
+
+| 子系统 | 现状 | 接入要点 |
+| --- | --- | --- |
+| M/C 医学监查·临床监查（看板＋工作台首页） | 已按本规范改完（medical-monitoring-report 3459afd 起；工作台首页同步） | — |
+| E 入排资料智能审核（enrollment-review-app frontend） | 已是「主标＋E 横版」，文件改名为 metric.svg / eligibility*.svg，横版靠 overflow 裁切留白；页头 52px；title「入排资料智能审核 · 智研METRIC」 | 改用 `lockup-3x1-header.svg`、`sub-E-lockup-header.svg`、`sub-E.svg`（不再裁切）；页头 56px、分隔与底边按第 2 节；title 改为「… · 入排资料智能审核 · 智研 METRIC」 |
+| P 方案设计与撰写（protocol-v3-workbench mw.html / StudioApp） | 康哲 logo＋P 方形图标＋HTML 文字「方案设计与撰写 / METRIC·P」；没有主标；title「方案设计与撰写 · METRIC」；老入口 index.html、mw-runs.html 各不相同 | 去掉康哲 logo 与 HTML 文字，改为主标＋`sub-P-lockup-header.svg`；三个入口统一同一页头；title「… · 方案设计与撰写 · 智研 METRIC」 |
+| L 竞品调研与设计先例（competitive-intelligence-workflow 报告站 base.html） | 只有 L 方形图标（ciw-mark.svg）＋文字「竞品调研」；无主标；title「报告名 · 适应症」 | 改为主标＋`sub-L-lockup-header.svg`，去掉文字「竞品调研」；title「报告名 · 适应症 · 竞品调研与设计先例 · 智研 METRIC」；被嵌入时隐藏页头的现有逻辑保留 |
+
+各子系统也不再使用橙色丝带或其他页头色条；设计令牌统一引用本仓库 `tokens/`（当前各子系统分别停在 7.1.1、7.1.3 与自定义变量）。
