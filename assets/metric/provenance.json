@@ -1,0 +1,160 @@
+{
+ "source": "智研METRIC 官方标识（v7 汇报 assets；P/L 见 protocol-v3-workbench docs/brand）",
+ "files": {
+  "icon.svg": {
+   "md5": "657071dcb0aae66142c454858d0ed7c6",
+   "role": "官方原件（逐字节）"
+  },
+  "lockup-3x1.svg": {
+   "md5": "12e18d8c23ae61fbd25ad22c7a83eccd",
+   "role": "官方原件（逐字节）"
+  },
+  "lockup-3x1-header.svg": {
+   "md5": "fdb1c4ed5d3385bae1cccaa1e3207b7f",
+   "role": "页头用：由 lockup-3x1.svg 去四周留白（仅改 viewBox/width/height，图形路径逐字节不变）",
+   "aspect": 4.979
+  },
+  "mark.svg": {
+   "md5": "68d0575379c232039450332b83d3ee56",
+   "role": "官方原件（逐字节）"
+  },
+  "sub-C-lockup.svg": {
+   "md5": "9c29226bbfee39167a5620282a060090",
+   "role": "官方原件（逐字节）"
+  },
+  "sub-C-lockup-header.svg": {
+   "md5": "9a01c3fce13377e4dfba26847462fbf5",
+   "role": "页头用：由 sub-C-lockup.svg 去四周留白（仅改 viewBox/width/height，图形路径逐字节不变）",
+   "aspect": 5.281
+  },
+  "sub-C.svg": {
+   "md5": "3379c98f2683a3fd4c675e56701aaeb0",
+   "role": "官方原件（逐字节）"
+  },
+  "sub-E-lockup.svg": {
+   "md5": "24c58297bab9e973a414c22b1f846980",
+   "role": "官方原件（逐字节）"
+  },
+  "sub-E-lockup-header.svg": {
+   "md5": "4b73a19f06d8694c7a64f6134fd8aab9",
+   "role": "页头用：由 sub-E-lockup.svg 去四周留白（仅改 viewBox/width/height，图形路径逐字节不变）",
+   "aspect": 5.13
+  },
+  "sub-E.svg": {
+   "md5": "a1c2072d2889435ab7211a271da80933",
+   "role": "官方原件（逐字节）"
+  },
+  "sub-I-lockup.svg": {
+   "md5": "67b5c5b8d281a937e339e2b0c06e1501",
+   "role": "官方原件（逐字节）"
+  },
+  "sub-I-lockup-header.svg": {
+   "md5": "22979b198ac6ad8f899e4378968d5baf",
+   "role": "页头用：由 sub-I-lockup.svg 去四周留白（仅改 viewBox/width/height，图形路径逐字节不变）",
+   "aspect": 6.401
+  },
+  "sub-I.svg": {
+   "md5": "f2ae1952ad177813209873fdc22ab372",
+   "role": "官方原件（逐字节）"
+  },
+  "sub-L-lockup.svg": {
+   "md5": "86da2ffbf44c2e06bef3047d53eb179f",
+   "role": "官方原件（逐字节）"
+  },
+  "sub-L-lockup-header.svg": {
+   "md5": "0e20b67628fc53c3fd388adeed415f42",
+   "role": "页头用：由 sub-L-lockup.svg 去四周留白（仅改 viewBox/width/height，图形路径逐字节不变）",
+   "aspect": 5.816
+  },
+  "sub-L.svg": {
+   "md5": "eb3bd022d1e087f05568a57da240bff8",
+   "role": "官方原件（逐字节）"
+  },
+  "sub-M-lockup.svg": {
+   "md5": "cf4f0949f28d10de9cf85e1729260956",
+   "role": "官方原件（逐字节）"
+  },
+  "sub-M-lockup-header.svg": {
+   "md5": "cc7a12b14fdb2fc331ab35b9d035e20a",
+   "role": "页头用：由 sub-M-lockup.svg 去四周留白（仅改 viewBox/width/height，图形路径逐字节不变）",
+   "aspect": 5.389
+  },
+  "sub-M.svg": {
+   "md5": "498833cd6c225b3cae59657bd289b725",
+   "role": "官方原件（逐字节）"
+  },
+  "sub-P-lockup.svg": {
+   "md5": "3b041b13c0bc4ad363ab77fe77ee9759",
+   "role": "官方原件（逐字节）"
+  },
+  "sub-P-lockup-header.svg": {
+   "md5": "7d3f951f7bb6dcf79f6c9dabf22bd268",
+   "role": "页头用：由 sub-P-lockup.svg 去四周留白（仅改 viewBox/width/height，图形路径逐字节不变）",
+   "aspect": 6.439
+  },
+  "sub-P.svg": {
+   "md5": "ae55d11bb763bdf366fe2c790fd1dea0",
+   "role": "官方原件（逐字节）"
+  },
+  "sub-R-lockup.svg": {
+   "md5": "989ae72bee74efc66d47562373d6984c",
+   "role": "官方原件（逐字节）"
+  },
+  "sub-R-lockup-header.svg": {
+   "md5": "759390d071086b4fa1063c4e04a616b3",
+   "role": "页头用：由 sub-R-lockup.svg 去四周留白（仅改 viewBox/width/height，图形路径逐字节不变）",
+   "aspect": 5.584
+  },
+  "sub-R.svg": {
+   "md5": "0f7427711ed1851260b9b64d194e1670",
+   "role": "官方原件（逐字节）"
+  },
+  "sub-T-lockup.svg": {
+   "md5": "83418a49b5d608a3b1d85c2fba12463a",
+   "role": "官方原件（逐字节）"
+  },
+  "sub-T-lockup-header.svg": {
+   "md5": "28ecd709bb94da861eaaa6410143eee7",
+   "role": "页头用：由 sub-T-lockup.svg 去四周留白（仅改 viewBox/width/height，图形路径逐字节不变）",
+   "aspect": 6.358
+  },
+  "sub-T.svg": {
+   "md5": "f46584a0b4b81ba1e2c3a2f23d296c19",
+   "role": "官方原件（逐字节）"
+  }
+ },
+ "subsystems": {
+  "T": {
+   "name": "试验数据与知识中枢",
+   "color": "#4A5568"
+  },
+  "R": {
+   "name": "中心遴选与启动评估",
+   "color": "#2A9D8F"
+  },
+  "E": {
+   "name": "入排资料智能审核",
+   "color": "#FF9900"
+  },
+  "M": {
+   "name": "数字化医学监查",
+   "color": "#E8590C"
+  },
+  "C": {
+   "name": "数字化临床监查",
+   "color": "#407AAA"
+  },
+  "I": {
+   "name": "安全性监测",
+   "color": "#A85F34"
+  },
+  "P": {
+   "name": "方案设计与撰写",
+   "color": "#6D4AA8"
+  },
+  "L": {
+   "name": "竞品调研与设计先例",
+   "color": "#B8406A"
+  }
+ }
+}

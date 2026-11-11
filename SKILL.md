@@ -48,6 +48,7 @@ description: 康哲药业医学部正式汇报与医学网页的统一 Liquid Gl
 - 必读：`design_specs/00-authority.md`、`01-core.md`、`02-liquid-glass.md`、`03-typography-language.md`、`04-image-pipeline.md`、所选轨道文件；旗舰路线另读 `14-flagship.md`，它替代的常规条文以其 FLAG-02 表为准。
 - PPTX / HTML-PPT 含封面、目录、章节、尾页时读 `11-hero-layouts.md`；正文页构图读 `13-layout-density.md` BODY-01 与 BODY-02（模板库），再读所选轨道适配合同里的“模板页”一节。
 - 所有 HTML 轨读 `06-motion-film.md` 与 `15-demo-motion.md`；站点与流式读 `13-layout-density.md`；PPTX 需要动效时读 06 MOTION-07 与 15 DEMO-06。
+- 智研 METRIC 各子系统的网页页头（医学监查、入排审核、方案撰写、竞品调研等）读 `16-metric-subsystem-header.md`，标志只取 `assets/metric/`。
 - 按能力读：图表 05、下钻 07、甘特 08、讲稿 09；终审读 10。
 - 本包的工具需要 Python 3.10+ 与 `requirements.txt`（jsonschema、Pillow、numpy）。把本文件所在目录记为 `KZ_DIR`，命令写成 `python3 "$KZ_DIR/tools/…"`，不依赖当前目录。
 - `python3 "$KZ_DIR/tools/context_pack.py" --track <pptx|htmlppt|site|stream> [--route flagship] --stage <bootstrap|plan|assets|author|verify> --features charts,film,motion,demo,gantt,drilldown,notes` 输出当前工序要读的文件与哈希；它是索引，不代替阅读。
