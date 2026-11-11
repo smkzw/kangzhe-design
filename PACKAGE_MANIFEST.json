@@ -1,12 +1,12 @@
 {
- "version": "7.2.4",
+ "version": "7.2.5",
  "revision": "KZ7-1031-B13",
  "scope": "installable skill content; maintenance material (review/, agent/, docs/history/, tests/, examples/validation/) and sample .pptx decks excluded",
  "files": [
   {
    "path": "CHANGELOG.md",
-   "bytes": 89460,
-   "sha256": "sha256:7d8607e8cbcbfa1d9f4f7b8c813e62cfb8c1d14bc5dba0978e6b9219a5dc4f2c"
+   "bytes": 90095,
+   "sha256": "sha256:1806482534aef12564d3ad0d3dbd32b714a45619488faa52455fd06d979b3802"
   },
   {
    "path": "INSTALL.md",
@@ -16,7 +16,7 @@
   {
    "path": "README.md",
    "bytes": 5183,
-   "sha256": "sha256:0d1976c0c4e7a37fc0b82f526f0233333be17b9dbaeed18bc1aa9814982dee13"
+   "sha256": "sha256:3378ee367cf67d171a9fb81e8020114a0afb5f37ed73f4810f8ca69b3c42d549"
   },
   {
    "path": "REVISION",
@@ -25,8 +25,8 @@
   },
   {
    "path": "SKILL.md",
-   "bytes": 10133,
-   "sha256": "sha256:cfb66c5ec6b1fa238af50f6d1b2b754e3220cf3d2180c23ad0462dbc12c2c3e1"
+   "bytes": 10313,
+   "sha256": "sha256:9f7975251783cdb88c586e51e8e34c082362b3318ad2d8769cf4ecf7eec8a7dd"
   },
   {
    "path": "STATUS.md",
@@ -36,7 +36,7 @@
   {
    "path": "VERSION",
    "bytes": 6,
-   "sha256": "sha256:f2b48b91ae6a73a55c3d69079b4428b3f8c73e63046da6e73f0eee958e8aea8f"
+   "sha256": "sha256:925374b3ed8333c50f3506dcb8605942a15e78c5cfaf7ccac9af352d0651b349"
   },
   {
    "path": "adapters/README.md",
@@ -60,8 +60,8 @@
   },
   {
    "path": "assets/README.md",
-   "bytes": 1255,
-   "sha256": "sha256:5b5dcbca4c4e7a55d13a2a1d4b83e4ac73f688505994a458b1aa3089ef8c2d2c"
+   "bytes": 1672,
+   "sha256": "sha256:e04a505108347961204c9ab622ef68a7e928bdd366769743db5e64f3d2d123e0"
   },
   {
    "path": "assets/backgrounds/body-quiet.jpg",
@@ -714,6 +714,156 @@
    "sha256": "sha256:8d16d3ae8353dd31f46a50d401e66f9e62af40be6cc42cdf5050866a4e6e1cae"
   },
   {
+   "path": "assets/metric/header-snippet.html",
+   "bytes": 1578,
+   "sha256": "sha256:6c9ec51aa3f4fbfb2d3957e92dcaf5f0a44e9900cfedb64c0f19ba998838d2c4"
+  },
+  {
+   "path": "assets/metric/icon.svg",
+   "bytes": 1405,
+   "sha256": "sha256:f6994e7f93f7cda7dc6cdf2dd70ec0a8efe55c7b82e2ec20acbcd2e929ca0f6b"
+  },
+  {
+   "path": "assets/metric/lockup-3x1-header.svg",
+   "bytes": 22613,
+   "sha256": "sha256:c91efb9108cfa670409f375e579e01e8d12fb16c25de258939d8ea4bfbbf8214"
+  },
+  {
+   "path": "assets/metric/lockup-3x1.svg",
+   "bytes": 22609,
+   "sha256": "sha256:4edb2940731fafca1119263fc09e42ea7c981d3d17bfda4d3695d21bfbc2c81d"
+  },
+  {
+   "path": "assets/metric/mark.svg",
+   "bytes": 1110,
+   "sha256": "sha256:8ead8efceef3a8d03ce51ebcbf3da7483adc2f8fb8cf2598ac6565641558f739"
+  },
+  {
+   "path": "assets/metric/provenance.json",
+   "bytes": 4901,
+   "sha256": "sha256:fd87b7c9bc5b839d352c04d57faa254adeb0e20af0a77425404715b77986e9dd"
+  },
+  {
+   "path": "assets/metric/sub-C-lockup-header.svg",
+   "bytes": 22079,
+   "sha256": "sha256:95778cb3ec66be253bc1452cdcfb513457b0308f923c6f78a94174ad491b2491"
+  },
+  {
+   "path": "assets/metric/sub-C-lockup.svg",
+   "bytes": 22075,
+   "sha256": "sha256:725f0741f08291440322d0c25b251c9668012c4a4aa5c6725785872aff39c21f"
+  },
+  {
+   "path": "assets/metric/sub-C.svg",
+   "bytes": 889,
+   "sha256": "sha256:6d4e4ca2c2fa969200f839d05ab7825110af69051a141541598ab0aaee52dadc"
+  },
+  {
+   "path": "assets/metric/sub-E-lockup-header.svg",
+   "bytes": 21907,
+   "sha256": "sha256:378965b910efd56942937b27a737f82b7c577e264ae13d5eb6ab8d65c0d37850"
+  },
+  {
+   "path": "assets/metric/sub-E-lockup.svg",
+   "bytes": 21903,
+   "sha256": "sha256:928ce64dfe8b1f4dd02fd1f42a68840ed028f5833617252cdcfe1c5b76c09628"
+  },
+  {
+   "path": "assets/metric/sub-E.svg",
+   "bytes": 897,
+   "sha256": "sha256:f7309366820707db67dcdcec9cfd21fbf04a9387b4b3962e8a835889ecc2252b"
+  },
+  {
+   "path": "assets/metric/sub-I-lockup-header.svg",
+   "bytes": 28114,
+   "sha256": "sha256:7c208a06ac5b75c9ce10288482a45b2e868d1be5db8c3b759c2726ea75681a52"
+  },
+  {
+   "path": "assets/metric/sub-I-lockup.svg",
+   "bytes": 28110,
+   "sha256": "sha256:6f446383327c27644a30b805281e028a92bcf2e291560a2b2cf91302a1ddf6d3"
+  },
+  {
+   "path": "assets/metric/sub-I.svg",
+   "bytes": 891,
+   "sha256": "sha256:4c8f7e3bb87289899b4fdc20dadc0a1b045ee29f5b1b4092fe506a2b5c93a65d"
+  },
+  {
+   "path": "assets/metric/sub-L-lockup-header.svg",
+   "bytes": 59818,
+   "sha256": "sha256:8c0514ab680386cc56764069ceea6931ecb03e84f621ba30fd7b79f9c2f1ea2f"
+  },
+  {
+   "path": "assets/metric/sub-L-lockup.svg",
+   "bytes": 59814,
+   "sha256": "sha256:dbc00216619e2f7b83cb75ddbc56737c437155e3dd8bd8d3bfb7e68e73379955"
+  },
+  {
+   "path": "assets/metric/sub-L.svg",
+   "bytes": 869,
+   "sha256": "sha256:b8b719255239f4b1f2c99e2a3a7d8412da26a280eb36e08792551cf8050a37ff"
+  },
+  {
+   "path": "assets/metric/sub-M-lockup-header.svg",
+   "bytes": 23014,
+   "sha256": "sha256:efa4a0d276921262f8e0a5147daf2cbe6fe79627fc737e0274cc9fd1cf7d3aff"
+  },
+  {
+   "path": "assets/metric/sub-M-lockup.svg",
+   "bytes": 23010,
+   "sha256": "sha256:95e31fdf8060c3add286cd6852c3c0e2e9d89ef00f8ca209e4457ecea728bd7c"
+  },
+  {
+   "path": "assets/metric/sub-M.svg",
+   "bytes": 845,
+   "sha256": "sha256:33f60c3c311fc6541802b5cb77cbd4e83c0a14ecd9e5a0f277791b50cfa10788"
+  },
+  {
+   "path": "assets/metric/sub-P-lockup-header.svg",
+   "bytes": 64499,
+   "sha256": "sha256:bd45ca0981dd6ba296f1565b531f5dc425a7d426f5d92635ec84456a8c9929a6"
+  },
+  {
+   "path": "assets/metric/sub-P-lockup.svg",
+   "bytes": 64495,
+   "sha256": "sha256:8fabdbe0ee325179821e4897f07dce68fe94d99ca03491832b5e53df04242221"
+  },
+  {
+   "path": "assets/metric/sub-P.svg",
+   "bytes": 954,
+   "sha256": "sha256:a24773bbd910d5858d12b877fa17653717cec2bbac0582967f769a39c8b25ec1"
+  },
+  {
+   "path": "assets/metric/sub-R-lockup-header.svg",
+   "bytes": 27939,
+   "sha256": "sha256:8426a66d22af8a2363c8589e906000c6ae474686a97da52d0c9aaf909f050102"
+  },
+  {
+   "path": "assets/metric/sub-R-lockup.svg",
+   "bytes": 27935,
+   "sha256": "sha256:c13a417d25509361969145187faedd5f0351910b86a600403c5415390c212ec1"
+  },
+  {
+   "path": "assets/metric/sub-R.svg",
+   "bytes": 847,
+   "sha256": "sha256:ffa14df0919e349df902c9caf9a35db8eabfcc426c48016ec912472f82e203d1"
+  },
+  {
+   "path": "assets/metric/sub-T-lockup-header.svg",
+   "bytes": 32481,
+   "sha256": "sha256:f8fe641a9bf8912c27cc4a91b4087cde0f1597dfee6efa64424f63c8cf52febf"
+  },
+  {
+   "path": "assets/metric/sub-T-lockup.svg",
+   "bytes": 32477,
+   "sha256": "sha256:a0b2687be4902408eba448c655c1d28568c3da50796187f538060f541684e0bf"
+  },
+  {
+   "path": "assets/metric/sub-T.svg",
+   "bytes": 849,
+   "sha256": "sha256:5a78d216b4daed40a4f157ed362033b2257e18c768b44c666a953a34763655fe"
+  },
+  {
    "path": "assets/vendor/ECHARTS-LICENSE.txt",
    "bytes": 11358,
    "sha256": "sha256:cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
@@ -802,6 +952,11 @@
    "path": "design_specs/15-demo-motion.md",
    "bytes": 13685,
    "sha256": "sha256:dde6c13f92ca00224e1cd2b7210b55adb27635ccd0cf096a551bf25515994b5c"
+  },
+  {
+   "path": "design_specs/16-metric-subsystem-header.md",
+   "bytes": 5298,
+   "sha256": "sha256:e092ef97a437427b1c04ad645911776df5ebda0ca7897e854b7cdd108eaf1957"
   },
   {
    "path": "design_specs/tracks-htmlppt.md",
@@ -1481,7 +1636,7 @@
   {
    "path": "tokens/tokens.json",
    "bytes": 27047,
-   "sha256": "sha256:52c525d481026a8884e21db0c2896b4cbe8d6b6d7b8f52c753dd9c9eb4735ef2"
+   "sha256": "sha256:c250a6d25614d5e407a24c0c5c2329ebeb8bd92eec792a93f4b87cf4f523cbbc"
   },
   {
    "path": "tools/bind_header_mark_pptx.py",

@@ -1,3 +1,10 @@
+# 7.2.5 · 2026-11-11
+
+## 智研 METRIC 子系统统一页头
+用户定：各子系统网页页头统一为「智研 METRIC 主标｜子系统横版」，不放康哲标志、不加色条。
+- 新增 `assets/metric/`：官方标识原件逐字节（主标 lockup-3x1、mark、icon，T/R/E/M/C/I/P/L 方形图标与横版），另附只去四周留白的 `-header` 版供页头使用；来源与 md5 见 `provenance.json`。
+- 新增 `design_specs/16-metric-subsystem-header.md`：尺寸、分隔、底边、窄屏、浏览器标题与图标、各子系统现状与接入要点；`assets/metric/header-snippet.html` 可直接套用。
+
 # 7.2.4 · 2026-11-01
 
 ## KZ7-1101-B14 · 入排标准的方案编号与子项层级（OMP + DeepSeek 7.2.3 重跑）
