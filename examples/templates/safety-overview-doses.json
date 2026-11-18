@@ -1,0 +1,30 @@
+{
+ "title": "各剂量组不良事件总览（安全性分析集）",
+ "layout": "grouped",
+ "safety": {
+  "set": "安全性分析集",
+  "unit": "例",
+  "arms": [
+   {"name": "KZ-001 0.5 mg", "n": 98, "role": "treat"},
+   {"name": "KZ-001 1.0 mg", "n": 102, "role": "treat"},
+   {"name": "安慰剂", "n": 100, "role": "comparator"}
+  ],
+  "rows": [
+   {"key": "teae", "label": "任何 TEAE", "values": [64, 78, 61]},
+   {"key": "trae", "label": "TRAE", "parent": "teae", "values": [38, 58, 30]},
+   {"key": "g3", "label": "≥3 级 TEAE", "parent": "teae", "values": [7, 11, 7]},
+   {"key": "tesae", "label": "TESAE", "parent": "teae", "values": [5, 7, 5]},
+   {"key": "aesi", "label": "AESI", "values": [3, 6, 3]},
+   {"key": "disc", "label": "导致停药的 TEAE", "values": [3, 8, 3]}
+  ],
+  "focus": "disc",
+  "flag_pp": 5,
+  "compare": [1, 2]
+ },
+ "insights": [
+  {"icon": "chart-bar", "title": "相关事件随剂量上升", "text": "TRAE 0.5 mg 38.8%、1.0 mg **56.9%**，安慰剂 30.0%"},
+  {"icon": "shield", "title": "严重事件剂量间接近", "text": "TESAE 5.1%、6.9% 对 5.0%；≥3 级 TEAE 1.0 mg 组 **10.8%**，其余两组约 7%"},
+  {"icon": "alert-circle", "title": "停药集中在高剂量组", "text": "1.0 mg 组导致停药 **7.8%**，较安慰剂高 4.8 个百分点", "tone": "risk"}
+ ],
+ "note": "合成示例；差值 = 1.0 mg 组 − 安慰剂（百分点）；百分比分母为各组安全性分析集人数。"
+}

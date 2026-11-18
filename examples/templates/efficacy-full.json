@@ -1,0 +1,27 @@
+{
+ "title": "KZ-001 III 期有效性汇总（W52，FAS）",
+ "efficacy": {
+  "arms": [{"key": "k10", "name": "KZ-001 1.0 mg", "n": 250, "role": "treat"}, {"key": "pbo", "name": "安慰剂", "n": 250, "role": "comparator"}],
+  "rows": [
+   {"key": "hba1c", "tier": "主要", "label": "HbA1c 较基线变化", "unit": "%", "type": "continuous", "better": "lower", "values": [-1.9, -0.2],
+    "vs": {"k10": {"diff": -1.7, "ci": [-1.9, -1.5], "p": "<0.001"}}},
+   {"key": "wt", "tier": "关键次要", "label": "体重较基线变化", "unit": "%", "type": "continuous", "better": "lower", "values": [-9.1, -1.4],
+    "vs": {"k10": {"diff": -7.7, "ci": [-8.6, -6.8], "p": "<0.001"}}},
+   {"key": "fpg", "tier": "关键次要", "label": "空腹血糖较基线变化", "unit": "mmol/L", "type": "continuous", "better": "lower", "values": [-2.7, -0.6],
+    "vs": {"k10": {"diff": -2.1, "ci": [-2.5, -1.7], "p": "<0.001"}}},
+   {"key": "sbp", "tier": "次要", "label": "收缩压较基线变化", "unit": "mmHg", "type": "continuous", "better": "lower", "values": [-4.2, -2.3],
+    "vs": {"k10": {"diff": -1.9, "ci": [-3.9, 0.1], "p": "0.06"}}},
+   {"key": "a1c7", "tier": "关键次要", "label": "HbA1c <7.0% 比例", "type": "binary", "better": "higher", "values": [[171, 250], [55, 250]],
+    "vs": {"k10": {"diff": 46.4, "ci": [38.6, 54.2], "p": "<0.001"}}},
+   {"key": "wt5", "tier": "次要", "label": "体重下降 ≥5% 比例", "type": "binary", "effect": "or", "better": "higher", "values": [[178, 250], [48, 250]],
+    "vs": {"k10": {"diff": 10.4, "ci": [6.8, 15.9], "p": "<0.001"}}},
+   {"key": "rescue", "tier": "次要", "label": "至首次补救治疗时间", "unit": "中位，周", "type": "tte", "better": "lower",
+    "values": [{"events": 9, "n": 250, "median": "NR"}, {"events": 41, "n": 250, "median": "NR"}],
+    "vs": {"k10": {"diff": 0.19, "ci": [0.09, 0.39], "p": "<0.001"}}},
+   {"key": "hypo", "tier": "安全性相关", "label": "≥2 级低血糖事件", "unit": "次/人年", "type": "rate", "better": "lower", "values": [0.08, 0.06],
+    "vs": {"k10": {"diff": 1.33, "ci": [0.71, 2.49], "p": "0.37"}}}
+  ],
+  "focus": "hba1c"
+ },
+ "note": "合成示例；均值差为 LS 均值（MMRM）之差，率差为百分点；HR 来自 Cox 模型，率比来自负二项回归；p 值未做多重性校正的为名义值。"
+}

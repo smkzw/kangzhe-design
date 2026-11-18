@@ -1,0 +1,11 @@
+{"schema": {
+  "periods": [{"label": "筛选 ≤2 周", "from": -4, "to": -2, "tone": "muted"}, {"label": "导入 2 周", "from": -2, "to": 0, "tone": "soft"},
+              {"label": "双盲治疗期 W0–W26", "from": 0, "to": 26, "tone": "brand"}, {"label": "安全随访 4 周", "from": 26, "to": 30, "tone": "muted"}],
+  "visits": [{"v": "V1", "week": -4, "label": "W−4"}, {"v": "V2", "week": -2, "label": "W−2"}, {"v": "V3", "week": 0, "key": true, "label": "W0"},
+             {"v": "V4", "week": 4}, {"v": "V5", "week": 8}, {"v": "V6", "week": 12}, {"v": "V7", "week": 16}, {"v": "V8", "week": 20},
+             {"v": "V9", "week": 26, "key": true, "tag": "EOT"}, {"v": "V10", "week": 30, "key": true, "tag": "EOS"}],
+  "markers": [{"week": 0, "label": "随机化 2:1", "kind": "random"}, {"week": 26, "label": "主要终点评估", "kind": "primary"}],
+  "arms": [{"label": "KZ-001 组 n=200", "bars": [{"from": 0, "to": 4, "text": "0.5 mg QW", "tone": "soft", "strong": false}, {"from": 4, "to": 26, "text": "1.0 mg QW ×22 次", "tone": "brand"}]},
+           {"label": "安慰剂组 n=100", "bars": [{"from": 0, "to": 26, "text": "安慰剂 QW ×26 次", "tone": "muted"}]}],
+  "background": {"from": -2, "to": 30, "text": "二甲双胍 ≥1500 mg/天 背景治疗（导入期 → 研究结束）＋ 自我血糖监测"}},
+ "kpis": [{"value": "34", "label": "周 单例最长参与"}, {"value": "10", "label": "次计划访视 V1–V10"}, {"value": "26", "label": "次研究药物给药"}, {"value": "2", "label": "次统计分析（W26 揭盲 + 研究结束）", "tone": "ink"}]}

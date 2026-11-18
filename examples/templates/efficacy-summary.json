@@ -1,0 +1,27 @@
+{
+ "title": "KZ-001 III 期有效性汇总（W26，FAS）",
+ "efficacy": {
+  "arms": [{"key": "k05", "name": "KZ-001 0.5 mg", "n": 200, "role": "treat"}, {"key": "k10", "name": "KZ-001 1.0 mg", "n": 200, "role": "treat"}, {"key": "pbo", "name": "安慰剂", "n": 200, "role": "comparator"}],
+  "rows": [
+   {"key": "hba1c", "tier": "主要", "label": "HbA1c 较基线变化", "unit": "%", "type": "continuous", "better": "lower", "values": [-1.6, -2.0, -0.3],
+    "vs": {"k05": {"diff": -1.3, "ci": [-1.5, -1.1], "p": "<0.001"}, "k10": {"diff": -1.7, "ci": [-1.9, -1.5], "p": "<0.001"}}},
+   {"key": "wt", "tier": "关键次要", "label": "体重较基线变化", "unit": "%", "type": "continuous", "better": "lower", "values": [-5.8, -8.4, -1.2],
+    "vs": {"k05": {"diff": -4.6, "ci": [-5.5, -3.7], "p": "<0.001"}, "k10": {"diff": -7.2, "ci": [-8.1, -6.3], "p": "<0.001"}}},
+   {"key": "fpg", "tier": "关键次要", "label": "空腹血糖较基线变化", "unit": "mmol/L", "type": "continuous", "better": "lower", "values": [-2.1, -2.6, -0.5],
+    "vs": {"k05": {"diff": -1.6, "ci": [-2.0, -1.2], "p": "<0.001"}, "k10": {"diff": -2.1, "ci": [-2.5, -1.7], "p": "<0.001"}}},
+   {"key": "sbp", "tier": "次要", "label": "收缩压较基线变化", "unit": "mmHg", "type": "continuous", "better": "lower", "values": [-3.1, -4.0, -2.2],
+    "vs": {"k05": {"diff": -0.9, "ci": [-2.9, 1.1], "p": "0.38"}, "k10": {"diff": -1.8, "ci": [-3.8, 0.2], "p": "0.08"}}},
+   {"key": "a1c7", "tier": "关键次要", "label": "HbA1c <7.0% 比例", "type": "binary", "better": "higher", "values": [[118, 200], [142, 200], [42, 200]],
+    "vs": {"k05": {"diff": 38.0, "ci": [29.4, 46.6], "p": "<0.001"}, "k10": {"diff": 50.0, "ci": [41.8, 58.2], "p": "<0.001"}}},
+   {"key": "rescue", "tier": "次要", "label": "需补救治疗比例", "type": "binary", "better": "lower", "values": [[10, 200], [6, 200], [34, 200]],
+    "vs": {"k05": {"diff": -12.0, "ci": [-17.9, -6.1], "p": "<0.001"}, "k10": {"diff": -14.0, "ci": [-19.6, -8.4], "p": "<0.001"}}}
+  ],
+  "focus": "hba1c"
+ },
+ "insights": [
+  {"icon": "target", "title": "主要终点两个剂量都达到", "text": "HbA1c 较安慰剂再降 **1.3%** 与 **1.7%**，95% CI 均不跨 0"},
+  {"icon": "trending-down", "title": "体重获益呈剂量依赖", "text": "1.0 mg 组较安慰剂多降 **7.2%**，0.5 mg 组多降 4.6%"},
+  {"icon": "alert-circle", "title": "收缩压差异未达统计学意义", "text": "两组 95% CI 均跨 0，按预设层级检验不作结论", "tone": "risk"}
+ ],
+ "note": "合成示例；均值为 LS 均值（MMRM），均值差为与安慰剂之差；比例写 n/N，率差为百分点；p 值未做多重性校正的标为名义值。"
+}

@@ -1,0 +1,86 @@
+{
+ "title": "GLP-1 类减重药物竞争格局（竞品少 · 合成示例）",
+ "landscape": {
+  "stages": [
+   "I 期",
+   "II 期",
+   "III 期",
+   "申报",
+   "上市"
+  ],
+  "efficacy": {
+   "label": "体重降幅",
+   "unit": "%",
+   "better": "higher",
+   "note": "第 68–72 周，安慰剂校正"
+  },
+  "safety": {
+   "label": "胃肠道不良事件",
+   "unit": "%",
+   "better": "lower"
+  },
+  "assets": [
+   {
+    "key": "kz",
+    "name": "KZ-001",
+    "company": "康哲（合成）",
+    "moa": "GLP-1/GIP 双激动",
+    "route": "注射 QW",
+    "stage": "III 期",
+    "efficacy": 18.6,
+    "safety": 34.0,
+    "ours": true
+   },
+   {
+    "key": "a",
+    "name": "竞品 A",
+    "company": "公司甲",
+    "moa": "GLP-1 单激动",
+    "route": "注射 QW",
+    "stage": "上市",
+    "efficacy": 12.4,
+    "safety": 44.0
+   },
+   {
+    "key": "b",
+    "name": "竞品 B",
+    "company": "公司乙",
+    "moa": "GLP-1/GIP 双激动",
+    "route": "注射 QW",
+    "stage": "上市",
+    "efficacy": 17.8,
+    "safety": 39.0
+   },
+   {
+    "key": "c",
+    "name": "竞品 C",
+    "company": "公司丙",
+    "moa": "GLP-1 口服小分子",
+    "route": "口服 QD",
+    "stage": "III 期",
+    "efficacy": 10.9,
+    "safety": 52.0
+   }
+  ],
+  "focus": "kz"
+ },
+ "insights": [
+  {
+   "icon": "award",
+   "title": "疗效与已上市 B 相当",
+   "text": "KZ-001 体重降幅 **18.6%**，B 为 17.8%，A 为 12.4%"
+  },
+  {
+   "icon": "shield",
+   "title": "胃肠道耐受性最好",
+   "text": "胃肠道不良事件 **34.0%**，低于 A 的 44.0% 与 B 的 39.0%"
+  },
+  {
+   "icon": "clock",
+   "title": "上市时间落后两家",
+   "text": "A、B 已上市；KZ-001 与口服的 C 同在 III 期",
+   "tone": "risk"
+  }
+ ],
+ "note": "合成示例；竞品与数据均为虚构；跨研究比较受人群与设计差异影响，仅作格局参考；— 表示尚无公开数据。"
+}

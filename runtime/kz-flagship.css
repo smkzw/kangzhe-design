@@ -1,0 +1,197 @@
+/* Kangzhe Design flagship route F1 (14, 8.0): warm-white canvas, white paper cards with three warm shadows,
+   METRIC-style header (icon tile + section kicker + page title, logo and chips top right), footer with page progress.
+   Geometry in logical units × --kz-u (1280×720 basis, set by adapters/html-ppt-bridge.js); wide viewports widen the
+   body between the side margins. Type in logical px × --kz-un from --kzf-type-*. Values come from tokens.flagship
+   (runtime/kz-tokens.css); motion is driven by runtime/kz-flagship.js with GSAP, so nothing here animates on its own. */
+@property --kzf-spot { syntax: '<number>'; inherits: false; initial-value: 0; } /* spotlight lift, tweened by kz-flagship.js */
+.kzf { --u: var(--kz-u, 1px); --un: var(--kz-un, 1); background: var(--kzf-canvas-flat); }
+.kzf .deck { background: var(--kzf-canvas); }
+.kzf .slide { padding: 0; display: block; background: transparent; color: var(--kzf-ink-title); transform: none !important;
+  transition: opacity 0s linear var(--kzf-exit-ms), visibility 0s linear var(--kzf-exit-ms); font-family: var(--kz-font); }
+.kzf .slide.is-active { transition-delay: 0s; }
+.kzf .slide > * { position: absolute; }
+.kzf .slide > .notes { position: static; }
+.kzf .slide h1, .kzf .slide h2, .kzf .slide h3, .kzf .slide h4, .kzf .slide p, .kzf .slide ul, .kzf .slide ol { margin: 0; padding: 0; }
+.kzf .slide ul, .kzf .slide ol { list-style: none; }
+.kzf .num { font-family: "SF Pro Display", "Helvetica Neue", Arial, var(--kz-font); font-variant-numeric: tabular-nums; font-weight: 700; }
+.kzf .kzf-risk { color: var(--kz-risk); }
+@media (prefers-reduced-motion: reduce) { .kzf .slide { transition: none; } }
+
+/* ---------- chrome: header, brand, chips, progress, footer (FLAG-06) ---------- */
+.kzf .kzf-head { left: calc(var(--kzf-g-margin-x) * var(--u)); top: calc(var(--kzf-g-head-top) * var(--u));
+  right: calc(var(--kzf-g-margin-x) * var(--u)); display: grid; grid-template-columns: auto minmax(0, 1fr);
+  column-gap: calc(var(--kzf-g-title-gap) * var(--u)); align-items: center; padding-right: calc(360 * var(--u)); }
+/* header mark H2: slanted orange facet carrying the page icon + small yellow facet (tokens.flagship.mark) */
+.kzf .kzf-mark { position: relative; width: calc(var(--kzf-mark-w) * var(--u)); height: calc(var(--kzf-mark-h) * var(--u)); grid-row: span 2; }
+.kzf .kzf-mark svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; filter: drop-shadow(var(--kzf-mark-shadow)); }
+.kzf .kzf-mark i { position: absolute; left: calc(var(--kzf-mark-icon-x) * 100%); top: calc(var(--kzf-mark-icon-y) * 100%); translate: -50% -50%;
+  width: calc(var(--kzf-mark-icon) * 100%); aspect-ratio: 1; color: var(--kzf-mark-icon-ink); }
+.kzf .kzf-mark i svg { display: block; width: 100%; height: 100%; stroke-width: var(--kzf-mark-icon-stroke); filter: drop-shadow(0 1px 1px rgba(150,70,0,.3)); }
+.kzf .kzf-kick { font-size: calc(var(--kzf-type-kicker) * var(--un)); font-weight: 600; letter-spacing: .06em; color: var(--kzf-ink-kicker); line-height: 1.3; }
+.kzf .kzf-title { font-size: calc(var(--kzf-type-page-title) * var(--un)); font-weight: 700; line-height: 1.2; letter-spacing: .01em; white-space: nowrap; }
+.kzf .kzf-brand { height: calc(var(--kzf-g-logo-h) * var(--u)); width: auto; z-index: 3; top: calc((var(--kzf-g-head-top) + 2) * var(--u)); right: calc(var(--kzf-g-margin-x) * var(--u)); }
+.kzf .slide[data-kzf-kind="cover"] > .kzf-brand, .kzf .slide[data-kzf-kind="ending"] > .kzf-brand,
+.kzf .slide[data-kzf-kind="toc"] > .kzf-brand, .kzf .slide[data-kzf-kind="section"] > .kzf-brand { right: auto; left: calc(var(--kzf-g-margin-x) * var(--u)); top: calc(46 * var(--u)); height: calc(34 * var(--u)); }
+.kzf .kzf-chips { top: calc(var(--kzf-g-chip-top) * var(--u)); right: calc(var(--kzf-g-margin-x) * var(--u)); display: flex; gap: calc(8 * var(--u)); }
+.kzf .kzf-chip { font-size: calc(var(--kzf-type-chip) * var(--un)); font-weight: 600; line-height: 1.3; padding: calc(4 * var(--u)) calc(12 * var(--u)); border-radius: 999px;
+  background: var(--kzf-chip-face); border: 1px solid var(--kzf-chip-border); color: var(--kzf-chip-ink); white-space: nowrap; }
+.kzf .kzf-chip b { color: var(--kzf-accent-ink); margin-right: calc(6 * var(--u)); }
+.kzf .kzf-prog { left: calc(var(--kzf-g-margin-x) * var(--u)); right: calc(var(--kzf-g-margin-x) * var(--u)); bottom: calc(var(--kzf-g-progress-bottom) * var(--u));
+  height: calc(var(--kzf-prog-h) * var(--u)); display: flex; gap: calc(var(--kzf-prog-gap) * var(--u)); }
+.kzf .kzf-prog i { flex: 1; border-radius: 2px; background: var(--kzf-prog-track); }
+.kzf .kzf-prog i.on { background: var(--kzf-prog-on); }
+.kzf .kzf-foot { left: calc(var(--kzf-g-margin-x) * var(--u)); right: calc(var(--kzf-g-margin-x) * var(--u)); bottom: calc(var(--kzf-g-foot-bottom) * var(--u));
+  display: flex; align-items: center; gap: calc(12 * var(--u)); font-size: calc(var(--kzf-type-foot) * var(--un)); color: var(--kzf-ink-foot); line-height: 1.3; white-space: nowrap; }
+.kzf .kzf-foot .pg { margin-left: auto; font-weight: 600; font-variant-numeric: tabular-nums; }
+
+/* ---------- body region and surfaces (FLAG-08) ---------- */
+.kzf .kzf-body { left: calc(var(--kzf-g-margin-x) * var(--u)); right: calc(var(--kzf-g-margin-x) * var(--u)); top: calc(var(--kzf-g-body-top) * var(--u));
+  bottom: calc(var(--kzf-g-body-bottom) * var(--u)); display: grid; gap: calc(var(--kzf-g-gap) * var(--u)); min-height: 0; }
+.kzf .kzf-card, .kzf .kzf-kpi, .kzf .kzf-band, .kzf .kzf-node { position: relative; background: var(--kzf-card-face); border: 1px solid var(--kzf-card-border);
+  border-radius: calc(var(--kzf-card-radius) * var(--u)); box-shadow: var(--kzf-card-shadow); min-width: 0; min-height: 0;
+  translate: 0 calc(var(--kzf-spot, 0) * -6 * var(--u)); }
+.kzf .kzf-card::after, .kzf .kzf-kpi::after, .kzf .kzf-node::after { content: ""; position: absolute; inset: -1px; border-radius: inherit; pointer-events: none;
+  box-shadow: var(--kzf-card-shadow-raised); opacity: var(--kzf-spot, 0); }
+.kzf .kzf-card { padding: calc(var(--kzf-g-card-pad-y) * var(--u)) calc(var(--kzf-g-card-pad-x) * var(--u)); display: flex; flex-direction: column; gap: calc(9 * var(--u)); }
+.kzf .kzf-card h3 { font-size: calc(var(--kzf-type-card-title) * var(--un)); font-weight: 700; line-height: 1.3; }
+.kzf .kzf-card p, .kzf .kzf-card li { font-size: calc(var(--kzf-type-body) * var(--un)); line-height: 1.5; color: var(--kzf-ink-body); }
+.kzf .kzf-card b { color: var(--kzf-ink-title); }
+.kzf .kzf-lbl { font-size: calc(var(--kzf-type-label) * var(--un)); color: var(--kzf-ink-muted); line-height: 1.4; }
+.kzf .kzf-hd { position: relative; display: flex; align-items: center; gap: calc(9 * var(--u)); padding: 0 calc(14 * var(--u)); height: calc(43 * var(--u));
+  border-radius: calc(var(--kzf-head-radius) * var(--u)); background: var(--kzf-head-face); border: 1px solid var(--kzf-head-border);
+  font-size: calc(var(--kzf-type-head) * var(--un)); font-weight: 700; white-space: nowrap; }
+.kzf .kzf-hd b { font-size: calc(var(--kzf-type-head-num) * var(--un)); color: var(--kzf-head-num); font-weight: 600; font-variant-numeric: tabular-nums; }
+.kzf .kzf-pill { display: flex; align-items: center; justify-content: space-between; gap: calc(8 * var(--u)); padding: calc(7 * var(--u)) calc(11 * var(--u));
+  border-radius: calc(9 * var(--u)); background: var(--kzf-pill-face); border: 1px solid var(--kzf-pill-border); font-size: calc(var(--kzf-type-body) * var(--un)); line-height: 1.35; }
+.kzf .kzf-pill em { font-style: normal; font-size: calc(var(--kzf-type-label) * var(--un)); font-weight: 600; padding: calc(1 * var(--u)) calc(8 * var(--u)); border-radius: 999px;
+  background: #fff; border: 1px solid var(--kzf-pill-border); white-space: nowrap; }
+.kzf .kzf-row { display: flex; align-items: center; justify-content: space-between; gap: calc(8 * var(--u)); padding: calc(7 * var(--u)) 0; border-bottom: 1px solid var(--kzf-line);
+  font-size: calc(var(--kzf-type-body) * var(--un)); line-height: 1.35; }
+.kzf .kzf-row small { display: block; font-size: calc(var(--kzf-type-label) * var(--un)); color: var(--kzf-ink-muted); }
+.kzf .kzf-tag { display: inline-block; font-size: calc(var(--kzf-type-label) * var(--un)); font-weight: 600; line-height: 1.3; padding: calc(3 * var(--u)) calc(9 * var(--u));
+  border-radius: calc(7 * var(--u)); white-space: nowrap; background: var(--kzf-tag-info-bg); color: var(--kzf-tag-info-ink); }
+.kzf .kzf-tag.ok { background: var(--kzf-tag-ok-bg); color: var(--kzf-tag-ok-ink); }
+.kzf .kzf-tag.risk { background: var(--kzf-tag-risk-bg); color: var(--kzf-tag-risk-ink); }
+.kzf .kzf-tag.wait { background: var(--kzf-tag-wait-bg); color: var(--kzf-tag-wait-ink); }
+.kzf .slide .kzf-note { margin-top: auto; padding-top: calc(9 * var(--u)); border-top: 1px solid var(--kzf-line); font-size: calc(var(--kzf-type-note) * var(--un)); font-weight: 600; color: var(--kzf-ink-body); line-height: 1.4; }
+.kzf .kzf-steps li { display: flex; gap: calc(8 * var(--u)); align-items: center; font-size: calc(var(--kzf-type-body) * var(--un)); padding: calc(3 * var(--u)) 0; color: var(--kzf-ink-body); }
+.kzf .kzf-steps li > i { flex: none; font-style: normal; width: calc(19 * var(--u)); height: calc(19 * var(--u)); border-radius: calc(6 * var(--u)); display: grid; place-items: center;
+  background: var(--kzf-head-face); color: var(--kzf-head-num); font-size: calc(var(--kzf-type-label) * var(--un) * .8); font-weight: 700; }
+.kzf .kzf-check { display: flex; justify-content: space-between; font-size: calc(var(--kzf-type-body) * var(--un)); padding: calc(3 * var(--u)) 0; }
+.kzf .kzf-check > span:last-child { color: var(--kzf-tag-ok-ink); font-weight: 700; }
+
+/* KPI cards: big numeral, unit, label, qualifier */
+.kzf .kzf-kpi { padding: calc(15 * var(--u)) calc(18 * var(--u)); display: flex; flex-direction: column; justify-content: center; }
+.kzf .kzf-kpi .v { font-family: "SF Pro Display", "Helvetica Neue", Arial, var(--kz-font); font-size: calc(var(--kzf-type-kpi-numeral) * var(--un)); font-weight: 700; line-height: 1; font-variant-numeric: tabular-nums; }
+.kzf .kzf-kpi .v small { font-family: var(--kz-font); font-size: calc(var(--kzf-type-kpi-unit) * var(--un)); color: var(--kzf-ink-muted); margin-left: calc(4 * var(--u)); font-weight: 600; }
+.kzf .kzf-kpi .k { font-size: calc(var(--kzf-type-kpi-label) * var(--un)); font-weight: 600; margin-top: calc(7 * var(--u)); line-height: 1.3; }
+.kzf .kzf-kpi .d { font-size: calc(var(--kzf-type-label) * var(--un)); color: var(--kzf-ink-muted); margin-top: calc(3 * var(--u)); line-height: 1.4; }
+.kzf .kzf-kpi.risk .v { color: var(--kz-risk); }
+.kzf .kzf-kpis { display: grid; gap: calc(var(--kzf-g-gap) * var(--u)); grid-auto-rows: 1fr; min-height: 0; }
+/* stack: cards keep their natural height and the last one takes the rest, spreading its rows (03 COPY-10: no half-empty cards) */
+.kzf .kzf-stack { display: flex; flex-direction: column; gap: calc(var(--kzf-g-gap) * var(--u)); min-height: 0; }
+.kzf .kzf-stack > :last-child { flex: 1; justify-content: space-between; }
+.kzf .kzf-stack > .kzf-kpi { flex: none; }
+/* fill (03 COPY-10): in equal-height card groups the list items share the spare height (capped), so a short card does not
+   leave its rows stacked at the top; the note stays anchored at the bottom. */
+.kzf :is(.kzf-cols, .kzf-flow) > .kzf-card, .kzf .kzf-stack > .kzf-card:last-child { justify-content: flex-start; }
+.kzf :is(.kzf-cols, .kzf-flow) > .kzf-card > :is(.kzf-pill, .kzf-row, .kzf-check),
+.kzf .kzf-stack > .kzf-card:last-child > :is(.kzf-pill, .kzf-row, .kzf-check),
+.kzf :is(.kzf-cols, .kzf-flow) > .kzf-card > .kzf-steps > li { flex: 1 1 auto; max-height: calc(62 * var(--u)); align-items: center; }
+.kzf :is(.kzf-cols, .kzf-flow) > .kzf-card > .kzf-steps { flex: 1 1 auto; display: flex; flex-direction: column; max-height: calc(248 * var(--u)); }
+.kzf .kzf-check { align-items: center; }
+.kzf .kzf-card > p.kzf-lede { text-wrap: balance; color: var(--kzf-ink-muted); font-size: calc(var(--kzf-type-label) * var(--un)); line-height: 1.45; }
+
+/* bottom band: one label segment and 3–5 hand-off segments */
+.kzf .kzf-band { display: flex; align-items: stretch; gap: calc(11 * var(--u)); padding: calc(11 * var(--u)); }
+.kzf .kzf-seg { position: relative; flex: 1; border-radius: calc(9 * var(--u)); padding: calc(8 * var(--u)) calc(13 * var(--u)); background: var(--kzf-pill-face);
+  display: flex; flex-direction: column; justify-content: center; gap: calc(2 * var(--u)); min-width: 0; }
+.kzf .kzf-seg span { font-size: calc(var(--kzf-type-label) * var(--un)); color: var(--kzf-ink-muted); line-height: 1.35; }
+.kzf .kzf-seg strong { font-size: calc(var(--kzf-type-body) * var(--un)); font-weight: 700; line-height: 1.35; }
+.kzf .kzf-seg.lead { flex: .7; background: none; }
+.kzf .kzf-seg.lead strong { font-size: calc(var(--kzf-type-card-title) * var(--un)); }
+
+/* ---------- body layouts ---------- */
+/* flow: N step columns, each a head pill over a card; joints between heads; optional band below */
+.kzf .kzf-flow { grid-template-columns: repeat(var(--n, 5), minmax(0, 1fr)); grid-template-rows: auto minmax(0, 1fr) auto; column-gap: calc(var(--kzf-g-gap) * var(--u)); row-gap: calc(12 * var(--u)); }
+.kzf .kzf-body > .kzf-band { grid-column: 1 / -1; }
+.kzf .kzf-flow > .kzf-card { padding-bottom: calc(15 * var(--u)); }
+.kzf .kzf-joint { position: absolute; width: calc(7 * var(--u)); height: calc(7 * var(--u)); border-radius: 50%; background: var(--kz-brand); top: calc(18 * var(--u));
+  right: calc((var(--kzf-g-gap) / -2 - 3.5) * var(--u)); z-index: 2; box-shadow: 0 0 0 calc(3 * var(--u)) rgba(255,153,0,.18); }
+/* split: a main stage (3D, chart, map) and a side column of KPI cards */
+.kzf .kzf-split { grid-template-columns: minmax(0, 1fr) calc(var(--side, 330) * var(--u)); }
+.kzf .kzf-stage { position: relative; min-height: 0; border-radius: calc(var(--kzf-card-radius) * var(--u)); }
+.kzf .kzf-stage canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+.kzf .kzf-stage-cap { position: absolute; left: calc(14 * var(--u)); bottom: calc(10 * var(--u)); font-size: calc(var(--kzf-type-label) * var(--un)); color: var(--kzf-ink-muted); }
+/* chart card + side cards */
+.kzf .kzf-chart-card .kz-chart { flex: 1; min-height: 0; }
+.kzf .kzf-chart-card .kz-gantt { flex: 1; min-height: 0; }
+.kzf .kzf-chart-card .kz-gantt-plot { height: 100% !important; }
+.kzf .kzf-card-head { display: flex; align-items: baseline; justify-content: space-between; gap: calc(12 * var(--u)); }
+.kzf .kzf-card-head span { font-size: calc(var(--kzf-type-label) * var(--un)); color: var(--kzf-ink-muted); white-space: nowrap; }
+/* cycle: centre KPI on an ellipse of nodes; kz-flagship.js places nodes and draws the arcs */
+.kzf .kzf-cycle { position: relative; display: block; }
+.kzf .kzf-cycle > svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; pointer-events: none; }
+.kzf .kzf-cycle .kzf-node { position: absolute; width: calc(200 * var(--u)); padding: calc(11 * var(--u)) calc(13 * var(--u)); translate: -50% calc(-50% + var(--kzf-spot, 0) * -6 * var(--u)); }
+.kzf .kzf-node h4 { display: flex; align-items: center; gap: calc(7 * var(--u)); font-size: calc(var(--kzf-type-card-title) * var(--un) * .9); font-weight: 700; line-height: 1.3; }
+.kzf .kzf-node h4 i { font-style: normal; flex: none; width: calc(23 * var(--u)); height: calc(23 * var(--u)); border-radius: calc(7 * var(--u)); display: grid; place-items: center;
+  color: #fff; background: var(--kzf-tile); font-size: calc(var(--kzf-type-label) * var(--un) * .85); }
+.kzf .kzf-node p { text-wrap: balance; font-size: calc(var(--kzf-type-label) * var(--un)); color: var(--kzf-ink-muted); line-height: 1.45; margin-top: calc(4 * var(--u)); }
+.kzf .kzf-cycle .kzf-kpi { position: absolute; left: 50%; top: 50%; width: calc(230 * var(--u)); height: calc(148 * var(--u)); translate: -50% -50%; border-radius: 999px; align-items: center; text-align: center; }
+/* columns of equal cards */
+.kzf .kzf-cols { grid-template-columns: repeat(var(--n, 3), minmax(0, 1fr)); }
+.kzf .kzf-rows2 { grid-template-rows: minmax(0, 1fr) auto; }
+
+/* ---------- hero pages (FLAG-07) ---------- */
+.kzf .kzf-cover-img { inset: 0; overflow: hidden; }
+.kzf .kzf-cover-img img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: right center; }
+.kzf .kzf-sweep { top: -10%; left: 40%; width: 22%; height: 120%; rotate: 22deg; opacity: 0; pointer-events: none; filter: blur(calc(24 * var(--u)));
+  background: linear-gradient(90deg, rgba(255,255,255,0), rgba(255,255,255,.55), rgba(255,255,255,0)); mix-blend-mode: soft-light; }
+.kzf .kzf-cover { left: calc(var(--kzf-g-margin-x) * var(--u)); top: calc(178 * var(--u)); width: calc(720 * var(--u)); display: flex; flex-direction: column; }
+.kzf .kzf-cover-kick { font-size: calc(var(--kzf-type-cover-kicker) * var(--un)); font-weight: 600; letter-spacing: .16em; color: var(--kzf-ink-kicker); }
+.kzf .kzf-cover h1 { font-size: calc(var(--kzf-type-cover-title) * var(--un)); font-weight: 700; line-height: 1.12; letter-spacing: .01em; margin-top: calc(14 * var(--u)); }
+.kzf .kzf-rule { height: calc(var(--kzf-rule-h) * var(--u)); width: calc(467 * var(--u)); border-radius: 3px; background: var(--kzf-rule); margin: calc(24 * var(--u)) 0 calc(18 * var(--u)); }
+.kzf .kzf-cover-lede { font-size: calc(var(--kzf-type-cover-lede) * var(--un)); color: var(--kzf-ink-body); font-weight: 500; line-height: 1.5; }
+.kzf .kzf-cover .kzf-chips { position: static; margin-top: calc(32 * var(--u)); flex-wrap: wrap; }
+.kzf .kzf-cover .kzf-chip { font-size: calc(var(--kzf-type-cover-chip) * var(--un)); padding: calc(8 * var(--u)) calc(16 * var(--u)); }
+.kzf .kzf-cover-meta { left: calc(var(--kzf-g-margin-x) * var(--u)); bottom: calc(56 * var(--u)); font-size: calc(var(--kzf-type-cover-meta) * var(--un)); color: var(--kzf-ink-body); font-weight: 600; }
+/* toc: one card per chapter, arranged on a shallow 3D arc */
+.kzf .kzf-toc-head { left: calc(var(--kzf-g-margin-x) * var(--u)); top: calc(118 * var(--u)); }
+.kzf .kzf-toc-head p { font-size: calc(var(--kzf-type-toc-kicker) * var(--un)); font-weight: 600; letter-spacing: .14em; color: var(--kzf-ink-kicker); }
+.kzf .kzf-toc-head h2 { font-size: calc(var(--kzf-type-toc-title) * var(--un)); font-weight: 700; line-height: 1.15; margin-top: calc(4 * var(--u)); }
+.kzf .kzf-toc { left: calc(var(--kzf-g-margin-x) * var(--u)); right: calc(var(--kzf-g-margin-x) * var(--u)); top: calc(290 * var(--u)); height: calc(272 * var(--u));
+  display: grid; grid-template-columns: repeat(var(--n, 4), minmax(0, calc(260 * var(--u)))); justify-content: center; gap: calc(26 * var(--u)); perspective: calc(1800 * var(--u)); }
+.kzf .kzf-toc .kzf-card { padding: calc(22 * var(--u)) calc(20 * var(--u)); gap: calc(10 * var(--u)); transform-style: preserve-3d; }
+.kzf .kzf-toc .ic { width: calc(38 * var(--u)); height: calc(38 * var(--u)); border-radius: calc(11 * var(--u)); display: grid; place-items: center; background: var(--kzf-head-face); color: #E58A00; }
+.kzf .kzf-toc .ic svg { width: calc(21 * var(--u)); height: calc(21 * var(--u)); }
+/* numerals (FLAG-07): gradient face + stepped depth + ground shadow on an inner face span (kz-flagship.js wraps the digits),
+   so entrance filters on the outer element never replace the depth; padding keeps the last glyph inside the clipped background */
+.kzf .kzf-toc .n, .kzf .kzf-sec-num { font-family: "SF Pro Display", "Helvetica Neue", Arial, var(--kz-font); font-weight: var(--kzf-numeral-weight); line-height: 1; letter-spacing: .01em; }
+.kzf .kzf-num-face { display: inline-block; padding-right: var(--kzf-numeral-pad); margin-right: calc(-1 * var(--kzf-numeral-pad));
+  background: var(--kzf-numeral); -webkit-background-clip: text; background-clip: text; color: transparent; filter: var(--kzf-numeral-depth); }
+.kzf .kzf-toc .n { font-size: calc(var(--kzf-type-toc-numeral) * var(--un)); }
+.kzf .kzf-toc h3 { font-size: calc(var(--kzf-type-toc-card-title) * var(--un)); margin-top: auto; }
+.kzf .kzf-toc .kzf-card p { font-size: calc(var(--kzf-type-toc-card-desc) * var(--un)); color: var(--kzf-ink-muted); }
+/* section: giant gradient numeral, title block, chapter list with the current one raised */
+.kzf .kzf-sec-num { left: calc(var(--kzf-g-margin-x) * var(--u)); top: calc(168 * var(--u)); font-size: calc(var(--kzf-type-section-numeral) * var(--un)); }
+.kzf .kzf-sec-text { left: calc(466 * var(--u)); top: calc(258 * var(--u)); display: flex; flex-direction: column; gap: calc(12 * var(--u)); max-width: calc(470 * var(--u)); }
+.kzf .kzf-sec-text p:first-child { font-size: calc(var(--kzf-type-section-kicker) * var(--un)); font-weight: 600; letter-spacing: .12em; color: var(--kzf-ink-kicker); }
+.kzf .kzf-sec-text h2 { font-size: calc(var(--kzf-type-section-title) * var(--un)); font-weight: 700; line-height: 1.15; }
+.kzf .kzf-sec-text p + h2 + p { font-size: calc(var(--kzf-type-section-lede) * var(--un)); color: var(--kzf-ink-body); line-height: 1.5; }
+.kzf .kzf-sec-toc { right: calc(var(--kzf-g-margin-x) * var(--u)); top: calc(200 * var(--u)); width: calc(280 * var(--u)); display: flex; flex-direction: column; gap: calc(4 * var(--u)); }
+.kzf .kzf-sec-toc li { display: flex; gap: calc(12 * var(--u)); align-items: center; padding: calc(11 * var(--u)) calc(15 * var(--u)); border-radius: calc(11 * var(--u));
+  font-size: calc(var(--kzf-type-section-toc) * var(--un)); color: var(--kzf-ink-muted); }
+.kzf .kzf-sec-toc li b { font-variant-numeric: tabular-nums; }
+.kzf .kzf-sec-toc li.on { color: var(--kzf-ink-title); font-weight: 700; background: rgba(255,255,255,.85); box-shadow: var(--kzf-card-shadow); }
+.kzf .kzf-sec-toc li.on b { color: var(--kz-brand); }
+/* ending: “谢谢” and one meta line (11 HERO-01, user 2026-11-17) */
+.kzf .kzf-end { left: 0; right: 0; top: calc(220 * var(--u)); display: flex; flex-direction: column; align-items: center; text-align: center; }
+.kzf .kzf-end h2 { font-size: calc(var(--kzf-type-ending-title) * var(--un)); font-weight: 700; letter-spacing: .2em; line-height: 1.1; padding-left: .2em; }
+.kzf .kzf-end .kzf-rule { width: calc(320 * var(--u)); background: linear-gradient(90deg, rgba(255,153,0,0), #FF9900 50%, rgba(255,204,0,0)); }
+.kzf .kzf-end p { font-size: calc(var(--kzf-type-ending-lede) * var(--un)); color: var(--kzf-ink-body); line-height: 1.5; }
+.kzf .kzf-end-meta { left: 0; right: 0; bottom: calc(56 * var(--u)); text-align: center; font-size: calc(var(--kzf-type-ending-meta) * var(--un)); color: var(--kzf-ink-foot); font-weight: 600; }
+
+/* print and frozen states: everything visible, nothing offset (runtime also seeks timelines to their end) */
+@media print { .kzf .slide { transition: none; } .kzf .deck { background: var(--kzf-canvas-flat); } }
+
+/* ---------- stage components (FLAG-06, runtime/kz-flagship-stages.js): 3D stages paint a 2D canvas, SVG stages draw in logical px ---------- */

@@ -1,0 +1,579 @@
+{
+ "defaults": {
+  "transition": {
+   "effect": "fade",
+   "duration": 0.4
+  },
+  "animation": {
+   "effect": "none"
+  }
+ },
+ "slides": {
+  "01_safety": {
+   "groups": {
+    "fs-head": {
+     "effect": "entrance_fade",
+     "duration": 0.52,
+     "delay": 0.0,
+     "trigger": "with-previous",
+     "order": 1,
+     "decelerate": 0.7
+    },
+    "fs-bars": {
+     "effect": "entrance_wipe",
+     "duration": 1.0,
+     "delay": 0.0,
+     "trigger": "on-click",
+     "order": 2,
+     "decelerate": 0.7,
+     "effect_options": {
+      "direction": "up"
+     }
+    },
+    "fs-in0": {
+     "effect": "entrance_rise_up",
+     "duration": 0.52,
+     "delay": 0.0,
+     "trigger": "on-click",
+     "order": 3
+    },
+    "fs-in1": {
+     "effect": "entrance_rise_up",
+     "duration": 0.52,
+     "delay": 0.18,
+     "trigger": "with-previous",
+     "order": 4
+    },
+    "fs-in2": {
+     "effect": "entrance_rise_up",
+     "duration": 0.52,
+     "delay": 0.36,
+     "trigger": "with-previous",
+     "order": 5
+    }
+   }
+  },
+  "02_program": {
+   "groups": {
+    "fp-now": {
+     "effect": "entrance_fade",
+     "duration": 0.52,
+     "delay": 0.0,
+     "trigger": "with-previous",
+     "order": 1,
+     "decelerate": 0.7
+    },
+    "fp-axis": {
+     "effect": "entrance_fade",
+     "duration": 0.52,
+     "delay": 0.18,
+     "trigger": "with-previous",
+     "order": 2,
+     "decelerate": 0.7
+    },
+    "fp-lane0": {
+     "effect": "entrance_wipe",
+     "duration": 1.0,
+     "delay": 0.0,
+     "trigger": "on-click",
+     "order": 3,
+     "decelerate": 0.7,
+     "effect_options": {
+      "direction": "left"
+     }
+    },
+    "fp-lane1": {
+     "effect": "entrance_wipe",
+     "duration": 1.0,
+     "delay": 0.18,
+     "trigger": "with-previous",
+     "order": 4,
+     "decelerate": 0.7,
+     "effect_options": {
+      "direction": "left"
+     }
+    },
+    "fp-lane2": {
+     "effect": "entrance_wipe",
+     "duration": 1.0,
+     "delay": 0.36,
+     "trigger": "with-previous",
+     "order": 5,
+     "decelerate": 0.7,
+     "effect_options": {
+      "direction": "left"
+     }
+    },
+    "fp-lane3": {
+     "effect": "entrance_wipe",
+     "duration": 1.0,
+     "delay": 0.54,
+     "trigger": "with-previous",
+     "order": 6,
+     "decelerate": 0.7,
+     "effect_options": {
+      "direction": "left"
+     }
+    },
+    "fp-lane4": {
+     "effect": "entrance_wipe",
+     "duration": 1.0,
+     "delay": 0.72,
+     "trigger": "with-previous",
+     "order": 7,
+     "decelerate": 0.7,
+     "effect_options": {
+      "direction": "left"
+     }
+    },
+    "fp-legend": {
+     "effect": "entrance_fade",
+     "duration": 0.52,
+     "delay": 0.9,
+     "trigger": "with-previous",
+     "order": 8,
+     "decelerate": 0.7
+    },
+    "fp-in0": {
+     "effect": "entrance_rise_up",
+     "duration": 0.52,
+     "delay": 0.0,
+     "trigger": "on-click",
+     "order": 9
+    },
+    "fp-in1": {
+     "effect": "entrance_rise_up",
+     "duration": 0.52,
+     "delay": 0.18,
+     "trigger": "with-previous",
+     "order": 10
+    },
+    "fp-in2": {
+     "effect": "entrance_rise_up",
+     "duration": 0.52,
+     "delay": 0.36,
+     "trigger": "with-previous",
+     "order": 11
+    }
+   }
+  },
+  "03_safety_db": {
+   "groups": {
+    "fd-hero": {
+     "effect": "entrance_rise_up",
+     "duration": 0.52,
+     "delay": 0.0,
+     "trigger": "with-previous",
+     "order": 1
+    },
+    "fd-head": {
+     "effect": "entrance_fade",
+     "duration": 0.52,
+     "delay": 0.18,
+     "trigger": "with-previous",
+     "order": 2,
+     "decelerate": 0.7
+    },
+    "fd-plot": {
+     "effect": "entrance_wipe",
+     "duration": 1.0,
+     "delay": 0.0,
+     "trigger": "on-click",
+     "order": 3,
+     "decelerate": 0.7,
+     "effect_options": {
+      "direction": "left"
+     }
+    },
+    "fd-in0": {
+     "effect": "entrance_fade",
+     "duration": 0.52,
+     "delay": 0.0,
+     "trigger": "on-click",
+     "order": 4,
+     "decelerate": 0.7
+    },
+    "fd-in1": {
+     "effect": "entrance_fade",
+     "duration": 0.52,
+     "delay": 0.18,
+     "trigger": "with-previous",
+     "order": 5,
+     "decelerate": 0.7
+    },
+    "fd-in2": {
+     "effect": "entrance_fade",
+     "duration": 0.52,
+     "delay": 0.36,
+     "trigger": "with-previous",
+     "order": 6,
+     "decelerate": 0.7
+    }
+   }
+  },
+  "04_program_strip": {
+   "groups": {
+    "fq-now": {
+     "effect": "entrance_fade",
+     "duration": 0.52,
+     "delay": 0.0,
+     "trigger": "with-previous",
+     "order": 1,
+     "decelerate": 0.7
+    },
+    "fq-axis": {
+     "effect": "entrance_fade",
+     "duration": 0.52,
+     "delay": 0.18,
+     "trigger": "with-previous",
+     "order": 2,
+     "decelerate": 0.7
+    },
+    "fq-lane0": {
+     "effect": "entrance_wipe",
+     "duration": 1.0,
+     "delay": 0.0,
+     "trigger": "on-click",
+     "order": 3,
+     "decelerate": 0.7,
+     "effect_options": {
+      "direction": "left"
+     }
+    },
+    "fq-lane1": {
+     "effect": "entrance_wipe",
+     "duration": 1.0,
+     "delay": 0.18,
+     "trigger": "with-previous",
+     "order": 4,
+     "decelerate": 0.7,
+     "effect_options": {
+      "direction": "left"
+     }
+    },
+    "fq-lane2": {
+     "effect": "entrance_wipe",
+     "duration": 1.0,
+     "delay": 0.36,
+     "trigger": "with-previous",
+     "order": 5,
+     "decelerate": 0.7,
+     "effect_options": {
+      "direction": "left"
+     }
+    },
+    "fq-lane3": {
+     "effect": "entrance_wipe",
+     "duration": 1.0,
+     "delay": 0.54,
+     "trigger": "with-previous",
+     "order": 6,
+     "decelerate": 0.7,
+     "effect_options": {
+      "direction": "left"
+     }
+    },
+    "fq-lane4": {
+     "effect": "entrance_wipe",
+     "duration": 1.0,
+     "delay": 0.72,
+     "trigger": "with-previous",
+     "order": 7,
+     "decelerate": 0.7,
+     "effect_options": {
+      "direction": "left"
+     }
+    },
+    "fq-legend": {
+     "effect": "entrance_fade",
+     "duration": 0.52,
+     "delay": 0.9,
+     "trigger": "with-previous",
+     "order": 8,
+     "decelerate": 0.7
+    },
+    "fq-in0": {
+     "effect": "entrance_rise_up",
+     "duration": 0.52,
+     "delay": 0.0,
+     "trigger": "on-click",
+     "order": 9
+    },
+    "fq-in1": {
+     "effect": "entrance_rise_up",
+     "duration": 0.52,
+     "delay": 0.18,
+     "trigger": "with-previous",
+     "order": 10
+    },
+    "fq-in2": {
+     "effect": "entrance_rise_up",
+     "duration": 0.52,
+     "delay": 0.36,
+     "trigger": "with-previous",
+     "order": 11
+    }
+   }
+  },
+  "05_exposure": {
+   "groups": {
+    "fe-head": {
+     "effect": "entrance_fade",
+     "duration": 0.52,
+     "delay": 0.0,
+     "trigger": "with-previous",
+     "order": 1,
+     "decelerate": 0.7
+    },
+    "fe-rows": {
+     "effect": "entrance_wipe",
+     "duration": 1.0,
+     "delay": 0.0,
+     "trigger": "on-click",
+     "order": 2,
+     "decelerate": 0.7,
+     "effect_options": {
+      "direction": "left"
+     }
+    },
+    "fe-target": {
+     "effect": "entrance_rise_up",
+     "duration": 0.52,
+     "delay": 0.0,
+     "trigger": "on-click",
+     "order": 3
+    }
+   }
+  },
+  "06_trialflow": {
+   "groups": {
+    "ft-head": {
+     "effect": "entrance_fade",
+     "duration": 0.52,
+     "delay": 0.0,
+     "trigger": "with-previous",
+     "order": 1,
+     "decelerate": 0.7
+    },
+    "ft-axis": {
+     "effect": "entrance_fade",
+     "duration": 0.52,
+     "delay": 0.18,
+     "trigger": "with-previous",
+     "order": 2,
+     "decelerate": 0.7
+    },
+    "ft-trunk": {
+     "effect": "entrance_rise_up",
+     "duration": 0.52,
+     "delay": 0.0,
+     "trigger": "on-click",
+     "order": 3
+    },
+    "ft-rand": {
+     "effect": "entrance_zoom",
+     "duration": 0.52,
+     "delay": 0.18,
+     "trigger": "with-previous",
+     "order": 4,
+     "decelerate": 0.7
+    },
+    "ft-arm0": {
+     "effect": "entrance_wipe",
+     "duration": 1.0,
+     "delay": 0.36,
+     "trigger": "with-previous",
+     "order": 5,
+     "decelerate": 0.7,
+     "effect_options": {
+      "direction": "left"
+     }
+    },
+    "ft-arm1": {
+     "effect": "entrance_wipe",
+     "duration": 1.0,
+     "delay": 0.54,
+     "trigger": "with-previous",
+     "order": 6,
+     "decelerate": 0.7,
+     "effect_options": {
+      "direction": "left"
+     }
+    },
+    "ft-names": {
+     "effect": "entrance_fade",
+     "duration": 0.52,
+     "delay": 0.72,
+     "trigger": "with-previous",
+     "order": 7,
+     "decelerate": 0.7
+    },
+    "ft-after": {
+     "effect": "entrance_rise_up",
+     "duration": 0.52,
+     "delay": 0.0,
+     "trigger": "on-click",
+     "order": 8
+    },
+    "ft-subs": {
+     "effect": "entrance_fade",
+     "duration": 0.52,
+     "delay": 0.18,
+     "trigger": "with-previous",
+     "order": 9,
+     "decelerate": 0.7
+    },
+    "ft-bands": {
+     "effect": "entrance_wipe",
+     "duration": 1.0,
+     "delay": 0.36,
+     "trigger": "with-previous",
+     "order": 10,
+     "decelerate": 0.7,
+     "effect_options": {
+      "direction": "left"
+     }
+    }
+   }
+  },
+  "07_landscape": {
+   "groups": {
+    "fl-head": {
+     "effect": "entrance_fade",
+     "duration": 0.52,
+     "delay": 0.0,
+     "trigger": "with-previous",
+     "order": 1,
+     "decelerate": 0.7
+    },
+    "fl-rows": {
+     "effect": "entrance_wipe",
+     "duration": 1.0,
+     "delay": 0.0,
+     "trigger": "on-click",
+     "order": 2,
+     "decelerate": 0.7,
+     "effect_options": {
+      "direction": "left"
+     }
+    }
+   }
+  },
+  "08_efficacy": {
+   "groups": {
+    "fv-head": {
+     "effect": "entrance_fade",
+     "duration": 0.52,
+     "delay": 0.0,
+     "trigger": "with-previous",
+     "order": 1,
+     "decelerate": 0.7
+    },
+    "fv-rows": {
+     "effect": "entrance_wipe",
+     "duration": 1.0,
+     "delay": 0.0,
+     "trigger": "on-click",
+     "order": 2,
+     "decelerate": 0.7,
+     "effect_options": {
+      "direction": "left"
+     }
+    },
+    "fv-in0": {
+     "effect": "entrance_rise_up",
+     "duration": 0.52,
+     "delay": 0.0,
+     "trigger": "on-click",
+     "order": 3
+    },
+    "fv-in1": {
+     "effect": "entrance_rise_up",
+     "duration": 0.52,
+     "delay": 0.18,
+     "trigger": "with-previous",
+     "order": 4
+    },
+    "fv-in2": {
+     "effect": "entrance_rise_up",
+     "duration": 0.52,
+     "delay": 0.36,
+     "trigger": "with-previous",
+     "order": 5
+    }
+   }
+  },
+  "09_soa": {
+   "groups": {
+    "fa-head": {
+     "effect": "entrance_fade",
+     "duration": 0.52,
+     "delay": 0.0,
+     "trigger": "with-previous",
+     "order": 1,
+     "decelerate": 0.7
+    },
+    "fa-events": {
+     "effect": "entrance_fade",
+     "duration": 0.52,
+     "delay": 0.0,
+     "trigger": "on-click",
+     "order": 2,
+     "decelerate": 0.7
+    },
+    "fa-bands": {
+     "effect": "entrance_wipe",
+     "duration": 1.0,
+     "delay": 0.18,
+     "trigger": "with-previous",
+     "order": 3,
+     "decelerate": 0.7,
+     "effect_options": {
+      "direction": "left"
+     }
+    },
+    "fa-rows": {
+     "effect": "entrance_wipe",
+     "duration": 1.0,
+     "delay": 0.0,
+     "trigger": "on-click",
+     "order": 4,
+     "decelerate": 0.7,
+     "effect_options": {
+      "direction": "down"
+     }
+    }
+   }
+  },
+  "10_exposure_plan": {
+   "groups": {
+    "fx-head": {
+     "effect": "entrance_fade",
+     "duration": 0.52,
+     "delay": 0.0,
+     "trigger": "with-previous",
+     "order": 1,
+     "decelerate": 0.7
+    },
+    "fx-plot": {
+     "effect": "entrance_wipe",
+     "duration": 1.0,
+     "delay": 0.0,
+     "trigger": "on-click",
+     "order": 2,
+     "decelerate": 0.7,
+     "effect_options": {
+      "direction": "left"
+     }
+    },
+    "fx-ready": {
+     "effect": "entrance_rise_up",
+     "duration": 0.52,
+     "delay": 0.0,
+     "trigger": "on-click",
+     "order": 3
+    }
+   }
+  }
+ }
+}

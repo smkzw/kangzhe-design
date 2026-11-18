@@ -1,0 +1,19 @@
+{
+ "title": "KZ-001 暴露例数汇总（安全性分析集）",
+ "exposure": {
+  "unit": "例",
+  "head": "适应症 / 研究",
+  "bands": [{"key": "any", "label": "任何暴露"}, {"key": "w26", "label": "≥26 周"}, {"key": "w52", "label": "≥52 周"}],
+  "groups": [
+   {"key": "t2d", "name": "2 型糖尿病", "note": "KZ-301 · KZ-302", "values": [812, 640, 402], "py": 905},
+   {"key": "obe", "name": "肥胖/超重", "note": "KZ-303 · KZ-304", "values": [596, 471, 233], "py": 612},
+   {"key": "mash", "name": "MASH", "note": "KZ-203", "values": [148, 121, 0], "py": 98},
+   {"key": "ckd", "name": "慢性肾病", "note": "KZ-104", "values": [64, 0, 0], "py": 16},
+   {"key": "hv", "name": "健康受试者", "note": "6 项 I 期", "values": [210, 0, 0], "py": 9}
+  ],
+  "targets": {"any": 1500, "w26": 600, "w52": 100},
+  "target_label": "ICH E1 目标",
+  "focus": "t2d"
+ },
+ "note": "合成示例；暴露时长档为累计（≥52 周包含在 ≥26 周内）；人年 = 各受试者暴露天数之和 / 365.25。"
+}

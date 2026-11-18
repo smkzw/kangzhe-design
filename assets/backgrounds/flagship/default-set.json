@@ -1,0 +1,177 @@
+{
+ "_doc": "14 FLAG-07/10 旗舰 F1 背景（8.0）：flagship-cover 是封面主视觉（2026-11-17 CMS gpt-image-2 生成的玻璃丝带，源图 1672×941，合成时放大），flagship-canvas 是其余页的暖白画布（tools/flagship_canvas.py，与 HTML 的 --kzf-canvas 同一组 token）。HTML-PPT 的画布由 CSS 绘制，只有封面用图；PPTX 每页用图。page-plan 的 image.mode 写 flagship_set，asset_id 写下面的 id。有生图能力时可按 04 IMG-07 为主题另生封面。",
+ "version": "8.0.0",
+ "assets": [
+  {
+   "id": "flagship-cover",
+   "style": "F1",
+   "kind": "cover",
+   "page_kinds": [
+    "cover"
+   ],
+   "role": "旗舰 F1 · cover",
+   "file": "assets/backgrounds/flagship/cover.jpg",
+   "sha256": "044667fc5a0c7d7f062c192597347abf3bd9009d878f052d96dcb6a54990439a",
+   "actual_size": [
+    2560,
+    1440
+   ],
+   "provenance": {
+    "origin": "generated",
+    "source": "examples/validation/backdrops/gen/g-flag-cover.png",
+    "source_sha256": "46adae3e5213b5042f079d3ede57099ea616dd69332110bf8fabe82cba5e1950",
+    "source_size": "1672x941",
+    "receipt": "examples/validation/backdrops/provenance.json",
+    "placement": {
+     "scale": 1,
+     "dy": 0,
+     "image_box": [
+      1,
+      0,
+      2559,
+      1440
+     ]
+    },
+    "upscaled": true
+   },
+   "quiet": {
+    "zones": [
+     {
+      "zone": [
+       92,
+       164,
+       760,
+       148
+      ],
+      "luminance_std": 0.46,
+      "mean_lightness": 245.9,
+      "colored_share": 0.0
+     },
+     {
+      "zone": [
+       92,
+       322,
+       760,
+       42
+      ],
+      "luminance_std": 0.49,
+      "mean_lightness": 245.8,
+      "colored_share": 0.0
+     },
+     {
+      "zone": [
+       92,
+       382,
+       760,
+       28
+      ],
+      "luminance_std": 0.46,
+      "mean_lightness": 245.9,
+      "colored_share": 0.0
+     }
+    ],
+    "pass": true,
+    "failures": []
+   },
+   "renditions": [
+    {
+     "aspect": "21:9",
+     "viewport": [
+      2560,
+      1080
+     ],
+     "file": "assets/backgrounds/flagship/cover-wide.jpg",
+     "sha256": "002ac1f125c089d88bec73ceaa53dcfb73ad92fe3f8ff0aa97720aaa131e5354",
+     "actual_size": [
+      2560,
+      1080
+     ],
+     "quiet": {
+      "zones": [
+       {
+        "zone": [
+         92,
+         164,
+         760,
+         148
+        ],
+        "luminance_std": 1.8,
+        "mean_lightness": 247.8,
+        "colored_share": 0.0
+       },
+       {
+        "zone": [
+         92,
+         322,
+         760,
+         42
+        ],
+        "luminance_std": 1.58,
+        "mean_lightness": 247.7,
+        "colored_share": 0.0
+       },
+       {
+        "zone": [
+         92,
+         382,
+         760,
+         28
+        ],
+        "luminance_std": 1.45,
+        "mean_lightness": 247.5,
+        "colored_share": 0.0
+       }
+      ],
+      "pass": true,
+      "failures": []
+     }
+    }
+   ]
+  },
+  {
+   "id": "flagship-canvas",
+   "style": "F1",
+   "kind": "canvas",
+   "page_kinds": [
+    "toc",
+    "section",
+    "content",
+    "ending"
+   ],
+   "role": "旗舰 F1 · canvas",
+   "file": "assets/backgrounds/flagship/canvas.jpg",
+   "sha256": "8354d484449656031c1b63e0665d1a1da9f37be9206f3134703582d7739d147b",
+   "actual_size": [
+    2560,
+    1440
+   ],
+   "provenance": {
+    "origin": "procedural",
+    "renderer": "tools/flagship_canvas.py --size 2560x1440"
+   },
+   "quiet": {
+    "pass": true,
+    "note": "整页安静画布，无主物象"
+   },
+   "renditions": [
+    {
+     "aspect": "21:9",
+     "viewport": [
+      2560,
+      1080
+     ],
+     "file": "assets/backgrounds/flagship/canvas-wide.jpg",
+     "sha256": "adcc10a2cc822f19eca91f0e299d66e15d27689e0fc73a25b6f5e1a1d8685bcc",
+     "actual_size": [
+      2560,
+      1080
+     ],
+     "quiet": {
+      "pass": true,
+      "note": "整页安静画布，无主物象"
+     }
+    }
+   ]
+  }
+ ]
+}

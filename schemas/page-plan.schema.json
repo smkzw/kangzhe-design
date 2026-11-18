@@ -1,0 +1,1175 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:kangzhe:page-plan:6.1",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "track",
+    "canvas",
+    "pages",
+    "contract_revision",
+    "target_viewports"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "6.1"
+    },
+    "track": {
+      "enum": [
+        "pptx",
+        "htmlppt",
+        "site",
+        "stream"
+      ]
+    },
+    "canvas": {
+      "type": "array",
+      "items": {
+        "type": "number",
+        "exclusiveMinimum": 0
+      },
+      "minItems": 2,
+      "maxItems": 2
+    },
+    "pages": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "kind",
+          "title",
+          "body_profile",
+          "elements",
+          "protected_regions",
+          "image",
+          "sources",
+          "cards"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "kind": {
+            "enum": [
+              "cover",
+              "toc",
+              "section",
+              "body",
+              "ending",
+              "hero",
+              "flow_section"
+            ]
+          },
+          "title": {
+            "type": "string",
+            "minLength": 1
+          },
+          "body_profile": {
+            "enum": [
+              "standard",
+              "compact",
+              "responsive"
+            ]
+          },
+          "elements": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "id",
+                "role",
+                "font_px",
+                "line_height"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "role": {
+                  "enum": [
+                    "page_title",
+                    "card_title",
+                    "body",
+                    "chart_label",
+                    "secondary",
+                    "takeaway",
+                    "footer",
+                    "reference",
+                    "cover_title",
+                    "hero_subtitle",
+                    "hero_meta",
+                    "toc_title",
+                    "toc_number",
+                    "toc_label",
+                    "toc_description",
+                    "section_number",
+                    "section_title",
+                    "ending_title"
+                  ]
+                },
+                "font_px": {
+                  "type": "number",
+                  "exclusiveMinimum": 0
+                },
+                "line_height": {
+                  "type": "number",
+                  "exclusiveMinimum": 0
+                },
+                "text": {
+                  "type": "string"
+                },
+                "rect": {
+                  "type": "array",
+                  "prefixItems": [
+                    {
+                      "type": "number"
+                    },
+                    {
+                      "type": "number"
+                    },
+                    {
+                      "type": "number"
+                    },
+                    {
+                      "type": "number"
+                    }
+                  ],
+                  "items": false,
+                  "minItems": 4,
+                  "maxItems": 4
+                }
+              },
+              "additionalProperties": false
+            }
+          },
+          "protected_regions": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "id",
+                "rect",
+                "role"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "rect": {
+                  "type": "array",
+                  "prefixItems": [
+                    {
+                      "type": "number"
+                    },
+                    {
+                      "type": "number"
+                    },
+                    {
+                      "type": "number"
+                    },
+                    {
+                      "type": "number"
+                    }
+                  ],
+                  "items": false,
+                  "minItems": 4,
+                  "maxItems": 4
+                },
+                "role": {
+                  "enum": [
+                    "title",
+                    "logo",
+                    "header",
+                    "footer",
+                    "body",
+                    "takeaway",
+                    "control",
+                    "data",
+                    "reference",
+                    "other"
+                  ]
+                },
+                "motion_margin": {
+                  "type": "number",
+                  "minimum": 0
+                },
+                "zone": {
+                  "enum": [
+                    "clear",
+                    "quiet",
+                    "subject"
+                  ],
+                  "description": "04 IMG-02 区域类别；缺省按 clear 处理"
+                }
+              },
+              "additionalProperties": false
+            }
+          },
+          "image": {
+            "type": "object",
+            "required": [
+              "mode"
+            ],
+            "properties": {
+              "mode": {
+                "enum": [
+                  "generated",
+                  "default_set",
+                  "global_procedural_optical_field",
+                  "flagship_set"
+                ]
+              },
+              "asset_id": {
+                "type": "string",
+                "minLength": 1
+              },
+              "subject_rects": {
+                "type": "array",
+                "items": {
+                  "type": "array",
+                  "prefixItems": [
+                    {
+                      "type": "number"
+                    },
+                    {
+                      "type": "number"
+                    },
+                    {
+                      "type": "number"
+                    },
+                    {
+                      "type": "number"
+                    }
+                  ],
+                  "items": false,
+                  "minItems": 4,
+                  "maxItems": 4
+                }
+              },
+              "procedural_evidence": {
+                "type": "string"
+              },
+              "viewport_assets": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "required": [
+                    "viewport",
+                    "asset_id"
+                  ],
+                  "properties": {
+                    "viewport": {
+                      "type": "array",
+                      "prefixItems": [
+                        {
+                          "type": "integer",
+                          "minimum": 1
+                        },
+                        {
+                          "type": "integer",
+                          "minimum": 1
+                        }
+                      ],
+                      "items": false,
+                      "minItems": 2,
+                      "maxItems": 2
+                    },
+                    "asset_id": {
+                      "type": "string",
+                      "minLength": 1
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              },
+              "viewport_regions": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "required": [
+                    "viewport",
+                    "protected_regions"
+                  ],
+                  "properties": {
+                    "viewport": {
+                      "type": "array",
+                      "prefixItems": [
+                        {
+                          "type": "integer",
+                          "minimum": 1
+                        },
+                        {
+                          "type": "integer",
+                          "minimum": 1
+                        }
+                      ],
+                      "items": false,
+                      "minItems": 2,
+                      "maxItems": 2
+                    },
+                    "protected_regions": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "required": [
+                          "id",
+                          "rect",
+                          "role"
+                        ],
+                        "properties": {
+                          "id": {
+                            "type": "string"
+                          },
+                          "rect": {
+                            "type": "array",
+                            "prefixItems": [
+                              {
+                                "type": "number"
+                              },
+                              {
+                                "type": "number"
+                              },
+                              {
+                                "type": "number"
+                              },
+                              {
+                                "type": "number"
+                              }
+                            ],
+                            "items": false,
+                            "minItems": 4,
+                            "maxItems": 4
+                          },
+                          "role": {
+                            "enum": [
+                              "title",
+                              "logo",
+                              "header",
+                              "footer",
+                              "body",
+                              "takeaway",
+                              "control",
+                              "data",
+                              "reference",
+                              "other"
+                            ]
+                          },
+                          "motion_margin": {
+                            "type": "number",
+                            "minimum": 0
+                          },
+                          "zone": {
+                            "enum": [
+                              "clear",
+                              "quiet",
+                              "subject"
+                            ],
+                            "description": "04 IMG-02 区域类别；缺省按 clear 处理"
+                          }
+                        },
+                        "additionalProperties": false
+                      }
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              }
+            },
+            "additionalProperties": false,
+            "allOf": [
+              {
+                "if": {
+                  "properties": {
+                    "mode": {
+                      "const": "generated"
+                    }
+                  }
+                },
+                "then": {
+                  "required": [
+                    "asset_id"
+                  ]
+                }
+              },
+              {
+                "if": {
+                  "properties": {
+                    "mode": {
+                      "const": "flagship_set"
+                    }
+                  }
+                },
+                "then": {
+                  "required": [
+                    "asset_id"
+                  ]
+                }
+              }
+            ]
+          },
+          "sources": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "id",
+                "kind",
+                "visible"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "kind": {
+                  "enum": [
+                    "scientific_paper",
+                    "guideline",
+                    "consensus",
+                    "guidance",
+                    "internal",
+                    "news",
+                    "registry",
+                    "other"
+                  ]
+                },
+                "visible": {
+                  "type": "boolean"
+                },
+                "locator": {
+                  "type": "string"
+                }
+              },
+              "additionalProperties": false
+            }
+          },
+          "cards": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "id",
+                "material",
+                "edge_decoration",
+                "layout_mode",
+                "detail",
+                "detail_reason"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "material": {
+                  "enum": [
+                    "liquid_glass",
+                    "accessible_glass",
+                    "flagship_paper"
+                  ],
+                  "description": "02 LG-01 同族玻璃（常规）；旗舰路线的白纸卡写 flagship_paper（14 FLAG-05）"
+                },
+                "edge_decoration": {
+                  "enum": [
+                    "none",
+                    "neutral_hairline",
+                    "localized_highlight"
+                  ]
+                },
+                "layout_mode": {
+                  "enum": [
+                    "stack",
+                    "distributed",
+                    "centered",
+                    "compact"
+                  ]
+                },
+                "layout_reason": {
+                  "type": "string"
+                },
+                "detail": {
+                  "description": "下钻细节的可得性（07）：available 源材料有更细层级可做 L1/L2，not_available 材料没有，not_needed 不需要；只填枚举，内容与理由写 detail_reason",
+                  "enum": [
+                    "available",
+                    "not_available",
+                    "not_needed"
+                  ]
+                },
+                "detail_reason": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "emphasis": {
+                  "enum": [
+                    "applied",
+                    "not_applicable"
+                  ],
+                  "description": "03 COPY-06 文字重点"
+                },
+                "emphasis_reason": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "verbatim_quote": {
+                  "type": "object",
+                  "required": [
+                    "source_locator",
+                    "reason"
+                  ],
+                  "properties": {
+                    "source_locator": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "reason": {
+                      "type": "string",
+                      "minLength": 1
+                    }
+                  },
+                  "additionalProperties": false,
+                  "description": "03 COPY-06：必须连续引述的原文"
+                }
+              },
+              "additionalProperties": false,
+              "allOf": [
+                {
+                  "if": {
+                    "properties": {
+                      "emphasis": {
+                        "const": "not_applicable"
+                      }
+                    },
+                    "required": [
+                      "emphasis"
+                    ]
+                  },
+                  "then": {
+                    "required": [
+                      "emphasis_reason"
+                    ]
+                  }
+                }
+              ]
+            }
+          },
+          "takeaway": {
+            "type": [
+              "object",
+              "null"
+            ],
+            "properties": {
+              "text": {
+                "type": "string"
+              },
+              "font_px": {
+                "type": "number"
+              },
+              "align": {
+                "const": "center"
+              },
+              "rationale": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "text",
+              "font_px",
+              "align",
+              "rationale"
+            ],
+            "additionalProperties": false
+          },
+          "hero_layout_id": {
+            "enum": [
+              "cover-01",
+              "toc-01",
+              "section-01",
+              "cover-02",
+              "toc-02",
+              "section-02",
+              "ending-01",
+              "flagship-cover",
+              "flagship-toc",
+              "flagship-section",
+              "flagship-ending"
+            ]
+          },
+          "motion_objects": {
+            "description": "逐对象动态清单（06）：页上每张卡片 cards[].id 都要有一项同 id 的对象（qc_plan MOTION-MAP），另可列标题、图表等对象",
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "id",
+                "role",
+                "enter",
+                "exit",
+                "hover",
+                "ambient"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "role": {
+                  "type": "string"
+                },
+                "enter": {
+                  "type": "string"
+                },
+                "exit": {
+                  "type": "string"
+                },
+                "hover": {
+                  "type": "string"
+                },
+                "ambient": {
+                  "type": "string"
+                },
+                "data_progress": {
+                  "type": "string"
+                },
+                "film_id": {
+                  "type": "string"
+                },
+                "static_reason": {
+                  "type": "string"
+                }
+              },
+              "additionalProperties": false
+            }
+          },
+          "preset": {
+            "enum": [
+              "cards-3",
+              "cards-2",
+              "split-7-5",
+              "film",
+              "full",
+              "demo",
+              "demo-mirror",
+              "demo-wide",
+              "demo-stack",
+              "kzl"
+            ],
+            "description": "13 BODY-01 正文页构图预设（PPTX / HTML-PPT 正文页）"
+          },
+          "demo": {
+            "description": "15 DEMO-01/02/05：HTML-PPT 演示页写形式 kind（KZDemo 形式名，或 custom 表示 KZScenes 自定义舞台）；讲方法或数据却不做演示时写 none 与理由。构图预设写在页面级 preset（不在 demo 里），须是 demo 系预设之一。",
+            "oneOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "kind": {
+                    "enum": [
+                      "units",
+                      "calc",
+                      "story",
+                      "timeline",
+                      "decision",
+                      "compare",
+                      "flow",
+                      "gantt",
+                      "swimlane",
+                      "consort",
+                      "curve",
+                      "breakdown",
+                      "audit",
+                      "matrix",
+                      "network",
+                      "schedule",
+                      "waffle",
+                      "funnel",
+                      "shift",
+                      "milestones",
+                      "pathway",
+                      "safety",
+                      "program",
+                      "exposure",
+                      "trialflow",
+                      "landscape",
+                      "efficacy",
+                      "soa",
+                      "custom"
+                    ]
+                  },
+                  "cases": {
+                    "type": "array",
+                    "items": {
+                      "enum": [
+                        "positive",
+                        "negative",
+                        "complex_negative"
+                      ]
+                    },
+                    "description": "DEMO-09：流程、规则、核查类演示含有的个案类型"
+                  }
+                },
+                "required": [
+                  "kind"
+                ],
+                "additionalProperties": false
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "none": {
+                    "type": "string",
+                    "minLength": 1
+                  }
+                },
+                "required": [
+                  "none"
+                ],
+                "additionalProperties": false
+              }
+            ]
+          },
+          "body_profile_reason": {
+            "type": "string",
+            "minLength": 1,
+            "description": "03 TYPE-01：整页降为 compact 的原因"
+          },
+          "fold_stage": {
+            "enum": [
+              "film",
+              "figure",
+              "chart"
+            ],
+            "description": "06 FILM-01 / 13 FOLD-02：站点与流式首屏舞台内容；非 film 时写 fold_stage_reason"
+          },
+          "fold_stage_reason": {
+            "type": "string",
+            "minLength": 1
+          },
+          "template": {
+            "type": "string",
+            "description": "13 BODY-02/03 正文页所用模板（tools/kz_layout.py list 的名字）；旗舰路线取 14 FLAG-08 的 flag-* 版式；故事板据此展示缩略图与同族变体"
+          },
+          "density": {
+            "enum": [
+              "sparse",
+              "standard",
+              "dense"
+            ],
+            "description": "13 BODY-03 内容密度档（tools/kz_layout.py render 回执里的 density.tier；list 目录里的 低/常规/高 对应 sparse/standard/dense）"
+          },
+          "stage": {
+            "type": "object",
+            "description": "14 FLAG-06a 舞台组件：component 取 tokens.flagship.stages.catalog 的组件名，job 取该组件登记的适用内容",
+            "required": [
+              "component",
+              "job"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "component": {
+                "type": "string"
+              },
+              "job": {
+                "type": "string"
+              }
+            }
+          },
+          "continues": {
+            "type": "boolean",
+            "description": "同一列表或条款按页续排的后续页（不计入相邻同形）"
+          },
+          "emphasis": {
+            "type": "object",
+            "required": [
+              "not_applicable"
+            ],
+            "properties": {
+              "not_applicable": {
+                "type": "string",
+                "minLength": 2
+              }
+            },
+            "additionalProperties": false,
+            "description": "03 COPY-04：本页文字单元确实没有合理重点时写理由"
+          }
+        },
+        "additionalProperties": false,
+        "allOf": [
+          {
+            "if": {
+              "properties": {
+                "body_profile": {
+                  "const": "compact"
+                }
+              },
+              "required": [
+                "body_profile"
+              ]
+            },
+            "then": {
+              "required": [
+                "body_profile_reason"
+              ]
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "fold_stage": {
+                  "enum": [
+                    "figure",
+                    "chart"
+                  ]
+                }
+              },
+              "required": [
+                "fold_stage"
+              ]
+            },
+            "then": {
+              "required": [
+                "fold_stage_reason"
+              ]
+            }
+          }
+        ]
+      }
+    },
+    "contract_revision": {
+      "const": "7.0",
+      "description": "page-plan 合同修订号；与包版本独立。7.0 起视口矩阵按 tokens.viewports（浏览器可视区）。"
+    },
+    "target_viewports": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "type": "array",
+        "minItems": 2,
+        "maxItems": 2,
+        "items": {
+          "type": "integer",
+          "minimum": 1
+        }
+      }
+    },
+    "route": {
+      "enum": [
+        "regular",
+        "flagship"
+      ],
+      "default": "regular",
+      "description": "14 FLAG-01：PPTX 与 HTML-PPT 的路线；缺省为常规"
+    },
+    "image_capability": {
+      "type": "object",
+      "description": "04 IMG-07：PPTX / HTML-PPT 常规路线的生图能力闸门结果（先检测、再问用户）；站点与流式不过这道闸门，不写本字段（写了 qc_plan 给 warning），程序化光场记在 image 里",
+      "required": [
+        "decision",
+        "asked_user",
+        "detected"
+      ],
+      "properties": {
+        "decision": {
+          "enum": [
+            "generated",
+            "default_set"
+          ]
+        },
+        "provider": {
+          "type": "string",
+          "minLength": 1,
+          "description": "实际使用的生图 skill 或接口名称"
+        },
+        "asked_user": {
+          "const": true
+        },
+        "detected": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Agent 检测到的生图能力（无则为空数组）"
+        },
+        "user_answer": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "decision": {
+                "const": "generated"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "provider"
+            ]
+          }
+        }
+      ]
+    }
+  },
+  "additionalProperties": false,
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "track": {
+            "enum": [
+              "pptx",
+              "htmlppt"
+            ]
+          },
+          "route": {
+            "not": {
+              "const": "flagship"
+            }
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "pages": {
+            "items": {
+              "allOf": [
+                {
+                  "if": {
+                    "properties": {
+                      "kind": {
+                        "const": "cover"
+                      }
+                    }
+                  },
+                  "then": {
+                    "required": [
+                      "hero_layout_id"
+                    ],
+                    "properties": {
+                      "hero_layout_id": {
+                        "const": "cover-01"
+                      }
+                    }
+                  }
+                },
+                {
+                  "if": {
+                    "properties": {
+                      "kind": {
+                        "const": "toc"
+                      }
+                    }
+                  },
+                  "then": {
+                    "required": [
+                      "hero_layout_id"
+                    ],
+                    "properties": {
+                      "hero_layout_id": {
+                        "const": "toc-01"
+                      }
+                    }
+                  }
+                },
+                {
+                  "if": {
+                    "properties": {
+                      "kind": {
+                        "const": "section"
+                      }
+                    }
+                  },
+                  "then": {
+                    "required": [
+                      "hero_layout_id"
+                    ],
+                    "properties": {
+                      "hero_layout_id": {
+                        "const": "section-01"
+                      }
+                    }
+                  }
+                },
+                {
+                  "if": {
+                    "properties": {
+                      "kind": {
+                        "const": "ending"
+                      }
+                    }
+                  },
+                  "then": {
+                    "required": [
+                      "hero_layout_id"
+                    ],
+                    "properties": {
+                      "hero_layout_id": {
+                        "const": "ending-01"
+                      }
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "required": [
+          "route"
+        ],
+        "properties": {
+          "route": {
+            "const": "flagship"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "pages": {
+            "items": {
+              "allOf": [
+                {
+                  "if": {
+                    "properties": {
+                      "kind": {
+                        "const": "cover"
+                      }
+                    }
+                  },
+                  "then": {
+                    "required": [
+                      "hero_layout_id"
+                    ],
+                    "properties": {
+                      "hero_layout_id": {
+                        "const": "flagship-cover"
+                      }
+                    }
+                  }
+                },
+                {
+                  "if": {
+                    "properties": {
+                      "kind": {
+                        "const": "toc"
+                      }
+                    }
+                  },
+                  "then": {
+                    "required": [
+                      "hero_layout_id"
+                    ],
+                    "properties": {
+                      "hero_layout_id": {
+                        "const": "flagship-toc"
+                      }
+                    }
+                  }
+                },
+                {
+                  "if": {
+                    "properties": {
+                      "kind": {
+                        "const": "section"
+                      }
+                    }
+                  },
+                  "then": {
+                    "required": [
+                      "hero_layout_id"
+                    ],
+                    "properties": {
+                      "hero_layout_id": {
+                        "const": "flagship-section"
+                      }
+                    }
+                  }
+                },
+                {
+                  "if": {
+                    "properties": {
+                      "kind": {
+                        "const": "ending"
+                      }
+                    }
+                  },
+                  "then": {
+                    "required": [
+                      "hero_layout_id"
+                    ],
+                    "properties": {
+                      "hero_layout_id": {
+                        "const": "flagship-ending"
+                      }
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "track": {
+            "enum": [
+              "htmlppt",
+              "site",
+              "stream"
+            ]
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "pages": {
+            "items": {
+              "required": [
+                "motion_objects"
+              ],
+              "properties": {
+                "motion_objects": {
+                  "minItems": 1
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "track": {
+            "enum": [
+              "pptx",
+              "htmlppt"
+            ]
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "pages": {
+            "items": {
+              "properties": {
+                "body_profile": {
+                  "enum": [
+                    "standard",
+                    "compact"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  ]
+}

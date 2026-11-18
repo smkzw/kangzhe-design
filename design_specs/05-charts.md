@@ -1,0 +1,56 @@
+# 05 四轨统一图表语言
+
+## 语义数据先于图形 CHART-01
+先建 canonical chart data：稳定的 chart/series/point id、类别或时间、数值、单位、缺失值、估计量、分析人群、时间点、区间类型和必要限定。HTML 与 PPTX 从同一数据对象派生，不手抄两份。不把 null 写成 0，不把描述性趋势写成推断结论，不把样本不同的比例混作直接比较。
+
+HTML 三轨的数值图都用随包 ECharts（`assets/vendor/echarts.min.js`，经 `runtime/kz-charts.js`）；不编码精确数值的流程或机制示意可以用 SVG/DOM。生成图不能画统计结果。
+
+## 共同形态 CHART-02
+- 柱/条：平直准确的量值轴、轻微端部圆角、同色淡渐变；不做透视立柱或立体厚度。负值用同系列颜色，不误染成风险红。比较量值通常保留零基线；截轴须明示。
+- 时间折线：默认带线下低透明度浅面积（沿零轴），`smooth:false`、`connectNulls:false`，显示真实点位与缺口。面积只是视觉辅助，不代表累计量或置信区间；多系列遮挡、真实 CI 带、KM、森林图、散点不套线下面积，在图表计划写理由。
+- 误差线/置信区间用真实 low/high 和明确统计名称。图例、单位、人群、时间点在必要时直接可见，不藏进 tooltip。
+- 量值轴用易读的等距刻度（1、2、5 × 10ⁿ），自动范围按完整真值计算，揭示动画中范围与步长不变；源材料指定的端点或专用尺度优先。
+- 文字用文字色（`charts.label`），不用系列色；网格与轴线用 `charts.grid` / `charts.axis`，保持安静。
+
+## 配色 CHART-03
+类别系列按固定顺序取 `charts.categorical`（5 色，已过亮度带、彩度下限、色觉障碍区分度与对比度校验），顺序不随筛选变化，不循环；超过 5 个系列合并为“其他”或拆成小多图。对照组/安慰剂用保留的中性色 `charts.comparator`，必须带文字标签。部门色只在系列确实代表某部门时使用（数据里声明 `department`）。治疗组与对照组的颜色映射全篇稳定。
+
+## 揭示动画 CHART-04
+数值图的入场由一个归一化进度驱动，图形与读数同步（`onProgress`）：
+
+- 折线自左向右描出：进度位置之前的点保持真实值，最后一段插值到进度位置；**不把整条线从零抬起**（那会让人读成数值随时间增长）。
+- 柱形自基线长出，各类别按左到右的小错峰（同一进度内完成）。
+- 缓动用 `motion.easing.data`，时长 `motion.duration_ms.data`。数据揭示在图表所在页或段落首次可见时开始，不随滚动进度拖动。
+- 用户正在读取或编辑、减少动态、打印、离页时立即呈现真值；未到达的图表不持续耗帧。
+- 数据更新（筛选、切换口径，`setData`）直接呈现新的真值，不在两组真值之间补间：补间的中间帧不对应任何真实数据。需要提示变化时，用不改数值的手段（短暂高亮变化的系列或标签）。
+- 单值 KPI 可用 `KZMotion.countUp` 短时滚动到真值（终值写入 `aria-label`），不得从随机数开始，不暗示真实的时间变化。
+
+基础工厂只覆盖折线/柱/条；森林图、CI、热图、Sankey 等用 ECharts 官方 series 或 custom 另行实现与测试，继承同一数据和材质规则，不能拿基础图冒充。
+
+图表壳用同族玻璃，绘图区是稳定阅读面，不倾斜。挂载后尺寸变化要 resize；隐藏状态不以零尺寸初始化；关闭时按状态 dispose 或暂停。图例切换不重排颜色，数字格式不丢规定小数位。图表可以下钻，但 tooltip 不是下钻。
+
+## PPTX 原生图表 CHART-05
+- 支持的图型同时写可见的 SVG fallback 与 `data-pptx-replace-with="chart"` 下的 JSON 元数据；fallback 与元数据同改，用上游 `stamp_native_fallbacks.py --write` 同步，再经 `verify-charts` 阶段与 `--native-charts-and-tables` 导出。
+- 折线 + 浅面积用 combo 中共享数据的 area 与 line 两个 plot，不传 ECharts 的 `areaStyle`。
+- 值轴元数据用 `axes.value.minimum / maximum / major_unit`（封闭对象），不是扁平的 `axes.minimum`，也不直接透传 ECharts 的 min/max/interval。
+- 缺失值：缓存省略、空单元格和 `dispBlanksAs=gap` 都不能单独证明面积没有落零；用含内部缺失点的数据在 PowerPoint 中打开、保存、重开，看两层形态是否一致，并结构核对图表缓存与嵌入工作簿。本包不要求、也不通过“编辑数据”启动 Excel。
+- 甘特不在原生 chart 类型中，用原生形状加可编辑标签（08）。
+- 图表入场动画只承诺到整个对象（原生 Wipe 自底部），不承诺按系列逐个生长（06 MOTION-07）。
+
+原生图不追求与浏览器逐像素一致；验收重点是同配色、同字号、同轴口径、同数据和接近的外壳。ECharts 截图不是可编辑原生图。
+
+## 双轨核对
+同一数据在 HTML 与 PPTX 导出前后逐值比对：顺序、零值、负值、null、极值、舍入、单位、图例。CSS 画的假柱不是 ECharts 合规实现，ECharts 渲染的 PNG 也不是原生数据图。
+
+## 临床数据图 CHART-06（round 9）
+依据：FDA《Standard Safety Tables and Figures: Integrated Guide》（2022，Docket FDA-2022-N-1961）、FDA《Sponsor Responsibilities—Safety Reporting》（2025 终版，FDA-2020-D-2099）、ICH E9 / E9(R1)、CONSORT 2025、Vandemeulebroecke 2019（CPT Pharmacometrics Syst Pharmacol 8:705，doi:10.1002/psp4.12455）、Phillips 2022（BMJ 377:e068983，安全性图形共识）；逐条出处与证据分级另行维护（访问日期 2026-11-18）。以下是硬规则：
+
+- **真实时间轴**：历时变化的横轴是研究时间 `t`（周、天、月），不按访视序号等距排列。缺失值写 `null`，图上断线、表里写“—”，不当 0，也不跨缺失连线。
+- **区间写明**：`measure.interval` 必须是 95% CI / SE / SD / IQR / 箱线之一，图上写出。描述分布用 SD 或 IQR，组间推断用 95% CI。
+- **按组的 n**：每个访视每组都有 n，写在轴下；尾部人数很少时截短。
+- **比值用对数轴**：HR / OR / RR / 率比用对数轴，参考线为 1；差值（均值差、率差）用线性轴，参考线为 0。参考线由效应量决定，不写死。
+- **盲态**：`blinded: true` 只有一条全体合并序列。不能有 arms、不能有组间差，图例不能切换。页面标“盲态汇总，仅限内部”；编码分组（A 组 / B 组）视同揭盲。
+- **实验室指标**：偏态且关注尾部，用箱线（`lab-boxplot`），画 ULN 参考线和参考范围；参考线落在范围边上时，范围带要内缩（02 LG-02）。多项检验与生命体征用小倍数（`lab-multiples`），各格各自刻度。
+- **安全性的 CI / P 值**是描述性的，未做多重性校正，写进脚注。
+- **HTML 交互**（`runtime/kz-explore.js`）：悬停显示组、访视、估计与区间、n；点数据点下钻出历时表，所点的格子标出；表内可以改数（按合同校验），改后图与 `KZ_DECK_DATA` 一起更新；“复制数据”给出 JSON。PPTX 用原生形状与文字。
+- **不是这里的规则**：`kind` 与数据合同的唯一来源是 `tools/kz_layouts/diagram_long.py`（Python）与 `KZClinical.longitudinal`（JS），两者由维护仓库的回归测试保持一致。

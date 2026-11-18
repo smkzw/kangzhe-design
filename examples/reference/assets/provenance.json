@@ -1,0 +1,65 @@
+{
+ "_doc": "参考实现复用历史真实生图资产（原始回执见 examples/validation/KZ6-0929-A01/asset-provenance.json），仅转码为 WebP；未重新生图。hero 长边 1672 < tokens.image.hero_min_long_edge_px 2560：清晰度 WARN。 未纳入 body-wide：其内容为 hero 式玻璃丝带，不符合 IMG-05 正文背景要求；超宽正文背景待真实生成。",
+ "assets": [
+  {
+   "id": "cover",
+   "file": "assets/cover.webp",
+   "derived_from": "examples/validation/KZ6-0929-A03/html-ppt/assets/asset_cover_hero.png",
+   "source_sha256": "aa4f7119df6ff40267fd8e6ed813c97bb93bd5a1666009f0d2686917a46c2871",
+   "sha256": "f49a77b3779197dc3da607cab1abd8e781a1752a59a05c0f6ddf483bddd966c4",
+   "actual_size": [
+    1672,
+    941
+   ],
+   "bytes": 39002
+  },
+  {
+   "id": "toc",
+   "file": "assets/toc.webp",
+   "derived_from": "examples/validation/KZ6-0929-A03/html-ppt/assets/asset_toc_hero.png",
+   "source_sha256": "566c6ad9ed48562fcc95847cdde63decdcc997f34c8a9c5e49b89b7c1a06c545",
+   "sha256": "a0605c608295ba363da7e686142c570eda72a26916a04a7435c9c4f4fb31e1d0",
+   "actual_size": [
+    1672,
+    941
+   ],
+   "bytes": 31472
+  },
+  {
+   "id": "section",
+   "file": "assets/section.webp",
+   "derived_from": "examples/validation/KZ6-0929-A03/html-ppt/assets/asset_section_hero.png",
+   "source_sha256": "380560cab7c937415e855be13fafe448490cbab1adfcbba95f7999402707574e",
+   "sha256": "b6c57e2353f4df286283b4bfc47c9dac6722477ea350394b22dbaaf219768466",
+   "actual_size": [
+    1672,
+    941
+   ],
+   "bytes": 37870
+  },
+  {
+   "id": "ending",
+   "file": "assets/ending.webp",
+   "derived_from": "examples/validation/KZ6-0929-A03/html-ppt/assets/asset_ending_hero_v3.png",
+   "source_sha256": "33680aee0826cf66e90f895047766f732d8eb3da3af849de4ce41cbbeddf8db0",
+   "sha256": "112c304cabe5d474627fe003e4de6cd34d87068383e516e2f2cf464bf7e32d3a",
+   "actual_size": [
+    1672,
+    941
+   ],
+   "bytes": 22128
+  },
+  {
+   "id": "body-quiet",
+   "file": "assets/body-quiet.webp",
+   "derived_from": "examples/validation/KZ6-0929-A03/html-ppt/assets/asset_body_bg_quiet.png",
+   "source_sha256": "ce19777696202c355b2d13cda6fb5b6b2172edfc58e7e93e3b231cfd9f2aed73",
+   "sha256": "193a17b2e926aa10dace71799d1577d431d86ba0ae1e4adf74819cc782f4a829",
+   "actual_size": [
+    1672,
+    941
+   ],
+   "bytes": 15818
+  }
+ ]
+}

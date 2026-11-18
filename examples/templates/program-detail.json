@@ -1,0 +1,40 @@
+{
+ "title": "肥胖/超重开发计划（细化节点）",
+ "program": {
+  "from": "2025Q3", "to": "2029Q4", "today": "2026Q4", "head": "研究",
+  "lanes": [
+   {"key": "s202", "name": "II 期 KZ-202", "note": "剂量探索 · 320 例",
+    "bars": [{"key": "s202-b", "phase": "II 期", "start": "2025Q3", "end": "2026Q3"}],
+    "milestones": [{"key": "s202-fpi", "at": "2025Q3", "label": "首例入组", "kind": "start"},
+                   {"key": "s202-lpi", "at": "2026Q1", "label": "末例入组", "kind": "other"},
+                   {"key": "s202-tl", "at": "2026Q3", "label": "顶线结果", "kind": "readout"}]},
+   {"key": "s303", "name": "III 期 KZ-303", "note": "疗效确证 · 600 例",
+    "bars": [{"key": "s303-b", "phase": "III 期", "start": "2026Q4", "end": "2028Q2", "label": "72 周疗程"}],
+    "milestones": [{"key": "s303-fpi", "at": "2026Q4", "label": "首例入组", "kind": "start"},
+                   {"key": "s303-lpi", "at": "2027Q2", "label": "末例入组", "kind": "other"},
+                   {"key": "s303-dbl", "at": "2028Q1", "label": "数据库锁定", "kind": "other"},
+                   {"key": "s303-tl", "at": "2028Q2", "label": "顶线结果", "kind": "readout"}]},
+   {"key": "s304", "name": "III 期 KZ-304", "note": "合并 2 型糖尿病 · 400 例",
+    "bars": [{"key": "s304-b", "phase": "III 期", "start": "2027Q1", "end": "2028Q2"}],
+    "milestones": [{"key": "s304-fpi", "at": "2027Q1", "label": "首例入组", "kind": "start"},
+                   {"key": "s304-lpi", "at": "2027Q3", "label": "末例入组", "kind": "other", "risk": true},
+                   {"key": "s304-tl", "at": "2028Q2", "label": "顶线结果", "kind": "readout"}]},
+   {"key": "s305", "name": "长期安全性 KZ-305", "note": "≥1 年暴露 · 300 例",
+    "bars": [{"key": "s305-b", "phase": "III 期", "start": "2027Q1", "end": "2028Q4"}],
+    "milestones": [{"key": "s305-fpi", "at": "2027Q1", "label": "首例入组", "kind": "start"},
+                   {"key": "s305-1y", "at": "2028Q3", "label": "1 年暴露数据", "kind": "readout"}]},
+   {"key": "reg", "name": "注册与上市", "note": "NMPA",
+    "bars": [{"key": "reg-b", "phase": "注册", "start": "2028Q3", "end": "2029Q2"},
+             {"key": "reg-pm", "phase": "上市后", "start": "2029Q3", "end": "2029Q4"}],
+    "milestones": [{"key": "reg-sub", "at": "2028Q3", "label": "NDA 递交", "kind": "submit"},
+                   {"key": "reg-ap", "at": "2029Q2", "label": "获批", "kind": "approve"}]}
+  ],
+  "focus": "s303-tl"
+ },
+ "insights": [
+  {"icon": "route", "title": "关键路径是 KZ-303", "text": "72 周疗效确证，**{s303-tl} 顶线**决定递交时间"},
+  {"icon": "alert-circle", "title": "KZ-304 入组偏慢", "text": "合并 2 型糖尿病人群末例入组可能推迟 **1 个季度**", "tone": "risk"},
+  {"icon": "shield", "title": "安全性暴露够用", "text": "KZ-305 在 {s305-1y} 给出 **1 年暴露**数据，赶得上递交"}
+ ],
+ "note": "合成示例；季度为计划时间，当前线之后为计划。"
+}

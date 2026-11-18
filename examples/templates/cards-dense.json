@@ -1,0 +1,150 @@
+{
+ "layout": "4x2",
+ "cards": [
+  {
+   "icon": "doc",
+   "title": "方案与修订",
+   "tag": {
+    "text": "已齐",
+    "tone": "ok"
+   },
+   "items": [
+    "V2.3 为当前版本",
+    "修订记录 2 份"
+   ],
+   "rows": [
+    {
+     "label": "应收 / 已收",
+     "value": "2 / 2"
+    }
+   ]
+  },
+  {
+   "icon": "building-hospital",
+   "title": "中心记录",
+   "tag": {
+    "text": "缺 3 份",
+    "tone": "bad"
+   },
+   "items": [
+    "两家中心未按期上传",
+    "CRA **本周补传**"
+   ],
+   "rows": [
+    {
+     "label": "应收 / 已收",
+     "value": "12 / 9"
+    }
+   ]
+  },
+  {
+   "icon": "flask",
+   "title": "实验室数据",
+   "tag": {
+    "text": "已齐",
+    "tone": "ok"
+   },
+   "items": [
+    "中心实验室统一报告",
+    "参考范围**已核**"
+   ],
+   "rows": [
+    {
+     "label": "应收 / 已收",
+     "value": "6 / 6"
+    }
+   ]
+  },
+  {
+   "icon": "shield",
+   "title": "安全性报告",
+   "tag": {
+    "text": "缺 1 份",
+    "tone": "bad"
+   },
+   "items": [
+    "SAE 随访报告未到",
+    "**不影响**主分析集"
+   ],
+   "rows": [
+    {
+     "label": "应收 / 已收",
+     "value": "4 / 3"
+    }
+   ]
+  },
+  {
+   "icon": "arrows-split",
+   "title": "版本差异",
+   "tag": {
+    "text": "待确认",
+    "tone": "wait"
+   },
+   "items": [
+    "访视窗定义不同",
+    "确认后**再比较**"
+   ],
+   "rows": [
+    {
+     "label": "差异条目",
+     "value": "2 项"
+    }
+   ]
+  },
+  {
+   "icon": "map-pin",
+   "title": "原文定位",
+   "tag": {
+    "text": "已执行",
+    "tone": "ok"
+   },
+   "items": [
+    "结论附文件与页码",
+    "复核**直接打开**"
+   ],
+   "rows": [
+    {
+     "label": "可回溯结论",
+     "value": "100%"
+    }
+   ]
+  },
+  {
+   "icon": "rework",
+   "title": "补收重比",
+   "tag": {
+    "text": "进行中",
+    "tone": "info"
+   },
+   "items": [
+    "补传后自动重比",
+    "结果写回档案"
+   ],
+   "rows": [
+    {
+     "label": "本周补传",
+     "value": "3 份"
+    }
+   ]
+  },
+  {
+   "icon": "circle-check",
+   "title": "复核签署",
+   "tag": {
+    "text": "未开始",
+    "tone": "muted"
+   },
+   "items": [
+    "医学与统计共同签署",
+    "签署前**再核关键条目**"
+   ],
+   "rows": [
+    {
+     "label": "计划时间",
+     "value": "2027Q1"
+    }
+   ]
+  }
+ ],
+ "band": "八项里**两项缺口、一项待确认**，其余已完成或进行中"
+}

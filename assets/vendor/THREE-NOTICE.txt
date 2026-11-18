@@ -1,0 +1,12 @@
+three.bundle.min.js — flagship 3D vendor bundle (8.0), one IIFE file built by tools/vendor3d (maintainer-only, see its README.md)
+sha256 8018c7783a8db59ffa8ea52e898e13220ddb3aef048d314e712efc2deaa360a8
+Globals: window.THREE (three.js), window.KZ3D (RoundedBoxGeometry, EffectComposer, RenderPass, EffectPass, SMAAEffect,
+ToneMappingEffect, ToneMappingMode, N8AOPostPass).
+
+Contents (versions pinned in tools/vendor3d/package.json and package-lock.json):
+- three 0.187.0 (r187) — MIT, see THREE-LICENSE.txt. Copyright 2010-2026 three.js authors. https://github.com/mrdoob/three.js
+- postprocessing 6.39.6 — Zlib, see POSTPROCESSING-LICENSE.txt. Copyright 2015 Raoul van Rüschen. https://github.com/pmndrs/postprocessing
+- n8ao 2.1.0 — CC0 1.0 (package metadata says ISC; both permit redistribution), see N8AO-LICENSE.txt. https://github.com/N8python/n8ao
+
+Why a bundle: three.js stopped shipping a UMD three.min.js after r160, and ES module <script src> does not load from file://,
+so the decks keep a plain <script> and the maintainer bundles once. The previous three.min.js (r149) is removed.

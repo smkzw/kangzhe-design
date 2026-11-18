@@ -1,0 +1,1973 @@
+{
+ "_doc": "04 IMG-07 缺省背景套（8.0）：PPTX 与 HTML-PPT 常规路线在没有生图能力、或用户选用现成风格时使用。四种风格见 tokens.image.backdrop.styles，缺省 A2。每张有 16:9（2560×1440）与 21:9（2560×1080，renditions）两版。A2 的主物象是 2026-11-17 用 CMS gpt-image-2 生成的液态玻璃丝带，源图 1672×941、合成时放大（hero 清晰度按 IMG-04 记 WARN）；A1/B/C 是程序化绘制。page-plan 的 image.mode 写 default_set，asset_id 写下面的 id；风格 A2 的 id 不带前缀（cover/toc/section/ending/body-quiet），其余风格写 <风格>-<页型>。重建：examples/validation/backdrops/build.py（维护者）。",
+ "version": "8.0.0",
+ "default_style": "A2",
+ "assets": [
+  {
+   "id": "cover",
+   "style": "A2",
+   "kind": "cover",
+   "page_kinds": [
+    "cover",
+    "hero"
+   ],
+   "role": "暖光丝带 · cover",
+   "file": "assets/backgrounds/A2/cover.jpg",
+   "sha256": "4397688b4a0d554e803392864f5269bd5d2d2c00d03974e2ce828fcd47545563",
+   "actual_size": [
+    2560,
+    1440
+   ],
+   "provenance": {
+    "origin": "generated",
+    "source": "examples/validation/backdrops/gen/g-cover.png",
+    "source_sha256": "8896cb9481886eb8c043ebb0fcda6add8fc3e0008ada326498ab7e12b5c97fee",
+    "source_size": "1672x941",
+    "receipt": "examples/validation/backdrops/provenance.json",
+    "placement": {
+     "scale": 1,
+     "dy": 0,
+     "image_box": [
+      1,
+      0,
+      2559,
+      1440
+     ]
+    },
+    "upscaled": true
+   },
+   "quiet": {
+    "zones": [
+     {
+      "zone": [
+       92,
+       164,
+       760,
+       148
+      ],
+      "luminance_std": 2.78,
+      "mean_lightness": 248.6,
+      "colored_share": 0.003
+     },
+     {
+      "zone": [
+       92,
+       322,
+       760,
+       42
+      ],
+      "luminance_std": 3.72,
+      "mean_lightness": 247.8,
+      "colored_share": 0.0073
+     },
+     {
+      "zone": [
+       92,
+       382,
+       760,
+       28
+      ],
+      "luminance_std": 1.26,
+      "mean_lightness": 247.8,
+      "colored_share": 0.0
+     }
+    ],
+    "pass": true,
+    "failures": []
+   },
+   "renditions": [
+    {
+     "aspect": "21:9",
+     "viewport": [
+      2560,
+      1080
+     ],
+     "file": "assets/backgrounds/A2/cover-wide.jpg",
+     "sha256": "95d6f7d8bb07f76caa540c0ccb15590be2553835069018cd4b4f6a3947e9c832",
+     "actual_size": [
+      2560,
+      1080
+     ],
+     "quiet": {
+      "zones": [
+       {
+        "zone": [
+         92,
+         164,
+         760,
+         148
+        ],
+        "luminance_std": 1.04,
+        "mean_lightness": 249.7,
+        "colored_share": 0.0
+       },
+       {
+        "zone": [
+         92,
+         322,
+         760,
+         42
+        ],
+        "luminance_std": 0.81,
+        "mean_lightness": 249.2,
+        "colored_share": 0.0
+       },
+       {
+        "zone": [
+         92,
+         382,
+         760,
+         28
+        ],
+        "luminance_std": 0.75,
+        "mean_lightness": 248.8,
+        "colored_share": 0.0
+       }
+      ],
+      "pass": true,
+      "failures": []
+     }
+    }
+   ]
+  },
+  {
+   "id": "toc",
+   "style": "A2",
+   "kind": "toc",
+   "page_kinds": [
+    "toc"
+   ],
+   "role": "暖光丝带 · toc",
+   "file": "assets/backgrounds/A2/toc.jpg",
+   "sha256": "1b6d26002431d5b338da9752377c2f733e03d35a5e71fd7065431752ae0b3d0e",
+   "actual_size": [
+    2560,
+    1440
+   ],
+   "provenance": {
+    "origin": "generated",
+    "source": "examples/validation/backdrops/gen/g-toc.png",
+    "source_sha256": "3b773e7e4f55e3e1a25ee9adecbdf2a97484877723010e3c4d895096723443cd",
+    "source_size": "1672x941",
+    "receipt": "examples/validation/backdrops/provenance.json",
+    "placement": {
+     "scale": 1.12,
+     "dy": 0,
+     "image_box": [
+      -306,
+      0,
+      2866,
+      1613
+     ]
+    },
+    "upscaled": true
+   },
+   "quiet": {
+    "zones": [
+     {
+      "zone": [
+       68,
+       28,
+       860,
+       68
+      ],
+      "luminance_std": 1.56,
+      "mean_lightness": 245.3,
+      "colored_share": 0.0
+     },
+     {
+      "zone": [
+       68,
+       160,
+       1144,
+       296
+      ],
+      "luminance_std": 1.27,
+      "mean_lightness": 245.2,
+      "colored_share": 0.0
+     }
+    ],
+    "pass": true,
+    "failures": []
+   },
+   "renditions": [
+    {
+     "aspect": "21:9",
+     "viewport": [
+      2560,
+      1080
+     ],
+     "file": "assets/backgrounds/A2/toc-wide.jpg",
+     "sha256": "4073ca6785280c30484bc3ca1088782d77b56ad38d61de7db7be4b273cf4f23b",
+     "actual_size": [
+      2560,
+      1080
+     ],
+     "quiet": {
+      "zones": [
+       {
+        "zone": [
+         68,
+         28,
+         860,
+         68
+        ],
+        "luminance_std": 2.79,
+        "mean_lightness": 246.4,
+        "colored_share": 0.007
+       },
+       {
+        "zone": [
+         68,
+         160,
+         1144,
+         296
+        ],
+        "luminance_std": 1.95,
+        "mean_lightness": 246.6,
+        "colored_share": 0.0009
+       }
+      ],
+      "pass": true,
+      "failures": []
+     }
+    }
+   ]
+  },
+  {
+   "id": "section",
+   "style": "A2",
+   "kind": "section",
+   "page_kinds": [
+    "section"
+   ],
+   "role": "暖光丝带 · section",
+   "file": "assets/backgrounds/A2/section.jpg",
+   "sha256": "2384ce72e725d9937590a0f0a0ca162357a1c57be0a82fc74a420ce09153f031",
+   "actual_size": [
+    2560,
+    1440
+   ],
+   "provenance": {
+    "origin": "generated",
+    "source": "examples/validation/backdrops/gen/g-section.png",
+    "source_sha256": "fb19725804b3584045376cf8a0dddd05026e56e07e8bc31629c51f17059f6ad3",
+    "source_size": "1672x941",
+    "receipt": "examples/validation/backdrops/provenance.json",
+    "placement": {
+     "scale": 1,
+     "dy": 0,
+     "image_box": [
+      1,
+      0,
+      2559,
+      1440
+     ]
+    },
+    "upscaled": true
+   },
+   "quiet": {
+    "zones": [
+     {
+      "zone": [
+       92,
+       272,
+       800,
+       83
+      ],
+      "luminance_std": 1.91,
+      "mean_lightness": 250.4,
+      "colored_share": 0.0
+     },
+     {
+      "zone": [
+       92,
+       108,
+       400,
+       148
+      ],
+      "luminance_std": 1.0,
+      "mean_lightness": 252.4,
+      "colored_share": 0.0
+     }
+    ],
+    "pass": true,
+    "failures": []
+   },
+   "renditions": [
+    {
+     "aspect": "21:9",
+     "viewport": [
+      2560,
+      1080
+     ],
+     "file": "assets/backgrounds/A2/section-wide.jpg",
+     "sha256": "e38210131fedffa18fe1d62b56755ec22f531ef2543bdeba11c5833323f051f5",
+     "actual_size": [
+      2560,
+      1080
+     ],
+     "quiet": {
+      "zones": [
+       {
+        "zone": [
+         92,
+         272,
+         800,
+         83
+        ],
+        "luminance_std": 1.55,
+        "mean_lightness": 250.6,
+        "colored_share": 0.0
+       },
+       {
+        "zone": [
+         92,
+         108,
+         400,
+         148
+        ],
+        "luminance_std": 2.14,
+        "mean_lightness": 248.8,
+        "colored_share": 0.0
+       }
+      ],
+      "pass": true,
+      "failures": []
+     }
+    }
+   ]
+  },
+  {
+   "id": "ending",
+   "style": "A2",
+   "kind": "ending",
+   "page_kinds": [
+    "ending"
+   ],
+   "role": "暖光丝带 · ending",
+   "file": "assets/backgrounds/A2/ending.jpg",
+   "sha256": "7b84b4bde9641751d55964f64aa7d61f0675c7825d9abb671049529722b4525d",
+   "actual_size": [
+    2560,
+    1440
+   ],
+   "provenance": {
+    "origin": "generated",
+    "source": "examples/validation/backdrops/gen/g-ending.png",
+    "source_sha256": "a4de37c0a12ca79270b23743c28e242049bd9c355b1fa607c66b300f1e7ab65c",
+    "source_size": "1672x941",
+    "receipt": "examples/validation/backdrops/provenance.json",
+    "placement": {
+     "scale": 1,
+     "dy": 0.07,
+     "image_box": [
+      1,
+      101,
+      2559,
+      1440
+     ]
+    },
+    "upscaled": true
+   },
+   "quiet": {
+    "zones": [
+     {
+      "zone": [
+       92,
+       184,
+       560,
+       138
+      ],
+      "luminance_std": 0.86,
+      "mean_lightness": 251.4,
+      "colored_share": 0.0
+     },
+     {
+      "zone": [
+       92,
+       334,
+       560,
+       42
+      ],
+      "luminance_std": 0.77,
+      "mean_lightness": 251.2,
+      "colored_share": 0.0
+     },
+     {
+      "zone": [
+       92,
+       394,
+       560,
+       28
+      ],
+      "luminance_std": 0.69,
+      "mean_lightness": 251.0,
+      "colored_share": 0.0
+     }
+    ],
+    "pass": true,
+    "failures": []
+   },
+   "renditions": [
+    {
+     "aspect": "21:9",
+     "viewport": [
+      2560,
+      1080
+     ],
+     "file": "assets/backgrounds/A2/ending-wide.jpg",
+     "sha256": "3433efe4ef6f73f6bc440804ea100937d52d1a90c44a599dbcc18c41edd64e61",
+     "actual_size": [
+      2560,
+      1080
+     ],
+     "quiet": {
+      "zones": [
+       {
+        "zone": [
+         92,
+         184,
+         560,
+         138
+        ],
+        "luminance_std": 1.43,
+        "mean_lightness": 249.9,
+        "colored_share": 0.0
+       },
+       {
+        "zone": [
+         92,
+         334,
+         560,
+         42
+        ],
+        "luminance_std": 1.44,
+        "mean_lightness": 249.5,
+        "colored_share": 0.0
+       },
+       {
+        "zone": [
+         92,
+         394,
+         560,
+         28
+        ],
+        "luminance_std": 1.38,
+        "mean_lightness": 249.2,
+        "colored_share": 0.0
+       }
+      ],
+      "pass": true,
+      "failures": []
+     }
+    }
+   ]
+  },
+  {
+   "id": "body-quiet",
+   "style": "A2",
+   "kind": "body",
+   "page_kinds": [
+    "body",
+    "flow_section"
+   ],
+   "role": "暖光丝带 · body",
+   "file": "assets/backgrounds/A2/body.jpg",
+   "sha256": "9ed9d8b5ae4d4fa33fecdb112eda50f9d2089cb1de5c87e24294d0f27f724517",
+   "actual_size": [
+    2560,
+    1440
+   ],
+   "provenance": {
+    "origin": "procedural",
+    "renderer": "tools/kz_backdrop.py ground --kind body"
+   },
+   "quiet": {
+    "zones": [
+     {
+      "zone": [
+       56,
+       96,
+       1168,
+       564
+      ],
+      "luminance_std": 0.75,
+      "mean_lightness": 249.7,
+      "colored_share": 0.0
+     }
+    ],
+    "pass": true,
+    "failures": []
+   },
+   "renditions": [
+    {
+     "aspect": "21:9",
+     "viewport": [
+      2560,
+      1080
+     ],
+     "file": "assets/backgrounds/A2/body-wide.jpg",
+     "sha256": "6ab140b00a10f3b80495c58b30ec8d36375aa7bf9823d4e79227a6251d12aba7",
+     "actual_size": [
+      2560,
+      1080
+     ],
+     "quiet": {
+      "zones": [
+       {
+        "zone": [
+         56,
+         96,
+         1168,
+         564
+        ],
+        "luminance_std": 0.81,
+        "mean_lightness": 249.6,
+        "colored_share": 0.0
+       }
+      ],
+      "pass": true,
+      "failures": []
+     }
+    }
+   ]
+  },
+  {
+   "id": "A1-cover",
+   "style": "A1",
+   "kind": "cover",
+   "page_kinds": [
+    "cover",
+    "hero"
+   ],
+   "role": "暖光绸带（程序化） · cover",
+   "file": "assets/backgrounds/A1/cover.jpg",
+   "sha256": "b6df11477d9e0ffe3a5bcb68a2a18af41d37f82e32882ff532eb05ccd39c5fb4",
+   "actual_size": [
+    2560,
+    1440
+   ],
+   "provenance": {
+    "origin": "procedural",
+    "renderer": "examples/validation/backdrops/backdrop.html?dir=A&page=cover&w=2560&h=1440&bare=1",
+    "capture_sha256": "170ab039fb90deb5170fb589e3aace15b00748ef30d8ad32a0378aa1f6165f61"
+   },
+   "quiet": {
+    "zones": [
+     {
+      "zone": [
+       92,
+       164,
+       760,
+       148
+      ],
+      "luminance_std": 0.6,
+      "mean_lightness": 247.7,
+      "colored_share": 0.0
+     },
+     {
+      "zone": [
+       92,
+       322,
+       760,
+       42
+      ],
+      "luminance_std": 0.15,
+      "mean_lightness": 247.0,
+      "colored_share": 0.0
+     },
+     {
+      "zone": [
+       92,
+       382,
+       760,
+       28
+      ],
+      "luminance_std": 0.31,
+      "mean_lightness": 246.9,
+      "colored_share": 0.0
+     }
+    ],
+    "pass": true,
+    "failures": []
+   },
+   "renditions": [
+    {
+     "aspect": "21:9",
+     "viewport": [
+      2560,
+      1080
+     ],
+     "file": "assets/backgrounds/A1/cover-wide.jpg",
+     "sha256": "ad63477fe4e85ed59c48ce4de4dc8039161fe70ccf299d7393ee673ba03f5d66",
+     "actual_size": [
+      2560,
+      1080
+     ],
+     "quiet": {
+      "zones": [
+       {
+        "zone": [
+         92,
+         164,
+         760,
+         148
+        ],
+        "luminance_std": 0.77,
+        "mean_lightness": 247.7,
+        "colored_share": 0.0
+       },
+       {
+        "zone": [
+         92,
+         322,
+         760,
+         42
+        ],
+        "luminance_std": 0.15,
+        "mean_lightness": 247.0,
+        "colored_share": 0.0
+       },
+       {
+        "zone": [
+         92,
+         382,
+         760,
+         28
+        ],
+        "luminance_std": 0.22,
+        "mean_lightness": 247.0,
+        "colored_share": 0.0
+       }
+      ],
+      "pass": true,
+      "failures": []
+     }
+    }
+   ]
+  },
+  {
+   "id": "A1-toc",
+   "style": "A1",
+   "kind": "toc",
+   "page_kinds": [
+    "toc"
+   ],
+   "role": "暖光绸带（程序化） · toc",
+   "file": "assets/backgrounds/A1/toc.jpg",
+   "sha256": "e6cf14804661736ec0758d2a31f5f49dcdc52e915979daaf430f2268195c6a63",
+   "actual_size": [
+    2560,
+    1440
+   ],
+   "provenance": {
+    "origin": "procedural",
+    "renderer": "examples/validation/backdrops/backdrop.html?dir=A&page=toc&w=2560&h=1440&bare=1",
+    "capture_sha256": "2af0a0f10e88afc81e8d0aec02809795164f442b3c3085ea361fd1003a0d11b5"
+   },
+   "quiet": {
+    "zones": [
+     {
+      "zone": [
+       68,
+       28,
+       860,
+       68
+      ],
+      "luminance_std": 2.54,
+      "mean_lightness": 247.7,
+      "colored_share": 0.0
+     },
+     {
+      "zone": [
+       68,
+       160,
+       1144,
+       296
+      ],
+      "luminance_std": 1.35,
+      "mean_lightness": 246.8,
+      "colored_share": 0.0
+     }
+    ],
+    "pass": true,
+    "failures": []
+   },
+   "renditions": [
+    {
+     "aspect": "21:9",
+     "viewport": [
+      2560,
+      1080
+     ],
+     "file": "assets/backgrounds/A1/toc-wide.jpg",
+     "sha256": "ca03ae2a1c8c8961bab838d70f6f981515cd53da011a7bd84d66bc0db1b49412",
+     "actual_size": [
+      2560,
+      1080
+     ],
+     "quiet": {
+      "zones": [
+       {
+        "zone": [
+         68,
+         28,
+         860,
+         68
+        ],
+        "luminance_std": 3.88,
+        "mean_lightness": 246.6,
+        "colored_share": 0.0172
+       },
+       {
+        "zone": [
+         68,
+         160,
+         1144,
+         296
+        ],
+        "luminance_std": 0.92,
+        "mean_lightness": 247.0,
+        "colored_share": 0.0
+       }
+      ],
+      "pass": true,
+      "failures": []
+     }
+    }
+   ]
+  },
+  {
+   "id": "A1-section",
+   "style": "A1",
+   "kind": "section",
+   "page_kinds": [
+    "section"
+   ],
+   "role": "暖光绸带（程序化） · section",
+   "file": "assets/backgrounds/A1/section.jpg",
+   "sha256": "853ee42485e10c29fd3a7a7e330ae6379148e9fd5804ce20cabd11b28e4fbdff",
+   "actual_size": [
+    2560,
+    1440
+   ],
+   "provenance": {
+    "origin": "procedural",
+    "renderer": "examples/validation/backdrops/backdrop.html?dir=A&page=section&w=2560&h=1440&bare=1",
+    "capture_sha256": "7a16d5979b45569b2993ebad7327baedc6b7748080474eb8d25e1ae9b33a7408"
+   },
+   "quiet": {
+    "zones": [
+     {
+      "zone": [
+       92,
+       272,
+       800,
+       83
+      ],
+      "luminance_std": 0.58,
+      "mean_lightness": 247.1,
+      "colored_share": 0.0
+     },
+     {
+      "zone": [
+       92,
+       108,
+       400,
+       148
+      ],
+      "luminance_std": 0.62,
+      "mean_lightness": 247.9,
+      "colored_share": 0.0
+     }
+    ],
+    "pass": true,
+    "failures": []
+   },
+   "renditions": [
+    {
+     "aspect": "21:9",
+     "viewport": [
+      2560,
+      1080
+     ],
+     "file": "assets/backgrounds/A1/section-wide.jpg",
+     "sha256": "59120f3556b127461cba989e2b685ab4fe3baa70a79b26c7fa24d70c77881419",
+     "actual_size": [
+      2560,
+      1080
+     ],
+     "quiet": {
+      "zones": [
+       {
+        "zone": [
+         92,
+         272,
+         800,
+         83
+        ],
+        "luminance_std": 0.46,
+        "mean_lightness": 247.3,
+        "colored_share": 0.0
+       },
+       {
+        "zone": [
+         92,
+         108,
+         400,
+         148
+        ],
+        "luminance_std": 2.01,
+        "mean_lightness": 246.8,
+        "colored_share": 0.0
+       }
+      ],
+      "pass": true,
+      "failures": []
+     }
+    }
+   ]
+  },
+  {
+   "id": "A1-ending",
+   "style": "A1",
+   "kind": "ending",
+   "page_kinds": [
+    "ending"
+   ],
+   "role": "暖光绸带（程序化） · ending",
+   "file": "assets/backgrounds/A1/ending.jpg",
+   "sha256": "d8fa084bb790b5366be2281f771514534ca5bc0a8425fa34e126fc9996c35894",
+   "actual_size": [
+    2560,
+    1440
+   ],
+   "provenance": {
+    "origin": "procedural",
+    "renderer": "examples/validation/backdrops/backdrop.html?dir=A&page=ending&w=2560&h=1440&bare=1",
+    "capture_sha256": "36a4f060c609c9c26f98e9c2f12897628dafd69089172408beb1c69fa3c3d722"
+   },
+   "quiet": {
+    "zones": [
+     {
+      "zone": [
+       92,
+       184,
+       560,
+       138
+      ],
+      "luminance_std": 0.44,
+      "mean_lightness": 247.8,
+      "colored_share": 0.0
+     },
+     {
+      "zone": [
+       92,
+       334,
+       560,
+       42
+      ],
+      "luminance_std": 0.23,
+      "mean_lightness": 247.0,
+      "colored_share": 0.0
+     },
+     {
+      "zone": [
+       92,
+       394,
+       560,
+       28
+      ],
+      "luminance_std": 0.31,
+      "mean_lightness": 246.9,
+      "colored_share": 0.0
+     }
+    ],
+    "pass": true,
+    "failures": []
+   },
+   "renditions": [
+    {
+     "aspect": "21:9",
+     "viewport": [
+      2560,
+      1080
+     ],
+     "file": "assets/backgrounds/A1/ending-wide.jpg",
+     "sha256": "7883b73443f645f1ed7aabd53f81cf304e7cbc50e13a1b2693669c623df32fde",
+     "actual_size": [
+      2560,
+      1080
+     ],
+     "quiet": {
+      "zones": [
+       {
+        "zone": [
+         92,
+         184,
+         560,
+         138
+        ],
+        "luminance_std": 0.68,
+        "mean_lightness": 247.6,
+        "colored_share": 0.0
+       },
+       {
+        "zone": [
+         92,
+         334,
+         560,
+         42
+        ],
+        "luminance_std": 0.21,
+        "mean_lightness": 247.0,
+        "colored_share": 0.0
+       },
+       {
+        "zone": [
+         92,
+         394,
+         560,
+         28
+        ],
+        "luminance_std": 0.41,
+        "mean_lightness": 246.8,
+        "colored_share": 0.0
+       }
+      ],
+      "pass": true,
+      "failures": []
+     }
+    }
+   ]
+  },
+  {
+   "id": "A1-body",
+   "style": "A1",
+   "kind": "body",
+   "page_kinds": [
+    "body",
+    "flow_section"
+   ],
+   "role": "暖光绸带（程序化） · body",
+   "file": "assets/backgrounds/A1/body.jpg",
+   "sha256": "9ed9d8b5ae4d4fa33fecdb112eda50f9d2089cb1de5c87e24294d0f27f724517",
+   "actual_size": [
+    2560,
+    1440
+   ],
+   "provenance": {
+    "origin": "procedural",
+    "renderer": "tools/kz_backdrop.py ground --kind body"
+   },
+   "quiet": {
+    "zones": [
+     {
+      "zone": [
+       56,
+       96,
+       1168,
+       564
+      ],
+      "luminance_std": 0.75,
+      "mean_lightness": 249.7,
+      "colored_share": 0.0
+     }
+    ],
+    "pass": true,
+    "failures": []
+   },
+   "renditions": [
+    {
+     "aspect": "21:9",
+     "viewport": [
+      2560,
+      1080
+     ],
+     "file": "assets/backgrounds/A1/body-wide.jpg",
+     "sha256": "6ab140b00a10f3b80495c58b30ec8d36375aa7bf9823d4e79227a6251d12aba7",
+     "actual_size": [
+      2560,
+      1080
+     ],
+     "quiet": {
+      "zones": [
+       {
+        "zone": [
+         56,
+         96,
+         1168,
+         564
+        ],
+        "luminance_std": 0.81,
+        "mean_lightness": 249.6,
+        "colored_share": 0.0
+       }
+      ],
+      "pass": true,
+      "failures": []
+     }
+    }
+   ]
+  },
+  {
+   "id": "B-cover",
+   "style": "B",
+   "kind": "cover",
+   "page_kinds": [
+    "cover",
+    "hero"
+   ],
+   "role": "光学线稿 · cover",
+   "file": "assets/backgrounds/B/cover.jpg",
+   "sha256": "bbad9affb8ed5dffafc945cb4e3511332795bbc38d46f8c6ea07cfd5d261bbad",
+   "actual_size": [
+    2560,
+    1440
+   ],
+   "provenance": {
+    "origin": "procedural",
+    "renderer": "examples/validation/backdrops/backdrop.html?dir=B&page=cover&w=2560&h=1440&bare=1",
+    "capture_sha256": "bf75c70603e991e433637cd64f7ee01b537090cd094009275eb1d3ef3b72d6c9"
+   },
+   "quiet": {
+    "zones": [
+     {
+      "zone": [
+       92,
+       164,
+       760,
+       148
+      ],
+      "luminance_std": 0.81,
+      "mean_lightness": 253.5,
+      "colored_share": 0.0
+     },
+     {
+      "zone": [
+       92,
+       322,
+       760,
+       42
+      ],
+      "luminance_std": 0.99,
+      "mean_lightness": 252.7,
+      "colored_share": 0.0
+     },
+     {
+      "zone": [
+       92,
+       382,
+       760,
+       28
+      ],
+      "luminance_std": 1.08,
+      "mean_lightness": 252.1,
+      "colored_share": 0.0
+     }
+    ],
+    "pass": true,
+    "failures": []
+   },
+   "renditions": [
+    {
+     "aspect": "21:9",
+     "viewport": [
+      2560,
+      1080
+     ],
+     "file": "assets/backgrounds/B/cover-wide.jpg",
+     "sha256": "e3bcfcd43f909adbe20214e5f1312aacf59c5e267cc9109a4006689f45ed9478",
+     "actual_size": [
+      2560,
+      1080
+     ],
+     "quiet": {
+      "zones": [
+       {
+        "zone": [
+         92,
+         164,
+         760,
+         148
+        ],
+        "luminance_std": 0.5,
+        "mean_lightness": 253.6,
+        "colored_share": 0.0
+       },
+       {
+        "zone": [
+         92,
+         322,
+         760,
+         42
+        ],
+        "luminance_std": 0.14,
+        "mean_lightness": 253.0,
+        "colored_share": 0.0
+       },
+       {
+        "zone": [
+         92,
+         382,
+         760,
+         28
+        ],
+        "luminance_std": 0.49,
+        "mean_lightness": 252.6,
+        "colored_share": 0.0
+       }
+      ],
+      "pass": true,
+      "failures": []
+     }
+    }
+   ]
+  },
+  {
+   "id": "B-toc",
+   "style": "B",
+   "kind": "toc",
+   "page_kinds": [
+    "toc"
+   ],
+   "role": "光学线稿 · toc",
+   "file": "assets/backgrounds/B/toc.jpg",
+   "sha256": "84606d8ec3fd4e831de8e3c76ca6757fafead78f06bd890920b9618ca4396ada",
+   "actual_size": [
+    2560,
+    1440
+   ],
+   "provenance": {
+    "origin": "procedural",
+    "renderer": "examples/validation/backdrops/backdrop.html?dir=B&page=toc&w=2560&h=1440&bare=1",
+    "capture_sha256": "96a18eb0638b63a3d84df4978cb14ad1b23d320ceff8efc9e09f7d54d91b49b9"
+   },
+   "quiet": {
+    "zones": [
+     {
+      "zone": [
+       68,
+       28,
+       860,
+       68
+      ],
+      "luminance_std": 0.0,
+      "mean_lightness": 255.0,
+      "colored_share": 0.0
+     },
+     {
+      "zone": [
+       68,
+       160,
+       1144,
+       296
+      ],
+      "luminance_std": 0.77,
+      "mean_lightness": 253.1,
+      "colored_share": 0.0
+     }
+    ],
+    "pass": true,
+    "failures": []
+   },
+   "renditions": [
+    {
+     "aspect": "21:9",
+     "viewport": [
+      2560,
+      1080
+     ],
+     "file": "assets/backgrounds/B/toc-wide.jpg",
+     "sha256": "9425a0127950c87185e2e0f00c255c94f7ede64c25c7e5df774d5f51b76c7515",
+     "actual_size": [
+      2560,
+      1080
+     ],
+     "quiet": {
+      "zones": [
+       {
+        "zone": [
+         68,
+         28,
+         860,
+         68
+        ],
+        "luminance_std": 0.0,
+        "mean_lightness": 255.0,
+        "colored_share": 0.0
+       },
+       {
+        "zone": [
+         68,
+         160,
+         1144,
+         296
+        ],
+        "luminance_std": 1.58,
+        "mean_lightness": 252.7,
+        "colored_share": 0.0
+       }
+      ],
+      "pass": true,
+      "failures": []
+     }
+    }
+   ]
+  },
+  {
+   "id": "B-section",
+   "style": "B",
+   "kind": "section",
+   "page_kinds": [
+    "section"
+   ],
+   "role": "光学线稿 · section",
+   "file": "assets/backgrounds/B/section.jpg",
+   "sha256": "bbad9affb8ed5dffafc945cb4e3511332795bbc38d46f8c6ea07cfd5d261bbad",
+   "actual_size": [
+    2560,
+    1440
+   ],
+   "provenance": {
+    "origin": "procedural",
+    "renderer": "examples/validation/backdrops/backdrop.html?dir=B&page=section&w=2560&h=1440&bare=1",
+    "capture_sha256": "bf75c70603e991e433637cd64f7ee01b537090cd094009275eb1d3ef3b72d6c9"
+   },
+   "quiet": {
+    "zones": [
+     {
+      "zone": [
+       92,
+       272,
+       800,
+       83
+      ],
+      "luminance_std": 1.14,
+      "mean_lightness": 252.6,
+      "colored_share": 0.0
+     },
+     {
+      "zone": [
+       92,
+       108,
+       400,
+       148
+      ],
+      "luminance_std": 0.25,
+      "mean_lightness": 254.0,
+      "colored_share": 0.0
+     }
+    ],
+    "pass": true,
+    "failures": []
+   },
+   "renditions": [
+    {
+     "aspect": "21:9",
+     "viewport": [
+      2560,
+      1080
+     ],
+     "file": "assets/backgrounds/B/section-wide.jpg",
+     "sha256": "e7973218325b8659447e7358d9d7bded761944f717b3a27e3079d205946c9d29",
+     "actual_size": [
+      2560,
+      1080
+     ],
+     "quiet": {
+      "zones": [
+       {
+        "zone": [
+         92,
+         272,
+         800,
+         83
+        ],
+        "luminance_std": 0.32,
+        "mean_lightness": 253.0,
+        "colored_share": 0.0
+       },
+       {
+        "zone": [
+         92,
+         108,
+         400,
+         148
+        ],
+        "luminance_std": 0.25,
+        "mean_lightness": 254.0,
+        "colored_share": 0.0
+       }
+      ],
+      "pass": true,
+      "failures": []
+     }
+    }
+   ]
+  },
+  {
+   "id": "B-ending",
+   "style": "B",
+   "kind": "ending",
+   "page_kinds": [
+    "ending"
+   ],
+   "role": "光学线稿 · ending",
+   "file": "assets/backgrounds/B/ending.jpg",
+   "sha256": "bbad9affb8ed5dffafc945cb4e3511332795bbc38d46f8c6ea07cfd5d261bbad",
+   "actual_size": [
+    2560,
+    1440
+   ],
+   "provenance": {
+    "origin": "procedural",
+    "renderer": "examples/validation/backdrops/backdrop.html?dir=B&page=ending&w=2560&h=1440&bare=1",
+    "capture_sha256": "bf75c70603e991e433637cd64f7ee01b537090cd094009275eb1d3ef3b72d6c9"
+   },
+   "quiet": {
+    "zones": [
+     {
+      "zone": [
+       92,
+       184,
+       560,
+       138
+      ],
+      "luminance_std": 0.52,
+      "mean_lightness": 253.5,
+      "colored_share": 0.0
+     },
+     {
+      "zone": [
+       92,
+       334,
+       560,
+       42
+      ],
+      "luminance_std": 0.32,
+      "mean_lightness": 253.0,
+      "colored_share": 0.0
+     },
+     {
+      "zone": [
+       92,
+       394,
+       560,
+       28
+      ],
+      "luminance_std": 0.42,
+      "mean_lightness": 252.1,
+      "colored_share": 0.0
+     }
+    ],
+    "pass": true,
+    "failures": []
+   },
+   "renditions": [
+    {
+     "aspect": "21:9",
+     "viewport": [
+      2560,
+      1080
+     ],
+     "file": "assets/backgrounds/B/ending-wide.jpg",
+     "sha256": "e7973218325b8659447e7358d9d7bded761944f717b3a27e3079d205946c9d29",
+     "actual_size": [
+      2560,
+      1080
+     ],
+     "quiet": {
+      "zones": [
+       {
+        "zone": [
+         92,
+         184,
+         560,
+         138
+        ],
+        "luminance_std": 0.5,
+        "mean_lightness": 253.5,
+        "colored_share": 0.0
+       },
+       {
+        "zone": [
+         92,
+         334,
+         560,
+         42
+        ],
+        "luminance_std": 0.0,
+        "mean_lightness": 253.0,
+        "colored_share": 0.0
+       },
+       {
+        "zone": [
+         92,
+         394,
+         560,
+         28
+        ],
+        "luminance_std": 0.42,
+        "mean_lightness": 252.2,
+        "colored_share": 0.0
+       }
+      ],
+      "pass": true,
+      "failures": []
+     }
+    }
+   ]
+  },
+  {
+   "id": "B-body",
+   "style": "B",
+   "kind": "body",
+   "page_kinds": [
+    "body",
+    "flow_section"
+   ],
+   "role": "光学线稿 · body",
+   "file": "assets/backgrounds/B/body.jpg",
+   "sha256": "4a8d3cccca7e4199b1836807000ddd645120fcf51709983217b2df30ab0d04f5",
+   "actual_size": [
+    2560,
+    1440
+   ],
+   "provenance": {
+    "origin": "procedural",
+    "renderer": "examples/validation/backdrops/backdrop.html?dir=B&page=body&w=2560&h=1440&bare=1",
+    "capture_sha256": "d991e86451d480210ec3a88533cb6ee5a2c28641581228632b46ee369619a3ed"
+   },
+   "quiet": {
+    "zones": [
+     {
+      "zone": [
+       56,
+       96,
+       1168,
+       564
+      ],
+      "luminance_std": 1.27,
+      "mean_lightness": 252.6,
+      "colored_share": 0.0
+     }
+    ],
+    "pass": true,
+    "failures": []
+   },
+   "renditions": [
+    {
+     "aspect": "21:9",
+     "viewport": [
+      2560,
+      1080
+     ],
+     "file": "assets/backgrounds/B/body-wide.jpg",
+     "sha256": "069576ea220976adcd8fcb8c37d1925bc7260ef76dce807431cd6d059aeb5501",
+     "actual_size": [
+      2560,
+      1080
+     ],
+     "quiet": {
+      "zones": [
+       {
+        "zone": [
+         56,
+         96,
+         1168,
+         564
+        ],
+        "luminance_std": 1.15,
+        "mean_lightness": 252.6,
+        "colored_share": 0.0
+       }
+      ],
+      "pass": true,
+      "failures": []
+     }
+    }
+   ]
+  },
+  {
+   "id": "C-cover",
+   "style": "C",
+   "kind": "cover",
+   "page_kinds": [
+    "cover",
+    "hero"
+   ],
+   "role": "柔焦光晕 · cover",
+   "file": "assets/backgrounds/C/cover.jpg",
+   "sha256": "2e3a5bdc8f7efdf6686801a86f916b9b9150987fef4822649321b94cb66fc4e6",
+   "actual_size": [
+    2560,
+    1440
+   ],
+   "provenance": {
+    "origin": "procedural",
+    "renderer": "examples/validation/backdrops/backdrop.html?dir=C&page=cover&w=2560&h=1440&bare=1",
+    "capture_sha256": "652b920163469f9611341b323862d929111955c9c3874c56761bbd9a1afd7bf2"
+   },
+   "quiet": {
+    "zones": [
+     {
+      "zone": [
+       92,
+       164,
+       760,
+       148
+      ],
+      "luminance_std": 1.13,
+      "mean_lightness": 248.9,
+      "colored_share": 0.0
+     },
+     {
+      "zone": [
+       92,
+       322,
+       760,
+       42
+      ],
+      "luminance_std": 2.21,
+      "mean_lightness": 247.8,
+      "colored_share": 0.0148
+     },
+     {
+      "zone": [
+       92,
+       382,
+       760,
+       28
+      ],
+      "luminance_std": 2.7,
+      "mean_lightness": 247.0,
+      "colored_share": 0.0425
+     }
+    ],
+    "pass": true,
+    "failures": []
+   },
+   "renditions": [
+    {
+     "aspect": "21:9",
+     "viewport": [
+      2560,
+      1080
+     ],
+     "file": "assets/backgrounds/C/cover-wide.jpg",
+     "sha256": "d853f11805db5e58ade9e78608359cb7a96f52fc2bff7ca45855b26bc0994dbd",
+     "actual_size": [
+      2560,
+      1080
+     ],
+     "quiet": {
+      "zones": [
+       {
+        "zone": [
+         92,
+         164,
+         760,
+         148
+        ],
+        "luminance_std": 0.46,
+        "mean_lightness": 249.2,
+        "colored_share": 0.0
+       },
+       {
+        "zone": [
+         92,
+         322,
+         760,
+         42
+        ],
+        "luminance_std": 0.48,
+        "mean_lightness": 248.6,
+        "colored_share": 0.0
+       },
+       {
+        "zone": [
+         92,
+         382,
+         760,
+         28
+        ],
+        "luminance_std": 0.15,
+        "mean_lightness": 248.0,
+        "colored_share": 0.0
+       }
+      ],
+      "pass": true,
+      "failures": []
+     }
+    }
+   ]
+  },
+  {
+   "id": "C-toc",
+   "style": "C",
+   "kind": "toc",
+   "page_kinds": [
+    "toc"
+   ],
+   "role": "柔焦光晕 · toc",
+   "file": "assets/backgrounds/C/toc.jpg",
+   "sha256": "967ef8795705cc76ba883dc823c163f7dbe899c915ce5752516f03ae2878ebe3",
+   "actual_size": [
+    2560,
+    1440
+   ],
+   "provenance": {
+    "origin": "procedural",
+    "renderer": "examples/validation/backdrops/backdrop.html?dir=C&page=toc&w=2560&h=1440&bare=1",
+    "capture_sha256": "fe3cd694b344889b58e857c1fcfd98e25f209289500dccb7deb2dc577a2fb388"
+   },
+   "quiet": {
+    "zones": [
+     {
+      "zone": [
+       68,
+       28,
+       860,
+       68
+      ],
+      "luminance_std": 0.5,
+      "mean_lightness": 250.4,
+      "colored_share": 0.0
+     },
+     {
+      "zone": [
+       68,
+       160,
+       1144,
+       296
+      ],
+      "luminance_std": 4.61,
+      "mean_lightness": 247.3,
+      "colored_share": 0.0496
+     }
+    ],
+    "pass": true,
+    "failures": []
+   },
+   "renditions": [
+    {
+     "aspect": "21:9",
+     "viewport": [
+      2560,
+      1080
+     ],
+     "file": "assets/backgrounds/C/toc-wide.jpg",
+     "sha256": "5ee29b67ca9e991449120ba2199a34f191fb1c38ec12761741a3b555ef8f155f",
+     "actual_size": [
+      2560,
+      1080
+     ],
+     "quiet": {
+      "zones": [
+       {
+        "zone": [
+         68,
+         28,
+         860,
+         68
+        ],
+        "luminance_std": 0.5,
+        "mean_lightness": 250.5,
+        "colored_share": 0.0
+       },
+       {
+        "zone": [
+         68,
+         160,
+         1144,
+         296
+        ],
+        "luminance_std": 1.02,
+        "mean_lightness": 248.6,
+        "colored_share": 0.0
+       }
+      ],
+      "pass": true,
+      "failures": []
+     }
+    }
+   ]
+  },
+  {
+   "id": "C-section",
+   "style": "C",
+   "kind": "section",
+   "page_kinds": [
+    "section"
+   ],
+   "role": "柔焦光晕 · section",
+   "file": "assets/backgrounds/C/section.jpg",
+   "sha256": "22f6c2a5fb36d3a914da68efbc0c72cd1c3b7c21a03104a27999f6f191a47929",
+   "actual_size": [
+    2560,
+    1440
+   ],
+   "provenance": {
+    "origin": "procedural",
+    "renderer": "examples/validation/backdrops/backdrop.html?dir=C&page=section&w=2560&h=1440&bare=1",
+    "capture_sha256": "bbdc17a3e851f70cca6ce34f64203f3a152fe55b7d7bfe3fb7c7d20ee8d91a0b"
+   },
+   "quiet": {
+    "zones": [
+     {
+      "zone": [
+       92,
+       272,
+       800,
+       83
+      ],
+      "luminance_std": 3.11,
+      "mean_lightness": 247.7,
+      "colored_share": 0.045
+     },
+     {
+      "zone": [
+       92,
+       108,
+       400,
+       148
+      ],
+      "luminance_std": 0.5,
+      "mean_lightness": 249.6,
+      "colored_share": 0.0
+     }
+    ],
+    "pass": true,
+    "failures": []
+   },
+   "renditions": [
+    {
+     "aspect": "21:9",
+     "viewport": [
+      2560,
+      1080
+     ],
+     "file": "assets/backgrounds/C/section-wide.jpg",
+     "sha256": "a82dfccdf7fcb785c21b55f0461894189560cfa6adacd2e9da40bd593c765bdd",
+     "actual_size": [
+      2560,
+      1080
+     ],
+     "quiet": {
+      "zones": [
+       {
+        "zone": [
+         92,
+         272,
+         800,
+         83
+        ],
+        "luminance_std": 0.36,
+        "mean_lightness": 248.8,
+        "colored_share": 0.0
+       },
+       {
+        "zone": [
+         92,
+         108,
+         400,
+         148
+        ],
+        "luminance_std": 0.5,
+        "mean_lightness": 249.6,
+        "colored_share": 0.0
+       }
+      ],
+      "pass": true,
+      "failures": []
+     }
+    }
+   ]
+  },
+  {
+   "id": "C-ending",
+   "style": "C",
+   "kind": "ending",
+   "page_kinds": [
+    "ending"
+   ],
+   "role": "柔焦光晕 · ending",
+   "file": "assets/backgrounds/C/ending.jpg",
+   "sha256": "8df97d2905bfd22d1cc7777e02f42cfaed4ce47e69cc610f06bd9a1014c731f0",
+   "actual_size": [
+    2560,
+    1440
+   ],
+   "provenance": {
+    "origin": "procedural",
+    "renderer": "examples/validation/backdrops/backdrop.html?dir=C&page=ending&w=2560&h=1440&bare=1",
+    "capture_sha256": "54140832925dce0a72f52a05c62a0d0f8959c61cd72d1708a75d456c783454ed"
+   },
+   "quiet": {
+    "zones": [
+     {
+      "zone": [
+       92,
+       184,
+       560,
+       138
+      ],
+      "luminance_std": 0.42,
+      "mean_lightness": 249.1,
+      "colored_share": 0.0
+     },
+     {
+      "zone": [
+       92,
+       334,
+       560,
+       42
+      ],
+      "luminance_std": 0.85,
+      "mean_lightness": 248.1,
+      "colored_share": 0.0
+     },
+     {
+      "zone": [
+       92,
+       394,
+       560,
+       28
+      ],
+      "luminance_std": 2.08,
+      "mean_lightness": 247.1,
+      "colored_share": 0.0057
+     }
+    ],
+    "pass": true,
+    "failures": []
+   },
+   "renditions": [
+    {
+     "aspect": "21:9",
+     "viewport": [
+      2560,
+      1080
+     ],
+     "file": "assets/backgrounds/C/ending-wide.jpg",
+     "sha256": "532ea838273ed7437271d063ea685b3fe1f7e8435de6e4b7c15f0c235aa79aae",
+     "actual_size": [
+      2560,
+      1080
+     ],
+     "quiet": {
+      "zones": [
+       {
+        "zone": [
+         92,
+         184,
+         560,
+         138
+        ],
+        "luminance_std": 0.4,
+        "mean_lightness": 249.1,
+        "colored_share": 0.0
+       },
+       {
+        "zone": [
+         92,
+         334,
+         560,
+         42
+        ],
+        "luminance_std": 0.47,
+        "mean_lightness": 248.3,
+        "colored_share": 0.0
+       },
+       {
+        "zone": [
+         92,
+         394,
+         560,
+         28
+        ],
+        "luminance_std": 0.18,
+        "mean_lightness": 248.0,
+        "colored_share": 0.0
+       }
+      ],
+      "pass": true,
+      "failures": []
+     }
+    }
+   ]
+  },
+  {
+   "id": "C-body",
+   "style": "C",
+   "kind": "body",
+   "page_kinds": [
+    "body",
+    "flow_section"
+   ],
+   "role": "柔焦光晕 · body",
+   "file": "assets/backgrounds/C/body.jpg",
+   "sha256": "2c60e27b41c641c75d02b7e8d1233938f7510daea665c369aa456f5dd064328d",
+   "actual_size": [
+    2560,
+    1440
+   ],
+   "provenance": {
+    "origin": "procedural",
+    "renderer": "examples/validation/backdrops/backdrop.html?dir=C&page=body&w=2560&h=1440&bare=1",
+    "capture_sha256": "c18954c465ad286fcf1aaebf4628e208b106b3ec0a8fb22bde60fb77a9bc90d0"
+   },
+   "quiet": {
+    "zones": [
+     {
+      "zone": [
+       56,
+       96,
+       1168,
+       564
+      ],
+      "luminance_std": 1.91,
+      "mean_lightness": 249.3,
+      "colored_share": 0.0
+     }
+    ],
+    "pass": true,
+    "failures": []
+   },
+   "renditions": [
+    {
+     "aspect": "21:9",
+     "viewport": [
+      2560,
+      1080
+     ],
+     "file": "assets/backgrounds/C/body-wide.jpg",
+     "sha256": "f22f978d172ab09552d8b0d81c27e7efdaba6d063c05644db445a1de17f0a395",
+     "actual_size": [
+      2560,
+      1080
+     ],
+     "quiet": {
+      "zones": [
+       {
+        "zone": [
+         56,
+         96,
+         1168,
+         564
+        ],
+        "luminance_std": 0.73,
+        "mean_lightness": 249.8,
+        "colored_share": 0.0
+       }
+      ],
+      "pass": true,
+      "failures": []
+     }
+    }
+   ]
+  }
+ ]
+}

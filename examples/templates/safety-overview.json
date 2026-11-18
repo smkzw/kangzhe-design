@@ -1,0 +1,31 @@
+{
+ "title": "治疗期不良事件总览（安全性分析集）",
+ "layout": "butterfly",
+ "safety": {
+  "set": "安全性分析集",
+  "unit": "例",
+  "arms": [
+   {"name": "KZ-001 1.0 mg", "n": 200, "role": "treat"},
+   {"name": "安慰剂", "n": 100, "role": "comparator"}
+  ],
+  "rows": [
+   {"key": "teae", "label": "任何 TEAE", "values": [142, 61]},
+   {"key": "trae", "label": "与研究药物相关（TRAE）", "short": "TRAE", "parent": "teae", "values": [96, 30]},
+   {"key": "g3", "label": "≥3 级 TEAE", "parent": "teae", "values": [18, 7]},
+   {"key": "g3r", "label": "≥3 级 TRAE", "short": "≥3 级 TRAE", "parent": "g3", "values": [8, 2]},
+   {"key": "tesae", "label": "严重 TEAE（TESAE）", "short": "TESAE", "parent": "teae", "values": [12, 5]},
+   {"key": "trsae", "label": "与研究药物相关的 SAE（TRSAE）", "short": "TRSAE", "parent": "tesae", "values": [4, 1]},
+   {"key": "aesi", "label": "特别关注 AE（AESI）", "short": "AESI", "values": [9, 3]},
+   {"key": "disc", "label": "导致停药的 TEAE", "short": "导致停药", "values": [11, 3]},
+   {"key": "death", "label": "导致死亡的 TEAE", "short": "导致死亡", "values": [0, 0]}
+  ],
+  "focus": "trae",
+  "flag_pp": 5
+ },
+ "insights": [
+  {"icon": "pill", "title": "差异主要来自药物相关事件", "text": "TRAE **48.0% 对 30.0%**，以胃肠道反应为主，多为 1–2 级"},
+  {"icon": "shield", "title": "严重事件两组接近", "text": "TESAE 6.0% 对 5.0%，TRSAE 2.0% 对 1.0%，**无导致死亡的 TEAE**"},
+  {"icon": "alert-circle", "title": "停药率需要关注", "text": "导致停药的 TEAE **5.5% 对 3.0%**，滴定期集中", "tone": "risk"}
+ ],
+ "note": "合成示例；TEAE = 治疗期出现的不良事件；百分比分母为各组安全性分析集人数；差值 = 治疗组 − 安慰剂（百分点）。"
+}

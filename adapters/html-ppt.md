@@ -1,0 +1,64 @@
+# HTML-PPT 适配合同（html-ppt-skill）
+
+核对基线：lewislulu/html-ppt-skill `fd1629067909`（2026-09-14）。升级上游后先重读 `runtime.js` 的 fit、活动页、键盘与演讲者部分，再改本页；不反过来放宽品牌要求。
+
+## 上游事实
+- `body[data-fit="fluid"]` 时 `initCanvasFit` 直接返回，`.deck` 为 100vw×100vh；这是宽屏的唯一扩展点，不再叠缩放。
+- 翻页切换 `.is-active / .is-prev`；base.css 给 `.slide` 0.5s 透明度渐变与 ±30px 横移，且没有减少动态规则。
+- `data-anim`（animations.css，27 种）与 `data-fx`（fx-runtime，20 种）由上游在翻页时重加；A 键会给当前页循环套上入场动画。大多数不处理减少动态。
+- 页码：runtime 只更新文档中第一个 `.slide-number` 的 `data-current/data-total`，base.css 用 `::before/::after` 显示。
+- O 总览在初始化时克隆一次页面（早于项目组件挂载，克隆中的图表/甘特为空）；S 演讲者窗口的两个 iframe 固定 1920×1080 再缩放，与 fluid 观众窗不同画；`?preview` 只显示一页并设 `body[data-preview]`。
+- 打印样式隐藏 deck 级 `.deck-header/.deck-footer`。
+- `scripts/render.sh <html> [N|all] [out]` 用 headless Chrome、1920×1080、`file://…#/N`、virtual-time-budget 4000，没有就绪等待参数。
+
+## 康哲的做法
+### 开工卡预填
+html-ppt-skill 自带的主题、配色、字体与动画询问不再出现：主题与配色由 tokens 固定，动效按开工卡的 `motion` 答案（`tools/intake.py apply` 的 `html_ppt`，17 INTAKE-03）；脚手架仍用 `new-deck.sh`，生成后按下文去掉主题链接与 `data-themes`。用户在上游界面里改了这些项时，以开工卡答案为准并在交付说明里写明。
+
+### 脚手架与资源
+`new-deck.sh` 生成后，把实际使用的 `base.css`、`runtime.js` 复制进交付目录并记录上游与副本 SHA；不加载主题链接、`data-themes`、远程字体（fonts.css）和 `animations.css`。分别用 `file://` 与 HTTP 打开，确认无 404。
+
+项目样式从参考实现 `examples/reference/htmlppt/deck.css` 整份复制开始：正文页 chrome、`.kz-body[data-preset]`、hero 版式的几何都在这份文件里，只写附加层会让双菱形铺满整页、预设失效。项目改动追加在文件末尾，不删参考规则。
+
+### 单位：一个比率
+`html-ppt-bridge.js` 维护 `:root` 上的 `--kz-un = innerHeight / 720`（不钳制）和 `--kz-u = calc(var(--kz-un) * 1px)`。几何写 `calc(N * var(--kz-u))`，字号写 `calc(Npx * var(--kz-un))`，共享组件在 `.kz[data-fit="fluid"]` 下以 `--kz-component-u: var(--kz-un)` 自动换算；canvas 组件（图表、甘特）读同一比率并在 `kz:fluidratio` 事件时重绘。项目 CSS 不另定义 `--kz-u`。
+
+这样字号与几何永远同比例：1080 屏 150% 缩放（约 1280×610）时整页等比缩小，文字不会比框大；捏合缩放不改变比率（用布局视口而非 visualViewport）；打印期间比率锁定为 1。浏览器 Ctrl± 缩放被高度归一化抵消，这是放映的正常行为。核对字号时用 computed ÷ `--kz-un` 使用值。
+
+不要写 `calc(24px * var(--kz-u))`（长度×长度，整条声明无效）或 `calc(24 * var(--kz-un))`（无单位，非法字号）。
+
+### 页面结构
+- 正文页 chrome 放在每张正文页内（打印也保留）：`brand_fragments.facets(prefix)` 生成的内联 SVG 双菱形，放置矩形 `tokens.chrome.header_mark.placement_htmlppt_u`；`tokens.chrome.rule` 是端点数组 `[x1,y1,x2,y2,stroke]`，HTML 写 `left:x1·u; right:(1280−x2)·u; top:y1·u; height:stroke·u`；Logo 右锚；页脚两槽，页码可静态写入。
+- 非 16:9 视口的固定文字框宽度取 `min(w·u, 视口宽 − x·u − 右留距·u)`，背景与正文网格仍铺满。
+- hero 页用 `hero_layout.html_fluid_fragment`。
+- 上游注入的 `.progress-bar` 由 kz-glass.css 隐藏；上游 `.card-accent` 的 3px 彩色顶边也由 kz-glass.css 去掉，不用带竖条的主题（02 LG-02）。
+- 上游只绑定 →/←/空格/PageDown/PageUp/Enter/Backspace 与横向滑动；↑/↓ 与纵向滑动由桥接在本页无 scene 可走时转交为 →/←。
+
+### 翻页与动效
+品牌层覆盖上游翻页（06 MOTION-08）：`.kz .slide{transform:none; transition: opacity 0s linear var(--kz-dur-exit)}`、`.is-active` 去掉延迟、背景图与 hero 主视觉各自淡入、减少动态取消过渡。生命周期用 `KZHTMLPPT.bind`：
+
+```js
+const bridge = KZHTMLPPT.bind(document.querySelector('.deck'), slide => {
+  const page = KZMotion.mountPage(slide);
+  return { enter() { page.enter(); }, leave() { page.leave(); }, dispose() { page.dispose(); } };
+});
+```
+
+图表、甘特、Film 与演示舞台加入同一个 factory：enter 时 play / `resume('engine-inactive')`，leave 时 pause。Film 用 `{scenes: storyboard.sceneAt}` 构造，演示用 `KZDemo.mount`，生命周期再实现 `next()` / `prev()` 并在 `enter(info)` 里按 `info.direction` 定位到 scene 0 或最后一个 scene，`info.attended` 为假时 `playThrough()`（06 MOTION-09）。`?preview`、打印、减少动态走静态终态（`page.finish()`、`chart.finish()`、`film.seek(film.staticProgress)`）。完整示例：`examples/reference/htmlppt/deck.js`。
+
+### 已知限制
+- O 总览中的图表/甘特缩略图为空（上游先克隆后挂载）；需要时在组件挂载后重建总览，或在交付说明中列为限制。
+- 演讲者窗口预览与 fluid 观众窗比例不同；需要同画时向预览传递观众比例，否则列为限制。
+
+## 模板页（13 BODY-02）
+正文页可用模板库：`python3 "$KZ_DIR/tools/kz_layout.py" render <模板> data.json --track html --title … --out frag/` 写出 `slide_NN.html`（`.kz-body` 内部的标记）与图表数据文件 frag/charts.json（KZCharts 与 KZExplore 的载荷，键是片段里 `data-kz-chart` / `data-kz-explore` 的值）；把它整份并进 `window.KZ_DECK_DATA`，键名不改（顶层平铺，`Object.assign(KZ_DECK_DATA, charts)`，不套命名空间：KZExplore、KZLongitudinal、KZExposure 都按顶层键读）。交付目录要自包含：参考实现按仓库相对路径引用 ECharts，交付时把 `assets/vendor/echarts.min.js` 复制进交付目录再引用。入选/排除标准、用药规则、访视窗、SAE/AESI 定义、SoA 等条款页加 `--source <方案.docx 或方案文本>`，逐字核对原文；入排标准的数据用 `tools/protocol_lists.py <方案.docx> --from 排除标准 --key exclusion` 从 Word 取，编号与子项层级照方案（03 COPY-09）。
+
+- 页面骨架照参考实现：`<div class="kz-body" data-preset="kzl">` 里放片段；加载 `runtime/kz-layouts.css`（在 kz-glass.css 之后），图表用 `KZCharts.mount(el, charts[el.dataset.kzChart])` 挂到每个 `[data-kz-chart]`，并纳入翻页生命周期（参考 `examples/reference/htmlppt/deck.js`）。
+- 森林图与 KM 走 ECharts（`kind: forest / km`），示意图是内联 SVG，按 PPTX 求解的高度以 1:1 比例显示，文字字号与 PPTX 相同。
+- 片段里的 `**`/`!!`/`__`/`==` 已转成 `<b>`、`.kz-risk`、`<u>`、`<mark>`。两轨样张：`examples/templates/deck/index.html`。
+- 讲稿写在每页的 `aside.notes`，按 09 写；hero 页标 `data-chrome="hero"`，交付前跑 `python3 "$KZ_DIR/tools/check_notes.py" index.html --plan page-plan.json`。页标题按 03 COPY-01 写章节或主题名。
+
+## 正式静态截帧
+`render.sh` 可能在上游 0.5s 过渡中截帧。确有该问题时，从观众源派生同目录 `capture-only.html`：资源与 hash 导航不变，仅此副本加 `body[data-capture-only]`，项目装配识别后把图表、甘特、电影置于完整终态；观众源不引用捕获样式。改源后重新派生。然后调用原 `render.sh capture-only.html all <out>`，逐页核对 PNG 尺寸、活动页 opacity=1、完整文字与数据。1920 截帧不代替 2560 宽屏运行检查；记录上游与副本 hash 和真实返回码。
+
+宿主禁止 headless 浏览器时（`render.sh` 依赖 headless Chrome），改用宿主允许的有界面浏览器：把可视区设为 1920×1080，逐页打开 `capture-only.html#/N`，等项目的就绪标记（参考实现为 `html[data-kz-deck-ready]`）与活动页 opacity=1 后截帧，按上面的项目核对。门表 G9 的 method 写“替代截帧（原因：宿主禁用 headless）”，不写成 render.sh 通过。

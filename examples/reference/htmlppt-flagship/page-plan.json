@@ -1,0 +1,1599 @@
+{
+ "schema_version": "6.1",
+ "contract_revision": "7.0",
+ "track": "htmlppt",
+ "route": "flagship",
+ "canvas": [
+  1280,
+  720
+ ],
+ "target_viewports": [
+  [
+   1280,
+   720
+  ],
+  [
+   1536,
+   730
+  ],
+  [
+   1920,
+   940
+  ],
+  [
+   1920,
+   1080
+  ],
+  [
+   2560,
+   1080
+  ]
+ ],
+ "pages": [
+  {
+   "id": "s01",
+   "kind": "cover",
+   "title": "封面",
+   "body_profile": "standard",
+   "elements": [
+    {
+     "id": "s01-cover_title-0",
+     "role": "cover_title",
+     "font_px": 80,
+     "line_height": 1.25,
+     "text": "研究资料"
+    },
+    {
+     "id": "s01-cover_title-1",
+     "role": "cover_title",
+     "font_px": 80,
+     "line_height": 1.25,
+     "text": "完整性核对"
+    },
+    {
+     "id": "s01-hero_subtitle-0",
+     "role": "hero_subtitle",
+     "font_px": 24,
+     "line_height": 1.25,
+     "text": "应收 24 份、已收 20 份；缺口集中在中心记录与安全性报告"
+    },
+    {
+     "id": "s01-hero_meta-0",
+     "role": "hero_meta",
+     "font_px": 18,
+     "line_height": 1.25,
+     "text": "产品中心-医学部 · 2026年11月"
+    }
+   ],
+   "protected_regions": [],
+   "cards": [],
+   "motion_objects": [
+    {
+     "id": "s01-title",
+     "role": "title",
+     "enter": "rise@s0",
+     "exit": "page",
+     "hover": "none",
+     "ambient": "none"
+    }
+   ],
+   "image": {
+    "mode": "flagship_set",
+    "asset_id": "flagship-cover"
+   },
+   "sources": [
+    {
+     "id": "brief",
+     "kind": "internal",
+     "visible": false
+    }
+   ],
+   "hero_layout_id": "flagship-cover"
+  },
+  {
+   "id": "s02",
+   "kind": "toc",
+   "title": "目录",
+   "body_profile": "standard",
+   "elements": [
+    {
+     "id": "s02-toc_title-0",
+     "role": "toc_title",
+     "font_px": 64,
+     "line_height": 1.25,
+     "text": "汇报章节"
+    },
+    {
+     "id": "s02-toc_number-0",
+     "role": "toc_number",
+     "font_px": 56,
+     "line_height": 1.25,
+     "text": "01"
+    },
+    {
+     "id": "s02-toc_label-0",
+     "role": "toc_label",
+     "font_px": 24,
+     "line_height": 1.25,
+     "text": "研究范围"
+    },
+    {
+     "id": "s02-toc_description-0",
+     "role": "toc_description",
+     "font_px": 16,
+     "line_height": 1.25,
+     "text": "对象、时间窗与四组资料"
+    },
+    {
+     "id": "s02-toc_number-1",
+     "role": "toc_number",
+     "font_px": 56,
+     "line_height": 1.25,
+     "text": "02"
+    },
+    {
+     "id": "s02-toc_label-1",
+     "role": "toc_label",
+     "font_px": 24,
+     "line_height": 1.25,
+     "text": "资料完整性"
+    },
+    {
+     "id": "s02-toc_description-1",
+     "role": "toc_description",
+     "font_px": 16,
+     "line_height": 1.25,
+     "text": "应收与已收、缺口所在"
+    },
+    {
+     "id": "s02-toc_number-2",
+     "role": "toc_number",
+     "font_px": 56,
+     "line_height": 1.25,
+     "text": "03"
+    },
+    {
+     "id": "s02-toc_label-2",
+     "role": "toc_label",
+     "font_px": 24,
+     "line_height": 1.25,
+     "text": "差异处理"
+    },
+    {
+     "id": "s02-toc_description-2",
+     "role": "toc_description",
+     "font_px": 16,
+     "line_height": 1.25,
+     "text": "版本差异的判定与关闭"
+    },
+    {
+     "id": "s02-toc_number-3",
+     "role": "toc_number",
+     "font_px": 56,
+     "line_height": 1.25,
+     "text": "04"
+    },
+    {
+     "id": "s02-toc_label-3",
+     "role": "toc_label",
+     "font_px": 24,
+     "line_height": 1.25,
+     "text": "核对计划"
+    },
+    {
+     "id": "s02-toc_description-3",
+     "role": "toc_description",
+     "font_px": 16,
+     "line_height": 1.25,
+     "text": "补收、确认与复核排期"
+    },
+    {
+     "id": "s02-footer",
+     "role": "footer",
+     "font_px": 16,
+     "line_height": 1.4
+    }
+   ],
+   "protected_regions": [],
+   "cards": [
+    {
+     "id": "s02-c1",
+     "material": "flagship_paper",
+     "edge_decoration": "none",
+     "layout_mode": "distributed",
+     "detail": "not_needed",
+     "detail_reason": "合成示例页，卡内已给全量信息"
+    },
+    {
+     "id": "s02-c2",
+     "material": "flagship_paper",
+     "edge_decoration": "none",
+     "layout_mode": "distributed",
+     "detail": "not_needed",
+     "detail_reason": "合成示例页，卡内已给全量信息"
+    },
+    {
+     "id": "s02-c3",
+     "material": "flagship_paper",
+     "edge_decoration": "none",
+     "layout_mode": "distributed",
+     "detail": "not_needed",
+     "detail_reason": "合成示例页，卡内已给全量信息"
+    },
+    {
+     "id": "s02-c4",
+     "material": "flagship_paper",
+     "edge_decoration": "none",
+     "layout_mode": "distributed",
+     "detail": "not_needed",
+     "detail_reason": "合成示例页，卡内已给全量信息"
+    }
+   ],
+   "motion_objects": [
+    {
+     "id": "s02-c1",
+     "role": "kzf-card",
+     "enter": "flip@s0",
+     "exit": "page",
+     "hover": "spot",
+     "ambient": "none"
+    },
+    {
+     "id": "s02-c2",
+     "role": "kzf-card",
+     "enter": "flip@s0",
+     "exit": "page",
+     "hover": "spot",
+     "ambient": "none"
+    },
+    {
+     "id": "s02-c3",
+     "role": "kzf-card",
+     "enter": "flip@s0",
+     "exit": "page",
+     "hover": "spot",
+     "ambient": "none"
+    },
+    {
+     "id": "s02-c4",
+     "role": "kzf-card",
+     "enter": "flip@s0",
+     "exit": "page",
+     "hover": "spot",
+     "ambient": "none"
+    }
+   ],
+   "image": {
+    "mode": "flagship_set",
+    "asset_id": "flagship-canvas"
+   },
+   "sources": [
+    {
+     "id": "brief",
+     "kind": "internal",
+     "visible": false
+    }
+   ],
+   "hero_layout_id": "flagship-toc"
+  },
+  {
+   "id": "s03",
+   "kind": "section",
+   "title": "研究范围",
+   "body_profile": "standard",
+   "elements": [
+    {
+     "id": "s03-section_number-0",
+     "role": "section_number",
+     "font_px": 280,
+     "line_height": 1.25,
+     "text": "01"
+    },
+    {
+     "id": "s03-section_title-0",
+     "role": "section_title",
+     "font_px": 64,
+     "line_height": 1.25,
+     "text": "研究范围"
+    },
+    {
+     "id": "s03-footer",
+     "role": "footer",
+     "font_px": 16,
+     "line_height": 1.4
+    }
+   ],
+   "protected_regions": [],
+   "cards": [],
+   "motion_objects": [
+    {
+     "id": "s03-title",
+     "role": "title",
+     "enter": "blur@s0",
+     "exit": "page",
+     "hover": "none",
+     "ambient": "none"
+    }
+   ],
+   "image": {
+    "mode": "flagship_set",
+    "asset_id": "flagship-canvas"
+   },
+   "sources": [
+    {
+     "id": "brief",
+     "kind": "internal",
+     "visible": false
+    }
+   ],
+   "hero_layout_id": "flagship-section"
+  },
+  {
+   "id": "s04",
+   "kind": "body",
+   "title": "核对范围与资料分组",
+   "body_profile": "standard",
+   "elements": [
+    {
+     "id": "s04-page_title",
+     "role": "page_title",
+     "font_px": 34,
+     "line_height": 1.25,
+     "text": "核对范围与资料分组"
+    },
+    {
+     "id": "s04-card_title-0",
+     "role": "card_title",
+     "font_px": 20,
+     "line_height": 1.25,
+     "text": "研究对象与时间窗"
+    },
+    {
+     "id": "s04-body-0",
+     "role": "body",
+     "font_px": 16,
+     "line_height": 1.5,
+     "text": "研究对象"
+    },
+    {
+     "id": "s04-body-1",
+     "role": "body",
+     "font_px": 16,
+     "line_height": 1.5,
+     "text": "成人受试者"
+    },
+    {
+     "id": "s04-body-2",
+     "role": "body",
+     "font_px": 16,
+     "line_height": 1.5,
+     "text": "筛选期"
+    },
+    {
+     "id": "s04-body-3",
+     "role": "body",
+     "font_px": 16,
+     "line_height": 1.5,
+     "text": "4 周"
+    },
+    {
+     "id": "s04-body-4",
+     "role": "body",
+     "font_px": 16,
+     "line_height": 1.5,
+     "text": "评价时间窗"
+    },
+    {
+     "id": "s04-body-5",
+     "role": "body",
+     "font_px": 16,
+     "line_height": 1.5,
+     "text": "第 16 周"
+    },
+    {
+     "id": "s04-card_title-1",
+     "role": "card_title",
+     "font_px": 20,
+     "line_height": 1.25,
+     "text": "纳入资料（4 组）"
+    },
+    {
+     "id": "s04-card_title-2",
+     "role": "card_title",
+     "font_px": 20,
+     "line_height": 1.25,
+     "text": "方案版本比对"
+    },
+    {
+     "id": "s04-footer",
+     "role": "footer",
+     "font_px": 16,
+     "line_height": 1.4
+    }
+   ],
+   "protected_regions": [],
+   "cards": [
+    {
+     "id": "s04-c1",
+     "material": "flagship_paper",
+     "edge_decoration": "none",
+     "layout_mode": "distributed",
+     "detail": "not_needed",
+     "detail_reason": "合成示例页，卡内已给全量信息"
+    },
+    {
+     "id": "s04-c2",
+     "material": "flagship_paper",
+     "edge_decoration": "none",
+     "layout_mode": "distributed",
+     "detail": "not_needed",
+     "detail_reason": "合成示例页，卡内已给全量信息"
+    },
+    {
+     "id": "s04-c3",
+     "material": "flagship_paper",
+     "edge_decoration": "none",
+     "layout_mode": "distributed",
+     "detail": "not_needed",
+     "detail_reason": "合成示例页，卡内已给全量信息"
+    },
+    {
+     "id": "s04-c4",
+     "material": "flagship_paper",
+     "edge_decoration": "none",
+     "layout_mode": "distributed",
+     "detail": "not_needed",
+     "detail_reason": "合成示例页，卡内已给全量信息"
+    }
+   ],
+   "motion_objects": [
+    {
+     "id": "s04-c1",
+     "role": "kzf-card",
+     "enter": "card@s0",
+     "exit": "page",
+     "hover": "spot",
+     "ambient": "none"
+    },
+    {
+     "id": "s04-c2",
+     "role": "kzf-card",
+     "enter": "card@s0",
+     "exit": "page",
+     "hover": "spot",
+     "ambient": "none"
+    },
+    {
+     "id": "s04-c3",
+     "role": "kzf-card",
+     "enter": "card@s0",
+     "exit": "page",
+     "hover": "spot",
+     "ambient": "none"
+    },
+    {
+     "id": "s04-c4",
+     "role": "kzf-band",
+     "enter": "card@s2",
+     "exit": "page",
+     "hover": "none",
+     "ambient": "none"
+    }
+   ],
+   "image": {
+    "mode": "flagship_set",
+    "asset_id": "flagship-canvas"
+   },
+   "sources": [
+    {
+     "id": "brief",
+     "kind": "internal",
+     "visible": false
+    }
+   ],
+   "template": "flag-cols"
+  },
+  {
+   "id": "s05",
+   "kind": "section",
+   "title": "资料完整性",
+   "body_profile": "standard",
+   "elements": [
+    {
+     "id": "s05-section_number-0",
+     "role": "section_number",
+     "font_px": 280,
+     "line_height": 1.25,
+     "text": "02"
+    },
+    {
+     "id": "s05-section_title-0",
+     "role": "section_title",
+     "font_px": 64,
+     "line_height": 1.25,
+     "text": "资料完整性"
+    },
+    {
+     "id": "s05-footer",
+     "role": "footer",
+     "font_px": 16,
+     "line_height": 1.4
+    }
+   ],
+   "protected_regions": [],
+   "cards": [],
+   "motion_objects": [
+    {
+     "id": "s05-title",
+     "role": "title",
+     "enter": "blur@s0",
+     "exit": "page",
+     "hover": "none",
+     "ambient": "none"
+    }
+   ],
+   "image": {
+    "mode": "flagship_set",
+    "asset_id": "flagship-canvas"
+   },
+   "sources": [
+    {
+     "id": "brief",
+     "kind": "internal",
+     "visible": false
+    }
+   ],
+   "hero_layout_id": "flagship-section"
+  },
+  {
+   "id": "s06",
+   "kind": "body",
+   "title": "资料核对六步",
+   "body_profile": "standard",
+   "elements": [
+    {
+     "id": "s06-page_title",
+     "role": "page_title",
+     "font_px": 34,
+     "line_height": 1.25,
+     "text": "资料核对六步"
+    },
+    {
+     "id": "s06-body-0",
+     "role": "body",
+     "font_px": 16,
+     "line_height": 1.5,
+     "text": "2.1"
+    },
+    {
+     "id": "s06-body-1",
+     "role": "body",
+     "font_px": 16,
+     "line_height": 1.5,
+     "text": "资料清单"
+    },
+    {
+     "id": "s06-body-2",
+     "role": "body",
+     "font_px": 16,
+     "line_height": 1.5,
+     "text": "2.2"
+    },
+    {
+     "id": "s06-body-3",
+     "role": "body",
+     "font_px": 16,
+     "line_height": 1.5,
+     "text": "上传识别"
+    },
+    {
+     "id": "s06-body-4",
+     "role": "body",
+     "font_px": 16,
+     "line_height": 1.5,
+     "text": "2.3"
+    },
+    {
+     "id": "s06-body-5",
+     "role": "body",
+     "font_px": 16,
+     "line_height": 1.5,
+     "text": "逐项比对"
+    },
+    {
+     "id": "s06-footer",
+     "role": "footer",
+     "font_px": 16,
+     "line_height": 1.4
+    }
+   ],
+   "protected_regions": [],
+   "cards": [
+    {
+     "id": "s06-c1",
+     "material": "flagship_paper",
+     "edge_decoration": "none",
+     "layout_mode": "distributed",
+     "detail": "not_needed",
+     "detail_reason": "合成示例页，卡内已给全量信息"
+    },
+    {
+     "id": "s06-c2",
+     "material": "flagship_paper",
+     "edge_decoration": "none",
+     "layout_mode": "distributed",
+     "detail": "not_needed",
+     "detail_reason": "合成示例页，卡内已给全量信息"
+    },
+    {
+     "id": "s06-c3",
+     "material": "flagship_paper",
+     "edge_decoration": "none",
+     "layout_mode": "distributed",
+     "detail": "not_needed",
+     "detail_reason": "合成示例页，卡内已给全量信息"
+    },
+    {
+     "id": "s06-c4",
+     "material": "flagship_paper",
+     "edge_decoration": "none",
+     "layout_mode": "distributed",
+     "detail": "not_needed",
+     "detail_reason": "合成示例页，卡内已给全量信息"
+    },
+    {
+     "id": "s06-c5",
+     "material": "flagship_paper",
+     "edge_decoration": "none",
+     "layout_mode": "distributed",
+     "detail": "not_needed",
+     "detail_reason": "合成示例页，卡内已给全量信息"
+    },
+    {
+     "id": "s06-c6",
+     "material": "flagship_paper",
+     "edge_decoration": "none",
+     "layout_mode": "distributed",
+     "detail": "not_needed",
+     "detail_reason": "合成示例页，卡内已给全量信息"
+    },
+    {
+     "id": "s06-c7",
+     "material": "flagship_paper",
+     "edge_decoration": "none",
+     "layout_mode": "distributed",
+     "detail": "not_needed",
+     "detail_reason": "合成示例页，卡内已给全量信息"
+    }
+   ],
+   "motion_objects": [
+    {
+     "id": "s06-c1",
+     "role": "kzf-card",
+     "enter": "card@s1",
+     "exit": "page",
+     "hover": "spot",
+     "ambient": "none"
+    },
+    {
+     "id": "s06-c2",
+     "role": "kzf-card",
+     "enter": "card@s1",
+     "exit": "page",
+     "hover": "spot",
+     "ambient": "none"
+    },
+    {
+     "id": "s06-c3",
+     "role": "kzf-card",
+     "enter": "card@s1",
+     "exit": "page",
+     "hover": "spot",
+     "ambient": "none"
+    },
+    {
+     "id": "s06-c4",
+     "role": "kzf-card",
+     "enter": "card@s1",
+     "exit": "page",
+     "hover": "spot",
+     "ambient": "none"
+    },
+    {
+     "id": "s06-c5",
+     "role": "kzf-card",
+     "enter": "card@s1",
+     "exit": "page",
+     "hover": "spot",
+     "ambient": "none"
+    },
+    {
+     "id": "s06-c6",
+     "role": "kzf-card",
+     "enter": "card@s1",
+     "exit": "page",
+     "hover": "spot",
+     "ambient": "none"
+    },
+    {
+     "id": "s06-c7",
+     "role": "kzf-band",
+     "enter": "card@s3",
+     "exit": "page",
+     "hover": "none",
+     "ambient": "none"
+    }
+   ],
+   "image": {
+    "mode": "flagship_set",
+    "asset_id": "flagship-canvas"
+   },
+   "sources": [
+    {
+     "id": "brief",
+     "kind": "internal",
+     "visible": false
+    }
+   ],
+   "template": "flag-flow"
+  },
+  {
+   "id": "s07",
+   "kind": "body",
+   "title": "四组资料到位全景",
+   "body_profile": "standard",
+   "elements": [
+    {
+     "id": "s07-page_title",
+     "role": "page_title",
+     "font_px": 34,
+     "line_height": 1.25,
+     "text": "四组资料到位全景"
+    },
+    {
+     "id": "s07-body-0",
+     "role": "body",
+     "font_px": 16,
+     "line_height": 1.5,
+     "text": "24"
+    },
+    {
+     "id": "s07-body-1",
+     "role": "body",
+     "font_px": 16,
+     "line_height": 1.5,
+     "text": "份"
+    },
+    {
+     "id": "s07-body-2",
+     "role": "body",
+     "font_px": 16,
+     "line_height": 1.5,
+     "text": "应收资料"
+    },
+    {
+     "id": "s07-body-3",
+     "role": "body",
+     "font_px": 16,
+     "line_height": 1.5,
+     "text": "四组合计"
+    },
+    {
+     "id": "s07-body-4",
+     "role": "body",
+     "font_px": 16,
+     "line_height": 1.5,
+     "text": "20"
+    },
+    {
+     "id": "s07-body-5",
+     "role": "body",
+     "font_px": 16,
+     "line_height": 1.5,
+     "text": "份"
+    },
+    {
+     "id": "s07-footer",
+     "role": "footer",
+     "font_px": 16,
+     "line_height": 1.4
+    }
+   ],
+   "protected_regions": [],
+   "cards": [
+    {
+     "id": "s07-c1",
+     "material": "flagship_paper",
+     "edge_decoration": "none",
+     "layout_mode": "distributed",
+     "detail": "not_needed",
+     "detail_reason": "合成示例页，卡内已给全量信息"
+    },
+    {
+     "id": "s07-c2",
+     "material": "flagship_paper",
+     "edge_decoration": "none",
+     "layout_mode": "distributed",
+     "detail": "not_needed",
+     "detail_reason": "合成示例页，卡内已给全量信息"
+    },
+    {
+     "id": "s07-c3",
+     "material": "flagship_paper",
+     "edge_decoration": "none",
+     "layout_mode": "distributed",
+     "detail": "not_needed",
+     "detail_reason": "合成示例页，卡内已给全量信息"
+    }
+   ],
+   "motion_objects": [
+    {
+     "id": "s07-c1",
+     "role": "kzf-kpi",
+     "enter": "right@s2",
+     "exit": "page",
+     "hover": "spot",
+     "ambient": "none"
+    },
+    {
+     "id": "s07-c2",
+     "role": "kzf-kpi",
+     "enter": "right@s2",
+     "exit": "page",
+     "hover": "spot",
+     "ambient": "none"
+    },
+    {
+     "id": "s07-c3",
+     "role": "kzf-kpi",
+     "enter": "right@s2",
+     "exit": "page",
+     "hover": "spot",
+     "ambient": "none"
+    }
+   ],
+   "image": {
+    "mode": "flagship_set",
+    "asset_id": "flagship-canvas"
+   },
+   "sources": [
+    {
+     "id": "brief",
+     "kind": "internal",
+     "visible": false
+    }
+   ],
+   "template": "flag-stage",
+   "stage": {
+    "component": "platforms",
+    "job": "completeness"
+   }
+  },
+  {
+   "id": "s08",
+   "kind": "body",
+   "title": "各资料组应收与已收",
+   "body_profile": "standard",
+   "elements": [
+    {
+     "id": "s08-page_title",
+     "role": "page_title",
+     "font_px": 34,
+     "line_height": 1.25,
+     "text": "各资料组应收与已收"
+    },
+    {
+     "id": "s08-card_title-0",
+     "role": "card_title",
+     "font_px": 20,
+     "line_height": 1.25,
+     "text": "应收与已收"
+    },
+    {
+     "id": "s08-body-0",
+     "role": "body",
+     "font_px": 16,
+     "line_height": 1.5,
+     "text": "缺口 = 应收 − 已收"
+    },
+    {
+     "id": "s08-body-1",
+     "role": "body",
+     "font_px": 16,
+     "line_height": 1.5,
+     "text": "4"
+    },
+    {
+     "id": "s08-body-2",
+     "role": "body",
+     "font_px": 16,
+     "line_height": 1.5,
+     "text": "份"
+    },
+    {
+     "id": "s08-body-3",
+     "role": "body",
+     "font_px": 16,
+     "line_height": 1.5,
+     "text": "资料缺口"
+    },
+    {
+     "id": "s08-body-4",
+     "role": "body",
+     "font_px": 16,
+     "line_height": 1.5,
+     "text": "中心记录 3 · 安全性报告 1"
+    },
+    {
+     "id": "s08-card_title-1",
+     "role": "card_title",
+     "font_px": 20,
+     "line_height": 1.25,
+     "text": "补收清单"
+    },
+    {
+     "id": "s08-body-5",
+     "role": "body",
+     "font_px": 16,
+     "line_height": 1.5,
+     "text": "C-03"
+    },
+    {
+     "id": "s08-footer",
+     "role": "footer",
+     "font_px": 16,
+     "line_height": 1.4
+    }
+   ],
+   "protected_regions": [],
+   "cards": [
+    {
+     "id": "s08-c1",
+     "material": "flagship_paper",
+     "edge_decoration": "none",
+     "layout_mode": "distributed",
+     "detail": "not_needed",
+     "detail_reason": "合成示例页，卡内已给全量信息"
+    },
+    {
+     "id": "s08-c2",
+     "material": "flagship_paper",
+     "edge_decoration": "none",
+     "layout_mode": "distributed",
+     "detail": "not_needed",
+     "detail_reason": "合成示例页，卡内已给全量信息"
+    },
+    {
+     "id": "s08-c3",
+     "material": "flagship_paper",
+     "edge_decoration": "none",
+     "layout_mode": "distributed",
+     "detail": "not_needed",
+     "detail_reason": "合成示例页，卡内已给全量信息"
+    }
+   ],
+   "motion_objects": [
+    {
+     "id": "s08-c1",
+     "role": "kzf-card",
+     "enter": "card@s0",
+     "exit": "page",
+     "hover": "spot",
+     "ambient": "none"
+    },
+    {
+     "id": "s08-c2",
+     "role": "kzf-kpi",
+     "enter": "right@s2",
+     "exit": "page",
+     "hover": "spot",
+     "ambient": "none"
+    },
+    {
+     "id": "s08-c3",
+     "role": "kzf-card",
+     "enter": "right@s2",
+     "exit": "page",
+     "hover": "spot",
+     "ambient": "none"
+    }
+   ],
+   "image": {
+    "mode": "flagship_set",
+    "asset_id": "flagship-canvas"
+   },
+   "sources": [
+    {
+     "id": "brief",
+     "kind": "internal",
+     "visible": false
+    }
+   ],
+   "template": "flag-chart"
+  },
+  {
+   "id": "s09",
+   "kind": "section",
+   "title": "差异处理",
+   "body_profile": "standard",
+   "elements": [
+    {
+     "id": "s09-section_number-0",
+     "role": "section_number",
+     "font_px": 280,
+     "line_height": 1.25,
+     "text": "03"
+    },
+    {
+     "id": "s09-section_title-0",
+     "role": "section_title",
+     "font_px": 64,
+     "line_height": 1.25,
+     "text": "差异处理"
+    },
+    {
+     "id": "s09-footer",
+     "role": "footer",
+     "font_px": 16,
+     "line_height": 1.4
+    }
+   ],
+   "protected_regions": [],
+   "cards": [],
+   "motion_objects": [
+    {
+     "id": "s09-title",
+     "role": "title",
+     "enter": "blur@s0",
+     "exit": "page",
+     "hover": "none",
+     "ambient": "none"
+    }
+   ],
+   "image": {
+    "mode": "flagship_set",
+    "asset_id": "flagship-canvas"
+   },
+   "sources": [
+    {
+     "id": "brief",
+     "kind": "internal",
+     "visible": false
+    }
+   ],
+   "hero_layout_id": "flagship-section"
+  },
+  {
+   "id": "s10",
+   "kind": "body",
+   "title": "差异处理闭环",
+   "body_profile": "standard",
+   "elements": [
+    {
+     "id": "s10-page_title",
+     "role": "page_title",
+     "font_px": 34,
+     "line_height": 1.25,
+     "text": "差异处理闭环"
+    },
+    {
+     "id": "s10-body-0",
+     "role": "body",
+     "font_px": 16,
+     "line_height": 1.5,
+     "text": "38"
+    },
+    {
+     "id": "s10-body-1",
+     "role": "body",
+     "font_px": 16,
+     "line_height": 1.5,
+     "text": "条"
+    },
+    {
+     "id": "s10-body-2",
+     "role": "body",
+     "font_px": 16,
+     "line_height": 1.5,
+     "text": "本季度差异"
+    },
+    {
+     "id": "s10-body-3",
+     "role": "body",
+     "font_px": 16,
+     "line_height": 1.5,
+     "text": "已关闭 31 · 进行中 7"
+    },
+    {
+     "id": "s10-body-4",
+     "role": "body",
+     "font_px": 16,
+     "line_height": 1.5,
+     "text": "1"
+    },
+    {
+     "id": "s10-body-5",
+     "role": "body",
+     "font_px": 16,
+     "line_height": 1.5,
+     "text": "发现差异"
+    },
+    {
+     "id": "s10-footer",
+     "role": "footer",
+     "font_px": 16,
+     "line_height": 1.4
+    }
+   ],
+   "protected_regions": [],
+   "cards": [
+    {
+     "id": "s10-c1",
+     "material": "flagship_paper",
+     "edge_decoration": "none",
+     "layout_mode": "distributed",
+     "detail": "not_needed",
+     "detail_reason": "合成示例页，卡内已给全量信息"
+    },
+    {
+     "id": "s10-c2",
+     "material": "flagship_paper",
+     "edge_decoration": "none",
+     "layout_mode": "distributed",
+     "detail": "not_needed",
+     "detail_reason": "合成示例页，卡内已给全量信息"
+    },
+    {
+     "id": "s10-c3",
+     "material": "flagship_paper",
+     "edge_decoration": "none",
+     "layout_mode": "distributed",
+     "detail": "not_needed",
+     "detail_reason": "合成示例页，卡内已给全量信息"
+    },
+    {
+     "id": "s10-c4",
+     "material": "flagship_paper",
+     "edge_decoration": "none",
+     "layout_mode": "distributed",
+     "detail": "not_needed",
+     "detail_reason": "合成示例页，卡内已给全量信息"
+    },
+    {
+     "id": "s10-c5",
+     "material": "flagship_paper",
+     "edge_decoration": "none",
+     "layout_mode": "distributed",
+     "detail": "not_needed",
+     "detail_reason": "合成示例页，卡内已给全量信息"
+    },
+    {
+     "id": "s10-c6",
+     "material": "flagship_paper",
+     "edge_decoration": "none",
+     "layout_mode": "distributed",
+     "detail": "not_needed",
+     "detail_reason": "合成示例页，卡内已给全量信息"
+    }
+   ],
+   "motion_objects": [
+    {
+     "id": "s10-c1",
+     "role": "kzf-kpi",
+     "enter": "pop@s0",
+     "exit": "page",
+     "hover": "spot",
+     "ambient": "none"
+    },
+    {
+     "id": "s10-c2",
+     "role": "kzf-node",
+     "enter": "pop@s1",
+     "exit": "page",
+     "hover": "spot",
+     "ambient": "none"
+    },
+    {
+     "id": "s10-c3",
+     "role": "kzf-node",
+     "enter": "pop@s1",
+     "exit": "page",
+     "hover": "spot",
+     "ambient": "none"
+    },
+    {
+     "id": "s10-c4",
+     "role": "kzf-node",
+     "enter": "pop@s1",
+     "exit": "page",
+     "hover": "spot",
+     "ambient": "none"
+    },
+    {
+     "id": "s10-c5",
+     "role": "kzf-node",
+     "enter": "pop@s1",
+     "exit": "page",
+     "hover": "spot",
+     "ambient": "none"
+    },
+    {
+     "id": "s10-c6",
+     "role": "kzf-node",
+     "enter": "pop@s1",
+     "exit": "page",
+     "hover": "spot",
+     "ambient": "none"
+    }
+   ],
+   "image": {
+    "mode": "flagship_set",
+    "asset_id": "flagship-canvas"
+   },
+   "sources": [
+    {
+     "id": "brief",
+     "kind": "internal",
+     "visible": false
+    }
+   ],
+   "template": "flag-cycle"
+  },
+  {
+   "id": "s11",
+   "kind": "body",
+   "title": "两个季度的差异处理",
+   "body_profile": "standard",
+   "elements": [
+    {
+     "id": "s11-page_title",
+     "role": "page_title",
+     "font_px": 34,
+     "line_height": 1.25,
+     "text": "两个季度的差异处理"
+    },
+    {
+     "id": "s11-body-0",
+     "role": "body",
+     "font_px": 16,
+     "line_height": 1.5,
+     "text": "82"
+    },
+    {
+     "id": "s11-body-1",
+     "role": "body",
+     "font_px": 16,
+     "line_height": 1.5,
+     "text": "%"
+    },
+    {
+     "id": "s11-body-2",
+     "role": "body",
+     "font_px": 16,
+     "line_height": 1.5,
+     "text": "关闭率"
+    },
+    {
+     "id": "s11-body-3",
+     "role": "body",
+     "font_px": 16,
+     "line_height": 1.5,
+     "text": "2026Q4：31 / 38 条"
+    },
+    {
+     "id": "s11-card_title-0",
+     "role": "card_title",
+     "font_px": 20,
+     "line_height": 1.25,
+     "text": "变化从哪里来"
+    },
+    {
+     "id": "s11-body-4",
+     "role": "body",
+     "font_px": 16,
+     "line_height": 1.5,
+     "text": "原文定位到页"
+    },
+    {
+     "id": "s11-body-5",
+     "role": "body",
+     "font_px": 16,
+     "line_height": 1.5,
+     "text": "判定前不再来回查找"
+    },
+    {
+     "id": "s11-footer",
+     "role": "footer",
+     "font_px": 16,
+     "line_height": 1.4
+    }
+   ],
+   "protected_regions": [],
+   "cards": [
+    {
+     "id": "s11-c1",
+     "material": "flagship_paper",
+     "edge_decoration": "none",
+     "layout_mode": "distributed",
+     "detail": "not_needed",
+     "detail_reason": "合成示例页，卡内已给全量信息"
+    },
+    {
+     "id": "s11-c2",
+     "material": "flagship_paper",
+     "edge_decoration": "none",
+     "layout_mode": "distributed",
+     "detail": "not_needed",
+     "detail_reason": "合成示例页，卡内已给全量信息"
+    }
+   ],
+   "motion_objects": [
+    {
+     "id": "s11-c1",
+     "role": "kzf-kpi",
+     "enter": "right@s3",
+     "exit": "page",
+     "hover": "spot",
+     "ambient": "none"
+    },
+    {
+     "id": "s11-c2",
+     "role": "kzf-card",
+     "enter": "right@s3",
+     "exit": "page",
+     "hover": "spot",
+     "ambient": "none"
+    }
+   ],
+   "image": {
+    "mode": "flagship_set",
+    "asset_id": "flagship-canvas"
+   },
+   "sources": [
+    {
+     "id": "brief",
+     "kind": "internal",
+     "visible": false
+    }
+   ],
+   "template": "flag-stage",
+   "stage": {
+    "component": "ghost",
+    "job": "change"
+   }
+  },
+  {
+   "id": "s12",
+   "kind": "section",
+   "title": "核对计划",
+   "body_profile": "standard",
+   "elements": [
+    {
+     "id": "s12-section_number-0",
+     "role": "section_number",
+     "font_px": 280,
+     "line_height": 1.25,
+     "text": "04"
+    },
+    {
+     "id": "s12-section_title-0",
+     "role": "section_title",
+     "font_px": 64,
+     "line_height": 1.25,
+     "text": "核对计划"
+    },
+    {
+     "id": "s12-footer",
+     "role": "footer",
+     "font_px": 16,
+     "line_height": 1.4
+    }
+   ],
+   "protected_regions": [],
+   "cards": [],
+   "motion_objects": [
+    {
+     "id": "s12-title",
+     "role": "title",
+     "enter": "blur@s0",
+     "exit": "page",
+     "hover": "none",
+     "ambient": "none"
+    }
+   ],
+   "image": {
+    "mode": "flagship_set",
+    "asset_id": "flagship-canvas"
+   },
+   "sources": [
+    {
+     "id": "brief",
+     "kind": "internal",
+     "visible": false
+    }
+   ],
+   "hero_layout_id": "flagship-section"
+  },
+  {
+   "id": "s13",
+   "kind": "body",
+   "title": "核对计划",
+   "body_profile": "standard",
+   "elements": [
+    {
+     "id": "s13-page_title",
+     "role": "page_title",
+     "font_px": 34,
+     "line_height": 1.25,
+     "text": "核对计划"
+    },
+    {
+     "id": "s13-card_title-0",
+     "role": "card_title",
+     "font_px": 20,
+     "line_height": 1.25,
+     "text": "季度安排"
+    },
+    {
+     "id": "s13-body-0",
+     "role": "body",
+     "font_px": 16,
+     "line_height": 1.5,
+     "text": "区间 [起, 止)"
+    },
+    {
+     "id": "s13-body-1",
+     "role": "body",
+     "font_px": 16,
+     "line_height": 1.5,
+     "text": "2027Q1"
+    },
+    {
+     "id": "s13-body-2",
+     "role": "body",
+     "font_px": 16,
+     "line_height": 1.5,
+     "text": "关键节点"
+    },
+    {
+     "id": "s13-body-3",
+     "role": "body",
+     "font_px": 16,
+     "line_height": 1.5,
+     "text": "缺失资料补收与版本差异确认完成"
+    },
+    {
+     "id": "s13-card_title-1",
+     "role": "card_title",
+     "font_px": 20,
+     "line_height": 1.25,
+     "text": "里程碑"
+    },
+    {
+     "id": "s13-body-4",
+     "role": "body",
+     "font_px": 16,
+     "line_height": 1.5,
+     "text": "4 份补收"
+    },
+    {
+     "id": "s13-body-5",
+     "role": "body",
+     "font_px": 16,
+     "line_height": 1.5,
+     "text": "· 2 项版本确认"
+    },
+    {
+     "id": "s13-footer",
+     "role": "footer",
+     "font_px": 16,
+     "line_height": 1.4
+    }
+   ],
+   "protected_regions": [],
+   "cards": [
+    {
+     "id": "s13-c1",
+     "material": "flagship_paper",
+     "edge_decoration": "none",
+     "layout_mode": "distributed",
+     "detail": "not_needed",
+     "detail_reason": "合成示例页，卡内已给全量信息"
+    },
+    {
+     "id": "s13-c2",
+     "material": "flagship_paper",
+     "edge_decoration": "none",
+     "layout_mode": "distributed",
+     "detail": "not_needed",
+     "detail_reason": "合成示例页，卡内已给全量信息"
+    },
+    {
+     "id": "s13-c3",
+     "material": "flagship_paper",
+     "edge_decoration": "none",
+     "layout_mode": "distributed",
+     "detail": "not_needed",
+     "detail_reason": "合成示例页，卡内已给全量信息"
+    }
+   ],
+   "motion_objects": [
+    {
+     "id": "s13-c1",
+     "role": "kzf-card",
+     "enter": "card@s0",
+     "exit": "page",
+     "hover": "spot",
+     "ambient": "none"
+    },
+    {
+     "id": "s13-c2",
+     "role": "kzf-kpi",
+     "enter": "right@s2",
+     "exit": "page",
+     "hover": "spot",
+     "ambient": "none"
+    },
+    {
+     "id": "s13-c3",
+     "role": "kzf-card",
+     "enter": "right@s2",
+     "exit": "page",
+     "hover": "spot",
+     "ambient": "none"
+    }
+   ],
+   "image": {
+    "mode": "flagship_set",
+    "asset_id": "flagship-canvas"
+   },
+   "sources": [
+    {
+     "id": "brief",
+     "kind": "internal",
+     "visible": false
+    }
+   ],
+   "template": "flag-gantt"
+  },
+  {
+   "id": "s14",
+   "kind": "ending",
+   "title": "结束",
+   "body_profile": "standard",
+   "elements": [
+    {
+     "id": "s14-ending_title-0",
+     "role": "ending_title",
+     "font_px": 120,
+     "line_height": 1.25,
+     "text": "谢谢"
+    }
+   ],
+   "protected_regions": [],
+   "cards": [],
+   "motion_objects": [
+    {
+     "id": "s14-title",
+     "role": "title",
+     "enter": "blur@s0",
+     "exit": "page",
+     "hover": "none",
+     "ambient": "none"
+    }
+   ],
+   "image": {
+    "mode": "flagship_set",
+    "asset_id": "flagship-canvas"
+   },
+   "sources": [
+    {
+     "id": "brief",
+     "kind": "internal",
+     "visible": false
+    }
+   ],
+   "hero_layout_id": "flagship-ending"
+  }
+ ]
+}

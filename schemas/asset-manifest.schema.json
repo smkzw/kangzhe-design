@@ -1,0 +1,219 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "assets"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "6.0"
+    },
+    "assets": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "origin",
+          "file",
+          "sha256",
+          "review"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "origin": {
+            "enum": [
+              "generated",
+              "approved_logo",
+              "evidence_original"
+            ]
+          },
+          "file": {
+            "type": "string"
+          },
+          "sha256": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+          },
+          "tool_receipt": {
+            "type": "string"
+          },
+          "review": {
+            "type": "object",
+            "required": [
+              "bare",
+              "composite",
+              "reviewer",
+              "evidence"
+            ],
+            "properties": {
+              "bare": {
+                "enum": [
+                  "pass",
+                  "fail",
+                  "pending"
+                ]
+              },
+              "composite": {
+                "enum": [
+                  "pass",
+                  "fail",
+                  "pending"
+                ]
+              },
+              "reviewer": {
+                "type": "string"
+              },
+              "evidence": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            },
+            "additionalProperties": false
+          },
+          "requested_size": {
+            "anyOf": [
+              {
+                "type": "array",
+                "prefixItems": [
+                  {
+                    "type": "integer",
+                    "minimum": 1
+                  },
+                  {
+                    "type": "integer",
+                    "minimum": 1
+                  }
+                ],
+                "items": false,
+                "minItems": 2,
+                "maxItems": 2
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "actual_size": {
+            "type": "array",
+            "prefixItems": [
+              {
+                "type": "integer",
+                "minimum": 1
+              },
+              {
+                "type": "integer",
+                "minimum": 1
+              }
+            ],
+            "items": false,
+            "minItems": 2,
+            "maxItems": 2
+          },
+          "renditions": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "object",
+              "required": [
+                "viewport",
+                "crop",
+                "fit",
+                "protected_regions",
+                "subject_rects",
+                "evidence"
+              ],
+              "properties": {
+                "viewport": {
+                  "type": "array",
+                  "prefixItems": [
+                    {
+                      "type": "integer",
+                      "minimum": 1
+                    },
+                    {
+                      "type": "integer",
+                      "minimum": 1
+                    }
+                  ],
+                  "items": false,
+                  "minItems": 2,
+                  "maxItems": 2
+                },
+                "crop": {
+                  "type": "array",
+                  "items": {
+                    "type": "number"
+                  },
+                  "minItems": 4,
+                  "maxItems": 4
+                },
+                "fit": {
+                  "enum": ["cover", "contain"],
+                  "description": "cover: crop fills the viewport (backgrounds, hero); contain: the whole image placed at its own aspect (logo, evidence figure), crop is the full image"
+                },
+                "protected_regions": {
+                  "type": "array",
+                  "items": {
+                    "type": "array",
+                    "items": {
+                      "type": "number"
+                    },
+                    "minItems": 4,
+                    "maxItems": 4
+                  }
+                },
+                "subject_rects": {
+                  "type": "array",
+                  "items": {
+                    "type": "array",
+                    "items": {
+                      "type": "number"
+                    },
+                    "minItems": 4,
+                    "maxItems": 4
+                  }
+                },
+                "evidence": {
+                  "type": "array",
+                  "minItems": 1,
+                  "items": {
+                    "type": "string",
+                    "minLength": 1
+                  }
+                }
+              },
+              "additionalProperties": false
+            }
+          }
+        },
+        "additionalProperties": false,
+        "allOf": [
+          {
+            "if": {
+              "properties": {
+                "origin": {
+                  "const": "generated"
+                }
+              }
+            },
+            "then": {
+              "required": [
+                "requested_size",
+                "actual_size",
+                "renditions",
+                "tool_receipt"
+              ]
+            }
+          }
+        ]
+      }
+    }
+  },
+  "additionalProperties": false
+}

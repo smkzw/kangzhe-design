@@ -1,0 +1,167 @@
+{
+ "schema_version": "6.0",
+ "assets": [
+  {
+   "id": "cover_hero",
+   "origin": "generated",
+   "file": "cover_hero.png",
+   "sha256": "aa4f7119df6ff40267fd8e6ed813c97bb93bd5a1666009f0d2686917a46c2871",
+   "tool_receipt": "historical real generation (Kangzhe A03 batch); original receipts in kangzhe-design repo examples/validation/KZ6-0929-A03/asset-provenance.json; supplied by the user for this deck",
+   "requested_size": null,
+   "actual_size": [
+    1672,
+    941
+   ],
+   "renditions": [
+    {
+     "viewport": [
+      1280,
+      720
+     ],
+     "crop": [
+      0,
+      0,
+      1672,
+      940
+     ],
+     "fit": "cover",
+     "protected_regions": [],
+     "subject_rects": [],
+     "evidence": [
+      "svg_output page uses cover_hero.png with slice"
+     ]
+    }
+   ],
+   "review": {
+    "bare": "pass",
+    "composite": "pass",
+    "reviewer": "agent (ego lite screenshots, 2026-10-24)",
+    "evidence": [
+     "kangzhe-review/shots/default-01.png"
+    ]
+   }
+  },
+  {
+   "id": "toc_hero",
+   "origin": "generated",
+   "file": "toc_hero.png",
+   "sha256": "566c6ad9ed48562fcc95847cdde63decdcc997f34c8a9c5e49b89b7c1a06c545",
+   "tool_receipt": "historical real generation (Kangzhe A03 batch); original receipts in kangzhe-design repo examples/validation/KZ6-0929-A03/asset-provenance.json; supplied by the user for this deck",
+   "requested_size": null,
+   "actual_size": [
+    1672,
+    941
+   ],
+   "renditions": [
+    {
+     "viewport": [
+      1280,
+      720
+     ],
+     "crop": [
+      0,
+      0,
+      1672,
+      940
+     ],
+     "fit": "cover",
+     "protected_regions": [],
+     "subject_rects": [],
+     "evidence": [
+      "svg_output page uses toc_hero.png with slice"
+     ]
+    }
+   ],
+   "review": {
+    "bare": "pass",
+    "composite": "pass",
+    "reviewer": "agent (ego lite screenshots, 2026-10-24)",
+    "evidence": [
+     "kangzhe-review/shots/default-02.png"
+    ]
+   }
+  },
+  {
+   "id": "ending_hero",
+   "origin": "generated",
+   "file": "ending_hero.png",
+   "sha256": "33680aee0826cf66e90f895047766f732d8eb3da3af849de4ce41cbbeddf8db0",
+   "tool_receipt": "historical real generation (Kangzhe A03 batch); original receipts in kangzhe-design repo examples/validation/KZ6-0929-A03/asset-provenance.json; supplied by the user for this deck",
+   "requested_size": null,
+   "actual_size": [
+    1672,
+    941
+   ],
+   "renditions": [
+    {
+     "viewport": [
+      1280,
+      720
+     ],
+     "crop": [
+      0,
+      0,
+      1672,
+      940
+     ],
+     "fit": "cover",
+     "protected_regions": [],
+     "subject_rects": [],
+     "evidence": [
+      "svg_output page uses ending_hero.png with slice"
+     ]
+    }
+   ],
+   "review": {
+    "bare": "pass",
+    "composite": "pass",
+    "reviewer": "agent (ego lite screenshots, 2026-10-24)",
+    "evidence": [
+     "kangzhe-review/shots/default-06.png"
+    ]
+   }
+  },
+  {
+   "id": "body_quiet",
+   "origin": "generated",
+   "file": "body_quiet.png",
+   "sha256": "ce19777696202c355b2d13cda6fb5b6b2172edfc58e7e93e3b231cfd9f2aed73",
+   "tool_receipt": "historical real generation (Kangzhe A03 batch); original receipts in kangzhe-design repo examples/validation/KZ6-0929-A03/asset-provenance.json; supplied by the user for this deck",
+   "requested_size": null,
+   "actual_size": [
+    1672,
+    941
+   ],
+   "renditions": [
+    {
+     "viewport": [
+      1280,
+      720
+     ],
+     "crop": [
+      0,
+      0,
+      1672,
+      940
+     ],
+     "fit": "cover",
+     "protected_regions": [],
+     "subject_rects": [],
+     "evidence": [
+      "svg_output page uses body_quiet.png with slice"
+     ]
+    }
+   ],
+   "review": {
+    "bare": "pass",
+    "composite": "pass",
+    "reviewer": "agent (ego lite screenshots, 2026-10-24)",
+    "evidence": [
+     "kangzhe-review/shots/default-03.png",
+     "kangzhe-review/shots/default-04.png",
+     "kangzhe-review/shots/default-05.png"
+    ]
+   }
+  }
+ ]
+}

@@ -1,0 +1,11 @@
+GSAP 3.15.1 (gsap.min.js, DrawSVGPlugin, MotionPathPlugin, CustomEase, Flip, MorphSVGPlugin)
+Source: https://registry.npmjs.org/gsap/-/gsap-3.15.1.tgz
+  npm integrity sha512-63yjWRFWj3QRP1UOuD8kcidCcy3nxb1mMRpwHr/xJRvPfm9GtWOXFAYUiL0ro1fgPq2nY53LR+98pAgy9BumBg==
+  files copied unchanged from package/dist/
+Copyright 2026, GreenSock (Webflow). All rights reserved.
+License: Standard "no charge" GSAP license, https://gsap.com/standard-license
+  (page snapshot fetched 2026-11-17: GSAP-STANDARD-LICENSE.snapshot.html).
+  Not an OSI licence. Commercial use is covered; use inside no-code visual animation
+  builders that compete with Webflow is prohibited. Kangzhe Design uses GSAP only inside
+  authored presentations and pages, never as a visual animation builder.
+  Keep the copyright headers in the .min.js files.

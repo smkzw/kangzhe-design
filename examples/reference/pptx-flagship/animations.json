@@ -1,0 +1,323 @@
+{
+ "defaults": {
+  "transition": {
+   "effect": "fade",
+   "duration": 0.4
+  },
+  "animation": {
+   "effect": "none"
+  }
+ },
+ "slides": {
+  "01_cover": {
+   "groups": {
+    "cover-title": {
+     "effect": "entrance_rise_up",
+     "duration": 0.52,
+     "delay": 0.0,
+     "trigger": "with-previous",
+     "order": 1
+    },
+    "cover-lede": {
+     "effect": "entrance_fade",
+     "duration": 0.52,
+     "delay": 0.18,
+     "trigger": "with-previous",
+     "order": 2,
+     "decelerate": 0.7
+    },
+    "cover-chips": {
+     "effect": "entrance_fade",
+     "duration": 0.52,
+     "delay": 0.36,
+     "trigger": "with-previous",
+     "order": 3,
+     "decelerate": 0.7
+    },
+    "cover-meta": {
+     "effect": "entrance_fade",
+     "duration": 0.52,
+     "delay": 0.54,
+     "trigger": "with-previous",
+     "order": 4,
+     "decelerate": 0.7
+    }
+   }
+  },
+  "02_toc": {
+   "groups": {
+    "toc-title": {
+     "effect": "entrance_rise_up",
+     "duration": 0.52,
+     "delay": 0.0,
+     "trigger": "with-previous",
+     "order": 1
+    },
+    "toc-1": {
+     "effect": "entrance_rise_up",
+     "duration": 0.52,
+     "delay": 0.18,
+     "trigger": "with-previous",
+     "order": 2
+    },
+    "toc-2": {
+     "effect": "entrance_rise_up",
+     "duration": 0.52,
+     "delay": 0.36,
+     "trigger": "with-previous",
+     "order": 3
+    },
+    "toc-3": {
+     "effect": "entrance_rise_up",
+     "duration": 0.52,
+     "delay": 0.54,
+     "trigger": "with-previous",
+     "order": 4
+    },
+    "toc-4": {
+     "effect": "entrance_rise_up",
+     "duration": 0.52,
+     "delay": 0.72,
+     "trigger": "with-previous",
+     "order": 5
+    }
+   }
+  },
+  "03_section": {
+   "groups": {
+    "section-number": {
+     "effect": "entrance_zoom",
+     "duration": 0.52,
+     "delay": 0.0,
+     "trigger": "with-previous",
+     "order": 1,
+     "decelerate": 0.7
+    },
+    "section-text": {
+     "effect": "entrance_fade",
+     "duration": 0.52,
+     "delay": 0.18,
+     "trigger": "with-previous",
+     "order": 2,
+     "decelerate": 0.7
+    },
+    "section-toc": {
+     "effect": "entrance_fade",
+     "duration": 0.52,
+     "delay": 0.36,
+     "trigger": "with-previous",
+     "order": 3,
+     "decelerate": 0.7
+    }
+   }
+  },
+  "04_scope": {
+   "groups": {
+    "scope-1": {
+     "effect": "entrance_rise_up",
+     "duration": 0.52,
+     "delay": 0.0,
+     "trigger": "with-previous",
+     "order": 1
+    },
+    "scope-2": {
+     "effect": "entrance_rise_up",
+     "duration": 0.52,
+     "delay": 0.18,
+     "trigger": "with-previous",
+     "order": 2
+    },
+    "scope-3": {
+     "effect": "entrance_rise_up",
+     "duration": 0.52,
+     "delay": 0.36,
+     "trigger": "with-previous",
+     "order": 3
+    },
+    "scope-band": {
+     "effect": "entrance_wipe",
+     "duration": 1.0,
+     "delay": 0.0,
+     "trigger": "on-click",
+     "order": 4,
+     "decelerate": 0.7,
+     "effect_options": {
+      "direction": "left"
+     }
+    }
+   }
+  },
+  "05_flow": {
+   "groups": {
+    "flow-heads": {
+     "effect": "entrance_wipe",
+     "duration": 1.0,
+     "delay": 0.0,
+     "trigger": "with-previous",
+     "order": 1,
+     "decelerate": 0.7,
+     "effect_options": {
+      "direction": "left"
+     }
+    },
+    "flow-1": {
+     "effect": "entrance_rise_up",
+     "duration": 0.52,
+     "delay": 0.0,
+     "trigger": "on-click",
+     "order": 2
+    },
+    "flow-2": {
+     "effect": "entrance_rise_up",
+     "duration": 0.52,
+     "delay": 0.18,
+     "trigger": "with-previous",
+     "order": 3
+    },
+    "flow-3": {
+     "effect": "entrance_rise_up",
+     "duration": 0.52,
+     "delay": 0.36,
+     "trigger": "with-previous",
+     "order": 4
+    },
+    "flow-4": {
+     "effect": "entrance_rise_up",
+     "duration": 0.52,
+     "delay": 0.54,
+     "trigger": "with-previous",
+     "order": 5
+    },
+    "flow-5": {
+     "effect": "entrance_rise_up",
+     "duration": 0.52,
+     "delay": 0.72,
+     "trigger": "with-previous",
+     "order": 6
+    },
+    "flow-6": {
+     "effect": "entrance_rise_up",
+     "duration": 0.52,
+     "delay": 0.9,
+     "trigger": "with-previous",
+     "order": 7
+    },
+    "flow-band": {
+     "effect": "entrance_wipe",
+     "duration": 1.0,
+     "delay": 0.0,
+     "trigger": "on-click",
+     "order": 8,
+     "decelerate": 0.7,
+     "effect_options": {
+      "direction": "left"
+     }
+    }
+   }
+  },
+  "06_gaps": {
+   "groups": {
+    "chart-head": {
+     "effect": "entrance_fade",
+     "duration": 0.52,
+     "delay": 0.0,
+     "trigger": "with-previous",
+     "order": 1,
+     "decelerate": 0.7
+    },
+    "completeness-bars": {
+     "effect": "entrance_wipe",
+     "duration": 1.0,
+     "delay": 0.0,
+     "trigger": "on-click",
+     "order": 2,
+     "decelerate": 0.7,
+     "effect_options": {
+      "direction": "down"
+     }
+    },
+    "gap-kpi": {
+     "effect": "entrance_zoom",
+     "duration": 0.52,
+     "delay": 0.0,
+     "trigger": "on-click",
+     "order": 3,
+     "decelerate": 0.7
+    },
+    "gap-list": {
+     "effect": "entrance_rise_up",
+     "duration": 0.52,
+     "delay": 0.18,
+     "trigger": "with-previous",
+     "order": 4
+    }
+   }
+  },
+  "07_plan": {
+   "groups": {
+    "gantt-head": {
+     "effect": "entrance_fade",
+     "duration": 0.52,
+     "delay": 0.0,
+     "trigger": "with-previous",
+     "order": 1,
+     "decelerate": 0.7
+    },
+    "gantt": {
+     "effect": "entrance_wipe",
+     "duration": 1.0,
+     "delay": 0.0,
+     "trigger": "on-click",
+     "order": 2,
+     "decelerate": 0.7,
+     "effect_options": {
+      "direction": "left"
+     }
+    },
+    "plan-kpi": {
+     "effect": "entrance_fade",
+     "duration": 0.52,
+     "delay": 0.0,
+     "trigger": "on-click",
+     "order": 3,
+     "decelerate": 0.7
+    },
+    "plan-list": {
+     "effect": "entrance_rise_up",
+     "duration": 0.52,
+     "delay": 0.18,
+     "trigger": "with-previous",
+     "order": 4
+    }
+   }
+  },
+  "08_ending": {
+   "groups": {
+    "ending-title": {
+     "effect": "entrance_zoom",
+     "duration": 0.52,
+     "delay": 0.0,
+     "trigger": "with-previous",
+     "order": 1,
+     "decelerate": 0.7
+    },
+    "ending-sub": {
+     "effect": "entrance_fade",
+     "duration": 0.52,
+     "delay": 0.18,
+     "trigger": "with-previous",
+     "order": 2,
+     "decelerate": 0.7
+    },
+    "ending-meta": {
+     "effect": "entrance_fade",
+     "duration": 0.52,
+     "delay": 0.36,
+     "trigger": "with-previous",
+     "order": 3,
+     "decelerate": 0.7
+    }
+   }
+  }
+ }
+}

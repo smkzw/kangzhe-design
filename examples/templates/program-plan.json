@@ -1,0 +1,43 @@
+{
+ "title": "KZ-001 临床开发计划（多适应症）",
+ "program": {
+  "from": "2025Q1", "to": "2029Q4", "today": "2026Q4",
+  "lanes": [
+   {"key": "t2d", "name": "2 型糖尿病", "note": "KZ-201 · KZ-301/302",
+    "bars": [{"key": "t2d-p2", "phase": "II 期", "start": "2025Q1", "end": "2025Q4"},
+             {"key": "t2d-p3", "phase": "III 期", "start": "2026Q1", "end": "2027Q4"},
+             {"key": "t2d-reg", "phase": "注册", "start": "2028Q1", "end": "2028Q4"}],
+    "milestones": [{"key": "t2d-tl2", "at": "2025Q4", "label": "II 期顶线", "kind": "readout"},
+                   {"key": "t2d-tl3", "at": "2027Q4", "label": "III 期顶线", "kind": "readout"},
+                   {"key": "t2d-sub", "at": "2028Q1", "label": "NDA 递交", "kind": "submit"},
+                   {"key": "t2d-ap", "at": "2028Q4", "label": "获批", "kind": "approve"}]},
+   {"key": "obe", "name": "肥胖/超重", "note": "KZ-202 · KZ-303/304",
+    "bars": [{"key": "obe-p2", "phase": "II 期", "start": "2025Q3", "end": "2026Q3"},
+             {"key": "obe-p3", "phase": "III 期", "start": "2026Q4", "end": "2028Q2"},
+             {"key": "obe-reg", "phase": "注册", "start": "2028Q3", "end": "2029Q2"}],
+    "milestones": [{"key": "obe-tl2", "at": "2026Q3", "label": "II 期顶线", "kind": "readout"},
+                   {"key": "obe-tl3", "at": "2028Q2", "label": "III 期顶线", "kind": "readout"},
+                   {"key": "obe-sub", "at": "2028Q3", "label": "NDA 递交", "kind": "submit"}]},
+   {"key": "mash", "name": "MASH", "note": "KZ-203",
+    "bars": [{"key": "mash-p2", "phase": "II 期", "start": "2026Q1", "end": "2027Q2", "label": "KZ-203 · 肝活检"},
+             {"key": "mash-p3", "phase": "III 期", "start": "2027Q4", "end": "2029Q4"}],
+    "milestones": [{"key": "mash-tl2", "at": "2027Q2", "label": "48 周组织学", "kind": "readout", "risk": true},
+                   {"key": "mash-fpi", "at": "2027Q4", "label": "III 期首例入组", "kind": "start"}]},
+   {"key": "ckd", "name": "慢性肾病", "note": "KZ-104 · KZ-204",
+    "bars": [{"key": "ckd-p1", "phase": "I 期", "start": "2026Q2", "end": "2026Q4"},
+             {"key": "ckd-p2", "phase": "II 期", "start": "2027Q2", "end": "2028Q3"}],
+    "milestones": [{"key": "ckd-tl1", "at": "2026Q4", "label": "Ib 期安全性", "kind": "readout"},
+                   {"key": "ckd-eop2", "at": "2028Q4", "label": "II 期结束会议", "kind": "other"}]},
+   {"key": "hf", "name": "射血分数保留的心衰", "note": "KZ-205",
+    "bars": [{"key": "hf-p2", "phase": "II 期", "start": "2027Q1", "end": "2028Q2"}],
+    "milestones": [{"key": "hf-tl2", "at": "2028Q2", "label": "II 期顶线", "kind": "readout"}]}
+  ],
+  "focus": "t2d-sub"
+ },
+ "insights": [
+  {"icon": "flag", "title": "首个递交在 {t2d-sub}", "text": "2 型糖尿病两项 III 期 **{t2d-tl3} 顶线**，随后递交 NDA"},
+  {"icon": "stack-2", "title": "肥胖紧随其后", "text": "III 期 {obe-p3.start} 启动，递交比 2 型糖尿病晚 **{gap:t2d-sub,obe-sub}**"},
+  {"icon": "alert-circle", "title": "MASH 读出有风险", "text": "48 周组织学结果决定 III 期能否 **{mash-p3.start}** 启动", "tone": "risk"}
+ ],
+ "note": "合成示例；季度为计划时间，当前线之后为计划；阶段之间的空档为准备期。"
+}

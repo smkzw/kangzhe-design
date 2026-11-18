@@ -1,0 +1,32 @@
+{
+ "title": "KZ-001 累计暴露与各适应症 NDA（ICH E1）",
+ "exposure_plan": {
+  "program": {
+   "id": "kz001-cdp",
+   "from": "2025Q1", "to": "2031Q4", "today": "2026Q4",
+   "lanes": [
+    {"key": "hv", "name": "健康受试者", "note": "I 期与临床药理",
+     "bars": [{"key": "hv-fih", "phase": "I 期", "start": "2025Q1", "end": "2025Q4", "label": "FIH 单次 / 多次递增", "exposure": {"n": 180, "ctrl": 0.25}},
+              {"key": "hv-cp", "phase": "I 期", "start": "2026Q1", "end": "2026Q4", "label": "临床药理 6 项", "exposure": {"n": 96}}]},
+    {"key": "t2d", "name": "2 型糖尿病", "note": "KZ-201 · KZ-301",
+     "bars": [{"key": "t2d-p2", "phase": "II 期", "start": "2025Q2", "end": "2026Q1", "exposure": {"n": 240, "ctrl": 0.25, "w26": 150}},
+              {"key": "t2d-p3", "phase": "III 期", "start": "2026Q2", "end": "2028Q1", "exposure": {"n": 600, "ctrl": 0.3333, "w26": 360, "w52": 300}}],
+     "milestones": [{"key": "t2d-sub", "at": "2028Q3", "label": "NDA 递交", "kind": "submit"}]},
+    {"key": "t2d-lte", "name": "长期延展", "parent": "t2d",
+     "bars": [{"key": "t2d-lte1", "phase": "III 期", "start": "2027Q1", "end": "2028Q2", "label": "开放延展（安慰剂转入）", "exposure": {"n": 60}}]},
+    {"key": "obe", "name": "肥胖/超重", "note": "KZ-202 · KZ-303",
+     "bars": [{"key": "obe-p2", "phase": "II 期", "start": "2025Q4", "end": "2026Q4", "exposure": {"n": 200, "ctrl": 0.2}},
+              {"key": "obe-p3", "phase": "III 期", "start": "2027Q1", "end": "2029Q1", "exposure": {"n": 900, "ctrl": 0.3333, "w26": 540, "w52": 420}}],
+     "milestones": [{"key": "obe-sub", "at": "2029Q3", "label": "NDA 递交", "kind": "submit"}]},
+    {"key": "mash", "name": "MASH", "note": "KZ-203 · KZ-305",
+     "bars": [{"key": "mash-p2", "phase": "II 期", "start": "2026Q2", "end": "2027Q4", "exposure": {"n": 150, "ctrl": 0.3333}},
+              {"key": "mash-p3", "phase": "III 期", "start": "2028Q2", "end": "2030Q4", "exposure": {"n": 800, "ctrl": 0.5}}],
+     "milestones": [{"key": "mash-sub", "at": "2031Q1", "label": "NDA 递交", "kind": "submit"}]}
+   ]
+  },
+  "targets": {"any": 1500, "w26": 600, "w52": 100},
+  "target_label": "ICH E1",
+  "focus": "t2d"
+ },
+ "note": "合成示例；暴露 = 样本量 × (1 − 对照比例)，计入时点为研究结束；长期延展只计安慰剂转入的新暴露；ICH E1：任何暴露约 1,500 例、≥6 个月 300–600 例、≥1 年 100 例。"
+}

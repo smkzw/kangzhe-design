@@ -1,0 +1,24 @@
+<!-- 智研 METRIC 子系统统一页头（规范见 design_specs/16-metric-subsystem-header.md）。
+     把 ASSET 换成本子系统部署 assets/metric/ 的路径，X 换成子系统字母，HOME 换成本子系统首页。 -->
+<style>
+.metric-hd{position:sticky;top:0;z-index:50;height:56px;display:flex;align-items:center;padding:0 20px;
+  background:rgba(255,255,255,.88);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);border-bottom:1px solid rgba(190,178,161,.35)}
+.metric-hd .metric-main{height:30px;display:block}
+.metric-hd .metric-rule{width:1px;height:28px;background:rgba(190,178,161,.6);margin:0 14px;flex:none}
+.metric-hd .metric-sub{height:32px;display:block}
+.metric-hd .metric-sub-icon{display:none;height:28px}
+.metric-hd .metric-nav{margin-left:28px;display:flex;gap:18px;align-items:center;min-width:0}
+.metric-hd .metric-sp{flex:1}
+@media (max-width:900px){.metric-hd .metric-sub{display:none}.metric-hd .metric-sub-icon{display:block}}
+</style>
+<header class="metric-hd">
+  <a href="/" title="智研 METRIC"><img class="metric-main" src="ASSET/lockup-3x1-header.svg" alt="智研 METRIC"></a>
+  <span class="metric-rule"></span>
+  <a href="HOME" title="子系统首页">
+    <img class="metric-sub" src="ASSET/sub-X-lockup-header.svg" alt="子系统中文名">
+    <img class="metric-sub-icon" src="ASSET/sub-X.svg" alt="子系统中文名">
+  </a>
+  <nav class="metric-nav"><!-- 本子系统导航 / 面包屑 --></nav>
+  <span class="metric-sp"></span>
+  <!-- 右侧元素（保存状态、数据截至、助手按钮等） -->
+</header>

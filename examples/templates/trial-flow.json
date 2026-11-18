@@ -1,0 +1,25 @@
+{
+ "title": "KZ-001 III 期研究流程（随机撤药设计）",
+ "trialflow": {
+  "unit": "周",
+  "trunk": [{"label": "筛选", "from": -3, "to": -1, "kind": "off"}, {"label": "单盲导入", "from": -1, "to": 0, "kind": "placebo"}],
+  "split": {"at": 0, "label": "随机化", "ratio": "2:1"},
+  "arms": [
+   {"key": "kz", "name": "KZ-001", "n": 400,
+    "segs": [{"from": 0, "to": 16, "label": "剂量递增 4 步", "kind": "titrate"}, {"from": 16, "to": 36, "label": "1.0 mg QW 维持", "kind": "maintain"}],
+    "split": {"at": 36, "label": "再随机化", "ratio": "1:1", "arms": [
+     {"key": "kz-c", "name": "继续 KZ-001", "n": 180, "segs": [{"from": 36, "to": 52, "label": "1.0 mg QW", "kind": "maintain"}]},
+     {"key": "kz-w", "name": "转安慰剂", "n": 180, "segs": [{"from": 36, "to": 52, "label": "安慰剂 QW", "kind": "placebo"}]}]}},
+   {"key": "pbo", "name": "安慰剂", "n": 200, "segs": [{"from": 0, "to": 52, "label": "安慰剂 QW", "kind": "placebo"}]}
+  ],
+  "after": [{"label": "安全随访", "from": 52, "to": 57, "kind": "off"}],
+  "endpoints": [{"at": 36, "label": "主要终点 W36", "primary": true}, {"at": 52, "label": "维持终点 W52"}],
+  "subs": [{"key": "cgm", "name": "CGM 子研究", "of": ["kz", "pbo"], "from": 0, "to": 36, "n": 120}],
+  "events": [{"at": 12, "label": "期中分析（DMC）", "kind": "interim"}, {"at": 57, "label": "数据库锁定 · 揭盲", "kind": "lock"}],
+  "bands": [{"label": "研究药物", "from": 0, "to": 52, "kind": "drug", "text": "KZ-001 或安慰剂 QW，皮下注射"},
+            {"label": "背景治疗", "from": -3, "to": 57, "kind": "background", "text": "二甲双胍 ≥1500 mg/d，全程稳定剂量"},
+            {"label": "补救治疗", "from": 12, "to": 52, "kind": "rescue", "text": "W12 起血糖超阈值可加用"}],
+  "focus": "kz"
+ },
+ "note": "合成示例；W = 周，随机化日为 W0；剂量递增每 4 周一步。"
+}

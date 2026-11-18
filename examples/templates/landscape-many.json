@@ -1,0 +1,309 @@
+{
+ "title": "GLP-1 类减重药物竞争格局（竞品多 · 合成示例）",
+ "landscape": {
+  "stages": [
+   "I 期",
+   "II 期",
+   "III 期",
+   "申报",
+   "上市"
+  ],
+  "efficacy": {
+   "label": "体重降幅",
+   "unit": "%",
+   "better": "higher",
+   "note": "第 68–72 周，安慰剂校正"
+  },
+  "safety": {
+   "label": "胃肠道不良事件",
+   "unit": "%",
+   "better": "lower"
+  },
+  "safety_detail": [
+   {
+    "key": "gi",
+    "label": "胃肠道 AE",
+    "unit": "%",
+    "better": "lower"
+   },
+   {
+    "key": "nausea",
+    "label": "恶心",
+    "unit": "%",
+    "better": "lower"
+   },
+   {
+    "key": "vomit",
+    "label": "呕吐",
+    "unit": "%",
+    "better": "lower"
+   },
+   {
+    "key": "disc",
+    "label": "因 AE 停药",
+    "unit": "%",
+    "better": "lower"
+   }
+  ],
+  "assets": [
+   {
+    "key": "kz",
+    "name": "KZ-001",
+    "company": "康哲（合成）",
+    "moa": "GLP-1/GIP 双激动",
+    "route": "注射 QW",
+    "stage": "III 期",
+    "efficacy": 18.6,
+    "safety": 34.0,
+    "ours": true,
+    "trial": {
+     "name": "KZ-303",
+     "weeks": 72,
+     "n": 900
+    },
+    "detail": {
+     "gi": 34.0,
+     "nausea": 21.0,
+     "vomit": 8.0,
+     "disc": 4.1
+    }
+   },
+   {
+    "key": "a",
+    "name": "竞品 A",
+    "company": "公司甲",
+    "moa": "GLP-1 单激动",
+    "route": "注射 QW",
+    "stage": "上市",
+    "efficacy": 12.4,
+    "safety": 44.0,
+    "trial": {
+     "name": "A-3",
+     "weeks": 68,
+     "n": 1961
+    },
+    "detail": {
+     "gi": 44.0,
+     "nausea": 30.0,
+     "vomit": 15.0,
+     "disc": 6.8
+    }
+   },
+   {
+    "key": "b",
+    "name": "竞品 B",
+    "company": "公司乙",
+    "moa": "GLP-1/GIP 双激动",
+    "route": "注射 QW",
+    "stage": "上市",
+    "efficacy": 17.8,
+    "safety": 39.0,
+    "trial": {
+     "name": "B-1",
+     "weeks": 72,
+     "n": 2539
+    },
+    "detail": {
+     "gi": 39.0,
+     "nausea": 25.0,
+     "vomit": 9.0,
+     "disc": 6.2
+    }
+   },
+   {
+    "key": "c",
+    "name": "竞品 C",
+    "company": "公司丙",
+    "moa": "GLP-1 口服小分子",
+    "route": "口服 QD",
+    "stage": "III 期",
+    "efficacy": 10.9,
+    "safety": 52.0,
+    "trial": {
+     "name": "C-2",
+     "weeks": 72,
+     "n": 3127
+    },
+    "detail": {
+     "gi": 52.0,
+     "nausea": 33.0,
+     "vomit": 18.0,
+     "disc": 10.3
+    }
+   },
+   {
+    "key": "d",
+    "name": "竞品 D",
+    "company": "公司丁",
+    "moa": "GLP-1/GCG 双激动",
+    "route": "注射 QW",
+    "stage": "II 期",
+    "efficacy": 16.1,
+    "safety": 61.0,
+    "trial": {
+     "name": "D-201",
+     "weeks": 48,
+     "n": 272
+    },
+    "detail": {
+     "gi": 61.0,
+     "nausea": 38.0,
+     "vomit": 22.0,
+     "disc": 11.0
+    }
+   },
+   {
+    "key": "e",
+    "name": "竞品 E",
+    "company": "公司戊",
+    "moa": "三重激动",
+    "route": "注射 QW",
+    "stage": "II 期",
+    "efficacy": 21.5,
+    "safety": null,
+    "trial": {
+     "name": "E-2",
+     "weeks": 48,
+     "n": 338
+    }
+   },
+   {
+    "key": "f",
+    "name": "竞品 F",
+    "company": "公司己",
+    "moa": "胰淀素类似物",
+    "route": "注射 QW",
+    "stage": "I 期",
+    "efficacy": null,
+    "safety": null
+   },
+   {
+    "key": "g",
+    "name": "竞品 G",
+    "company": "公司庚",
+    "moa": "GLP-1 单激动",
+    "route": "注射 QW",
+    "stage": "上市",
+    "efficacy": 6.0,
+    "safety": 40.0,
+    "trial": {
+     "name": "G-1",
+     "weeks": 56,
+     "n": 3731
+    },
+    "detail": {
+     "gi": 40.0,
+     "nausea": 32.0,
+     "vomit": 12.0,
+     "disc": 6.4
+    }
+   },
+   {
+    "key": "h",
+    "name": "竞品 H",
+    "company": "公司辛",
+    "moa": "GLP-1 口服小分子",
+    "route": "口服 QD",
+    "stage": "II 期",
+    "efficacy": 9.8,
+    "safety": 47.0,
+    "trial": {
+     "name": "H-201",
+     "weeks": 36,
+     "n": 272
+    },
+    "detail": {
+     "gi": 47.0,
+     "nausea": 31.0,
+     "vomit": 14.0,
+     "disc": 7.9
+    }
+   },
+   {
+    "key": "i",
+    "name": "竞品 I",
+    "company": "公司壬",
+    "moa": "GLP-1/GCG 双激动",
+    "route": "注射 QW",
+    "stage": "III 期",
+    "efficacy": 14.9,
+    "safety": 55.0,
+    "trial": {
+     "name": "I-301",
+     "weeks": 48,
+     "n": 610
+    },
+    "detail": {
+     "gi": 55.0,
+     "nausea": 35.0,
+     "vomit": 16.0,
+     "disc": 8.8
+    }
+   },
+   {
+    "key": "j",
+    "name": "竞品 J",
+    "company": "公司癸",
+    "moa": "胰淀素类似物",
+    "route": "注射 QW",
+    "stage": "II 期",
+    "efficacy": 11.2,
+    "safety": 28.0,
+    "trial": {
+     "name": "J-2",
+     "weeks": 26,
+     "n": 285
+    },
+    "detail": {
+     "gi": 28.0,
+     "nausea": 18.0,
+     "vomit": 6.0,
+     "disc": 3.5
+    }
+   },
+   {
+    "key": "k",
+    "name": "竞品 K",
+    "company": "公司子",
+    "moa": "三重激动",
+    "route": "注射 QW",
+    "stage": "I 期",
+    "efficacy": null,
+    "safety": null
+   },
+   {
+    "key": "l",
+    "name": "竞品 L",
+    "company": "公司丑",
+    "moa": "GLP-1/GIP 双激动",
+    "route": "口服 QD",
+    "stage": "I 期",
+    "efficacy": null,
+    "safety": null
+   },
+   {
+    "key": "m",
+    "name": "竞品 M",
+    "company": "公司寅",
+    "moa": "GLP-1 单激动",
+    "route": "注射 QD",
+    "stage": "申报",
+    "efficacy": 8.4,
+    "safety": 42.0,
+    "trial": {
+     "name": "M-3",
+     "weeks": 52,
+     "n": 1240
+    },
+    "detail": {
+     "gi": 42.0,
+     "nausea": 27.0,
+     "vomit": 11.0,
+     "disc": 5.9
+    }
+   }
+  ],
+  "focus": "kz"
+ },
+ "note": "合成示例；竞品与数据均为虚构；跨研究比较受人群、时长与设计差异影响，仅作格局参考；— 表示尚无公开数据。"
+}

@@ -1,0 +1,119 @@
+# 10 质量门与放行
+
+各章写“做成什么样”，本章写“怎么证明做成了”。
+
+## 状态词 QA-STATUS
+门表、证据记录和交付说明只用以下六个状态词，其他章节引用本表，不另造近义词：
+
+| 状态 | 含义 | 必须附带 |
+|---|---|---|
+| `PASS` | 已按本章方法测过且合格 | 证据路径 |
+| `WARN` | 合格但有已知降级 | 理由与影响范围 |
+| `FAIL` | 测过且不合格 | 问题坐标 |
+| `BLOCKED` | 工具、权限或条件不可用，无法完成 | 所需能力、已完成部分 |
+| `PENDING` | 尚未测 | 原因与下一步 |
+| `N/A` | 本条对该产物不适用 | 原因 |
+
+硬门 FAIL 不能用美观高分抵消；PENDING 不是默认通过。工具返回的内部码（如 `inspectCard` 的 `NOT_TESTED`）在门表里记为 PENDING。
+
+## 门表
+交付说明的结论段附一张“G0–G9 门表”：每门填一个状态词，不留空，不写“同 G5”之类的互相指向。
+
+| 门 | 内容 | 最小证据 |
+|---|---|---|
+| G0 输入与引擎 | 事实清单、页型、所选上游引擎及版本/commit、能力发现 | 计划、源定位、真实工具回执 |
+| G1 品牌 | tokens 一致、Logo 哈希、部门映射、chrome 几何 | token 派生检查、DOM/OOXML 与逐页图 |
+| G2 语言与排版 | 标题规则、观点句、同角色同字号、字号下限、无孤字、无翻译腔与生产口吻 | `qc_plan.py`、`inspectOrphans`、语义审阅 |
+| G3 生图前 | 保护区与扫掠区、资产计划 | page-plan、mask/overlay |
+| G4 生图后 | 实际调用、裸图与合成、裁切、颜色、冲突；G4-BODY 三类正文合成 | 回执/哈希、逐页截图、问题坐标 |
+| G5 材料与布局 | 玻璃可感知、无色条、无裁字、卡内节奏、首屏与密度 | `inspectEdgeBars`（HTML）、`tools/check_edge_bars.py`（PPTX 的 SVG）、`inspectCard`、`inspectFold`、`inspectScroll`、全尺寸渲染 |
+| G6 数据 | HTML 用 ECharts、PPTX 对象类型、数据一致、null/单位/区间 | 数据对账、图表缓存与工作簿结构读回 |
+| G7 动态 | 编排与对象清单、电影同节点与接缝、HTML-PPT scene 步进、演示密度与内容依据、无播放器、后台暂停/seek/减少动态/离屏、锚元素、状态可辨 | 状态日志、正常速度完整周期、关键帧、真实指针样本 |
+| G8 交互 | 下钻宽度与层级、焦点、按键与滚轮隔离、甘特拖改与编辑台一致、撤销 | 真实指针/键盘/滚轮事件轨迹与断言 |
+| G-KZ 康哲项目检查 | 生图闸门与白底合成回执、色条、字号下限（10.5pt）、页标题（章节名，无冒号与句读）、讲稿（hero 页一句、不报幕，09 NOTES-04/05）、模板原文核对与溢出、模板轮换、强调与视觉载体、PPTX 高亮哨兵 | PPTX：`tools/check_kz_project.py`（导出前与导出后各一次）；HTML 三轨没有 `svg_output/`，用 `KZLayoutQC.inspectEdgeBars / inspectOrphans / inspectEmphasis` 与 `qc_plan.py` 覆盖同样的项，报告里写明替代 |
+| G9 目标环境 | 上游引擎端到端、目标 Office、浏览器与系统、离线与导出 | 实机截图、原生编辑保存回读 |
+
+旗舰路线（14）在下列各门内按 FLAG-11 增补证据，不另立门。
+
+无讲稿容器的轨道或页面，G7-NOTES 写 `N/A：本轨无讲稿容器`；没有实机投屏条件时，G5-PROJ 记 PENDING（投屏可读性未验证），并在 G2、G5 与结论段注明；其余门照常按各自证据取值。
+
+## 分阶段检查
+预检一次发现缺依赖 → 布局草图检容量与保护区 → 生图批量完成同风格资产 → 组件阶段跑确定性测试 → 每个语义里程碑做浏览器/视觉审阅 → 最后完整回归。先交付一页完整可验的样页、确认上游链路后再扩展全套；不对每个 CSS 小改动重启全部检查。
+
+## 工具
+安装包内可用的工具：
+
+| 工具 | 用途 | 不能证明 |
+|---|---|---|
+| `tools/qc_plan.py PLAN [--manifest M --asset-root R]` | 计划语义预检：标题、字号、动态清单、视口矩阵、图像映射、真实像素与哈希 | 视觉放行 |
+| `KZLayoutQC.inspectCard / inspectTextBounds / inspectFold / inspectOrphans / inspectEdgeBars / inspectScroll / inspectOverlaps / inspectTextFloor` | 卡内纵向分布、阅读区越界、首屏覆盖率与空白、孤字行、卡片边缘色条、滚动页逐屏墨迹与空白、演示舞台文字互相压叠、渲染字号下限（浏览器内运行） | 审美与语义 |
+| `tools/check_kz_project.py 项目 [--plan --pptx]` | 10 G-KZ：闸门与白底合成回执、色条、字号下限、页标题、讲稿、模板原文核对、轮换、强调、视觉载体、高亮哨兵 | 审美与医学语义 |
+| `tools/check_notes.py 讲稿 [--plan]` | 09 讲稿：hero 页句数、报幕套话（错误），行话、翻译腔、长句、口头语（警告）；读 PPTX、`notes/total.md` 或 HTML-PPT | 逻辑、重点与医学准确性要通读 |
+| `tools/kz_layout.py render` | 模板页生成与原文核对回执（13 BODY-02、03 COPY-09） | 选型是否合适 |
+| `tools/protocol_lists.py 方案.docx --from 排除标准` | 从 Word 自动编号读出条款的方案编号与子项层级，直接输出入排标准数据（03 COPY-09） | 方案以外的条款来源 |
+| `tools/quiet_plate.py` | 生成背景合成到白底并量阅读区安静度（04 IMG-08） | 主题是否相符 |
+| `tools/check_edge_bars.py SVG目录` | PPTX 页面 SVG 中贴卡边的彩色细条（02 LG-02） | 导出后的手工改动 |
+| ppt-master `svg_quality_checker.py`、`animation_config.py validate`、`pptx_delivery_check.py` | 上游 SVG 合同、动效侧车、成品交付风险 | PowerPoint 实机观感 |
+| html-ppt-skill `scripts/render.sh` | 官方静态截帧 | 普通观众态动态 |
+
+维护仓库另有回归测试（不随发布包，用于改 runtime、tokens 或规范之后）：合同、tokens、hero 几何、规范结构的单元测试，以及在浏览器中对组件实验室做的真实指针、键盘、滚动检查。它们证明组件行为，不证明交付页本身。
+
+## 几何与文字 G5-LAYOUT
+- 用真实 computed style、文字 Range 矩形、容器 client/scroll 尺寸判断越界；“页面没有滚动条”不够。祖先包含子节点不是碰撞。
+- 页缘溢出：每个交付视口逐页取卡片 `getBoundingClientRect()`，超出页面内容边界超过 `layout.qc.page_overflow_px`（2px）即失败（CSS 裁切不改变溢出事实）；卡内叶级文字越过卡片左右内边界超过 `text_inner_tolerance_px`（1px）计横向溢出，纵向允许字形越过内边距 `text_overhang_em`（0.2em）。`inspectCard` 按这三项报 `TEXT_OUTSIDE`。
+- 卡内分布按 03 TYPE-02 实测 T/B/H/R；`inspectCard` 遇到局部滚动区返回 `NOT_TESTED`（记 PENDING），另验可见 scrollport 与全部行列可达。图表内容以实际 ECharts 系列数据计数，取不到实例同样记 PENDING。
+- G5-NESTED：电影最大展开态中的每张子卡也分别测，不用父载体的联合框掩盖内部空白。
+- G5-FOLD：站点首页与流式文档首页的首屏在 `tokens.viewports` 每档 `inspectFold` PASS（13 FOLD-03），并在电影初始态与总览帧各测一次。
+- G5-DENSE：站点与流式的每个页面在每档视口 `inspectScroll` PASS（13 FOLD-07），演示舞台在 scene 0 与静态 scene 各测一次。
+- G5-WIDTH：站点与流式的每个页面在每档视口 `inspectWidth` PASS（13 WIDE-01）：信息对象横向跨度 ≥ `wide.content_width_min`，页眉与全宽容器不计；3440×1440 的截图另做视觉审阅（字号随宽度放大、页眉与 Logo 尺寸、无居中窄栏）。
+- G5-EDGE：所有轨道无卡片边缘色条（02 LG-02）：HTML 每页 `inspectEdgeBars` 无 fail，PPTX 对 `svg_output/` 跑 `tools/check_edge_bars.py` 无 fail；WARN 须写明语义。
+- G5-ORPHAN：`inspectOrphans` 在每档视口、电影各阅读状态无孤字行，`splits`（词内换行）为空。
+- G5-LEGIBLE（HTML 三轨）：每页每档视口跑 `inspectTextFloor`，渲染后的字（SVG 按屏幕缩放折算）不小于 11 px；模板示意图放进窄卡后整体缩小的情形由它发现，修法是放整行卡（tracks-site / tracks-stream 静态临床模板条），不是缩字或删字。
+- G5-OVERLAP（HTML 三轨有演示舞台时）：每个舞台在交付宽度下逐 scene（QC seek 到各 stop）跑 `inspectOverlaps`，不同对象的文字不重叠；FAIL 时按 15 DEMO-03 放整行卡、换宽预设或改用静态模板，不缩字。
+- G5-SPAN（PPTX/HTML-PPT）：正文页内容的纵向跨度达到 `layout.content_span_target` 下限（HTML 用 `inspectBodySpan`；PPTX 按根模块 `data-pptx-bounds` 的上下沿计算），低于下限记 WARN 并说明为何不补内容。
+- G5-WIDE：16:9、2:1、21:9 与更宽视口下 deck 边界贴视口、背景无两侧空带、内容网格达到品牌锚宽度。
+- G5-PROJ：现场投屏的交付物，在最大交付视口 100% 渲染帧上，由独立审阅者按实际观看条件判断可辨；HTML-PPT 的字号按 computed ÷ `--kz-un` 核对。缩小的截图不等于远距离观看。
+- G5-FACET（PPTX/HTML-PPT）：双菱形四个原生形状除 ID 外与批准资产一致；HTML 同几何同色、只整组竖直浮动。G5-MARK-SCOPE：站点/流式的 DOM 与画面不出现双菱形。
+
+## 动态 G7
+- **G7-INIT**：从普通观众 URL 进入每个含动态的页面，捕获 pageerror 与资源错误，确认组件挂载完成（Film 的 `data-kz-ready`、有限进度、自然推进与完整回接）；异常、NaN、零采样、未挂载、空图都不是 PASS。capture/print 副本另列。
+- **G7-OBJECT**：交付页每个卡片、流程、数据、识别件的动态清单（06 MOTION-01）与真实轨迹逐项对账；入场分层（外壳 translate/scale、玻璃本层 opacity、卡内级联）、退出、悬停、浮动、静态完整分别验证。
+- **悬停**：真实指针进入并驻留，记录 `--kz-lift`、`--kz-lx/ly`、transform 与阴影变化，再离开复位；不用 dispatchEvent 一次读瞬时值。
+- **电影**：正常速度观看一个完整周期并跨越接缝（最后 300ms + 最前 300ms）；取初始可读态、每段中点、每次文字切换前后、最大展开态、暂停后返回、中断—恢复后的锚元素、QC seek、减少动态、resize、父子下钻切换、打印/静态态。截图合格但播放晕眩或来不及读，仍不通过。
+- **G7-ANCHOR**：每部电影登记“该进度必须可见”的锚元素；自然播放中段，以及至少一条实际的中断—恢复路径（seek、再次进入、编辑打断）后，读取锚元素的 computed opacity/visibility、祖先透明度与矩形。
+- **业务同步**：记录每次状态切换前后的标题、编号、说明、节点、数值快照；一处错配即失败。第二圈的图表与数字仍由同一时钟驱动。
+- **G7-NO-PLAYER**：普通页、章节、首尾、L1/L2 与返回态都没有播放/暂停/重播/进度条/时间码；清理旧控件的选择器不能误删电影根节点或业务按钮。
+- **G7-NOTES**：从首状态起按正常语速朗读讲稿（含指图与停顿），指向的对象尚未出现或已退出即失败。
+- **G7-SCENE**（HTML-PPT，06 MOTION-09）：用真实按键与触控验证：
+  - 翻入后停在 scene 0；→/↓/空格/PageDown 与左滑、上滑各进一个 scene 并停住；最后一个 scene 后才翻页；
+  - ←/↑ 瞬时退回；运动中再按只完成当前运动；从后一页退回显示最后一个 scene；
+  - 深链与演讲者窗口入场走完全部 scene；减少动态直接翻页；
+  - scene 运动时长与 `move_ms` 一致，记录浏览器帧率，低帧率下不变慢；
+- **G7-DEMO**（15 DEMO-03/04/05/08/09）：
+  - 每个演示舞台导出 `audit()` 回执并对照 `motion.scenes.density`；逐 scene 取 `coverage()`，最满的 scene 达到 `min_canvas_coverage`，图形对象达到 `min_figures`；HTML-PPT 演示页的舞台面积达到 `min_stage_share`；
+  - page-plan 的演示页写 `demo`，相邻演示页不重复预设（qc_plan DEMO-PRESET-REPEAT）；流程、规则、核查类演示有正例、简单反例与复杂反例；
+  - 每个 scene seek 后检查文字对象无重叠、无出界、无溢出，说明不超过两行；
+  - 演示数据对账表逐项核对；
+- **HTML-PPT 翻页**：翻页过程中离开页在退出窗口内保持不透明、玻璃不失效；深链接、方向键、O 总览、S 演讲者、`?preview`、打印、离线、宽屏 resize、减少动态、重新进入。演讲者预览是独立视口，不保证同画，须实测或列为限制。
+- **PPTX**：`p:timing` 中入场的 presetID、触发方式、delay、时长、decel 与 `animations.json` 一致；Morph 两端同名 `!!key`；动效与 Morph 观感只在 PowerPoint 中验收。
+
+## 交互 G8
+- 下钻：宽度与高度、层级栈、面包屑、焦点进入与返回、Esc 逐层、背景隔离、展开与收回动画、父电影暂停与恢复；renderer 抛错显示“明细未能加载”时判失败。
+- DRILL-04：在最小交付视口逐层用真实滚轮/触控验证：内容溢出时 scrollTop 双向可变；两端与滚动体外页码不变、背景不动；指针落在横向溢出单元格上的双轴事件仍能纵向滚动；弹层内横滑不翻页；单字母快捷键不冒泡。任务书点名本条而产物没有可溢出弹层时，须提供一个真实溢出的实例，否则记 PENDING。
+- 甘特：真实指针拖动整条与两端（条内里程碑随动）、Esc/pointercancel 回退、键盘、撤销与还原（真实指针点击浮层按钮并记录 `elementFromPoint`）、减少动态、离开再返回读到修改；编辑台：T 打开且宿主 inert、日期点选、粒度切换换算、无效输入给具体错误、编辑台内按键不翻页、Esc 关闭后页面与数据仓库同步、草稿恢复/丢弃、保存数据块只替换改过的条目（系统对话框那一步人工确认）。
+
+## 可编辑性 G9
+PPTX：抽样编辑一段中文、一个表格格子和一个甘特条（存在时），保存重开检查；图表按 canonical data、缓存与嵌入工作簿结构逐值核对，并在 PowerPoint 检查渲染。本包不调用、打开或修复 Excel，也不通过“编辑数据”启动 Excel；结构核对不叫 Excel 编辑验证。光学装饰图片合法，整页或整卡栅格化不合法。HTML-PPT 必须通过上游的缩放、深链接、方向键与演讲者窗口；编辑表单或弹窗中的按键不触发翻页。
+
+## 证据
+每项记录 `rule_id、status、artifact、page/scene/object、expected、observed、method、environment、evidence_path、hash、next_action`；未执行记 PENDING 与原因。QC 每页/每场景结束即写入结果，异常终止保留已有结果和真实退出码，不在末尾补写全绿报告；修仪器与修产品分开归因。
+
+视觉审阅帧包写明视口、页面/场景、普通态或静态态、时间/进度、页面与弹层的滚动位置；包含下钻顶部、电影中段与底部。静态截图只证明可见外观：不能据此推断 DOM 不存在或 backdrop-filter 不存在；疑似缺失先由该规则的所有者对照源码与真实滚动复核，保留原判与复核结论。VLM 评分写明模型、提示、输入帧与原始回复，生成者与评审者身份隐藏。“console 零报错”包含浏览器自动请求的 favicon（产物给一个 `data:` favicon 即可）。
+
+## 放行等级
+- **设计规范可用**：文档、参数、合同自洽，基础工厂与本地测试可运行。
+- **组件已验证**：列出通过的具体检查，不外推到其他环境。
+- **轨道已验证**：该轨上游引擎端到端与目标运行环境都有证据。
+- **正式业务产物可交付**：逐页事实、视觉、来源、图像、编辑、讲稿都已复核。
+
+版本号指规范版本，不代表全部能力、所有 Office 与浏览器都已放行；发布包不附验证记录，每次交付按本页门表给出该次的证据。

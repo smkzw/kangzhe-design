@@ -1,0 +1,78 @@
+"""Produce a minimal explicit file-reading index, not an alternative rule set."""
+import argparse,json,hashlib
+from pathlib import Path
+ROOT=Path(__file__).resolve().parents[1]
+def files(track,features,route='regular'):
+ base=['SKILL.md','tokens/tokens.json']+[f'design_specs/{x}.md' for x in ['00-authority','01-core','02-liquid-glass','03-typography-language','04-image-pipeline','tracks-'+track,'13-layout-density','17-intake-storyboard','10-quality-gates']]
+ if track in ['pptx','htmlppt']:base+=['design_specs/11-hero-layouts.md']
+ if track=='pptx':base+=['adapters/ppt-master.md']
+ if track=='htmlppt':base+=['adapters/html-ppt.md']
+ # 14: the flagship route layers on the PPTX/HTML-PPT track; its FLAG-02 table names the regular rules it replaces.
+ if route=='flagship':
+  if track not in ['pptx','htmlppt']:raise ValueError('flagship route applies to pptx and htmlppt only')
+  base+=['design_specs/14-flagship.md']
+ if track in ['htmlppt','site','stream']:features.add('film')
+ if track in ['site','stream']:features.add('drilldown')
+ # 'motion' = PPTX animations.json / Morph (06 MOTION-07); HTML tracks always read 06 through 'film'.
+ # Any motion brings 15 (demonstrative stages; DEMO-06 is the PPTX degradation).
+ if features&{'film','motion'}:features.add('demo')
+ table={'charts':'05-charts','film':'06-motion-film','motion':'06-motion-film','demo':'15-demo-motion','drilldown':'07-drilldown','gantt':'08-gantt','notes':'09-speaker-notes'}
+ for f in sorted(features):
+  if f not in table:raise ValueError('Unknown feature: '+f)
+  base+=['design_specs/'+table[f]+'.md']
+ if 'gantt' in features and 'charts' not in features:base+=['design_specs/05-charts.md']
+ for f in base:
+  if not (ROOT/f).is_file():raise FileNotFoundError(f)
+ return list(dict.fromkeys(base))
+
+STAGES=('bootstrap','plan','assets','author','verify')
+def index(track,features,stage='all',seen=None,route='regular'):
+ """Route owner paths, not copied rules or a production acceptance verdict."""
+ complete=files(track,set(features),route)
+ if stage=='all': selected=complete
+ elif stage=='bootstrap':
+  selected=['SKILL.md','design_specs/00-authority.md','design_specs/17-intake-storyboard.md','tools/intake.py','design_specs/tracks-'+track+'.md']+(['design_specs/14-flagship.md'] if route=='flagship' else [])
+  if track=='pptx':selected+=['adapters/ppt-master.md']
+  if track=='htmlppt':selected+=['adapters/html-ppt.md']
+ elif stage=='plan':
+  selected=[p for p in complete if p.startswith(('tokens/','design_specs/')) and not p.endswith('10-quality-gates.md')]
+  selected+=['schemas/page-plan.schema.json','tools/qc_plan.py','tools/storyboard.py']
+  if 'film' in features or track in ['htmlppt','site','stream']:selected+=['schemas/film-plan.schema.json']
+  if 'gantt' in features:selected+=['schemas/program-plan.schema.json']
+ elif stage=='assets':
+  # 04 hands off to the glass material (02), hero frames (11) and the viewport matrix (13 FOLD-04).
+  selected=['design_specs/04-image-pipeline.md','design_specs/02-liquid-glass.md','design_specs/13-layout-density.md']+(['design_specs/11-hero-layouts.md'] if track in ['pptx','htmlppt'] else [])+['schemas/asset-manifest.schema.json','tools/qc_plan.py']
+  # 14 FLAG-03: flagship backgrounds come from the flagship set (a theme cover may still be generated through 04)
+  if route=='flagship':selected+=['design_specs/14-flagship.md','assets/backgrounds/flagship/default-set.json','tools/kz_image_prompts.py','tools/quiet_plate.py']+(['tools/flagship_canvas.py'] if track=='pptx' else [])
+  # 04 IMG-07/08: prompts in the composition contract, then the white-base plate and its reading-zone check
+  elif track in ['pptx','htmlppt']:selected+=['tools/kz_image_prompts.py','tools/quiet_plate.py']
+ elif stage=='author':
+  selected=['tokens/tokens.json','runtime/API.md'] if track!='pptx' else ['tokens/tokens.json','adapters/ppt-master.md']
+  if track=='htmlppt':selected+=['adapters/html-ppt.md']
+  if track in ['pptx','htmlppt']:selected+=['tools/brand_fragments.py','tools/hero_layout.py']
+  # 13 BODY-02: regular-route body pages come from the template library (same page data for both tracks)
+  if track in ['pptx','htmlppt'] and route!='flagship':selected+=['design_specs/13-layout-density.md','tools/kz_layout.py','tools/protocol_lists.py','examples/templates/pages.py']+(['runtime/kz-layouts.css'] if track=='htmlppt' else [])
+  if track=='pptx':selected+=['tools/glass_svg.py']+(['tools/flagship_canvas.py','examples/reference/pptx-flagship/README.md','examples/reference/pptx-flagship/build_svg.py','tools/kz_layouts/flagship_pptx.py','examples/reference/pptx-flagship-clinical/README.md'] if route=='flagship' else ['examples/reference/pptx-default/README.md','examples/reference/pptx-default/page-plan.json'])
+  if track=='htmlppt' and route=='flagship':selected+=['design_specs/14-flagship.md','runtime/kz-flagship.css','runtime/kz-flagship-stages.js','examples/motion/flagship/index.html','examples/reference/htmlppt-flagship/build.py','examples/reference/htmlppt-flagship/page-plan.json']
+  # 09: PPTX and HTML-PPT decks carry speaker notes by default (ppt-master enables them outside Quick); 03 owns the title rule
+  if track in ['pptx','htmlppt']:selected+=['design_specs/03-typography-language.md','design_specs/09-speaker-notes.md','tools/check_notes.py']
+  # The current-spec reference implementation is the fastest correct starting point for authoring.
+  selected+=['examples/reference/README.md']
+ elif stage=='verify':selected=complete+['tools/qc_plan.py']+(['tools/check_kz_project.py','tools/check_notes.py','design_specs/09-speaker-notes.md'] if track in ['pptx','htmlppt'] else [])
+ else:raise ValueError('Unknown stage: '+stage)
+ selected=list(dict.fromkeys(selected));owners=[]
+ for p in selected:
+  data=(ROOT/p).read_bytes();sha=hashlib.sha256(data).hexdigest()
+  owners.append({'path':p,'sha256':sha,'bytes':len(data),'needs_read':(seen or {}).get(p)!=sha})
+ pos=STAGES.index(stage) if stage in STAGES else None
+ return {'track':track,'route':route,'stage':stage,'read_files':selected,'owners':owners,
+         'fingerprints':{o['path']:o['sha256'] for o in owners},
+         'prerequisite_stages':list(STAGES[:pos]) if pos is not None else [],
+         'next_stage':STAGES[pos+1] if pos is not None and pos+1<len(STAGES) else None,
+         'scope':'reading index only; no stage or artifact is accepted by this output',
+         'note':'Earlier owner requirements remain active. Hash matches permit reuse only when actually read in the same compatible session; final verification retains every applicable owner. Read implementation definitions when the public API is insufficient, not whole unrelated sources.'}
+if __name__=='__main__':
+ ap=argparse.ArgumentParser();ap.add_argument('--track',choices=['pptx','htmlppt','site','stream'],required=True);ap.add_argument('--route',choices=['regular','flagship'],default='regular',help='14 FLAG-01: chosen route for pptx/htmlppt');ap.add_argument('--features',default='',help='comma list: charts,film,motion,demo,drilldown,gantt,notes');ap.add_argument('--stage',choices=['all',*STAGES],default='all');ap.add_argument('--seen',type=Path,help='JSON {"fingerprints": {relative_owner_path: actually_read_sha256}}');a=ap.parse_args()
+ seen=json.loads(a.seen.read_text())['fingerprints'] if a.seen else None
+ if seen is not None and (not isinstance(seen,dict) or any(not isinstance(k,str) or not isinstance(v,str) for k,v in seen.items())):ap.error('--seen fingerprints must map paths to string hashes')
+ print(json.dumps(index(a.track,set(filter(None,a.features.split(','))),a.stage,seen,a.route),ensure_ascii=False,indent=2))

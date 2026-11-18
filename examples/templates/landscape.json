@@ -1,0 +1,98 @@
+{
+ "title": "GLP-1 类减重药物竞争格局（合成示例）",
+ "landscape": {
+  "stages": [
+   "I 期",
+   "II 期",
+   "III 期",
+   "申报",
+   "上市"
+  ],
+  "efficacy": {
+   "label": "体重降幅",
+   "unit": "%",
+   "better": "higher",
+   "note": "第 68–72 周，安慰剂校正"
+  },
+  "safety": {
+   "label": "胃肠道不良事件",
+   "unit": "%",
+   "better": "lower"
+  },
+  "assets": [
+   {
+    "key": "kz",
+    "name": "KZ-001",
+    "company": "康哲（合成）",
+    "moa": "GLP-1/GIP 双激动",
+    "route": "注射 QW",
+    "stage": "III 期",
+    "efficacy": 18.6,
+    "safety": 34.0,
+    "ours": true
+   },
+   {
+    "key": "a",
+    "name": "竞品 A",
+    "company": "公司甲",
+    "moa": "GLP-1 单激动",
+    "route": "注射 QW",
+    "stage": "上市",
+    "efficacy": 12.4,
+    "safety": 44.0
+   },
+   {
+    "key": "b",
+    "name": "竞品 B",
+    "company": "公司乙",
+    "moa": "GLP-1/GIP 双激动",
+    "route": "注射 QW",
+    "stage": "上市",
+    "efficacy": 17.8,
+    "safety": 39.0
+   },
+   {
+    "key": "c",
+    "name": "竞品 C",
+    "company": "公司丙",
+    "moa": "GLP-1 口服小分子",
+    "route": "口服 QD",
+    "stage": "III 期",
+    "efficacy": 10.9,
+    "safety": 52.0
+   },
+   {
+    "key": "d",
+    "name": "竞品 D",
+    "company": "公司丁",
+    "moa": "GLP-1/GCG 双激动",
+    "route": "注射 QW",
+    "stage": "II 期",
+    "efficacy": 16.1,
+    "safety": 61.0
+   },
+   {
+    "key": "e",
+    "name": "竞品 E",
+    "company": "公司戊",
+    "moa": "三重激动",
+    "route": "注射 QW",
+    "stage": "II 期",
+    "efficacy": 21.5,
+    "safety": null
+   },
+   {
+    "key": "f",
+    "name": "竞品 F",
+    "company": "公司己",
+    "moa": "胰淀素类似物",
+    "route": "注射 QW",
+    "stage": "I 期",
+    "efficacy": null,
+    "safety": null
+   }
+  ],
+  "focus": "kz"
+ },
+ "note": "合成示例；竞品与数据均为虚构；跨研究比较受人群与设计差异影响，仅作格局参考；— 表示尚无公开数据。"
+}

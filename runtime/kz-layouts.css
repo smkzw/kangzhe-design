@@ -1,0 +1,125 @@
+/* Kangzhe 7.2 — template pages for HTML-PPT (13 BODY-02), markup printed by tools/kz_layouts (html.py).
+   Lengths in --kz-u, type in --kz-type-* × --kz-un (HTML-PPT: written by adapters/html-ppt-bridge.js; site and stream:
+   set below from the card width). The same template
+   trees are solved for PPTX by tools/kz_layouts/tree.py; here the browser lays them out with grid and flex.
+   Cards keep their content distributed over their height (03 TYPE-02): stacks space their groups evenly.
+   Rules sit under .kzl-root so a template's role sizes win over the generic .kz-card p/li sizes of kz-glass.css. */
+/* --kz-lh: the list item's line height in px, inherited by its number disc (registered so 1lh resolves on the li) */
+@property --kz-lh{syntax:"<length>";inherits:true;initial-value:0px}
+.kz .kz-body[data-preset="kzl"]{grid-template-columns:minmax(0,1fr);grid-template-rows:minmax(0,1fr)}
+.kz .kzl-root{display:flex;flex-direction:column;min-height:0;height:100%}
+/* site and stream: a template page in a sheet card is the slide body scaled to the card width — one unit, --kz-u =
+   card width / tokens.chrome.body.w, for lengths and type alike (the type numbers are tokens.type_px), so what
+   tools/kz_layouts solved for 1168 px keeps its proportions; height follows the content, stacks do not stretch */
+.kz:not([data-fit]) :has(> .kzl-root){container-type:inline-size}
+.kz:not([data-fit]) .kzl-root{height:auto;--kz-u:calc(100cqw / var(--kz-chrome-body-w));--kz-un:1;
+  --kz-type-body:calc(20 * var(--kz-u));--kz-type-secondary:calc(16 * var(--kz-u));--kz-type-card-title:calc(24 * var(--kz-u));
+  --kz-type-takeaway:calc(24 * var(--kz-u));--kz-type-kpi-value:calc(38 * var(--kz-u))}
+.kz:not([data-fit]) .kzl-root .kzl-stack{flex-grow:0}
+/* the sheet and stream chart rule (kz-glass.css: aspect-ratio, min/max height) is for free-standing charts; a chart in a template figure fills the figure box */
+.kz:not([data-fit]) .kzl-root .kzl-figure>.kz-chart{aspect-ratio:auto;height:100%;min-height:0;max-height:none}
+.kz .kzl-root .kzl-stack{display:flex;flex-direction:column;min-height:0;min-width:0;flex:1 1 auto}
+.kz .kzl-root .kzl-row{display:grid;min-height:0;flex:1 1 auto}
+.kz .kzl-root .kzl-row>*{min-width:0;min-height:0}
+.kz .kzl-root .kzl-spacer{min-height:0}
+.kz .kzl-root .kzl-card{display:flex;flex-direction:column;box-sizing:border-box;padding:calc(22 * var(--kz-u)) calc(24 * var(--kz-u));min-height:0}
+.kz .kzl-root .kzl-card>.kzl-stack{flex:1 1 auto}
+.kz .kzl-root .kzl-stack>.kzl-card{flex:1 1 auto}
+/* the deck sets .kz-body .kz-card{height:100%}; template cards size from their content and the flex share instead */
+.kz .kzl-root .kzl-card.kzl-card{height:auto}
+.kz .kzl-root .kzl-card.is-tint{background:#FFF6E8}
+.kz .kzl-root .kzl-card.is-risk{background:#FCEDEC}
+.kz .kzl-root .kzl-card.is-plain{background:#FFFFFF}
+.kz .kzl-root .kzl-t{margin:0}
+.kz .kzl-root .kzl-body{font-size:calc(var(--kz-type-body) * var(--kz-un,1));line-height:1.5;color:var(--kz-body)}
+.kz .kzl-root .kzl-secondary{font-size:calc(var(--kz-type-secondary) * var(--kz-un,1));line-height:1.45;color:var(--kz-body)}
+.kz .kzl-root .kzl-t.is-label{color:var(--kz-muted);line-height:1.35}
+.kz .kzl-root .kzl-t.is-item_title{color:var(--kz-ink);font-weight:700;line-height:1.35}
+.kz .kzl-root .kzl-card-title{font-size:calc(var(--kz-type-card-title) * var(--kz-un,1));line-height:1.3;font-weight:700;color:var(--kz-ink)}
+.kz .kzl-root .kzl-takeaway{font-size:calc(var(--kz-type-takeaway) * var(--kz-un,1));line-height:1.4;font-weight:700;color:var(--kz-ink)}
+.kz .kzl-root .kzl-kpi-value{font-size:calc(var(--kz-type-kpi-value) * var(--kz-un,1));line-height:1.1;font-weight:700;color:var(--kz-ink);font-variant-numeric:tabular-nums}
+.kz .kzl-root .kzl-kpi{display:flex;flex-direction:column;gap:calc(4 * var(--kz-u));justify-content:center}
+.kz .kzl-root .kzl-kpi.is-risk b{color:var(--kz-risk)}
+.kz .kzl-root .kzl-kpi.is-brand b{color:var(--kz-focus)}
+.kz .kzl-root .kzl-icon{display:inline-grid;place-items:center;flex:none;width:calc(var(--s) * var(--kz-u));height:calc(var(--s) * var(--kz-u));color:#B85C00}
+.kz .kzl-root .kzl-icon .kz-icon{width:100%;height:100%}
+.kz .kzl-root .kzl-icon.is-disc{border-radius:50%;background:#FFF1DE}
+.kz .kzl-root .kzl-icon.is-disc .kz-icon{width:60%;height:60%}
+.kz .kzl-root .kzl-icon.is-risk{color:var(--kz-risk)}
+.kz .kzl-root .kzl-icon.is-ok{color:var(--kz-statistics)}
+.kz .kzl-root .kzl-lead{display:grid;grid-template-columns:calc(var(--s) * var(--kz-u)) minmax(0,1fr);align-items:start}
+.kz .kzl-root .kzl-items{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;justify-content:space-evenly;gap:calc(var(--gap) * var(--kz-u));flex:1 1 auto;min-height:0}
+.kz .kzl-root .kzl-cols{display:grid;grid-template-columns:repeat(var(--cols),minmax(0,1fr));flex:1 1 auto;min-height:0}
+.kz .kzl-root .kzl-cols>.kzl-items{height:100%}
+.kz .kzl-root .kzl-items li{--kz-lh:1lh;font-size:inherit;line-height:inherit;display:grid;grid-template-columns:calc(1.55em) minmax(0,1fr);align-items:start;margin:0}
+.kz .kzl-root .kzl-items li:has(>.kzl-mk.is-number){grid-template-columns:max(1.55em,calc(29 * var(--kz-u))) minmax(0,1fr)}
+.kz .kzl-root .kzl-items li .kzl-li{min-width:0}
+.kz .kzl-root .kzl-items.is-top{justify-content:flex-start}
+.kz .kzl-root .kzl-items li.is-sub{grid-template-columns:1.55em minmax(0,1fr);padding-left:max(1.55em,calc(29 * var(--kz-u)))}
+.kz .kzl-root .kzl-mk{display:grid;place-items:center;height:1.5em;color:var(--kz-brand)}
+.kz .kzl-root .kzl-mk.is-dot::before{content:"";width:.32em;height:.32em;border-radius:50%;background:currentColor}
+.kz .kzl-root .kzl-mk.is-number{border-radius:50%;background:var(--kz-brand);color:#FFF;font-weight:700;font-size:max(.62em,calc(14 * var(--kz-u)));--d:max(1.85em,calc(22 * var(--kz-u)));width:var(--d);height:var(--d);margin:calc((var(--kz-lh) - var(--d)) / 2) 0;line-height:1}
+.kz .kzl-root .kzl-mk.is-icon .kz-icon{width:1em;height:1em}
+.kz .kzl-root .kzl-items li.is-ok .kzl-mk{color:var(--kz-statistics)}
+.kz .kzl-root .kzl-items li.is-risk .kzl-mk{color:var(--kz-risk)}
+.kz .kzl-root .kzl-items li.is-risk .kzl-mk.is-number{background:var(--kz-risk);color:#FFF}
+.kz .kzl-root .kzl-items li.is-muted .kzl-mk{color:#9AA1A8}
+.kz .kzl-root .kzl-figure{position:relative;flex:1 1 auto;min-height:calc(var(--min-h,160) * var(--kz-u));min-width:0}
+.kz .kzl-root .kzl-figure>svg{position:absolute;inset:0;width:100%;height:100%}
+.kz .kzl-root .kzl-figure>.kz-chart{position:absolute;inset:0;width:100%;height:100%}
+/* the live Gantt of a template (program-plan in HTML): fills the figure; the editor opens beside it (08 GANTT-01) */
+.kz .kzl-root .kzl-figure>.kz-gantt{position:absolute;inset:0;align-items:stretch}
+.kz .kzl-root .kzl-figure>.kz-gantt>.kz-gantt-plot{height:100%}
+.kz .kzl-root .kzl-table{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums}
+.kz .kzl-root .kzl-table th,.kz .kzl-root .kzl-table td{padding:calc(6 * var(--kz-u)) calc(10 * var(--kz-u));border-bottom:1px solid #E1E5E9;text-align:left;vertical-align:middle;line-height:1.35}
+.kz .kzl-root .kzl-table th{color:var(--kz-ink);font-weight:700;background:#FFF4E2}
+.kz .kzl-root .kzl-table td.is-num,.kz .kzl-root .kzl-table th.is-num{text-align:right}
+.kz .kzl-root .kzl-badge{display:inline-grid;place-items:center;flex:none;width:calc(var(--s) * var(--kz-u));height:calc(var(--s) * var(--kz-u));border-radius:50%;background:var(--kz-brand);color:#FFF;font-weight:700;font-size:calc(var(--s) * .5 * var(--kz-u));line-height:1}
+.kz .kzl-root .kzl-badge.is-risk{background:var(--kz-risk)}
+.kz .kzl-root .kzl-badge.is-ink{background:var(--kz-ink)}
+.kz .kzl-root .kzl-badge.is-muted{background:#9AA1A8}
+.kz .kzl-root .kzl-badge.is-medical{background:var(--kz-medical)}
+.kz .kzl-root .kzl-badge.is-operations{background:var(--kz-operations)}
+.kz .kzl-root .kzl-badge.is-statistics{background:var(--kz-statistics)}
+.kz .kzl-root .kzl-badge.is-pv{background:var(--kz-pv)}
+.kz .kzl-root .kzl-figure.is-table{display:flex;min-height:0}
+.kz .kzl-root .kzl-figure.is-table>table{height:100%}
+.kz .kzl-root .kzl-table .is-c{text-align:center}
+.kz .kzl-root .kzl-table .is-r{text-align:right}
+.kz .kzl-root .kzl-table td.is-key{background:#FFF8EE;color:var(--kz-ink)}
+.kz .kzl-root .kzl-table td.is-brand{background:#FFF1DE}
+.kz .kzl-root .kzl-table td.is-risk{background:#FCEDEC}
+.kz .kzl-root .kzl-table td.is-tint{background:#FFF8EE}
+.kz .kzl-root .kzl-table td.is-muted{background:#F3F4F6}
+.kz .kzl-root .kzl-table thead tr:not(:last-child) th{border-bottom:1px solid #F2C98A}
+.kz .kzl-root .kzl-dot{color:var(--kz-brand)}
+.kz .kzl-root .kzl-dot.is-key{color:var(--kz-risk)}
+.kz .kzl-root .kzl-badge.is-cat1{background:#D46B08}
+.kz .kzl-root .kzl-badge.is-cat2{background:#008F8A}
+.kz .kzl-root .kzl-badge.is-cat3{background:#7B5CC7}
+.kz .kzl-root .kzl-badge.is-cat4{background:#B38A00}
+.kz .kzl-root .kzl-badge.is-cat5{background:#C4457C}
+.kz .kzl-root .kzl-t.is-item_title b:not(.kz-risk),.kz .kzl-root .kzl-card-title b:not(.kz-risk),.kz .kzl-root .kzl-takeaway b:not(.kz-risk){color:var(--kz-emph-in-bold)}  /* bold inside bold text: tokens.emphasis.bold.in_bold_color, as in PPTX; mark/u/risk looks are in kz-glass.css */
+/* 8.0 variant families (13 BODY-03): status tags, chips, key-value rows, chevron steps, hero numerals.
+   Colours mirror tokens.layout.templates (tags, chevron_ramp, numeral_color, row_plate); tools/kz_layouts/svg.py draws the same for PPTX. */
+.kz .kzl-root .kzl-tag{display:inline-flex;align-items:center;justify-content:center;align-self:flex-start;white-space:nowrap;font-size:calc(var(--kz-type-secondary) * var(--kz-un,1));line-height:1.35;font-weight:700;padding:calc(4 * var(--kz-u)) calc(11 * var(--kz-u));border-radius:999px}
+.kz .kzl-root .kzl-tag.is-end{align-self:flex-end;justify-self:end}
+.kz .kzl-root .kzl-tag.is-center{align-self:center;justify-self:center}
+.kz .kzl-root .kzl-tag.is-ok{background:#E6F2DD;color:#3D6B1F}
+.kz .kzl-root .kzl-tag.is-wait{background:#FFF0D2;color:#8F5300}
+.kz .kzl-root .kzl-tag.is-bad{background:#FCE3E0;color:#B3261E}
+.kz .kzl-root .kzl-tag.is-info{background:#FFF1DE;color:#9A4D00}
+.kz .kzl-root .kzl-tag.is-muted{background:#F1ECE4;color:#5E6166}
+.kz .kzl-root .kzl-chips{display:flex;flex-wrap:wrap;gap:calc(8 * var(--kz-u))}
+.kz .kzl-root .kzl-keyrow{display:flex;align-items:center;justify-content:space-between;gap:calc(10 * var(--kz-u));background:#FBF6EE;border-radius:calc(10 * var(--kz-u));padding:calc(7 * var(--kz-u)) calc(12 * var(--kz-u))}
+.kz .kzl-root .kzl-keyrow .kzl-keyrow-v{color:var(--kz-ink);white-space:nowrap;font-variant-numeric:tabular-nums}
+.kz .kzl-root .kzl-chev{position:relative;display:flex;align-items:center;gap:calc(10 * var(--kz-u));background:var(--fill);padding:0 calc(30 * var(--kz-u)) 0 calc(36 * var(--kz-u));
+  clip-path:polygon(0 0,calc(100% - 0.32 * var(--h,58) * var(--kz-u)) 0,100% 50%,calc(100% - 0.32 * var(--h,58) * var(--kz-u)) 100%,0 100%,calc(0.32 * var(--h,58) * var(--kz-u)) 50%);
+  font-size:calc(var(--kz-type-body) * var(--kz-un,1));font-weight:700;color:var(--kz-ink);white-space:nowrap;overflow:hidden}
+.kz .kzl-root .kzl-chev.is-first{padding-left:calc(18 * var(--kz-u));clip-path:polygon(0 0,calc(100% - 0.32 * var(--h,58) * var(--kz-u)) 0,100% 50%,calc(100% - 0.32 * var(--h,58) * var(--kz-u)) 100%,0 100%)}
+.kz .kzl-root .kzl-chev b{font-size:1.25em;color:var(--kz-focus)}
+.kz .kzl-root .kzl-numeral{font-size:calc(var(--s) * var(--kz-u,1px));line-height:1.08;font-weight:700;color:#E07B00;font-variant-numeric:tabular-nums}
+.kz .kzl-root .kzl-numeral.is-risk{color:var(--kz-risk)}
+.kz .kzl-root .kzl-numeral.is-ink{color:var(--kz-ink)}
+.kz .kzl-root .kzl-numeral small{font-size:.36em;color:var(--kz-muted);margin-left:.15em}
+.kz .kzl-root .kzl-takeaway{text-wrap:balance}  /* a two-line judgement breaks between phrases, as the PPTX solver does */

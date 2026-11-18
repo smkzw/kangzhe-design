@@ -1,0 +1,77 @@
+{
+ "$schema": "https://json-schema.org/draft/2020-12/schema",
+ "$id": "kangzhe-design/program-plan.schema.json",
+ "title": "临床开发计划（甘特计划合同，08 GANTT-02）",
+ "description": "KZGantt、甘特编辑台、静态模板 program-plan 与旗舰舞台 program 共用的计划合同。本 schema 只核对结构；时间先后、重叠、可见泳道数、粒度等语义规则由 tools/kz_layouts/diagram_clinical.py 的 program_model 与 runtime/kz-clinical.js 的 KZClinical.program 判定（两者逐条相同）。时间写季度 2026Q3、月份 2026-08 或日期 2026-08-15，结束含当个单位。",
+ "type": "object",
+ "required": ["from", "to", "lanes"],
+ "additionalProperties": false,
+ "$defs": {
+  "time": {"type": "string", "pattern": "^\\d{4}(Q[1-4]|-(0[1-9]|1[0-2])(-(0[1-9]|[12]\\d|3[01]))?)$"},
+  "key": {"type": "string", "minLength": 1},
+  "text": {"type": "string", "minLength": 1}
+ },
+ "properties": {
+  "id": {"$ref": "#/$defs/key", "description": "计划的标识：同一份材料里甘特与暴露累计图写同一个 id 时共用一份数据（改一处两边同步）"},
+  "from": {"$ref": "#/$defs/time", "description": "时间轴起点；轴按整季度对齐，覆盖 2–40 个季度"},
+  "to": {"$ref": "#/$defs/time", "description": "时间轴终点（含）"},
+  "today": {"description": "当前时间；auto 取打开或构建当天；不写则不画当前线", "oneOf": [{"$ref": "#/$defs/time"}, {"const": "auto"}]},
+  "granularity": {"enum": ["quarter", "month", "day"], "description": "阶段起止的精度；不写取阶段里最细的写法。里程碑在任何粒度下都可写到日"},
+  "phases": {"type": "array", "minItems": 1, "maxItems": 5, "items": {"$ref": "#/$defs/text"}, "description": "阶段名与色序（charts.phases）；默认 I 期、II 期、III 期、注册、上市后"},
+  "focus": {"$ref": "#/$defs/key", "description": "强调的泳道、阶段或里程碑 key"},
+  "head": {"type": "string", "description": "静态模板（PPTX）泳道列的列标题，默认「适应症 / 研究」"},
+  "lanes": {
+   "type": "array", "minItems": 1, "maxItems": 24,
+   "items": {
+    "type": "object", "required": ["key", "name"], "additionalProperties": false,
+    "properties": {
+     "key": {"$ref": "#/$defs/key"},
+     "name": {"$ref": "#/$defs/text"},
+     "note": {"type": "string"},
+     "parent": {"$ref": "#/$defs/key", "description": "下级泳道：parent 是紧挨在上方的上级泳道（只有两级）"},
+     "collapsed": {"type": "boolean", "description": "上级泳道收起：按阶段合并下级的条，只上提 major（否则递交/获批）里程碑"},
+     "bars": {
+      "type": "array",
+      "items": {
+       "type": "object", "required": ["key", "phase", "start", "end"], "additionalProperties": false,
+       "properties": {
+        "key": {"$ref": "#/$defs/key"},
+        "phase": {"$ref": "#/$defs/text"},
+        "start": {"$ref": "#/$defs/time"},
+        "end": {"$ref": "#/$defs/time"},
+        "label": {"type": "string"},
+        "color": {"type": "string", "pattern": "^#[0-9A-Fa-f]{6}$"},
+        "status": {"enum": ["planned", "active", "done", "delayed", "risk"], "description": "可选层：没有任何 status 时不画状态"},
+        "progress": {"type": "number", "minimum": 0, "maximum": 100, "description": "可选层：完成百分比"},
+        "baseline": {"type": "object", "required": ["start", "end"], "additionalProperties": false, "description": "可选层：原计划，画成浅色幽灵条并标推迟/提前",
+         "properties": {"start": {"$ref": "#/$defs/time"}, "end": {"$ref": "#/$defs/time"}}},
+        "exposure": {"type": "object", "required": ["n"], "additionalProperties": false, "description": "暴露累计（exposure_plan）：这项研究计入研究药物暴露；甘特不画它，编辑台可改",
+         "properties": {"n": {"type": "integer", "minimum": 1, "description": "样本量"},
+                        "ctrl": {"type": "number", "minimum": 0, "exclusiveMaximum": 1, "description": "对照比例，默认 0"},
+                        "exposed": {"type": "integer", "minimum": 0, "description": "研究药物暴露例数，默认 round(n × (1 − ctrl))"},
+                        "w26": {"type": "integer", "minimum": 0, "description": "其中暴露 ≥26 周"}, "w52": {"type": "integer", "minimum": 0, "description": "其中暴露 ≥52 周"},
+                        "at": {"$ref": "#/$defs/time", "description": "计入时点，默认该研究的结束"}}}
+       }
+      }
+     },
+     "milestones": {
+      "type": "array", "maxItems": 6,
+      "items": {
+       "type": "object", "required": ["key", "at", "label"], "additionalProperties": false,
+       "properties": {
+        "key": {"$ref": "#/$defs/key"},
+        "at": {"$ref": "#/$defs/time"},
+        "label": {"$ref": "#/$defs/text"},
+        "kind": {"enum": ["start", "readout", "submit", "approve", "other"]},
+        "icon": {"type": "string", "minLength": 1, "description": "里程碑图形名（同 kind）或 assets/icons 图标名"},
+        "risk": {"type": "boolean"},
+        "major": {"type": "boolean"},
+        "baseline": {"$ref": "#/$defs/time"}
+       }
+      }
+     }
+    }
+   }
+  }
+ }
+}
